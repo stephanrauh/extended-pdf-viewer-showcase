@@ -15,3 +15,8 @@
   top: 0;
   z-index: 1;
 }
+
+.with-border {
+  padding-left: 10px;
+  padding-right: 10px;
+}

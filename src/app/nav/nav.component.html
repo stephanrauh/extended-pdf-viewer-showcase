@@ -7,10 +7,10 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)"
   >
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>Demos</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="'simple'">Simple demo</a>
-      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item [routerLink]="'pages-loaded'">pagesLoaded event</a>
       <a mat-list-item href="#">Link 3</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -19,8 +19,10 @@
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>pdf-showcase</span>
+      <span>&lt;ngx-extended-pdf-viewer&gt; showcase</span>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <div class="with-border">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

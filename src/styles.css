@@ -11,3 +11,11 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.distance-16 {
+  margin-top: 16px !important;
+}
+
+.messages {
+  margin-left: 32px;
+}
