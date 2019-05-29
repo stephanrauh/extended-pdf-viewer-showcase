@@ -10,6 +10,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { SimpleModule } from './simple/simple.module';
 import { PagesLoadedModule } from './pages-loaded/pages-loaded.module';
+import { I18nModule } from './i18n/i18n.module';
 
 @NgModule({
   declarations: [AppComponent, NavComponent],
@@ -23,6 +24,7 @@ import { PagesLoadedModule } from './pages-loaded/pages-loaded.module';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    I18nModule,
     SimpleModule,
     PagesLoadedModule
   ],
