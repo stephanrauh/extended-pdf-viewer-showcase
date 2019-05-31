@@ -1,31 +1,29 @@
-<mat-card class="distance-16 mat-elevation-z8">
-  <mat-tab-group>
-    <mat-tab label="HTML template">
-      <div class="sourcecode">
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
         <markdown ngPreserveWhitespaces src="assets/pages-loaded/html.md"> </markdown>
-      </div>
-    </mat-tab>
-    <mat-tab label="TypeScript app-code">
-      <div class="sourcecode">
+      </mat-tab>
+      <mat-tab label="TypeScript app-code">
         <markdown ngPreserveWhitespaces src="assets/pages-loaded/ts.md"> </markdown>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</mat-card>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
 
-<mat-card class="distance-16 mat-elevation-z8">
-  <mat-card-header>
-    <b>Messages sent by the PDF ngx-extended-pdf-viewer</b>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="messages distance-16">
-      <div *ngIf="!messages">
-        No message yet. This means no document has been loaded yet.
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <mat-card-header>
+      <b>Messages sent by the PDF ngx-extended-pdf-viewer</b>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="messages distance-16">
+        <div *ngIf="!messages">
+          No message yet. This means no document has been loaded yet.
+        </div>
+        <div *ngFor="let m of messages">{{ m }}</div>
       </div>
-      <div *ngFor="let m of messages">{{ m }}</div>
-    </div>
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer

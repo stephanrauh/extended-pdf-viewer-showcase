@@ -1,30 +1,28 @@
-<mat-card class="distance-16 mat-elevation-z8">
-  <p>The attribute "language" is only read when the component is drawn initially.</p>
-  <p>So this demo hides the PDF viewer for a second when you're switching from one language to another.</p>
-  <mat-form-field>
-    <mat-label>language</mat-label>
-    <mat-select [(value)]="language" class="margin">
-      <mat-option [value]="undefined">default (Spanish)</mat-option>
-      <mat-option value="es-ES">es-ES (Spanish)</mat-option>
-      <mat-option value="de-DE">de-DE (German)</mat-option>
-    </mat-select>
-  </mat-form-field>
-</mat-card>
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <p>The attribute "language" is only read when the component is drawn initially.</p>
+    <p>So this demo hides the PDF viewer for a second when you're switching from one language to another.</p>
+    <mat-form-field>
+      <mat-label>language</mat-label>
+      <mat-select [(value)]="language" class="margin">
+        <mat-option [value]="undefined">default (Spanish)</mat-option>
+        <mat-option value="es-ES">es-ES (Spanish)</mat-option>
+        <mat-option value="de-DE">de-DE (German)</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
 
-<mat-card class="distance-16 mat-elevation-z8">
-  <mat-tab-group>
-    <mat-tab label="HTML template">
-      <div class="sourcecode">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
         <markdown ngPreserveWhitespaces src="assets/i18n/html.md"> </markdown>
-      </div>
-    </mat-tab>
-    <mat-tab label="TypeScript app-code">
-      <div class="sourcecode">
+      </mat-tab>
+      <mat-tab label="TypeScript">
         <markdown ngPreserveWhitespaces src="assets/i18n/ts.md"> </markdown>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</mat-card>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SimpleComponent } from './simple/simple.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
 import {
   MatToolbarModule,
@@ -42,6 +43,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     HttpClientModule,
     BrowserAnimationsModule,
     LayoutModule,
+    FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
