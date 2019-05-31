@@ -1,0 +1,11 @@
+```html
+<ngx-extended-pdf-viewer
+  [src]="'assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
+  backgroundColor="#ffffff"
+  [delayFirstView]="1000"
+  [height]="'90vh'"
+  [useBrowserLocale]="true"
+  (pagesLoaded)="onPagesLoaded($event)"
+>
+</ngx-extended-pdf-viewer>
+```

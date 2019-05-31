@@ -15,12 +15,12 @@
   <mat-tab-group>
     <mat-tab label="HTML template">
       <div class="sourcecode">
-        <app-code [code]="code"></app-code>
+        <markdown ngPreserveWhitespaces src="assets/i18n/html.md"> </markdown>
       </div>
     </mat-tab>
     <mat-tab label="TypeScript app-code">
       <div class="sourcecode">
-        <app-code [code]="tscode" language="typescript"></app-code>
+        <markdown ngPreserveWhitespaces src="assets/i18n/ts.md"> </markdown>
       </div>
     </mat-tab>
   </mat-tab-group>

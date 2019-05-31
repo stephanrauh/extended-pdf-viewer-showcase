@@ -1,8 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~prismjs/plugins/toolbar/prism-toolbar.css';
-@import '~prismjs/themes/prism';
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
 html,
 body {
   height: 100%;
