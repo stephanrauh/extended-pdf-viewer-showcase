@@ -2,7 +2,16 @@
 
 ## Loading the JS file in the wrong order
 
-Have a look at [this discussion](https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/20).
+Have a look at [this discussion](https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/20). Several developers observed it's a good idea to load the three pdf.js files before any other additional JavaScript file. Plus, they use each other, so they need to be defined in this order:
+
+```json
+"scripts": [
+  "node_modules/ngx-extended-pdf-viewer/assets/pdf.js",
+  "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker.js",
+  "node_modules/ngx-extended-pdf-viewer/assets/viewer.js",
+  (put any additional JavaScript file here)
+]
+```
 
 ## Localization
 
@@ -11,6 +20,14 @@ Did you set the attribute `useBrowserLocale`? By default, it's false. Usually, i
 If you've set `useBrowserLocale="false"`, you need to define the translations in the `index.html`. The folder `node_modules/ngx-extended-pdf-viewer/assets/inline-locale-files` contains snippet files you can simply copy into your HTML page.
 
 _Hint_: Sometimes you do not need to copy the HTML snippet into the index.html at the root folder of the Angular project. The bottom line is that the HTML snippet is already part of the DOM when the PDF viewer is initialized. Cluttering the root index file with the translations is an ugly and inflexible hack, but it works.
+
+## set `delayFirstView="1000"`
+
+Strictly speaking, this is only a work-around. Sometime the initialization of the pdf viewer takes some time, and I haven't found out when to open the PDF file. As a work-around, you can add a delay. Setting it to one second is usually a good compromise:
+
+```html
+<ngx-extended-pdf-viewer src="..." useBrowserLocale="true" [delayFirstView]="1000"></ngx-extended-pdf-viewer>
+```
 
 ## Other hints collected over time
 
