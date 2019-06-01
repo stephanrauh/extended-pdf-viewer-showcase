@@ -19,6 +19,8 @@ Talking about bugs and feature requests: I also listen to StackOverflow, but it 
 
 ## Installation
 
+If you're familiar with Angular, you can get the PDF viewer up and running in roughly five minutes.
+
 Install the library with `npm install`:
 
 ```batch

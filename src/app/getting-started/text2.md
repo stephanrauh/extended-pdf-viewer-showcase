@@ -14,7 +14,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 </ngx-extended-pdf-viewer>
 ```
 
-_Hint:_ If you are using JHipster, note there's no `assets` folder, so most like the path of the URL is something like `[src]="'content/example.pdf'"`.
+_Hint:_ If you are using JHipster, note there's no `assets` folder, so most likel<> the path of the URL is something like `[src]="'content/example.pdf'"`.
 
 ## What if I'm getting my PDF file from a REST resource?
 

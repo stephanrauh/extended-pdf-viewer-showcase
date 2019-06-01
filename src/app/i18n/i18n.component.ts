@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './i18n.component.html',
   styleUrls: ['./i18n.component.css']
 })
-export class I18nComponent implements OnInit {
+export class I18nComponent {
   public hidePdfViewer = false;
 
   private _language = 'es-ES';
@@ -21,8 +21,4 @@ export class I18nComponent implements OnInit {
       this.hidePdfViewer = false;
     }, 1000);
   }
-
-  constructor() {}
-
-  ngOnInit() {}
 }

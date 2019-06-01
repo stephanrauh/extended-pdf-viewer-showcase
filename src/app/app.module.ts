@@ -17,7 +17,8 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatSelectModule,
-  MatTabsModule
+  MatTabsModule,
+  MatRadioModule
 } from '@angular/material';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { I18nComponent } from './i18n/i18n.component';
@@ -26,6 +27,9 @@ import { TroubleshootingComponent } from './troubleshooting/troubleshooting.comp
 import { GettingStartedComponent } from './getting-started/getting-started.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { ZoomComponent } from './zoom/zoom.component';
+import { MobileComponent } from './mobile/mobile.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,12 +39,15 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     I18nComponent,
     PagesLoadedComponent,
     TroubleshootingComponent,
-    GettingStartedComponent
+    GettingStartedComponent,
+    ZoomComponent,
+    MobileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
     LayoutModule,
     FlexLayoutModule,
@@ -52,6 +59,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatRadioModule,
     MatTabsModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
     NgxExtendedPdfViewerModule

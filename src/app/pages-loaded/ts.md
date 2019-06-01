@@ -1,10 +1,7 @@
 ```typescript
-export class PagesLoadedComponent implements OnInit {
+@Component({ ... })
+export class PagesLoadedComponent {
   public messages: Array<string> = [];
-
-  constructor() {}
-
-  ngOnInit() {}
 
   public onPagesLoaded(pagecount: PagesLoadedEvent): void {
     const now = new Date().toLocaleTimeString();
