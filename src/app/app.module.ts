@@ -32,6 +32,8 @@ import { MobileComponent } from './mobile/mobile.component';
 import { FormsModule } from '@angular/forms';
 import { AttributesComponent } from './attributes/attributes.component';
 import { IntroComponent } from './intro/intro.component';
+import { AlternativesComponent } from './alternatives/alternatives.component';
+import { RangeRequestsComponent } from './range-requests/range-requests.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { IntroComponent } from './intro/intro.component';
     ZoomComponent,
     MobileComponent,
     AttributesComponent,
-    IntroComponent
+    IntroComponent,
+    AlternativesComponent,
+    RangeRequestsComponent
   ],
   imports: [
     BrowserModule,

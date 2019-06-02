@@ -33,3 +33,8 @@
 .mat-list-base .mat-list-item:hover {
   color: blue;
 }
+
+.mat-toolbar-single-row {
+  height: 48px;
+  padding-top: 24px;
+}

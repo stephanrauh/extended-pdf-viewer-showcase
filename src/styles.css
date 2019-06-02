@@ -28,3 +28,13 @@ th {
 code {
   font-size: 16px;
 }
+
+.mat-drawer-inner-container {
+  margin-top: 64px;
+  margin-bottom: -64px;
+}
+
+body > app-root > app-nav > .mat-toolbar-single-row {
+  height: 64px !important;
+  padding-top: 0 !important;
+}
