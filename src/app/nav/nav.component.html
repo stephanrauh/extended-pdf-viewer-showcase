@@ -7,15 +7,27 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)"
   >
-    <mat-toolbar>Guides and demos</mat-toolbar>
+    <mat-toolbar>About the project</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'getting-started'">Getting started</a>
-      <a mat-list-item [routerLink]="'troubleshooting'">Troubleshooting</a>
+      <a mat-list-item [routerLink]="'intro'">What is ngx-extended-pdf-viewer?</a>
+      <a mat-list-item [routerLink]="'alternatives'">Alternatives</a>
+      <a mat-list-item [routerLink]="'native-browser-support'">Do you need it at all?</a>
+    </mat-nav-list>
+
+    <mat-toolbar>Demos</mat-toolbar>
+    <mat-nav-list>
       <a mat-list-item [routerLink]="'simple'">Simple demo</a>
       <a mat-list-item [routerLink]="'mobile'">Mobile devices</a>
       <a mat-list-item [routerLink]="'i18n'">Internationalization</a>
       <a mat-list-item [routerLink]="'pages-loaded'">(pagesLoaded) event</a>
       <a mat-list-item [routerLink]="'zoom'">Zoom</a>
+    </mat-nav-list>
+    <mat-toolbar>Documentation</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'getting-started'">Getting started</a>
+      <a mat-list-item [routerLink]="'troubleshooting'">Troubleshooting</a>
+      <a mat-list-item [routerLink]="'attributes'">Attributes and events</a>
+      <a mat-list-item [routerLink]="'range-requests'">Loading PDF files lazily</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

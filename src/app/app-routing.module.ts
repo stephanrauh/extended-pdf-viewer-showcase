@@ -7,10 +7,14 @@ import { SimpleComponent } from './simple/simple.component';
 import { TroubleshootingComponent } from './troubleshooting/troubleshooting.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { ZoomComponent } from './zoom/zoom.component';
+import { AttributesComponent } from './attributes/attributes.component';
+import { IntroComponent } from './intro/intro.component';
 
 const routes: Routes = [
+  { path: 'attributes', component: AttributesComponent },
   { path: 'getting-started', component: GettingStartedComponent },
   { path: 'i18n', component: I18nComponent },
+  { path: 'intro', component: IntroComponent },
   { path: 'mobile', component: MobileComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },
   { path: 'simple', component: SimpleComponent },

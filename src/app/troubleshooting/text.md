@@ -1,4 +1,4 @@
-#Troubleshooting
+# Troubleshooting
 
 ## Loading the JS file in the wrong order
 

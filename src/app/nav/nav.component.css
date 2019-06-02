@@ -24,3 +24,12 @@
 .mat-toolbar.mat-primary {
   z-index: 11;
 }
+
+.mat-list-base .mat-list-item {
+  height: 32px;
+  font-size: 14px;
+}
+
+.mat-list-base .mat-list-item:hover {
+  color: blue;
+}

@@ -30,6 +30,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { ZoomComponent } from './zoom/zoom.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { FormsModule } from '@angular/forms';
+import { AttributesComponent } from './attributes/attributes.component';
+import { IntroComponent } from './intro/intro.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { FormsModule } from '@angular/forms';
     TroubleshootingComponent,
     GettingStartedComponent,
     ZoomComponent,
-    MobileComponent
+    MobileComponent,
+    AttributesComponent,
+    IntroComponent
   ],
   imports: [
     BrowserModule,
