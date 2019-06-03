@@ -34,6 +34,7 @@ import { AttributesComponent } from './attributes/attributes.component';
 import { IntroComponent } from './intro/intro.component';
 import { AlternativesComponent } from './alternatives/alternatives.component';
 import { RangeRequestsComponent } from './range-requests/range-requests.component';
+import { FindComponent } from './find/find.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { RangeRequestsComponent } from './range-requests/range-requests.componen
     AttributesComponent,
     IntroComponent,
     AlternativesComponent,
-    RangeRequestsComponent
+    RangeRequestsComponent,
+    FindComponent
   ],
   imports: [
     BrowserModule,

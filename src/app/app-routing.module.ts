@@ -11,11 +11,13 @@ import { AttributesComponent } from './attributes/attributes.component';
 import { IntroComponent } from './intro/intro.component';
 import { AlternativesComponent } from './alternatives/alternatives.component';
 import { RangeRequestsComponent } from './range-requests/range-requests.component';
+import { FindComponent } from './find/find.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'getting-started', component: GettingStartedComponent },
+  { path: 'find', component: FindComponent },
   { path: 'i18n', component: I18nComponent },
   { path: 'intro', component: IntroComponent },
   { path: 'mobile', component: MobileComponent },
