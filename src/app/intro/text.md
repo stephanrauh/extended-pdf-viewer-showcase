@@ -12,7 +12,7 @@ I haven't forgotten you. The Angular component is a good starting point. Farther
 
 ## Talking about the memory footprint: how bad is it?
 
-There's no point denying it: viewing PDF files comes with a huge memory penalty. Mozilla's PDF viewer consists of four files, weighing in at almost three megabytes. Gzip reduces this to roughly half a megabyte.
+There's no point denying it: viewing PDF files comes with a huge memory penalty. Mozilla's PDF viewer consists of four files, weighing in at almost three megabytes. Minification and Gzip reduce this to roughly half a megabyte.
 
 However, almost every alternative I know also relies on Mozilla's PDF viewer, so you get a similar memory and bandwidth penalty.
 

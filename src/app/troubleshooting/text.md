@@ -29,6 +29,14 @@ Strictly speaking, this is only a work-around. Sometime the initialization of th
 <ngx-extended-pdf-viewer src="..." useBrowserLocale="true" [delayFirstView]="1000"></ngx-extended-pdf-viewer>
 ```
 
+## Multiple PDF viewers on the same page (e.g. tabs)
+
+Unfortunately, you can't use multiple instances of `<ngx-extended-pdf-viewer>` on the same page. You're restricted to a single PDF viewer. This also applies to hidden PDF viewers. If you're using tabs containing PDF files, make sure you hide the PDF viewer before showing the next tab. You'll also need a short delay before showing the new PDF viewer. It takes some time to remove every object from memory.
+
+## Memory leaks
+
+I've observed a memory leak. The reason isn't clear yet, but probably it's become better with pdf.js 2.2. The current version of `<ngx-extended-pdf-viewer>` bundles both the stable version 2.1.166 and the developer preview 2.2.197.
+
 ## Other hints collected over time
 
 | Error message or description                                            |                                                                                                                                                                                                                               Solution                                                                                                                                                                                                                               |
