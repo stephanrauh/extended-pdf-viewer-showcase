@@ -1,0 +1,31 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <p>
+      The attribute <code>src</code> allows you to switch between different documents. There's also the attribute
+      <code> [base64Src]</code> for base64 encoded documents.
+    </p>
+    <mat-form-field>
+      <mat-label>[src]=</mat-label>
+      <mat-select [(value)]="src" class="margin">
+        <mat-option [value]="undefined">no document</mat-option>
+        <mat-option value="assets/pdfs/Introduction.pdf">assets/pdfs/Introduction.pdf</mat-option>
+        <mat-option value="assets/pdfs/pdf-sample.pdf">assets/pdfs/pdf-sample.pdf</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
+
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <markdown ngPreserveWhitespaces src="assets/multiple-documents/html.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="TypeScript">
+        <markdown ngPreserveWhitespaces src="assets/multiple-documents/ts.md"> </markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <ngx-extended-pdf-viewer [src]="src" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true"> </ngx-extended-pdf-viewer>
+</mat-card>

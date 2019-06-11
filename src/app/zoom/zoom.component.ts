@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./zoom.component.css']
 })
 export class ZoomComponent {
-  public zoomSetting: number | string | undefined = undefined;
+  public zoomSetting: number | string | undefined = 'page-width';
 }

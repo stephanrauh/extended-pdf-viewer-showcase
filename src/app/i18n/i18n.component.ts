@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class I18nComponent {
   public hidePdfViewer = false;
 
-  private _language = 'es-ES';
+  private _language = undefined;
 
   public get language(): string {
     return this._language;

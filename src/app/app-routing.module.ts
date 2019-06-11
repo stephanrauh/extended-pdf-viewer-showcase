@@ -12,6 +12,7 @@ import { IntroComponent } from './intro/intro.component';
 import { AlternativesComponent } from './alternatives/alternatives.component';
 import { RangeRequestsComponent } from './range-requests/range-requests.component';
 import { FindComponent } from './find/find.component';
+import { MultipleDocumentsComponent } from './multiple-documents/multiple-documents.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'i18n', component: I18nComponent },
   { path: 'intro', component: IntroComponent },
   { path: 'mobile', component: MobileComponent },
+  { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },
   { path: 'range-requests', component: RangeRequestsComponent },
   { path: 'simple', component: SimpleComponent },
