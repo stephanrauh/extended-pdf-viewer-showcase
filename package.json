@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^8.0.2",
     "@angular/router": "^8.0.2",
     "hammerjs": "^2.0.8",
-    "ngx-extended-pdf-viewer": "^0.9.47",
+    "ngx-extended-pdf-viewer": "^0.9.48",
     "ngx-markdown": "^8.0.2",
     "prismjs": "^1.16.0",
     "rxjs": "~6.5.2",

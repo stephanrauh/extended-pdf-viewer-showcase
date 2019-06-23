@@ -18,7 +18,8 @@ import {
   MatFormFieldModule,
   MatSelectModule,
   MatTabsModule,
-  MatRadioModule
+  MatRadioModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { I18nComponent } from './i18n/i18n.component';
@@ -35,25 +36,27 @@ import { IntroComponent } from './intro/intro.component';
 import { AlternativesComponent } from './alternatives/alternatives.component';
 import { RangeRequestsComponent } from './range-requests/range-requests.component';
 import { FindComponent } from './find/find.component';
+import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.component';
 import { MultipleDocumentsComponent } from './multiple-documents/multiple-documents.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    SimpleComponent,
-    I18nComponent,
-    PagesLoadedComponent,
-    TroubleshootingComponent,
-    GettingStartedComponent,
-    ZoomComponent,
-    MobileComponent,
-    AttributesComponent,
-    IntroComponent,
     AlternativesComponent,
-    RangeRequestsComponent,
+    AttributesComponent,
     FindComponent,
-    MultipleDocumentsComponent
+    GettingStartedComponent,
+    I18nComponent,
+    IntroComponent,
+    HidingButtonsComponent,
+    MultipleDocumentsComponent,
+    MobileComponent,
+    PagesLoadedComponent,
+    RangeRequestsComponent,
+    SimpleComponent,
+    TroubleshootingComponent,
+    ZoomComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import { MultipleDocumentsComponent } from './multiple-documents/multiple-docume
     BrowserAnimationsModule,
     LayoutModule,
     FlexLayoutModule,
+    MatCheckboxModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

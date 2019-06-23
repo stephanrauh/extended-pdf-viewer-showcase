@@ -1,0 +1,73 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <p>
+      You can hide every button of the PDF viewer. By default, each of these buttons is activated.
+    </p>
+
+    <mat-checkbox class="margin" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showFindButton">showFindButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showBookmarkButton">showBookmarkButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
+    <br />
+    <mat-checkbox class="margin" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
+  </mat-card>
+
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <markdown ngPreserveWhitespaces src="assets/multiple-documents/html.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="TypeScript">
+        <markdown ngPreserveWhitespaces src="assets/multiple-documents/ts.md"> </markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <ngx-extended-pdf-viewer
+    [src]="'assets/pdfs/pdf-sample.pdf'"
+    [useBrowserLocale]="true"
+    height="250px"
+    zoom="25%"
+    [showSidebarButton]="showSidebarButton"
+    [showFindButton]="showFindButton"
+    [showPagingButtons]="showPagingButtons"
+    [showZoomButtons]="showZoomButtons"
+    [showPresentationModeButton]="showPresentationModeButton"
+    [showOpenFileButton]="showOpenFileButton"
+    [showPrintButton]="showPrintButton"
+    [showDownloadButton]="showDownloadButton"
+    [showBookmarkButton]="showBookmarkButton"
+    [showSecondaryToolbarButton]="showSecondaryToolbarButton"
+    [showRotateButton]="showRotateButton"
+    [showHandToolButton]="showHandToolButton"
+    [showScrollingButton]="showScrollingButton"
+    [showSpreadButton]="showSpreadButton"
+    [showPropertiesButton]="showPropertiesButton"
+  >
+  </ngx-extended-pdf-viewer>
+</mat-card>

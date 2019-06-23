@@ -23,7 +23,7 @@ _Hint_: Sometimes you do not need to copy the HTML snippet into the index.html a
 
 ## set `delayFirstView="1000"`
 
-Strictly speaking, this is only a work-around. Sometime the initialization of the pdf viewer takes some time, and I haven't found out when to open the PDF file. As a work-around, you can add a delay. Setting it to one second is usually a good compromise:
+This workaround was needed in the early version of ngx-extended-pdf-viewer, before I understood how to initialize the library correctly. However, it may come in handy every once in a while. Sometimes the initialization of the pdf viewer takes some time, so the PDF file is opened too early. As a work-around, you can add a delay. Setting it to one second is usually a good compromise:
 
 ```html
 <ngx-extended-pdf-viewer src="..." useBrowserLocale="true" [delayFirstView]="1000"></ngx-extended-pdf-viewer>

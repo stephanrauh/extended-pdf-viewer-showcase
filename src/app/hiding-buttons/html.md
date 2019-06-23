@@ -1,0 +1,24 @@
+```html
+<ngx-extended-pdf-viewer
+  [src]="'assets/pdfs/pdf-sample.pdf'"
+  [useBrowserLocale]="true"
+  height="250px"
+  zoom="25%"
+  [showSidebarButton]="showSidebarButton"
+  [showFindButton]="showFindButton"
+  [showPagingButtons]="showPagingButtons"
+  [showZoomButtons]="showZoomButtons"
+  [showPresentationModeButton]="showPresentationModeButton"
+  [showOpenFileButton]="showOpenFileButton"
+  [showPrintButton]="showPrintButton"
+  [showDownloadButton]="showDownloadButton"
+  [showBookmarkButton]="showBookmarkButton"
+  [showSecondaryToolbarButton]="showSecondaryToolbarButton"
+  [showRotateButton]="showRotateButton"
+  [showHandToolButton]="showHandToolButton"
+  [showScrollingButton]="showScrollingButton"
+  [showSpreadButton]="showSpreadButton"
+  [showPropertiesButton]="showPropertiesButton"
+>
+</ngx-extended-pdf-viewer>
+```

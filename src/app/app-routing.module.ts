@@ -1,4 +1,4 @@
-import { NgModule, SimpleChanges } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
 import { I18nComponent } from './i18n/i18n.component';
@@ -13,6 +13,7 @@ import { AlternativesComponent } from './alternatives/alternatives.component';
 import { RangeRequestsComponent } from './range-requests/range-requests.component';
 import { FindComponent } from './find/find.component';
 import { MultipleDocumentsComponent } from './multiple-documents/multiple-documents.component';
+import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'find', component: FindComponent },
   { path: 'i18n', component: I18nComponent },
   { path: 'intro', component: IntroComponent },
+  { path: 'hiding-buttons', component: HidingButtonsComponent },
   { path: 'mobile', component: MobileComponent },
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },
