@@ -1,8 +1,8 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
     <input matInput class="margin" [(ngModel)]="searchtext" placeholder="find (programmatically)" />
-    <button (click)="findNext()">next</button>
-    <button (click)="findPrevious()">previous</button>
+    <button mat-raised-button color="primary" (click)="findNext()">next</button>
+    <button mat-raised-button color="primary" (click)="findPrevious()">previous</button>
   </mat-card>
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
@@ -23,6 +23,8 @@
     backgroundColor="#ffffff"
     [height]="'90vh'"
     [useBrowserLocale]="true"
+    [handTool]="false"
+    [showHandToolButton]="true"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

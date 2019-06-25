@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^8.0.2",
     "@angular/router": "^8.0.2",
     "hammerjs": "^2.0.8",
-    "ngx-extended-pdf-viewer": "^0.9.48",
+    "ngx-extended-pdf-viewer": "^0.9.49",
     "ngx-markdown": "^8.0.2",
     "prismjs": "^1.16.0",
     "rxjs": "~6.5.2",
@@ -31,8 +31,8 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.800.3",
-    "@angular/cli": "^8.0.3",
+    "@angular-devkit/build-angular": "^0.800.4",
+    "@angular/cli": "^8.0.4",
     "@angular/compiler-cli": "^8.0.2",
     "@angular/language-service": "^8.0.2",
     "@types/jasmine": "^3.3.13",
@@ -47,8 +47,8 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "~5.4.2",
-    "ts-node": "~8.2.0",
-    "tslint": "~5.17.0",
+    "ts-node": "~8.3.0",
+    "tslint": "~5.18.0",
     "typescript": "~3.4.5"
   }
 }
