@@ -13,9 +13,9 @@ If you're the adventurous one, you can also add the next version of pdf.js. Note
 
 ```json
 "scripts": [
-  "node_modules/ngx-extended-pdf-viewer/assets/pdf-2.2.199.js",
-  "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker-2.2.199.js",
-  "node_modules/ngx-extended-pdf-viewer/assets/viewer-2.2.199.js"
+  "node_modules/ngx-extended-pdf-viewer/assets/pdf-2.2.222.js",
+  "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker-2.2.222.js",
+  "node_modules/ngx-extended-pdf-viewer/assets/viewer-2.2.222.js"
 ]
 ```
 
