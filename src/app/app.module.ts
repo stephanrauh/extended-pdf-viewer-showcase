@@ -38,6 +38,7 @@ import { RangeRequestsComponent } from './range-requests/range-requests.componen
 import { FindComponent } from './find/find.component';
 import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.component';
 import { MultipleDocumentsComponent } from './multiple-documents/multiple-documents.component';
+import { Base64Component } from './base64/base64.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MultipleDocumentsComponent } from './multiple-documents/multiple-docume
     NavComponent,
     AlternativesComponent,
     AttributesComponent,
+    Base64Component,
     FindComponent,
     GettingStartedComponent,
     I18nComponent,

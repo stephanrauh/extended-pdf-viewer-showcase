@@ -1,0 +1,11 @@
+```html
+<ngx-extended-pdf-viewer
+  [base64Src]="base64"
+  backgroundColor="#ffffff"
+  [height]="'90vh'"
+  [useBrowserLocale]="true"
+  [handTool]="false"
+  [showHandToolButton]="true"
+>
+</ngx-extended-pdf-viewer>
+```

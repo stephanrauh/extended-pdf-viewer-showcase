@@ -14,10 +14,12 @@ import { RangeRequestsComponent } from './range-requests/range-requests.componen
 import { FindComponent } from './find/find.component';
 import { MultipleDocumentsComponent } from './multiple-documents/multiple-documents.component';
 import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.component';
+import { Base64Component } from './base64/base64.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
   { path: 'attributes', component: AttributesComponent },
+  { path: 'base64', component: Base64Component },
   { path: 'getting-started', component: GettingStartedComponent },
   { path: 'find', component: FindComponent },
   { path: 'i18n', component: I18nComponent },
