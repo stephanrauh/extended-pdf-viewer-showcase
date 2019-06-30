@@ -1,6 +1,20 @@
 ```typescript
 @Component({ ... })
 export class ZoomComponent {
-  public zoomSetting: number | string | undefined = undefined;
+  private _zoomSetting: number | string | undefined = 'page-width';
+
+  // getter and setter make the demo nicer -
+  // you probably don't need them in your code
+  public get zoomSetting() {
+    return String(this._zoomSetting);
+  }
+
+  public set zoomSetting(zoom: string) {
+    if (isNaN(Number(zoom))) {
+      this._zoomSetting = zoom;
+    } else {
+      this._zoomSetting = zoom + '%';
+    }
+  }
 }
 ```
