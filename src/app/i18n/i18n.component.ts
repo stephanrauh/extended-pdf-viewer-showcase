@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'app-i18n',
@@ -15,7 +15,25 @@ export class I18nComponent {
   }
 
   public set language(language: string) {
+    let writingDirectionChange = false;
+    if (this._language === 'ar' && language !== 'ar') {
+      writingDirectionChange = true;
+    }
+    if (this._language !== 'ar' && language === 'ar') {
+      writingDirectionChange = true;
+    }
     this._language = language;
+
+    if (writingDirectionChange) {
+      // brute force approach necessary because Angular's mat-drawer doesn't detect the change
+      // between LTR and RTL languages
+      const drawer = document.getElementsByClassName('mat-drawer-content')[0] as HTMLElement;
+      const styleLeft = drawer.style.marginLeft;
+      const styleRight = drawer.style.marginRight;
+      drawer.style.marginLeft = styleRight;
+      drawer.style.marginRight = styleLeft;
+    }
+
     this.hidePdfViewer = true;
     setTimeout(() => {
       this.hidePdfViewer = false;
