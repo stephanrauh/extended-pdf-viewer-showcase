@@ -36,6 +36,14 @@ The iFrame approach is simple and robust. If you're not happy with ngx-extended-
 
 This library is the way to go if you just want to render PDF files and nothing else. No toolbar, no thumbnails, just the plain PDF file. <a href="https://www.npmjs.com/package/ng2-pdf-viewer">ngx-pdf-viewer</a> gives you a decent API, is actively maintained, and is popular enough to feel trustworthy. At the time of writing, it saw more than 99.000 downloads a month. Without having used the library myself, I suppose Vadym Yatsyuk is doing a great job with his library.
 
+## ng2-image-viewer
+
+This nice library is an image viewer at it's heart. The author, Breno Prata, took the <a target="#" href="http://ignitersworld.com/lab/imageViewer.html">ImageViewer</a> library, wrapped in a carousel, and added PDF support to it.
+
+As far as I can see, ng2-image-viewer relies on the browser to render the PDF file natively. Don't hope for Internet Explorer support. Plus, the PDF viewer is always shown completely, without options to customize it. Other than that, it's a nice little library if you need to display the PDF file in a carousel.
+
+Have a look at the <a href="https://brenoprata10.github.io/ng2-image-viewer/">showcase</a> or get the downloads coordinates from the <a href="https://www.npmjs.com/package/ng2-image-viewer" target="#">npm page</a>.
+
 ## Angular.js 1.x
 
 Are you still using AngularJS 1.x? Then you should check out <a href="https://github.com/legalthings/angular-pdfjs-viewer">angular-pdfjs-viewer</a> is a fine library. Unfortunately, the authors ceased to maintain it, so use it at your own risk.
