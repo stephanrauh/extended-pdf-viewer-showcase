@@ -12,7 +12,7 @@ export class HidingButtonsComponent {
   public showPresentationModeButton = false;
   public showOpenFileButton = false;
   public showPrintButton = false;
-  public showDownloadButton = false;
+  public showDownloadButton = true;
   public showBookmarkButton = false;
   public showSecondaryToolbarButton = true;
   public showRotateButton = false;
@@ -20,4 +20,5 @@ export class HidingButtonsComponent {
   public showScrollingButton = false;
   public showSpreadButton = false;
   public showPropertiesButton = false;
+  public downloadFileName = 'user-defined-name.pdf';
 }

@@ -19,6 +19,9 @@
     <mat-checkbox class="margin" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
     <br />
     <mat-checkbox class="margin" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
+    <mat-form-field class="margin">
+      <input *ngIf="showDownloadButton" matInput class="margin" [(ngModel)]="downloadFileName" placeholder="filename when downloaded" />
+    </mat-form-field>
     <br />
     <mat-checkbox class="margin" [(ngModel)]="showBookmarkButton">showBookmarkButton</mat-checkbox>
     <br />
@@ -61,6 +64,7 @@
     [showOpenFileButton]="showOpenFileButton"
     [showPrintButton]="showPrintButton"
     [showDownloadButton]="showDownloadButton"
+    [filenameForDownload]="downloadFileName"
     [showBookmarkButton]="showBookmarkButton"
     [showSecondaryToolbarButton]="showSecondaryToolbarButton"
     [showRotateButton]="showRotateButton"
