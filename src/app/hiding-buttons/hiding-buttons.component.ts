@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-hiding-buttons',
-  templateUrl: './hiding-buttons.component.html'
+  templateUrl: './hiding-buttons.component.html',
+  styleUrls: ['./hiding-buttons.component.css']
 })
 export class HidingButtonsComponent {
   public showSidebarButton = false;

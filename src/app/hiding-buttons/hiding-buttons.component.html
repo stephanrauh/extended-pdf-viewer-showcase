@@ -3,7 +3,6 @@
     <p>
       You can hide every button of the PDF viewer. By default, each of these buttons is activated.
     </p>
-
     <mat-checkbox class="margin" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
     <br />
     <mat-checkbox class="margin" [(ngModel)]="showFindButton">showFindButton</mat-checkbox>
@@ -19,8 +18,8 @@
     <mat-checkbox class="margin" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
     <br />
     <mat-checkbox class="margin" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
-    <mat-form-field class="margin">
-      <input *ngIf="showDownloadButton" matInput class="margin" [(ngModel)]="downloadFileName" placeholder="filename when downloaded" />
+    <mat-form-field class="margin" *ngIf="showDownloadButton">
+      <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
     </mat-form-field>
     <br />
     <mat-checkbox class="margin" [(ngModel)]="showBookmarkButton">showBookmarkButton</mat-checkbox>
