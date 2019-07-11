@@ -24,7 +24,7 @@
     "@angular/router": "^8.1.0",
     "hammerjs": "^2.0.8",
     "ngx-extended-pdf-viewer": "^0.9.54",
-    "ngx-markdown": "^8.0.2",
+    "ngx-markdown": "^8.1.0",
     "prismjs": "^1.16.0",
     "rxjs": "~6.5.2",
     "tslib": "^1.10.0",
