@@ -15,6 +15,7 @@ import { FindComponent } from './find/find.component';
 import { MultipleDocumentsComponent } from './multiple-documents/multiple-documents.component';
 import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.component';
 import { Base64Component } from './base64/base64.component';
+import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },
   { path: 'range-requests', component: RangeRequestsComponent },
+  { path: 'responsive-design', component: ResponsiveDesignComponent },
   { path: 'simple', component: SimpleComponent },
   { path: 'troubleshooting', component: TroubleshootingComponent },
   { path: 'zoom', component: ZoomComponent },

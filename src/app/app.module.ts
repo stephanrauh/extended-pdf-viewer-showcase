@@ -40,6 +40,7 @@ import { FindComponent } from './find/find.component';
 import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.component';
 import { MultipleDocumentsComponent } from './multiple-documents/multiple-documents.component';
 import { Base64Component } from './base64/base64.component';
+import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { Base64Component } from './base64/base64.component';
     MobileComponent,
     PagesLoadedComponent,
     RangeRequestsComponent,
+    ResponsiveDesignComponent,
     SimpleComponent,
     TroubleshootingComponent,
     ZoomComponent
