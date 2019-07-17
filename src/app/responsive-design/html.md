@@ -2,7 +2,6 @@
 <ngx-extended-pdf-viewer
   [src]="'assets/pdfs/pdf-sample.pdf'"
   [ignoreResponsiveCSS]="ignoreResponsiveCSS"
-  backgroundColor="#ffffff"
   [height]="'90vh'"
   [useBrowserLocale]="true"
 >

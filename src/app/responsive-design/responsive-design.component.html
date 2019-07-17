@@ -1,52 +1,55 @@
-<div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="60%">
-    <markdown>
-      <p>
-        The PDF viewer comes with a fine-tuned set of CSS rules to make it responsible. It automatically adapts for large and small screens.
+<mat-card class="distance-16 mat-elevation-z8">
+  <mat-tab-group>
+    <mat-tab label="Description & live demo">
+      <markdown>
+        <p>
+          Mozilla's PDF viewer comes with a fine-tuned set of CSS rules to adapt the layout responsibly to the window size.
+          Have a look <a href="https://mozilla.github.io/pdf.js/web/viewer.html">their demo</a> to show how it works. When you're
+          reducing the window width, the buttons are moving from the toolbar to a secondary pop-up menu.
+        </p>
+        <p>
+          Unfortunately, as soon as you're embedding the PDF viewer into your web application, these CSS rules quickly start to fail. More
+          often than not, embedding means that the PDF viewer only get a fraction of the window width (such as this showcase page).
+          For some reason, even in 2019 CSS doesn't support such a
+          scenario. There's no way to fix the CSS rules. You can react to the window size, but you can't define responsive design
+          based on the size of an particular HTML element.
+        </p>
+        <p>To solve the problem, &lt;ngx-extended-pdf-viewer&gt; uses a two-part strategy:</p>
+        <ul>
+          <li>
+            If &lt;ngx-extended-pdf-viewer&gt; uses almost the full width of the window, the standard CSS rules are used. That's the most
+            efficient approach.
+          </li>
+          <li>Otherwise, &lt;ngx-extended-pdf-viewer&gt; uses JavaScript to simulate the media queries.</li>
+        </ul>
+        <p>You can override the automagical choice of the correct approach by setting the attribute <code>[ignoreResponsiveCSS]</code>.</p>
+        <p>
+          To see the effect, make this window smaller. If <code>[ignoreResponsiveCSS]="false"</code>, you'll notice some errors. In
+          particular, the scale selector is pushed down on small screens, showing up in like a hardly-visibe ghost above the PDF file. If
+          <code>[ignoreResponsiveCSS]="false"</code>, these errors do not show. 
+        </p>
+      </markdown>
+      <mat-checkbox aria-label="ignore default CSS" [(ngModel)]="ignoreResponsiveCSS">ignore default CSS</mat-checkbox>
+      <p *ngIf="tooSmall">
+        Increase the window width to see the difference between the two responsive strategies
       </p>
-      <p>
-        Unfortunately, when you're embedding the PDF viewer into your web application, this CSS rules quickly start to fail. Embedding often
-        means that the PDF viewer can't use the full width of the screen. For example, the page you're currently viewing has a side menu
-        (unless your viewing it on a very small smartphone). As of 2019, CSS doesn't bear such a scenario in mind.
+      <p *ngIf="tooWide">
+        Reduce the window width to see the differences
       </p>
-      <p>So &lt;ngx-extended-pdf-viewer&gt; uses a two-part strategy:</p>
-      <ul>
-        <li>
-          If &lt;ngx-extended-pdf-viewer&gt; uses almost the full width of the window, the standard CSS rules are used. That's the most
-          efficient approach.
-        </li>
-        <li>Otherwise, &lt;ngx-extended-pdf-viewer&gt; uses JavaScript to simulate the media queries.</li>
-      </ul>
-      <p>You can override the automagical choice of the correct approach by setting the attribute <code>[ignoreResponsiveCSS]</code>.</p>
-      <p>
-        To see the effect, make this window smaller. If <code>[ignoreResponsiveCSS]="false</code>, you'll notice some errors. In particular,
-        the scale selector is pushed down on small screens, showing up in like a hardly-visibe ghost above the PDF file. If
-        <code>[ignoreResponsiveCSS]="false</code>, these errors do not show. At the time of writing, the demo isn't perfect yet. Switch to
-        the full-width view before changing the setting to see the effect. Otherwise, you might be confused by the current, slightly buggy
-        state of the demo.
+      <p *ngIf="!tooWide && !tooSmall">
+        With the current window width, differences may become visible
       </p>
-    </markdown>
-    <mat-label title="Toolbar zoom factor"></mat-label>
-    <mat-radio-group aria-label="Toolbar zoom factor" [(ngModel)]="ignoreResponsiveCSS">
-      <mat-radio-button [value]="true">true</mat-radio-button>
-      <mat-radio-button [value]="false">false</mat-radio-button>
-    </mat-radio-group>
-  </mat-card>
-
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="38%">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <markdown ngPreserveWhitespaces src="assets/responsive-design/html.md"> </markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
+    </mat-tab>
+    <mat-tab label="HTML template">
+      <markdown ngPreserveWhitespaces src="assets/responsive-design/html.md"> </markdown>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer
     [src]="'assets/pdfs/pdf-sample.pdf'"
     [ignoreResponsiveCSS]="ignoreResponsiveCSS"
-    backgroundColor="#ffffff"
     [height]="'90vh'"
     [useBrowserLocale]="true"
   >

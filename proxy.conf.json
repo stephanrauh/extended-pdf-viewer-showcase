@@ -1,0 +1,7 @@
+{
+  "/assets/pdfs/": {
+    "target": "https://pdfviewer.net/",
+    "secure": false,
+    "debug": true
+  }
+}
