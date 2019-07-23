@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-html,
-body {
+html {
   height: 100%;
 }
 body {
@@ -32,6 +31,10 @@ code {
 .mat-drawer-inner-container {
   margin-top: 64px;
   margin-bottom: -64px;
+}
+
+mat-sidenav.mat-drawer {
+  overflow-y: hidden;
 }
 
 body > app-root > app-nav > .mat-toolbar-single-row {
