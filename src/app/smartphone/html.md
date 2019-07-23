@@ -1,0 +1,11 @@
+```html
+<ngx-extended-pdf-viewer
+  [src]="'assets/pdfs/fancy.pdf'"
+  backgroundColor="#ffffff"
+  [useBrowserLocale]="true"
+  [mobileFriendlyZoom]="'150%'"
+  [ignoreResponsiveCSS]="true"
+  [showSecondaryToolbarButton]="false"
+>
+</ngx-extended-pdf-viewer>
+```

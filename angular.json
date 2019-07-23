@@ -38,9 +38,9 @@
               "node_modules/prismjs/themes/prism-okaidia.css"
             ],
             "scripts": [
-              "node_modules/ngx-extended-pdf-viewer/assets/pdf-2.2.js",
-              "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker-2.2.js",
-              "node_modules/ngx-extended-pdf-viewer/assets/viewer-2.2.js",
+              "node_modules/ngx-extended-pdf-viewer/assets/pdf.js",
+              "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker.js",
+              "node_modules/ngx-extended-pdf-viewer/assets/viewer.js",
               "node_modules/marked/lib/marked.js",
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-batch.min.js",

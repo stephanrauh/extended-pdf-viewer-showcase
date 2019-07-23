@@ -1,0 +1,16 @@
+/deep/ button#print {
+  display: block !important;
+}
+
+/deep/ button#download {
+  display: block !important;
+}
+
+.mat-radio-button {
+  padding-top: 5px;
+  display: block;
+}
+
+.distance-top {
+  padding-top: 8px;
+}
