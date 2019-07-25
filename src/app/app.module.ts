@@ -42,6 +42,7 @@ import { MultipleDocumentsComponent } from './multiple-documents/multiple-docume
 import { Base64Component } from './base64/base64.component';
 import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 import { SmartphoneComponent } from './smartphone/smartphone.component';
+import { ContextmenuComponent } from './contextmenu/contextmenu.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SmartphoneComponent } from './smartphone/smartphone.component';
     AlternativesComponent,
     AttributesComponent,
     Base64Component,
+    ContextmenuComponent,
     FindComponent,
     GettingStartedComponent,
     I18nComponent,

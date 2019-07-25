@@ -17,11 +17,13 @@ import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.componen
 import { Base64Component } from './base64/base64.component';
 import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 import { SmartphoneComponent } from './smartphone/smartphone.component';
+import { ContextmenuComponent } from './contextmenu/contextmenu.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'base64', component: Base64Component },
+  { path: 'contextmenu', component: ContextmenuComponent },
   { path: 'getting-started', component: GettingStartedComponent },
   { path: 'find', component: FindComponent },
   { path: 'i18n', component: I18nComponent },
