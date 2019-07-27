@@ -13,7 +13,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)"
   >
-    <mat-toolbar>About {{ isHandset$ | async }}</mat-toolbar>
+    <mat-toolbar>About</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="'intro'">What is ngx-extended-pdf-viewer?</a>
       <a mat-list-item [routerLink]="'alternatives'">Alternatives</a>
