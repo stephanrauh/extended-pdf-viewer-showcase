@@ -6,7 +6,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   templateUrl: './responsive-design.component.html',
   styleUrls: ['./responsive-design.component.css']
 })
-export class ResponsiveDesignComponent implements OnInit {
+export class ResponsiveDesignComponent {
   public ignoreResponsiveCSS = false;
   public tooSmall = false;
   public tooWide = false;
@@ -19,6 +19,4 @@ export class ResponsiveDesignComponent implements OnInit {
       this.tooSmall = result.matches;
     });
   }
-
-  ngOnInit() {}
 }
