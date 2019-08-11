@@ -9,17 +9,17 @@
 ]
 ```
 
-If you're the adventurous one, you can also add the next version of pdf.js. Note that this version is a developer snapshat instead of a stable release. It's not intended to be used in production yet. Plus, the version number may change with each release of ngx-extended-pdf-viewer. That said, here's how to have a glimpse of the future:
+If need to support Internet Explorer 11, use these files instead:
 
 ```json
 "scripts": [
-  "node_modules/ngx-extended-pdf-viewer/assets/pdf-2.2.222.js",
-  "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker-2.2.222.js",
-  "node_modules/ngx-extended-pdf-viewer/assets/viewer-2.2.222.js"
+  "node_modules/ngx-extended-pdf-viewer/assets/pdf-es5.js",
+  "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker-es5.js",
+  "node_modules/ngx-extended-pdf-viewer/assets/viewer-es5.js"
 ]
 ```
 
-2. Add the translations to the assets by adding them to the "assets" section in the angular.json:
+2. Add the translations and images to the assets by adding them to the "assets" section in the angular.json:
 
 ```json
 "assets": [
@@ -29,6 +29,11 @@ If you're the adventurous one, you can also add the next version of pdf.js. Note
     "glob": "**/*",
     "input": "node_modules/ngx-extended-pdf-viewer/assets/locale",
     "output": "/assets/locale/"
+  },
+    {
+    "glob": "**/*",
+    "input": "node_modules/ngx-extended-pdf-viewer/assets/images",
+    "output": "/assets/images/"
   }
 ]
 ```

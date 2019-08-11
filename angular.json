@@ -27,6 +27,11 @@
                 "output": "/assets/locale/"
               },
               {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/images",
+                "output": "/assets/images/"
+              },
+              {
                 "glob": "**/*.md",
                 "input": "src/app/",
                 "output": "/assets"
