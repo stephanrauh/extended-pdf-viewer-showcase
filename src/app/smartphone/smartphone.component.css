@@ -6,6 +6,10 @@
   display: block !important;
 }
 
+/deep/ #toolbarViewerMiddle {
+  display: none;
+}
+
 .mat-radio-button {
   padding-top: 5px;
   display: block;

@@ -34,7 +34,7 @@ The iFrame approach is simple and robust. If you're not happy with ngx-extended-
 
 ## ng2-pdf-viewer: Displaying PDF files in a no-nonsense way
 
-This library is the way to go if you just want to render PDF files and nothing else. No toolbar, no thumbnails, just the plain PDF file. <a href="https://www.npmjs.com/package/ng2-pdf-viewer">ngx-pdf-viewer</a> gives you a decent API, is actively maintained, and is popular enough to feel trustworthy. At the time of writing, it saw more than 99.000 downloads a month. Without having used the library myself, I suppose Vadym Yatsyuk is doing a great job with his library.
+This library is the way to go if you just want to render PDF files and nothing else. No toolbar, no thumbnails, just the plain PDF file. <a href="https://www.npmjs.com/package/ng2-pdf-viewer">ng2-pdf-viewer</a> gives you a decent API, is actively maintained, and is popular enough to feel trustworthy. At the time of writing, it saw more than 99.000 downloads a month. Without having used the library myself, I suppose Vadym Yatsyuk is doing a great job with his library.
 
 ## ng2-image-viewer
 

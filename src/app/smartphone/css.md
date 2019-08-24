@@ -6,4 +6,8 @@
 /deep/ button#download {
   display: block !important;
 }
+
+/deep/ #toolbarViewerMiddle {
+  display: none;
+}
 ```

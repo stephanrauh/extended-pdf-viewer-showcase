@@ -1,6 +1,6 @@
 ## Almost there!
 
-1.  Add "NgxExtendedPdfViewerModule" to the import section of your module file. If your IDE doesn't find
+1.  Add `NgxExtendedPdfViewerModule` to the import section of your module file. If your IDE doesn't find
     the import automatically, here it is:
 
 ```typescript
