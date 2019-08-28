@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class ZoomComponent {
   private _zoomSetting: number | string | undefined = 'page-width';
 
+  public currentZoomFactor: number;
+
   // getter and setter make the demo nicer -
   // you probably don't need them in your code
   public get zoomSetting() {
@@ -20,5 +22,9 @@ export class ZoomComponent {
     } else {
       this._zoomSetting = zoom + '%';
     }
+  }
+
+  public updateZoomFactor(zoom: number): void {
+    this.currentZoomFactor = zoom;
   }
 }
