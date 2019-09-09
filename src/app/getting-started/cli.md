@@ -4,7 +4,6 @@
 ```json
 "scripts": [
   "node_modules/ngx-extended-pdf-viewer/assets/pdf.js",
-  "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker.js",
   "node_modules/ngx-extended-pdf-viewer/assets/viewer.js"
 ]
 ```
@@ -14,7 +13,6 @@ If need to support Internet Explorer 11, use these files instead:
 ```json
 "scripts": [
   "node_modules/ngx-extended-pdf-viewer/assets/pdf-es5.js",
-  "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker-es5.js",
   "node_modules/ngx-extended-pdf-viewer/assets/viewer-es5.js"
 ]
 ```
@@ -34,6 +32,11 @@ If need to support Internet Explorer 11, use these files instead:
     "glob": "**/*",
     "input": "node_modules/ngx-extended-pdf-viewer/assets/images",
     "output": "/assets/images/"
+  },
+  { 
+    "glob": "**/pdf.worker.js", 
+    "input": "node_modules/ngx-extended-pdf-viewer/ngx-extended-pdf-viewer/assets", 
+    "output": "/assets/" 
   }
 ]
 ```

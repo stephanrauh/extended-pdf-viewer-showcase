@@ -7,11 +7,42 @@ Have a look at [this discussion](https://github.com/stephanrauh/ngx-extended-pdf
 ```json
 "scripts": [
   "node_modules/ngx-extended-pdf-viewer/assets/pdf.js",
-  "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker.js",
   "node_modules/ngx-extended-pdf-viewer/assets/viewer.js",
   (put any additional JavaScript file here)
 ]
 ```
+
+There's a third file - `node_modules/ngx-extended-pdf-viewer/assets/pdf.worker.js`. Earlier versions of these instructions told you to put add it in the `scripts` section, too, but that's wrong, as you'll see in the next paragraph.
+
+
+## Fake worker
+If you see the message "Setting up fake worker", everything works fine, except you're wasting performance. To avoid that, make sure that the file `pdf.worker.js` (or `pdf.worker-es5.js` for developers supporting IE11) is *not* part of the `scripts` section of the `angular.json`.
+
+Instead, put the pdf.worker.js file into the assets folder. The path can be configured in the global constant `defaultOptions.workerSrc` (which, in turn, is defined in the file `default-options.ts`). By default, it's './assets/pdf.worker.js'. In other words, you need to add these lines to the `angular.json`:
+
+```json
+"assets": [
+   ...,
+   {
+      "glob": "pdf.worker.js", // or "pdf.worker-es5.js" to support IE11
+      "input": "node_modules/ngx-extended-pdf-viewer/assets",
+      "output": "/assets/"
+   }
+```
+
+If you need IE11 support, you also need to configure the URL of the worker file:
+
+```typescript
+import { defaultOptions } from 'ngx-extended-pdf-viewer';
+
+@Component(...)
+export class PdfDisplayComponent {
+constructor() {
+    defaultOptions.workerSrc = './assets/pdf.worker-es5.js';
+  }
+```
+
+If everything works, the file is lazy-loaded when the PDF viewer opens, and you're rewarded with a non-blocking PDF viewer, even if your PDF file is huge.
 
 ## Localization
 

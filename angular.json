@@ -35,6 +35,11 @@
                 "glob": "**/*.md",
                 "input": "src/app/",
                 "output": "/assets"
+              },
+              {
+                "glob": "pdf.worker-es5.js",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets",
+                "output": "/assets/"
               }
             ],
             "styles": [
@@ -44,7 +49,6 @@
             ],
             "scripts": [
               "node_modules/ngx-extended-pdf-viewer/assets/pdf-es5.js",
-              "node_modules/ngx-extended-pdf-viewer/assets/pdf.worker-es5.js",
               "node_modules/ngx-extended-pdf-viewer/assets/viewer-es5.js",
               "node_modules/marked/lib/marked.js",
               "node_modules/prismjs/prism.js",
