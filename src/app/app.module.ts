@@ -20,7 +20,8 @@ import {
   MatSelectModule,
   MatTabsModule,
   MatRadioModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { I18nComponent } from './i18n/i18n.component';
@@ -43,6 +44,7 @@ import { Base64Component } from './base64/base64.component';
 import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 import { SmartphoneComponent } from './smartphone/smartphone.component';
 import { ContextmenuComponent } from './contextmenu/contextmenu.component';
+import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-dialog.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { ContextmenuComponent } from './contextmenu/contextmenu.component';
     SimpleComponent,
     SmartphoneComponent,
     TroubleshootingComponent,
-    ZoomComponent
+    ZoomComponent,
+    CustomPrintDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,7 @@ import { ContextmenuComponent } from './contextmenu/contextmenu.component';
     MatSelectModule,
     MatRadioModule,
     MatTabsModule,
+    MatProgressBarModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
     NgxExtendedPdfViewerModule
   ],

@@ -1,0 +1,33 @@
+
+.pdf-wrapper .pdf-card {
+    margin-bottom: 10px;
+}
+
+.pdf-wrapper  #toolbarContainer {
+    background-color: transparent;
+    display: none;
+}
+
+.pdf-wrapper .pdf-code-wrapper {
+    height: 350px;
+}
+
+.pdf-wrapper .overflow-y-scroll {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.pdf-wrapper .overflow-none {
+    overflow: none;
+}
+
+.pdf-wrapper .print__progress {
+    height: 15px;
+    width: 100%;
+}
+
+/* Remove animation from progres bar  */
+/* MutationObserver events are faster than animation causing a choppy animation */
+.pdf-wrapper .mat-progress-bar .mat-progress-bar-fill {
+    transition: none;
+  }
