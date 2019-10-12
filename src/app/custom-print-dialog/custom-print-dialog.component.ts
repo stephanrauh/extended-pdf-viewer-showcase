@@ -17,12 +17,12 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
 
   printPercentage: number = 0;
   totalPages: number = 0;
-  currentPageRendered: number = 0; 
-  showProgress: boolean = false; 
-  showCompleted: boolean = false; 
+  currentPageRendered: number = 0;
+  showProgress: boolean = false;
+  showCompleted: boolean = false;
   hideBuiltInProgress: boolean = true;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     const node = document.querySelector('#printContainer');
@@ -34,7 +34,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
             if (count > 0) {
               this.currentPageRendered = count;
               this.printPercentage = Math.round((count / this.totalPages) * 100);
-            }            
+            }
           } catch (error) {
             this.printPercentage = 0;
           }
@@ -58,11 +58,11 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
     this._eventBus = event.source['eventBus'];
   }
 
-  onBeforePrint() {    
+  onBeforePrint() {
     if (this.hideBuiltInProgress) {
       const node: Element = document.querySelector('.pdf-wrapper #printServiceOverlay .dialog');
       node.setAttribute('style', 'display:none!important');
-    }    
+    }
     this.showCompleted = false;
     this.showProgress = true;
   }
@@ -73,7 +73,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
     this.showCompleted = true;
   }
 
-  print() {  
+  print() {
     this._eventBus.dispatch('print');
   }
 
