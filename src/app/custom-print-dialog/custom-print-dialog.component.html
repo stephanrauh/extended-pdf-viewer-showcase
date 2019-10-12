@@ -6,7 +6,7 @@
       <div fxLayout="column" fxLayoutGap="10px">
         <button mat-raised-button color="primary" (click)="print()"> Print </button>
         <button mat-raised-button color="warn" (click)="cancel()"> Cancel </button>
-        <mat-checkbox class="example-margin" [(ngModel)]="hideBuiltInProgress">Hide PDFJS Progress Dialog</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hideBuiltInProgress">Hide PDFJS Progress Dialog</mat-checkbox>
 
         <div *ngIf="showProgress" style="padding-bottom:10px; padding-top:10px">
           <div>Processing page {{currentPageRendered}} of {{totalPages}}</div>
