@@ -18,6 +18,7 @@ import { Base64Component } from './base64/base64.component';
 import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 import { SmartphoneComponent } from './smartphone/smartphone.component';
 import { ContextmenuComponent } from './contextmenu/contextmenu.component';
+import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-dialog.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'smartphone', component: SmartphoneComponent },
   { path: 'troubleshooting', component: TroubleshootingComponent },
   { path: 'zoom', component: ZoomComponent },
+  { path: 'custom-print-dialog', component: CustomPrintDialogComponent },
   { path: '**', redirectTo: '/simple', pathMatch: 'full' }
 ];
 
