@@ -6,23 +6,25 @@ interface EventBus {
 }
 
 @Component({
-  selector: 'app-simple',
+  selector: 'app-custom-progress-bar',
   templateUrl: './custom-print-dialog.component.html',
   styleUrls: ['./custom-print-dialog.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class CustomPrintDialogComponent implements OnInit, OnDestroy {
+  // tslint:disable-next-line:variable-name
   private _eventBus: EventBus;
+  // tslint:disable-next-line:variable-name
   private _observer: MutationObserver;
 
-  printPercentage: number = 0;
-  totalPages: number = 0;
-  currentPageRendered: number = 0;
-  showProgress: boolean = false;
-  showCompleted: boolean = false;
-  hideBuiltInProgress: boolean = true;
+  printPercentage = 0;
+  totalPages = 0;
+  currentPageRendered = 0;
+  showProgress = false;
+  showCompleted = false;
+  hideBuiltInProgress = true;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     const node = document.querySelector('#printContainer');
@@ -55,6 +57,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
 
   onPagesLoaded(event: PagesLoadedEvent) {
     this.totalPages = event.pagesCount;
+    // tslint:disable-next-line:no-string-literal
     this._eventBus = event.source['eventBus'];
   }
 
@@ -82,6 +85,6 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   }
 
   get isPrintCancelled(): boolean {
-    return (this.totalPages !== this.currentPageRendered);
+    return this.totalPages !== this.currentPageRendered;
   }
 }
