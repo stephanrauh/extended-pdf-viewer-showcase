@@ -52,7 +52,12 @@ If you've set `useBrowserLocale="false"`, you need to define the translations in
 
 _Hint_: Sometimes you do not need to copy the HTML snippet into the index.html at the root folder of the Angular project. The bottom line is that the HTML snippet is already part of the DOM when the PDF viewer is initialized. Cluttering the root index file with the translations is an ugly and inflexible hack, but it works.
 
-## set `delayFirstView="1000"`
+## Marking a search result
+The PDF viewer has three different rendering modes. By default, `ngx-extended-pdf-viewer` does not render the "text layer". Most of the time, you won't notice - apart from improved performance. However, without the text layer, you can't mark text, and the "find" function doesn't highlight the search results.
+
+To activate the text layer, use `showHandToolButton="true"`.
+
+## set delayFirstView="1000" (deprecated)
 
 This workaround was needed in the early version of ngx-extended-pdf-viewer, before I understood how to initialize the library correctly. However, it may come in handy every once in a while. Sometimes the initialization of the pdf viewer takes some time, so the PDF file is opened too early. As a work-around, you can add a delay. Setting it to one second is usually a good compromise:
 
