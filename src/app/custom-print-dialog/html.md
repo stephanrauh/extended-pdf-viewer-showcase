@@ -21,8 +21,8 @@
     [showSpreadButton]="false"
     [showPropertiesButton]="false"
     (pagesLoaded)="onPagesLoaded($event)"
-    (beforePrint)="onBeforePrint($event)"
-    (afterPrint)="onAfterPrint($event)"
+    (beforePrint)="onBeforePrint()"
+    (afterPrint)="onAfterPrint()"
   >
   </ngx-extended-pdf-viewer>
 ```
