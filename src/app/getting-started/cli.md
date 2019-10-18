@@ -35,7 +35,7 @@ If need to support Internet Explorer 11, use these files instead:
   },
   { 
     "glob": "**/pdf.worker.js", 
-    "input": "node_modules/ngx-extended-pdf-viewer/ngx-extended-pdf-viewer/assets", 
+    "input": "node_modules/ngx-extended-pdf-viewer/assets", 
     "output": "/assets/" 
   }
 ]
