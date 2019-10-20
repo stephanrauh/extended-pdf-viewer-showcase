@@ -44,6 +44,17 @@ constructor() {
 
 If everything works, the file is lazy-loaded when the PDF viewer opens, and you're rewarded with a non-blocking PDF viewer, even if your PDF file is huge.
 
+## Compatibility to Bootstrap (and other CSS frameworks)
+
+Bootstrap interferes with the printing algorithm of `pdf.js`. Guard it with a media query to avoid unwanted effects, such as scaling the print to 65%. For example, if you're using SCSS and Bootstrap 4, remove the import of Bootstrap.min.css from the Angular.json file. Instead, import it by including Bootstrap by adding this line to the global `styles.scss` file:
+
+```css
+@media screen {
+  @import '../node_modules/bootstrap/scss/bootstrap';
+}
+```
+Caveat: this trick only works with the SCSS version of both `styles.scss` and `bootstrap.scss`. It doesn't work with simple CSS. 
+
 ## Localization
 
 Did you set the attribute `useBrowserLocale`? By default, it's false. Usually, it's better to set it to true. The pdf viewer uses the language the user has set in their browser settings and loads a translation file from the assets folder. If that doesn't work, please check the settings in the Angular.json file.
