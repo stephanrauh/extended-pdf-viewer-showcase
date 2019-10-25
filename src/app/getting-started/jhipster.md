@@ -13,7 +13,7 @@ new CopyWebpackPlugin([
 
 ```typescript
 require('ngx-extended-pdf-viewer/assets/pdf.js');
-require('ngx-extended-pdf-viewer/assets/pdf.worker.js');
+require('ngx-extended-pdf-viewer/assets/pdf.worker*.js');
 require('ngx-extended-pdf-viewer/assets/web/viewer.js');
 ```
 

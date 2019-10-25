@@ -34,7 +34,7 @@ If need to support Internet Explorer 11, use these files instead:
     "output": "/assets/images/"
   },
   { 
-    "glob": "**/pdf.worker.js", 
+    "glob": "**/pdf.worker*.js", 
     "input": "node_modules/ngx-extended-pdf-viewer/assets", 
     "output": "/assets/" 
   }
