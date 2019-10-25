@@ -13,8 +13,6 @@ interface EventBus {
 })
 export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:variable-name
-  private _eventBus: EventBus;
-  // tslint:disable-next-line:variable-name
   private _observer: MutationObserver;
 
   printPercentage = 0;
@@ -57,8 +55,6 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
 
   onPagesLoaded(event: PagesLoadedEvent) {
     this.totalPages = event.pagesCount;
-    // tslint:disable-next-line:no-string-literal
-    this._eventBus = event.source['eventBus'];
   }
 
   onBeforePrint() {
@@ -77,7 +73,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   }
 
   print() {
-    this._eventBus.dispatch('print');
+    (window as any).PDFViewerApplication.eventBus.dispatch('print');
   }
 
   cancel() {
