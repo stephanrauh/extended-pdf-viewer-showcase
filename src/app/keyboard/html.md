@@ -1,0 +1,13 @@
+```html
+<ngx-extended-pdf-viewer
+    [src]="'assets/pdfs/hammond-organ-wikipedia.pdf'"
+    [ignoreKeyboard]="ignoreKeyboard"
+    [ignoreKeys]="ignoreKeys"
+    [acceptKeys]="acceptKeys"
+    backgroundColor="#ffffff"
+    [height]="'90vh'"
+    [useBrowserLocale]="true"
+    [page]="2"
+>
+</ngx-extended-pdf-viewer>
+```

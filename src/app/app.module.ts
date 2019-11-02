@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -43,6 +44,7 @@ import { ResponsiveDesignComponent } from './responsive-design/responsive-design
 import { SmartphoneComponent } from './smartphone/smartphone.component';
 import { ContextmenuComponent } from './contextmenu/contextmenu.component';
 import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-dialog.component';
+import { KeyboardComponent } from './keyboard/keyboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +67,8 @@ import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-d
     SmartphoneComponent,
     TroubleshootingComponent,
     ZoomComponent,
-    CustomPrintDialogComponent
+    CustomPrintDialogComponent,
+    KeyboardComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,7 @@ import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-d
     MatSelectModule,
     MatRadioModule,
     MatTabsModule,
+    MatTooltipModule,
     MatProgressBarModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
     NgxExtendedPdfViewerModule

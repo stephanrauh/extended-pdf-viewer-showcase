@@ -1,3 +1,4 @@
+import { KeyboardComponent } from './keyboard/keyboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'i18n', component: I18nComponent },
   { path: 'intro', component: IntroComponent },
   { path: 'hiding-buttons', component: HidingButtonsComponent },
+  { path: 'keyboard', component: KeyboardComponent },
   { path: 'mobile', component: MobileComponent },
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },

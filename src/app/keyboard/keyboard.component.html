@@ -1,0 +1,186 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <mat-tab-group>
+      <mat-tab label="documentation">
+        <p>
+          The PDF viewer can be controlled by the keyboard. If necessary, you can disable the key bindings, either globally or only certain
+          keys.
+        </p>
+        <ul>
+          <li>[ignoreKeyboard]="true": disables the keyboard entirely</li>
+          <li>[ignoreKeys] comma-separated list of keys. Every key in the list is ignored.</li>
+          <li>[acceptKeys] comma-separated list of keys. Every key in the list is accepted, and every other key is ignored.</li>
+        </ul>
+      </mat-tab>
+      <mat-tab label="demo">
+        <div>
+          <mat-checkbox class="margin" [(ngModel)]="ignoreKeyboard">ignoreKeyboard</mat-checkbox>
+        </div>
+        <div>
+          <mat-form-field style="width:100%">
+            <input matInput class="margin" readonly="true" [ngModel]="ignoreKeysDisplay" placeholder="ignoreKeys" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field style="width:100%">
+            <input matInput class="margin" readonly="true" [ngModel]="acceptKeysDisplay" placeholder="acceptKeys" />
+          </mat-form-field>
+        </div>
+        <table class="full-width">
+          <tr>
+            <th>key</th>
+            <th>accept</th>
+            <th>ignore</th>
+            <th>meaning</th>
+          </tr>
+          <tr>
+            <td matTooltip="alternative keys: SHIFT+CTRL, SHIFT+META, ALT+META">CTRL+F</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrlF"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrlF"></mat-checkbox></td>
+            <td>open find dialog</td>
+          </tr>
+          <tr>
+              <td matTooltip="alternative keys: SHIFT+CTRL, SHIFT+META, ALT+META" >CTRL+G</td>
+              <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrlG"></mat-checkbox></td>
+              <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrlG"></mat-checkbox></td>
+              <td>find next</td>
+          </tr>
+          <tr>
+            <td matTooltip="alternative keys: META, SHIFT+CTRL, SHIFT+META">CTRL+"+"</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrlPlus"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrlPlus"></mat-checkbox></td>
+            <td>zoom in</td>
+          </tr>
+          <tr>
+            <td matTooltip="alternative keys: META, SHIFT+CTRL, SHIFT+META">CTRL+"-"</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrlMinus"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrlMinus"></mat-checkbox></td>
+            <td>zoom out</td>
+          </tr>
+          <tr >
+            <td matTooltip="alternative keys: META, SHIFT+CTRL, SHIFT+META">CTRL+0</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrl0"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrl0"></mat-checkbox></td>
+            <td>reset zoom</td>
+          </tr>
+          <tr>
+            <td>UP</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptUp"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreUp"></mat-checkbox></td>
+            <td>next page (only if zoom = "page fit")</td>
+          </tr>
+          <tr>
+            <td>DOWN</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptDown"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreDown"></mat-checkbox></td>
+            <td>previous page (only if zoom = "page fit")</td>
+          </tr>
+          <tr>
+            <td>CTRL+UP</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrlUp"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrlUp"></mat-checkbox></td>
+            <td>first page</td>
+          </tr>
+          <tr>
+            <td>CTRL+DOWN</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrlDown"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrlDown"></mat-checkbox></td>
+            <td>last page</td>
+          </tr>
+          <tr>
+            <td>P</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptP"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreP"></mat-checkbox></td>
+            <td>previous page</td>
+          </tr>
+          <tr>
+            <td>N</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptN"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreN"></mat-checkbox></td>
+            <td>next page</td>
+          </tr>
+          <tr>
+            <td>J</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptJ"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreJ"></mat-checkbox></td>
+            <td>previous page</td>
+          </tr>
+          <tr>
+            <td>K</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptK"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreK"></mat-checkbox></td>
+            <td>next page</td>
+          </tr>
+          <tr>
+            <td>HOME</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptHome"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreHome"></mat-checkbox></td>
+            <td>next page</td>
+          </tr>
+          <tr>
+              <td>END</td>
+              <td><mat-checkbox class="margin" [(ngModel)]="acceptEnd"></mat-checkbox></td>
+              <td><mat-checkbox class="margin" [(ngModel)]="ignoreEnd"></mat-checkbox></td>
+              <td>next page</td>
+            </tr>
+            <tr>
+              <td>S</td>
+              <td><mat-checkbox class="margin" [(ngModel)]="acceptS"></mat-checkbox></td>
+              <td><mat-checkbox class="margin" [(ngModel)]="ignoreS"></mat-checkbox></td>
+              <td>"select" mode</td>
+            </tr>
+            <tr>
+              <td>CTRL+S</td>
+              <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrlS"></mat-checkbox></td>
+              <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrlS"></mat-checkbox></td>
+              <td>download PDF</td>
+            </tr>
+            <tr>
+              <td>H</td>
+              <td><mat-checkbox class="margin" [(ngModel)]="acceptH"></mat-checkbox></td>
+              <td><mat-checkbox class="margin" [(ngModel)]="ignoreH"></mat-checkbox></td>
+              <td>"hand" mode"</td>
+            </tr>
+            <tr>
+              <td>R</td>
+              <td><mat-checkbox class="margin" [(ngModel)]="acceptR"></mat-checkbox></td>
+              <td><mat-checkbox class="margin" [(ngModel)]="ignoreR"></mat-checkbox></td>
+              <td>rotate clockwise</td>
+            </tr>
+            <tr>
+              <td>SHIFT+R</td>
+              <td><mat-checkbox class="margin" [(ngModel)]="acceptShiftR"></mat-checkbox></td>
+              <td><mat-checkbox class="margin" [(ngModel)]="ignoreShiftR"></mat-checkbox></td>
+              <td>rotate counter-clockwise</td>
+            </tr>
+
+        </table>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <markdown ngPreserveWhitespaces src="assets/keyboard/html.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="TypeScript">
+        <markdown ngPreserveWhitespaces src="assets/keyboard/ts.md"> </markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <ngx-extended-pdf-viewer
+    [src]="'assets/pdfs/hammond-organ-wikipedia.pdf'"
+    [ignoreKeyboard]="ignoreKeyboard"
+    [ignoreKeys]="ignoreKeys"
+    [acceptKeys]="acceptKeys"
+    backgroundColor="#ffffff"
+    [height]="'90vh'"
+    [useBrowserLocale]="true"
+    [page]="2"
+  >
+  </ngx-extended-pdf-viewer>
+</mat-card>
