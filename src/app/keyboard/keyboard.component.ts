@@ -10,7 +10,7 @@ export class KeyboardComponent implements OnInit {
 
   public acceptKeys = [];
 
-  public ignoreKeys = [];
+  public ignoreKeys = ['j', 'k', 'F4'];
 
   private accept(key: string, add: boolean): void {
     if (add) {
@@ -474,5 +474,20 @@ export class KeyboardComponent implements OnInit {
 
   public get ignoreAltCtrlG() {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'Alt+Ctrl+G'.toLowerCase());
+  }
+
+  public get sourcecode(): string {
+    return `<ngx-extended-pdf-viewer
+    [src]="'assets/pdfs/hammond-organ-wikipedia.pdf'"
+    [ignoreKeyboard]="${this.ignoreKeyboard}"
+    [ignoreKeys]="${this.ignoreKeysDisplay}"
+    [acceptKeys]="${this.acceptKeysDisplay}"
+    backgroundColor="#ffffff"
+    [height]="'90vh'"
+    [useBrowserLocale]="true"
+    [page]="2"
+    showPresentationModeButton="true"
+>
+  </ngx-extended-pdf-viewer>`;
   }
 }

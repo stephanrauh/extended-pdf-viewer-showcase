@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <mat-tab-group>
+    <mat-tab-group  style="height:50vh">
       <mat-tab label="documentation">
         <p>
           The PDF viewer can be controlled by the keyboard. If necessary, you can disable the key bindings, either globally or only certain
@@ -11,23 +11,16 @@
           <li>[ignoreKeys] comma-separated list of keys. Every key in the list is ignored.</li>
           <li>[acceptKeys] comma-separated list of keys. Every key in the list is accepted, and every other key is ignored.</li>
         </ul>
+        <p>The keys are defined by their name and - optionally - their modifiers (SHIFT, ALT, CTRL, CMD, and META). CMD is used on Apple keyboards, while META is used on some UNIX keyboards.</p>
+        <p>Examples: "CTRL+SHIFT+P" is the key binding of the presentation mode. "F4" toggles the sidebar.</p>
       </mat-tab>
       <mat-tab label="demo">
-        <p>See how the demo reacts to these settings. Also have a look at the tooltips: many keys have multiple key bindings.</p>
+        <p>See how the demo reacts to these settings. The source code on the right-hand side reflect the settings, too. Also have a look at the tooltips: many keys have multiple key bindings.</p>
+
         <div>
           <mat-checkbox class="margin" [(ngModel)]="ignoreKeyboard">ignoreKeyboard</mat-checkbox>
         </div>
-        <div>
-          <mat-form-field style="width:100%">
-            <input matInput class="margin" readonly="true" [ngModel]="ignoreKeysDisplay" placeholder="ignoreKeys (not editable)" />
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field style="width:100%">
-            <input matInput class="margin" readonly="true" [ngModel]="acceptKeysDisplay" placeholder="acceptKeys (not editable)" />
-          </mat-form-field>
-        </div>
-        <table class="full-width">
+         <table class="full-width">
           <tr>
             <th>key</th>
             <th>accept</th>
@@ -167,18 +160,18 @@
             <td>print</td>
           </tr>
           <tr>
-              <td>F4</td>
-              <td><mat-checkbox class="margin" [(ngModel)]="acceptF4"></mat-checkbox></td>
-              <td><mat-checkbox class="margin" [(ngModel)]="ignoreF4"></mat-checkbox></td>
-              <td>toggle sidebar</td>
-            </tr>
-            <tr>
-                <td matTooltip="alternative keys: CMD+ALT+G">ALT+CTRL+G</td>
-                <td><mat-checkbox class="margin" [(ngModel)]="acceptAltCtrlG"></mat-checkbox></td>
-                <td><mat-checkbox class="margin" [(ngModel)]="ignoreAltCtrlG"></mat-checkbox></td>
-                <td>focus on page number field</td>
-              </tr>
-            </table>
+            <td>F4</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptF4"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreF4"></mat-checkbox></td>
+            <td>toggle sidebar</td>
+          </tr>
+          <tr>
+            <td matTooltip="alternative keys: CMD+ALT+G">ALT+CTRL+G</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptAltCtrlG"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreAltCtrlG"></mat-checkbox></td>
+            <td>focus on page number field</td>
+          </tr>
+        </table>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -186,7 +179,7 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="HTML template">
-        <markdown ngPreserveWhitespaces src="assets/keyboard/html.md"> </markdown>
+        <markdown ngPreserveWhitespaces [data]="sourcecode | language : 'typescript'"></markdown>
       </mat-tab>
       <mat-tab label="TypeScript">
         <markdown ngPreserveWhitespaces src="assets/keyboard/ts.md"> </markdown>
