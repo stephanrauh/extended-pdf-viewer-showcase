@@ -8,6 +8,7 @@
     [height]="'90vh'"
     [useBrowserLocale]="true"
     [page]="2"
+    showPresentationModeButton="true"
 >
 </ngx-extended-pdf-viewer>
 ```

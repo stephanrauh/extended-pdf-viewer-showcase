@@ -172,7 +172,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'CTRL+-'.toLowerCase());
   }
 
-  /***/
   public set acceptCtrl0(v: boolean) {
     this.accept('CTRL+0', v);
   }
@@ -189,7 +188,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'CTRL+0'.toLowerCase());
   }
 
-  /***/
   public set acceptUp(v: boolean) {
     this.accept('CTRL+UP', v);
   }
@@ -206,7 +204,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'UP'.toLowerCase());
   }
 
-  /***/
   public set acceptDown(v: boolean) {
     this.accept('DOWN', v);
   }
@@ -223,7 +220,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'DOWN'.toLowerCase());
   }
 
-  /***/
   public set acceptCtrlUp(v: boolean) {
     this.accept('CTRL+UP', v);
   }
@@ -240,7 +236,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'CTRL+UP'.toLowerCase());
   }
 
-  /***/
   public set acceptCtrlDown(v: boolean) {
     this.accept('CTRL+DOWN', v);
   }
@@ -257,7 +252,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'CTRL+DOWN'.toLowerCase());
   }
 
-  /***/
   public set acceptP(v: boolean) {
     this.accept('P', v);
   }
@@ -274,7 +268,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'P'.toLowerCase());
   }
 
-  /***/
   public set acceptK(v: boolean) {
     this.accept('K', v);
   }
@@ -291,7 +284,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'K'.toLowerCase());
   }
 
-  /***/
   public set acceptJ(v: boolean) {
     this.accept('J', v);
   }
@@ -308,7 +300,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'J'.toLowerCase());
   }
 
-  /***/
   public set acceptN(v: boolean) {
     this.accept('N', v);
   }
@@ -325,7 +316,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'N'.toLowerCase());
   }
 
-  /***/
   public set acceptHome(v: boolean) {
     this.accept('HOME', v);
   }
@@ -342,7 +332,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'HOME'.toLowerCase());
   }
 
-  /***/
   public set acceptEnd(v: boolean) {
     this.accept('END', v);
   }
@@ -359,7 +348,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'END'.toLowerCase());
   }
 
-  /***/
   public set acceptS(v: boolean) {
     this.accept('S', v);
   }
@@ -376,7 +364,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'S'.toLowerCase());
   }
 
-  /***/
   public set acceptCtrlS(v: boolean) {
     this.accept('CTRL+S', v);
   }
@@ -393,7 +380,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'CTRL+S'.toLowerCase());
   }
 
-  /***/
   public set acceptH(v: boolean) {
     this.accept('H', v);
   }
@@ -410,7 +396,6 @@ export class KeyboardComponent implements OnInit {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'H'.toLowerCase());
   }
 
-  /***/
   public set acceptR(v: boolean) {
     this.accept('R', v);
   }
@@ -426,7 +411,7 @@ export class KeyboardComponent implements OnInit {
   public get ignoreR() {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'R'.toLowerCase());
   }
-  /***/
+
   public set acceptShiftR(v: boolean) {
     this.accept('Shift+R', v);
   }
@@ -441,5 +426,53 @@ export class KeyboardComponent implements OnInit {
 
   public get ignoreShiftR() {
     return this.ignoreKeys.some(k => k.toLowerCase() === 'Shift+R'.toLowerCase());
+  }
+
+  public set acceptCtrlAltP(v: boolean) {
+    this.accept('Ctrl+Alt+P', v);
+  }
+
+  public get acceptCtrlAltP() {
+    return this.acceptKeys.some(k => k.toLowerCase() === 'Ctrl+Alt+P'.toLowerCase());
+  }
+
+  public set ignoreCtrlAltP(v: boolean) {
+    this.ignore('Ctrl+Alt+P', v);
+  }
+
+  public get ignoreCtrlAltP() {
+    return this.ignoreKeys.some(k => k.toLowerCase() === 'Ctrl+Alt+P'.toLowerCase());
+  }
+
+  public set acceptF4(v: boolean) {
+    this.accept('F4', v);
+  }
+
+  public get acceptF4() {
+    return this.acceptKeys.some(k => k.toLowerCase() === 'F4'.toLowerCase());
+  }
+
+  public set ignoreF4(v: boolean) {
+    this.ignore('F4', v);
+  }
+
+  public get ignoreF4() {
+    return this.ignoreKeys.some(k => k.toLowerCase() === 'F4'.toLowerCase());
+  }
+
+  public set acceptAltCtrlG(v: boolean) {
+    this.accept('Alt+Ctrl+G', v);
+  }
+
+  public get acceptAltCtrlG() {
+    return this.acceptKeys.some(k => k.toLowerCase() === 'Alt+Ctrl+G'.toLowerCase());
+  }
+
+  public set ignoreAltCtrlG(v: boolean) {
+    this.ignore('Alt+Ctrl+G', v);
+  }
+
+  public get ignoreAltCtrlG() {
+    return this.ignoreKeys.some(k => k.toLowerCase() === 'Alt+Ctrl+G'.toLowerCase());
   }
 }
