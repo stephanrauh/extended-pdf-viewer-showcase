@@ -1,9 +1,11 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
-  backgroundColor="#ffffff"
-  [height]="'90vh'"
-  [useBrowserLocale]="true"
->
-</ngx-extended-pdf-viewer>
+    [src]="'assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+    backgroundColor="#ffffff"
+    [height]="'90vh'"
+    [useBrowserLocale]="true"
+    [handTool]="false"
+    [showHandToolButton]="true"
+    page="9"
+  >
 ```

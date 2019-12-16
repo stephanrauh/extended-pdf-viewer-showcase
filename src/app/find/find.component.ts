@@ -10,12 +10,21 @@ export class FindComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   public _searchtext = '';
 
+  public highlightAll = false;
+  public matchCase = false;
+  public wholeWord = false;
+  public ignoreAccents = false;
+
   public get searchtext(): string {
     return this._searchtext;
   }
 
   public set searchtext(text: string) {
-    if (this.ngxExtendedPdfViewerService.find(text)) {
+    if (this.ngxExtendedPdfViewerService.find(text,
+      { highlightAll: this.highlightAll,
+        matchCase: this.matchCase,
+        wholeWords: this.wholeWord,
+        ignoreAccents: this.ignoreAccents})) {
       this._searchtext = text;
     }
   }
@@ -23,6 +32,14 @@ export class FindComponent implements OnInit {
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService) {}
 
   ngOnInit() {}
+
+  public onCheckboxClicked() {
+    this.ngxExtendedPdfViewerService.find(this._searchtext,
+      { highlightAll: this.highlightAll,
+        matchCase: this.matchCase,
+        wholeWords: this.wholeWord,
+        ignoreAccents: this.ignoreAccents});
+  }
 
   public findNext(): void {
     this.ngxExtendedPdfViewerService.findNext();

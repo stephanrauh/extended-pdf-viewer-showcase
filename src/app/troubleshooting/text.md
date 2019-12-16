@@ -80,6 +80,21 @@ This workaround was needed in the early version of ngx-extended-pdf-viewer, befo
 
 Unfortunately, you can't use multiple instances of `<ngx-extended-pdf-viewer>` on the same page. You're restricted to a single PDF viewer. This also applies to hidden PDF viewers. If you're using tabs containing PDF files, make sure you hide the PDF viewer before showing the next tab. You'll also need a short delay before showing the new PDF viewer. It takes some time to remove every object from memory.
 
+## Printing
+
+The print algorithm often conflicts with your CSS framework. That's because the print algorithm simply generates images of each page, adds them to the document, hides everything else, and prints what's left. Basically, that's simply a list of `<div>` tags containing images. If you CSS framework influences the `<div>` or `<image>`, you end up with empty or truncated pages.
+
+ngx-extended-pdf-viewer covers several popular CSS frameworks (such as BootsFaces and Material Design), but it's still possible there's a conflict I haven't seen yet. If so, checking the `display` and `overflow` properties is a good starting point. Often adding this CSS snippet solves the problem:
+
+```css
+@media print {
+  #printContainer > div {
+    display: inline;
+    overflow-y: visible;
+  }
+}
+```
+
 ## Other hints collected over time
 
 | Error message or description                                            |                                                                                                                                                                                                                               Solution                                                                                                                                                                                                                               |
