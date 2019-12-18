@@ -2,8 +2,11 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
     <section class="section">
       <mat-form-field>
-    <input matInput class="margin" [(ngModel)]="searchtext" placeholder="find (programmatically)" />
-    </mat-form-field>
+        <input matInput class="margin" [(ngModel)]="searchtext" placeholder="find (programmatically)" />
+      </mat-form-field>
+      <small *ngIf="findState!==undefined"><span style="margin-left:24px">{{findStateText}}</span>
+      <span style="margin-left:24px;" *ngIf="totalMatches > 0">Result {{currentMatchNumber}} of {{totalMatches}}
+      </span></small>
     </section>
     <section class="section">
       <mat-checkbox class="margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()">highlight all</mat-checkbox>
@@ -16,7 +19,7 @@
     </section>
     <section class="section">
       <mat-checkbox class="margin" [(ngModel)]="ignoreAccents" (change)="onCheckboxClicked()">ignore accents and diacritics</mat-checkbox>
-      <br /><small style="margin-left:24px">(try "licao" instead of "lição")</small>
+      <br /><small style="margin-left:24px">(try "licao" to find of "lição")</small>
     </section>
     <section class="section" style="margin-top:5px; margin-bottom:10px">
       <button mat-raised-button color="primary" (click)="findNext()">next</button>
@@ -45,6 +48,8 @@
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer
     [src]="'assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+    (updateFindMatchesCount)="updateFindMatchesCount($event)"
+    (updateFindState)="updateFindState($event)"
     backgroundColor="#ffffff"
     [height]="'90vh'"
     [useBrowserLocale]="true"

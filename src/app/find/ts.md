@@ -36,5 +36,14 @@ export class FindComponent {
   public findPrevious(): void {
     this.ngxExtendedPdfViewerService.findPrevious();
   }
+
+  public updateFindState(result: FindState) {
+    this.findState = result;
+  }
+
+  public updateFindMatchesCount(result: FindResultMatchesCount) {
+    this.currentMatchNumber = result.current;
+    this.totalMatches = result.total;
+  }
 }
 ```
