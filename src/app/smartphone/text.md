@@ -1,4 +1,4 @@
-On a tiny smartphone, all the buttons are pushed to the secondary menu. That's most inconvenient, so chances are you want to put a small selection of buttons into the toolbar. &lt;ngx-extended-pdf-viewer&gt; 1.1 is going to offer a dedicated API for that.
+On a tiny smartphone, all the buttons are pushed to the secondary menu. That's most inconvenient, so chances are you want to put a small selection of buttons into the toolbar. &lt;ngx-extended-pdf-viewer&gt; 2.0 is going to offer a dedicated API for that.
 
 Until this version lands, you can use CSS rules to do the trick. Don't forget to set <code>ignoreResponsiveCSS="true"</code>. Otherwise, your CSS rules will be overwritten by JavaScript. 
 

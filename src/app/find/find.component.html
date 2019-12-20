@@ -25,11 +25,17 @@
       <button mat-raised-button color="primary" (click)="findNext()">next</button>
       <button mat-raised-button color="primary" (click)="findPrevious()" style="margin-left:10px">previous</button>
     </section>
-    <section>
-      I've chosen a portuguese text because this language has many special characters (such as ã, ç, and ê).
-      Note that this is a lot of text (641 pages), so search may be slow.
-      The text has been published under a Creative Commons license at
-      <a href="https://wisc.pb.unizin.org/portuguese/">https://wisc.pb.unizin.org/portuguese/</a>.
+    <section class="section">
+      <b>Notes on the demo:</b>
+      <ul>
+        <li>The demo is a bit slow because the example document is huge. This, in turn, allows you to watch the
+          find result events, demonstrating the asynchronous nature of the find API.</li>
+        <li>I've chosen a portuguese text because this language has many special characters (such as ã, ç, and ê).</li>
+        <li>
+          The example PDF has been published under a Creative Commons license at
+          <a href="https://wisc.pb.unizin.org/portuguese/">https://wisc.pb.unizin.org/portuguese/</a>.
+        </li>
+      </ul>
     </section>
   </mat-card>
 
