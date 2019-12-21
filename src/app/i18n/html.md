@@ -6,6 +6,8 @@
   [useBrowserLocale]="true"
   *ngIf="!hidePdfViewer"
   [language]="language"
+  textLayer="true"
+
 >
 </ngx-extended-pdf-viewer>
 ```

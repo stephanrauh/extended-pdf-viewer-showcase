@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer/lib/pages-loaded-event';
+import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
 
 interface EventBus {
   dispatch(eventName: string): void;

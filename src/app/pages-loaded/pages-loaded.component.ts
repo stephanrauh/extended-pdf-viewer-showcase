@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer/lib/pages-loaded-event';
+import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-pages-loaded',
