@@ -1,13 +1,13 @@
 ## Almost there!
 
-1.  Add `NgxExtendedPdfViewerModule` to the import section of your module file. If your IDE doesn't find
+Add `NgxExtendedPdfViewerModule` to the import section of your module file. If your IDE doesn't find
     the import automatically, here it is:
 
 ```typescript
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 ```
 
-2.  Now you can display the PDF file like so:
+Now you can display the PDF file like so:
 
 ```html
 <ngx-extended-pdf-viewer [src]="'assets/example.pdf'" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
