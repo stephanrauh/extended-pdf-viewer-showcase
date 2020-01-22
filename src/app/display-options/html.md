@@ -1,0 +1,9 @@
+```html
+<ngx-extended-pdf-viewer
+  [src]="'assets/pdfs/pdf-sample.pdf'"
+  [height]="'90vh'"
+  [showBorders]="showBorders"
+  [useBrowserLocale]="true"
+>
+</ngx-extended-pdf-viewer>
+```

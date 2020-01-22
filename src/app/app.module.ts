@@ -45,6 +45,8 @@ import { SmartphoneComponent } from './smartphone/smartphone.component';
 import { ContextmenuComponent } from './contextmenu/contextmenu.component';
 import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-dialog.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
+import { DisplayOptionsComponent } from './display-options/display-options.component';
+import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +70,9 @@ import { KeyboardComponent } from './keyboard/keyboard.component';
     TroubleshootingComponent,
     ZoomComponent,
     CustomPrintDialogComponent,
-    KeyboardComponent
+    KeyboardComponent,
+    DisplayOptionsComponent,
+    CustomToolbarComponent
   ],
   imports: [
     BrowserModule,
