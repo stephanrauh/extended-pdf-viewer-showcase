@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
 
@@ -10,11 +10,14 @@ import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
 export class FindComponent {
   // tslint:disable-next-line:variable-name
   public _searchtext = '';
+  public _searchtext2 = '';
+  public _searchtext3 = '';
 
   public highlightAll = false;
   public matchCase = false;
   public wholeWord = false;
   public ignoreAccents = false;
+  public multipleSearchTerms = false;
 
   public currentMatchNumber: number;
 
@@ -24,10 +27,14 @@ export class FindComponent {
 
   public get findStateText(): string {
     switch (this.findState) {
-      case FindState.FOUND: return 'found';
-      case FindState.NOT_FOUND: return 'not found';
-      case FindState.PENDING: return 'pending';
-      case FindState.WRAPPED: return 'wrapped';
+      case FindState.FOUND:
+        return 'found';
+      case FindState.NOT_FOUND:
+        return 'not found';
+      case FindState.PENDING:
+        return 'pending';
+      case FindState.WRAPPED:
+        return 'wrapped';
     }
   }
 
@@ -36,16 +43,54 @@ export class FindComponent {
   }
 
   public set searchtext(text: string) {
-    if (
-      this.ngxExtendedPdfViewerService.find(text, {
-        highlightAll: this.highlightAll,
-        matchCase: this.matchCase,
-        wholeWords: this.wholeWord,
-        ignoreAccents: this.ignoreAccents,
-      })
-    ) {
-      this._searchtext = text;
+    this._searchtext = text;
+    this.find();
+  }
+
+  private find() {
+    if (!this._searchtext) {
+      this.findState = undefined;
+      this.currentMatchNumber = undefined;
+      this.totalMatches = undefined;
     }
+    if (this.multipleSearchTerms) {
+      this.ngxExtendedPdfViewerService.findMultiple(
+        [this._searchtext, this.searchtext2, this._searchtext3],
+        {
+          highlightAll: this.highlightAll,
+          matchCase: this.matchCase,
+          wholeWords: this.wholeWord,
+          ignoreAccents: this.ignoreAccents
+        }
+      );
+    } else {
+      if (
+        this.ngxExtendedPdfViewerService.find(this._searchtext, {
+          highlightAll: this.highlightAll,
+          matchCase: this.matchCase,
+          wholeWords: this.wholeWord,
+          ignoreAccents: this.ignoreAccents
+        })
+      ) {
+      }
+    }
+  }
+
+  public get searchtext2(): string {
+    return this._searchtext2;
+  }
+
+  public set searchtext2(text: string) {
+    this._searchtext2 = text;
+    this.find();
+  }
+  public get searchtext3(): string {
+    return this._searchtext3;
+  }
+
+  public set searchtext3(text: string) {
+    this._searchtext3 = text;
+    this.find();
   }
 
   constructor(

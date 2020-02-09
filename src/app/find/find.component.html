@@ -1,8 +1,16 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
     <section class="section">
-      <mat-form-field>
-        <input matInput class="margin" [(ngModel)]="searchtext" placeholder="find (programmatically)" />
+      <mat-form-field [class.narrow]="multipleSearchTerms">
+        <input matInput class="margin" [(ngModel)]="searchtext" placeholder="search term" />
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field *ngIf="multipleSearchTerms"  class="narrow">
+        <input matInput class="margin" [(ngModel)]="searchtext2" placeholder="2nd search term"/>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field *ngIf="multipleSearchTerms"  class="narrow">
+        <input matInput class="margin" [(ngModel)]="searchtext3" placeholder="3nd search term"/>
       </mat-form-field>
       <small *ngIf="findState!==undefined"><span style="margin-left:24px">{{findStateText}}</span>
       <span style="margin-left:24px;" *ngIf="totalMatches > 0">Result {{currentMatchNumber}} of {{totalMatches}}
@@ -16,6 +24,9 @@
     </section>
     <section class="section">
       <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()">whole word</mat-checkbox>
+    </section>
+    <section class="section">
+      <mat-checkbox class="margin" [(ngModel)]="multipleSearchTerms" (change)="onCheckboxClicked()">multiple search terms</mat-checkbox>
     </section>
     <section class="section">
       <mat-checkbox class="margin" [(ngModel)]="ignoreAccents" (change)="onCheckboxClicked()">ignore accents and diacritics</mat-checkbox>

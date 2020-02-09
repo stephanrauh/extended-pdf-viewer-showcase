@@ -8,6 +8,6 @@ import { defaultOptions } from 'ngx-extended-pdf-viewer';
 })
 export class AppComponent {
   constructor() {
-    defaultOptions.workerSrc = './assets/pdf.worker-es5.js';
+    console.log(defaultOptions.workerSrc);
   }
 }
