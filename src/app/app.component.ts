@@ -7,7 +7,5 @@ import { defaultOptions } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor() {
-    console.log(defaultOptions.workerSrc);
-  }
+  constructor() {}
 }
