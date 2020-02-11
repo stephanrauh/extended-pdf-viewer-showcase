@@ -13,8 +13,23 @@ export class PagesLoadedComponent implements OnInit {
 
   ngOnInit() {}
 
+  public onEvent(type: string, event: any): void {
+    const now = new Date().toLocaleTimeString();
+    let e = '(no parameters)';
+    if (event) {
+      e =
+        'Event type: ' +
+        event.constructor.name +
+        ' Event: ' +
+        event;
+    }
+    this.messages.push(`${now} ${type} ${e}`);
+  }
+
   public onPagesLoaded(pagecount: PagesLoadedEvent): void {
     const now = new Date().toLocaleTimeString();
-    this.messages.push(`${now} Loaded a document with ${pagecount.pagesCount}  pages`);
+    this.messages.push(
+      `${now} Loaded a document with ${pagecount.pagesCount}  pages`
+    );
   }
 }
