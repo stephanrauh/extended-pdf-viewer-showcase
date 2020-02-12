@@ -473,7 +473,23 @@ export class KeyboardComponent implements OnInit {
   }
 
   public get ignoreAltCtrlG() {
-    return this.ignoreKeys.some(k => k.toLowerCase() === 'Alt+Ctrl+G'.toLowerCase());
+    return this.ignoreKeys.some(k => k.toLowerCase() === 'Ctrl+WHEEL'.toLowerCase());
+  }
+
+  public set acceptCtrlWheel(v: boolean) {
+    this.accept('Ctrl+WHEEL', v);
+  }
+
+  public get acceptCtrlWheel() {
+    return this.acceptKeys.some(k => k.toLowerCase() === 'Ctrl+WHEEL'.toLowerCase());
+  }
+
+  public set ignoreCtrlWheel(v: boolean) {
+    this.ignore('Ctrl+WHEEL', v);
+  }
+
+  public get ignoreCtrlWheel() {
+    return this.ignoreKeys.some(k => k.toLowerCase() === 'Ctrl+WHEEL'.toLowerCase());
   }
 
   public get sourcecode(): string {

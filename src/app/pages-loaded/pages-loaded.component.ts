@@ -17,11 +17,22 @@ export class PagesLoadedComponent implements OnInit {
     const now = new Date().toLocaleTimeString();
     let e = '(no parameters)';
     if (event) {
+      if (event.source) {
+        event.source=undefined;
+      }
+      try {
       e =
         'Event type: ' +
         event.constructor.name +
         ' Event: ' +
+        JSON.stringify(event);
+      } catch (exception) {
+        e =
+        'Event type: ' +
+        event.constructor.name +
+        ' Event: ' +
         event;
+      }
     }
     this.messages.push(`${now} ${type} ${e}`);
   }
@@ -29,7 +40,14 @@ export class PagesLoadedComponent implements OnInit {
   public onPagesLoaded(pagecount: PagesLoadedEvent): void {
     const now = new Date().toLocaleTimeString();
     this.messages.push(
-      `${now} Loaded a document with ${pagecount.pagesCount}  pages`
+      `${now} Loaded a document with ${pagecount.pagesCount} pages`
+    );
+  }
+
+  public onPdfLoadingFailed(error: any): void {
+    const now = new Date().toLocaleTimeString();
+    this.messages.push(
+      `${now} Failed to load a PDF document ${error}`
     );
   }
 }

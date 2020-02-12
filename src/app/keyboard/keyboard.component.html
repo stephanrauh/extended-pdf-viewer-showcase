@@ -28,6 +28,12 @@
             <th>meaning</th>
           </tr>
           <tr>
+            <td matTooltip="alternative keys: CMD+WHEEL">CTRL+WHEEL</td>
+            <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrlWheel"></mat-checkbox></td>
+            <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrlWheel"></mat-checkbox></td>
+            <td>zoom with mouse wheel</td>
+          </tr>
+          <tr>
             <td matTooltip="alternative keys: SHIFT+CTRL, SHIFT+CMD, ALT+CMD">CTRL+F</td>
             <td><mat-checkbox class="margin" [(ngModel)]="acceptCtrlF"></mat-checkbox></td>
             <td><mat-checkbox class="margin" [(ngModel)]="ignoreCtrlF"></mat-checkbox></td>
@@ -199,6 +205,7 @@
     [useBrowserLocale]="true"
     showPresentationModeButton="true"
     [page]="2"
+    [textLayer]="true"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

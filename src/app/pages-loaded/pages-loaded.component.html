@@ -42,7 +42,7 @@ under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-
     (pageRendered)="onEvent('pageRendered', $event)"
     (pdfDownloaded)="onEvent('pdfDownloaded', $event)"
     (pdfLoaded)="onEvent('pdfLoaded', $event)"
-    (pdfLoadingFailed)="onEvent('pdfLoadingFailed', $event)"
+    (pdfLoadingFailed)="onPdfLoadingFailed($event)"
     (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"
     (updateFindState)="onEvent('updateFindState', $event)"
   >
