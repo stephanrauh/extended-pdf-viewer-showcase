@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./custom-toolbar.component.css']
 })
 export class CustomToolbarComponent {
+  public design = "findbar";
 
 }
