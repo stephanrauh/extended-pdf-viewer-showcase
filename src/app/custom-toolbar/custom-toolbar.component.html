@@ -1,8 +1,13 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%" style="margin-bottom:20px">
+  <mat-card
+    class="distance-16 mat-elevation-z8"
+    fxFlex="40%"
+    style="margin-bottom:20px"
+  >
     <p>
-      ngx-extended-pdf-viewer 2.0.0 is going to allow you to define your own custom toolbar, menu, and maybe it'll even allow your to
-      create your own sidebar. This feature is currently under development. Stay tuned!
+      ngx-extended-pdf-viewer 2.0.0 is going to allow you to define your own
+      custom toolbar, menu, and maybe it'll even allow your to create your own
+      sidebar. This feature is currently under development. Stay tuned!
     </p>
     <mat-label title="Demo design"></mat-label>
     <mat-radio-group aria-label="Demo" [(ngModel)]="design">
@@ -13,14 +18,16 @@
       <mat-radio-button value="checkbox zoom">checkbox zoom</mat-radio-button>
     </mat-radio-group>
   </mat-card>
-<p></p>
+  <p></p>
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="HTML template">
-        <markdown ngPreserveWhitespaces src="assets/custom-toolbar/html.md"> </markdown>
+        <markdown ngPreserveWhitespaces src="assets/custom-toolbar/html.md">
+        </markdown>
       </mat-tab>
       <mat-tab label="TypeScript">
-        <markdown ngPreserveWhitespaces src="assets/custom-toolbar/ts.md"> </markdown>
+        <markdown ngPreserveWhitespaces src="assets/custom-toolbar/ts.md">
+        </markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -28,8 +35,11 @@
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer
-    [customFindbarInputArea]="design==='findbar'?customFindbarInputArea:null"
-    [customFindbarButtons]="design==='findbar'?customFindbarButtons:null"
+    [customFindbarInputArea]="
+      design === 'findbar' ? customFindbarInputArea : null
+    "
+    [customFindbarButtons]="design === 'findbar' ? customFindbarButtons : null"
+    [customToolbar]="design === 'checkbox zoom' ? customCheckboxZoomToolbar : null"
     [src]="'assets/pdfs/dachstein.pdf'"
     [height]="'50vh'"
     [useBrowserLocale]="true"
@@ -48,7 +58,9 @@
 </ng-template>
 
 <ng-template #customFindbarButtons>
-  <pdf-find-input-area [customFindbarInputArea]="customFindbarInputArea"></pdf-find-input-area>
+  <pdf-find-input-area
+    [customFindbarInputArea]="customFindbarInputArea"
+  ></pdf-find-input-area>
   <div id="findbarOptionsOneContainer">
     <pdf-find-highlight-all></pdf-find-highlight-all>
     <pdf-find-match-case></pdf-find-match-case>
@@ -65,4 +77,68 @@
   </div>
   <br />
   <pdf-findbar-message-container></pdf-findbar-message-container>
+</ng-template>
+
+<ng-template #customCheckboxZoomToolbar>
+  <div id="toolbarViewer">
+    <div id="toolbarViewerLeft">
+      <button
+        type="button"
+        [class.invisible]="true"
+        id="sidebarToggle"
+        class="toolbarButton"
+        title="Toggle Sidebar"
+        tabindex="11"
+        data-l10n-id="toggle_sidebar"
+      >
+        <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
+      </button>
+      <button
+        type="button"
+        [class.invisible]="true"
+        id="viewFind"
+        class="toolbarButton"
+        title="Find in Document"
+        tabindex="12"
+        data-l10n-id="findbar"
+      >
+        <span data-l10n-id="findbar_label">Find</span>
+      </button>
+      <pdf-paging-area [showPagingButtons]="true"></pdf-paging-area>
+    </div>
+    <div id="toolbarViewerRight">
+      <pdf-presentation-mode
+        [showPresentationModeButton]="false"
+      ></pdf-presentation-mode>
+      <pdf-open-file [showOpenFileButton]="false"></pdf-open-file>
+      <pdf-print [showPrintButton]="false"></pdf-print>
+      <pdf-download [showDownloadButton]="false"></pdf-download>
+      <pdf-bookmark [showBookmarkButton]="false"></pdf-bookmark>
+      <div
+        [class.invisible]="true"
+        class="verticalToolbarSeparator hiddenSmallView"
+      ></div>
+
+      <button
+        type="button"
+        [class.invisible]="true"
+        id="secondaryToolbarToggle"
+        class="toolbarButton"
+        title="Tools"
+        tabindex="36"
+        data-l10n-id="tools"
+      >
+        <span data-l10n-id="tools_label">Tools</span>
+      </button>
+    </div>
+    <div [class.invisible]="false" id="toolbarViewerMiddle">
+      <div class="splitToolbarButton">
+        <button id="zoomOut" class="invisible"></button>
+        <button id="zoomIn" class="invisible"></button>
+      </div>
+      <pdf-zoom-dropdown
+        style="width: unset; max-width: unset;padding-top:6px"
+      ></pdf-zoom-dropdown>
+    </div>
+  </div>
 </ng-template>

@@ -38,3 +38,8 @@
   height: 48px;
   padding-top: 24px;
 }
+
+.mat-nav-list a.mat-list-item.long-text {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
