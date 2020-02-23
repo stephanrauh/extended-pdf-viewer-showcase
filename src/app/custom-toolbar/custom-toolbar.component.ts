@@ -7,7 +7,7 @@ import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./custom-toolbar.component.css']
 })
 export class CustomToolbarComponent {
-  public _theme = 'findbar';
+  public _theme = 'checkbox';
 
   public zoom = '100%';
 
