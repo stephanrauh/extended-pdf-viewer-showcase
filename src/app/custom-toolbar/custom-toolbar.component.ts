@@ -7,23 +7,24 @@ import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./custom-toolbar.component.css']
 })
 export class CustomToolbarComponent {
-  public _design = 'findbar';
+  public _theme = 'findbar';
+
+  public zoom = '100%';
 
   @ViewChild('pdfViewer')
-  public  pdfViewer: OnInit & OnDestroy; // NgxExtendedPdfViewerComponent;
+  public pdfViewer: OnInit & OnDestroy; // NgxExtendedPdfViewerComponent;
 
-  public set design(design: string) {
-    if (this._design !== design) {
-      debugger;
+  public set theme(theme: string) {
+    if (this._theme !== theme) {
       this.pdfViewer.ngOnDestroy();
-      this._design = design;
+      this._theme = theme;
       this.pdfViewer.ngOnInit();
     } else {
-      this._design = design;
+      this._theme = theme;
     }
   }
 
-  public get design(): string {
-    return this._design;
+  public get theme(): string {
+    return this._theme;
   }
 }

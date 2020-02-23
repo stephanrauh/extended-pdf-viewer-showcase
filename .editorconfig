@@ -17,3 +17,6 @@ quote_type = single
 
 [*.js]
 quote_type = single
+
+[*.html]
+max_line_length=140
