@@ -2,7 +2,7 @@
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span>Angular PDF viewer showcase. Running on Angular 9.0.2 and ngx-extended-pdf-viewer 2.0.0-alpha.13.</span>
+  <span>Angular PDF viewer showcase. Running on Angular 9.0.3 and ngx-extended-pdf-viewer 2.0.0-alpha.13.</span>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container distance-48">
   <mat-sidenav
@@ -24,6 +24,7 @@
       <a mat-list-item [routerLink]="'getting-started'">Getting started</a>
       <a mat-list-item [routerLink]="'troubleshooting'">Troubleshooting</a>
       <a mat-list-item [routerLink]="'attributes'">Attributes and events</a>
+      <a mat-list-item [routerLink]="'customization'">Customizing the menus (2.0.0)</a>
       <a mat-list-item [routerLink]="'range-requests'">Range requests</a>
     </mat-nav-list>
 

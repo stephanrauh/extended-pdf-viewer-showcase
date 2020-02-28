@@ -1,0 +1,53 @@
+<mat-card class="distance-16 mat-elevation-z8 full-height" fxFlex="97%">
+  <h2>Features you can customize</h2>
+  <p>Version 2.0.0 of <code>&lt;ngx-extended-pdf-viewer&gt;</code> allows you to customize the toolbar and the menu of the PDF viewer.
+    Previously, all you could do was to hide certain buttons and menu items. Now, you can also</p>
+    <ul>
+      <li>re-arrange the pre-defined items any way you like;</li>
+      <li>replace existing items by custom items - including your own icons, texts, and tooltips;</li>
+      <li>and add your own buttons, menu items, and even menus, implementing custom functions I can't even imagine.</li>
+    </ul>
+
+  <h2>But how to document this feature?</h2>
+  <p>I'm afraid you can't avoid reading the sourcecode of the UI. You find it
+    <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/master/projects/ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.component.html">
+      in the GitHub repository of <code>&lt;ngx-extended-pdf-viewer&gt;</code></a>.</p>
+  <p>Nonetheless, I'm optimistic I can give you a head start with a few hints:</p>
+  <ul>
+    <li>First of all, <a href="/custom-toolbar">this interactive demo</a> shows a few example implementations.</li>
+    <li>The default UI naturally forms a tree. Below, you'll find a high-level abstraction of this tree. Your customization doesn't have to follow this structure. It's just the default.</li>
+    <li>The customization hooks defined by <code>&lt;ngx-extended-pdf-viewer&gt;</code> allow you to modify certain subtrees.</li>
+    <li>The underlying PDF framework, pdf.js, recognizes the buttons and menu items by their <code>id</code>. If you want to
+    modify an existing functionality, keep in mind you have to provide the id. Otherwise, pdf.js will raise and exception.</li>
+    <li>I'm sure there's a lot of headroom for improvements. Don't hesitate to report any shortcoming on <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues">the bugtracker of ngx-extended-pdf-viewer</a>.</li>
+  </ul>
+
+  <h2>Default toolbar, findbar, and secondary menu</h2>
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+      <li class="mat-tree-node">
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <button mat-icon-button disabled></button>
+        {{node.name}}
+      </li>
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+      <li>
+        <div class="mat-tree-node">
+          <button mat-icon-button matTreeNodeToggle
+                  [attr.aria-label]="'toggle ' + node.name">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          {{node.name}}
+        </div>
+        <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </ul>
+      </li>
+    </mat-nested-tree-node>
+  </mat-tree>
+</mat-card>

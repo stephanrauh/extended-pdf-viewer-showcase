@@ -41,3 +41,9 @@ body > app-root > app-nav > .mat-toolbar-single-row {
   height: 64px !important;
   padding-top: 0 !important;
 }
+
+.full-height {
+  min-height: calc(100vh - 64px);
+  margin-bottom:10px;
+}
+

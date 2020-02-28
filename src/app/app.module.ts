@@ -18,7 +18,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -47,12 +48,14 @@ import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-d
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { DisplayOptionsComponent } from './display-options/display-options.component';
 import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.component';
+import { CustomizationComponent } from './customization/customization.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     AlternativesComponent,
     AttributesComponent,
+    CustomizationComponent,
     Base64Component,
     ContextmenuComponent,
     FindComponent,
@@ -95,6 +98,7 @@ import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.componen
     MatSelectModule,
     MatRadioModule,
     MatTabsModule,
+    MatTreeModule,
     MatTooltipModule,
     MatProgressBarModule,
     MarkdownModule.forRoot({ loader: HttpClient }),

@@ -22,12 +22,14 @@ import { ContextmenuComponent } from './contextmenu/contextmenu.component';
 import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-dialog.component';
 import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.component';
 import { DisplayOptionsComponent } from './display-options/display-options.component';
+import { CustomizationComponent } from './customization/customization.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'base64', component: Base64Component },
   { path: 'contextmenu', component: ContextmenuComponent },
+  { path: 'customization', component: CustomizationComponent},
   { path: 'custom-toolbar', component: CustomToolbarComponent },
   { path: 'display-options', component: DisplayOptionsComponent },
   { path: 'getting-started', component: GettingStartedComponent },
