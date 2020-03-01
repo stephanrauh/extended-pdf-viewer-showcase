@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 
@@ -6,54 +6,69 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
  * Food data with nested structure.
  * Each node has a name and an optional list of children.
  */
-interface FoodNode {
+interface TreeNode {
   name: string;
   id?: string;
-  children?: FoodNode[];
+  children?: TreeNode[];
   content?: string;
+  expanded?: boolean;
+  prefix?: string;
+  suffix?: string;
 }
 
-const TREE_DATA: FoodNode[] = [
+const TREE_DATA: TreeNode[] = [
   {
-    name: '<pdf-findbar>',
+    name: '<pdf-toolbar>',
+    content: 'customToolbar',
     children: [
       {
-        name: '<div class="findbar hidden doorHanger" ...>',
-        id: 'findbar',
-        content: 'customFindbarButtons',
+        name: ' <div id="toolbarViewer">',
         children: [
-          { name: '<pdf-find-input-area>' },
           {
-            name: '<pdf-findbar-options-one-container>',
+            name: '<div id="toolbarViewerLeft">',
             children: [
-              { name: '<pdf-find-highlight-all>', id: 'findHighlightAll' },
-              { name: ' <pdf-find-match-case>', id: 'findMatchCase' }
-            ]
-          },
-          {
-            name: '<pdf-findbar-options-two-container>',
-            children: [
-              { name: '<pdf-find-entire-word>', id: 'findEntireWord' },
+              { name: '<pdf-toggle-sidebar>', id: 'sidebarToggle' },
+              { name: '<pdf-find-button>', id: 'viewFind' },
               {
-                name: '<pdf-find-entire-phrase>',
+                name: '<pdf-paging-area>',
                 children: [
-                  {
-                    name: '<input type="checkbox"',
-                    id: 'findMultipleSearchTexts'
-                  },
-                  { name: '<input type="checkbox"', id: 'individualWordsMode' }
+                  { name: '<pdf-previous-page>', id: 'previous' },
+                  { name: '<pdf-next-page>', id: 'next' },
+                  { name: '<pdf-page-number>', id: 'pageNumber' }
                 ]
               }
             ]
           },
-          { name: '<pdf-findbar-options-three-container>', children: [] },
-          { name: '<pdf-findbar-message-container>', id: 'findMsg' }
+          {
+            name: '<div id="toolbarViewerRight">',
+            children: [
+              { name: '<pdf-presentation-mode>', id: 'presentationMode' },
+              { name: '<pdf-open-file>', id: 'openFile' },
+              { name: '<pdf-print>', id: 'print' },
+              { name: '<pdf-download>', id: 'download' },
+              { name: '<pdf-bookmark>', id: 'viewBookmark' },
+              {
+                name: '<pdf-toggle-secondary-toolbar>',
+                id: 'secondaryToolbarToggle'
+              }
+            ]
+          },
+          {
+            name: '<pdf-zoom-toolbar>',
+            children: [
+              { name: '<pdf-zoom-out>', id: 'zoomOut' },
+              { name: '<pdf-zoom-in>', id: 'zoomIn' },
+              { name: '<pdf-zoom-dropdown>', id: 'scaleSelect' }
+            ]
+          }
         ]
       }
     ]
   },
+
   {
     name: '<pdf-secondary-toolbar>',
+    content: 'customSecondaryToolbar',
     children: [
       {
         name: '<div class="secondaryToolbar hidden doorHangerRight">',
@@ -117,39 +132,57 @@ const TREE_DATA: FoodNode[] = [
     ]
   },
   {
-    name: 'toolbar',
+    name: '<pdf-findbar>',
+    expanded: true,
     children: [
       {
-        name: ' <div id="toolbarViewer">',
+        name: '<div class="findbar hidden doorHanger" ...>',
+        id: 'findbar',
+        content: 'customFindbarButtons',
         children: [
           {
-            name: '<div id="toolbarViewerLeft">',
+            name: '<pdf-find-input-area>',
+            content: 'customFindbarInputArea',
             children: [
-              { name: 'toggle sidebar', id: 'sidebarToggle' },
-              { name: 'toolbarButtonSpacer' },
-              { name: 'findButton', id: 'viewFind' },
-              { name: '<pdf-paging-area>' }
+              {
+                name: '<pdf-search-input-field>',
+                id: 'findInput / findInputMultiline'
+              },
+              { name: '<pdf-find-previous>', id: 'findPrevious' },
+              { name: '<pdf-find-next>', id: 'findNext' }
             ]
           },
           {
-            name: '<div id="toolbarViewerRight">',
+            name: '<pdf-findbar-options-one-container>',
             children: [
-              { name: '<pdf-presentation-mode>' },
-              { name: '<pdf-open-file>' },
-              { name: '<pdf-print>' },
-              { name: '<pdf-download>' },
-              { name: '<pdf-bookmark>' },
-              { name: '<div class="verticalToolbarSeparator">' },
+              { name: '<pdf-find-highlight-all>', id: 'findHighlightAll' },
+              { name: ' <pdf-find-match-case>', id: 'findMatchCase' }
+            ]
+          },
+          {
+            name: '<pdf-findbar-options-two-container>',
+            children: [
+              { name: '<pdf-find-entire-word>', id: 'findEntireWord' },
               {
-                name: '<pdf-show-secondary-toolbar>',
-                id: 'secondaryToolbarToggle'
+                name: '<pdf-find-entire-phrase>',
+                children: [
+                  {
+                    name: '<input type="checkbox>"',
+                    id: 'findMultipleSearchTexts'
+                  },
+                  { name: '<input type="checkbox">', id: 'individualWordsMode' }
+                ]
               }
             ]
           },
           {
-            name: '<pdf-zoom-toolbar>',
-            children: []
-          }
+            name: '<pdf-findbar-options-three-container>',
+            children: [
+              { name: '<pdf-find-ignore-accents>', id: 'findIgnoreAccents' },
+              { name: '<pdf-find-results-count>', id: 'findResultsCount' }
+            ]
+          },
+          { name: '<pdf-findbar-message-container>', id: 'findMsg' }
         ]
       }
     ]
@@ -162,13 +195,32 @@ const TREE_DATA: FoodNode[] = [
   styleUrls: ['./customization.component.css']
 })
 export class CustomizationComponent {
-  treeControl = new NestedTreeControl<FoodNode>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<FoodNode>();
+  public treeControl = new NestedTreeControl<TreeNode>(node => node.children);
+  public dataSource = new MatTreeNestedDataSource<TreeNode>();
 
   constructor() {
-    this.dataSource.data = TREE_DATA;
+    this.dataSource.data = this.enrichTreeData(TREE_DATA);
+    this.treeControl.dataNodes = this.dataSource.data;
+    this.treeControl.expandAll();
   }
 
-  hasChild = (_: number, node: FoodNode) =>
+  hasChild = (_: number, node: TreeNode) =>
     !!node.children && node.children.length > 0;
+
+  private enrichTreeData(nodes: TreeNode[]): TreeNode[] {
+    if (!nodes) {
+      return;
+    }
+    nodes.forEach(n => {
+      if (n.name.endsWith('>')) {
+        n.suffix = '>';
+        n.prefix = n.name.substring(0, n.name.length - 1);
+      } else {
+        n.prefix = n.name;
+        n.suffix = '';
+      }
+      this.enrichTreeData(n.children);
+    });
+    return nodes;
+  }
 }

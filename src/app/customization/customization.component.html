@@ -1,48 +1,95 @@
 <mat-card class="distance-16 mat-elevation-z8 full-height" fxFlex="97%">
   <h2>Features you can customize</h2>
-  <p>Version 2.0.0 of <code>&lt;ngx-extended-pdf-viewer&gt;</code> allows you to customize the toolbar and the menu of the PDF viewer.
-    Previously, all you could do was to hide certain buttons and menu items. Now, you can also</p>
-    <ul>
-      <li>re-arrange the pre-defined items any way you like;</li>
-      <li>replace existing items by custom items - including your own icons, texts, and tooltips;</li>
-      <li>and add your own buttons, menu items, and even menus, implementing custom functions I can't even imagine.</li>
-    </ul>
+  <p>
+    Version 2.0.0 of <code>&lt;ngx-extended-pdf-viewer&gt;</code> allows you to customize the toolbar and the menu of the PDF viewer.
+    Previously, all you could do was to hide certain buttons and menu items. Now, you can also
+  </p>
+  <ul>
+    <li>re-arrange the pre-defined items any way you like;</li>
+    <li>replace existing items by custom items - including your own icons, texts, and tooltips;</li>
+    <li>and add your own buttons, menu items, and even menus, implementing custom functions I can't even imagine.</li>
+  </ul>
 
   <h2>But how to document this feature?</h2>
-  <p>I'm afraid you can't avoid reading the sourcecode of the UI. You find it
-    <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/master/projects/ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.component.html">
-      in the GitHub repository of <code>&lt;ngx-extended-pdf-viewer&gt;</code></a>.</p>
-  <p>Nonetheless, I'm optimistic I can give you a head start with a few hints:</p>
+  <p>
+    I'm afraid you can't avoid reading the sourcecode of the UI. You find it
+    <a
+      href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/master/projects/ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.component.html"
+    >
+      in the GitHub repository of <code>&lt;ngx-extended-pdf-viewer&gt;</code></a
+    >.
+  </p>
+  <p>Nonetheless, I'm optimistic I can give you a head start with a couple of demos and a few hints:</p>
   <ul>
     <li>First of all, <a href="/custom-toolbar">this interactive demo</a> shows a few example implementations.</li>
-    <li>The default UI naturally forms a tree. Below, you'll find a high-level abstraction of this tree. Your customization doesn't have to follow this structure. It's just the default.</li>
-    <li>The customization hooks defined by <code>&lt;ngx-extended-pdf-viewer&gt;</code> allow you to modify certain subtrees.</li>
-    <li>The underlying PDF framework, pdf.js, recognizes the buttons and menu items by their <code>id</code>. If you want to
-    modify an existing functionality, keep in mind you have to provide the id. Otherwise, pdf.js will raise and exception.</li>
-    <li>I'm sure there's a lot of headroom for improvements. Don't hesitate to report any shortcoming on <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues">the bugtracker of ngx-extended-pdf-viewer</a>.</li>
+    <li>
+      The default UI naturally forms a tree. Below, you'll find a high-level abstraction of this tree. Your customization doesn't have to
+      follow this structure. It's just the default.
+    </li>
+    <li>The customization hooks defined by <code>&lt;ngx-extended-pdf-viewer&gt;</code> allow you to modify certain subtrees. Currently there are four hooks:
+    <ul>
+      <li><code>[customToolbar]</code> allows you to modify the entire black bar above the PDF document.</li>
+      <li><code>[customSecondaryToolbar]</code> represents the menu at the right-hand side of the PDF viewer.</li>
+      <li><code>[customFindbarButtons]</code> allows you to modify the entire find bar (the black bar that's shown after typing <code>CTRL+F</code>).</li>
+      <li><code>[customFindbarInputArea]</code> is responsible for a small part of the find bar: the input field and the previous/next buttons.</li>
+    </ul>
+    </li>
+    <li>
+      The underlying PDF framework, pdf.js, recognizes the buttons and menu items by their <code>id</code>. If you want to modify an
+      existing functionality, keep in mind you have to provide the id. Otherwise, pdf.js will raise and exception.
+    </li>
+    <li>
+      I'm sure there's a lot of headroom for improvements. Don't hesitate to report any shortcoming on
+      <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues">the bugtracker of ngx-extended-pdf-viewer</a>.
+    </li>
   </ul>
 
   <h2>Default toolbar, findbar, and secondary menu</h2>
-  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" #treeWidget>
     <!-- This is the tree node template for leaf nodes -->
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
       <li class="mat-tree-node">
         <!-- use a disabled button to provide padding for tree leaf -->
-        <button mat-icon-button disabled></button>
-        {{node.name}}
-      </li>
+        <button mat-icon-button disabled class="spacer"></button>
+        <span>
+          {{ node.prefix }}
+          <span *ngIf="node.id" class="hook" [matTooltipPosition]="'after'"
+            matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+            id="{{ node.id }}"
+            <app-icon-info class="icon id" ></app-icon-info>
+          </span>
+          <span *ngIf="node.content" class="customizable" [matTooltipPosition]="'after'"
+          matTooltip="You can use this property to replace the content of this component with your custom content.">
+            custom content: [{{node.content}}]
+            <app-icon-info class="icon"></app-icon-info>
+          </span>
+          {{node.suffix}}
+        </span>
+    </li>
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
     <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
       <li>
         <div class="mat-tree-node">
-          <button mat-icon-button matTreeNodeToggle
-                  [attr.aria-label]="'toggle ' + node.name">
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
             <mat-icon class="mat-icon-rtl-mirror">
-              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
             </mat-icon>
           </button>
-          {{node.name}}
+          <span>
+            {{ node.prefix }}
+            <span *ngIf="node.id" class="hook" [matTooltipPosition]="'after'"
+              matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+              id="{{ node.id }}"
+              <app-icon-info class="icon id" ></app-icon-info>
+            </span>
+            <span *ngIf="node.content" class="customizable"  [matTooltipPosition]="'after'"
+            matTooltip="You can use this property to replace the content of this component with your custom content.">
+              custom content: [{{node.content}}]
+              <app-icon-info class="icon"></app-icon-info>
+            </span>
+            {{node.suffix}}
+          </span>
         </div>
         <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
           <ng-container matTreeNodeOutlet></ng-container>

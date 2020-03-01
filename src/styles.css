@@ -47,3 +47,11 @@ body > app-root > app-nav > .mat-toolbar-single-row {
   margin-bottom:10px;
 }
 
+.mat-nested-tree-node > li {
+  display: contents;
+}
+
+.mat-nested-tree-node ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}

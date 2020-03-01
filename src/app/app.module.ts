@@ -49,6 +49,7 @@ import { KeyboardComponent } from './keyboard/keyboard.component';
 import { DisplayOptionsComponent } from './display-options/display-options.component';
 import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.component';
 import { CustomizationComponent } from './customization/customization.component';
+import { IconInfoComponent } from './icons/icon-info/icon-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +76,8 @@ import { CustomizationComponent } from './customization/customization.component'
     CustomPrintDialogComponent,
     KeyboardComponent,
     DisplayOptionsComponent,
-    CustomToolbarComponent
+    CustomToolbarComponent,
+    IconInfoComponent
   ],
   imports: [
     BrowserModule,

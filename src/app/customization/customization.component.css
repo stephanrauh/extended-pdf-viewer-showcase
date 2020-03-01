@@ -17,3 +17,25 @@
 .mat-tree-node {
   min-height: 24px;
 }
+
+.hook {
+  color: darkred;
+}
+
+.customizable {
+  color: blue;
+}
+
+.icon {
+  fill: blue;
+  position: relative;
+  top:5px;
+}
+
+.icon.id {
+  fill: darkred;
+}
+
+.spacer {
+  width: 20px;
+}
