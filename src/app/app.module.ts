@@ -50,6 +50,12 @@ import { DisplayOptionsComponent } from './display-options/display-options.compo
 import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.component';
 import { CustomizationComponent } from './customization/customization.component';
 import { IconInfoComponent } from './icons/icon-info/icon-info.component';
+import { TreeComponent } from './customization/tree/tree.component';
+import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar.component';
+
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +83,9 @@ import { IconInfoComponent } from './icons/icon-info/icon-info.component';
     KeyboardComponent,
     DisplayOptionsComponent,
     CustomToolbarComponent,
-    IconInfoComponent
+    IconInfoComponent,
+    TreeComponent,
+    PerfectScrollbarComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +112,8 @@ import { IconInfoComponent } from './icons/icon-info/icon-info.component';
     MatTooltipModule,
     MatProgressBarModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    PerfectScrollbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,41 @@
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.mat-tree-node .mat-icon-button {
+  height: 24px;
+  line-height: 24px;
+}
+
+.mat-tree-node {
+  min-height: 24px;
+}
+
+.hook {
+  color: darkred;
+}
+
+.customizable {
+  color: blue;
+}
+
+.icon {
+  fill: blue;
+  position: relative;
+  top:5px;
+}
+
+.icon.id {
+  fill: darkred;
+}
+
+.spacer {
+  width: 20px;
+}

@@ -23,6 +23,7 @@ import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-d
 import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.component';
 import { DisplayOptionsComponent } from './display-options/display-options.component';
 import { CustomizationComponent } from './customization/customization.component';
+import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'troubleshooting', component: TroubleshootingComponent },
   { path: 'zoom', component: ZoomComponent },
   { path: 'custom-print-dialog', component: CustomPrintDialogComponent },
+  { path: 'perfect-scrollbar', component: PerfectScrollbarComponent },
   { path: '**', redirectTo: '/simple', pathMatch: 'full' }
 ];
 

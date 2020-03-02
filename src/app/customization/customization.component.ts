@@ -1,22 +1,12 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { TreeNode } from './tree-node';
 
 /**
  * Food data with nested structure.
  * Each node has a name and an optional list of children.
  */
-interface TreeNode {
-  name: string;
-  id?: string;
-  children?: TreeNode[];
-  content?: string;
-  expanded?: boolean;
-  prefix?: string;
-  suffix?: string;
-}
 
-const TREE_DATA: TreeNode[] = [
+const TOOLBAR: TreeNode[] = [
   {
     name: '<pdf-toolbar>',
     content: 'customToolbar',
@@ -64,7 +54,9 @@ const TREE_DATA: TreeNode[] = [
         ]
       }
     ]
-  },
+  }];
+
+  const SECONDARY_TOOLBAR: TreeNode[] = [
 
   {
     name: '<pdf-secondary-toolbar>',
@@ -130,7 +122,9 @@ const TREE_DATA: TreeNode[] = [
         ]
       }
     ]
-  },
+  }];
+
+  const FINDBAR: TreeNode[] = [
   {
     name: '<pdf-findbar>',
     expanded: true,
@@ -195,32 +189,14 @@ const TREE_DATA: TreeNode[] = [
   styleUrls: ['./customization.component.css']
 })
 export class CustomizationComponent {
-  public treeControl = new NestedTreeControl<TreeNode>(node => node.children);
-  public dataSource = new MatTreeNestedDataSource<TreeNode>();
+  public toolbar = TOOLBAR;
+
+  public secondaryToolbar = SECONDARY_TOOLBAR;
+
+  public findbar = FINDBAR;
 
   constructor() {
-    this.dataSource.data = this.enrichTreeData(TREE_DATA);
-    this.treeControl.dataNodes = this.dataSource.data;
-    this.treeControl.expandAll();
+
   }
 
-  hasChild = (_: number, node: TreeNode) =>
-    !!node.children && node.children.length > 0;
-
-  private enrichTreeData(nodes: TreeNode[]): TreeNode[] {
-    if (!nodes) {
-      return;
-    }
-    nodes.forEach(n => {
-      if (n.name.endsWith('>')) {
-        n.suffix = '>';
-        n.prefix = n.name.substring(0, n.name.length - 1);
-      } else {
-        n.prefix = n.name;
-        n.suffix = '';
-      }
-      this.enrichTreeData(n.children);
-    });
-    return nodes;
-  }
 }

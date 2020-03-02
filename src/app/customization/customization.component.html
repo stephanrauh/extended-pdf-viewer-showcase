@@ -44,57 +44,19 @@
     </li>
   </ul>
 
-  <h2>Default toolbar, findbar, and secondary menu</h2>
-  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" #treeWidget>
-    <!-- This is the tree node template for leaf nodes -->
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-      <li class="mat-tree-node">
-        <!-- use a disabled button to provide padding for tree leaf -->
-        <button mat-icon-button disabled class="spacer"></button>
-        <span>
-          {{ node.prefix }}
-          <span *ngIf="node.id" class="hook" [matTooltipPosition]="'after'"
-            matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
-            id="{{ node.id }}"
-            <app-icon-info class="icon id" ></app-icon-info>
-          </span>
-          <span *ngIf="node.content" class="customizable" [matTooltipPosition]="'after'"
-          matTooltip="You can use this property to replace the content of this component with your custom content.">
-            custom content: [{{node.content}}]
-            <app-icon-info class="icon"></app-icon-info>
-          </span>
-          {{node.suffix}}
-        </span>
-    </li>
-    </mat-tree-node>
-    <!-- This is the tree node template for expandable nodes -->
-    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-      <li>
-        <div class="mat-tree-node">
-          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
-            <mat-icon class="mat-icon-rtl-mirror">
-              {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
-            </mat-icon>
-          </button>
-          <span>
-            {{ node.prefix }}
-            <span *ngIf="node.id" class="hook" [matTooltipPosition]="'after'"
-              matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
-              id="{{ node.id }}"
-              <app-icon-info class="icon id" ></app-icon-info>
-            </span>
-            <span *ngIf="node.content" class="customizable"  [matTooltipPosition]="'after'"
-            matTooltip="You can use this property to replace the content of this component with your custom content.">
-              custom content: [{{node.content}}]
-              <app-icon-info class="icon"></app-icon-info>
-            </span>
-            {{node.suffix}}
-          </span>
-        </div>
-        <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
-          <ng-container matTreeNodeOutlet></ng-container>
-        </ul>
-      </li>
-    </mat-nested-tree-node>
-  </mat-tree>
+  <h2>Toolbar</h2>
+  <p>The toolbar is the black bar containing the buttons above the PDF file.</p>
+  <app-tree [treeData]="toolbar"></app-tree>
+
+  <h2>Findbar</h2>
+  <p>The findbar becomes visible after hitting <code>CTRL+F</code>.</p>
+  <app-tree [treeData]="findbar"></app-tree>
+
+  <h2>Secondary menu</h2>
+  <p>The secondary toolbar is the menu that opens on the right-hand side. It contains many buttons
+    of the primary toolbar. On small displays, widgets are shifted from the primary toolbar to the
+    secondary toolbar until the primary toolbar fits on the screen. Similarly, when the window size
+    gets larger, many items are shifted from the secondary toolbar to the primary toolbar.
+  </p>
+  <app-tree [treeData]="secondaryToolbar"></app-tree>
 </mat-card>
