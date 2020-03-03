@@ -54,6 +54,7 @@ import { TreeComponent } from './customization/tree/tree.component';
 import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar.component';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-new-tab.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     CustomToolbarComponent,
     IconInfoComponent,
     TreeComponent,
-    PerfectScrollbarComponent
+    PerfectScrollbarComponent,
+    OpenInNewTabComponent
   ],
   imports: [
     BrowserModule,

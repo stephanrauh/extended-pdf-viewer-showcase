@@ -11,6 +11,8 @@
       <mat-radio-button value="findbar">custom findbar</mat-radio-button>
       <br />
       <mat-radio-button value="checkbox">checkbox zoom</mat-radio-button>
+      <br />
+      <mat-radio-button value="additional">additional buttons</mat-radio-button>
     </mat-radio-group>
   </mat-card>
   <p></p>
@@ -21,6 +23,9 @@
       </mat-tab>
       <mat-tab label="HTML template">
         <markdown ngPreserveWhitespaces [src]="'assets/custom-toolbar/html-'+ theme+'.md'"> </markdown>
+      </mat-tab>
+      <mat-tab label="additional components" *ngIf="theme=='additional'">
+        <markdown ngPreserveWhitespaces [src]="'assets/custom-toolbar/component-new-tab.md'"> </markdown>
       </mat-tab>
       <mat-tab label="changing the theme dynamically">
         <markdown ngPreserveWhitespaces [src]="'assets/custom-toolbar/ts-reinitialization.md'"> </markdown>
@@ -34,7 +39,7 @@
     #pdfViewer
     [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : null"
     [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : null"
-    [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : null"
+    [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons :null)"
     [src]="'assets/pdfs/dachstein.pdf'"
     [height]="'50vh'"
     [useBrowserLocale]="true"
@@ -110,3 +115,27 @@
     </div>
   </div>
 </ng-template>
+
+
+<ng-template #additionalButtons>
+  <div id="toolbarViewer" style="background-color:darkblue">
+    <div id="toolbarViewerLeft">
+      <pdf-toggle-sidebar></pdf-toggle-sidebar>
+      <div class="toolbarButtonSpacer"></div>
+      <pdf-find-button [showFindButton]="true" [textLayer]="true"></pdf-find-button>
+      <pdf-paging-area></pdf-paging-area>
+    </div>
+    <div id="toolbarViewerRight">
+      <pdf-open-file></pdf-open-file>
+      <pdf-presentation-mode></pdf-presentation-mode>
+      <pdf-print></pdf-print>
+      <app-open-in-new-tab></app-open-in-new-tab>
+      <pdf-download></pdf-download>
+      <pdf-bookmark></pdf-bookmark>
+      <div class="verticalToolbarSeparator hiddenSmallView"></div>
+      <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
+    </div>
+    <pdf-zoom-toolbar ></pdf-zoom-toolbar>
+  </div>
+</ng-template>
+

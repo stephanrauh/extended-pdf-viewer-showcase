@@ -1,4 +1,4 @@
-import { Component, Inject, AfterViewInit } from '@angular/core';
+import { Component, Inject, AfterViewInit, OnDestroy } from '@angular/core';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import PerfectScrollbar from 'perfect-scrollbar';
@@ -6,7 +6,8 @@ import PerfectScrollbar from 'perfect-scrollbar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
-  minScrollbarLength: 100
+  minScrollbarLength: 100,
+
 };
 
 @Component({
@@ -20,8 +21,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }
   ]
 })
-export class PerfectScrollbarComponent implements AfterViewInit {
-  public scrollbar: any = undefined;
+export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
+
+  public scrollbar: PerfectScrollbar | undefined = undefined;
 
   constructor(
     @Inject(PERFECT_SCROLLBAR_CONFIG)
@@ -31,5 +33,12 @@ export class PerfectScrollbarComponent implements AfterViewInit {
   public ngAfterViewInit(): void {
     const container = document.querySelector('#viewerContainer');
     this.scrollbar = new PerfectScrollbar(container, this.config);
+  }
+
+  public ngOnDestroy(): void {
+    if (this.scrollbar) {
+      this.scrollbar.destroy();
+      this.scrollbar = undefined;
+    }
   }
 }
