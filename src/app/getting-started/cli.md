@@ -6,7 +6,7 @@ Open the file `angular.json` (or `.angular-cli.json` if you're using an older ve
     "src/assets",
     {
       "glob": "**/*",
-      "input": "dist/ngx-extended-pdf-viewer/assets/",
+      "input": "node_modules/ngx-extended-pdf-viewer/assets/",
       "output": "/assets/"
     }
   ],
