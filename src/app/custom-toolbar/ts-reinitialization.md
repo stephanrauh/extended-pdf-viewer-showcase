@@ -6,13 +6,13 @@ export class CustomToolbarComponent {
   public _theme = 'findbar';
 
   @ViewChild('pdfViewer')
-  public pdfViewer: OnInit & OnDestroy;
+  public pdfViewer: AfterViewInit & OnDestroy;
 
   public set theme(theme: string) {
     if (this._theme !== theme) {
       this.pdfViewer.ngOnDestroy();
       this._theme = theme;
-      this.pdfViewer.ngOnInit();
+      this.pdfViewer.ngAfterViewInit();
     } else {
       this._theme = theme;
     }

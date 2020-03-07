@@ -80,25 +80,7 @@
 
 <ng-template #customCheckboxZoomToolbar>
   <div id="toolbarViewer">
-    <div id="toolbarViewerLeft">
-      <div [class.invisible]="true" id="sidebarToggle"></div>
-      <div [class.invisible]="true" id="viewFind">
-      </div>
-      <pdf-paging-area [showPagingButtons]="true"></pdf-paging-area>
-    </div>
-    <div id="toolbarViewerRight">
-      <pdf-presentation-mode [showPresentationModeButton]="false"></pdf-presentation-mode>
-      <pdf-open-file [showOpenFileButton]="false"></pdf-open-file>
-      <pdf-print [showPrintButton]="false"></pdf-print>
-      <pdf-download [showDownloadButton]="false"></pdf-download>
-      <pdf-bookmark [showBookmarkButton]="false"></pdf-bookmark>
-      <button [class.invisible]="true" id="secondaryToolbarToggle"></button>
-    </div>
-    <div [class.invisible]="false" id="toolbarViewerMiddle">
-      <div class="splitToolbarButton">
-        <button id="zoomOut" class="invisible"></button>
-        <button id="zoomIn" class="invisible"></button>
-      </div>
+    <div id="toolbarViewerMiddle">
       <pdf-zoom-dropdown class="invisible"></pdf-zoom-dropdown>
 
       <input type="radio" id="zoom50" class="toolbarField radio" tabindex="94" (click)="zoom = '50%'" name="zoom" [checked]="zoom==='50%'" />
@@ -135,7 +117,7 @@
       <div class="verticalToolbarSeparator hiddenSmallView"></div>
       <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
     </div>
-    <pdf-zoom-toolbar ></pdf-zoom-toolbar>
+    <pdf-zoom-toolbar></pdf-zoom-toolbar>
   </div>
 </ng-template>
 

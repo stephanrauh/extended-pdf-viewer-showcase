@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 // import { NgxExtendedPdfViewerComponent } from 'ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.component';
 
 @Component({
@@ -12,13 +12,13 @@ export class CustomToolbarComponent {
   public zoom = '100%';
 
   @ViewChild('pdfViewer')
-  public pdfViewer: OnInit & OnDestroy; // NgxExtendedPdfViewerComponent;
+  public pdfViewer: AfterViewInit & OnDestroy; // NgxExtendedPdfViewerComponent;
 
   public set theme(theme: string) {
     if (this._theme !== theme) {
       this.pdfViewer.ngOnDestroy();
       this._theme = theme;
-      this.pdfViewer.ngOnInit();
+      this.pdfViewer.ngAfterViewInit();
     } else {
       this._theme = theme;
     }

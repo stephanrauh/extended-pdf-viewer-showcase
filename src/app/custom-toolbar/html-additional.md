@@ -1,14 +1,14 @@
 ```html
-  <ngx-extended-pdf-viewer
-    #pdfViewer
-    [customToolbar]="additionalButtons"
-    [src]="'assets/pdfs/dachstein.pdf'"
-    [height]="'50vh'"
-    [useBrowserLocale]="true"
-    [textLayer]="true">
-  </ngx-extended-pdf-viewer>
+<ngx-extended-pdf-viewer
+  #pdfViewer
+  [customToolbar]="additionalButtons"
+  [src]="'assets/pdfs/dachstein.pdf'"
+  [height]="'50vh'"
+  [useBrowserLocale]="true"
+  [textLayer]="true">
+</ngx-extended-pdf-viewer>
 
-  <ng-template #additionalButtons>
+<ng-template #additionalButtons>
   <div id="toolbarViewer" style="background-color:darkblue">
     <div id="toolbarViewerLeft">
       <pdf-toggle-sidebar></pdf-toggle-sidebar>

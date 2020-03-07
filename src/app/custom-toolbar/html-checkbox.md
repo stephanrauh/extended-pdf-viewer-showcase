@@ -1,34 +1,17 @@
 ```html
-  <ngx-extended-pdf-viewer
-    #pdfViewer
-    [customToolbar]="customCheckboxZoomToolbar"
-    [src]="'assets/pdfs/dachstein.pdf'"
-    [height]="'50vh'"
-    [useBrowserLocale]="true"
-    [textLayer]="true"
-    [zoom]="zoom">
-  </ngx-extended-pdf-viewer>
+<ngx-extended-pdf-viewer
+  #pdfViewer
+  [customToolbar]="customCheckboxZoomToolbar"
+  [src]="'assets/pdfs/dachstein.pdf'"
+  [height]="'50vh'"
+  [useBrowserLocale]="true"
+  [textLayer]="true"
+  [zoom]="zoom">
+</ngx-extended-pdf-viewer>
 
 <ng-template #customCheckboxZoomToolbar>
   <div id="toolbarViewer">
-    <div id="toolbarViewerLeft">
-      <button [class.invisible]="true" id="sidebarToggle"></button>
-      <button [class.invisible]="true" id="viewFind"></button>
-      <pdf-paging-area [showPagingButtons]="true"></pdf-paging-area>
-    </div>
-    <div id="toolbarViewerRight">
-      <pdf-presentation-mode [showPresentationModeButton]="false"></pdf-presentation-mode>
-      <pdf-open-file [showOpenFileButton]="false"></pdf-open-file>
-      <pdf-print [showPrintButton]="false"></pdf-print>
-      <pdf-download [showDownloadButton]="false"></pdf-download>
-      <pdf-bookmark [showBookmarkButton]="false"></pdf-bookmark>
-      <button [class.invisible]="true" id="secondaryToolbarToggle"></button>
-    </div>
     <div [class.invisible]="false" id="toolbarViewerMiddle">
-      <div class="splitToolbarButton">
-        <button id="zoomOut" class="invisible"></button>
-        <button id="zoomIn" class="invisible"></button>
-      </div>
       <pdf-zoom-dropdown class="invisible"></pdf-zoom-dropdown>
 
       <input type="radio" id="zoom50" class="toolbarField radio" tabindex="94" (click)="zoom = '50%'" name="zoom" [checked]="zoom==='50%'" />
@@ -45,5 +28,4 @@
     </div>
   </div>
 </ng-template>
-
 ```

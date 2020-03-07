@@ -1,13 +1,13 @@
 ```html
-  <ngx-extended-pdf-viewer
-    #pdfViewer
-    [customFindbarInputArea]="customFindbarInputArea"
-    [customFindbarButtons]="customFindbarButtons"
-    [src]="'assets/pdfs/dachstein.pdf'"
-    [height]="'50vh'"
-    [useBrowserLocale]="true"
-    [textLayer]="true">
-  </ngx-extended-pdf-viewer>
+<ngx-extended-pdf-viewer
+  #pdfViewer
+  [customFindbarInputArea]="customFindbarInputArea"
+  [customFindbarButtons]="customFindbarButtons"
+  [src]="'assets/pdfs/dachstein.pdf'"
+  [height]="'50vh'"
+  [useBrowserLocale]="true"
+  [textLayer]="true">
+</ngx-extended-pdf-viewer>
 
 <ng-template #customFindbarInputArea>
   <div id="findbarInputContainer">
