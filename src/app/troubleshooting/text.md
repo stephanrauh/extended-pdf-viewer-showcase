@@ -53,7 +53,15 @@ Bootstrap interferes with the printing algorithm of `pdf.js`. Guard it with a me
   @import '../node_modules/bootstrap/scss/bootstrap';
 }
 ```
-Caveat: this trick only works with the SCSS version of both `styles.scss` and `bootstrap.scss`. It doesn't work with simple CSS. 
+Caveat: this trick only works with the SCSS version of both `styles.scss` and `bootstrap.scss`. It doesn't work with simple CSS. If you're using pure CSS, you can use the solution suggested by <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/48#issuecomment-596629621" target="#">Austin Walker</a>:
+
+```css
+@media print {
+  body {
+    min-width: auto !important;
+  }
+}
+```
 
 ## Localization
 
