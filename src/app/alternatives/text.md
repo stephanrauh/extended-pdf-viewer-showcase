@@ -1,6 +1,13 @@
 # Alternatives to ngx-extended-pdf-viewer
 
-There's a similar copy of this text at <a target="#" href="https://www.beyondjava.net/ngx-extended-pdf-viewer">beyondjava.net</a>.
+There's a similar article at <a target="#" href="https://beyondjava.net/angular-pdf-viewers-2020">https://beyondjava.net/angular-pdf-viewers-2020</a> and an older text at <a target="#" href="https://www.beyondjava.net/ngx-extended-pdf-viewer">beyondjava.net/ngx-extended-pdf-viewer</a>.
+
+## TLDR
+In general, I recommend using either my own PDF viewer, ngx-extended-pdf-viewer, or the PDF viewer of Vadym Yatsyuk, <a href="https://www.npmjs.com/package/ng2-pdf-viewer">ng2-pdf-viewer</a>. Vadym's viewer is the tool of choice if you don't need the menu, the sidebar, or anything else beyond displaying the PDF file. ngx-extended-pdf-viewer is the tool of choice if you need the fancy UI, too.
+
+If you need to display multiple PDF files simultaneously and if you don't mind using iFrames, I recommend <a target="#" href="https://www.npmjs.com/package/ng2-pdfjs-viewer">ng2-pdfjs-viewer</a>. The library has less features than ngx-extended-pdf-viewer, but its iFrame approach allows it do some tricks that make it unique. Such as opening a PDF file in a new tab or a new window, or - as I've mentioned before - displaying multiple PDF files side-by-side.
+
+If you need to modify PDF files, that's the realm of the commercial solutions. I didn't do much market research, so take my hints with a grain of salt. PDFTron looks interesting, as well as the commercial sibling of ej2-angular-pdfviewer.
 
 ## Using the native browser support
 

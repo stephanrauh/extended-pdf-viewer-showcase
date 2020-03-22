@@ -1,49 +1,77 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <p>
-      You can hide every button of the PDF viewer. By default, each of these buttons is activated.
-    </p>
-    <mat-checkbox class="margin" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showFindButton">showFindButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
-    <mat-form-field class="margin" *ngIf="showDownloadButton">
-      <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
-    </mat-form-field>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showBookmarkButton">showBookmarkButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
-    <br />
-    <mat-checkbox class="margin" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
+    <mat-tab-group>
+      <mat-tab label="live demo">
+<mat-checkbox class="margin" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showFindButton">showFindButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
+        <mat-form-field class="margin" *ngIf="showDownloadButton">
+          <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
+        </mat-form-field>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showBookmarkButton">showBookmarkButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
+      </mat-tab>
+      <mat-tab label="changes in version 2.1.0">
+        <p>
+          The attribute <code>[showSecondaryToolbarButton]</code> has become more useful and more predictable
+          since version 2.1.0. However, if you're updating from an earlier version, you may notice
+          a difference. I don't think it's a breaking change, but it's worth documenting:
+        </p>
+        <ul>
+          <li>Until version 2.0.0, the PDF viewer displayed or hid the primary toolbar and the
+            secondary toolbar (i.e. the menu on the right-hand side on
+            most languages) depending on the parameters. That has always been bad because this
+            algorithm didn't support responsive design. On smaller screens, more and more
+            buttons are shifted to the secondary menu, but that didn't mean it'd become visible.
+            With the advent of version 2.0.0, things got worse: the new customization options mean there's
+            no way to guess the correct setting from the parameters. As a consequence, I implemented
+            a slow-but-reliable algorithm looking at the real DOM and its effective CSS.
+          </li>
+          <li><code>[showSecondaryToolbarButton]="false"</code> means the "kebab menu" button never becomes
+            visible. In other words: there's no secondary toolbar, no matter what the user does.
+          </li>
+          <li><code>[showSecondaryToolbarButton]="false"</code> means the "kebab menu" button is visible
+            if necessary. If the secondary toolbar is empty, the kebab menu button is hidden.
+          </li>
+          <li>The primary toolbar is only shown if it's not empty. Since version 2.1.0, that
+            may happen even if <code>[showSecondaryToolbarButton]="true"</code>, because it checks whether the
+          </li>
+        </ul>
+      </mat-tab>
+    </mat-tab-group>
   </mat-card>
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="HTML template">
-        <markdown ngPreserveWhitespaces src="assets/multiple-documents/html.md"> </markdown>
+        <markdown ngPreserveWhitespaces src="assets/hiding-buttons/html.md"> </markdown>
       </mat-tab>
       <mat-tab label="TypeScript">
-        <markdown ngPreserveWhitespaces src="assets/multiple-documents/ts.md"> </markdown>
+        <markdown ngPreserveWhitespaces src="assets/hiding-buttons/ts.md"> </markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
