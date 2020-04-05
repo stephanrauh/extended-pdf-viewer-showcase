@@ -4,7 +4,6 @@
   backgroundColor="#ffffff"
   [useBrowserLocale]="true"
   [mobileFriendlyZoom]="'150%'"
-  [ignoreResponsiveCSS]="true"
   [showSecondaryToolbarButton]="false"
 >
 </ngx-extended-pdf-viewer>

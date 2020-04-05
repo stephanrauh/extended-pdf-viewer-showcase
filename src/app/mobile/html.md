@@ -1,11 +1,9 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
-  backgroundColor="#ffffff"
+  [src]="'assets/pdfs/demo.pdf'"
   [height]="'90vh'"
   [useBrowserLocale]="true"
-  [mobileFriendlyZoom]="mobileFriendlyZoomSetting"
-  [showZoomButtons]="true"
+  [mobileFriendlyZoom]="zoom"
 >
 </ngx-extended-pdf-viewer>
 ```

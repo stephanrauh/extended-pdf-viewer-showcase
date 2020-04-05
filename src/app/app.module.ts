@@ -41,7 +41,6 @@ import { FindComponent } from './find/find.component';
 import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.component';
 import { MultipleDocumentsComponent } from './multiple-documents/multiple-documents.component';
 import { Base64Component } from './base64/base64.component';
-import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 import { SmartphoneComponent } from './smartphone/smartphone.component';
 import { ContextmenuComponent } from './contextmenu/contextmenu.component';
 import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-dialog.component';
@@ -75,7 +74,6 @@ import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-
     MobileComponent,
     PagesLoadedComponent,
     RangeRequestsComponent,
-    ResponsiveDesignComponent,
     SimpleComponent,
     SmartphoneComponent,
     TroubleshootingComponent,

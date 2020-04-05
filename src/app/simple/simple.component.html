@@ -23,6 +23,11 @@
 </div>
 
 <mat-card class="distance-16 mat-elevation-z8">
-  <ngx-extended-pdf-viewer [src]="'assets/pdfs/pdf-sample.pdf'" [height]="'90vh'" [useBrowserLocale]="true">
+  <ngx-extended-pdf-viewer
+     [src]="'assets/pdfs/pdf-sample.pdf'"
+     [height]="'90vh'"
+     [useBrowserLocale]="true"
+     [textLayer]="true"
+     [showHandToolButton]="true">
   </ngx-extended-pdf-viewer>
 </mat-card>

@@ -1,7 +1,7 @@
 ```typescript
 @Component({ ... })
 export class MobileComponent {
-  public mobileFriendlyZoomSetting = '150%';
+  public zoom = '150%';
 }
 
 ```
