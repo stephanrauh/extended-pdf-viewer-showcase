@@ -23,6 +23,7 @@ import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.componen
 import { DisplayOptionsComponent } from './display-options/display-options.component';
 import { CustomizationComponent } from './customization/customization.component';
 import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar.component';
+import { LinksComponent } from './links/links.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'i18n', component: I18nComponent },
   { path: 'intro', component: IntroComponent },
   { path: 'hiding-buttons', component: HidingButtonsComponent },
+  { path: 'links', component: LinksComponent },
   { path: 'keyboard', component: KeyboardComponent },
   { path: 'mobile', component: MobileComponent },
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
