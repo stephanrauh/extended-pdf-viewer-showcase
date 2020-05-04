@@ -24,6 +24,7 @@ import { DisplayOptionsComponent } from './display-options/display-options.compo
 import { CustomizationComponent } from './customization/customization.component';
 import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar.component';
 import { LinksComponent } from './links/links.component';
+import { TextlayerComponent } from './textlayer/textlayer.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'range-requests', component: RangeRequestsComponent },
   { path: 'simple', component: SimpleComponent },
   { path: 'smartphone', component: SmartphoneComponent },
+  { path: 'textlayer', component: TextlayerComponent },
   { path: 'troubleshooting', component: TroubleshootingComponent },
   { path: 'zoom', component: ZoomComponent },
   { path: 'custom-print-dialog', component: CustomPrintDialogComponent },

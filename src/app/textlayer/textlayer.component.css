@@ -1,0 +1,8 @@
+.box {
+  border: 1px solid red;
+  border-radius: 8px;
+}
+
+div.show-text-layer > span {
+  color: unset;
+}

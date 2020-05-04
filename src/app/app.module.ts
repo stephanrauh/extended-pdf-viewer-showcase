@@ -55,6 +55,7 @@ import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-new-tab.component';
 import { LinksComponent } from './links/links.component';
+import { TextlayerComponent } from './textlayer/textlayer.component';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { LinksComponent } from './links/links.component';
     RangeRequestsComponent,
     SimpleComponent,
     SmartphoneComponent,
+    TextlayerComponent,
     TroubleshootingComponent,
     ZoomComponent,
     CustomPrintDialogComponent,

@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'https://www.math.ias.edu/~lurie/281notes/Lecture15-Wall.pdf'"
+  [src]="'assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
   backgroundColor="#ffffff"
   [height]="'90vh'"
   [useBrowserLocale]="true"
