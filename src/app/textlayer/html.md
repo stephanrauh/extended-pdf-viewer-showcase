@@ -1,9 +1,11 @@
 ```html
-<ngx-extended-pdf-viewer
-    [src]="'assets/pdfs/pdf-sample.pdf'"
-    [useBrowserLocale]="true" <!-- load i18n files from the assets folder -->
-    [textLayer]="true" <!-- enable the find button -->
-    [showHandToolButton]="true" <!-- enable text selection -->
-    [height]="'90vh'"> <!-- by default, most CSS framework set the height to 0 -->
-</ngx-extended-pdf-viewer>
+  <ngx-extended-pdf-viewer
+     [src]="'assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+     [textLayer]="true"
+     (textLayerRendered)=highlightWords($event);
+     [page]="9"
+     [height]="'90vh'"
+     [useBrowserLocale]="true"
+     [showHandToolButton]="true">
+  </ngx-extended-pdf-viewer>
 ```

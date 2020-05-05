@@ -6,11 +6,12 @@
     <ul>
       <li>mark and copy texts</li>
       <li>find texts</li>
-      <li>and - to a limited extend - to manipulate texts.</li>
+      <li>and - to a limited extend and far from being perfect - to modify how texts are displayed.</li>
     </ul>
     <p>By default, the text layer is switched off in order to render the document faster. The drawback
       is that both the find menu and the select tool are disabled until you activate the text layer.
     </p>
+    <p><b>Demos:</b></p>
     <mat-checkbox class="margin" [(ngModel)]="markLongWords">mark long words</mat-checkbox>
     <br>
     <mat-checkbox class="margin" [(ngModel)]="showBoxes">put each text layer <code>&lt;span&gt;</code> into a box</mat-checkbox>
@@ -24,7 +25,19 @@
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="HTML template">
-        <markdown ngPreserveWhitespaces src="assets/simple/html.md"> </markdown>
+        <markdown ngPreserveWhitespaces src="assets/textlayer/html.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="TS - demo 1">
+        <markdown ngPreserveWhitespaces src="assets/textlayer/ts.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="TS - demo 2">
+        <markdown ngPreserveWhitespaces src="assets/textlayer/ts2.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="TS - demo 3">
+        <markdown ngPreserveWhitespaces src="assets/textlayer/ts3.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="CSS">
+        <markdown ngPreserveWhitespaces src="assets/textlayer/css.md"> </markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
