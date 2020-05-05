@@ -13,9 +13,12 @@
     </p>
     <mat-checkbox class="margin" [(ngModel)]="markLongWords">mark long words</mat-checkbox>
     <br>
-    <mat-checkbox class="margin" [(ngModel)]="showBoxes">show each text layer <code>&lt;span&gt;</code></mat-checkbox>
+    <mat-checkbox class="margin" [(ngModel)]="showBoxes">put each text layer <code>&lt;span&gt;</code> into a box</mat-checkbox>
     <br>
     <mat-checkbox class="margin" [(ngModel)]="showTextLayer">show the text layer</mat-checkbox>
+    <p>The demos show that the text layer isn't perfect. The positions are good enough for finding and marking text, but
+      they don't match the precise positions. Plus, sometime words are separated into several <code>&lt;span&gt;</code> tags.
+    </p>
 
   </mat-card>
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">

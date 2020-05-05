@@ -7,10 +7,14 @@ import { TextLayerRenderedEvent } from '../../../../ngx-extended-pdf-viewer/proj
   styleUrls: ['./textlayer.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class TextlayerComponent implements OnInit {
-  public markLongWords = false;
+export class TextlayerComponent {
+  public _markLongWords = false;
 
   private _showBoxes = false;
+
+  private _showTextLayer = false;
+
+  private alreadyRendered: Array<HTMLSpanElement> = [];
 
   public get showBoxes(): boolean {
     return this._showBoxes;
@@ -28,9 +32,33 @@ export class TextlayerComponent implements OnInit {
     }
   }
 
-  private _showTextLayer = false;
+  public get markLongWords(): boolean {
+    return this._markLongWords;
+  }
 
-  private alreadyRendered: Array<HTMLSpanElement> = [];
+  public set markLongWords(mark: boolean) {
+    this._markLongWords = mark;
+    this.alreadyRendered.forEach((span) => this.doMarkLongWordsInSpan(span));
+  }
+
+  public doMarkLongWordsInSpan(span: HTMLSpanElement): void {
+    if (!this._markLongWords) {
+      span.innerHTML = span.innerText;
+    } else {
+      const withMarks = span.innerText
+        .split(' ')
+        .map((t) => this.markOneLongWord(t))
+        .join(' ');
+      span.innerHTML = withMarks;
+    }
+  }
+
+  private markOneLongWord(word: string): string {
+    if (word.length > 6) {
+      return `<span class="long-word">${word}</span>`;
+    }
+    return word;
+  }
 
   public get showTextLayer(): boolean {
     return this._showTextLayer;
@@ -49,10 +77,6 @@ export class TextlayerComponent implements OnInit {
     }
   }
 
-  constructor() {}
-
-  ngOnInit() {}
-
   public highlightWords(event: TextLayerRenderedEvent): void {
     event.source.textDivs.forEach((span) => {
       this.alreadyRendered.push(span);
@@ -61,6 +85,11 @@ export class TextlayerComponent implements OnInit {
     if (this.showTextLayer) {
       event.source.textDivs.forEach((span) => {
         span.classList.add('box');
+      });
+    }
+    if (this._markLongWords) {
+      event.source.textDivs.forEach((span) => {
+        this.doMarkLongWordsInSpan(span);
       });
     }
   }
