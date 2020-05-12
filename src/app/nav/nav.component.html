@@ -2,7 +2,7 @@
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span>Angular PDF viewer showcase. Running on Angular 9.1.4 and ngx-extended-pdf-viewer 3.2.6.</span>
+  <span>Angular PDF viewer showcase. Running on Angular 9.1.6 and ngx-extended-pdf-viewer 3.3.0.</span>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container distance-48">
   <mat-sidenav
@@ -34,6 +34,7 @@
       <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'base64'">Base64 encoded files</a>
       <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'multiple-documents'" class="long-text">Switching between documents</a>
       <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'mobile'">Mobile devices and responsive design</a>
+      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'touch-gestures'">Touch gestures (experimental)</a>
       <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'smartphone'">Smartphones</a>
       <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'contextmenu'">Context menu</a>
       <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'hiding-buttons'"  class="long-text">Customizing the buttons</a>
