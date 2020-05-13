@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class TouchGesturesComponent {
   public enablePinchOnMobile = true;
+
+  public isMobile = 'ontouchstart' in document.documentElement;
 }

@@ -44,7 +44,7 @@ constructor() {
 
 If everything works, the file is lazy-loaded when the PDF viewer opens, and you're rewarded with a non-blocking PDF viewer, even if your PDF file is huge.
 
-## Compatibility to Bootstrap (and other CSS frameworks)
+## Trouble with printing (aka: compatibility to Bootstrap and other CSS frameworks)
 
 Bootstrap interferes with the printing algorithm of `pdf.js`. Guard it with a media query to avoid unwanted effects, such as scaling the print to 65%. For example, if you're using SCSS and Bootstrap 4, remove the import of Bootstrap.min.css from the Angular.json file. Instead, import it by including Bootstrap by adding this line to the global `styles.scss` file:
 
@@ -62,6 +62,15 @@ Caveat: this trick only works with the SCSS version of both `styles.scss` and `b
   }
 }
 ```
+
+If you need more information, have a look at these issues:
+* https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/148
+* https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/175
+* https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/143 
+
+## Promise.allSettled is not a function
+
+Please update the library `zone.js` to a current version. At the time of writing, that's 0.10.3. For some reason, the default setup of Angular locks `zone.js` to an old version. In most cases, the update shouldn't cause problems.
 
 ## Localization
 
