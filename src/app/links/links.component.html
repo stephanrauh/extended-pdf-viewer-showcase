@@ -1,43 +1,64 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <p>
-      There are several kinds of links:
-    </p>
-    <ul>
-      <li>Internal links within the PDF files.</li>
-      <li>External links on web server (usually with an https URL).</li>
-      <li>Links to file on the local PC or the local network. The PDF viewer doesn't support such links.</li>
-    </ul>
-    <p>By default, external links are opened in the same window. In other words, clicking the link
-      amounts to leaving the Angular application. To prevent this, you have to options:
-    </p>
-    <ul>
-      <li>Add the target when you're creating the PDF file. That's generally the best solution.</li>
-      <li>
-        Use the <code>defaultOptions</code> to override the default for <code>externalLinkTarget</code>.
-        The source code on the right-hand side shows you how to do it.
-      </li>
-    </ul>
+    <mat-tab-group>
+      <mat-tab label="Demo">
+        <p>Chose a link target:</p>
+        <mat-radio-group aria-label="Toolbar zoom factor"
+                         (change)="target=$event.value"
+                         [value]="target">
+          <mat-radio-button [value]="LinkTarget.BLANK">[target]="LinkTarget.BLANK" (opens a new window)</mat-radio-button>
+          <br />
+          <mat-radio-button [value]="LinkTarget.SELF">[target]="LinkTarget.SELF" (same window)</mat-radio-button>
+          <br />
+          <mat-radio-button [value]="LinkTarget.PARENT">[target]="LinkTarget.PARENT" (same window)</mat-radio-button>
+          <br />
+          <mat-radio-button [value]="LinkTarget.TOP">[target]="LinkTarget.TOP" (same window)</mat-radio-button>
+          <br />
+          <mat-radio-button [value]="LinkTarget.NONE">[target]="LinkTarget.NONE" (identical to TOP)</mat-radio-button>
+        </mat-radio-group>
+        <p>The link target is only considered at render time. So this demo forces a reload when you chose
+          a different option.
+        </p>
+     </mat-tab>
+    <mat-tab label="Description">
+      <p>
+        There are several kinds of links:
+      </p>
+      <ul>
+        <li>Internal links within the PDF files.</li>
+        <li>External links on web server (usually with an https URL).</li>
+        <li>Links to file on the local PC or the local network. The PDF viewer doesn't support such links.</li>
+      </ul>
+      <p>By default, external links are opened in the same window. In other words, clicking the link
+        amounts to leaving the Angular application. To prevent this, you have two options:
+      </p>
+      <ul>
+        <li>Add the target when you're creating the PDF file. That's generally the best solution.</li>
+        <li>
+          Use the <code>defaultOptions</code> to override the default for <code>externalLinkTarget</code>.
+        </li>
+      </ul>
+    </mat-tab>
+    </mat-tab-group>
   </mat-card>
-
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="TypeScript">
         <markdown ngPreserveWhitespaces [data]="sourcecode | language : 'typescript'"></markdown>
       </mat-tab>
+      <mat-tab label="HTML">
+        <markdown ngPreserveWhitespaces src="assets/links/html.md"></markdown>
+      </mat-tab>
      </mat-tab-group>
   </mat-card>
 </div>
 
-
 <mat-card class="distance-16 mat-elevation-z8">
-  <ngx-extended-pdf-viewer
+  <ngx-extended-pdf-viewer *ngIf="!hidden"
     [src]="'assets/pdfs/blind-text-collection.pdf'"
-    backgroundColor="#ffffff"
     [height]="'90vh'"
     [useBrowserLocale]="true"
-    [textLayer]="true"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
