@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { defaultOptions } from 'ngx-extended-pdf-viewer';
+import { LinkTarget } from 'ngx-extended-pdf-viewer';
 @Component({
   selector: 'app-links',
   templateUrl: './links.component.html',
@@ -9,11 +10,13 @@ export class LinksComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    defaultOptions.externalLinkTarget = LinkTarget.BLANK;
+  }
 
   public get sourcecode(): string {
     return `import { defaultOptions } from 'ngx-extended-pdf-viewer/default-options';
-    import { LinkTarget } from '/ngx-extended-pdf-viewer/link-target';
+    import { LinkTarget } from 'ngx-extended-pdf-viewer';
     ...
     ngOnInit(): void {
       defaultOptions.externalLinkTarget = LinkTarget.BLANK;
