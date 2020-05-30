@@ -27,10 +27,15 @@
                 "output": "/assets/"
               },
               {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets-2.5/",
+                "output": "/assets/"
+              },
+              {
                 "glob": "**/*.md",
                 "input": "src/app/",
                 "output": "/assets"
-              },
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
