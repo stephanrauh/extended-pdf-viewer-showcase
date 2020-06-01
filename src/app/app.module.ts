@@ -1,3 +1,4 @@
+import { PrintRangeComponent } from './print-range/print-range.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -76,6 +77,7 @@ import { TouchGesturesComponent } from './touch-gestures/touch-gestures.componen
     MultipleDocumentsComponent,
     MobileComponent,
     PagesLoadedComponent,
+    PrintRangeComponent,
     RangeRequestsComponent,
     SimpleComponent,
     SmartphoneComponent,

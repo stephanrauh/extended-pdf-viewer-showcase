@@ -73,13 +73,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   }
 
   print() {
-    const range = {
-      from: 2,
-      to: 5,
-      excluded: [3]
-    }
-    this.printService.print(range);
-    // (window as any).PDFViewerApplication.eventBus.dispatch('print');
+    this.printService.print();
   }
 
   cancel() {

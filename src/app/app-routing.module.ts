@@ -26,6 +26,7 @@ import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar
 import { LinksComponent } from './links/links.component';
 import { TextlayerComponent } from './textlayer/textlayer.component';
 import { TouchGesturesComponent } from './touch-gestures/touch-gestures.component';
+import { PrintRangeComponent } from './print-range/print-range.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'troubleshooting', component: TroubleshootingComponent },
   { path: 'zoom', component: ZoomComponent },
   { path: 'custom-print-dialog', component: CustomPrintDialogComponent },
+  { path: 'print-range', component: PrintRangeComponent },
   { path: 'perfect-scrollbar', component: PerfectScrollbarComponent },
   { path: '**', redirectTo: '/simple', pathMatch: 'full' }
 ];
