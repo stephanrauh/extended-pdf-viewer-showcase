@@ -31,11 +31,11 @@ under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-
   <ngx-extended-pdf-viewer
     [src]="'assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
     [page]="9"
-    backgroundColor="#ffffff"
     [height]="'90vh'"
     [useBrowserLocale]="true"
     [showHandToolButton]="true"
     [textLayer]="true"
+    (pageChange)="onEvent('pageChange', $event)"
     (afterPrint)="onEvent('afterPrint', $event)"
     (beforePrint)="onEvent('beforePrint', $event)"
     (currentZoomFactor)="onEvent('currentZoomFactor', $event)"
@@ -45,7 +45,6 @@ under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-
     (pdfLoaded)="onEvent('pdfLoaded', $event)"
     (pdfLoadingFailed)="onPdfLoadingFailed($event)"
     (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"
-    (updateFindState)="onEvent('updateFindState', $event)"
-  >
+    (updateFindState)="onEvent('updateFindState', $event)">
   </ngx-extended-pdf-viewer>
 </mat-card>

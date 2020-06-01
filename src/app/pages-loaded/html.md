@@ -1,9 +1,9 @@
 ```html
 <ngx-extended-pdf-viewer
   [src]="'assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
-  backgroundColor="#ffffff"
   [height]="'90vh'"
   [useBrowserLocale]="true"
+  (pageChange)="onEvent('pageChange', $event)"
   (afterPrint)="onEvent('afterPrint', $event)"
   (beforePrint)="onEvent('beforePrint', $event)"
   (currentZoomFactor)="onEvent('currentZoomFactor', $event)"
@@ -13,7 +13,6 @@
   (pdfLoaded)="onEvent('pdfLoaded', $event)"
   (pdfLoadingFailed)="onEvent('pdfLoadingFailed', $event)"
   (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"
-  (updateFindState)="onEvent('updateFindState', $event)"
->
+  (updateFindState)="onEvent('updateFindState', $event)">
 </ngx-extended-pdf-viewer>
 ```
