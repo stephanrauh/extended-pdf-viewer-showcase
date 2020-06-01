@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
+import { PagesLoadedEvent, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 interface EventBus {
   dispatch(eventName: string): void;
@@ -22,7 +22,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   showCompleted = false;
   hideBuiltInProgress = true;
 
-  constructor() {}
+  constructor(private printService: NgxExtendedPdfViewerService) {}
 
   ngOnInit() {
     const node = document.querySelector('#printContainer');
@@ -73,7 +73,13 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   }
 
   print() {
-    (window as any).PDFViewerApplication.eventBus.dispatch('print');
+    const range = {
+      from: 2,
+      to: 5,
+      excluded: [3]
+    }
+    this.printService.print(range);
+    // (window as any).PDFViewerApplication.eventBus.dispatch('print');
   }
 
   cancel() {
