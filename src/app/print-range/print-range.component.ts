@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { PDFPrintRange } from '../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-print-range';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-print-range',
   templateUrl: './print-range.component.html',
   styleUrls: ['./print-range.component.css'],
 })
-export class PrintRangeComponent {
+export class PrintRangeComponent implements OnDestroy {
+  private programmaticAPI = true;
+
   public from = 1;
 
   public to = 10;
@@ -38,17 +42,20 @@ export class PrintRangeComponent {
 
   public includedAsArray = PrintRangeComponent.toArray(this.included);
 
-  constructor(private printService: NgxExtendedPdfViewerService) {}
+  constructor(
+    private printService: NgxExtendedPdfViewerService,
+    private snackBar: MatSnackBar
+  ) {}
 
   private static toArray(list: string): Array<number> | undefined {
     if (!list) {
       return undefined;
     }
-    if (list.endsWith(",")) {
+    if (list.endsWith(',')) {
       return undefined;
     }
     try {
-      const result = [...list.split(",").map(s => Number(s.trim()))];
+      const result = [...list.split(',').map((s) => Number(s.trim()))];
       return result;
     } catch (e) {
       return undefined;
@@ -65,20 +72,62 @@ export class PrintRangeComponent {
     this.printService.print(range);
   }
 
+  public setPrintRange(): void {
+    const range = {
+      from: this.from,
+      to: this.to,
+      excluded: this.excludedAsArray,
+      included: this.includedAsArray,
+    } as PDFPrintRange;
+    this.printService.setPrintRange(range);
+    this.snackBar.open(
+      'Click the print button or hit CTRL+P to see the effect. If you are using a Mac, the key binding is CMD+P.',
+      'OK',
+      {
+        duration: 5000,
+      }
+    );
+  }
+
+  public tabChanged(index: MatTabChangeEvent) {
+    this.programmaticAPI = index.index === 0;
+  }
+
   public get sourcecode(): string {
-    return `@Component({ ... })
+    if (this.programmaticAPI) {
+      return `@Component({ ... })
 export class PrintRangeComponent {
   constructor(private printService: NgxExtendedPdfViewerService) {}
 
   public print(): void {
     const range = {
-      ${this.from ? 'from: [' + this.from + '],': ''}
-      ${this.to ? 'to: [' + this.to + '],': ''}
-      ${this.excludedAsArray ? 'excluded: [' + this.excludedAsArray + '],': ''}
-      ${this.includedAsArray ? 'included: [' + this.includedAsArray + '],': ''}
+      ${this.from ? 'from: [' + this.from + '],' : ''}
+      ${this.to ? 'to: [' + this.to + '],' : ''}
+      ${this.excludedAsArray ? 'excluded: [' + this.excludedAsArray + '],' : ''}
+      ${this.includedAsArray ? 'included: [' + this.includedAsArray + '],' : ''}
     } as PDFPrintRange;
     this.printService.print(range);
   }
 }`;
+    } else {
+      return `@Component({ ... })
+export class PrintRangeComponent {
+  constructor(private printService: NgxExtendedPdfViewerService) {}
+
+  public setPrintRange(): void {
+    const range = {
+      ${this.from ? 'from: [' + this.from + '],' : ''}
+      ${this.to ? 'to: [' + this.to + '],' : ''}
+      ${this.excludedAsArray ? 'excluded: [' + this.excludedAsArray + '],' : ''}
+      ${this.includedAsArray ? 'included: [' + this.includedAsArray + '],' : ''}
+    } as PDFPrintRange;
+    this.printService.setPrintRange(range);
+  }
+}`;
+    }
+  }
+
+  public ngOnDestroy(): void {
+    this.printService.removePrintRange();
   }
 }

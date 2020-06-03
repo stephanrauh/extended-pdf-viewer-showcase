@@ -1,13 +1,12 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
     <mat-card class="overflow-none distance-16 mat-elevation-z8" fxFlex="50%">
       <div fxLayout="column" fxLayoutGap="10px">
-        <p>You can print the PDF file by calling <code>NgxExtendedPdfViewerService.print()</code>.
+        <mat-tab-group (selectedTabChange)="tabChanged($event)">
+          <mat-tab label="Programmatic API">
+          <p>You can print the PDF file by calling <code>NgxExtendedPdfViewerService.print()</code>.
           The (optional) parameter defines the print range. Limiting the print range is
           useful for very large documents that'd crash your browser - such as trying
-          to print documents containing several hundred pages with Internet Explorer 11.
-<br />
-        As of version 3.5.0, it's not possible (yet?) to limit the print range of the standard print button
-          or the CTRL+P key binding.</p>
+          to print documents containing several hundred pages with Internet Explorer 11.</p>
 
           <section class="section">
             <mat-form-field>
@@ -28,7 +27,36 @@
             </mat-form-field>
           </section>
 
-          <button mat-raised-button color="primary" (click)="print()">Print</button>
+          <button mat-raised-button color="primary" (click)="print()">NgxExtendedPdfViewerService.print()</button>
+          </mat-tab>
+          <mat-tab label="User API">
+            <p>Calling <code>NgxExtendedPdfViewerService.setPrintRange()</code> limits
+              the print range of the print button and CTRL+P. This also includes the
+              programmatic API <code>print()</code> if the parameter is omitted.</p>
+            <p>To prevent nasty surprises, call an <code>ngDestroy()</code> callback and use it
+              to call <code>NgxExtendedPdfViewerService.removePrintRange()</code>.
+            </p>
+              <section class="section">
+                <mat-form-field>
+                  <input matInput class="margin" [(ngModel)]="from" placeholder="from page number" />
+                </mat-form-field>
+                <mat-form-field style="padding-left:10px;">
+                  <input matInput class="margin" [(ngModel)]="to" placeholder="to page number"/>
+                </mat-form-field>
+              </section>
+              <section class="section">
+                <mat-form-field style="width:90%">
+                  <input matInput class="margin" [(ngModel)]="included" placeholder="including (comma separatated list of page numbers)"/>
+                </mat-form-field>
+              </section>
+              <section class="section">
+                <mat-form-field style="width:90%">
+                  <input matInput class="margin" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)"/>
+                </mat-form-field>
+              </section>
+              <button mat-raised-button color="primary" (click)="setPrintRange()">NgxExtendedPdfViewerService.setPrintRange()</button>
+              </mat-tab>
+          </mat-tab-group>
 
         </div>
     </mat-card>
