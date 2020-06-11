@@ -27,12 +27,14 @@ import { LinksComponent } from './links/links.component';
 import { TextlayerComponent } from './textlayer/textlayer.component';
 import { TouchGesturesComponent } from './touch-gestures/touch-gestures.component';
 import { PrintRangeComponent } from './print-range/print-range.component';
+import { ChangelogComponent } from './changelog/changelog.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'base64', component: Base64Component },
   { path: 'contextmenu', component: ContextmenuComponent },
+  { path: 'changelog', component: ChangelogComponent},
   { path: 'customization', component: CustomizationComponent},
   { path: 'custom-toolbar', component: CustomToolbarComponent },
   { path: 'display-options', component: DisplayOptionsComponent },

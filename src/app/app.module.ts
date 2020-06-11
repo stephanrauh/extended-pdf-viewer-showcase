@@ -59,6 +59,7 @@ import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-
 import { LinksComponent } from './links/links.component';
 import { TextlayerComponent } from './textlayer/textlayer.component';
 import { TouchGesturesComponent } from './touch-gestures/touch-gestures.component';
+import { ChangelogComponent } from './changelog/changelog.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { TouchGesturesComponent } from './touch-gestures/touch-gestures.componen
     NavComponent,
     AlternativesComponent,
     AttributesComponent,
+    ChangelogComponent,
     CustomizationComponent,
     Base64Component,
     ContextmenuComponent,

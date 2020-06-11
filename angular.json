@@ -30,6 +30,11 @@
                 "glob": "**/*.md",
                 "input": "src/app/",
                 "output": "/assets"
+              },
+              {
+                "glob": "changelog.md",
+                "input": "node_modules/ngx-extended-pdf-viewer/",
+                "output": "/assets/changelog/"
               }
             ],
             "styles": [
