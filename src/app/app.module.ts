@@ -1,3 +1,4 @@
+import { ExportComponent } from './export/export.component';
 import { PrintRangeComponent } from './print-range/print-range.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -72,6 +73,7 @@ import { ChangelogComponent } from './changelog/changelog.component';
     CustomizationComponent,
     Base64Component,
     ContextmenuComponent,
+    ExportComponent,
     FindComponent,
     GettingStartedComponent,
     I18nComponent,

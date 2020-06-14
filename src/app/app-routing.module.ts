@@ -1,3 +1,4 @@
+import { ExportComponent } from './export/export.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'customization', component: CustomizationComponent},
   { path: 'custom-toolbar', component: CustomToolbarComponent },
   { path: 'display-options', component: DisplayOptionsComponent },
+  { path: 'export', component: ExportComponent },
   { path: 'getting-started', component: GettingStartedComponent },
   { path: 'find', component: FindComponent },
   { path: 'i18n', component: I18nComponent },
