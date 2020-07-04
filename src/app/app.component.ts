@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { defaultOptions } from 'ngx-extended-pdf-viewer';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-root',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { defaultOptions, LinkTarget } from 'ngx-extended-pdf-viewer';
+import { pdfDefaultOptions, LinkTarget } from 'ngx-extended-pdf-viewer';
 @Component({
   selector: 'app-links',
   templateUrl: './links.component.html',
@@ -18,7 +18,7 @@ export class LinksComponent implements OnInit {
     if (this._target !== t) {
       this._target = t;
       this.hidden = true;
-      defaultOptions.externalLinkTarget = t;
+      pdfDefaultOptions.externalLinkTarget = t;
       setTimeout(() => (this.hidden = false), 250);
     }
   }
@@ -52,11 +52,11 @@ export class LinksComponent implements OnInit {
         break;
     }
 
-    return `import { defaultOptions } from 'ngx-extended-pdf-viewer/default-options';
+    return `import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer/default-options';
 import { LinkTarget } from 'ngx-extended-pdf-viewer';
 ...
 ngOnInit(): void {
-  defaultOptions.externalLinkTarget = LinkTarget.${target};
+  pdfDefaultOptions.externalLinkTarget = LinkTarget.${target};
 }`;
   }
 }

@@ -29,6 +29,8 @@ import { TextlayerComponent } from './textlayer/textlayer.component';
 import { TouchGesturesComponent } from './touch-gestures/touch-gestures.component';
 import { PrintRangeComponent } from './print-range/print-range.component';
 import { ChangelogComponent } from './changelog/changelog.component';
+import { PdfjsVersionsComponent } from './pdfjs-versions/pdfjs-versions.component';
+import { DefaultOptionsComponent } from './default-options/default-options.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -36,6 +38,7 @@ const routes: Routes = [
   { path: 'base64', component: Base64Component },
   { path: 'contextmenu', component: ContextmenuComponent },
   { path: 'changelog', component: ChangelogComponent},
+  { path: 'options', component: DefaultOptionsComponent},
   { path: 'customization', component: CustomizationComponent},
   { path: 'custom-toolbar', component: CustomToolbarComponent },
   { path: 'display-options', component: DisplayOptionsComponent },
@@ -50,6 +53,7 @@ const routes: Routes = [
   { path: 'mobile', component: MobileComponent },
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },
+  { path: 'pdfjs-versions', component: PdfjsVersionsComponent },
   { path: 'range-requests', component: RangeRequestsComponent },
   { path: 'simple', component: SimpleComponent },
   { path: 'smartphone', component: SmartphoneComponent },

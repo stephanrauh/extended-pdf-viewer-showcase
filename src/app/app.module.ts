@@ -61,6 +61,8 @@ import { LinksComponent } from './links/links.component';
 import { TextlayerComponent } from './textlayer/textlayer.component';
 import { TouchGesturesComponent } from './touch-gestures/touch-gestures.component';
 import { ChangelogComponent } from './changelog/changelog.component';
+import { DefaultOptionsComponent } from './default-options/default-options.component';
+import { PdfjsVersionsComponent } from './pdfjs-versions/pdfjs-versions.component';
 
 
 @NgModule({
@@ -71,6 +73,7 @@ import { ChangelogComponent } from './changelog/changelog.component';
     AttributesComponent,
     ChangelogComponent,
     CustomizationComponent,
+    DefaultOptionsComponent,
     Base64Component,
     ContextmenuComponent,
     ExportComponent,
@@ -82,6 +85,7 @@ import { ChangelogComponent } from './changelog/changelog.component';
     MultipleDocumentsComponent,
     MobileComponent,
     PagesLoadedComponent,
+    PdfjsVersionsComponent,
     PrintRangeComponent,
     RangeRequestsComponent,
     SimpleComponent,

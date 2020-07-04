@@ -13,6 +13,7 @@ export class FindComponent {
   public _searchtext2 = '';
   public _searchtext3 = '';
 
+  public fuzzy = false;
   public highlightAll = false;
   public matchCase = false;
   public wholeWord = false;
@@ -60,7 +61,8 @@ export class FindComponent {
           highlightAll: this.highlightAll,
           matchCase: this.matchCase,
           wholeWords: this.wholeWord,
-          ignoreAccents: this.ignoreAccents
+          ignoreAccents: this.ignoreAccents,
+          fuzzySearch: this.fuzzy
         }
       );
     } else {
@@ -69,7 +71,8 @@ export class FindComponent {
           highlightAll: this.highlightAll,
           matchCase: this.matchCase,
           wholeWords: this.wholeWord,
-          ignoreAccents: this.ignoreAccents
+          ignoreAccents: this.ignoreAccents,
+          fuzzySearch: this.fuzzy
         })
       ) {
       }
