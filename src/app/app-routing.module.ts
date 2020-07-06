@@ -31,6 +31,7 @@ import { PrintRangeComponent } from './print-range/print-range.component';
 import { ChangelogComponent } from './changelog/changelog.component';
 import { PdfjsVersionsComponent } from './pdfjs-versions/pdfjs-versions.component';
 import { DefaultOptionsComponent } from './default-options/default-options.component';
+import { KeycloakComponent } from './keycloak/keycloak.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'hiding-buttons', component: HidingButtonsComponent },
   { path: 'links', component: LinksComponent },
   { path: 'keyboard', component: KeyboardComponent },
+  { path: 'keycloak', component: KeycloakComponent },
   { path: 'mobile', component: MobileComponent },
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },

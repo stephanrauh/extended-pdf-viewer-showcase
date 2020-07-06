@@ -63,6 +63,7 @@ import { TouchGesturesComponent } from './touch-gestures/touch-gestures.componen
 import { ChangelogComponent } from './changelog/changelog.component';
 import { DefaultOptionsComponent } from './default-options/default-options.component';
 import { PdfjsVersionsComponent } from './pdfjs-versions/pdfjs-versions.component';
+import { KeycloakComponent } from './keycloak/keycloak.component';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { PdfjsVersionsComponent } from './pdfjs-versions/pdfjs-versions.componen
     I18nComponent,
     IntroComponent,
     HidingButtonsComponent,
+    KeycloakComponent,
     MultipleDocumentsComponent,
     MobileComponent,
     PagesLoadedComponent,
