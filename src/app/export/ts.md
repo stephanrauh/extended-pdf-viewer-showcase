@@ -2,7 +2,10 @@
 constructor(private pdfViewerService: NgxExtendedPdfViewerService) {}
 
 public exportAsText(): void {
-  this.pdfViewerService.getPageAsText_preview(1, (text) => console.log(text));
+  (async () => {
+    const text = await this.pdfViewerService.getPageAsText(1);
+    console.log(text);
+  })();
 }
 
 public exportAsImage(): void {

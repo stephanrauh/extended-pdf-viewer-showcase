@@ -54,14 +54,12 @@ export class ExportComponent implements OnInit {
   public exportAsImage(): void {
     this.selectedTabIndex = 2;
     const scale = {width: this.width, height: this.height, scale: this.scale};
-    this.pdfViewerService.getPageAsImage_preview(1, scale, (dataURL) =>
-      this.showImage(dataURL)
-    );
+    (async () => this.showImage(await this.pdfViewerService.getPageAsImage(1, scale)))();
   }
 
   public exportAsText(): void {
     this.selectedTabIndex = 3;
-    this.pdfViewerService.getPageAsText_preview(1, (text) => this.showText(text));
+    (async () => this.showText(await this.pdfViewerService.getPageAsText(1)))();
   }
 
   private showText(text: string): void {
