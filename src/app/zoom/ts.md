@@ -1,6 +1,11 @@
 ```typescript
 @Component({ ... })
 export class ZoomComponent {
+  public enablePinchOnMobile = true;
+  public isMobile = 'ontouchstart' in document.documentElement;
+  public minZoom = 0.33;
+  public maxZoom = 3;
+  public zoomLevels = ['auto', 'page-actual', 'page-fit', 'page-width', 0.2, 0.25, 0.33, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 3.5, 4];
   private _zoomSetting: number | string | undefined = 'page-width';
   private currentZoomFactor: number;
   // getter and setter make the demo nicer -

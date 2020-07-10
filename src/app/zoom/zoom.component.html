@@ -1,22 +1,65 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <markdown>
-      The attribute `[(zoom)]` is controls the zoom level of the PDF document. If you're using two-way binding, the variable is updated when
-      the user zooms in or out.
-    </markdown>
-    <mat-label title="Toolbar zoom factor"></mat-label>
-    <mat-radio-group aria-label="Toolbar zoom factor" [(ngModel)]="zoomSetting">
-      <mat-radio-button value="undefined">[zoom]="undefined"</mat-radio-button>
-      <mat-radio-button value="100%">[zoom]="'100%'"</mat-radio-button>
-      <mat-radio-button value="150%">[zoom]="'150%'"</mat-radio-button>
-      <mat-radio-button value="200%">[zoom]="'200%'"</mat-radio-button>
-      <mat-radio-button value="auto">[zoom]="auto"</mat-radio-button>
-      <mat-radio-button value="page-fit">[zoom]="page-fit"</mat-radio-button>
-      <mat-radio-button value="page-actual">[zoom]="page-actual"</mat-radio-button>
-      <mat-radio-button value="page-width">[zoom]="page-width"</mat-radio-button>
-    </mat-radio-group>
-    <div class="distance-top">Selected zoom level: {{ zoomSetting === undefined ? 'undefined' : zoomSetting }}</div>
-    <div class="distance-top">Current zoom level: {{ currentZoomFactor | percent }}</div>
+    <mat-tab-group>
+      <mat-tab label="[(zoom)]] and (currentZoomFactor)">
+        <markdown>
+          The attribute `[(zoom)]` controls the zoom level of the PDF document. If you're using two-way binding, the variable is updated
+          when the user zooms in or out.
+        </markdown>
+        <mat-label title="Toolbar zoom factor"></mat-label>
+        <mat-radio-group aria-label="Toolbar zoom factor" [(ngModel)]="zoomSetting">
+          <mat-radio-button value="undefined">[zoom]="undefined"</mat-radio-button>
+          <mat-radio-button value="100%">[zoom]="'100%'"</mat-radio-button>
+          <mat-radio-button value="150%">[zoom]="'150%'"</mat-radio-button>
+          <mat-radio-button value="200%">[zoom]="'200%'"</mat-radio-button>
+          <mat-radio-button value="auto">[zoom]="auto"</mat-radio-button>
+          <mat-radio-button value="page-fit">[zoom]="page-fit"</mat-radio-button>
+          <mat-radio-button value="page-actual">[zoom]="page-actual"</mat-radio-button>
+          <mat-radio-button value="page-width">[zoom]="page-width"</mat-radio-button>
+        </mat-radio-group>
+        <div class="distance-top">Selected zoom level: {{ zoomSetting === undefined ? "undefined" : zoomSetting }}</div>
+        <div class="distance-top">Current zoom level: {{ currentZoomFactor | percent }}</div>
+      </mat-tab>
+      <mat-tab label="zoom levels">
+        <p>The attributes <code>minZoom</code> and  <code>maxZoom</code> limit the zoom factor you can get by pinching or by hitting the "+" or "-" button.
+        The attribute <code>zoomLevels</code> defines the content of the dropdown. It ignores both   <code>minZoom</code> and  <code>maxZoom</code>.</p>
+        <p>If the zoom factor exceeds the browser's limit, it's automatically reduced to that limit. That's why you can zoom the document
+          below only to 200% on iOS and 1090% on a current Chrome. Note that the test adds a one-time performance penalty
+          when the canvas exceed 4096 pixels.</p>
+        <p><b>Known bug</b>: zooming repeatedly too quickly can cause weird infinite loops. This usually happens with documents that
+          render slowly, such as the demo document below. </p>
+        <section>
+          <mat-form-field>
+            <input matInput class="margin" [(ngModel)]="minZoom" placeholder="minimum zoom level" />
+          </mat-form-field>
+          <mat-form-field style="padding-left: 10px;">
+            <input matInput class="margin" [(ngModel)]="maxZoom" placeholder="maximum zoom level" />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field style="padding-left: 10px; width: 90%;">
+            <input matInput class="margin" [(ngModel)]="zoomLevelsDisplay" placeholder="zoom levels of the drop-down menu" />
+          </mat-form-field>
+        </section>
+      </mat-tab>
+      <mat-tab label="touch gestures">
+        <p>
+          By default, the pinch gesture simple zooms the entire page on mobile devices. If you want to zoom the PDF file without zooming the
+          rest of the page, you can activate the <code>enablePinchOnMobile</code> option. This doesn't modify the behavior of desktop PC and
+          laptops. Most touchpads translate the finger gestures to mouse wheel events. This approach works well enough, so the PDF viewer
+          doesn't add additional support for touch gestures. However, the detection may be imprecise.
+        </p>
+        <p>
+          <b>State of the art:</b>
+          <br />
+          This feature is currently under development. Among other things, it ignores scrolling. The touch gestures are only recognized if
+          the fingers rest on the PDF file. However, if you scroll the window, this detection currently fails.
+        </p>
+        <mat-checkbox [disabled]="!isMobile" [(ngModel)]="enablePinchOnMobile">enable the pinch gesture on mobile devices</mat-checkbox>
+        <p *ngIf="isMobile">This device has been detected as a mobile device.</p>
+        <p *ngIf="!isMobile">This device has been detected as device without touch screen. <code>enablePinchOnMobile</code> is ignored.</p>
+      </mat-tab>
+    </mat-tab-group>
   </mat-card>
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
@@ -39,6 +82,10 @@
     [useBrowserLocale]="true"
     [(zoom)]="zoomSetting"
     [showZoomButtons]="true"
+    [minZoom]="minZoom"
+    [maxZoom]="maxZoom"
+    [zoomLevels]="zoomLevels"
+    [enablePinchOnMobile]="enablePinchOnMobile"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

@@ -12,7 +12,7 @@
         This feature is currently under development. Among other things, it ignores scrolling. The touch gestures are only
         recognized if the fingers rest on the PDF file. However, if you scroll the window, this detection currently fails.
       </p>
-        <mat-checkbox [(ngModel)]="enablePinchOnMobile">enable the pinch gesture on mobile devices</mat-checkbox>
+        <mat-checkbox [disabled]="!isMobile" [(ngModel)]="enablePinchOnMobile">enable the pinch gesture on mobile devices</mat-checkbox>
         <p *ngIf="isMobile">This device has been detected as a mobile device.</p>
         <p *ngIf="!isMobile">This device has been detected as device without touch screen. <code>enablePinchOnMobile</code> is ignored.</p>
   </mat-card>
@@ -37,6 +37,7 @@
     [useBrowserLocale]="true"
     [enablePinchOnMobile]="enablePinchOnMobile"
     [zoomLevels]="zoomLevels"
+    [minifiedJSLibraries]="false"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

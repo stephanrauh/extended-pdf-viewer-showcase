@@ -6,6 +6,9 @@
   [useBrowserLocale]="true"
   [(zoom)]="zoomSetting"
   [showZoomButtons]="true"
->
+  [minZoom]="minZoom"
+  [maxZoom]="maxZoom"
+  [zoomLevels]="zoomLevels"
+  [enablePinchOnMobile]="enablePinchOnMobile">
 </ngx-extended-pdf-viewer>
 ```
