@@ -1,0 +1,10 @@
+input {
+  top: -76px;
+  right: 10px;
+  position: relative;
+}
+
+.thumbnailSelectionRing {
+  display: contents;
+  background-color: blue;
+}

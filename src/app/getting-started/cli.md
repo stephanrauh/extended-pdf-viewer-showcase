@@ -17,9 +17,9 @@ This simply copies the entire assets folder. If you're concerned about disk memo
 
 _Hint:_ There are two ways to define the language files needed for the labels of the buttons and screen elements of the PDF viewer. The second method is described below in the "internationalization" section.
 
-The next version of pdf.js, 2.5, hasn't been released yet. However, the current developer snapshot already fixes at least one bug ([#285](https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/285)). But be warned, the developer version is bleeding edge. It's a far cry from being a thoroughly tested release. 
+You can choose between the stable release of pdf.js or the "bleeding edge" version. That latter is a version I regularly update with the newest changes from the Mozilla team. But be warned, the developer version is bleeding edge. It's a far cry from being a thoroughly tested release. The automated tests at Mozilla are fairly good, but it's always possible I do a mistake when merging the changes.
 
-If you want to use the developer version 2.5 of pdf.js, add these lines:
+If you want to use the "bleeding edge" version of pdf.js, add these lines:
 
 ```json
   "assets": [
@@ -27,12 +27,7 @@ If you want to use the developer version 2.5 of pdf.js, add these lines:
     "src/assets",
     {
       "glob": "**/*",
-      "input": "node_modules/ngx-extended-pdf-viewer/assets/",
-      "output": "/assets/"
-    },
-    {
-      "glob": "**/*",
-      "input": "node_modules/ngx-extended-pdf-viewer/assets-2.5/",
+      "input": "node_modules/ngx-extended-pdf-viewer/bleeding-edge/",
       "output": "/assets/"
     }
   ],

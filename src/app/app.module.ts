@@ -64,6 +64,8 @@ import { ChangelogComponent } from './changelog/changelog.component';
 import { DefaultOptionsComponent } from './default-options/default-options.component';
 import { PdfjsVersionsComponent } from './pdfjs-versions/pdfjs-versions.component';
 import { KeycloakComponent } from './keycloak/keycloak.component';
+import { CustomSidebarComponent } from './custom-sidebar/custom-sidebar.component';
+import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails.component';
 
 
 @NgModule({
@@ -74,6 +76,8 @@ import { KeycloakComponent } from './keycloak/keycloak.component';
     AttributesComponent,
     ChangelogComponent,
     CustomizationComponent,
+    CustomSidebarComponent,
+    CustomThumbnailsComponent,
     DefaultOptionsComponent,
     Base64Component,
     ContextmenuComponent,

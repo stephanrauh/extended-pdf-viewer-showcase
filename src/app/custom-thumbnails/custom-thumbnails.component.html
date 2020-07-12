@@ -1,0 +1,58 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <p>You can customize the thumbnails. To do so you need to define an
+      Angular template - or something that looks like an Angular template.
+    </p>
+    <p><b>Caveat:</b> As of version 4.0.0, the template does not participate
+    in the Angular interpolation. You can't use the interpolation, nor can
+    you use Angular events. This demo shows how to circumvent this restriction.</p>
+    <p>You can use these variables:</p>
+    <ul>
+      <li><code>PAGE_NUMBER</code></li>
+      <li><code>WIDTH_OF_RING</code> width of the ring around the thumbnail. This ring is used to highlight the selected page.</li>
+      <li><code>HEIGHT_OF_RING</code> height of the ring around the thumbnail.</li>
+    </ul>
+  </mat-card>
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <markdown ngPreserveWhitespaces src="assets/custom-toolbar/html.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="HTML template">
+        <markdown ngPreserveWhitespaces src="assets/custom-toolbar/template.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="HTML template">
+        <markdown ngPreserveWhitespaces src="assets/custom-toolbar/ts.md"> </markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <ngx-extended-pdf-viewer
+      [src]="'assets/pdfs/stluciadance.com.pdf'"
+      [customThumbnail]="checkboxThumbnail"
+      [height]="'90vh'"
+      [useBrowserLocale]="true"
+      [textLayer]="true"
+      [showHandToolButton]="true"
+      [minifiedJSLibraries]="false"
+      (pageChange)="onPageChange($event)">
+  </ngx-extended-pdf-viewer>
+</mat-card>
+
+<ng-template #checkboxThumbnail>
+  <a class="pdf-viewer-template">
+    <div class="thumbnail" data-page-number="PAGE_NUMBER">
+      <input id="thumbnail-cbx-$page"
+        class="thumbnail-checkbox"
+        type="checkbox"
+        style="top: 80px;right: 25px;position: relative;transform:scale(1.5)"
+        onClick="window.PDFViewerApplication.page=PAGE_NUMBER;window.updateThumbnailSelection(PAGE_NUMBER)">
+      <div class="thumbnailSelectionRing image-container" style="width: WIDTH_OF_RING; height: HEIGHT_OF_RING; display: contents">
+        <!-- image is automatically inserted here -->
+        <!-- <img class="thumbnailImage" style="width: 98px; height: 73px;" /> -->
+      </div>
+    </div>
+  </a>
+</ng-template>

@@ -1,0 +1,84 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <p>You can customize both the sidebar. The only disadvantage is you have to set the
+    `top` position yourself. If you're offering an optional mobile-frieny large toolbar,
+    the `top` position of custom sidebars is not adjusted automatically.
+    </p>
+    <mat-radio-group aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;">
+      <mat-radio-button value="default">standard layout</mat-radio-button>
+      <br />
+      <mat-radio-button value="without">without toolbar</mat-radio-button>
+      <br />
+      <mat-radio-button value="fancy">fancy layout</mat-radio-button>
+    </mat-radio-group>
+
+  </mat-card>
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <markdown ngPreserveWhitespaces src="assets/custom-sidebar/html.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="no toolbar">
+        <markdown ngPreserveWhitespaces src="assets/custom-sidebar/without-toolbar.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="fancy sidebar">
+        <markdown ngPreserveWhitespaces src="assets/custom-sidebar/fancy-sidebar.md"> </markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <ngx-extended-pdf-viewer
+     #pdfViewer
+     [src]="'assets/pdfs/stluciadance.com.pdf'"
+     [customSidebar]="theme==='fancy' ? fancySidebar: theme === 'without'? withoutSidebar: null"
+     [height]="'90vh'"
+     [useBrowserLocale]="true"
+     [textLayer]="true"
+     [showHandToolButton]="true"
+     [minifiedJSLibraries]="false">
+  </ngx-extended-pdf-viewer>
+</mat-card>
+
+<ng-template #withoutSidebar>
+  <div id="sidebarContainer" style="top:-1px">
+    <pdf-sidebar-content></pdf-sidebar-content>
+    <div id="sidebarResizer" class="hidden"></div>
+  </div>
+</ng-template>
+
+<ng-template #fancySidebar>
+  <div id="sidebarContainer" style="top:31px;background-color:goldenrod">
+    <div id="additionalSidebarContainer">
+      <div id="toolbarSidebar">
+        <div class="splitToolbarButton toggled">
+          <button style="background-color: red; height:100%;width: 34%;border:0;margin:0;padding:0"
+            type="button" id="viewThumbnail"
+            class="toolbarButton"
+            data-l10n-id="thumbs">
+            <span data-l10n-id="thumbs_label">Thumbnails</span>
+          </button>
+          <button
+            style="background-color: green; height:100%;width: 35%;border:0;margin:0;padding:0"
+            type="button"
+            id="viewOutline"
+            class="toolbarButton"
+            data-l10n-id="document_outline">
+            <span data-l10n-id="document_outline_label">Document Outline</span>
+          </button>
+          <button
+            style="background-color: blue; height:100%;width: 34%;border:0;margin:0;padding:0"
+            type="button"
+            id="viewAttachments"
+            class="toolbarButton"
+            data-l10n-id="attachments">
+            <span data-l10n-id="attachments_label">Attachments</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <pdf-sidebar-content></pdf-sidebar-content>
+    <div id="sidebarResizer" class="hidden"></div>
+  </div>
+</ng-template>

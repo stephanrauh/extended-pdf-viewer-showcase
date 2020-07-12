@@ -32,6 +32,8 @@ import { ChangelogComponent } from './changelog/changelog.component';
 import { PdfjsVersionsComponent } from './pdfjs-versions/pdfjs-versions.component';
 import { DefaultOptionsComponent } from './default-options/default-options.component';
 import { KeycloakComponent } from './keycloak/keycloak.component';
+import { CustomSidebarComponent } from './custom-sidebar/custom-sidebar.component';
+import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -42,6 +44,8 @@ const routes: Routes = [
   { path: 'options', component: DefaultOptionsComponent},
   { path: 'customization', component: CustomizationComponent},
   { path: 'custom-toolbar', component: CustomToolbarComponent },
+  { path: 'custom-sidebar', component: CustomSidebarComponent },
+  { path: 'custom-thumbnails', component: CustomThumbnailsComponent },
   { path: 'display-options', component: DisplayOptionsComponent },
   { path: 'export', component: ExportComponent },
   { path: 'getting-started', component: GettingStartedComponent },
