@@ -1,4 +1,4 @@
-input {
+.thumbnail-radiobutton {
   top: -76px;
   right: 10px;
   position: relative;
@@ -7,4 +7,14 @@ input {
 .thumbnailSelectionRing {
   display: contents;
   background-color: blue;
+}
+
+.thumbnail-text {
+  position: relative;
+  top: 25px;
+  left: 50px;
+  transform: rotate(-45deg);
+  z-index: 1;
+  color: black;
+  display:none;
 }

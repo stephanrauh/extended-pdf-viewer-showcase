@@ -1,35 +1,74 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <p>This demo shows the default viewer. In most cases, you can also omit the property
-      <code>[useBrowserLocale]</code>. It's a performance optimization: the showcase
-      embeds the translation files in the <code>index.html</code>. This approach is
-      faster than the flexible default approach which supports more then 120 languages and dialects.</p>
-    <p>If you're missing the find dialog and the text selection: that's a performance optimization.
-      The <a href="/base64">base64 demo</a> adds the text layer. That's a bit slower, but allows you
-      to find and select text.</p>
-    <p>
-      The <code>height</code> attribute can often be omitted, too. The showcase only needs it because its layout
-      framework, Angular Material,
-      sets the height of the PDF viewer to zero pixels by default.
-    </p>
+    <mat-tab-group (selectedIndexChange)="onSelectedTab($event)">
+      <mat-tab label="Getting started">
+        <p>
+          This demo shows the default viewer. In most cases, you can also omit the property <code>[useBrowserLocale]</code>. It's a
+          performance optimization: the showcase embeds the translation files in the <code>index.html</code>. This approach is faster than
+          the flexible default approach which supports more then 120 languages and dialects.
+        </p>
+        <p>
+          If you're missing the find dialog and the text selection: that's a performance optimization. The
+          <a href="/base64">base64 demo</a> adds the text layer. That's a bit slower, but allows you to find and select text.
+        </p>
+        <p>
+          The <code>height</code> attribute can often be omitted, too. The showcase only needs it because its layout framework, Angular
+          Material, sets the height of the PDF viewer to zero pixels by default.
+        </p>
+      </mat-tab>
+      <mat-tab label="Page and page label">
+        <p>The page is the number page number. It always starts with 1.</p>
+        <p>
+          The page label is the page number assigned by the author of the PDF document. For example, the document below uses roman numbers
+          for the table of contents and arabic numbers for the main body.
+        </p>
+        <p>
+          If you try to use both `[(page)]` and `[(pageLabel)]` with two-way binding, you'll run into
+          `ExpressionChangedAfterItHasBeenCheckedErrors`. To prevent this, you'll want to adopt the `OnPush` change detection strategy.
+        </p>
+        <mat-form-field>
+          <input matInput class="margin" [(ngModel)]="page" placeholder="Current page number" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput class="margin" [(ngModel)]="pageLabel" placeholder="Current page label" />
+        </mat-form-field>
+      </mat-tab>
+    </mat-tab-group>
   </mat-card>
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
-    <mat-tab-group>
+    <div *ngIf="selectedTab === 0">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+          <markdown ngPreserveWhitespaces src="assets/simple/html.md"> </markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+     <mat-tab-group *ngIf="selectedTab === 1">
       <mat-tab label="HTML template">
-        <markdown ngPreserveWhitespaces src="assets/simple/html.md"> </markdown>
+        <markdown ngPreserveWhitespaces src="assets/simple/html2.md"> </markdown>
+      </mat-tab>
+      <mat-tab label="Typescript">
+        <markdown ngPreserveWhitespaces src="assets/simple/ts.md"> </markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
 </div>
 
 <mat-card class="distance-16 mat-elevation-z8">
+  <small
+    >Copyright hint: the e-book has been published by James Boyle under a
+    <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+    <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a></small
+  >.
   <ngx-extended-pdf-viewer
-     [src]="'assets/pdfs/pdf-sample.pdf'"
-     [height]="'90vh'"
-     [useBrowserLocale]="true"
-     [textLayer]="true"
-     [showHandToolButton]="true"
-     [minifiedJSLibraries]="false"
-     [showPresentationModeButton]="true">
+    [src]="'assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
+    [height]="'90vh'"
+    [useBrowserLocale]="true"
+    [textLayer]="true"
+    [showHandToolButton]="true"
+    [showPresentationModeButton]="true"
+    [(page)]="page"
+    [(pageLabel)]="pageLabel"
+  >
   </ngx-extended-pdf-viewer>
 </mat-card>

@@ -1,12 +1,10 @@
 ```html
 <ngx-extended-pdf-viewer
     [src]="'assets/pdfs/stluciadance.com.pdf'"
-    [customThumbnail]="checkboxThumbnail"
+    [customThumbnail]="radiobuttonThumbnail"
     [height]="'90vh'"
     [useBrowserLocale]="true"
-    [textLayer]="true"
-    [showHandToolButton]="true"
-    [minifiedJSLibraries]="false"
-    (pageChange)="onPageChange($event)">
+    (pageChange)="onPageChange($event)"
+    (thumbnailDrawn)="onThumbnailDrawn($event)">
 </ngx-extended-pdf-viewer>
 ```

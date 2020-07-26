@@ -1,10 +1,11 @@
 ```typescript
-window as any).updateThumbnailSelection = (page: number) => {
+(window as any).updateThumbnailSelection = (page: number) => {
+  (window as any).PDFViewerApplication.page = page;
   setTimeout(() => {
-    const checkboxes = document.getElementsByClassName('thumbnail-checkbox');
-    if (checkboxes) {
-      for (let i = 1; i <= checkboxes.length; i++) {
-        const cbx = checkboxes.item(i - 1) as HTMLInputElement;
+    const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
+    if (radiobuttons) {
+      for (let i = 1; i <= radiobuttons.length; i++) {
+        const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
         cbx.checked = i === page + 1;
       }
     }
@@ -15,6 +16,7 @@ window as any).updateThumbnailSelection = (page: number) => {
   selector: 'app-custom-thumbnails',
   templateUrl: './custom-thumbnails.component.html',
   styleUrls: ['./custom-thumbnails.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CustomThumbnailsComponent implements OnInit {
   constructor() {}
@@ -22,10 +24,10 @@ export class CustomThumbnailsComponent implements OnInit {
   ngOnInit() {}
 
   public onPageChange(page: number): void {
-    const checkboxes = document.getElementsByClassName('thumbnail-checkbox');
-    if (checkboxes) {
-      for (let i = 1; i <= checkboxes.length; i++) {
-        const cbx = checkboxes.item(i - 1) as HTMLInputElement;
+    const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
+    if (radiobuttons) {
+      for (let i = 1; i <= radiobuttons.length; i++) {
+        const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
         cbx.checked = i === page + 1;
       }
     }
