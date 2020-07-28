@@ -7,6 +7,7 @@ import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular
   styleUrls: ['./custom-toolbar.component.css']
 })
 export class CustomToolbarComponent {
+  // tslint:disable-next-line: variable-name
   public _theme = 'checkbox';
 
   public zoom = '100%';
@@ -18,7 +19,7 @@ export class CustomToolbarComponent {
     if (this._theme !== theme) {
       this.pdfViewer.ngOnDestroy();
       this._theme = theme;
-      this.pdfViewer.ngAfterViewInit();
+      setTimeout(() => this.pdfViewer.ngAfterViewInit(), 100);
     } else {
       this._theme = theme;
     }

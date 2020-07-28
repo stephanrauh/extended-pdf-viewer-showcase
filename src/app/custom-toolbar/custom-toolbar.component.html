@@ -1,8 +1,8 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%" style="margin-bottom:20px">
     <p>
-      ngx-extended-pdf-viewer 2.0.0 allows you to define your own custom toolbar, menu, and maybe it'll even allow your to create
-      your own sidebar. This feature is currently under development. This demo is an early prototype, running on version 2.0.0-alpha.13. Stay tuned!
+      ngx-extended-pdf-viewer allows you to define your own custom toolbar, menu, and it even allows you to create
+      your own sidebar and your own thumbnails.
     </p>
     <mat-label title="Demo theme"></mat-label>
     <mat-radio-group aria-label="Demo" [(ngModel)]="theme">
@@ -13,6 +13,8 @@
       <mat-radio-button value="checkbox">checkbox zoom</mat-radio-button>
       <br />
       <mat-radio-button value="additional">additional buttons</mat-radio-button>
+      <br />
+      <mat-radio-button value="floating">floating zoombar</mat-radio-button>
     </mat-radio-group>
   </mat-card>
   <p></p>
@@ -40,11 +42,13 @@
     [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : null"
     [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : null"
     [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons :null)"
+    [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : null"
     [src]="'assets/pdfs/dachstein.pdf'"
     [height]="'50vh'"
     [useBrowserLocale]="true"
     [textLayer]="true"
     [zoom]="zoom"
+    [showZoomButtons]="theme != 'floating'"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
@@ -121,3 +125,22 @@
   </div>
 </ng-template>
 
+<ng-template #floatingZoombar>
+  <div style="position: absolute;bottom:20px;left:41%;z-index:1;background-color:black;padding:4px;padding-bottom: 8px;border:1px solid lightgray">
+    <div>
+      <pdf-zoom-dropdown class="invisible"></pdf-zoom-dropdown>
+
+      <input type="radio" id="zoom50" class="toolbarField radio" tabindex="94" (click)="zoom = '50%'" name="zoom" [checked]="zoom==='50%'" />
+      <label for="zoom50" class="toolbarLabel">50%</label>
+
+      <input type="radio" id="zoom100" class="toolbarField radio" tabindex="95" (click)="zoom = '100%'" name="zoom" [checked]="zoom==='100%'"/>
+      <label for="zoom100" class="toolbarLabel">100%</label>
+
+      <input type="radio" id="zoom200" class="toolbarField radio" tabindex="96" (click)="zoom = '200%'" name="zoom" [checked]="zoom==='200%'"/>
+      <label for="zoom200" class="toolbarLabel">200%</label>
+
+      <input type="radio" id="zoom-auto" class="toolbarField radio" tabindex="97" (click)="zoom = 'auto'" name="zoom" [checked]="zoom==='auto'"/>
+      <label for="zoom-auto" class="toolbarLabel">auto</label>
+    </div>
+  </div>
+</ng-template>
