@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-simple',
@@ -12,6 +13,10 @@ export class SimpleComponent {
   public page = 5;
 
   public pageLabel: string;
+
+  constructor() {
+    pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+  }
 
   public onSelectedTab(event: number): void {
     this.selectedTab = event;

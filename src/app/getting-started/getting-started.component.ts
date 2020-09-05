@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-getting-started',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GettingStartedComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+  }
 
   ngOnInit() {
   }
