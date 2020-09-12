@@ -30,7 +30,7 @@
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer
-     #pdfViewer
+     *ngIf="showPdfViewer"
      [src]="'assets/pdfs/stluciadance.com.pdf'"
      [customSidebar]="theme==='fancy' ? fancySidebar: theme === 'without'? withoutSidebar: null"
      [height]="'90vh'"

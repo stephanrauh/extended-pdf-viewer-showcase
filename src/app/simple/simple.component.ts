@@ -15,7 +15,6 @@ export class SimpleComponent {
   public pageLabel: string;
 
   constructor() {
-    pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 
   public onSelectedTab(event: number): void {

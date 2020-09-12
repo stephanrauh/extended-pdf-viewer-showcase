@@ -9,19 +9,17 @@ export class CustomSidebarComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   public _theme = 'default';
 
-  @ViewChild('pdfViewer')
-  public pdfViewer: AfterViewInit & OnDestroy; // NgxExtendedPdfViewerComponent;
+  public showPdfViewer = true;
+
   constructor() {}
 
   ngOnInit() {}
 
-
-
   public set theme(theme: string) {
     if (this._theme !== theme) {
-      this.pdfViewer.ngOnDestroy();
+      this.showPdfViewer = false;
       this._theme = theme;
-      this.pdfViewer.ngAfterViewInit();
+      setTimeout(() => this.showPdfViewer = true, 500);
     } else {
       this._theme = theme;
     }
