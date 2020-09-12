@@ -10,16 +10,15 @@ export class CustomToolbarComponent {
   // tslint:disable-next-line: variable-name
   public _theme = 'checkbox';
 
-  public zoom = '100%';
+  public showPdfViewer = true;
 
-  @ViewChild('pdfViewer')
-  public pdfViewer: AfterViewInit & OnDestroy; // NgxExtendedPdfViewerComponent;
+  public zoom = '100%';
 
   public set theme(theme: string) {
     if (this._theme !== theme) {
-      this.pdfViewer.ngOnDestroy();
+      this.showPdfViewer = false;
       this._theme = theme;
-      setTimeout(() => this.pdfViewer.ngAfterViewInit(), 100);
+      setTimeout(() => this.showPdfViewer = true, 100);
     } else {
       this._theme = theme;
     }

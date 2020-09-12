@@ -10,7 +10,7 @@
       <br />
       <mat-radio-button value="findbar">custom findbar</mat-radio-button>
       <br />
-      <mat-radio-button value="checkbox">checkbox zoom</mat-radio-button>
+      <mat-radio-button value="checkbox">radiobutton zoom</mat-radio-button>
       <br />
       <mat-radio-button value="additional">additional buttons</mat-radio-button>
       <br />
@@ -37,8 +37,7 @@
 </div>
 
 <mat-card class="distance-16 mat-elevation-z8">
-  <ngx-extended-pdf-viewer
-    #pdfViewer
+  <ngx-extended-pdf-viewer *ngIf="showPdfViewer"
     [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : null"
     [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : null"
     [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons :null)"

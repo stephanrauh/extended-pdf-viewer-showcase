@@ -1,18 +1,17 @@
-This demo changes the theme dynamically. The PDF viewer has to be re-initialized to support this feature. This is a prototypical sourcecode to achieve this:
+The PDF viewer doesn't restart reliably when you change the theme. So this demo hides the PDF viewer before changing the theme.
 
 ```typescript
 @Component({ ... })
 export class CustomToolbarComponent {
   public _theme = 'findbar';
 
-  @ViewChild('pdfViewer')
-  public pdfViewer: AfterViewInit & OnDestroy;
+  public showPdfViewer = true;
 
   public set theme(theme: string) {
     if (this._theme !== theme) {
-      this.pdfViewer.ngOnDestroy();
+      this.showPdfViewer = false;
       this._theme = theme;
-      this.pdfViewer.ngAfterViewInit();
+      setTimeout(() => this.showPdfViewer = true, 100);
     } else {
       this._theme = theme;
     }
