@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { TextLayerRenderedEvent } from '../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/events/textlayer-rendered';
+import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-textlayer',

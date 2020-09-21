@@ -1,3 +1,4 @@
+import { LayersComponent } from './layers/layers.component';
 import { ExportComponent } from './export/export.component';
 import { PrintRangeComponent } from './print-range/print-range.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -66,6 +67,7 @@ import { PdfjsVersionsComponent } from './pdfjs-versions/pdfjs-versions.componen
 import { KeycloakComponent } from './keycloak/keycloak.component';
 import { CustomSidebarComponent } from './custom-sidebar/custom-sidebar.component';
 import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails.component';
+import { FormsComponent } from './forms/forms.component';
 
 
 @NgModule({
@@ -108,7 +110,9 @@ import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails
     IconInfoComponent,
     TreeComponent,
     PerfectScrollbarComponent,
-    OpenInNewTabComponent
+    OpenInNewTabComponent,
+    FormsComponent,
+    LayersComponent
   ],
   imports: [
     BrowserModule,

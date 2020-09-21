@@ -1,3 +1,4 @@
+import { LayersComponent } from './layers/layers.component';
 import { ExportComponent } from './export/export.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { NgModule } from '@angular/core';
@@ -34,6 +35,7 @@ import { DefaultOptionsComponent } from './default-options/default-options.compo
 import { KeycloakComponent } from './keycloak/keycloak.component';
 import { CustomSidebarComponent } from './custom-sidebar/custom-sidebar.component';
 import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails.component';
+import { FormsComponent } from './forms/forms.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -48,6 +50,8 @@ const routes: Routes = [
   { path: 'custom-thumbnails', component: CustomThumbnailsComponent },
   { path: 'display-options', component: DisplayOptionsComponent },
   { path: 'export', component: ExportComponent },
+  { path: 'forms', component: FormsComponent },
+  { path: 'layers', component: LayersComponent },
   { path: 'getting-started', component: GettingStartedComponent },
   { path: 'find', component: FindComponent },
   { path: 'i18n', component: I18nComponent },

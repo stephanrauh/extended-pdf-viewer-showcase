@@ -1,0 +1,34 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <p>
+      Starting with ngx-extended-pdf-viewer 5.0 (and pdf.js 2.6), PDF files with forms are supported.
+    </p>
+    <p><b>Configuration:</b><br />
+      If you're using the default options, you don't have to do anything to activate the feature. If
+      you're using custom options, make sure to activate the setting <code>renderInteractiveForms: true</code>.
+    </p>
+  </mat-card>
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
+    <div *ngIf="selectedTab === 0">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+          <markdown ngPreserveWhitespaces src="assets/forms/html.md"> </markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+     <mat-tab-group *ngIf="selectedTab === 1">
+      <mat-tab label="Typescript">
+        <markdown ngPreserveWhitespaces src="assets/forms/ts.md"> </markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <ngx-extended-pdf-viewer
+    [src]="'assets/pdfs/PdfFormExample.pdf'"
+    [height]="'90vh'"
+    [useBrowserLocale]="true"
+  >
+  </ngx-extended-pdf-viewer>
+</mat-card>

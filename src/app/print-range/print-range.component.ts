@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { PDFPrintRange } from '../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-print-range';
+import { PDFPrintRange } from 'ngx-extended-pdf-viewer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 

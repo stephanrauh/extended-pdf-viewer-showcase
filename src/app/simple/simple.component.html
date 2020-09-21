@@ -33,6 +33,14 @@
           <input matInput class="margin" [(ngModel)]="pageLabel" placeholder="Current page label" />
         </mat-form-field>
       </mat-tab>
+      <mat-tab label="Color themes">
+        <p>This is a preview to color themes. Note that switching the themes doesn't work reliably without a full reload (i.e. hitting the F5 or CMD+R key).</p>
+        <mat-radio-group aria-label="Color themes" [(ngModel)]="theme" style="line-height: 1.5;">
+          <mat-radio-button value="dark">dark theme (work in progress)</mat-radio-button>
+          <br />
+          <mat-radio-button value="light">light theme (work in progress)</mat-radio-button>
+        </mat-radio-group>
+      </mat-tab>
     </mat-tab-group>
   </mat-card>
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
@@ -61,6 +69,7 @@
     <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a></small
   >.
   <ngx-extended-pdf-viewer
+    *ngIf="showPdfViewer"
     [src]="'assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
     [height]="'90vh'"
     [useBrowserLocale]="true"
@@ -70,6 +79,7 @@
     [(page)]="page"
     [(pageLabel)]="pageLabel"
     [minifiedJSLibraries]="false"
+    [theme]="theme"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { PdfThumbnailDrawnEvent } from '../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/events/pdf-thumbnail-drawn-event';
+import { PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
 
 (window as any).updateThumbnailSelection = (page: number) => {
   (window as any).PDFViewerApplication.page = page;
