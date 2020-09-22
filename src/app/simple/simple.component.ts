@@ -18,7 +18,7 @@ export class SimpleComponent {
   public set theme(theme: string) {
     if (theme !== this.theme) {
       localStorage.setItem('ngx-extended-pdf-viewer.theme', theme);
-      new Location().reload();
+      location = location;
     }
   }
 
