@@ -7,13 +7,21 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./simple.component.css'],
 })
 export class SimpleComponent {
-  public selectedTab = 0;
+  public _selectedTab = 0;
 
   public page = 5;
 
   public pageLabel: string;
 
   public showPdfViewer = true;
+
+  public set selectedTab(index: number) {
+    localStorage.setItem('ngx-extended-pdf-viewer.simple.selectedTab', String(index));
+  }
+
+  public get selectedTab(): number {
+    return Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
+  }
 
   public set theme(theme: string) {
     if (theme !== this.theme) {
@@ -28,7 +36,4 @@ export class SimpleComponent {
 
   constructor() {}
 
-  public onSelectedTab(event: number): void {
-    this.selectedTab = event;
-  }
 }
