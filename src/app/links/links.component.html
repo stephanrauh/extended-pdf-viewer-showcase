@@ -45,10 +45,10 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="TypeScript">
-        <markdown ngPreserveWhitespaces [data]="sourcecode | language : 'typescript'"></markdown>
+        <app-ie11-markdown [data]="sourcecode | language : 'typescript'"></app-ie11-markdown>
       </mat-tab>
       <mat-tab label="HTML">
-        <markdown ngPreserveWhitespaces src="assets/links/html.md"></markdown>
+        <app-ie11-markdown src="assets/links/html.md"></app-ie11-markdown>
       </mat-tab>
      </mat-tab-group>
   </mat-card>

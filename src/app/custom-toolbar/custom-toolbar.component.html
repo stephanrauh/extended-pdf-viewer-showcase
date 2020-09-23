@@ -21,16 +21,16 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="TypeScript">
-        <markdown ngPreserveWhitespaces [src]="'assets/custom-toolbar/ts-'+ theme+'.md'"> </markdown>
+        <app-ie11-markdown [src]="'assets/custom-toolbar/ts-'+ theme+'.md'"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="HTML template">
-        <markdown ngPreserveWhitespaces [src]="'assets/custom-toolbar/html-'+ theme+'.md'"> </markdown>
+        <app-ie11-markdown [src]="'assets/custom-toolbar/html-'+ theme+'.md'"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="additional components" *ngIf="theme=='additional'">
-        <markdown ngPreserveWhitespaces [src]="'assets/custom-toolbar/component-new-tab.md'"> </markdown>
+        <app-ie11-markdown [src]="'assets/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="changing the theme dynamically">
-        <markdown ngPreserveWhitespaces [src]="'assets/custom-toolbar/ts-reinitialization.md'"> </markdown>
+        <app-ie11-markdown [src]="'assets/custom-toolbar/ts-reinitialization.md'"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>

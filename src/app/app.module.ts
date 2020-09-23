@@ -68,6 +68,7 @@ import { KeycloakComponent } from './keycloak/keycloak.component';
 import { CustomSidebarComponent } from './custom-sidebar/custom-sidebar.component';
 import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails.component';
 import { FormsComponent } from './forms/forms.component';
+import { Ie11MarkdownComponent } from './ie11-markdown/ie11-markdown.component';
 
 
 @NgModule({
@@ -112,7 +113,8 @@ import { FormsComponent } from './forms/forms.component';
     PerfectScrollbarComponent,
     OpenInNewTabComponent,
     FormsComponent,
-    LayersComponent
+    LayersComponent,
+    Ie11MarkdownComponent
   ],
   imports: [
     BrowserModule,

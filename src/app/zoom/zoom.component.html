@@ -2,10 +2,10 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
     <mat-tab-group>
       <mat-tab label="[(zoom)]] and (currentZoomFactor)">
-        <markdown>
+        <app-ie11-markdown>
           The attribute `[(zoom)]` controls the zoom level of the PDF document. If you're using two-way binding, the variable is updated
           when the user zooms in or out.
-        </markdown>
+        </app-ie11-markdown>
         <mat-label title="Toolbar zoom factor"></mat-label>
         <mat-radio-group aria-label="Toolbar zoom factor" [(ngModel)]="zoomSetting">
           <mat-radio-button value="undefined">[zoom]="undefined"</mat-radio-button>
@@ -65,10 +65,10 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="HTML template">
-        <markdown ngPreserveWhitespaces src="assets/zoom/html.md"> </markdown>
+        <app-ie11-markdown src="assets/zoom/html.md"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="TypeScript">
-        <markdown ngPreserveWhitespaces src="assets/zoom/ts.md"> </markdown>
+        <app-ie11-markdown src="assets/zoom/ts.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
