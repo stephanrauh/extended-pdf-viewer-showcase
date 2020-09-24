@@ -10,6 +10,7 @@ dir.files('dist/pdf-showcase', function(err, files) {
   files.forEach(f => compress(f));
   const end = new Date().getTime();
   console.log('Compressing took ' + (end - start) / 1000 + ' seconds');
+  console.log('TODO: use https://github.com/mscdex/node-ftp to check if the file has changed')
 });
 
 function compress(file) {

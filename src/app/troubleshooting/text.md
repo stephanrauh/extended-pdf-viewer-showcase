@@ -30,11 +30,16 @@ That's mostly the same as the trouble with the find button. Activate the text la
 
 ## When I select or find text, the selection is slightly off
 
-The text layer doesn't match the real positions of the text. It's a good approximation, but it's not perfect. More often than not, the selection is half a character off, sometimes even more. There's nothing you can do about it - except offering your help at the base project, <a href="https://github.com/mozilla/pdf.js">pdf.js</a>. The project support almost every language and every font of the world, so it's hard to get it right.
+The text layer doesn't match the real positions of the text. It's a good approximation, but it's not perfect. More often than not, the selection is half a character off, sometimes even more. There's nothing you can do about it - except offering your help at the base project, <a target="#" href="https://github.com/mozilla/pdf.js">pdf.js</a>. The project support almost every language and every font of the world, so it's hard to get it right.
 
 ## Why is the text layer deactivated by default?
 
 The PDF viewer is a lot faster if it doesn't have to render the text layer. That's why you have to activate the text layer manually.
+
+## Problems with Internet Explorer 11
+The library is intended to be used with IE11 - but every once in a while, a new incompatibility pops up. Bear with me. I don't use Windows to develop the library, so testing IE11 isn't that easy.
+
+The latest error I've seen is caused by another library, zone.js. Version 0.11.1 of zone.js is incompatible with IE11. If I've got it correctly, this will be fixed with version 0.11.2. What I can tell for sure is downgrading to version 0.10.3 fixes the bug. More details <a target="#" href="https://github.com/angular/angular/issues/38561">in the GitHub ticket</a>.
 
 ## Trouble with printing (aka: compatibility to Bootstrap and other CSS frameworks)
 
