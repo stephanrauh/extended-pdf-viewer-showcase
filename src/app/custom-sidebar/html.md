@@ -6,7 +6,6 @@
     [height]="'90vh'"
     [useBrowserLocale]="true"
     [textLayer]="true"
-    [showHandToolButton]="true"
-    [minifiedJSLibraries]="false">
+    [showHandToolButton]="true">
 </ngx-extended-pdf-viewer>
 ```
