@@ -32,4 +32,14 @@
 </div>
 
 <mat-card class="distance-16 mat-elevation-z8">
+  <ngx-extended-pdf-viewer
+     [src]="'assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+     [textLayer]="true"
+     (textLayerRendered)=highlightWords($event);
+     [page]="9"
+     [height]="'90vh'"
+     [useBrowserLocale]="true"
+     [showHandToolButton]="true">
+  </ngx-extended-pdf-viewer>
 </mat-card>
+

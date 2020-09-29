@@ -35,7 +35,7 @@ What we're looking for is a simple but powerful solution.
 
 ## https://www.npmjs.com/package/ng2-pdfjs-viewer
 
-Did I say nobody's using iFrames in 2019? A developer nicknamed Code Hippie does. As things go, they implemented their PDF viewer almost at the same time as I did. Their approach is very simple: create an Angular component wrapping the PDF viewer in an iFrame. You can send parameters to the PDF viewer using the URL. That's quite a few parameters, so chances are you're happy with this approach.
+Did I say nobody's using iFrames in 2020? A developer nicknamed Code Hippie does. As things go, they implemented their PDF viewer almost at the same time as I did. Their approach is very simple: create an Angular component wrapping the PDF viewer in an iFrame. You can send parameters to the PDF viewer using the URL. That's quite a few parameters, so chances are you're happy with this approach.
 
 The iFrame approach is simple and robust. If you're not happy with ngx-extended-pdf-viewer, go for the library of Codehippie. You'll lose some options - but most likely you don't need them anyways.
 
