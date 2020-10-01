@@ -64,19 +64,20 @@
             URL automatically from the default option <code>assetsFolder</code>, so in general it's better to modify <code>assetsFolder</code>.
           </dd>
           <dt>disableAutoFetch</dt>
-          <dd>Disable pre-fetching of PDF file
+          <dd>Caveat: this feature seems to be broken.<br> Disable pre-fetching of PDF file
            data. When range requests are enabled PDF.js will automatically keep
            fetching more data even if it isn't needed to display the current page.
            The default value is `false`.
            NOTE: It is also necessary to disable streaming, see below, in order for
-           disabling of pre-fetching to work correctly.</dd>
+           disabling of pre-fetching to work correctly.
+           </dd>
           <dt>disableFontFace</dt>
           <dd>By default fonts are converted to
            OpenType fonts and loaded via `@font-face` rules. If disabled, fonts will
            be rendered using a built-in font renderer that constructs the glyphs with
            primitive path commands. The default value is `false`.</dd>
           <dt>disableRange</dt>
-          <dd>Disable range request loading of PDF
+          <dd>Caveat: this feature seems to be broken.<br>Disable range request loading of PDF
            files. When enabled, and if the server supports partial content requests,
            then the PDF will be fetched in chunks. The default value is `false`.</dd>
           <dt>disableStream</dt>
