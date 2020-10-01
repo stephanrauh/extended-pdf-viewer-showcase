@@ -60,3 +60,29 @@ body > app-root > app-nav > .mat-toolbar-single-row {
 mat-tab-group, .mat-tab-body-wrapper {
   height: 100%;
 }
+
+dt,
+dd {
+  box-sizing: border-box;
+  padding: 10px;
+}
+dd ~ dt,
+dd ~ dd {
+  border-top: 1px solid #bdc8ca;
+}
+dt {
+  float: left;
+  width: 35%;
+  padding-bottom: 0;
+  font-size: 110%;
+}
+dd {
+  margin-left: 35%;
+  border-left: 1px dotted #bdc8ca;
+  background-color: #fff;
+}
+dd:after {
+  content: '';
+  display: block;
+  clear: both;
+}

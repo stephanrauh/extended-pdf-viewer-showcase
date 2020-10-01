@@ -1,16 +1,142 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <p>
-      You can fine-tune the behavior of the PDF viewer by modifying the default options. The full list of
-      the options is available
-      <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/master/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-default-options.ts">here</a>.
-      Most options are very advanced or covered by regular attributes of <code>&lt;ngx-extended-pdf-viewer /&gt;</code>,
-      so use the options at your own risk.
-    </p>
-    <p>This page uses the <code>assetsFolder</code> attribute to use the "bleeding edge" version of pdf.js instead of the regular
-    release of pdf.js. However, to see the effect you need a full reload of the page (i.e. you need to hit the F5 key). After that, the version number of pdf.js changes.
-    You can see that in the blue bar of this page and in the console window of the developer tools.</p>
-    <app-ie11-markdown src="assets/default-options/options.md"></app-ie11-markdown>
+    <mat-tab-group>
+      <mat-tab label="Overview">
+        <p>
+          You can fine-tune the behavior of the PDF viewer by modifying the default options. The full list of
+          the options is available
+          <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/master/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-default-options.ts">here</a>.
+          Most options are very advanced or covered by regular attributes of <code>&lt;ngx-extended-pdf-viewer /&gt;</code>,
+          so use the options at your own risk.
+        </p>
+        <p>
+          This page uses the <code>assetsFolder</code> attribute to use the "bleeding edge" version of pdf.js instead of the regular
+          release of pdf.js. However, to see the effect you need a full reload of the page (i.e. you need to hit the F5 key). After that, the version number of pdf.js changes.
+          You can see that in the blue bar of this page and in the console window of the developer tools.
+        </p>
+        <app-ie11-markdown src="assets/default-options/options.md"></app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="Available options">
+        <dl>
+          <dt>cursorToolOnLoad</dt>
+          <dd>What happens when you click and move the mouse?
+            <ul>
+              <li>select: 0</li>
+              <li>hand tool: 1 (i.e. move the PDF with the mouse)</li>
+              <li>zoom: 2</li>
+            </ul>
+          </dd>
+          <dt>disablePageLabels</dt>
+          <dd>ignore the page numbers defined by the author of the PDF file; default value: <code>false</code></dd>
+          <dt>enablePermissions</dt>
+          <dd>evaluate the permission granted by the author of the PDF file; currently only the "copy" permission is implemented; default value: <code>false</code></dd>
+          <dt>enablePrintAutoRotate</dt>
+          <dd>rotates landscape page to portrait pagen when printing; default value: <code>false</code></dd>
+          <dt>enableWebGL</dt>
+          <dd>Enables WebGL accelerated rendering for some operations. The default value is <code>false</code></dd>
+          <dt>externalLinkRel</dt>
+          <dd>Specifies the `rel` attribute for external links. Defaults to stripping the referrer</dd>
+          <dt>externalLinkTarget</dt>
+          <dd>documented <a href="/link">here</a></dd>
+          <dt>ignoreDestinationZoom</dt>
+          <dd>Ignore the zoom argument in the destination array. The default value is <code>false</code>.</dd>
+          <dt>imageResourcesPath</dt>
+          <dd>Path for image resources, mainly for annotation icons. Include trailing slash</dd>
+          <dt>maxCanvasPixels</dt>
+          <dd>The maximum supported canvas size in total pixels, i.e. width * height. Use -1 for no limit.
+            The default value is 4096 * 4096 (16 mega-pixels). The canvas size is also limited by your browser.</dd>
+          <dt>renderer</dt>
+          <dd>render the PDF file on a <code>&lt;canvas&gt;</code> or an SVG image; default value is <code>"canvas"</code>;
+          legal values are <code>"canvas"</code> and <code>"svg"</code></dd>
+          <dt>renderInteractiveForms</dt>
+          <dd>activate forms embedded in PDF files; since version 5.0.0 the default value is <code>true</code></dd>
+          <dt>useOnlyCssZoom</dt>
+          <dd>Enables CSS only zooming. The default value is `false`</dd>
+          <dt>cMapPacked</dt>
+          <dd>Specifies if the Adobe CMaps are binary packed or not; the default value is <code>true</code></dd>
+          <dt>cMapUrl</dt>
+          <dd>URL of the CMap files; ngx-extended-pdf-viewer ships with the CMap files, so usually you can stick with the default value</dd>
+          <dt>disableAutoFetch</dt>
+          <dd>Disable pre-fetching of PDF file
+           data. When range requests are enabled PDF.js will automatically keep
+           fetching more data even if it isn't needed to display the current page.
+           The default value is `false`.
+           NOTE: It is also necessary to disable streaming, see above, in order for
+           disabling of pre-fetching to work correctly.</dd>
+          <dt>disableFontFace</dt>
+          <dd>By default fonts are converted to
+           OpenType fonts and loaded via `@font-face` rules. If disabled, fonts will
+           be rendered using a built-in font renderer that constructs the glyphs with
+           primitive path commands. The default value is `false`.</dd>
+          <dt>disableRange</dt>
+          <dd>Disable range request loading of PDF
+           files. When enabled, and if the server supports partial content requests,
+           then the PDF will be fetched in chunks. The default value is `false`.</dd>
+          <dt>disableStream</dt>
+          <dd>Disable streaming of PDF file data.
+           By default PDF.js attempts to load PDF files in chunks. The default value
+           is `false`.</dd>
+          <dt>docBaseUrl</dt>
+          <dd></dd>
+          <dt>fontExtraProperties</dt>
+          <dd>Include additional properties,
+           which are unused during rendering of PDF documents, when exporting the
+           parsed font data from the worker-thread. This may be useful for debugging
+           purposes (and backwards compatibility), but note that it will lead to
+           increased memory usage. The default value is `false`.</dd>
+          <dt>isEvalSupported</dt>
+          <dd>Determines if we can evaluate strings
+           as JavaScript. Primarily used to improve performance of font rendering, and
+           when parsing PDF functions. The default value is `true`.</dd>
+          <dt>maxImageSize</dt>
+          <dd>The maximum allowed image size in total
+           pixels, i.e. width * height. Images above this value will not be rendered.
+           Use -1 for no limit, which is also the default value.
+          Note that the browser also limits the image size. ngx-extended-pdf-viewer tries to reduce the size of
+        images that are larger than the browser allows, but this doesn't always work.</dd>
+          <dt>scrollModeOnLoad</dt>
+          <dd>default scroll direction:
+            <ul>
+              <li>VERTICAL: 0 (default value)</li>
+              <li>HORIZONTAL: 1</li>
+              <li>WRAPPED: 2</li>
+            </ul>
+            </dd>
+          <dt>viewOnLoad</dt>
+          <dd>tries to restore the settings of the last PDF file; almost every setting is overwritten by the
+            attributes of ngx-extended-pdf-viewer, so <code>viewOnLoad</code> is probably useless.
+            <ul>
+              <li>PREVIOUS = 0 (default value).</li>
+              <li>INITIAL = 1</li>
+            </ul>
+          </dd>
+          <dt>workerPort</dt>
+          <dd>Port of the URL of the <code>worker.min.js</code>file; used in combination with <code>workerSrc</code>;
+            you don't need this option because the library is bundled with and loaded by ngx-extended-pdf-viewer</dd>
+        </dl>
+      </mat-tab>
+      <mat-tab label="Options covered by attributes">
+        <dl>
+          <dt>defaultUrl</dt>
+          <dd>covered by <code>[src]</code></dd>
+          <dt>defaultZoomValue</dt>
+          <dd>covered by <code>[zoom]</code></dd>
+          <dt>printResolution</dt>
+          <dd>covered by <code>[printResolution]</code></dd>
+          <dt>sidebarViewOnLoad</dt>
+          <dd>covered by <code>[sidebarVisible]</code></dd>
+          <dt>spreadModeOnLoad</dt>
+          <dd>covered by <code>[spread]</code></dd>
+          <dt>textLayerMode</dt>
+          <dd>covered by <code>[textLayer]</code></dd>
+          <dt>verbosity</dt>
+          <dd>covered by <code>[logLevel]</code></dd>
+          <dt>workerSrc</dt>
+          <dd>automatically set depending on <code>minifiedJSLibraries</code> and your browser</dd>
+        </dl>
+      </mat-tab>
+
+    </mat-tab-group>
   </mat-card>
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
