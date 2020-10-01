@@ -18,6 +18,9 @@
       </mat-tab>
       <mat-tab label="Available options">
         <dl>
+          <dt>assetsFolder</dt>
+          <dd>URL of the assets folder (relative to the <code>index.html</code>). Changing this attribute modifies the value
+          of the default options <code>cMapUrl</code> and <code></code>.</dd>
           <dt>cursorToolOnLoad</dt>
           <dd>What happens when you click and move the mouse?
             <ul>
@@ -26,6 +29,7 @@
               <li>zoom: 2</li>
             </ul>
           </dd>
+
           <dt>disablePageLabels</dt>
           <dd>ignore the page numbers defined by the author of the PDF file; default value: <code>false</code></dd>
           <dt>enablePermissions</dt>
@@ -55,7 +59,10 @@
           <dt>cMapPacked</dt>
           <dd>Specifies if the Adobe CMaps are binary packed or not; the default value is <code>true</code></dd>
           <dt>cMapUrl</dt>
-          <dd>URL of the CMap files; ngx-extended-pdf-viewer ships with the CMap files, so usually you can stick with the default value</dd>
+          <dd>URL of the CMap files; ngx-extended-pdf-viewer ships with the CMap files, so usually you can stick with the default value.
+            Change this value if your application doesn't run in the root folder. More precisely, ngx-extended-pdf-viewer computes the
+            URL automatically from the default option <code>assetsFolder</code>, so in general it's better to modify <code>assetsFolder</code>.
+          </dd>
           <dt>disableAutoFetch</dt>
           <dd>Disable pre-fetching of PDF file
            data. When range requests are enabled PDF.js will automatically keep
@@ -132,7 +139,8 @@
           <dt>verbosity</dt>
           <dd>covered by <code>[logLevel]</code></dd>
           <dt>workerSrc</dt>
-          <dd>automatically set depending on <code>minifiedJSLibraries</code> and your browser</dd>
+          <dd>automatically set depending on <code>minifiedJSLibraries</code> and your browser, and by the attribute <code>assetsFolder</code>.
+          If you application doesn't run in the root folder, modify the default option <code>assetsFolder</code>.</dd>
         </dl>
       </mat-tab>
 

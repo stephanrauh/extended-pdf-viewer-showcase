@@ -4,6 +4,11 @@
 
 Please update the library `zone.js` to a current version. At the time of writing, that's 0.10.3. For some reason, the default setup of Angular locks `zone.js` to an old version. In most cases, the update shouldn't cause problems.
 
+## Running Angular in a context path or using a non-standard assets folder
+The CMap files and the JavaScript file <code>pdf.worker.min.js</code> are expected to be in the assets folder of your application.
+Sometimes the path resolution fails. In this case, you'll need to set the default option <code>assetsFolder</code> to the appropriate value.
+Maybe you'll even have to modify the derived options <code>workerSrc</code> and <code>cMapUrl</code>.
+
 ## I can't find the find button
 
 First of all, I have to apologize: For some reason, I've never managed to make the  intuitive. I hope I'll manage one day or another!
