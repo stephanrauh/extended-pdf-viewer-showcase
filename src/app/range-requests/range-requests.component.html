@@ -8,4 +8,14 @@
     Most of the time, you don't have to configure this feature (unless you want to switch it off). It just works. If it doesn't, check if
     your server supports range requests. If it does, the response headers have the attribute <code>accept-ranges: bytes</code>.
   </p>
+  <p>GitHub user Rebecca90 also suggest to pass the size of the chunks in the src attribute, like so:
+    <code>[src]="{{ '{' }}'url' : 'url of the file', 'rangeChunkSize' : '1024'}"</code>
+  </p>
+  <p>Vishal Patel has written a article <a href="https://medium.com/@vishal1909/how-to-handle-partial-content-in-node-js-8b0a5aea216">range request</a>
+    and how to implement them in a simple node.js server. He's also published the source code
+    <a href="https://github.com/phoenixinfotech1984/node-content-range/blob/master/server.js">on GitHub</a>.</p>
+
+  <h2>Getting rid of range requests and lazy loading</h2>
+  The <a href="/options">default options</a> <code> disableStream</code> and <code>disableAutoFetch</code> allow you to switch off the feature.
+  In most cases, this means it takes longer until the PDF file is shown, so use this option only as a last resort.
 </mat-card>
