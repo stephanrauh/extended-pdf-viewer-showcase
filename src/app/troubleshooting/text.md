@@ -46,6 +46,26 @@ The library is intended to be used with IE11 - but every once in a while, a new 
 
 The latest error I've seen is caused by another library, zone.js. Version 0.11.1 of zone.js is incompatible with IE11. If I've got it correctly, this will be fixed with version 0.11.2. What I can tell for sure is downgrading to version 0.10.3 fixes the bug. More details <a target="#" href="https://github.com/angular/angular/issues/38561">in the GitHub ticket</a>.
 
+## No PDF file shown - error message "offsetParent not set - cannot scroll" in the console
+
+This error means that the PDF viewer is invisible at load time. For example, that happens frequently with modal windows. If there's a fade-in animation, there's a small time frame when the PDF viewer is still invisible. In this case, you need to add a small delay before initializing it.
+
+Two solutions are sketched in the <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/489#issuecomment-703838087">GitHub issues</a>:
+
+```typescript
+openModal(modaltemplate: any): void {
+  modaltemplate.show();
+  setTimeout(() => this.stringSource = this.url, 50); // <<< added delay
+}
+```
+
+If you're using Bootstrap, you can also use the event `(onshown)` like so:
+
+```html
+<div bsModal #pdfModal="bs-modal" class="modal" 
+     (onShown)="onModalShown($event)">
+```
+
 ## Trouble with printing (aka: compatibility to Bootstrap and other CSS frameworks)
 
 Broken print is the most popular reason to open a bug tracker issue. Almost always the problems are caused by your CSS framework. Thing is, the PDF viewer doesn't really print anything. It just hides the entire page using CSS and adds high-resolution images to the document. After that, the PDF viewer simply calls the print function of your browser. Basically, it's printing the entire HTML page. Your custom CSS is still active. If it reduces the font size, you end up with scaled-down pages in print.
