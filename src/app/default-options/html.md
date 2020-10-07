@@ -1,8 +1,11 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'assets/pdfs/themes_de_la_Science-fiction.pdf'"
-  [height]="'90vh'"
-  [useBrowserLocale]="true"
+    [src]="'assets/pdfs/codpaste-teachingpack.pdf'"
+    [height]="'90vh'"
+    [showBorders]="showBorders"
+    [useBrowserLocale]="true"
+    [(scrollMode)]="scrollMode"
+    zoom="30%"
 >
 </ngx-extended-pdf-viewer>
 ```
