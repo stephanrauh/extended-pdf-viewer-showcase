@@ -31,7 +31,7 @@
     "perfect-scrollbar": "^1.5.0",
     "prismjs": "^1.21.0",
     "rxjs": "^6.6.3",
-    "tslib": "^2.0.1",
+    "tslib": "^2.0.2",
     "web-animations-js": "^2.3.2",
     "zone.js": "0.10.3"
   },
