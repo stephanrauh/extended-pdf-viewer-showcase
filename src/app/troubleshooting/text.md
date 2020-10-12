@@ -5,9 +5,13 @@
 Please update the library `zone.js` to a current version. At the time of writing, that's 0.10.3. For some reason, the default setup of Angular locks `zone.js` to an old version. In most cases, the update shouldn't cause problems.
 
 ## Running Angular in a context path or using a non-standard assets folder
-The CMap files and the JavaScript file <code>pdf.worker.min.js</code> are expected to be in the assets folder of your application.
+The CMap files and the JavaScript files <code>pdf.min.js</code>, <code>viewer.min.js</code>, and <code>pdf.worker.min.js</code> are expected to be in the assets folder of your application.
 Sometimes the path resolution fails. In this case, you'll need to set the default option <code>assetsFolder</code> to the appropriate value.
 Maybe you'll even have to modify the derived options <code>workerSrc</code> and <code>cMapUrl</code>.
+
+Another workaround is to load the files <code>pdf.min.js</code> and <code>viewer.min.js</code> yourself. You just have to make sure that the files are loaded before ngx-extended-pdf-viewer is initialized. The drawback of this approach is that there's no automatic browser switch. ngx-extended-pdf-viewer detects the capabilities the user's browsers and selects either the slow-but-safe ECMAScript 5 version, or the faster default version that only runs on modern browsers.
+
+In any case, you should not load the file <code>pdf.worker.min.js</code> yourself. Technically, that's possible, and the approach works well for small PDF files. But it ruins the performance of the PDF viewer. One of our <a href="https://www.obwb.ca/library/okanagan-basin-waterscape-poster/">test PDF files (75 MB!)</a> shows almost immediately in the default configuration, but takes several minutes when your loading <code>pdf.worker.min.js</code> yourself. (The technical explanation is that loading the pdf worker file yourself disables the service worker).
 
 ## I can't find the find button
 
