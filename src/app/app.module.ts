@@ -69,6 +69,7 @@ import { CustomSidebarComponent } from './custom-sidebar/custom-sidebar.componen
 import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails.component';
 import { FormsComponent } from './forms/forms.component';
 import { Ie11MarkdownComponent } from './ie11-markdown/ie11-markdown.component';
+import { PageViewModeComponent } from './page-view-mode/page-view-mode.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { Ie11MarkdownComponent } from './ie11-markdown/ie11-markdown.component';
     MultipleDocumentsComponent,
     MobileComponent,
     PagesLoadedComponent,
+    PageViewModeComponent,
     PdfjsVersionsComponent,
     PrintRangeComponent,
     RangeRequestsComponent,

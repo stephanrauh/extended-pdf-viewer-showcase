@@ -36,6 +36,7 @@ import { KeycloakComponent } from './keycloak/keycloak.component';
 import { CustomSidebarComponent } from './custom-sidebar/custom-sidebar.component';
 import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails.component';
 import { FormsComponent } from './forms/forms.component';
+import { PageViewModeComponent } from './page-view-mode/page-view-mode.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -72,6 +73,7 @@ const routes: Routes = [
   { path: 'troubleshooting', component: TroubleshootingComponent },
   { path: 'zoom', component: ZoomComponent },
   { path: 'custom-print-dialog', component: CustomPrintDialogComponent },
+  { path: 'page-view-mode', component: PageViewModeComponent },
   { path: 'print-range', component: PrintRangeComponent },
   { path: 'perfect-scrollbar', component: PerfectScrollbarComponent },
   { path: '**', redirectTo: '/simple', pathMatch: 'full' }

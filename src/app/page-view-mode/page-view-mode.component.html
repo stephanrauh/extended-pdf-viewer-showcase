@@ -1,0 +1,44 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <mat-tab-group>
+      <mat-tab label="Getting started">
+        <p>
+          The PDF viewer supports the single-page mode. In this mode, you can scroll from page to page. Instead,
+          you can only navigate to a new page by setting the page number or clicking a chapter in the sidebar.
+        </p>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <app-ie11-markdown ngPreserveWhitespaces src="assets/page-view-mode/html.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="Typescript">
+        <app-ie11-markdown ngPreserveWhitespaces src="assets/page-view-mode/ts.md"> </app-ie11-markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <small
+    >Copyright hint: the e-book has been published by James Boyle under a
+    <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+    <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a></small
+  >.
+  <ngx-extended-pdf-viewer
+    *ngIf="showPdfViewer"
+    [src]="'assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
+    [height]="'90vh'"
+    [useBrowserLocale]="true"
+    [textLayer]="true"
+    [showHandToolButton]="true"
+    [showPresentationModeButton]="true"
+    [(page)]="page"
+    [(pageLabel)]="pageLabel"
+    [minifiedJSLibraries]="false"
+    [pageViewMode]="'single'"
+  >
+  </ngx-extended-pdf-viewer>
+</mat-card>
