@@ -7,6 +7,9 @@ const start = new Date().getTime();
 
 dir.files('dist/pdf-showcase', function(err, files) {
   if (err) throw err;
+  const compressed = files.filter(f => f.endsWith('.br'));
+  files = files.filter(f => !f.endsWith('.br'));
+  files = files.filter(f => !compressed.includes(f+'.br'));
   files.forEach(f => compress(f));
   const end = new Date().getTime();
   console.log('Compressing took ' + (end - start) / 1000 + ' seconds');
