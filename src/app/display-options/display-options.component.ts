@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { ScrollModeType } from '../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-viewer';
+import { ScrollModeType } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-display-options',

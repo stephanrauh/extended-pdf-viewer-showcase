@@ -13,5 +13,6 @@ export class PageViewModeComponent {
 
   public showPdfViewer = true;
 
-  constructor() {}
+  constructor() {
+  }
 }

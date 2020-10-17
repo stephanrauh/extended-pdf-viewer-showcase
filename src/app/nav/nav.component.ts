@@ -18,7 +18,7 @@ export class NavComponent {
 
   public version = version;
 
-  public angularVersion = dependencies['@angular/core'].replace("^", "");
+  public angularVersion = dependencies['@angular/core'].replace('^', '');
 
   public pdfjsVersion = '';
 
