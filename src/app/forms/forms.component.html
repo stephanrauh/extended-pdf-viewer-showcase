@@ -13,6 +13,15 @@
     <mat-form-field>
       <input matInput class="margin" [(ngModel)]="lastName" placeholder="last name" />
     </mat-form-field>
+    <mat-form-field>
+      <input matInput class="margin" [(ngModel)]="country" placeholder="country" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput class="margin" [(ngModel)]="jobExperience" placeholder="job experience" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput class="margin" [(ngModel)]="typeScript" placeholder="TypeScript" />
+    </mat-form-field>
   </mat-card>
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
     <div *ngIf="selectedTab === 0">
@@ -35,7 +44,7 @@
     [src]="'assets/pdfs/OoPdfFormExample.pdf'"
     [height]="'90vh'"
     [useBrowserLocale]="true"
-    [formDataSneakPreview]="formData"
+    [(formDataSneakPreview)]="formData"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
