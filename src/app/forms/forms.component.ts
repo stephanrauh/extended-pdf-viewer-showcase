@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 export class FormsComponent {
   public selectedTab = 0;
 
-  public firstName = 'Jane';
+  public firstName = 'Lucía';
 
-  public lastName = 'Doe';
-  public country = 'Germany';
+  public lastName = 'Garzas';
+  public country = 'Spain';
   public jobExperience = '6';
   public typeScript = true;
 
@@ -30,7 +30,7 @@ export class FormsComponent {
     this.lastName = data.lastName as string;
     this.jobExperience = data.yearsOfExperience as string;
     this.country = data.country as string;
-    this.typeScript = data.typeScript === 'true';
+    this.typeScript = data.typeScript === 'true' || data.typeScript === true;
   }
 
   constructor() {}

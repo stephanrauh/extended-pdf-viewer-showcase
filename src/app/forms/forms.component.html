@@ -7,6 +7,12 @@
       If you're using the default options, you don't have to do anything to activate the feature. If
       you're using custom options, make sure to activate the setting <code>renderInteractiveForms: true</code>.
     </p>
+    <p>You can use the two-way binding attribute `[(formData)]` to fill the form in the PDF or to get
+      the user input from the PDF. The event `(formData)` reports every input field, even if
+      `[formData]` passes only a small selection of these field. You can use this to find out
+      how the field names are called in the PDF file, so you can map them to your naming conventions
+      if you don't have the opportunity to talk to the creator of the PDF file.
+    </p>
     <mat-form-field>
       <input matInput class="margin" [(ngModel)]="firstName" placeholder="first name" />
     </mat-form-field>
@@ -44,7 +50,7 @@
     [src]="'assets/pdfs/OoPdfFormExample.pdf'"
     [height]="'90vh'"
     [useBrowserLocale]="true"
-    [(formDataSneakPreview)]="formData"
+    [(formData)]="formData"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
