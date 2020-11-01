@@ -37,6 +37,7 @@ import { CustomSidebarComponent } from './custom-sidebar/custom-sidebar.componen
 import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails.component';
 import { FormsComponent } from './forms/forms.component';
 import { PageViewModeComponent } from './page-view-mode/page-view-mode.component';
+import { SignaturesComponent } from './signatures/signatures.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
@@ -66,6 +67,7 @@ const routes: Routes = [
   { path: 'pages-loaded', component: PagesLoadedComponent },
   { path: 'pdfjs-versions', component: PdfjsVersionsComponent },
   { path: 'range-requests', component: RangeRequestsComponent },
+  { path: 'signatures', component: SignaturesComponent},
   { path: 'simple', component: SimpleComponent },
   { path: 'smartphone', component: SmartphoneComponent },
   { path: 'textlayer', component: TextlayerComponent },

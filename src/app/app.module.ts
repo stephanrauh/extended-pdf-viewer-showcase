@@ -70,6 +70,7 @@ import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails
 import { FormsComponent } from './forms/forms.component';
 import { Ie11MarkdownComponent } from './ie11-markdown/ie11-markdown.component';
 import { PageViewModeComponent } from './page-view-mode/page-view-mode.component';
+import { SignaturesComponent } from './signatures/signatures.component';
 
 
 @NgModule({
@@ -99,6 +100,7 @@ import { PageViewModeComponent } from './page-view-mode/page-view-mode.component
     PdfjsVersionsComponent,
     PrintRangeComponent,
     RangeRequestsComponent,
+    SignaturesComponent,
     SimpleComponent,
     SmartphoneComponent,
     TextlayerComponent,
