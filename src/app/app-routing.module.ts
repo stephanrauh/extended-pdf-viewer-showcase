@@ -18,6 +18,7 @@ import { FindComponent } from './find/find.component';
 import { MultipleDocumentsComponent } from './multiple-documents/multiple-documents.component';
 import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.component';
 import { Base64Component } from './base64/base64.component';
+import { BlobComponent } from './blob/blob.component';
 import { SmartphoneComponent } from './smartphone/smartphone.component';
 import { ContextmenuComponent } from './contextmenu/contextmenu.component';
 import { CustomPrintDialogComponent } from './custom-print-dialog/custom-print-dialog.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'base64', component: Base64Component },
+  { path: 'blob', component: BlobComponent },
   { path: 'contextmenu', component: ContextmenuComponent },
   { path: 'changelog', component: ChangelogComponent},
   { path: 'options', component: DefaultOptionsComponent},
