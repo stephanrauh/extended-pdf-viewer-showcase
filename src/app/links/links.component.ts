@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { pdfDefaultOptions, LinkTarget } from 'ngx-extended-pdf-viewer';
+import {
+  pdfDefaultOptions,
+  LinkTarget,
+  PageRenderedEvent,
+} from 'ngx-extended-pdf-viewer';
 @Component({
   selector: 'app-links',
   templateUrl: './links.component.html',
@@ -10,7 +14,21 @@ export class LinksComponent implements OnInit {
 
   public hidden = false;
 
-  private _target;;
+  // tslint:disable-next-line: variable-name
+  private _target: number;
+
+  // tslint:disable-next-line: variable-name
+  private _selectedTab = 0;
+
+  public set selectedTab(tab: number) {
+    this._selectedTab = tab;
+    this.hidden = true;
+    setTimeout(() => (this.hidden = false), 250);
+  }
+
+  public get selectedTab(): number {
+    return this._selectedTab;
+  }
 
   constructor() {}
 
@@ -27,9 +45,19 @@ export class LinksComponent implements OnInit {
     return this._target;
   }
 
+  public afterPageRendered(pageRenderedEvent: PageRenderedEvent) {
+    if (this._selectedTab === 2) {
+      const pageView = pageRenderedEvent.source; /* as PdfPageView */
+      const div = pageView.div as HTMLDivElement;
+      div.querySelectorAll('a').forEach((a: HTMLAnchorElement) => {
+        a.href = 'javascript: void(0)';
+        a.target = '';
+      });
+    }
+  }
+
   public ngOnInit() {
     this.target = LinkTarget.BLANK;
-
   }
 
   public get sourcecode(): string {

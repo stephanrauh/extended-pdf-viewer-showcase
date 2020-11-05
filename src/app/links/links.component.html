@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <mat-tab-group>
-      <mat-tab label="Demo">
+    <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab=$event">
+      <mat-tab label="Default link targets">
         <p>Chose a link target:</p>
         <mat-radio-group aria-label="Toolbar zoom factor"
                          (change)="target=$event.value"
@@ -39,16 +39,28 @@
         </li>
       </ul>
     </mat-tab>
+    <mat-tab label="Deactivating links">
+      <p>You can manipulate links using the <code>pageRendered</code> event. This demo deactivates
+      the links. Note you can't modify the appearance of the links. They are part of the PDF file,
+      so they can't be displayed differently. But you can modify the invisible annotation layer.</p>
+    </mat-tab>
+
     </mat-tab-group>
   </mat-card>
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
-      <mat-tab label="TypeScript">
+      <mat-tab label="TypeScript" *ngIf="selectedTab!==2">
         <app-ie11-markdown [data]="sourcecode | language : 'typescript'"></app-ie11-markdown>
       </mat-tab>
-      <mat-tab label="HTML">
+      <mat-tab label="HTML" *ngIf="selectedTab!==2">
         <app-ie11-markdown src="assets/links/html.md"></app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="TypeScript" *ngIf="selectedTab===2">
+        <app-ie11-markdown src="assets/links/ts2.md"></app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="HTML" *ngIf="selectedTab===2">
+        <app-ie11-markdown src="assets/links/html2.md"></app-ie11-markdown>
       </mat-tab>
      </mat-tab-group>
   </mat-card>
@@ -59,6 +71,7 @@
     [src]="'assets/pdfs/blind-text-collection.pdf'"
     [height]="'90vh'"
     [useBrowserLocale]="true"
+    (pageRendered)="afterPageRendered($event)"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
