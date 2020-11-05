@@ -1,0 +1,34 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <p>The PDF viewer accepts different types if input:</p>
+    <ul>
+      <li>[src]="blob": file provided as a Blob</li>
+      <li>[src]="url": files given by their URL</li>
+      <li>[src]="UInt8array": files provided as an UInt8Array</li>
+      <li>[base64src]="someLongString": files passed as a Base64 encoded string</li>
+    </ul>
+  </mat-card>
+
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <app-ie11-markdown src="assets/blob/html.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="TypeScript">
+        <app-ie11-markdown src="assets/blob/ts.md"> </app-ie11-markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <ngx-extended-pdf-viewer
+    [src]="blob"
+    backgroundColor="#ffffff"
+    [height]="'90vh'"
+    [useBrowserLocale]="true"
+    [handTool]="false"
+    [showHandToolButton]="true"
+  >
+  </ngx-extended-pdf-viewer>
+</mat-card>
