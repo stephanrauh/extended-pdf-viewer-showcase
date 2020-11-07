@@ -7,6 +7,7 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./simple.component.css'],
 })
 export class SimpleComponent {
+  // tslint:disable-next-line: variable-name
   public _selectedTab = 0;
 
   public page = 5;
