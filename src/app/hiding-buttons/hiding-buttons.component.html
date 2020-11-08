@@ -2,38 +2,40 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
     <mat-tab-group>
       <mat-tab label="live demo">
-<mat-checkbox class="margin" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
+        <mat-checkbox class="margin" [(ngModel)]="showToolbar">showToolbar</mat-checkbox> (hides every button)
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showFindButton">showFindButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox> (only shown if there are menu items)
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showFindButton">showFindButton</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
+        <br />
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
         <mat-form-field class="margin" *ngIf="showDownloadButton">
           <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
         </mat-form-field>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showBookmarkButton">showBookmarkButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showBookmarkButton">showBookmarkButton</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
         <br />
-        <mat-checkbox class="margin" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
       </mat-tab>
       <mat-tab label="changes in version 2.1.0">
         <p>
@@ -77,6 +79,7 @@
     [useBrowserLocale]="true"
     height="250px"
     zoom="25%"
+    [showToolbar]="showToolbar"
     [showSidebarButton]="showSidebarButton"
     [showFindButton]="showFindButton"
     [showPagingButtons]="showPagingButtons"

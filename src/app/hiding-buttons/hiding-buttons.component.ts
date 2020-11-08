@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hiding-buttons.component.css']
 })
 export class HidingButtonsComponent {
+  public showToolbar = true;
   public showSidebarButton = false;
   public showFindButton = false;
   public showPagingButtons = false;
@@ -26,6 +27,7 @@ export class HidingButtonsComponent {
   public get sourcecode() {
     return `<ngx-extended-pdf-viewer
   [src]="'assets/pdfs/pdf-sample.pdf'"
+  [showToolbar]="${this.showToolbar}"
   [showSidebarButton]="${this.showSidebarButton}"
   [showFindButton]="${this.showFindButton}"
   [showPagingButtons]="${this.showPagingButtons}"
