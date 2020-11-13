@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-simple',
@@ -16,12 +16,21 @@ export class SimpleComponent {
 
   public showPdfViewer = true;
 
+  public height = '90vh';
+
   public set selectedTab(index: number) {
-    localStorage.setItem('ngx-extended-pdf-viewer.simple.selectedTab', String(index));
+    localStorage.setItem(
+      'ngx-extended-pdf-viewer.simple.selectedTab',
+      String(index)
+    );
   }
 
   public get selectedTab(): number {
-    return Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
+    return (
+      Number(
+        localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')
+      ) || 0
+    );
   }
 
   public set theme(theme: string) {
@@ -37,4 +46,9 @@ export class SimpleComponent {
 
   constructor() {}
 
+  public onPagesLoaded(event: PagesLoadedEvent): void {
+    console.log(event.pagesCount);
+    const h = event.source.viewer.clientHeight;
+    this.height = (h + 35) + 'px';
+  }
 }

@@ -74,7 +74,7 @@
   <ngx-extended-pdf-viewer
     *ngIf="showPdfViewer"
     [src]="'assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
-    [height]="'90vh'"
+    [height]="height"
     [useBrowserLocale]="true"
     [textLayer]="true"
     [showHandToolButton]="true"
@@ -82,6 +82,7 @@
     [(page)]="page"
     [(pageLabel)]="pageLabel"
     [theme]="theme"
+    (pagesLoaded)="onPagesLoaded($event)"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
