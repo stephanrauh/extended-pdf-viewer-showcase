@@ -46,9 +46,4 @@ export class SimpleComponent {
 
   constructor() {}
 
-  public onPagesLoaded(event: PagesLoadedEvent): void {
-    console.log(event.pagesCount);
-    const h = event.source.viewer.clientHeight;
-    this.height = (h + 35) + 'px';
-  }
 }

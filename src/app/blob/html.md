@@ -1,11 +1,9 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="blob"
-  backgroundColor="#ffffff"
+  [src]="src"
   [height]="'90vh'"
   [useBrowserLocale]="true"
-  [handTool]="false"
-  [showHandToolButton]="true"
 >
 </ngx-extended-pdf-viewer>
+
 ```

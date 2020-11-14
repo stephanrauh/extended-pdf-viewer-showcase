@@ -72,6 +72,8 @@ import { FormsComponent } from './forms/forms.component';
 import { Ie11MarkdownComponent } from './ie11-markdown/ie11-markdown.component';
 import { PageViewModeComponent } from './page-view-mode/page-view-mode.component';
 import { SignaturesComponent } from './signatures/signatures.component';
+import { InfiniteScrollComponent } from './infinite-scroll/infinite-scroll.component';
+import { FileInfoComponent } from './file-info/file-info.component';
 
 
 @NgModule({
@@ -89,9 +91,11 @@ import { SignaturesComponent } from './signatures/signatures.component';
     BlobComponent,
     ContextmenuComponent,
     ExportComponent,
+    FileInfoComponent,
     FindComponent,
     GettingStartedComponent,
     I18nComponent,
+    InfiniteScrollComponent,
     IntroComponent,
     HidingButtonsComponent,
     KeycloakComponent,

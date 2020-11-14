@@ -1,0 +1,69 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <mat-tab-group>
+      <mat-tab label="Getting started">
+        <p>
+          This option allows you to display the PDF file without scrollbar.
+        </p>
+        <p>
+          <mat-checkbox class="margin" [(ngModel)]="showWidgets">show widgets</mat-checkbox> (forces reload)
+        </p>
+        <p>
+        <mat-radio-group aria-label="File selection" [(ngModel)]="file" style="line-height: 1.5;">
+          <mat-radio-button [value]="0">tiny file (1 page, 41 KB)</mat-radio-button>
+          <br />
+          <mat-radio-button [value]="1">small file (4 pages, 700 KB)</mat-radio-button>
+          <br />
+          <mat-radio-button [value]="2">huge file (300+ pages, 2 MB)</mat-radio-button>
+        </mat-radio-group>
+      </p>
+      <p *ngIf="file === 2">
+        <mat-radio-group aria-label="Zoom" [(ngModel)]="zoom" style="line-height: 1.5;">
+          <mat-radio-button [value]="'100%'">zoom: 100%</mat-radio-button>
+          <br />
+          <mat-radio-button [value]="'7%'">zoom: 7%, scrollMode = wrapped</mat-radio-button> (demonstrates performance challenges)
+        </mat-radio-group>
+        {{zoom}} {{zoom == '100%'}} {{zoom == '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped}}
+      </p>
+
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <app-ie11-markdown ngPreserveWhitespaces src="assets/infinite-scroll/html.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="Typescript">
+        <app-ie11-markdown ngPreserveWhitespaces src="assets/infinite-scroll/ts.md"> </app-ie11-markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <small *ngIf="file===1"
+    >Copyright hint: the PDF has been published by Stefan Hellweger and Xiaofeng Wang under a
+    <a target="#" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> on
+    <a target="#" href="https://arxiv.org/abs/1503.01850">https://arxiv.org/abs/1503.01850</a></small
+  >
+  <small *ngIf="file===2"
+    >Copyright hint: the e-book has been published by James Boyle under a
+    <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+    <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>.</small
+  >
+  <ngx-extended-pdf-viewer
+    *ngIf="showPdfViewer"
+    [src]="filenames[file]"
+    [height]="height"
+    [useBrowserLocale]="true"
+    [textLayer]="showWidgets"
+    (pagesLoaded)="onPagesLoaded($event)"
+    [showHandToolButton]="showWidgets"
+    [showToolbar]="showWidgets"
+    [sidebarVisible]="showWidgets"
+    [zoom]="zoom"
+    [scrollMode]="zoom == '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped"
+  >
+  </ngx-extended-pdf-viewer>
+</mat-card>

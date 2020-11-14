@@ -39,12 +39,15 @@ import { CustomThumbnailsComponent } from './custom-thumbnails/custom-thumbnails
 import { FormsComponent } from './forms/forms.component';
 import { PageViewModeComponent } from './page-view-mode/page-view-mode.component';
 import { SignaturesComponent } from './signatures/signatures.component';
+import { InfiniteScrollComponent } from './infinite-scroll/infinite-scroll.component';
+import { PreloadGuard } from './blob/preload.guard';
+import { FileInfoComponent } from './file-info/file-info.component';
 
 const routes: Routes = [
   { path: 'alternatives', component: AlternativesComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'base64', component: Base64Component },
-  { path: 'blob', component: BlobComponent },
+  { path: 'blob', component: BlobComponent, canActivate: [PreloadGuard] },
   { path: 'contextmenu', component: ContextmenuComponent },
   { path: 'changelog', component: ChangelogComponent},
   { path: 'options', component: DefaultOptionsComponent},
@@ -54,11 +57,13 @@ const routes: Routes = [
   { path: 'custom-thumbnails', component: CustomThumbnailsComponent },
   { path: 'display-options', component: DisplayOptionsComponent },
   { path: 'export', component: ExportComponent },
+  { path: 'file-info', component: FileInfoComponent },
   { path: 'forms', component: FormsComponent },
   { path: 'layers', component: LayersComponent },
   { path: 'getting-started', component: GettingStartedComponent },
   { path: 'find', component: FindComponent },
   { path: 'i18n', component: I18nComponent },
+  { path: 'infinite-scroll', component: InfiniteScrollComponent },
   { path: 'intro', component: IntroComponent },
   { path: 'hiding-buttons', component: HidingButtonsComponent },
   { path: 'links', component: LinksComponent },

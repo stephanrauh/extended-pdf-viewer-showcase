@@ -35,13 +35,14 @@
       </mat-tab>
       <mat-tab label="Color themes">
         <p>
-          This is a preview to color themes. Note that switching the themes doesn't work reliably without a full reload (i.e. hitting the F5
+          You can choose between two predefined color themes, or you can provide your own custom color theme.
+          Note that switching the themes doesn't work reliably without a full reload (i.e. hitting the F5
           or CMD+R key). This demo reloads the page programmatically each time you change the theme.
         </p>
         <mat-radio-group aria-label="Color themes" [(ngModel)]="theme" style="line-height: 1.5">
-          <mat-radio-button value="dark">dark theme (work in progress)</mat-radio-button>
+          <mat-radio-button value="dark">dark theme</mat-radio-button>
           <br />
-          <mat-radio-button value="light">light theme (work in progress)</mat-radio-button>
+          <mat-radio-button value="light">light theme</mat-radio-button>
         </mat-radio-group>
       </mat-tab>
     </mat-tab-group>
@@ -82,7 +83,6 @@
     [(page)]="page"
     [(pageLabel)]="pageLabel"
     [theme]="theme"
-    (pagesLoaded)="onPagesLoaded($event)"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

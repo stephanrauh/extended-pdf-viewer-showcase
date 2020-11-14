@@ -1,12 +1,15 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <p>The PDF viewer accepts different types if input:</p>
-    <ul>
-      <li>[src]="blob": file provided as a Blob</li>
-      <li>[src]="url": files given by their URL</li>
-      <li>[src]="UInt8array": files provided as an UInt8Array</li>
-      <li>[base64src]="someLongString": files passed as a Base64 encoded string</li>
-    </ul>
+    <p>If you're displaying a PDF file from a REST API, you often receive it as a BLOB. You can simply use the <code>src</code>
+    attribute to display the BLOB. Since version 6.0.0, you can use this feature with a strict Content Security Policy strictly
+    (see <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/534">this issue for details</a>).</p>
+    <p>This demo uses a file that's already in memory and a file that finishes loading after the PDF viewer has initialized.
+      That's no difference from a programmers perspective, but it results in a different internal data flow, so both options are shown.
+    </p>
+    <section class="section" style="margin-top:5px; margin-bottom:10px">
+      <button mat-raised-button color="primary" (click)="usePreloadedFile()">use the preloaded BLOB</button>
+      <button mat-raised-button color="primary" (click)="loadLargeFile()" style="margin-left:10px">load a large file as blob</button>
+    </section>
   </mat-card>
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
@@ -17,18 +20,21 @@
       <mat-tab label="TypeScript">
         <app-ie11-markdown src="assets/blob/ts.md"> </app-ie11-markdown>
       </mat-tab>
+      <mat-tab label="Preload-Guard and service">
+        <app-ie11-markdown src="assets/blob/ts2.md"> </app-ie11-markdown>
+      </mat-tab>
     </mat-tab-group>
   </mat-card>
 </div>
 
 <mat-card class="distance-16 mat-elevation-z8">
+  <small>Copyright hint: the e-book has been published by James Boyle under a
+    <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+    <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>.</small>
   <ngx-extended-pdf-viewer
-    [src]="blob"
-    backgroundColor="#ffffff"
+    [src]="src"
     [height]="'90vh'"
     [useBrowserLocale]="true"
-    [handTool]="false"
-    [showHandToolButton]="true"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
