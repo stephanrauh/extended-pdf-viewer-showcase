@@ -55,15 +55,15 @@
   <ngx-extended-pdf-viewer
     *ngIf="showPdfViewer"
     [src]="filenames[file]"
-    [height]="height"
     [useBrowserLocale]="true"
     [textLayer]="showWidgets"
-    (pagesLoaded)="onPagesLoaded($event)"
     [showHandToolButton]="showWidgets"
     [showToolbar]="showWidgets"
     [sidebarVisible]="showWidgets"
     [zoom]="zoom"
     [scrollMode]="zoom == '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped"
+    [minifiedJSLibraries]="false"
+    [pageViewMode]="'infinite-scroll'"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

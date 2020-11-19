@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PagesLoadedEvent, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { PagesLoadedEvent, pdfDefaultOptions, ScrollModeType } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-infinite-scroll',
@@ -15,8 +15,6 @@ export class InfiniteScrollComponent {
 
   public ScrollModeType = ScrollModeType;
 
-  public height = '100vh';
-
   // tslint:disable-next-line: variable-name
   private _showWidgets = false;
 
@@ -25,6 +23,10 @@ export class InfiniteScrollComponent {
   public file = 0;
 
   public showPdfViewer = true;
+
+  constructor() {
+  //  pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+  }
 
   public get showWidgets(): boolean {
     return this._showWidgets;
@@ -36,14 +38,5 @@ export class InfiniteScrollComponent {
       setTimeout(() => this.showPdfViewer = true);
     }
     this._showWidgets = v;
-  }
-
-  public onPagesLoaded(event: PagesLoadedEvent): void {
-    const h = event.source.viewer.clientHeight;
-    if (this.showWidgets) {
-      this.height = h + 35 + 'px';
-    } else {
-      this.height = h + 'px';
-    }
   }
 }

@@ -2,7 +2,7 @@
   <ngx-extended-pdf-viewer
     *ngIf="showPdfViewer"
     [src]="'...'"
-    [height]="height"
+    [pageViewMode]="'infinite-scroll'"
     [useBrowserLocale]="true"
     [textLayer]="showWidgets"
     (pagesLoaded)="onPagesLoaded($event)"
