@@ -1,46 +1,83 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <p>
-      Starting with ngx-extended-pdf-viewer 5.0 (and pdf.js 2.6), PDF files with forms are supported.
-    </p>
-    <p><b>Configuration:</b><br />
-      If you're using the default options, you don't have to do anything to activate the feature. If
-      you're using custom options, make sure to activate the setting <code>renderInteractiveForms: true</code>.
-    </p>
-    <p>You can use the two-way binding attribute `[(formData)]` to fill the form in the PDF or to get
-      the user input from the PDF. The event `(formData)` reports every input field, even if
-      `[formData]` passes only a small selection of these field. You can use this to find out
-      how the field names are called in the PDF file, so you can map them to your naming conventions
-      if you don't have the opportunity to talk to the creator of the PDF file.
-    </p>
-    <mat-form-field>
-      <input matInput class="margin" [(ngModel)]="firstName" placeholder="first name" />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput class="margin" [(ngModel)]="lastName" placeholder="last name" />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput class="margin" [(ngModel)]="country" placeholder="country" />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput class="margin" [(ngModel)]="jobExperience" placeholder="job experience" />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput class="margin" [(ngModel)]="typeScript" placeholder="TypeScript" />
-    </mat-form-field>
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="50%">
+    <mat-tab-group>
+      <mat-tab label="Displaying Forms">
+        <p>
+          Starting with ngx-extended-pdf-viewer 5.0 (and pdf.js 2.6), PDF files with forms are supported.
+        </p>
+        <p><b>Configuration:</b><br />
+          If you're using the default options, you don't have to do anything to activate the feature. If
+          you're using custom options, make sure to activate the setting <code>renderInteractiveForms: true</code>.
+        </p>
+        <p>You can use the two-way binding attribute `[(formData)]` to fill the form in the PDF or to get
+          the user input from the PDF. The event `(formData)` reports every input field, even if
+          `[formData]` passes only a small selection of these field. You can use this to find out
+          how the field names are called in the PDF file, so you can map them to your naming conventions
+          if you don't have the opportunity to talk to the creator of the PDF file.
+        </p>
+        <mat-form-field>
+          <input matInput class="margin" [(ngModel)]="firstName" placeholder="first name" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput class="margin" [(ngModel)]="lastName" placeholder="last name" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput class="margin" [(ngModel)]="country" placeholder="country" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput class="margin" [(ngModel)]="jobExperience" placeholder="job experience" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput class="margin" [(ngModel)]="typeScript" placeholder="TypeScript" />
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Forms raw data (under construction)">
+        <p>You can access low-level form data using <code>NgxExtendedPdfViewerService.getFormData().</code>
+        </p>
+        <p><b>Caveat:</b> The API is subject to change.</p>
+        <section class="section" style="margin-top:5px; margin-bottom:10px">
+          <button mat-raised-button color="primary" (click)="readRawFormDescription()" style="margin-left:10px">read low-level form description</button>
+        </section>
+        <table *ngIf="rawFormData">
+          <tr>
+            <td>Name</td>
+            <td>Coordinates<br>(0, 0) = bottom left</td>
+            <td>Json (a small selection)</td>
+          </tr>
+          <tr *ngFor="let field of rawFormData">
+            <td>{{field.fieldName}}</td>
+            <td>{{field.rect}}</td>
+            <td>{{field | json}}</td>
+          </tr></table>
+    </mat-tab>
+
+      <mat-tab label="Downloading form data in a BLOB">
+        <p>You can download the PDF file as a BLOB. The user
+          can fill the PDF form, and
+           you can download the file containing the user's input.
+        </p>
+        <section class="section" style="margin-top:5px; margin-bottom:10px">
+          <button mat-raised-button color="primary" (click)="downloadAsBlob()" style="margin-left:10px">download the file as BLOB</button>
+        </section>
+        <p *ngIf="downloaded">{{downloaded}}</p>
+    </mat-tab>
+  </mat-tab-group>
+
   </mat-card>
-  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
-    <div *ngIf="selectedTab === 0">
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="48%">
       <mat-tab-group>
         <mat-tab label="HTML template">
           <app-ie11-markdown src="assets/forms/html.md"> </app-ie11-markdown>
         </mat-tab>
-      </mat-tab-group>
-    </div>
-     <mat-tab-group *ngIf="selectedTab === 1">
-      <mat-tab label="Typescript">
-        <app-ie11-markdown src="assets/forms/ts.md"> </app-ie11-markdown>
-      </mat-tab>
+        <mat-tab label="Typescript">
+          <app-ie11-markdown src="assets/forms/ts.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="Reading raw forms data (prototype)">
+          <app-ie11-markdown src="assets/forms/ts2.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="Download as BLOB">
+          <app-ie11-markdown src="assets/forms/ts3.md"> </app-ie11-markdown>
+        </mat-tab>
     </mat-tab-group>
   </mat-card>
 </div>

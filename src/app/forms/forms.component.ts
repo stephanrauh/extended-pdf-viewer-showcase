@@ -1,3 +1,4 @@
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { Component } from '@angular/core';
 
 @Component({
@@ -14,6 +15,10 @@ export class FormsComponent {
   public country = 'Spain';
   public jobExperience = '6';
   public typeScript = true;
+
+  public downloaded: string | undefined;
+
+  public rawFormData: any[];
 
   public get formData(): { [fieldName: string]: string | number | boolean } {
     return {
@@ -33,9 +38,29 @@ export class FormsComponent {
     this.typeScript = data.typeScript === 'true' || data.typeScript === true;
   }
 
-  constructor() {}
+  constructor(private ngxService: NgxExtendedPdfViewerService) {}
 
-  public onSelectedTab(event: number): void {
-    this.selectedTab = event;
+  public async downloadAsBlob(): Promise<void> {
+    this.downloaded = undefined;
+    const blob = await this.ngxService.getCurrentDocumentAsBlob();
+    if (blob) {
+      this.downloaded = 'The BLOB contains ' + blob.size + ' byte.';
+    } else {
+      this.downloaded = 'download failed';
+    }
   }
+
+  public async readRawFormDescription(): Promise<void> {
+    const raw = await this.ngxService.getFormData();
+    this.rawFormData = raw.map((annotation: any) => ({
+        alternativeText: annotation.fieldAnnotation.alternativeText,
+        fieldName: annotation.fieldAnnotation.fieldName,
+        fieldType: annotation.fieldAnnotation.fieldType,
+        fieldValue: annotation.fieldAnnotation.fieldValue,
+        id: annotation.fieldAnnotation.id,
+        maxLen: annotation.fieldAnnotation.maxLen,
+        rect: annotation.fieldAnnotation.rect
+      }));
+  }
+
 }

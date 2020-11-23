@@ -1,15 +1,30 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
-    <p>If you're displaying a PDF file from a REST API, you often receive it as a BLOB. You can simply use the <code>src</code>
-    attribute to display the BLOB. Since version 6.0.0, you can use this feature with a strict Content Security Policy strictly
-    (see <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/534">this issue for details</a>).</p>
-    <p>This demo uses a file that's already in memory and a file that finishes loading after the PDF viewer has initialized.
-      That's no difference from a programmers perspective, but it results in a different internal data flow, so both options are shown.
-    </p>
-    <section class="section" style="margin-top:5px; margin-bottom:10px">
-      <button mat-raised-button color="primary" (click)="usePreloadedFile()">use the preloaded BLOB</button>
-      <button mat-raised-button color="primary" (click)="loadLargeFile()" style="margin-left:10px">load a large file as blob</button>
-    </section>
+    <mat-tab-group>
+      <mat-tab label="Displaying BLOBs">
+
+        <p>If you're displaying a PDF file from a REST API, you often receive it as a BLOB. You can simply use the <code>src</code>
+        attribute to display the BLOB. Since version 6.0.0, you can use this feature with a strict Content Security Policy strictly
+        (see <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/534">this issue for details</a>).</p>
+        <p>This demo uses a file that's already in memory and a file that finishes loading after the PDF viewer has initialized.
+          That's no difference from a programmers perspective, but it results in a different internal data flow, so both options are shown.
+        </p>
+        <section class="section" style="margin-top:5px; margin-bottom:10px">
+          <button mat-raised-button color="primary" (click)="usePreloadedFile()">use the preloaded BLOB</button>
+          <button mat-raised-button color="primary" (click)="loadLargeFile()" style="margin-left:10px">load a large file as BLOB</button>
+        </section>
+      </mat-tab>
+      <mat-tab label="Downloading BLOBs">
+        <p>You can also download the PDF file as a BLOB. For instance, the user can upload a file, and you can use the method
+          <code>NgxExtendedPdfViewerService.getCurrentDocumentAsBlob()</code> to send the file to your server. Or the user
+          can fill a form embedded in the PDF file, and you can download the file containing the user's input.
+        </p>
+      <section class="section" style="margin-top:5px; margin-bottom:10px">
+        <button mat-raised-button color="primary" (click)="downloadAsBlob()" style="margin-left:10px">download the file as BLOB</button>
+      </section>
+      <p *ngIf="downloaded">{{downloaded}}</p>
+      </mat-tab>
+    </mat-tab-group>
   </mat-card>
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
@@ -22,6 +37,9 @@
       </mat-tab>
       <mat-tab label="Preload-Guard and service">
         <app-ie11-markdown src="assets/blob/ts2.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="Download PDF as a BLOB">
+        <app-ie11-markdown src="assets/blob/ts3.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
