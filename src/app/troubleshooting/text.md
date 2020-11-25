@@ -1,5 +1,3 @@
-# Troubleshooting
-
 ## Promise.allSettled is not a function
 
 Please update the library `zone.js` to a current version. At the time of writing, that's 0.10.3. For some reason, the default setup of Angular locks `zone.js` to an old version. In most cases, the update shouldn't cause problems.
