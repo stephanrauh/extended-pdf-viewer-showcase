@@ -30,6 +30,30 @@
         <mat-form-field>
           <input matInput class="margin" [(ngModel)]="typeScript" placeholder="TypeScript" />
         </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Databases</mat-label>
+          <mat-select [(ngModel)]="databases" multiple>
+            <mat-option value="oracle">Oracle</mat-option>
+            <mat-option value="sqlServer">SQL Server</mat-option>
+            <mat-option value="db2">DB2</mat-option>
+            <mat-option value="postgreSQL">PostgreSQL</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+          <mat-radio-group [(ngModel)]="educationLevel" aria-label="Education Level" fxLayout="column">  
+            <mat-label>Education Level</mat-label>          
+            <mat-radio-button value="highSchool">High School Diploma or Equivalent</mat-radio-button>
+            <mat-radio-button value="associateDegree">Associate's Degree</mat-radio-button>
+            <mat-radio-button value="bachelorDegree">Bachelor's Degree</mat-radio-button>
+            <mat-radio-button value="masterDegree">Master's Degree</mat-radio-button>
+          </mat-radio-group>
+
+          <br/>
+        <mat-form-field>
+          <textarea matInput class="margin" rows="5" [(ngModel)]="otherJobExperience" placeholder="Other Job Experience"></textarea>
+        </mat-form-field>
+
       </mat-tab>
       <mat-tab label="Forms raw data (under construction)">
         <p>You can access low-level form data using <code>NgxExtendedPdfViewerService.getFormData().</code>
@@ -91,3 +115,4 @@
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
+
