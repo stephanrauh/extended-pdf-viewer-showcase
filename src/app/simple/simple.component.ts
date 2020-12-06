@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
+import { PagesLoadedEvent, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-simple',
@@ -44,6 +44,8 @@ export class SimpleComponent {
     return localStorage.getItem('ngx-extended-pdf-viewer.theme') || 'light';
   }
 
-  constructor() {}
+  constructor() {
+    // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+  }
 
 }

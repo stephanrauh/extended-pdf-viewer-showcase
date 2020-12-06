@@ -25,7 +25,7 @@ export class InfiniteScrollComponent {
   public showPdfViewer = true;
 
   constructor() {
-  //  pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+    // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 
   public get showWidgets(): boolean {
