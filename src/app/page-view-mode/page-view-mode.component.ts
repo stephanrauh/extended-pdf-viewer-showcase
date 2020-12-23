@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-page-view-mode',
@@ -14,5 +15,6 @@ export class PageViewModeComponent {
   public showPdfViewer = true;
 
   constructor() {
+    // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 }

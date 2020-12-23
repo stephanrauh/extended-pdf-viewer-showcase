@@ -85,5 +85,9 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   get isPrintCancelled(): boolean {
     return (this.totalPages !== this.currentPageRendered);
   }
+
+  public onProgress(progress: ProgressBarEvent): void {
+    console.log(progress);
+  }
 }
 ```

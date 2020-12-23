@@ -23,6 +23,7 @@
     (pagesLoaded)="onPagesLoaded($event)"
     (beforePrint)="onBeforePrint()"
     (afterPrint)="onAfterPrint()"
+    (progress)="onProgress($event)"
   >
   </ngx-extended-pdf-viewer>
 ```

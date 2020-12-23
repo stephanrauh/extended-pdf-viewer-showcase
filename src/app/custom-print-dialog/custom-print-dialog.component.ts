@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { PagesLoadedEvent, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { PagesLoadedEvent, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { ProgressBarEvent } from '../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/events/progress-bar-event';
 
 interface EventBus {
   dispatch(eventName: string): void;
@@ -22,7 +23,9 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   showCompleted = false;
   hideBuiltInProgress = true;
 
-  constructor(private printService: NgxExtendedPdfViewerService) {}
+  constructor(private printService: NgxExtendedPdfViewerService) {
+    // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+  }
 
   ngOnInit() {
     const node = document.querySelector('#printContainer');
@@ -82,5 +85,9 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
 
   get isPrintCancelled(): boolean {
     return this.totalPages !== this.currentPageRendered;
+  }
+
+  public onProgress(event: ProgressBarEvent): void {
+    console.log(event);
   }
 }
