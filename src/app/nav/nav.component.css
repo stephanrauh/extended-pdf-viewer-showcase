@@ -48,3 +48,16 @@
 .is-active {
   color: #3f51b5;
 }
+
+.distance-16 {
+  padding-left: 16px;
+}
+
+.mat-sidenav {
+  padding-top: 48px;
+}
+
+.second-row {
+  margin-top: -16px;
+  padding-bottom: 8px;
+}
