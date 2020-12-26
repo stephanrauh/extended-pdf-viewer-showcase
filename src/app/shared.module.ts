@@ -24,7 +24,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { FormsModule } from '@angular/forms';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { Ie11MarkdownComponent } from './ie11-markdown/ie11-markdown.component';
+import { Ie11MarkdownComponent } from './extended-pdf-viewer/ie11-markdown/ie11-markdown.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { BrowserModule } from '@angular/platform-browser';
 

@@ -1,4 +1,4 @@
-import { TreeNode } from './../tree-node';
+import { TreeNode } from '../tree-node';
 import { Component, OnInit, Input } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';

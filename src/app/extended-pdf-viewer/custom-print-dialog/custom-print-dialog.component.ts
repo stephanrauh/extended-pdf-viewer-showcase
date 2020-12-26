@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { PagesLoadedEvent, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { ProgressBarEvent } from '../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/events/progress-bar-event';
+import { ProgressBarEvent } from '../../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/events/progress-bar-event';
 
 interface EventBus {
   dispatch(eventName: string): void;
