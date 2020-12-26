@@ -61,6 +61,11 @@ mat-tab-group, .mat-tab-body-wrapper {
   height: 100%;
 }
 
+.mat-list-base a.mat-list-item {
+  font-size: 15px;
+  height: 36px;
+}
+
 dt,
 dd {
   box-sizing: border-box;
@@ -86,3 +91,5 @@ dd:after {
   display: block;
   clear: both;
 }
+
+

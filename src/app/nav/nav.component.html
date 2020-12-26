@@ -5,7 +5,7 @@
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
     <span
-      >Angular PDF viewer showcase. Running on Angular {{ angularVersion }}, pdf.js {{ pdfjsVersion }}, and ngx-extended-pdf-viewer
+      >Angular PDF viewer showcase. Running on Angular {{ angularVersion }}{{ pdfjsVersion }} and {{library}}
       {{ version }}.</span
     >
   </mat-toolbar-row>
@@ -27,63 +27,8 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)"
   >
-    <mat-toolbar>About</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'intro'">What is ngx-extended-pdf-viewer?</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'alternatives'">Alternatives</a>
-    </mat-nav-list>
-
-    <mat-toolbar>Documentation</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'getting-started'">Getting started</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'troubleshooting'">Troubleshooting</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'attributes'">Attributes and events</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'customization'">Customizing the menus (2.0.0)</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'keycloak'">Keycloak</a>
-      <a mat-list-item [href]="'pdfjs-versions'">Choosing a pdf.js version</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'options'">Default options</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'range-requests'">Range requests</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'changelog'">Changelog</a>
-    </mat-nav-list>
-
-    <mat-toolbar>Demos</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'simple'">Simple demo</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'base64'">Base64 encoded files</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'blob'">BLOBs</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'multiple-documents'" class="long-text"
-        >Switching between documents</a
-      >
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'mobile'">Mobile devices and responsive design</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'touch-gestures'">Touch gestures (experimental)</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'smartphone'">Smartphones</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'contextmenu'">Context menu</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'export'">Export as text or image</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'hiding-buttons'" class="long-text">Customizing the buttons</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'custom-toolbar'" class="long-text"
-        >Custom toolbars and menus (2.0.0)</a
-      >
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'custom-sidebar'" class="long-text">Custom sidebar (4.0.0)</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'custom-thumbnails'" class="long-text">Custom thumbnails (4.0.0)</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'display-options'">Display options (2.0.0)</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'forms'">Forms (5.0.0)</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'layers'">Layers (5.0.0)</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'links'">Links</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'keyboard'">Keyboard</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'i18n'">Internationalization</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'pages-loaded'">Events</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'infinite-scroll'">Infinite scroll (6.0.0)</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'page-view-mode'">Single-Page mode (4.1.0)</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'signatures'">Unverified signatures</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'textlayer'">Text layer</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'find'">Find programmatically</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'perfect-scrollbar'">Perfect scrollbar</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'zoom'">Zoom</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'custom-print-dialog'">Custom print progress</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'print-range'">Print API and print range</a>
-      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'file-info'">Extracting infos from the PDF file</a>
-      <p style="height: 5em">&nbsp;</p>
-    </mat-nav-list>
+    <app-extended-pdf-viewer-menu *ngIf="ngxExtendedPdfViewer"></app-extended-pdf-viewer-menu>
+    <app-ng2-pdf-viewer-menu *ngIf="ng2PdfViewer"></app-ng2-pdf-viewer-menu>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="with-border full-height">

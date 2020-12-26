@@ -42,7 +42,13 @@
                 "glob": "changelog.md",
                 "input": "node_modules/ngx-extended-pdf-viewer/",
                 "output": "/assets/extended-pdf-viewer/changelog/"
+              },
+              {
+                "glob": "CHANGELOG.md",
+                "input": "node_modules/ng2-pdf-viewer/",
+                "output": "/assets/ng2-pdf-viewer/changelog/"
               }
+
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

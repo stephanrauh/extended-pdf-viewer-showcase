@@ -1,4 +1,4 @@
-# Alternatives to ngx-extended-pdf-viewer
+# Which options do you have to display a PDF file in your Angular application?
 
 There's a similar article at <a target="#" href="https://beyondjava.net/angular-pdf-viewers-2020">https://beyondjava.net/angular-pdf-viewers-2020</a> and an older text at <a target="#" href="https://www.beyondjava.net/ngx-extended-pdf-viewer">beyondjava.net/ngx-extended-pdf-viewer</a>.
 

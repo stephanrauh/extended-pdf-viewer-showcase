@@ -3,11 +3,11 @@ import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-attributes',
-  templateUrl: './attributes.component.html',
-  styleUrls: ['./attributes.component.css'],
+  selector: 'app-ng2-attributes',
+  templateUrl: './ng2-attributes.component.html',
+  styleUrls: ['./ng2-attributes.component.css'],
 })
-export class AttributesComponent implements AfterViewInit {
+export class Ng2AttributesComponent implements AfterViewInit {
   public data = [];
 
   private compareFunction = (dir: number, a: string, b: string) => {
@@ -52,7 +52,7 @@ export class AttributesComponent implements AfterViewInit {
 
   constructor(private httpClient: HttpClient, private element: ElementRef) {
     this.httpClient
-      .get('/assets/extended-pdf-viewer/attributes/attributes.md', {
+      .get('/assets/ng2-pdf-viewer/ng2-attributes/ng2-attributes.md', {
         responseType: 'text',
       })
       .pipe(

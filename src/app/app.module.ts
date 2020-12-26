@@ -18,7 +18,7 @@ import { ZoomComponent } from './extended-pdf-viewer/zoom/zoom.component';
 import { MobileComponent } from './extended-pdf-viewer/mobile/mobile.component';
 import { AttributesComponent } from './extended-pdf-viewer/attributes/attributes.component';
 import { IntroComponent } from './extended-pdf-viewer/intro/intro.component';
-import { AlternativesComponent } from './extended-pdf-viewer/alternatives/alternatives.component';
+import { AlternativesComponent } from './shared/alternatives/alternatives.component';
 import { RangeRequestsComponent } from './extended-pdf-viewer/range-requests/range-requests.component';
 import { FindComponent } from './extended-pdf-viewer/find/find.component';
 import { HidingButtonsComponent } from './extended-pdf-viewer/hiding-buttons/hiding-buttons.component';
@@ -55,6 +55,8 @@ import { SharedModule } from './shared/shared.module';
 import { OctocatComponent } from './nav/octocat/octocat.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { ExtendedPdfViewerMenuComponent } from './nav/extended-pdf-viewer-menu/extended-pdf-viewer-menu.component';
+import { Ng2PdfViewerMenuComponent } from './nav/ng2-pdf-viewer-menu/ng2-pdf-viewer-menu.component';
 
 
 @NgModule({
@@ -62,6 +64,8 @@ import { BrowserModule } from '@angular/platform-browser';
     AppComponent,
     NavComponent,
     OctocatComponent,
+    ExtendedPdfViewerMenuComponent,
+    Ng2PdfViewerMenuComponent,
   ],
   imports: [
     BrowserAnimationsModule,

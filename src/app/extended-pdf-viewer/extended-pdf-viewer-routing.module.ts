@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SimpleComponent } from './simple/simple.component';
-import { AlternativesComponent } from './alternatives/alternatives.component';
+import { AlternativesComponent } from '../shared/alternatives/alternatives.component';
 import { AttributesComponent } from './attributes/attributes.component';
 import { Base64Component } from './base64/base64.component';
 import { BlobComponent } from './blob/blob.component';

@@ -1,3 +1,4 @@
+import { AlternativesComponent } from './alternatives/alternatives.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -23,11 +24,16 @@ import { NgModule } from '@angular/core';
 import { Ie11MarkdownComponent } from './ie11-markdown/ie11-markdown.component';
 import { DefaultRoutesComponent } from './default-routes/default-routes.component';
 import { CommonModule } from '@angular/common';
-
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
 
 @NgModule({
-  declarations:
-  [Ie11MarkdownComponent, DefaultRoutesComponent],
+  declarations: [
+    Ie11MarkdownComponent,
+    DefaultRoutesComponent,
+    AlternativesComponent,
+    CopyrightBoxComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -52,9 +58,11 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule,
     MatTreeModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
+    Ng2SmartTableModule
   ],
   exports: [
     CommonModule,
+    AlternativesComponent,
     Ie11MarkdownComponent,
     FormsModule,
     FlexLayoutModule,
@@ -77,6 +85,8 @@ import { CommonModule } from '@angular/common';
     MatTooltipModule,
     MatToolbarModule,
     MatTreeModule,
-],
+    Ng2SmartTableModule,
+    CopyrightBoxComponent
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
