@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayersComponent } from './extended-pdf-viewer/layers/layers.component';
 import { ExportComponent } from './extended-pdf-viewer/export/export.component';
 import { PrintRangeComponent } from './extended-pdf-viewer/print-range/print-range.component';
@@ -50,8 +51,10 @@ import { PageViewModeComponent } from './extended-pdf-viewer/page-view-mode/page
 import { SignaturesComponent } from './extended-pdf-viewer/signatures/signatures.component';
 import { InfiniteScrollComponent } from './extended-pdf-viewer/infinite-scroll/infinite-scroll.component';
 import { FileInfoComponent } from './extended-pdf-viewer/file-info/file-info.component';
-import { SharedModule } from './shared.module';
+import { SharedModule } from './shared/shared.module';
 import { OctocatComponent } from './nav/octocat/octocat.component';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -59,55 +62,13 @@ import { OctocatComponent } from './nav/octocat/octocat.component';
     AppComponent,
     NavComponent,
     OctocatComponent,
-    AlternativesComponent,
-    AttributesComponent,
-    ChangelogComponent,
-    CustomizationComponent,
-    CustomSidebarComponent,
-    CustomThumbnailsComponent,
-    DefaultOptionsComponent,
-    Base64Component,
-    BlobComponent,
-    ContextmenuComponent,
-    ExportComponent,
-    FileInfoComponent,
-    FindComponent,
-    GettingStartedComponent,
-    I18nComponent,
-    InfiniteScrollComponent,
-    IntroComponent,
-    HidingButtonsComponent,
-    KeycloakComponent,
-    MultipleDocumentsComponent,
-    MobileComponent,
-    PagesLoadedComponent,
-    PageViewModeComponent,
-    PdfjsVersionsComponent,
-    PrintRangeComponent,
-    RangeRequestsComponent,
-    SignaturesComponent,
-    SimpleComponent,
-    SmartphoneComponent,
-    TextlayerComponent,
-    TouchGesturesComponent,
-    TroubleshootingComponent,
-    ZoomComponent,
-    CustomPrintDialogComponent,
-    LinksComponent,
-    KeyboardComponent,
-    DisplayOptionsComponent,
-    CustomToolbarComponent,
-    IconInfoComponent,
-    TreeComponent,
-    PerfectScrollbarComponent,
-    OpenInNewTabComponent,
-    FormsComponent,
-    LayersComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
     SharedModule,
     AppRoutingModule,
-    MarkdownModule.forRoot({ loader: HttpClient }),
+    // MarkdownModule.forRoot({ loader: HttpClient }),
 
   ],
   providers: [],

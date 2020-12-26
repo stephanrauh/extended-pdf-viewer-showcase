@@ -41,7 +41,7 @@
               {
                 "glob": "changelog.md",
                 "input": "node_modules/ngx-extended-pdf-viewer/",
-                "output": "/assets/changelog/"
+                "output": "/assets/extended-pdf-viewer/changelog/"
               }
             ],
             "styles": [

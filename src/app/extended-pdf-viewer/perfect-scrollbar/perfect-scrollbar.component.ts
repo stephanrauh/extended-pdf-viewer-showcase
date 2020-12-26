@@ -28,7 +28,9 @@ export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
   constructor(
     @Inject(PERFECT_SCROLLBAR_CONFIG)
     public config: PerfectScrollbarConfigInterface
-  ) {}
+  ) {
+    console.log("Hall")
+  }
 
   public ngAfterViewInit(): void {
     const container = document.querySelector('#viewerContainer');

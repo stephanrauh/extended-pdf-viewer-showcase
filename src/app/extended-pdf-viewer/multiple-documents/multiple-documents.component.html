@@ -8,8 +8,8 @@
       <mat-label>[src]=</mat-label>
       <mat-select [(value)]="src" class="margin">
         <mat-option [value]="undefined">no document</mat-option>
-        <mat-option value="assets/pdfs/Introduction.pdf">assets/pdfs/Introduction.pdf</mat-option>
-        <mat-option value="assets/pdfs/pdf-sample.pdf">assets/pdfs/pdf-sample.pdf</mat-option>
+        <mat-option value="/assets/pdfs/Introduction.pdf">/assets/pdfs/Introduction.pdf</mat-option>
+        <mat-option value="/assets/pdfs/pdf-sample.pdf">/assets/pdfs/pdf-sample.pdf</mat-option>
       </mat-select>
     </mat-form-field>
     <p>Current value: {{ src === undefined ? 'undefined' : src }}</p>
@@ -18,10 +18,10 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="HTML template">
-        <app-ie11-markdown src="assets/multiple-documents/html.md"> </app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/multiple-documents/html.md"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="TypeScript">
-        <app-ie11-markdown src="assets/multiple-documents/ts.md"> </app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/multiple-documents/ts.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>

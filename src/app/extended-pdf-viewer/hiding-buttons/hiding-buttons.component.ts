@@ -26,7 +26,7 @@ export class HidingButtonsComponent {
 
   public get sourcecode() {
     return `<ngx-extended-pdf-viewer
-  [src]="'assets/pdfs/pdf-sample.pdf'"
+  [src]="'/assets/pdfs/pdf-sample.pdf'"
   [showToolbar]="${this.showToolbar}"
   [showSidebarButton]="${this.showSidebarButton}"
   [showFindButton]="${this.showFindButton}"

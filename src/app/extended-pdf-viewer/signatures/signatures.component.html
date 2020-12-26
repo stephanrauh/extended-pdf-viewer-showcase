@@ -36,10 +36,10 @@
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
       <mat-tab-group>
         <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="assets/signatures/html.md"> </app-ie11-markdown>
+         <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/html.md"> </app-ie11-markdown>
         </mat-tab>
       <mat-tab label="Typescript">
-        <app-ie11-markdown ngPreserveWhitespaces src="assets/signatures/ts.md"> </app-ie11-markdown>
+       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/ts.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -52,7 +52,7 @@
   </small>
   <ngx-extended-pdf-viewer
     *ngIf="showPdf"
-    [src]="'assets/pdfs/unverified-signature.pdf'"
+    [src]="'/assets/pdfs/unverified-signature.pdf'"
     [height]="'90vh'"
     [useBrowserLocale]="true"
     [showUnverifiedSignatures]="showSignature"

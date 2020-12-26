@@ -28,10 +28,10 @@
     <mat-card class="overflow-y-scroll distance-16 mat-elevation-z8 progress" fxFlex="79%">
       <mat-tab-group>
         <mat-tab label="HTML template">
-          <app-ie11-markdown src="assets/custom-print-dialog/html.md"> </app-ie11-markdown>
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-print-dialog/html.md"> </app-ie11-markdown>
         </mat-tab>
         <mat-tab label="TypeScript">
-          <app-ie11-markdown src="assets/custom-print-dialog/ts.md"> </app-ie11-markdown>
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-print-dialog/ts.md"> </app-ie11-markdown>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
@@ -39,7 +39,7 @@
 
   <mat-card class="pdf-card distance-16 mat-elevation-z8">
     <ngx-extended-pdf-viewer
-      [src]="'assets/pdfs/A%20COOL%20KID%20LIKE%20ME.pdf'"
+      [src]="'/assets/pdfs/A%20COOL%20KID%20LIKE%20ME.pdf'"
       [useBrowserLocale]="true"
       height="calc(100vh - 475px)"
       zoom="50%"

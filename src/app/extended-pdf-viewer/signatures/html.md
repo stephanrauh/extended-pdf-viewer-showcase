@@ -1,6 +1,6 @@
 ```html
   <ngx-extended-pdf-viewer
-    [src]="'assets/pdfs/unverified-signature.pdf'"
+    [src]="'/assets/pdfs/unverified-signature.pdf'"
     [height]="'90vh'"
     [useBrowserLocale]="true"
     [showUnverifiedSignatures]="true"

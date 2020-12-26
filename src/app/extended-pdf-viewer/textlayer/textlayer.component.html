@@ -25,7 +25,7 @@
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="HTML template">
-        <app-ie11-markdown src="assets/textlayer/html.md"> </app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/html.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -33,7 +33,7 @@
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer
-     [src]="'assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+     [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
      [textLayer]="true"
      (textLayerRendered)=highlightWords($event);
      [page]="9"

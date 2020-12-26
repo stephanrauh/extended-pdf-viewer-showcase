@@ -42,10 +42,10 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="48%">
     <mat-tab-group>
       <mat-tab label="HTML template">
-        <app-ie11-markdown src="assets/mobile/html.md"> </app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/mobile/html.md"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="TypeScript">
-        <app-ie11-markdown src="assets/mobile/ts.md"> </app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/mobile/ts.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -53,7 +53,7 @@
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer
-    [src]="'assets/pdfs/fancy.pdf'"
+    [src]="'/assets/pdfs/fancy.pdf'"
     [mobileFriendlyZoom]="mobileFriendlyZoomSetting"
     [height]="'90vh'"
     [useBrowserLocale]="true"

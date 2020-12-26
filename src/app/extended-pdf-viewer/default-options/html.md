@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-    [src]="'assets/pdfs/codpaste-teachingpack.pdf'"
+    [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
     [height]="'90vh'"
     [showBorders]="showBorders"
     [useBrowserLocale]="true"

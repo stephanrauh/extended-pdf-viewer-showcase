@@ -19,8 +19,8 @@ export class DisplayOptionsComponent {
   }
 
   public set scrollMode(mode: ScrollModeType) {
-    this.ngZome.run(() => this._scrollMode = mode);
+    this.ngZone.run(() => this._scrollMode = mode);
   }
 
-  constructor(private ngZome: NgZone) {}
+  constructor(private ngZone: NgZone) {}
 }

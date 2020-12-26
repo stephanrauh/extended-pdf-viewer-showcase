@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-    [src]="'assets/pdfs/stluciadance.com.pdf'"
+    [src]="'/assets/pdfs/stluciadance.com.pdf'"
     [customThumbnail]="radiobuttonThumbnail"
     [height]="'90vh'"
     [useBrowserLocale]="true"

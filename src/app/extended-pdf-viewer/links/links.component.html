@@ -54,13 +54,13 @@
         <app-ie11-markdown [data]="sourcecode | language : 'typescript'"></app-ie11-markdown>
       </mat-tab>
       <mat-tab label="HTML" *ngIf="selectedTab!==2">
-        <app-ie11-markdown src="assets/links/html.md"></app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html.md"></app-ie11-markdown>
       </mat-tab>
       <mat-tab label="TypeScript" *ngIf="selectedTab===2">
-        <app-ie11-markdown src="assets/links/ts2.md"></app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/links/ts2.md"></app-ie11-markdown>
       </mat-tab>
       <mat-tab label="HTML" *ngIf="selectedTab===2">
-        <app-ie11-markdown src="assets/links/html2.md"></app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html2.md"></app-ie11-markdown>
       </mat-tab>
      </mat-tab-group>
   </mat-card>
@@ -68,7 +68,7 @@
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer *ngIf="!hidden"
-    [src]="'assets/pdfs/blind-text-collection.pdf'"
+    [src]="'/assets/pdfs/blind-text-collection.pdf'"
     [height]="'90vh'"
     [useBrowserLocale]="true"
     (pageRendered)="afterPageRendered($event)"

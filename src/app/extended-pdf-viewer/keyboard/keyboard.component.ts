@@ -494,7 +494,7 @@ export class KeyboardComponent implements OnInit {
 
   public get sourcecode(): string {
     return `<ngx-extended-pdf-viewer
-    [src]="'assets/pdfs/hammond-organ-wikipedia.pdf'"
+    [src]="'/assets/pdfs/hammond-organ-wikipedia.pdf'"
     [ignoreKeyboard]="${this.ignoreKeyboard}"
     [ignoreKeys]="${this.ignoreKeysDisplay}"
     [acceptKeys]="${this.acceptKeysDisplay}"

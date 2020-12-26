@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'assets/pdfs/pdf-sample.pdf'"
+  [src]="'/assets/pdfs/pdf-sample.pdf'"
   [showSidebarButton]="showSidebarButton"
   [showFindButton]="showFindButton"
   [showPagingButtons]="showPagingButtons"

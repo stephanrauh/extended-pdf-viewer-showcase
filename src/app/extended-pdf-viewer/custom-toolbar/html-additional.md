@@ -2,7 +2,7 @@
 <ngx-extended-pdf-viewer
   #pdfViewer
   [customToolbar]="additionalButtons"
-  [src]="'assets/pdfs/dachstein.pdf'"
+  [src]="'/assets/pdfs/dachstein.pdf'"
   [height]="'50vh'"
   [useBrowserLocale]="true"
   [textLayer]="true">

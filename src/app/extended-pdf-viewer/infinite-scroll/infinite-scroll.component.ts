@@ -8,9 +8,9 @@ import { PagesLoadedEvent, pdfDefaultOptions, ScrollModeType } from 'ngx-extende
 })
 export class InfiniteScrollComponent {
   public filenames = [
-    'assets/pdfs/PdfFormExample.pdf',
-    'assets/pdfs/user-experience.pdf',
-    'assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf',
+    '/assets/pdfs/PdfFormExample.pdf',
+    '/assets/pdfs/user-experience.pdf',
+    '/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf',
   ];
 
   public ScrollModeType = ScrollModeType;

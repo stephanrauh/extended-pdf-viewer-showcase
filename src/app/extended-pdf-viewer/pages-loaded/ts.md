@@ -5,7 +5,7 @@ export class PagesLoadedComponent {
 
   public onPagesLoaded(pagecount: PagesLoadedEvent): void {
     const now = new Date().toLocaleTimeString();
-    this.messages.push(\`\${now} Loaded a document with \${pagecount.pagesCount}  pages\`);
+    this.messages.push(`${now} Loaded a document with ${pagecount.pagesCount} pages`);
   }
 }
 ```

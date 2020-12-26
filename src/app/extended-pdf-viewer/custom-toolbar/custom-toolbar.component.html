@@ -21,16 +21,16 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="TypeScript">
-        <app-ie11-markdown [src]="'assets/custom-toolbar/ts-'+ theme+'.md'"> </app-ie11-markdown>
+        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-'+ theme+'.md'"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="HTML template">
-        <app-ie11-markdown [src]="'assets/custom-toolbar/html-'+ theme+'.md'"> </app-ie11-markdown>
+        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-'+ theme+'.md'"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="additional components" *ngIf="theme=='additional'">
-        <app-ie11-markdown [src]="'assets/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
+        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="changing the theme dynamically">
-        <app-ie11-markdown [src]="'assets/custom-toolbar/ts-reinitialization.md'"> </app-ie11-markdown>
+        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-reinitialization.md'"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -42,7 +42,7 @@
     [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : null"
     [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons :null)"
     [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : null"
-    [src]="'assets/pdfs/dachstein.pdf'"
+    [src]="'/assets/pdfs/dachstein.pdf'"
     [height]="'50vh'"
     [useBrowserLocale]="true"
     [textLayer]="true"

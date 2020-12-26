@@ -12,10 +12,10 @@
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="HTML template">
-        <app-ie11-markdown ngPreserveWhitespaces src="assets/page-view-mode/html.md"> </app-ie11-markdown>
+       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/html.md"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="Typescript">
-        <app-ie11-markdown ngPreserveWhitespaces src="assets/page-view-mode/ts.md"> </app-ie11-markdown>
+       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/ts.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -29,7 +29,7 @@
   >.
   <ngx-extended-pdf-viewer
     *ngIf="showPdfViewer"
-    [src]="'assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
+    [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
     [height]="'90vh'"
     [useBrowserLocale]="true"
     [textLayer]="true"

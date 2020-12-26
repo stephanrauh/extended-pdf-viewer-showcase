@@ -25,7 +25,7 @@ Second, you have to activate the attribute `textlayer`:
 <ngx-extended-pdf-viewer
      [textLayer]="true"  <!-- necessary to activate the find button and the select tool -->
      [showHandToolButton]="true" <!-- displays the "select tool" and the "hand tool" buttons -->
-     [src]="'assets/pdfs/blind-text-collection.pdf'"
+     [src]="'/assets/pdfs/blind-text-collection.pdf'"
      [height]="'90vh'"
      [useBrowserLocale]="true">
   </ngx-extended-pdf-viewer>

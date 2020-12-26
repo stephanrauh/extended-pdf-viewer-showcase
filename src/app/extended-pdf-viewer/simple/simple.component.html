@@ -51,16 +51,16 @@
     <div *ngIf="selectedTab === 0">
       <mat-tab-group>
         <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="assets/simple/html.md"> </app-ie11-markdown>
+         <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html.md"> </app-ie11-markdown>
         </mat-tab>
       </mat-tab-group>
     </div>
     <mat-tab-group *ngIf="selectedTab === 1">
       <mat-tab label="HTML template">
-        <app-ie11-markdown ngPreserveWhitespaces src="assets/simple/html2.md"> </app-ie11-markdown>
+       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html2.md"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="Typescript">
-        <app-ie11-markdown ngPreserveWhitespaces src="assets/simple/ts.md"> </app-ie11-markdown>
+       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -74,7 +74,7 @@
   >.
   <ngx-extended-pdf-viewer
     *ngIf="showPdfViewer"
-    [src]="'assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
+    [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
     [height]="height"
     [useBrowserLocale]="true"
     [textLayer]="true"

@@ -1,6 +1,6 @@
 ```html
   <ngx-extended-pdf-viewer
-    [src]="'assets/pdfs/A%20COOL%20KID%20LIKE%20ME.pdf'"
+    [src]="'/assets/pdfs/A%20COOL%20KID%20LIKE%20ME.pdf'"
     [useBrowserLocale]="true"
     height="calc(100vh - 475px)"
     zoom="50%"

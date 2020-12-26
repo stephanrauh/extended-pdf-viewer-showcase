@@ -37,16 +37,16 @@
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
     <mat-tab-group>
       <mat-tab label="HTML template (1/2)">
-        <app-ie11-markdown src="assets/custom-thumbnails/html.md"></app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/html.md"></app-ie11-markdown>
       </mat-tab>
       <mat-tab label="HTML template (2/2)">
-        <app-ie11-markdown src="assets/custom-thumbnails/template.md"></app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/template.md"></app-ie11-markdown>
       </mat-tab>
       <mat-tab label="Call JavaScript code">
-        <app-ie11-markdown src="assets/custom-thumbnails/ts.md"></app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts.md"></app-ie11-markdown>
       </mat-tab>
       <mat-tab label="Call Angular code">
-        <app-ie11-markdown src="assets/custom-thumbnails/ts2.md"></app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts2.md"></app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -54,7 +54,7 @@
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer
-      [src]="'assets/pdfs/stluciadance.com.pdf'"
+      [src]="'/assets/pdfs/stluciadance.com.pdf'"
       [customThumbnail]="radiobuttonThumbnail"
       [height]="'90vh'"
       [useBrowserLocale]="true"
