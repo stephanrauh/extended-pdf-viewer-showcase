@@ -11,7 +11,11 @@ import { IntroductionComponent } from './introduction/introduction.component';
 import { Ng2ShowAllComponent } from './ng2-show-all/ng2-show-all.component';
 import { Ng2ZoomComponent } from './ng2-zoom/ng2-zoom.component';
 import { Ng2BordersComponent } from './ng2-border/ng2-borders.component';
+import { Ng2EventsComponent } from './ng2-events/ng2-events.component';
+import { Ng2LinksCallAngularComponent } from './ng2-links-call-angular/ng2-links-call-angular.component';
+import { Ng2SideBySideComponent } from './ng2-side-by-side/ng2-side-by-side.component';
 
+(window as any).pdfWorkerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.5.207/build/pdf.worker.js';
 @NgModule({
   declarations: [
     GettingStartedComponent,
@@ -21,7 +25,10 @@ import { Ng2BordersComponent } from './ng2-border/ng2-borders.component';
     Ng2BordersComponent,
     Ng2ShowAllComponent,
     Ng2ZoomComponent,
-    Ng2AttributesComponent
+    Ng2AttributesComponent,
+    Ng2EventsComponent,
+    Ng2LinksCallAngularComponent,
+    Ng2SideBySideComponent
   ],
   imports: [
     CommonModule,

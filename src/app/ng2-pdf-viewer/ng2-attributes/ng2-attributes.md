@@ -16,7 +16,7 @@
 | (error) | | This event fires if an error occurs when the PDF file is loaded. |
 | (on-progress) | | This event fires several times when the PDF file is loaded. |
 | [(page)] | | Two-way binding attribute defining the page number. This is the counting the pages in the document. If the author of the PDF file chose to use a different numbering system, the author's page numbers are ignored. |
-| (c-maps-url) | | URL of the CMaps files for non-european languages. By default, the CMap files are loaded from `https://unpkg.com/pdfjs-dist`. If you're behind a firewall, you can use this attribute to host the CMap files locally. |
+| [c-maps-url] | | URL of the CMaps files for non-european languages. By default, the CMap files are loaded from `https://unpkg.com/pdfjs-dist`. If you're behind a firewall, you can use this attribute to host the CMap files locally. |
 | [render-text] | | Activate or deactivate the text layer. If activate, users can mark and copy text (provided the PDF file supports this). |
 | [render-text-mode] | | `[render-text-mode]="2"` activates the enhanced text mode. |
 | [original-size] | | |

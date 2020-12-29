@@ -8,6 +8,10 @@
         <mat-form-field>
           <input matInput class="margin" type="number" [(ngModel)]="page" placeholder="Current page number" />
         </mat-form-field>
+        <br />
+        <mat-form-field>
+          <input matInput class="margin" type="number" [(ngModel)]="rotation" placeholder="Rotation (0, 90, 180, 270 degrees)" />
+        </mat-form-field>
       </mat-tab>
       <mat-tab label="Text layer">
         <p>Activating the text layer slows down rendering slightly, but enables the user to mark text.
@@ -45,6 +49,7 @@
               [render-text]="renderText"
               [(page)]="page"
               [show-all]="false"
+              [rotation]="rotation"
               >
   </pdf-viewer>
 </mat-card>
