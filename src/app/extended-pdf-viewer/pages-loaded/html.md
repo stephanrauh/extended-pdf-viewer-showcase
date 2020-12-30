@@ -13,6 +13,7 @@
   (pdfLoaded)="onEvent('pdfLoaded', $event)"
   (pdfLoadingFailed)="onEvent('pdfLoadingFailed', $event)"
   (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"
-  (updateFindState)="onEvent('updateFindState', $event)">
+  (updateFindState)="onEvent('updateFindState', $event)"
+  (progress)="onEvent('onProgress', $event)">
 </ngx-extended-pdf-viewer>
 ```
