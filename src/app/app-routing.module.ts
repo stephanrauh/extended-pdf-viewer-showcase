@@ -5,7 +5,7 @@ import { DefaultRoutesComponent } from './shared/default-routes/default-routes.c
 const routes: Routes = [
   {
     path: 'extended-pdf-viewer',
-    loadChildren: () => import('./extended-pdf-viewer/extended-pdf-viewer.module').then(m => m.OrdersModule)
+    loadChildren: () => import('./extended-pdf-viewer/extended-pdf-viewer.module').then(m => m.ExtendedPdfViewerModule)
   },
   {
     path: 'ng2-pdf-viewer',

@@ -49,8 +49,12 @@ export class NavComponent {
     private breakpointObserver: BreakpointObserver,
     private notification: PDFNotificationService
   ) {
-    this.notification.pdfjsVersion.subscribe((s) => (this.pdfjsVersion = s));
-    this.activateViewer();
+    try {
+      this.notification.pdfjsVersion.subscribe((s) => (this.pdfjsVersion = s));
+      this.activateViewer();
+    } catch (exception) {
+      alert("Error! " + exception);
+    }
   }
 
   public switchViewer(): void {

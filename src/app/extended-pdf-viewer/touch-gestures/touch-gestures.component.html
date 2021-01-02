@@ -3,15 +3,12 @@
        <p>
           By default, the pinch gesture simple zooms the entire page on mobile devices. If you want to
           zoom the PDF file without zooming the rest of the page, you can activate the <code>enablePinchOnMobile</code> option.
-          This doesn't modify the behavior of desktop PC and laptops. Most touchpads translate the finger gestures to mouse wheel
-          events. This approach works well enough, so the PDF viewer doesn't add additional support for touch gestures. However,
-          the detection may be imprecise.
        </p>
-       <p><b>State of the art:</b>
-        <br />
-        This feature is currently under development. Among other things, it ignores scrolling. The touch gestures are only
-        recognized if the fingers rest on the PDF file. However, if you scroll the window, this detection currently fails.
-      </p>
+       <p>
+          Note that this doesn't modify the behavior of laptops. Their touchpads translate the finger gestures to mouse wheel
+          events. This approach works well enough, so the PDF viewer doesn't add additional support for touch gestures on laptop touchpads.
+          In other words, <code>enablePinchOnMobile</code> is ignored on laptops.
+       </p>
         <mat-checkbox [disabled]="!isMobile" [(ngModel)]="enablePinchOnMobile">enable the pinch gesture on mobile devices</mat-checkbox>
         <p *ngIf="isMobile">This device has been detected as a mobile device.</p>
         <p *ngIf="!isMobile">This device has been detected as device without touch screen. <code>enablePinchOnMobile</code> is ignored.</p>
@@ -33,10 +30,14 @@
   <ngx-extended-pdf-viewer
     [src]="'/assets/pdfs/fancy.pdf'"
     [mobileFriendlyZoom]="'150%'"
-    [height]="'90vh'"
+    [height]="'500px'"
     [useBrowserLocale]="true"
     [enablePinchOnMobile]="enablePinchOnMobile"
     [zoomLevels]="zoomLevels"
+    [minZoom]="0.5"
+    [maxZoom]="1.5"
   >
   </ngx-extended-pdf-viewer>
+  <div id="debug-info"></div>
+  <p style="height:600px">&nbsp;</p>
 </mat-card>

@@ -4,6 +4,8 @@
   [height]="'90vh'"
   [useBrowserLocale]="true"
   [enablePinchOnMobile]="enablePinchOnMobile"
+  [minZoom]="0.5"
+  [maxZoom]="1.5"
 >
 </ngx-extended-pdf-viewer>
 ```

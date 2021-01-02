@@ -4,7 +4,6 @@ import { ExtendedPdfViewerRoutingModule } from './extended-pdf-viewer-routing.mo
 import { SimpleComponent } from './simple/simple.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { AlternativesComponent } from '../shared/alternatives/alternatives.component';
 import { AttributesComponent } from './attributes/attributes.component';
 import { Base64Component } from './base64/base64.component';
 import { BlobComponent } from './blob/blob.component';
@@ -100,4 +99,4 @@ import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-
     LayersComponent,
   ],
 })
-export class OrdersModule {}
+export class ExtendedPdfViewerModule {}
