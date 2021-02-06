@@ -8,7 +8,7 @@ import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular
 })
 export class CustomToolbarComponent {
   // tslint:disable-next-line: variable-name
-  public _theme = 'checkbox';
+  public _theme = 'multi';
 
   public showPdfViewer = true;
 

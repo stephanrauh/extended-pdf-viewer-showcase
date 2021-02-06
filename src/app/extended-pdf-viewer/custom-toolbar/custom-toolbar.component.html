@@ -15,6 +15,8 @@
       <mat-radio-button value="additional">additional buttons</mat-radio-button>
       <br />
       <mat-radio-button value="floating">floating zoombar</mat-radio-button>
+      <br>
+      <mat-radio-button value="multi">multiple lines</mat-radio-button>
     </mat-radio-group>
   </mat-card>
   <p></p>
@@ -40,7 +42,7 @@
   <ngx-extended-pdf-viewer *ngIf="showPdfViewer"
     [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : null"
     [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : null"
-    [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons :null)"
+    [customToolbar]="theme === 'multi'? multiToolbar: theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons :null)"
     [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : null"
     [src]="'/assets/pdfs/dachstein.pdf'"
     [height]="'50vh'"
@@ -142,3 +144,34 @@
     </div>
   </div>
 </ng-template>
+
+<ng-template #multiToolbar>
+  <div class="header">
+    <pdf-toggle-sidebar></pdf-toggle-sidebar>
+    <pdf-find-button></pdf-find-button>
+
+    <button mat-icon-button id="zoomIn">
+      <mat-icon>zoom_in</mat-icon>
+    </button>
+    <button mat-icon-button id="zoomOut">
+      <mat-icon>zoom_out</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>fullscreen</mat-icon>
+    </button>
+
+    <button mat-icon-button id="primaryPageRotateCw">
+      <mat-icon>replay</mat-icon>
+    </button>
+
+    <div class="flex-spacer"></div>
+    <button mat-icon-button id="print">
+      <mat-icon>print</mat-icon>
+    </button>
+    <button mat-icon-button id="download">
+      <mat-icon>download</mat-icon>
+    </button>
+    <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
+  </div>
+</ng-template>
+

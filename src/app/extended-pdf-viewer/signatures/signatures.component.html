@@ -15,20 +15,14 @@
           signature unless you're 100% sure it's valid. Otherwise, users may draw wrong conclusions.
         </p>
         <p>To activate signatures, you must set the attribute <code>showUnverifiedSignatures</code>.
-        You'll also have to deactivate form rendering in the default options.</p>
+        </p>
         <mat-checkbox class="margin" [(ngModel)]="showSignature">show signature</mat-checkbox>
       </mat-tab>
-      <mat-tab label="Unverified signatures and forms">
+      <mat-tab label="Unverified signatures and security considerations">
         <p>
           The base library, pdf.js, has deliberately deactivated support for signature.
           The teams considers it a misleading and dangerous feature as long as the
-          signature can't be verified. As a side
-          effect, signatures aren't display when forms rendering is active. So you have
-          deactivate form rendering.
-        </p>
-        <p>If you need both signatures and forms, you can render the form yourself.
-          as <a href="https://medium.com/factory-mind/angular-pdf-forms-fa72b15c3fbd">Jonny Fox</a>
-          shows, that's surprisingly simple.
+          signature can't be verified.
         </p>
       </mat-tab>
     </mat-tab-group>
@@ -56,6 +50,7 @@
     [height]="'90vh'"
     [useBrowserLocale]="true"
     [showUnverifiedSignatures]="showSignature"
+    [minifiedJSLibraries]="false"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

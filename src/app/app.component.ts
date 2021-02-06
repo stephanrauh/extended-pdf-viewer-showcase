@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +6,7 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor() {}
+
+  constructor() {
+  }
 }

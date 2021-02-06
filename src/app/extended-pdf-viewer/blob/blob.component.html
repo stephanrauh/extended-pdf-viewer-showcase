@@ -3,16 +3,6 @@
     <mat-tab-group>
       <mat-tab label="Displaying BLOBs">
 
-        <p>If you're displaying a PDF file from a REST API, you often receive it as a BLOB. You can simply use the <code>src</code>
-        attribute to display the BLOB. Since version 6.0.0, you can use this feature with a strict Content Security Policy strictly
-        (see <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/534">this issue for details</a>).</p>
-        <p>This demo uses a file that's already in memory and a file that finishes loading after the PDF viewer has initialized.
-          That's no difference from a programmers perspective, but it results in a different internal data flow, so both options are shown.
-        </p>
-        <section class="section" style="margin-top:5px; margin-bottom:10px">
-          <button mat-raised-button color="primary" (click)="usePreloadedFile()">use the preloaded BLOB</button>
-          <button mat-raised-button color="primary" (click)="loadLargeFile()" style="margin-left:10px">load a large file as BLOB</button>
-        </section>
       </mat-tab>
       <mat-tab label="Downloading BLOBs">
         <p>You can also download the PDF file as a BLOB. For instance, the user can upload a file, and you can use the method
@@ -51,8 +41,9 @@
     <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>.</small>
   <ngx-extended-pdf-viewer
     [src]="src"
-    [height]="'90vh'"
+    [height]="'20vh'"
     [useBrowserLocale]="true"
+    [minifiedJSLibraries]="false"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

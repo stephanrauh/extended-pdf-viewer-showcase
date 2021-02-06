@@ -12,9 +12,9 @@
   <mat-toolbar-row class="second-row">
     <mat-radio-group aria-label="Demo" [(ngModel)]="viewer">
       Choose a library:
-      <mat-radio-button class="distance-16" value="ngx-extended-pdf-viewer">ngx-extended-pdf-viewer (pdf.js 2.6)</mat-radio-button>
-      <mat-radio-button class="distance-16" value="bleeding-edge">ngx-extended-pdf-viewer (pdf.js 2.7)</mat-radio-button>
-      <mat-radio-button class="distance-16" value="ng2-pdf-viewer">ng2-pdf-viewer</mat-radio-button>
+      <mat-radio-button class="distance-16" value="ngx-extended-pdf-viewer">ngx-extended-pdf-viewer (pdf.js 2.7)</mat-radio-button>
+      <mat-radio-button class="distance-16" value="bleeding-edge">ngx-extended-pdf-viewer (pdf.js 2.8)</mat-radio-button>
+      <mat-radio-button class="distance-16" value="ng2-pdf-viewer">ng2-pdf-viewer (pdf.js 2.5)</mat-radio-button>
     </mat-radio-group>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -33,6 +33,9 @@
   <mat-sidenav-content>
     <div class="with-border full-height">
       <router-outlet></router-outlet>
+      <div *ngFor="let l of logs">
+        {{l}}
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

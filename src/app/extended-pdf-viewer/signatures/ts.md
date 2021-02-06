@@ -6,8 +6,6 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./simple.component.css']
 })
 export class SignatureComponent {
-  constructor() {
-    pdfDefaultOptions.renderInteractiveForms = false;
-  }
+  constructor() {} 
 }
 ```

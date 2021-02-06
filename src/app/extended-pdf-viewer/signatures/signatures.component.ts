@@ -24,6 +24,6 @@ export class SignaturesComponent {
   }
 
   constructor() {
-    pdfDefaultOptions.renderInteractiveForms = false;
+    // pdfDefaultOptions.renderInteractiveForms = false;
   }
 }

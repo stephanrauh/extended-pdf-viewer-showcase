@@ -11,6 +11,8 @@ import { dependencies } from '../../../package.json';
 import { version as ng2PdfViewerLibVersion } from 'pdfjs-dist/package.json';
 import { version as ng2PdfViewerVersion } from 'ng2-pdf-viewer/package.json';
 
+const originalConsoleLog = console.log;
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -31,6 +33,9 @@ export class NavComponent {
   public ngxExtendedPdfViewer = true;
 
   public ng2PdfViewer = false;
+
+  public logs: Array<string> = [];
+
 
   public set viewer(v: string) {
     if (this._viewer !== v) {
@@ -55,6 +60,8 @@ export class NavComponent {
     } catch (exception) {
       alert("Error! " + exception);
     }
+    // console.log = (s) => { this.logs.push(s); originalConsoleLog(s); }
+    // console.error = (s) => { this.logs.push(s); originalConsoleLog(s); }
   }
 
   public switchViewer(): void {

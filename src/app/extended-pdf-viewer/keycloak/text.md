@@ -32,7 +32,7 @@ Note that you have to add the prefix `"Bearer "` yourself. That's necessary beca
 
 ## Example project
 
-<a target="#" href="https://github.com/MKITConsulting">Marcel Karras</a> kindly provided a demo project: https://github.com/stephanrauh/ngx-extended-pdf-viewer-issues/tree/master/oauth2-ngx-extended-pdf-viewer-test.
+<a target="#" href="https://github.com/MKITConsulting">Marcel Karras</a> kindly provided a demo project: https://github.com/stephanrauh/ngx-extended-pdf-viewer-issues/tree/main/oauth2-ngx-extended-pdf-viewer-test.
 
 To run it, just follow the instructions of the readme file.
 
