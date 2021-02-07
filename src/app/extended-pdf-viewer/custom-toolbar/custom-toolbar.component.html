@@ -147,8 +147,7 @@
 
 <ng-template #multiToolbar>
   <div class="header">
-    <pdf-toggle-sidebar></pdf-toggle-sidebar>
-    <pdf-find-button></pdf-find-button>
+    <pdf-toggle-sidebar style="padding-top:5px"></pdf-toggle-sidebar>
 
     <button mat-icon-button id="zoomIn">
       <mat-icon>zoom_in</mat-icon>
@@ -164,6 +163,7 @@
       <mat-icon>replay</mat-icon>
     </button>
 
+    <pdf-find-button></pdf-find-button>
     <div class="flex-spacer"></div>
     <button mat-icon-button id="print">
       <mat-icon>print</mat-icon>
@@ -171,7 +171,9 @@
     <button mat-icon-button id="download">
       <mat-icon>download</mat-icon>
     </button>
-    <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
+    <div style="float:right">
+      <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
+    </div>
   </div>
 </ng-template>
 
