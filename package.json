@@ -29,7 +29,7 @@
     "ng2-completer": "^9.0.1",
     "ng2-pdf-viewer": "^6.3.2",
     "ng2-smart-table": "^1.7.2",
-    "ngx-extended-pdf-viewer": "^8.0.0-beta.8",
+    "ngx-extended-pdf-viewer": "^8.0.0-beta.9",
     "ngx-markdown": "^11.0.1",
     "ngx-perfect-scrollbar": "^10.1.0",
     "pdfjs-dist": "^2.5.207 < 2.6",
