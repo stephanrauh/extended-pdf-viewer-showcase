@@ -1,7 +1,7 @@
 ```html
 <ngx-extended-pdf-viewer
   [src]="src"
-  [height]="'90vh'"
+  [height]="'58vh'"
   [useBrowserLocale]="true"
 >
 </ngx-extended-pdf-viewer>

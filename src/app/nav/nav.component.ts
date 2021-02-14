@@ -65,32 +65,37 @@ export class NavComponent {
   }
 
   public switchViewer(): void {
-    const previousViewer = localStorage.getItem('showcase.viewer');
-    localStorage.setItem('showcase.viewer', this.viewer);
-    if (
-      previousViewer === 'ng2-pdf-viewer' &&
-      this.viewer !== 'ng2-pdf-viewer'
-    ) {
-      location.pathname = '/extended-pdf-viewer';
-    } else if (
-      previousViewer !== 'ng2-pdf-viewer' &&
-      this.viewer === 'ng2-pdf-viewer'
-    ) {
-      location.pathname = '/ng2-pdf-viewer';
-    } else {
-      location = location; // trigger reload
-    }
-  }
-  public activateViewer(): void {
-    if (location.pathname.startsWith('/ng2-pdf-viewer')) {
-      localStorage.setItem('showcase.viewer', 'ng2-pdf-viewer');
-    }
-    if (location.pathname.startsWith('/extended-pdf-viewer')) {
-      if (localStorage.getItem('showcase.viewer') === 'ng2-pdf-viewer') {
-        localStorage.setItem('showcase.viewer', 'ngx-extended-pdf-viewer');
+    if (localStorage) {
+      const previousViewer = localStorage.getItem('showcase.viewer');
+      localStorage.setItem('showcase.viewer', this.viewer);
+      if (
+        previousViewer === 'ng2-pdf-viewer' &&
+        this.viewer !== 'ng2-pdf-viewer'
+      ) {
+        location.pathname = '/extended-pdf-viewer';
+      } else if (
+        previousViewer !== 'ng2-pdf-viewer' &&
+        this.viewer === 'ng2-pdf-viewer'
+      ) {
+        location.pathname = '/ng2-pdf-viewer';
+      } else {
+        location = location; // trigger reload
       }
     }
-    this._viewer = localStorage.getItem('showcase.viewer');
+
+  }
+  public activateViewer(): void {
+    if (localStorage) {
+      if (location.pathname.startsWith('/ng2-pdf-viewer')) {
+        localStorage.setItem('showcase.viewer', 'ng2-pdf-viewer');
+      }
+      if (location.pathname.startsWith('/extended-pdf-viewer')) {
+        if (localStorage.getItem('showcase.viewer') === 'ng2-pdf-viewer') {
+          localStorage.setItem('showcase.viewer', 'ngx-extended-pdf-viewer');
+        }
+      }
+      this._viewer = localStorage.getItem('showcase.viewer');
+    }
     if (!this._viewer) {
       this._viewer = 'ngx-extended-pdf-viewer';
     }

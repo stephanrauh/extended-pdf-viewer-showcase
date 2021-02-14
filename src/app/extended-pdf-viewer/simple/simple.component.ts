@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { PagesLoadedEvent, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-simple',
@@ -18,6 +17,9 @@ export class SimpleComponent {
 
   public height = '90vh';
 
+  /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
+  private themeIfLocalStorageIsUnavailable = "light";
+
   public set selectedTab(index: number) {
     localStorage.setItem(
       'ngx-extended-pdf-viewer.simple.selectedTab',
@@ -34,14 +36,21 @@ export class SimpleComponent {
   }
 
   public set theme(theme: string) {
-    if (theme !== this.theme) {
+    if (theme !== this.theme && localStorage) {
       localStorage.setItem('ngx-extended-pdf-viewer.theme', theme);
+      location = location;
+    } else {
+      this.themeIfLocalStorageIsUnavailable = theme;
       location = location;
     }
   }
 
   public get theme(): string {
-    return localStorage.getItem('ngx-extended-pdf-viewer.theme') || 'light';
+    if (localStorage) {
+      return localStorage.getItem('ngx-extended-pdf-viewer.theme') || 'light';
+    } else {
+      return this.themeIfLocalStorageIsUnavailable;
+    }
   }
 
   constructor() {
