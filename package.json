@@ -30,7 +30,7 @@
     "ng2-pdf-viewer": "^6.3.2",
     "ng2-smart-table": "^1.7.2",
     "ngx-extended-pdf-viewer": "^8.1.1",
-    "ngx-markdown": "^11.0.1",
+    "ngx-markdown": "^11.1.0",
     "ngx-perfect-scrollbar": "^10.1.0",
     "pdfjs-dist": "^2.5.207 < 2.6",
     "perfect-scrollbar": "^1.5.0",
