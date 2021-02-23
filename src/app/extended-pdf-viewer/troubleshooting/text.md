@@ -48,6 +48,14 @@ The library is intended to be used with IE11 - but every once in a while, a new 
 
 The latest error I've seen is caused by another library, zone.js. Version 0.11.1 of zone.js is incompatible with IE11. If I've got it correctly, this will be fixed with version 0.11.2. What I can tell for sure is downgrading to version 0.10.3 fixes the bug. More details <a target="#" href="https://github.com/angular/angular/issues/38561">in the GitHub ticket</a>.
 
+## iOS emulators; iOS 13 with ngx-extended-pdf-viewer 8.x
+
+The base library, pdf.js, has begun to use advanced features of JavaScript with version 2.7. That corresponds with version 8.0 of ngx-extended-pdf-viewer. That's ok because pdf.js is the PDF viewer of Firefox - nothing less and nothing more - but it's a challenge for third-party library like ngx-extended-pdf-viewer. The solution is to use the ES5 version of pdf.js. ngx-extended-pdf-viewer tries to detect the features of your browser and to load the appropriate version of pdf.js.
+
+There's a catch: starting with version 8.1.2, ngx-extended-pdf-viewer uses an algorithm that works fine on actual iPhones and iPads running on iOS 13.x, but if you're running the application in an emulator, it may report an unrecoverable error. Such as <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/657#issuecomment-783555261">this error report shows</a>. If you run into such an error, test the code on a real device. Chances are it turns out to be a false positive.
+
+Oh, and if you've got a better idea how to check compatibility, don't hesitate to <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues">open a bug report</a>!
+
 ## No PDF file shown - error message "offsetParent not set - cannot scroll" in the console
 
 This error means that the PDF viewer is invisible at load time. For example, that happens frequently with modal windows. If there's a fade-in animation, there's a small time frame when the PDF viewer is still invisible. In this case, you need to add a small delay before initializing it.
@@ -121,7 +129,6 @@ _Hint_: Sometimes you do not need to copy the HTML snippet into the index.html a
 ## Multiple PDF viewers on the same page (e.g. tabs)
 
 Unfortunately, you can't use multiple instances of `<ngx-extended-pdf-viewer>` on the same page. You're restricted to a single PDF viewer. This also applies to hidden PDF viewers. If you're using tabs containing PDF files, make sure you hide the PDF viewer before showing the next tab. You'll also need a short delay before showing the new PDF viewer. It takes some time to remove every object from memory.
-
 ## Other hints collected over time
 
 | Error message or description                                            |                                                                                                                                                                                                                               Solution                                                                                                                                                                                                                               |
