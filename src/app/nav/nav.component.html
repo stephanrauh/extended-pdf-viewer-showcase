@@ -31,7 +31,7 @@
     <app-ng2-pdf-viewer-menu *ngIf="ng2PdfViewer"></app-ng2-pdf-viewer-menu>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="with-border full-height">
+    <div class="with-border">
       <router-outlet></router-outlet>
       <div *ngFor="let l of logs">
         {{l}}

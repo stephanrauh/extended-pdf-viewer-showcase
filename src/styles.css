@@ -43,11 +43,6 @@ body > app-root > app-nav > .mat-toolbar-single-row {
   padding-top: 0 !important;
 }
 
-.full-height {
-  min-height: calc(100vh - 64px);
-  margin-bottom:10px;
-}
-
 .mat-nested-tree-node > li {
   display: contents;
 }
