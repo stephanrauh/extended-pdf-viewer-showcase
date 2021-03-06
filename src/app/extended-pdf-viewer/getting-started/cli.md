@@ -28,8 +28,19 @@ If you want to use the "bleeding edge" version of pdf.js, add these lines:
     {
       "glob": "**/*",
       "input": "node_modules/ngx-extended-pdf-viewer/bleeding-edge/",
-      "output": "/assets/"
+      "output": "/bleeding-edge/"
     }
   ],
   "scripts": []
-  
+```
+
+
+You will also need to add those lines to your componenent : 
+1. An import statement
+```ts
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+```
+2. A line in your constructor
+```ts 
+pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+```
