@@ -13,7 +13,7 @@ Now you can display the PDF file like so:
 <ngx-extended-pdf-viewer [src]="'assets/example.pdf'" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
 ```
 
-_Hint:_ If you are using JHipster, note there's no `assets` folder, so most likel<> the path of the URL is something like `[src]="'content/example.pdf'"`.
+_Hint:_ If you are using JHipster, note there's no `assets` folder, so most likely the path of the URL is something like `[src]="'content/example.pdf'"`.
 
 ## What if I'm getting my PDF file from a REST resource?
 
