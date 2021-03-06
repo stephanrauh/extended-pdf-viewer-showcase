@@ -35,7 +35,7 @@ If you want to use the "bleeding edge" version of pdf.js, add these lines:
 ```
 
 
-You will also need to add those lines to your componenent : 
+You will also need to add those lines to your component : 
 1. An import statement
 ```ts
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
