@@ -11,6 +11,9 @@
       <br />
       <mat-radio-button value="fancy">fancy layout</mat-radio-button>
     </mat-radio-group>
+    <br />
+    <p>The attribute <code>[(sidebarVisible)]</code> supports two-way binding. It's updated when the user opens or hide the sidebar.</p>
+    <mat-checkbox [(ngModel)]="sidebarOpen">show sidebar</mat-checkbox>
 
   </mat-card>
   <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
@@ -33,8 +36,8 @@
      *ngIf="showPdfViewer"
      [src]="'/assets/pdfs/stluciadance.com.pdf'"
      [customSidebar]="theme==='fancy' ? fancySidebar: theme === 'without'? withoutSidebar: null"
-     [height]="'90vh'"
      [useBrowserLocale]="true"
+     [(sidebarVisible)]="sidebarOpen"
      [textLayer]="true"
      [showHandToolButton]="true">
   </ngx-extended-pdf-viewer>

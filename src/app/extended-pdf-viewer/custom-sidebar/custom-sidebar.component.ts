@@ -11,6 +11,8 @@ export class CustomSidebarComponent implements OnInit {
 
   public showPdfViewer = true;
 
+  public sidebarOpen = true;
+
   constructor() {}
 
   ngOnInit() {}
