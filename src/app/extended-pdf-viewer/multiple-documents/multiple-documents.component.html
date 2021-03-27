@@ -4,12 +4,13 @@
       The attribute <code>src</code> allows you to switch between different documents. There's also the attribute
       <code> [base64Src]</code> for base64 encoded documents.
     </p>
-    <mat-form-field>
-      <mat-label>[src]=</mat-label>
+    <mat-form-field style="width:430px">
+      <mat-label>[(src)]=</mat-label>
       <mat-select [(value)]="src" class="margin">
         <mat-option [value]="undefined">no document</mat-option>
         <mat-option value="/assets/pdfs/Introduction.pdf">/assets/pdfs/Introduction.pdf</mat-option>
         <mat-option value="/assets/pdfs/pdf-sample.pdf">/assets/pdfs/pdf-sample.pdf</mat-option>
+        <mat-option [value]="url">new URL('{{url.toString()}}')</mat-option>
       </mat-select>
     </mat-form-field>
     <p>Current value: {{ src === undefined ? 'undefined' : src }}</p>
@@ -28,5 +29,5 @@
 </div>
 
 <mat-card class="distance-16 mat-elevation-z8">
-  <ngx-extended-pdf-viewer [src]="src" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true"> </ngx-extended-pdf-viewer>
+  <ngx-extended-pdf-viewer [(src)]="src" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true"> </ngx-extended-pdf-viewer>
 </mat-card>

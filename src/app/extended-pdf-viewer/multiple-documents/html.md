@@ -1,5 +1,5 @@
 ```html
-<ngx-extended-pdf-viewer [src]="src" 
+<ngx-extended-pdf-viewer [(src)]="src" 
                           backgroundColor="#ffffff" 
                           [height]="'90vh'" 
                           [useBrowserLocale]="true">

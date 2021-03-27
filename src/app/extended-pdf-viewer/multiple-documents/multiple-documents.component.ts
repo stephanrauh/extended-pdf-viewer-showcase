@@ -7,4 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MultipleDocumentsComponent {
   public src = undefined;
+
+  public url = new URL('http://' + location.host + '/assets/pdfs/GraalVM.pdf');
 }
