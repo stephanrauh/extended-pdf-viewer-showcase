@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-simple',
@@ -21,18 +21,23 @@ export class SimpleComponent {
   private themeIfLocalStorageIsUnavailable = "light";
 
   public set selectedTab(index: number) {
-    localStorage.setItem(
-      'ngx-extended-pdf-viewer.simple.selectedTab',
-      String(index)
-    );
-  }
+    if (localStorage) {
+      localStorage.setItem(
+        'ngx-extended-pdf-viewer.simple.selectedTab',
+        String(index)
+      );
+    }
+}
 
   public get selectedTab(): number {
-    return (
-      Number(
-        localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')
-      ) || 0
-    );
+    if (localStorage) {
+      return (
+        Number(
+          localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')
+        ) || 0
+      );
+    }
+    return 0;
   }
 
   public set theme(theme: string) {
