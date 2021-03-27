@@ -13,6 +13,9 @@
         <mat-option [value]="url">new URL('{{url.toString()}}')</mat-option>
       </mat-select>
     </mat-form-field>
+    <br />
+    <mat-checkbox [(ngModel)]="dragAndDrop">enable dragging and dropping files to the PDF viewer</mat-checkbox>
+
     <p>Current value: {{ src === undefined ? 'undefined' : src }}</p>
   </mat-card>
 
@@ -29,5 +32,10 @@
 </div>
 
 <mat-card class="distance-16 mat-elevation-z8">
-  <ngx-extended-pdf-viewer [(src)]="src" backgroundColor="#ffffff" [height]="'90vh'" [useBrowserLocale]="true"> </ngx-extended-pdf-viewer>
+  <ngx-extended-pdf-viewer
+    [(src)]="src"
+    backgroundColor="#ffffff"
+    [enableDragAndDrop]="dragAndDrop"
+    [useBrowserLocale]="true"
+  > </ngx-extended-pdf-viewer>
 </mat-card>

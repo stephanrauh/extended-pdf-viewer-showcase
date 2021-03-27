@@ -8,5 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MultipleDocumentsComponent {
   public src = undefined;
 
+  public dragAndDrop = true;
+
   public url = new URL(location.protocol + '//' + location.host + '/assets/pdfs/GraalVM.pdf');
 }
