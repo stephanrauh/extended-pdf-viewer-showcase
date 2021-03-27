@@ -4,8 +4,8 @@
      [textLayer]="true"
      (textLayerRendered)=highlightWords($event);
      [page]="9"
-     [height]="'90vh'"
      [useBrowserLocale]="true"
-     [showHandToolButton]="true">
+     [showHandToolButton]="true"
+     [handTool]="false">
   </ngx-extended-pdf-viewer>
 ```

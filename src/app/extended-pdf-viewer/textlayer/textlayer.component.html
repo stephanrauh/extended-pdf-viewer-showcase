@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="50%">
     <p>The text layer is an optional, invisible layer above the PDF document, which
-      is rendered as an image. The text layer allows you to
+      is rendered as an image. You need it to
     </p>
     <ul>
       <li>mark and copy texts</li>
@@ -17,15 +17,29 @@
     <mat-checkbox class="margin" [(ngModel)]="showBoxes">put each text layer <code>&lt;span&gt;</code> into a box</mat-checkbox>
     <br>
     <mat-checkbox class="margin" [(ngModel)]="showTextLayer">show the text layer</mat-checkbox>
+    <br>
+    <mat-checkbox class="margin" [(ngModel)]="enhancedTextLayer">use the enhanced text layer</mat-checkbox> (requires reload)
     <p>The demos show that the text layer isn't perfect. The positions are good enough for finding and marking text, but
-      they don't match the precise positions. Plus, sometime words are separated into several <code>&lt;span&gt;</code> tags.
+      they don't match the precise positions. Plus, sometime words are spread among several <code>&lt;span&gt;</code> tags.
     </p>
 
   </mat-card>
-  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="48%">
     <mat-tab-group>
-      <mat-tab label="HTML template">
+      <mat-tab label="HTML">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/html.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="show text layer">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="highlight words">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts2.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="mark long words">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts3.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="text layer mode">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts4.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -37,9 +51,9 @@
      [textLayer]="true"
      (textLayerRendered)=highlightWords($event);
      [page]="9"
-     [height]="'90vh'"
      [useBrowserLocale]="true"
-     [showHandToolButton]="true">
+     [showHandToolButton]="true"
+     [handTool]="false">
   </ngx-extended-pdf-viewer>
 </mat-card>
 

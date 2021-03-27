@@ -4,7 +4,7 @@
   border-radius: 8px;
 }
 
-div.show-text-layer > span {
+.ngx-extended-pdf-viewer div.show-text-layer > span {
   color: unset;
 }
 

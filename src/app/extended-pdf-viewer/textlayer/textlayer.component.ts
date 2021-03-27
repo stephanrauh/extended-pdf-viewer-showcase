@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { PageRenderedEvent, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
 
 @Component({
@@ -15,6 +16,31 @@ export class TextlayerComponent {
   private _showTextLayer = false;
 
   private alreadyRendered: Array<HTMLSpanElement> = [];
+
+  constructor() {
+    pdfDefaultOptions.textLayerMode = this.enhancedTextLayer ? 2 : 1;
+  }
+
+  public get enhancedTextLayer(): boolean {
+    if (localStorage) {
+      return "true"===localStorage.getItem('enhancedTextLayer');
+    } else {
+      return true;
+    }
+  }
+
+  public set enhancedTextLayer(b: boolean) {
+    if (b !== this.enhancedTextLayer) {
+      pdfDefaultOptions.textLayerMode = b ? 2 : 1;
+      if (localStorage) {
+        localStorage.setItem('enhancedTextLayer', String(b));
+        location = location;
+      } else {
+        alert("Cannot demonstrate this feature because your browser doesn't support localStorage.");
+      }
+
+    }
+  }
 
   public get showBoxes(): boolean {
     return this._showBoxes;
@@ -92,5 +118,13 @@ export class TextlayerComponent {
         this.doMarkLongWordsInSpan(span);
       });
     }
+  }
+
+  public pageRendered(event: PageRenderedEvent): void {
+    console.log('text layer mode', event.source['textLayerMode']);
+  }
+
+  public textLayerRendered($event: TextLayerRenderedEvent): void {
+    console.log('should use enhanced text selection', $event.source['enhanceTextSelection']);
   }
 }
