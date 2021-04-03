@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { pdfDefaultOptions } from '../../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-default-options';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-touch-gestures',
