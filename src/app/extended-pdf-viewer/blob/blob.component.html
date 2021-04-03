@@ -14,6 +14,13 @@
       </section>
       <p *ngIf="downloaded">{{downloaded}}</p>
       </mat-tab>
+      <mat-tab label="Troubleshooting">
+        <p>In rare cases, developers report they can't open the BLOB, but managed to open the same file as a Base64 file using
+          the attribute <code>[base64Src]</code>.
+          You can use this code snippets to convert a BLOB to a Base64 file:
+        </p>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/workaround.md"> </app-ie11-markdown>
+      </mat-tab>
     </mat-tab-group>
   </mat-card>
 
@@ -39,17 +46,11 @@
   <small>Copyright hint: the e-book has been published by James Boyle under a
     <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
     <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>.</small>
-  <ngx-extended-pdf-viewer
-    [src]="src"
-    [height]="'58vh'"
-    [useBrowserLocale]="true"
-    [minifiedJSLibraries]="false"
-  >
-    </ngx-extended-pdf-viewer>    </mat-tab>
-    <mat-tab label="console messages">
-      <div *ngFor="let l of logService.logs">
-        {{l}}
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+      <ngx-extended-pdf-viewer
+      [src]="src"
+      [height]="'58vh'"
+      [useBrowserLocale]="true"
+      [minifiedJSLibraries]="false"
+    >
+    </ngx-extended-pdf-viewer>
 </mat-card>

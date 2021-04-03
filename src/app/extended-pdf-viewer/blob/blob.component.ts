@@ -7,6 +7,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { BlobService } from './blob.service';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { LogService } from '../../log.service';
 
 @Component({
   selector: 'app-blob',
