@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { LogService } from '../../log.service';
 
 @Component({
   selector: 'app-simple',
@@ -58,8 +60,28 @@ export class SimpleComponent {
     }
   }
 
-  constructor() {
+  constructor(private service: NgxExtendedPdfViewerService, public logService: LogService) {
     // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 
+  public onUpdateFindResult(event: any): void {
+    console.log("UpdateFindResult " + event.matches);
+  }
+
+  public async getDiv(): Promise<void> {
+    await this.getDivAtPosition(8, 20);
+  }
+
+  public async getDivAtPosition(page: number, position: number): Promise<HTMLElement | undefined> {
+    const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
+    if (!PDFViewerApplication.pdfViewer._pages[page].textLayer) {
+      await PDFViewerApplication.pdfViewer._pages[page].draw();
+    } else {
+      const textLayer = PDFViewerApplication.pdfViewer._pages[page].textLayer;
+      const divs = textLayer.textDivs;
+      const textSnippets = textLayer.textContentItemsStr;
+      debugger;
+      return undefined;
+    }
+  }
 }
