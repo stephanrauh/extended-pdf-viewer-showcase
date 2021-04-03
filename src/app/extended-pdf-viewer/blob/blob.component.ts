@@ -21,7 +21,8 @@ export class BlobComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private blobService: BlobService,
-    private ngxService: NgxExtendedPdfViewerService
+    private ngxService: NgxExtendedPdfViewerService,
+    public logService: LogService
   ) {
     this.usePreloadedFile();
   }

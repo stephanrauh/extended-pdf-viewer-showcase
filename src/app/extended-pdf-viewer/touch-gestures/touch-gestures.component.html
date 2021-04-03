@@ -12,6 +12,9 @@
         <mat-checkbox [disabled]="!isMobile" [(ngModel)]="enablePinchOnMobile">enable the pinch gesture on mobile devices</mat-checkbox>
         <p *ngIf="isMobile">This device has been detected as a mobile device.</p>
         <p *ngIf="!isMobile">This device has been detected as device without touch screen. <code>enablePinchOnMobile</code> is ignored.</p>
+        <p>The double-tap (or double-click) gesture enlarges the PDF file. By default, the target zoom is "page-width". You can define a
+          different target zoom by setting <code>pdfDefaultOptions.doubleTapZoomFactor</code>. In this demo, that's 125%.
+        </p>
   </mat-card>
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="48%">

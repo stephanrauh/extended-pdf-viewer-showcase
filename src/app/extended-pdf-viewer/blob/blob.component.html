@@ -45,5 +45,11 @@
     [useBrowserLocale]="true"
     [minifiedJSLibraries]="false"
   >
-  </ngx-extended-pdf-viewer>
+    </ngx-extended-pdf-viewer>    </mat-tab>
+    <mat-tab label="console messages">
+      <div *ngFor="let l of logService.logs">
+        {{l}}
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </mat-card>
