@@ -3,7 +3,7 @@
   <div id="sidebarContainer" style="top:31px;background-color:goldenrod">
     <div id="additionalSidebarContainer">
       <div id="toolbarSidebar">
-        <div class="splitToolbarButton toggled">
+        <div id="outlineOptionsContainer" class="splitToolbarButton toggled">
           <button style="background-color: red; height:100%;width: 34%;border:0;margin:0;padding:0" 
             type="button" id="viewThumbnail" 
             class="toolbarButton" 

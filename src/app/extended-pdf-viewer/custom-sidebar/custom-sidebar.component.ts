@@ -7,7 +7,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular
 })
 export class CustomSidebarComponent implements OnInit {
   // tslint:disable-next-line: variable-name
-  public _theme = 'default';
+  public _theme = 'without';
 
   public showPdfViewer = true;
 

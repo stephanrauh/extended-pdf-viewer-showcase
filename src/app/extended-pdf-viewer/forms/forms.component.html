@@ -110,8 +110,10 @@
   <ngx-extended-pdf-viewer
     [src]="'/assets/pdfs/OoPdfFormExample.pdf'"
     [height]="'90vh'"
+    [zoom]="'auto'"
     [useBrowserLocale]="true"
     [(formData)]="formData"
+    [minifiedJSLibraries]="true"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
