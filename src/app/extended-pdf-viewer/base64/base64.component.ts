@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { pdfBase64 } from './pdfBase64';
 import { pdfData2 } from './secondPdfBase64';
 
@@ -7,10 +6,13 @@ import { pdfData2 } from './secondPdfBase64';
   selector: 'app-base64',
   templateUrl: './base64.component.html',
   styleUrls: ['./base64.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Base64Component {
-  public base64 = pdfBase64;
+  public base64 = undefined;
+
+  public ngOnInit(): void {
+    setTimeout(() => this.base64 = pdfBase64, 1500);
+  }
 
   public toggle(): void {
     if (this.base64 === pdfBase64) {
