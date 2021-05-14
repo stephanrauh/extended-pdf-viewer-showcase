@@ -10,7 +10,7 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
 })
 export class TreeComponent implements OnInit {
 
-  public _treeData: TreeNode[];
+  public _treeData!: TreeNode[];
 
   public treeControl = new NestedTreeControl<TreeNode>(node => node.children);
   public dataSource = new MatTreeNestedDataSource<TreeNode>();
@@ -32,9 +32,9 @@ export class TreeComponent implements OnInit {
   hasChild = (_: number, node: TreeNode) =>
     !!node.children && node.children.length > 0;
 
-  private enrichTreeData(nodes: TreeNode[]): TreeNode[] {
+  private enrichTreeData(nodes: TreeNode[] | undefined): TreeNode[] {
     if (!nodes) {
-      return;
+      return [];
     }
     nodes.forEach(n => {
       if (n.name.endsWith('>')) {

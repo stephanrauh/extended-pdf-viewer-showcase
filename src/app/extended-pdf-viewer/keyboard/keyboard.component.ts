@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class KeyboardComponent implements OnInit {
   public ignoreKeyboard = false;
 
-  public acceptKeys = [];
+  public acceptKeys: Array<string> = [];
 
   public ignoreKeys = ['j', 'k', 'F4'];
 

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./attributes.component.css'],
 })
 export class AttributesComponent implements AfterViewInit {
-  public data = [];
+  public data: Array<object> = [];
 
   private compareFunction = (dir: number, a: string, b: string) => {
     a = a.replace("[", "").replace("]", "").replace("(", "").replace(")", "").replace("<s>", "").replace("</s>", "");

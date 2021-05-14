@@ -15,7 +15,7 @@ import { LogService } from '../../log.service';
   styleUrls: ['./blob.component.css'],
 })
 export class BlobComponent implements OnInit {
-  public src: Blob;
+  public src!: Blob;
 
   public downloaded: string | undefined;
 

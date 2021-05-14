@@ -40,10 +40,10 @@
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer *ngIf="showPdfViewer"
-    [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : null"
-    [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : null"
-    [customToolbar]="theme === 'multi'? multiToolbar: theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons :null)"
-    [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : null"
+    [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : undefined"
+    [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : undefined"
+    [customToolbar]="theme === 'multi'? multiToolbar: theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons : undefined)"
+    [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : undefined"
     [src]="'/assets/pdfs/dachstein.pdf'"
     [height]="'50vh'"
     [useBrowserLocale]="true"

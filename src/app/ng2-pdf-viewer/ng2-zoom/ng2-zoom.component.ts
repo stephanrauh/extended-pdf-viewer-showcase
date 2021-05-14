@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
 })
 export class Ng2ZoomComponent {
 
-  public zoom: number | undefined = undefined;
+  public zoom!: number;
 
-  public zoomScale: string | undefined = undefined;
+  public zoomScale!: string;
 
-  public originalSize: Boolean | undefined = undefined;
+  public originalSize = false;
 
-  public fitToPage: Boolean | undefined = undefined;
+  public fitToPage = true
 
-  public autoresize: Boolean | undefined = undefined;
+  public autoresize = false;
 }

@@ -8,16 +8,16 @@
     <p>To export an image, fill one (and only one) of the input fields below. The text export doesn't require the input fields.</p>
       <mat-form-field style="width:90%">
         <mat-label>desired width (pixels)</mat-label>
-        <input matInput class="margin" [(ngModel)]="width" placeholder="1000" [disabled]="height || scale"/>
+        <input matInput class="margin" [(ngModel)]="width" placeholder="1000" [disabled]="!!height || !!scale"/>
       </mat-form-field>
       <mat-form-field style="width:90%">
         <mat-label>desired height (pixels)</mat-label>
-        <input matInput class="margin" [(ngModel)]="height" placeholder="1500" [disabled]="width || scale"/>
+        <input matInput class="margin" [(ngModel)]="height" placeholder="1500" [disabled]="!!width || !!scale"/>
         <mat-error >Please fill only one of the input fields</mat-error>
       </mat-form-field>
       <mat-form-field style="width:90%">
         <mat-label>zoom factor (numeric, not percentage) (values above 5 are slow!)</mat-label>
-        <input matInput class="margin" [(ngModel)]="scale" placeholder="0.5" [disabled]="width || height"/>
+        <input matInput class="margin" [(ngModel)]="scale" placeholder="0.5" [disabled]="(!!width) || (!!height)"/>
       </mat-form-field>
       <button mat-raised-button color="primary" (click)="exportAsImage()" [disabled] = "!height && !width && !scale" >Export as image</button>
       <button mat-raised-button color="primary" (click)="exportAsText()" style="margin-left:16px">Export as text</button>

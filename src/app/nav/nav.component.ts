@@ -6,10 +6,7 @@ import {
   pdfDefaultOptions,
   PDFNotificationService,
 } from 'ngx-extended-pdf-viewer';
-import { version } from 'ngx-extended-pdf-viewer/package.json';
-import { dependencies } from '../../../package.json';
-import { version as ng2PdfViewerLibVersion } from 'pdfjs-dist/package.json';
-import { version as ng2PdfViewerVersion } from 'ng2-pdf-viewer/package.json';
+import { versions } from './versions';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -20,12 +17,12 @@ export class NavComponent {
     .observe('(max-width: 810px)')
     .pipe(map((result) => result.matches));
 
-  public version = version;
+  public version = versions.extendedPdfViewer;
   public library = 'ngx-extended-pdf-viewer';
 
-  public angularVersion = dependencies['@angular/core'].replace('^', '');
+  public angularVersion = versions.angular;
 
-  public _viewer = 'ngx-extended-pdf-viewer';
+  public _viewer: string | null = 'ngx-extended-pdf-viewer';
 
   public ngxExtendedPdfViewer = true;
 
@@ -39,7 +36,7 @@ export class NavComponent {
   }
 
   public get viewer(): string {
-    return this._viewer;
+    return this._viewer || 'ngx-extended-pdf-viewer';
   }
 
   public pdfjsVersion = '';
@@ -100,9 +97,9 @@ export class NavComponent {
     } else if (this._viewer === 'ng2-pdf-viewer') {
       this.ngxExtendedPdfViewer = false;
       this.ng2PdfViewer = true;
-      this.pdfjsVersion = ', pdf.js ' + ng2PdfViewerLibVersion + ',';
+      this.pdfjsVersion = ', pdf.js ' + versions.pdfJsDist;
       this.library = 'ng2-pdf-viewer';
-      this.version = ng2PdfViewerVersion;
+      this.version = versions.ng2PdfViewer;
     }
   }
 

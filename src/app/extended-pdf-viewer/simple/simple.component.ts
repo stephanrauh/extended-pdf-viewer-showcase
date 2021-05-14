@@ -13,7 +13,7 @@ export class SimpleComponent {
 
   public page = 5;
 
-  public pageLabel: string;
+  public pageLabel!: string;
 
   public showPdfViewer = true;
 
@@ -60,7 +60,7 @@ export class SimpleComponent {
     }
   }
 
-  constructor(private service: NgxExtendedPdfViewerService, public logService: LogService) {
+  constructor(public logService: LogService) {
     // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 
@@ -72,7 +72,7 @@ export class SimpleComponent {
     await this.getDivAtPosition(8, 20);
   }
 
-  public async getDivAtPosition(page: number, position: number): Promise<HTMLElement | undefined> {
+  public async getDivAtPosition(page: number, position: number): Promise<void> {
     const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
     if (!PDFViewerApplication.pdfViewer._pages[page].textLayer) {
       await PDFViewerApplication.pdfViewer._pages[page].draw();
@@ -80,8 +80,6 @@ export class SimpleComponent {
       const textLayer = PDFViewerApplication.pdfViewer._pages[page].textLayer;
       const divs = textLayer.textDivs;
       const textSnippets = textLayer.textContentItemsStr;
-      debugger;
-      return undefined;
     }
   }
 }

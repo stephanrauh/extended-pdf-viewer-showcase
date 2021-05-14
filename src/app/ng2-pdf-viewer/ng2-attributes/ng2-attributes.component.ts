@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ng2-attributes',
@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./ng2-attributes.component.css'],
 })
 export class Ng2AttributesComponent implements AfterViewInit {
-  public data = [];
+  public data: Array<object> = [];
 
   private compareFunction = (dir: number, a: string, b: string) => {
     a = a.replace("[", "").replace("]", "").replace("(", "").replace(")", "").replace("<s>", "").replace("</s>", "");
@@ -59,11 +59,9 @@ export class Ng2AttributesComponent implements AfterViewInit {
         map((raw) => this.removeHeader(raw)),
         map((raw) => this.splitLines(raw)),
         map((lines) => lines.map((line) => this.parseColumns(line))),
+        tap((lines) => this.data = lines)
       )
-      .subscribe((data) => {
-        this.data = data;
-
-        });
+      .subscribe();
   }
 
   ngAfterViewInit() {

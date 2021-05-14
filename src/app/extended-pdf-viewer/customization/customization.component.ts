@@ -1,10 +1,5 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { TreeNode } from './tree-node';
-
-/**
- * Food data with nested structure.
- * Each node has a name and an optional list of children.
- */
 
 const TOOLBAR: TreeNode[] = [
   {
@@ -195,8 +190,6 @@ export class CustomizationComponent {
 
   public findbar = FINDBAR;
 
-  constructor() {
-
-  }
+  constructor() { }
 
 }

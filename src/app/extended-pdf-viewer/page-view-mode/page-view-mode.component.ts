@@ -10,7 +10,7 @@ export class PageViewModeComponent {
 
   public page = 5;
 
-  public pageLabel: string;
+  public pageLabel!: string;
 
   public showPdfViewer = true;
 

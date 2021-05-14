@@ -13,7 +13,7 @@
         <input matInput class="margin" [(ngModel)]="searchtext3" placeholder="3nd search term"/>
       </mat-form-field>
       <small *ngIf="findState!==undefined"><span style="margin-left:24px">{{findStateText}}</span>
-      <span style="margin-left:24px;" *ngIf="totalMatches > 0">Result {{currentMatchNumber}} of {{totalMatches}}
+      <span style="margin-left:24px;" *ngIf="totalMatches && (totalMatches > 0)">Result {{currentMatchNumber}} of {{totalMatches}}
       </span></small>
     </section>
     <section class="section">
@@ -76,7 +76,7 @@
     [useBrowserLocale]="true"
     [handTool]="false"
     [showHandToolButton]="true"
-    page="9"
+    [page]="9"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

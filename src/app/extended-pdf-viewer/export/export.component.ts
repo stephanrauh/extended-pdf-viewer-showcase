@@ -11,14 +11,14 @@ export class ExportComponent implements OnInit {
 
   public extractedText = 'no text extracted yet';
 
-  public scale: number;
+  public scale!: number;
 
-  public width: number;
+  public width!: number;
 
-  public height: number;
-  public widthDisplay: number;
+  public height!: number;
+  public widthDisplay!: number;
 
-  public heightDisplay: number;
+  public heightDisplay!: number;
 
   public selectedTabIndex = 0;
 

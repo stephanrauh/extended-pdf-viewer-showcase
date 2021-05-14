@@ -9,7 +9,7 @@ import { PagesLoadedEvent, NgxExtendedPdfViewerService, ProgressBarEvent } from 
 })
 export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:variable-name
-  private _observer: MutationObserver;
+  private _observer!: MutationObserver;
 
   printPercentage = 0;
   totalPages = 0;
@@ -57,7 +57,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
 
   onBeforePrint() {
     if (this.hideBuiltInProgress) {
-      const node: Element = document.querySelector('.pdf-wrapper #printServiceOverlay .dialog');
+      const node = document.querySelector('.pdf-wrapper #printServiceOverlay .dialog') as Element;
       node.setAttribute('style', 'display:none!important');
     }
     this.showCompleted = false;
@@ -65,7 +65,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   }
 
   onAfterPrint() {
-    const node: Element = document.querySelector('.pdf-wrapper #printServiceOverlay .dialog');
+    const node = document.querySelector('.pdf-wrapper #printServiceOverlay .dialog') as Element;
     node.removeAttribute('style');
     this.showCompleted = true;
   }
@@ -75,7 +75,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    document.getElementById('printCancel').click();
+    document.getElementById('printCancel')?.click();
   }
 
   get isPrintCancelled(): boolean {

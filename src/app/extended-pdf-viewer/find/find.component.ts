@@ -20,11 +20,11 @@ export class FindComponent {
   public ignoreAccents = false;
   public multipleSearchTerms = false;
 
-  public currentMatchNumber: number;
+  public currentMatchNumber: number | undefined;
 
-  public totalMatches: number;
+  public totalMatches: number | undefined;
 
-  public findState: FindState;
+  public findState: FindState | undefined;
 
   public get findStateText(): string {
     switch (this.findState) {
@@ -37,6 +37,7 @@ export class FindComponent {
       case FindState.WRAPPED:
         return 'wrapped';
     }
+    return "";
   }
 
   public get searchtext(): string {

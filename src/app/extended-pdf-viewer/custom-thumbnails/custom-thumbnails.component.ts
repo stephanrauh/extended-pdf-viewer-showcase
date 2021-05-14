@@ -27,13 +27,13 @@ export class CustomThumbnailsComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit() {
-    document.addEventListener('hoveringOverThumbnail', this.onEnterListener);
-    document.addEventListener('leavingThumbnail', this.onLeaveListener);
+    (document as any).addEventListener('hoveringOverThumbnail', this.onEnterListener);
+    (document as any).addEventListener('leavingThumbnail', this.onLeaveListener);
   }
 
   ngOnDestroy() {
-    document.removeEventListener('hoveringOverThumbnail', this.onEnterListener);
-    document.removeEventListener('leavingThumbnail', this.onLeaveListener);
+    (document as any).removeEventListener('hoveringOverThumbnail', this.onEnterListener);
+    (document as any).removeEventListener('leavingThumbnail', this.onLeaveListener);
   }
 
   public onPageChange(page: number): void {

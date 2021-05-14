@@ -8,10 +8,10 @@ import { Component, OnInit, AfterContentInit } from '@angular/core';
 export class I18nComponent {
   public hidePdfViewer = false;
 
-  private _language = undefined;
+  private _language: string | undefined = undefined;
 
   public get language(): string {
-    return this._language;
+    return this._language || '';
   }
 
   public set language(language: string) {

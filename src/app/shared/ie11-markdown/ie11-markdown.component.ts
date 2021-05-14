@@ -11,7 +11,7 @@ export class Ie11MarkdownComponent implements OnInit {
   public data: any;
 
   @Input()
-  public src: string;
+  public src!: string;
 
   public isIE11 = typeof window === 'undefined' ? false : !!(<any>window).MSInputMethodContext && !!(<any>document).documentMode;
 

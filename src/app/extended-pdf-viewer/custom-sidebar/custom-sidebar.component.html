@@ -35,7 +35,7 @@
   <ngx-extended-pdf-viewer
      *ngIf="showPdfViewer"
      [src]="'/assets/pdfs/stluciadance.com.pdf'"
-     [customSidebar]="theme==='fancy' ? fancySidebar: theme === 'without'? withoutSidebar: null"
+     [customSidebar]="theme==='fancy' ? fancySidebar: theme === 'without'? withoutSidebar: undefined"
      [useBrowserLocale]="true"
      [(sidebarVisible)]="sidebarOpen"
      [textLayer]="true"

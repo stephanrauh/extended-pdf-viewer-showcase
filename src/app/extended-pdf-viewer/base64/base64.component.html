@@ -23,7 +23,7 @@
 
 <mat-card class="distance-16 mat-elevation-z8">
   <ngx-extended-pdf-viewer
-    [base64Src]="base64"
+    [base64Src]="base64 | async"
     backgroundColor="#ffffff"
     [height]="'90vh'"
     [useBrowserLocale]="true"

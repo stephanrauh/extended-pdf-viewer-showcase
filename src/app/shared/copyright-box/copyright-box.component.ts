@@ -7,19 +7,19 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CopyrightBoxComponent implements OnInit {
   @Input()
-  public author: string;
+  public author!: string;
 
   @Input()
-  public sourceShort: string;
+  public sourceShort!: string;
 
   @Input()
-  public source: string;
+  public source!: string;
 
   @Input()
-  public licenceLink: string;
+  public licenceLink!: string;
 
   @Input()
-  public licence: string;
+  public licence!: string;
 
   constructor() {}
 

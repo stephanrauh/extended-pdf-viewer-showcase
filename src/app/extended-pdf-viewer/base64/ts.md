@@ -1,9 +1,18 @@
 ```typescript
 @Component({ ... })
 export class Base64Component{
-  // in real life, the base64 file is
-  // sent by the server. In our case, it's
-  // simply a constant string.
-  public base64 = '...SVFT0YNCg==';
+export class Base64Component {
+  public base64 = new Subject<string>();
+
+  constructor(private httpClient: HttpClient) {}
+
+  public ngOnInit(): void {
+    this.httpClient.get(
+        '/assets/pdfs/Bootstrap-vs-Material-Design-vs-Prime-vs-Tailwind.base64.txt',
+        { responseType: 'text' as 'json' })
+      .pipe(
+        tap((base64) => (this.base64. = base64 as string)),
+      ).subscribe();
+  }
 }
 ```

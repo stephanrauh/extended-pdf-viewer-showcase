@@ -95,10 +95,12 @@ export class TextlayerComponent {
     const divs = document.getElementsByClassName('textLayer');
     for (let i = 0; i < divs.length; i++) {
       const div = divs.item(i);
-      if (layer) {
-        div.classList.add('show-text-layer');
-      } else {
-        div.classList.remove('show-text-layer');
+      if (div) {
+        if (layer) {
+          div.classList.add('show-text-layer');
+        } else {
+          div.classList.remove('show-text-layer');
+        }
       }
     }
   }

@@ -21,7 +21,7 @@ export class FormsComponent {
 
   public downloaded: string | undefined;
 
-  public rawFormData: any[];
+  public rawFormData!: any[];
 
   public get formData(): { [fieldName: string]: string | string[] | number | boolean } {
     return {
@@ -35,7 +35,7 @@ export class FormsComponent {
       otherJobExperience: this.otherJobExperience,
     };
   }
- 
+
   public set formData(data: { [fieldName: string]: string | string[] | number | boolean }) {
     this.firstName = data.firstName as string;
     this.lastName = data.lastName as string;

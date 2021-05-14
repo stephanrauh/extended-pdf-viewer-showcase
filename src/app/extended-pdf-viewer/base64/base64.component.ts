@@ -1,6 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { pdfBase64 } from './pdfBase64';
 import { pdfData2 } from './secondPdfBase64';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
+import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-base64',
@@ -8,17 +10,33 @@ import { pdfData2 } from './secondPdfBase64';
   styleUrls: ['./base64.component.css'],
 })
 export class Base64Component {
-  public base64 = undefined;
+  public base64 = new Subject<string>();
+
+  public tailwindPdf!: string;
+
+  public firstPdf = true;
+
+  constructor(private httpClient: HttpClient) {}
 
   public ngOnInit(): void {
-    setTimeout(() => this.base64 = pdfBase64, 1500);
+    this.httpClient
+      .get(
+        '/assets/pdfs/Bootstrap-vs-Material-Design-vs-Prime-vs-Tailwind.base64.txt',
+        { responseType: 'text' as 'json' }
+      )
+      .pipe(
+        tap((base64) => (this.tailwindPdf = base64 as string)),
+        tap((base64) => (this.base64.next(base64 as string))),
+      )
+      .subscribe();
   }
 
   public toggle(): void {
-    if (this.base64 === pdfBase64) {
-      this.base64 = pdfData2;
+    if (this.firstPdf) {
+      this.base64.next(pdfData2);
     } else {
-      this.base64 = pdfBase64;
+      this.base64.next(this.tailwindPdf);
     }
+    this.firstPdf = !this.firstPdf;
   }
 }

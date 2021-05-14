@@ -15,7 +15,7 @@ export class LinksComponent implements OnInit {
   public hidden = false;
 
   // tslint:disable-next-line: variable-name
-  private _target: number;
+  private _target!: number;
 
   // tslint:disable-next-line: variable-name
   private _selectedTab = 0;
@@ -84,7 +84,7 @@ export class LinksComponent implements OnInit {
 import { LinkTarget } from 'ngx-extended-pdf-viewer';
 ...
 ngOnInit(): void {
-  pdfDefaultOptions.externalLinkTarget = LinkTarget.${target};
+  pdfDefaultOptions.externalLinkTarget = LinkTarget.${this.target};
 }`;
   }
 }

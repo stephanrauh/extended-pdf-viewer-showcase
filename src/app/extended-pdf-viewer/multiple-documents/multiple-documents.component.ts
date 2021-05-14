@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./multiple-documents.component.css']
 })
 export class MultipleDocumentsComponent {
-  public src = undefined;
+  public src!: string;
 
   public dragAndDrop = true;
 

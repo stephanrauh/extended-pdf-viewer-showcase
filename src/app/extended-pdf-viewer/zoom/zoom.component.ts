@@ -44,15 +44,15 @@ export class ZoomComponent {
     this.zoomLevels = list.split(',').map((x) => x.trim());
   }
 
-  public currentZoomFactor: number;
+  public currentZoomFactor: number | undefined;
 
   // getter and setter make the demo nicer -
   // you probably don't need them in your code
-  public get zoomSetting() {
+  public get zoomSetting(): string | number | undefined {
     return String(this._zoomSetting);
   }
 
-  public set zoomSetting(zoom: string) {
+  public set zoomSetting(zoom: string | number | undefined) {
     if (isNaN(Number(zoom))) {
       this._zoomSetting = zoom;
     } else {
