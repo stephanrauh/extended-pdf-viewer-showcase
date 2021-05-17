@@ -1,10 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="50%">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="60%">
     <mat-tab-group>
       <mat-tab label="Displaying Forms">
-        <p>
-          Starting with ngx-extended-pdf-viewer 5.0 (and pdf.js 2.6), PDF files with forms are supported.
-        </p>
         <p><b>Configuration:</b><br />
           If you're using the default options, you don't have to do anything to activate the feature. If
           you're using custom options, make sure to activate the setting <code>renderInteractiveForms: true</code>.
@@ -15,25 +12,26 @@
           how the field names are called in the PDF file, so you can map them to your naming conventions
           if you don't have the opportunity to talk to the creator of the PDF file.
         </p>
-        <mat-form-field>
-          <input matInput class="margin" [(ngModel)]="firstName" placeholder="first name" />
+        {{formData | json}}
+        <mat-form-field class="margin-right">
+          <input matInput class="margin" (change)="this.updateFormData()" [(ngModel)]="firstName" placeholder="first name" />
         </mat-form-field>
-        <mat-form-field>
-          <input matInput class="margin" [(ngModel)]="lastName" placeholder="last name" />
+        <mat-form-field class="margin-right">
+          <input matInput class="margin" (change)="this.updateFormData()" [(ngModel)]="lastName" placeholder="last name" />
         </mat-form-field>
-        <mat-form-field>
-          <input matInput class="margin" [(ngModel)]="country" placeholder="country" />
+        <mat-form-field class="margin-right">
+          <input matInput class="margin" (change)="this.updateFormData()" [(ngModel)]="country" placeholder="country" />
         </mat-form-field>
-        <mat-form-field>
-          <input matInput class="margin" [(ngModel)]="jobExperience" placeholder="job experience" />
+        <mat-form-field class="margin-right">
+          <input matInput class="margin" (change)="this.updateFormData()" [(ngModel)]="jobExperience" placeholder="job experience" />
         </mat-form-field>
-        <mat-form-field>
-          <input matInput class="margin" [(ngModel)]="typeScript" placeholder="TypeScript" />
+        <mat-form-field class="margin-right">
+          <input matInput class="margin" (change)="this.updateFormData()" [(ngModel)]="typeScript" placeholder="TypeScript" />
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" class="margin-right">
           <mat-label>Databases</mat-label>
-          <mat-select [(ngModel)]="databases" multiple>
+          <mat-select (change)="this.updateFormData()" [(ngModel)]="databases" multiple>
             <mat-option value="oracle">Oracle</mat-option>
             <mat-option value="sqlServer">SQL Server</mat-option>
             <mat-option value="db2">DB2</mat-option>
@@ -41,18 +39,16 @@
           </mat-select>
         </mat-form-field>
 
-          <mat-radio-group [(ngModel)]="educationLevel" aria-label="Education Level" fxLayout="column">
-            <mat-label>Education Level</mat-label>
-            <mat-radio-button value="highSchool">High School Diploma or Equivalent</mat-radio-button>
-            <mat-radio-button value="associateDegree">Associate's Degree</mat-radio-button>
-            <mat-radio-button value="bachelorDegree">Bachelor's Degree</mat-radio-button>
-            <mat-radio-button value="masterDegree">Master's Degree</mat-radio-button>
-          </mat-radio-group>
-
-          <br/>
-        <mat-form-field>
-          <textarea matInput class="margin" rows="5" [(ngModel)]="otherJobExperience" placeholder="Other Job Experience"></textarea>
+        <mat-form-field class="margin-right">
+          <textarea matInput class="margin" rows="3" (change)="this.updateFormData()" [(ngModel)]="otherJobExperience" placeholder="Other Job Experience"></textarea>
         </mat-form-field>
+
+        <mat-radio-group (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" [fxLayoutGap]="'20px'">
+          <mat-radio-button value="highSchool">High School Diploma or Equivalent</mat-radio-button>
+          <mat-radio-button value="associateDegree">Associate's Degree</mat-radio-button>
+          <mat-radio-button value="bachelorDegree">Bachelor's Degree</mat-radio-button>
+          <mat-radio-button value="masterDegree">Master's Degree</mat-radio-button>
+        </mat-radio-group>
 
       </mat-tab>
       <mat-tab label="Forms raw data (under construction)">
@@ -88,7 +84,7 @@
   </mat-tab-group>
 
   </mat-card>
-  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="48%">
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="38%">
       <mat-tab-group>
         <mat-tab label="HTML template">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/forms/html.md"> </app-ie11-markdown>
@@ -112,8 +108,9 @@
     [height]="'90vh'"
     [zoom]="'auto'"
     [useBrowserLocale]="true"
-    [(formData)]="formData"
-    [minifiedJSLibraries]="true"
+    [formData]="formData"
+    (formDataChange)="setFormData($event)"
+    [minifiedJSLibraries]="false"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

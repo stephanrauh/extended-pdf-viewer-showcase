@@ -11,7 +11,6 @@ export class Ng2EventsComponent {
 
   public onError(event: any): void {
     console.log(event);
-    debugger;
   }
 
   public onEvent(type: string, event: any): void {

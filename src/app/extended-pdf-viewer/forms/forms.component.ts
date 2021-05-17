@@ -1,15 +1,16 @@
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
-export class FormsComponent {
+export class FormsComponent implements OnChanges {
   public selectedTab = 0;
 
-  public firstName = 'LucÃ­a';
+  public firstName = 'Lucí­a';
 
   public lastName = 'Garzas';
   public country = 'Spain';
@@ -23,8 +24,10 @@ export class FormsComponent {
 
   public rawFormData!: any[];
 
-  public get formData(): { [fieldName: string]: string | string[] | number | boolean } {
-    return {
+  public formData: { [fieldName: string]: string | string[] | number | boolean } = {};
+
+  public updateFormData(): void {
+    this.formData = {
       firstName: this.firstName,
       lastName: this.lastName,
       yearsOfExperience: this.jobExperience,
@@ -36,7 +39,7 @@ export class FormsComponent {
     };
   }
 
-  public set formData(data: { [fieldName: string]: string | string[] | number | boolean }) {
+  public setFormData(data: { [fieldName: string]: string | string[] | number | boolean } | any) {
     this.firstName = data.firstName as string;
     this.lastName = data.lastName as string;
     this.jobExperience = data.yearsOfExperience as string;
@@ -47,7 +50,14 @@ export class FormsComponent {
     this.typeScript = data.typeScript as string;
   }
 
-  constructor(private ngxService: NgxExtendedPdfViewerService) {}
+  constructor(private ngxService: NgxExtendedPdfViewerService) {
+    this.updateFormData();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    debugger;
+  }
 
   public async downloadAsBlob(): Promise<void> {
     this.downloaded = undefined;
