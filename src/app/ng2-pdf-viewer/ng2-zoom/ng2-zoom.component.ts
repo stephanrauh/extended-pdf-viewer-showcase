@@ -9,7 +9,7 @@ export class Ng2ZoomComponent {
 
   public zoom!: number;
 
-  public zoomScale!: string;
+  public zoomScale!: "page-fit" | "page-width" | "page-height";
 
   public originalSize = false;
 
