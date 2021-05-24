@@ -10,12 +10,15 @@ import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges } from '@a
 export class FormsComponent implements OnChanges {
   public selectedTab = 0;
 
-  public firstName = 'Lucí­a';
+  public firstName = 'Lucía';
 
   public lastName = 'Garzas';
   public country = 'Spain';
   public jobExperience = '6';
-  public typeScript = 'Yes';
+  public typeScript = true;
+  public javaScript = true;
+  public java = true;
+  public cSharp = true;
   public databases = ['oracle','db2'];
   public educationLevel = 'bachelorDegree';
   public otherJobExperience = 'Several\nOther\nJobs';
@@ -32,6 +35,9 @@ export class FormsComponent implements OnChanges {
       lastName: this.lastName,
       yearsOfExperience: this.jobExperience,
       typeScript: this.typeScript,
+      javaScript: this.javaScript,
+      java: this.java,
+      cSharp: this.cSharp,
       country: this.country,
       databases: this.databases,
       educationLevel: this.educationLevel,
@@ -47,7 +53,10 @@ export class FormsComponent implements OnChanges {
     this.databases = data.databases as string[],
     this.educationLevel = data.educationLevel as string,
     this.otherJobExperience = data.otherJobExperience as string
-    this.typeScript = data.typeScript as string;
+    this.typeScript = Boolean(data.typeScript);
+    this.javaScript = Boolean(data.javaScript);
+    this.java = Boolean(data.java);
+    this.cSharp = Boolean(data.cSharp);
   }
 
   constructor(private ngxService: NgxExtendedPdfViewerService) {
@@ -55,8 +64,6 @@ export class FormsComponent implements OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    debugger;
   }
 
   public async downloadAsBlob(): Promise<void> {
