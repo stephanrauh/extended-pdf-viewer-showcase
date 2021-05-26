@@ -1,11 +1,16 @@
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.css'],
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FormsComponent implements OnChanges {
   public selectedTab = 0;
@@ -19,7 +24,7 @@ export class FormsComponent implements OnChanges {
   public javaScript = true;
   public java = true;
   public cSharp = true;
-  public databases = ['oracle','db2'];
+  public databases = ['oracle', 'db2', 'sqlServer'];
   public educationLevel = 'bachelorDegree';
   public otherJobExperience = 'Several\nOther\nJobs';
 
@@ -27,7 +32,9 @@ export class FormsComponent implements OnChanges {
 
   public rawFormData!: any[];
 
-  public formData: { [fieldName: string]: string | string[] | number | boolean } = {};
+  public formData: {
+    [fieldName: string]: string | string[] | number | boolean;
+  } = {};
 
   public updateFormData(): void {
     this.formData = {
@@ -45,14 +52,16 @@ export class FormsComponent implements OnChanges {
     };
   }
 
-  public setFormData(data: { [fieldName: string]: string | string[] | number | boolean } | any) {
+  public setFormData(
+    data: { [fieldName: string]: string | string[] | number | boolean } | any
+  ) {
     this.firstName = data.firstName as string;
     this.lastName = data.lastName as string;
     this.jobExperience = data.yearsOfExperience as string;
     this.country = data.country as string;
-    this.databases = data.databases as string[],
-    this.educationLevel = data.educationLevel as string,
-    this.otherJobExperience = data.otherJobExperience as string
+    (this.databases = data.databases as string[]),
+      (this.educationLevel = data.educationLevel as string),
+      (this.otherJobExperience = data.otherJobExperience as string);
     this.typeScript = Boolean(data.typeScript);
     this.javaScript = Boolean(data.javaScript);
     this.java = Boolean(data.java);
@@ -63,8 +72,7 @@ export class FormsComponent implements OnChanges {
     this.updateFormData();
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-  }
+  public ngOnChanges(changes: SimpleChanges): void {}
 
   public async downloadAsBlob(): Promise<void> {
     this.downloaded = undefined;
@@ -79,14 +87,13 @@ export class FormsComponent implements OnChanges {
   public async readRawFormDescription(): Promise<void> {
     const raw = await this.ngxService.getFormData();
     this.rawFormData = raw.map((annotation: any) => ({
-        alternativeText: annotation.fieldAnnotation.alternativeText,
-        fieldName: annotation.fieldAnnotation.fieldName,
-        fieldType: annotation.fieldAnnotation.fieldType,
-        fieldValue: annotation.fieldAnnotation.fieldValue,
-        id: annotation.fieldAnnotation.id,
-        maxLen: annotation.fieldAnnotation.maxLen,
-        rect: annotation.fieldAnnotation.rect
-      }));
+      alternativeText: annotation.fieldAnnotation.alternativeText,
+      fieldName: annotation.fieldAnnotation.fieldName,
+      fieldType: annotation.fieldAnnotation.fieldType,
+      fieldValue: annotation.fieldAnnotation.fieldValue,
+      id: annotation.fieldAnnotation.id,
+      maxLen: annotation.fieldAnnotation.maxLen,
+      rect: annotation.fieldAnnotation.rect,
+    }));
   }
-
 }

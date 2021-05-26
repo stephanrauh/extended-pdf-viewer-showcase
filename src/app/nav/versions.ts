@@ -1,6 +1,6 @@
 export const versions = {
-  angular: '12.0.1',
-  extendedPdfViewer: '9.0.0-alpha.8',
+  angular: '12.0.2',
+  extendedPdfViewer: '9.0.0-alpha.9',
   ng2PdfViewer: '7.0.1',
   pdfJsDist: '2.7.570'
 } 
