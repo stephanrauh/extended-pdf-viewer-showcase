@@ -3,7 +3,7 @@
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
-    "tsconfig.base.json": "*",
+    "tsconfig.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
@@ -15,14 +15,17 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": [
           "build",
           "lint",
           "test",
           "e2e"
-        ]
+        ],
+        "accessToken": "Yzk3MTU4ZmYtNjdkYi00OTdmLTkzZmEtMWQxM2ExMjM4OTcxfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
       }
     }
   }

@@ -37,7 +37,7 @@
           <dt>enablePrintAutoRotate</dt>
           <dd>rotates landscape page to portrait pagen when printing; default value: <code>false</code></dd>
           <dt>enableWebGL</dt>
-          <dd>Enables WebGL accelerated rendering for some operations. The default value is <code>false</code></dd>
+          <dd>Enables WebGL accelerated rendering for some operations. The default value is <code>false</code>. Remove with pdf.js 2.9.</dd>
           <dt>externalLinkRel</dt>
           <dd>Specifies the `rel` attribute for external links. Defaults to stripping the referrer</dd>
           <dt>externalLinkTarget</dt>
@@ -51,7 +51,7 @@
             The default value is 4096 * 4096 (16 mega-pixels). The canvas size is also limited by your browser.</dd>
           <dt>renderer</dt>
           <dd>render the PDF file on a <code>&lt;canvas&gt;</code> or an SVG image; default value is <code>"canvas"</code>;
-          legal values are <code>"canvas"</code> and <code>"svg"</code></dd>
+          legal values are <code>"canvas"</code> and <code>"svg"</code>. Removed with pdf.js 2.9</dd>
           <dt>renderInteractiveForms</dt>
           <dd>activate forms embedded in PDF files; since version 5.0.0 the default value is <code>true</code></dd>
           <dt>useOnlyCssZoom</dt>
@@ -124,6 +124,8 @@
           <dt>doubleTapZoomFactor</dt>
           <dd>Tapping twice (or clicking twice) on a PDF file enlarges is. By default, the target zoom is <code>'page-width'</code>.
             You can use this attribute to use a different zoom factor, such as <code>'150%'</code>.</dd>
+            <dt>enableXfa</dt>
+            <dd>??? (Since pdf.js 2.9)</dd>
         </dl>
       </mat-tab>
       <mat-tab label="Options covered by attributes">

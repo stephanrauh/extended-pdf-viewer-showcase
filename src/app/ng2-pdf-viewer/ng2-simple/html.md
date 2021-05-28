@@ -3,6 +3,7 @@
             [render-text]="renderText"
             [(page)]="page"
             [show-all]="false"
-            [rotation]="rotation">
+            [rotation]="rotation"
+            [zoom]="0.9">
 </pdf-viewer>
 ```
