@@ -3,7 +3,7 @@ export class FormsComponent {
   public firstName = 'Jane';
 
   public lastName = 'Doe';
-  public country = 'Germany';
+  public country = 'Spain';
   public jobExperience = '6';
   public typeScript = true;
 

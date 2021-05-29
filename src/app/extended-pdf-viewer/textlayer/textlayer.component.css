@@ -9,4 +9,5 @@ ngx-extended-pdf-viewer div.show-text-layer > span {
 
 .long-word {
   background-color: blue;
+  display: inline;
 }

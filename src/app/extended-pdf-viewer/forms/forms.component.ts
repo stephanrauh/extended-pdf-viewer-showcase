@@ -1,11 +1,12 @@
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { countries } from './countries';
+import { pdfDefaultOptions } from '../../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-default-options';
 import {
   ChangeDetectionStrategy,
   Component,
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -27,6 +28,7 @@ export class FormsComponent implements OnChanges {
   public databases = ['oracle', 'db2', 'sqlServer'];
   public educationLevel = 'bachelorDegree';
   public otherJobExperience = 'Several\nOther\nJobs';
+  public countries = countries;
 
   public downloaded: string | undefined;
 
@@ -35,6 +37,10 @@ export class FormsComponent implements OnChanges {
   public formData: {
     [fieldName: string]: string | string[] | number | boolean;
   } = {};
+
+  public delayedUpdateFormData(): void {
+    setTimeout(() => this.updateFormData());
+  }
 
   public updateFormData(): void {
     this.formData = {
@@ -55,6 +61,7 @@ export class FormsComponent implements OnChanges {
   public setFormData(
     data: { [fieldName: string]: string | string[] | number | boolean } | any
   ) {
+    console.log(data);
     this.firstName = data.firstName as string;
     this.lastName = data.lastName as string;
     this.jobExperience = data.yearsOfExperience as string;

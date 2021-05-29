@@ -1,5 +1,6 @@
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { Component, OnInit } from '@angular/core';
+import { pdfDefaultOptions } from '../../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-default-options';
 
 @Component({
   selector: 'app-export',
@@ -22,7 +23,9 @@ export class ExportComponent implements OnInit {
 
   public selectedTabIndex = 0;
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService) {}
+  constructor(private pdfViewerService: NgxExtendedPdfViewerService) {
+    pdfDefaultOptions.textLayerMode = 1;
+  }
 
   ngOnInit() {}
 

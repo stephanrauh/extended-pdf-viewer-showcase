@@ -16,7 +16,7 @@ export class TextlayerComponent {
 
   public doMarkLongWordsInSpan(span: HTMLSpanElement): void {
     if (!this._markLongWords) {
-      span.innerHTML = span.innerText;
+      span.innerHTML = span.innerText.replace("\n", '');
     } else {
       const withMarks = span.innerText
         .split(' ')
@@ -28,7 +28,7 @@ export class TextlayerComponent {
 
   private markOneLongWord(word: string): string {
     if (word.length > 6) {
-      return `<span class="long-word">${word}</span>`;
+      return `<div class="long-word">${word}</div>`;
     }
     return word;
   }

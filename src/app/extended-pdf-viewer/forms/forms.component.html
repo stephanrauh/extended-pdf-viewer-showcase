@@ -2,30 +2,31 @@
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="60%">
     <mat-tab-group>
       <mat-tab label="Displaying Forms">
-        <p><b>Caveat:</b> This feature is broken in version 9.0.0-alpha.x. I've been able to repair input fields, checkboxes, and text areas, but radio buttons and dropdowns are still broken.</p>
-        <p *ngIf="true">
+        <p>
           <b>Configuration:</b><br />
           If you're using the default options, you don't have to do anything to activate the feature. If you're using custom options, make
           sure to activate the setting <code>renderInteractiveForms: true</code>.
         </p>
-        <p *ngIf="true">
-          You can use the two-way binding attribute `[(formData)]` to fill the form in the PDF or to get the user input from the PDF. The
-          event `(formData)` reports every input field, even if `[formData]` passes only a small selection of these field. You can use this
-          to find out how the field names are called in the PDF file, so you can map them to your naming conventions if you don't have the
-          opportunity to talk to the creator of the PDF file.
+        <p>
+          `[(formData)]` links the fields in the PDF form with your Angular component. Note
+          that `(formDataChange)` reports every filled input field of the PDF file, including fields you didn't send with `[formData]`.
         </p>
         <mat-form-field class="margin-right">
-          <input matInput class="margin" (change)="this.updateFormData()" [(ngModel)]="firstName" placeholder="first name" />
+          <input matInput class="margin" (change)="this.updateFormData()" (ngModelChange)="this.delayedUpdateFormData()" [(ngModel)]="firstName" placeholder="first name" />
         </mat-form-field>
         <mat-form-field class="margin-right">
-          <input matInput class="margin" (change)="this.updateFormData()" [(ngModel)]="lastName" placeholder="last name" />
+          <input matInput class="margin" (change)="this.updateFormData()"  (ngModelChange)="this.delayedUpdateFormData()" [(ngModel)]="lastName" placeholder="last name" />
         </mat-form-field>
         <mat-form-field class="margin-right">
-          <input matInput class="margin" (change)="this.updateFormData()" [(ngModel)]="country" placeholder="country" />
+          <mat-label>Country</mat-label>
+          <mat-select (selectionChange)="this.updateFormData()" [(ngModel)]="country">
+            <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field class="margin-right">
-          <input matInput class="margin" (change)="this.updateFormData()" [(ngModel)]="jobExperience" placeholder="job experience" />
+          <input matInput class="margin" (change)="this.updateFormData()" (ngModelChange)="this.delayedUpdateFormData()"  [(ngModel)]="jobExperience" placeholder="job experience" />
         </mat-form-field>
+        <br>
         <mat-checkbox [checked]="typeScript" (change)="typeScript = $event.checked; this.updateFormData()" class="margin-right">
           TypeScript
         </mat-checkbox>
@@ -55,11 +56,12 @@
             class="margin"
             rows="3"
             (change)="this.updateFormData()"
+            (ngModelChange)="this.delayedUpdateFormData()"
             [(ngModel)]="otherJobExperience"
             placeholder="Other Job Experience"
           ></textarea>
         </mat-form-field>
-
+        <br>
         <mat-radio-group
           (change)="this.updateFormData()"
           [(ngModel)]="educationLevel"
@@ -74,6 +76,7 @@
       </mat-tab>
       <mat-tab label="Forms raw data (under construction)">
         <p>You can access low-level form data using <code>NgxExtendedPdfViewerService.getFormData().</code></p>
+        <p>You can use this demo to find out the names of the fields in the PDF file.</p>
         <p><b>Caveat:</b> The API is subject to change.</p>
         <section class="section" style="margin-top: 5px; margin-bottom: 10px">
           <button mat-raised-button color="primary" (click)="readRawFormDescription()" style="margin-left: 10px">
