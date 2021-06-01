@@ -45,11 +45,11 @@ This library is the way to go if you just want to render PDF files and nothing e
 
 ## ng2-image-viewer
 
-This nice library is an image viewer at it's heart. The author, Breno Prata, took the <a target="#" href="http://ignitersworld.com/lab/imageViewer.html">ImageViewer</a> library, wrapped in a carousel, and added PDF support to it.
+<b>Warning:</b> ng2-image-viewer is no longer maintained. The GitHub project has been archived. Use this library at your own risk. Plus, the README.md file of the repository contains a link to a questionable site. It seems the base library, ImageViewer, has been abandoned, and it's website has been aquired by a betting portal. If you want to use this library, please be very careful. As a measure of caution, I've removed the hyperlinks. Nonetheless, the library still looks promising, so I don't want to remove this section.
+
+This nice library is an image viewer at it's heart. The author, Breno Prata, took the ImageViewer library, wrapped in a carousel, and added PDF support to it.
 
 As far as I can see, ng2-image-viewer relies on the browser to render the PDF file natively. Don't hope for Internet Explorer support. Plus, the PDF viewer is always shown completely, without options to customize it. Other than that, it's a nice little library if you need to display the PDF file in a carousel.
-
-Have a look at the <a href="https://brenoprata10.github.io/ng2-image-viewer/">showcase</a> or get the downloads coordinates from the <a href="https://www.npmjs.com/package/ng2-image-viewer" target="#">npm page</a>.
 
 ## Angular.js 1.x
 
