@@ -20,9 +20,22 @@
       </mat-tab>
       <mat-tab label="Unverified signatures and security considerations">
         <p>
-          The base library, pdf.js, has deliberately deactivated support for signature.
-          The teams considers it a misleading and dangerous feature as long as the
-          signature can't be verified.
+          The base library, pdf.js, has only recently activated support for signatures.
+          The team had a long-standing policy not to support signature because it's difficult
+          to verify signatures.
+        </p>
+        <p>
+          ngx-extended-pdf-viewer prefers to err on the safe side. By default, signatures are
+          <b>not</b> shown. You can activate them, but then your users see a red bar containing
+          a warning. I hope that's fine for you. If you're really sure what you're doing,
+          you can hide the red bar with a CSS rule.
+        </p>
+        <p>
+          But I ask you not to do so. It's better to
+          play it safe. Show the signature, but also inform your users you can't guarantee them
+          it's not a fake. The warning also tells your users how to verify the signature: most
+          desktop PDF viewer applications check this. In particular, just open the file in
+          Acrobat Reader to see if the signature is valid or fraud.
         </p>
       </mat-tab>
     </mat-tab-group>
