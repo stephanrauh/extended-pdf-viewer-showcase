@@ -36,7 +36,7 @@
     "ngx-perfect-scrollbar": "^10.1.1",
     "pdfjs-dist": "~2.7.570",
     "perfect-scrollbar": "^1.5.1",
-    "prismjs": "^1.24.0",
+    "prismjs": "^1.24.1",
     "rxjs": "^7.1.0",
     "tslib": "^2.3.0",
     "web-animations-js": "^2.3.2",
