@@ -87,11 +87,13 @@
           <tr>
             <td>Name</td>
             <td>Coordinates<br />(0, 0) = bottom left</td>
+            <td>Page number</td>
             <td>Json (a small selection)</td>
           </tr>
           <tr *ngFor="let field of rawFormData">
             <td>{{ field.fieldName }}</td>
             <td>{{ field.rect }}</td>
+            <td>{{ field.pageNumber }}</td>
             <td>{{ field | json }}</td>
           </tr>
         </table>

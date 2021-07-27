@@ -98,6 +98,7 @@ export class FormsComponent implements OnChanges {
       fieldName: annotation.fieldAnnotation.fieldName,
       fieldType: annotation.fieldAnnotation.fieldType,
       fieldValue: annotation.fieldAnnotation.fieldValue,
+      pageNumber: annotation.pageNumber,
       id: annotation.fieldAnnotation.id,
       maxLen: annotation.fieldAnnotation.maxLen,
       rect: annotation.fieldAnnotation.rect,
