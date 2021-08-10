@@ -46,6 +46,7 @@ import { CustomizationComponent } from './customization/customization.component'
 import { TreeComponent } from './customization/tree/tree.component';
 import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.component';
 import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-new-tab.component';
+import { ScriptingComponent } from './scripting/scripting.component';
 
 @NgModule({
   imports: [
@@ -80,6 +81,7 @@ import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-
     PdfjsVersionsComponent,
     PrintRangeComponent,
     RangeRequestsComponent,
+    ScriptingComponent,
     SignaturesComponent,
     SmartphoneComponent,
     TextlayerComponent,

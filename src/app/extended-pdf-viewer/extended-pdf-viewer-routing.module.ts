@@ -43,6 +43,7 @@ import { TextlayerComponent } from './textlayer/textlayer.component';
 import { TouchGesturesComponent } from './touch-gestures/touch-gestures.component';
 import { TroubleshootingComponent } from './troubleshooting/troubleshooting.component';
 import { ZoomComponent } from './zoom/zoom.component';
+import { ScriptingComponent } from './scripting/scripting.component';
 
 const routes: Routes = [
   {
@@ -80,6 +81,7 @@ const routes: Routes = [
   { path: 'pages-loaded', component: PagesLoadedComponent },
   { path: 'pdfjs-versions', component: PdfjsVersionsComponent },
   { path: 'range-requests', component: RangeRequestsComponent },
+  { path: 'scripting', component: ScriptingComponent },
   { path: 'signatures', component: SignaturesComponent},
   { path: 'simple', component: SimpleComponent },
   { path: 'smartphone', component: SmartphoneComponent },

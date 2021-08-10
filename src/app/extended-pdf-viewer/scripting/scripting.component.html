@@ -1,0 +1,43 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+    <p>
+      pdf.js ships with a JavaScript engine. There's little security risk because they're executing
+      JavaScript in a sandbox. Even so, you can deactivate scripting altogether.
+    </p>
+    <p>There are two limitations of this feature:</p>
+    <ul>
+      <li>You must disable JavaScript before loading the pdf.js engine. Usually initializing
+        <code>pdfDefaultOptions.enableScripting = false;</code> in the constructor of your component
+        is early enough (unless you've already opened a PDF document before).
+      </li>
+      <li>If your PDF file contains a script to print the file immediately after opening it,
+        it's still printed. The only difference is it's not printed using the JavaScript engine,
+        so any option your JavaScript code may pass is lost.
+      </li>
+    </ul>
+    <p>The demo needs JavaScript to put the cursor into the first form field, to validate your input, and to implement the "re-initialize" button.</p>
+    <mat-checkbox class="margin" [(ngModel)]="enableScripting">enable JavaScript</mat-checkbox> (forces reload)
+  </mat-card>
+
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/html.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="TypeScript">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/ts.md"> </app-ie11-markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8">
+  <small>
+    Copyright hint: the PDF file is part of test suite of the <a href="https://github.com/mozilla/pdf.js/blob/master/test/pdfs/160F-2019.pdf">pdf.js</a> project.
+  </small>.
+  <ngx-extended-pdf-viewer
+    [src]="'/assets/pdfs/160F-2019.pdf'"
+    [useBrowserLocale]="true"
+  >
+  </ngx-extended-pdf-viewer>
+</mat-card>
