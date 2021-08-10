@@ -1,14 +1,14 @@
-/deep/ button#print,
-/deep/ button#print * {
+::ng-deep button#print,
+::ng-deep button#print * {
   display: block !important;
 }
 
-/deep/ button#download,
-/deep/ button#download * {
+::ng-deep button#download,
+::ng-deep button#download * {
   display: block !important;
 }
 
-/deep/ #toolbarViewerMiddle {
+::ng-deep #toolbarViewerMiddle {
   display: none;
 }
 
