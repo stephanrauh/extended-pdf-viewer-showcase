@@ -10,11 +10,7 @@ export class PageViewModeComponent {
 
   public page = 5;
 
-  public pageLabel!: string;
+  public spreadMode: "off" | "even" | "odd" = "off";
 
-  public showPdfViewer = true;
-
-  constructor() {
-    // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
-  }
+  constructor() { }
 }

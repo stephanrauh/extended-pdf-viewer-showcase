@@ -1,9 +1,13 @@
 ```typescript
  @Component({
-  selector: 'app-simple',
-  templateUrl: './simple.component.html',
-  styleUrls: ['./simple.component.css']
+  selector: 'app-page-view-mode',
+  templateUrl: './page-view-mode.component.html',
+  styleUrls: ['./page-view-mode.component.css']
 })
-export class SimpleComponent {
+export class PageViewModeComponent {
+
+  public page = 5;
+
+  public spreadMode: "off" | "even" | "odd" = "off";
 }
 ```
