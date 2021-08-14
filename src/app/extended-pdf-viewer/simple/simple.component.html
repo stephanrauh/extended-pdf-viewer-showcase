@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFill>
   <div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="45%">
     <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab=$event">
       <mat-tab label="Getting started">
         <p>
@@ -46,9 +46,29 @@
           <mat-radio-button value="light">light theme</mat-radio-button>
         </mat-radio-group>
       </mat-tab>
+      <mat-tab label="Height">
+        <p>
+          If you omit the <code>[height]</code> attribute, the PDF viewer tries to use all the available vertical space.
+          To make this work, make sure the surrounding container is large enough to contain the PDF viewer.
+          By default, many CSS frameworks set the height of an empty container to zero pixels.
+          You can use the <code>height</code> attribute to work around this limitation or to fine-tune the amount
+          of screen estate you need.
+        </p>
+        <mat-radio-group aria-label="Height" [(ngModel)]="height" style="line-height: 1.5">
+          <mat-radio-button [value]="undefined">default (i.e. [height]="undefined")</mat-radio-button>
+          <br />
+          <mat-radio-button value="100%">[height]="'100%'"</mat-radio-button>
+          <br />
+          <mat-radio-button value="95%">[height]="'95%'"</mat-radio-button>
+          <br />
+          <mat-radio-button value="90vh">[height]="'90vh'"</mat-radio-button>
+          <br />
+          <mat-radio-button value="200px">[height]="'200px'"</mat-radio-button>
+        </mat-radio-group>
+      </mat-tab>
     </mat-tab-group>
   </mat-card>
-  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="53%">
     <div *ngIf="selectedTab === 0">
       <mat-tab-group>
         <mat-tab label="HTML template">
@@ -62,6 +82,14 @@
       </mat-tab>
       <mat-tab label="Typescript">
        <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts.md"> </app-ie11-markdown>
+      </mat-tab>
+    </mat-tab-group>
+    <mat-tab-group *ngIf="selectedTab === 2">
+      <mat-tab label="HTML template">
+       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html3.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="Typescript">
+       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts3.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -79,6 +107,7 @@
     *ngIf="showPdfViewer"
     [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
     [zoom]="'auto'"
+    [height]="height"
     [useBrowserLocale]="true"
     [textLayer]="true"
     [showHandToolButton]="true"
@@ -86,7 +115,6 @@
     [(page)]="page"
     [(pageLabel)]="pageLabel"
     [theme]="theme"
-    [minifiedJSLibraries]="false"
     (updateFindMatchesCount)="onUpdateFindResult($event)"
   >
   </ngx-extended-pdf-viewer>

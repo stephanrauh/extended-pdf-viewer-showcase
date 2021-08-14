@@ -17,7 +17,7 @@ export class SimpleComponent {
 
   public showPdfViewer = true;
 
-  public height = '90vh';
+  public height: string = "95%";
 
   /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
   private themeIfLocalStorageIsUnavailable = "light";
