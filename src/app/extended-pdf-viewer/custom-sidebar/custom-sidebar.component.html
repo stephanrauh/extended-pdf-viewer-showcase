@@ -1,4 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="space-between">
+<div fxLayout="column" fxFill>
+  <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
     <p>You can customize both the sidebar. The only disadvantage is you have to set the
     `top` position yourself. If you're offering an optional mobile-frieny large toolbar,
@@ -31,7 +32,7 @@
   </mat-card>
 </div>
 
-<mat-card class="distance-16 mat-elevation-z8">
+<mat-card class="distance-16 mat-elevation-z8 use-available-height">
   <ngx-extended-pdf-viewer
      *ngIf="showPdfViewer"
      [src]="'/assets/pdfs/stluciadance.com.pdf'"
@@ -43,6 +44,7 @@
      [minifiedJSLibraries]="false">
   </ngx-extended-pdf-viewer>
 </mat-card>
+</div>
 
 <ng-template #withoutSidebar>
   <div id="sidebarContainer" style="top:-1px">

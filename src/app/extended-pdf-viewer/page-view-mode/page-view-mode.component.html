@@ -1,4 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="space-between">
+<div fxLayout="column" fxFill>
+  <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
     <mat-tab-group>
       <mat-tab label="Getting started">
@@ -31,13 +32,13 @@
   </mat-card>
 </div>
 
-<mat-card class="distance-16 mat-elevation-z8">
+<mat-card class="distance-16 mat-elevation-z8 use-available-height">
   <small
     >Copyright hint: the e-book has been published by James Boyle under a
     <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
     <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a></small
   >.
-  <ngx-extended-pdf-viewer
+  <ngx-extended-pdf-viewer class="use-available-height"
     [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
     [useBrowserLocale]="true"
     [(page)]="page"
@@ -45,6 +46,8 @@
     [spread]="spreadMode"
     [showBorders]="showBorders"
     [minifiedJSLibraries]="false"
+    [height]="'90%'"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
+</div>

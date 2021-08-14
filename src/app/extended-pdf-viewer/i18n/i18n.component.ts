@@ -37,6 +37,6 @@ export class I18nComponent {
     this.hidePdfViewer = true;
     setTimeout(() => {
       this.hidePdfViewer = false;
-    }, 1000);
+    });
   }
 }

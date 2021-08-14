@@ -1,4 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="space-between">
+<div fxLayout="column" fxFill>
+  <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="48%">
     <mat-tab-group>
       <mat-tab label="HTML template">
@@ -25,7 +26,7 @@
   </mat-card>
 </div>
 
-<mat-card class="distance-16 mat-elevation-z8">
+<mat-card class="distance-16 mat-elevation-z8 use-available-height">
 <small>Copyright hint: the PDF file has been published on <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">Wikimedia</a> by the anonymous user Paroliver
 under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a> license, as stated <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">here</a>.</small>
   <ngx-extended-pdf-viewer
@@ -50,3 +51,4 @@ under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-
     (progress)="onEvent('progress', $event)">
   </ngx-extended-pdf-viewer>
 </mat-card>
+</div>

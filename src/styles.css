@@ -10,6 +10,12 @@ html {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  height: calc(100% - 112px);
+}
+
+.use-available-height {
+  flex: auto;
+  margin-bottom: 8px;
 }
 
 .distance-16 {

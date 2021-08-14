@@ -1,4 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="space-between">
+<div fxLayout="column" fxFill>
+  <div fxLayout="row" fxLayoutAlign="space-between">
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
     <mat-tab-group>
       <mat-tab label="Calling Angular">
@@ -72,7 +73,7 @@
   </mat-card>
 </div>
 
-<mat-card class="distance-16 mat-elevation-z8" style="height:54vh">
+<mat-card class="distance-16 mat-elevation-z8 use-available-height" style="height:54vh">
   <pdf-viewer *ngIf="!hidden"
               [src]="'/assets/pdfs/blind-text-collection.pdf'"
               [render-text]="true"
@@ -83,3 +84,4 @@
               >
   </pdf-viewer>
 </mat-card>
+</div>
