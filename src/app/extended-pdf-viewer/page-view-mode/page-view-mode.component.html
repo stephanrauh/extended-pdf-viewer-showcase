@@ -13,7 +13,9 @@
           <br />
           <mat-radio-button value="even">even spread</mat-radio-button>
         </mat-radio-group>
-
+        <p>
+          <mat-checkbox class="margin" [(ngModel)]="showBorders">show borders around the pages</mat-checkbox>
+        </p>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -41,6 +43,8 @@
     [(page)]="page"
     pageViewMode="single"
     [spread]="spreadMode"
+    [showBorders]="showBorders"
+    [minifiedJSLibraries]="false"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

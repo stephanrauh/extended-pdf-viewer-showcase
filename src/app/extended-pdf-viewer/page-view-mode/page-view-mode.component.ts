@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-page-view-mode',
@@ -11,6 +10,8 @@ export class PageViewModeComponent {
   public page = 5;
 
   public spreadMode: "off" | "even" | "odd" = "off";
+
+  public showBorders = true;
 
   constructor() { }
 }
