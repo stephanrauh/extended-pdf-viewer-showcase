@@ -44,6 +44,7 @@ import { TouchGesturesComponent } from './touch-gestures/touch-gestures.componen
 import { TroubleshootingComponent } from './troubleshooting/troubleshooting.component';
 import { ZoomComponent } from './zoom/zoom.component';
 import { ScriptingComponent } from './scripting/scripting.component';
+import { BookModeComponent } from './book-mode/book-mode.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,7 @@ const routes: Routes = [
   { path: 'find', component: FindComponent },
   { path: 'i18n', component: I18nComponent },
   { path: 'infinite-scroll', component: InfiniteScrollComponent },
+  { path: 'book-mode', component: BookModeComponent },
   { path: 'intro', component: IntroComponent },
   { path: 'hiding-buttons', component: HidingButtonsComponent },
   { path: 'links', component: LinksComponent },

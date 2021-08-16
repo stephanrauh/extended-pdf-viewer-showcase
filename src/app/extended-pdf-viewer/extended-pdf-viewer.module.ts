@@ -47,6 +47,7 @@ import { TreeComponent } from './customization/tree/tree.component';
 import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.component';
 import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-new-tab.component';
 import { ScriptingComponent } from './scripting/scripting.component';
+import { BookModeComponent } from './book-mode/book-mode.component';
 
 @NgModule({
   imports: [
@@ -78,6 +79,7 @@ import { ScriptingComponent } from './scripting/scripting.component';
     MobileComponent,
     PagesLoadedComponent,
     PageViewModeComponent,
+    BookModeComponent,
     PdfjsVersionsComponent,
     PrintRangeComponent,
     RangeRequestsComponent,

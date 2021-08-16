@@ -1,6 +1,3 @@
-You only need this if <code>[useBrowserLocale]="false"</code>. The locales are Json files. For many languages,
-these files are already in the folder node_modules/ngx-extended-pdf-viewer/assets/inline-locale-files. If you need a single language, you can simply copy the content of one of these files and put them into the index.html (or any other file that's part of the DOM when the PDF viewer is initialized).
-
 ```html
 <script type="application/l10n">
   {"default_locale":"es-ES",

@@ -8,7 +8,21 @@ import { Component, OnInit, AfterContentInit } from '@angular/core';
 export class I18nComponent {
   public hidePdfViewer = false;
 
-  private _language: string | undefined = undefined;
+  public _selectedTab: number = 1;
+
+  private _language: string | undefined = 'nl-BE';
+
+  public get selectedTab(): number {
+    return this._selectedTab;
+  }
+
+  public set selectedTab(tab: number) {
+    this._selectedTab = tab;
+    this.hidePdfViewer = true;
+    setTimeout(() => {
+      this.hidePdfViewer = false;
+    });
+  }
 
   public get language(): string {
     return this._language || '';
