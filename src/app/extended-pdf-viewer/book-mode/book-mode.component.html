@@ -26,7 +26,7 @@
   </mat-card>
 </div>
 
-<mat-card class="distance-16 mat-elevation-z8" style="width:720px;height:700px">
+<mat-card class="distance-16 mat-elevation-z8 use-available-height" xstyle="width:720px;height:700px">
   <small
     >Copyright hint: the e-book has been published by James Boyle under a
     <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
@@ -36,9 +36,12 @@
     [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
     pageViewMode="book"
     [minifiedJSLibraries]="false"
-    [height]="'90%'"
+    [height]="'95%'"
     [zoom]="'page-fit'"
     [sidebarVisible]="false"
+    [showBorders]="false"
+    (pageRendered)="onPageRendered($event)"
+    (pageRender)="onPageRender($event)"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
