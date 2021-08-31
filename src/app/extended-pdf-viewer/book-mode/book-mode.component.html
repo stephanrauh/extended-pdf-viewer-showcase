@@ -5,6 +5,17 @@
       under development. Truth to tell, it's possible it won't work reliable enough.
       Consider it a preview.
     </p>
+    <p>
+      <b>Problems to solve before making it an official features:</b>
+    </p>
+    <ul>
+      <li>Book mode is a bit heavy on the CPU.</li>
+      <li>Rendering pages is unreliable. To enable smooth page turning,
+        the two pages before and after the currently visible pages should
+        always be rendered in advance. That doesn't always happen - possibly
+        because of the high CPU usage, but I'm still looking for the root cause.
+      </li>
+    </ul>
     <mat-tab-group  *ngIf="false">
       <mat-tab label="Getting started">
         <p>
@@ -26,7 +37,7 @@
   </mat-card>
 </div>
 
-<mat-card class="distance-16 mat-elevation-z8 use-available-height" xstyle="width:720px;height:700px">
+<mat-card class="distance-16 mat-elevation-z8 use-available-height">
   <small
     >Copyright hint: the e-book has been published by James Boyle under a
     <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
