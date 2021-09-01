@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
 
 @Component({
@@ -21,6 +21,8 @@ export class SimpleComponent {
 
   /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
   private themeIfLocalStorageIsUnavailable = "light";
+
+
 
   public set selectedTab(index: number) {
     if (localStorage) {
@@ -61,7 +63,8 @@ export class SimpleComponent {
   }
 
   constructor(public logService: LogService) {
-    // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+//    pdfDefaultOptions.assetsFolder = 'https://unpkg.com/browse/ngx-extended-pdf-viewer@10.0.0-alpha.9/assets';
+//    pdfDefaultOptions.workerSrc = () => 'https://unpkg.com/browse/ngx-extended-pdf-viewer@10.0.0-alpha.9/assets/pdf.worker-2.10.550.min.js';
   }
 
   public onUpdateFindResult(event: any): void {

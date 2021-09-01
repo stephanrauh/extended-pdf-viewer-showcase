@@ -45,6 +45,7 @@ import { TroubleshootingComponent } from './troubleshooting/troubleshooting.comp
 import { ZoomComponent } from './zoom/zoom.component';
 import { ScriptingComponent } from './scripting/scripting.component';
 import { BookModeComponent } from './book-mode/book-mode.component';
+import { PresentationComponent } from './presentations/presentations.component';
 
 const routes: Routes = [
   {
@@ -95,11 +96,11 @@ const routes: Routes = [
   { path: 'page-view-mode', component: PageViewModeComponent },
   { path: 'print-range', component: PrintRangeComponent },
   { path: 'perfect-scrollbar', component: PerfectScrollbarComponent },
+  { path: 'presentations', component: PresentationComponent },
   {
     path: '**',
     redirectTo: 'simple',
   },
-
 ];
 
 @NgModule({

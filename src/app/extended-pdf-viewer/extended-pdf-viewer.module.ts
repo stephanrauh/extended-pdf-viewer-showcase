@@ -48,6 +48,7 @@ import { CustomToolbarComponent } from './custom-toolbar/custom-toolbar.componen
 import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-new-tab.component';
 import { ScriptingComponent } from './scripting/scripting.component';
 import { BookModeComponent } from './book-mode/book-mode.component';
+import { PresentationComponent } from './presentations/presentations.component';
 
 @NgModule({
   imports: [
@@ -101,6 +102,7 @@ import { BookModeComponent } from './book-mode/book-mode.component';
     OpenInNewTabComponent,
     FormsComponent,
     LayersComponent,
+    PresentationComponent
   ],
 })
 export class ExtendedPdfViewerModule {}

@@ -1,0 +1,16 @@
+```html
+<ngx-extended-pdf-viewer
+    [src]="'/assets/pdfs/GraalVM.pdf'"
+    [zoom]="'auto'"
+    [useBrowserLocale]="true"
+    [showPresentationModeButton]="true"
+    [showRotateButton]="false"
+    [showHandToolButton]="false"
+    [showDownloadButton]="false"
+    [showPrintButton]="false"
+    [showSecondaryToolbarButton]="false"
+    [showBookmarkButton]="false"
+    [backgroundColor]="'#161C1E'"
+  >
+  </ngx-extended-pdf-viewer>
+```
