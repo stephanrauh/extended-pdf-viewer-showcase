@@ -1,0 +1,3 @@
+::ng-deep .mat-list-base .mat-list-item.active {
+  color: blue;
+}

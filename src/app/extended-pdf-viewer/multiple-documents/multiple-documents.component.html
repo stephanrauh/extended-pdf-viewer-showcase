@@ -17,7 +17,7 @@
     <br />
     <mat-checkbox [(ngModel)]="dragAndDrop">enable dragging and dropping files to the PDF viewer</mat-checkbox>
 
-    <p>Current value: {{ src === undefined ? 'undefined' : src }}</p>
+    <p>Current value of <code>[src]</code>: {{ src === undefined ? 'undefined' : '"'+ src + '"' }}</p>
   </mat-card>
 
   <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
@@ -38,6 +38,7 @@
     backgroundColor="#ffffff"
     [enableDragAndDrop]="dragAndDrop"
     [useBrowserLocale]="true"
+    [minifiedJSLibraries]="false"
   > </ngx-extended-pdf-viewer>
 </mat-card>
 </div>

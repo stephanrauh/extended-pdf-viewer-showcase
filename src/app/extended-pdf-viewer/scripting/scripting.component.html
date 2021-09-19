@@ -5,7 +5,7 @@
       pdf.js ships with a JavaScript engine. There's little security risk because they're executing
       JavaScript in a sandbox. Even so, you can deactivate scripting altogether.
     </p>
-    <p>There are two limitations of this feature:</p>
+    <p>If you want to deactivate the JavaScript engine, keep two things in mind:</p>
     <ul>
       <li>You must disable JavaScript before loading the pdf.js engine. Usually initializing
         <code>pdfDefaultOptions.enableScripting = false;</code> in the constructor of your component
