@@ -1,6 +1,5 @@
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { countries } from './countries';
-import { pdfDefaultOptions } from '../../../../../ngx-extended-pdf-viewer/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-default-options';
 import {
   ChangeDetectionStrategy,
   Component,
