@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, tap } from 'rxjs';
 
@@ -6,6 +6,7 @@ import { filter, tap } from 'rxjs';
   selector: 'app-extended-pdf-viewer-menu',
   templateUrl: './extended-pdf-viewer-menu.component.html',
   styleUrls: ['./extended-pdf-viewer-menu.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExtendedPdfViewerMenuComponent implements OnInit {
   constructor(private router: Router, private cd: ChangeDetectorRef) {}

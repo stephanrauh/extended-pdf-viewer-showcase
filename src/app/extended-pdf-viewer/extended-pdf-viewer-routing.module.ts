@@ -46,6 +46,8 @@ import { ZoomComponent } from './zoom/zoom.component';
 import { ScriptingComponent } from './scripting/scripting.component';
 import { BookModeComponent } from './book-mode/book-mode.component';
 import { PresentationComponent } from './presentations/presentations.component';
+import { PrerenderingComponent } from './prerendering/prerendering.component';
+import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 
 const routes: Routes = [
   {
@@ -97,6 +99,8 @@ const routes: Routes = [
   { path: 'print-range', component: PrintRangeComponent },
   { path: 'perfect-scrollbar', component: PerfectScrollbarComponent },
   { path: 'presentations', component: PresentationComponent },
+  { path: 'prerendering', component: PrerenderingComponent },
+  { path: 'two-way-binding', component: TwoWayBindingComponent },
   {
     path: '**',
     redirectTo: 'simple',

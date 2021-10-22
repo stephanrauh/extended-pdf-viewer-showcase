@@ -1,0 +1,91 @@
+<div fxLayout="column" fxFill>
+  <div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="45%">
+    <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab=$event">
+      <mat-tab label="Getting started">
+        <p>
+          Many properties of ngx-extended-pdf-viewer support two-way binding.
+        </p>
+        <mat-form-field class="margin">
+          <input matInput  [(ngModel)]="rotation" placeholder="[(rotation)]=0 | 90 | 180 | 270" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput  [(ngModel)]="sidebarVisible" placeholder="[(sidebarVisible)]" />
+        </mat-form-field>
+        <br />
+        <mat-form-field class="margin">
+          <input matInput  [(ngModel)]="zoom" placeholder="[(zoom)]" />
+        </mat-form-field>
+        <br />
+        <mat-form-field class="margin">
+          <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput  [(ngModel)]="spreadMode" placeholder="[(spreadMode)]='off' | 'even' | 'odd'" />
+        </mat-form-field>
+        <br />
+        <mat-form-field class="full-width">
+          <input matInput  [(ngModel)]="src" placeholder="[(src)]" />
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Page and page label">
+        <p>The page is the number page number. It always starts with 1.</p>
+        <p>
+          The page label is the page number assigned by the author of the PDF document. For example, the document below uses roman numbers
+          for the table of contents and arabic numbers for the main body.
+        </p>
+        <p>
+          If you try to use both `[(page)]` and `[(pageLabel)]` with two-way binding, you'll run into
+          `ExpressionChangedAfterItHasBeenCheckedErrors`. To prevent this, you'll want to adopt the `OnPush` change detection strategy.
+        </p>
+        <mat-form-field class="margin">
+          <input matInput  [(ngModel)]="page" placeholder="Current page number" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput  [(ngModel)]="pageLabel" placeholder="Current page label" />
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Forms">
+        <p>ngx-extended-pdf-viewer offers two-way binding between Angular attributes and Acroforms embedded in your PDF. Please visit the
+          <a [routerLink]="'/extended-pdf-viewer/forms'">dedicated demo</a>.
+        </p>
+      </mat-tab>
+
+    </mat-tab-group>
+  </mat-card>
+  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="53%">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+         <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/two-way-binding/html.md"> </app-ie11-markdown>
+        </mat-tab>
+      <mat-tab label="Typescript">
+       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/two-way-binding/ts.md"> </app-ie11-markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<mat-card class="distance-16 mat-elevation-z8 use-available-height">
+  <small
+    >Copyright hint: the e-book has been published by James Boyle under a
+    <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+    <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a></small
+  >.
+  <ngx-extended-pdf-viewer
+    [src]="src"
+    [useBrowserLocale]="true"
+    [textLayer]="true"
+    [(scrollMode)]="scrollMode"
+    [(spread)]="spreadMode"
+    [(handTool)]="handTool"
+    [(page)]="page"
+    [(pageLabel)]="pageLabel"
+    [(rotation)]="rotation"
+    [(sidebarVisible)]="sidebarVisible"
+    [(spread)]="spreadMode"
+    [(zoom)]="zoom"
+  >
+  </ngx-extended-pdf-viewer>
+
+</mat-card>
+</div>

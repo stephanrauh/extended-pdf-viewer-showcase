@@ -27,11 +27,11 @@
           If you try to use both `[(page)]` and `[(pageLabel)]` with two-way binding, you'll run into
           `ExpressionChangedAfterItHasBeenCheckedErrors`. To prevent this, you'll want to adopt the `OnPush` change detection strategy.
         </p>
-        <mat-form-field>
-          <input matInput class="margin" [(ngModel)]="page" placeholder="Current page number" />
+        <mat-form-field class="margin">
+          <input matInput  [(ngModel)]="page" placeholder="Current page number" />
         </mat-form-field>
         <mat-form-field>
-          <input matInput class="margin" [(ngModel)]="pageLabel" placeholder="Current page label" />
+          <input matInput [(ngModel)]="pageLabel" placeholder="Current page label" />
         </mat-form-field>
       </mat-tab>
       <mat-tab label="Color themes">

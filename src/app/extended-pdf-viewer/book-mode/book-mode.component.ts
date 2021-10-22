@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageRenderedEvent } from 'ngx-extended-pdf-viewer';
 import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
 
@@ -6,6 +6,7 @@ import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-
   selector: 'app-book-mode',
   templateUrl: './book-mode.component.html',
   styleUrls: ['./book-mode.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookModeComponent {
 
@@ -18,7 +19,16 @@ export class BookModeComponent {
   }
 
   public onPageRendered(event: PageRenderedEvent): void {
-    console.log("Finished rendering page " + event.pageNumber);
+    let result = '';
+    result += `${String(event.pageNumber).padStart(4, ' ')} `;
+    for (const page of (window as any).PDFViewerApplication.pdfViewer._pages) {
+      const isLoading = page.div.querySelector('.loadingIcon');
+      if (isLoading) {
+        result += '!';
+      } else {
+        result += '' + page.renderingState;
+      }
+    }
+    console.log(result);
   }
-
 }

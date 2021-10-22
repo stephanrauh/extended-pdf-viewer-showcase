@@ -49,6 +49,8 @@ import { OpenInNewTabComponent } from './custom-toolbar/open-in-new-tab/open-in-
 import { ScriptingComponent } from './scripting/scripting.component';
 import { BookModeComponent } from './book-mode/book-mode.component';
 import { PresentationComponent } from './presentations/presentations.component';
+import { PrerenderingComponent } from './prerendering/prerendering.component';
+import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 
 @NgModule({
   imports: [
@@ -102,7 +104,9 @@ import { PresentationComponent } from './presentations/presentations.component';
     OpenInNewTabComponent,
     FormsComponent,
     LayersComponent,
-    PresentationComponent
+    PresentationComponent,
+    PrerenderingComponent,
+    TwoWayBindingComponent
   ],
 })
 export class ExtendedPdfViewerModule {}
