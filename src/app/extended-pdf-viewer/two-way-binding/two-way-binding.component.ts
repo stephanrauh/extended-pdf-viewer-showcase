@@ -25,8 +25,7 @@ export class TwoWayBindingComponent {
 
   public src = './assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf';
 
-  @Input()
-  public spreadMode: 'off' | 'even' | 'odd' = 'off';
+  public spread: 'off' | 'even' | 'odd' = 'off';
 
   public zoom: number | string = 'auto';
 

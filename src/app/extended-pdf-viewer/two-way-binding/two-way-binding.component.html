@@ -21,7 +21,7 @@
           <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]" />
         </mat-form-field>
         <mat-form-field>
-          <input matInput  [(ngModel)]="spreadMode" placeholder="[(spreadMode)]='off' | 'even' | 'odd'" />
+          <input matInput  [(ngModel)]="spread" placeholder="[(spread)]='off' | 'even' | 'odd'" />
         </mat-form-field>
         <br />
         <mat-form-field class="full-width">
@@ -76,13 +76,12 @@
     [useBrowserLocale]="true"
     [textLayer]="true"
     [(scrollMode)]="scrollMode"
-    [(spread)]="spreadMode"
     [(handTool)]="handTool"
     [(page)]="page"
     [(pageLabel)]="pageLabel"
     [(rotation)]="rotation"
     [(sidebarVisible)]="sidebarVisible"
-    [(spread)]="spreadMode"
+    [(spread)]="spread"
     [(zoom)]="zoom"
   >
   </ngx-extended-pdf-viewer>

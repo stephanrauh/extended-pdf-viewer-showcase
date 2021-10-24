@@ -1,12 +1,11 @@
 ```html
  <ngx-extended-pdf-viewer
     [src]="src"
-    [(scrollMode)]="scrollMode"
-    [(spread)]="spreadMode"
     [(handTool)]="handTool"
     [(page)]="page"
     [(pageLabel)]="pageLabel"
     [(rotation)]="rotation"
+    [(scrollMode)]="scrollMode"
     [(sidebarVisible)]="sidebarVisible"
     [(spread)]="spreadMode"
     [(zoom)]="zoom">
