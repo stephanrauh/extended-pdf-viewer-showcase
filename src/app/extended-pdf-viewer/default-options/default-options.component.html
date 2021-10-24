@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFill>
   <div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+  <mat-card class="distance-16 mat-elevation-z8" fxFlex="60%">
     <mat-tab-group>
       <mat-tab label="Overview">
         <p>
@@ -127,8 +127,12 @@
           <dt>doubleTapZoomFactor</dt>
           <dd>Tapping twice (or clicking twice) on a PDF file enlarges is. By default, the target zoom is <code>'page-width'</code>.
             You can use this attribute to use a different zoom factor, such as <code>'150%'</code>.</dd>
-            <dt>enableXfa</dt>
-            <dd>??? (Since pdf.js 2.9)</dd>
+          <dt>enableXfa</dt>
+          <dd>Enables support for XFA forms. Since pdf.js 2.11, this feature is active by default.</dd>
+          <dt>defaultCacheSize</dt>
+          <dd>maximum number of rendered pages. Reducing this number may help you if you're running on tight memory requirements. By default,
+            ngx-extended-pdf-viewer keeps up to 50 pages in memory.
+          </dd>
         </dl>
       </mat-tab>
       <mat-tab label="Options covered by attributes">
@@ -156,7 +160,7 @@
     </mat-tab-group>
   </mat-card>
 
-  <mat-card class="distance-16 mat-elevation-z8 use-available-height" fxFlex="58%">
+  <mat-card class="distance-16 mat-elevation-z8 use-available-height" fxFlex="38%">
     <mat-tab-group>
       <mat-tab label="HTML template">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/default-options/html.md"> </app-ie11-markdown>
