@@ -3,7 +3,9 @@
 export class PrerenderingComponent {
   public spreadMode: 'off' | 'even' | 'odd' = 'off';
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService) {}
+  constructor(private pdfViewerService: NgxExtendedPdfViewerService) {
+    pdfDefaultOptions.ignoreDestinationZoom = true;
+  }
 
   public onPageRendered(): void {
     if (!this.pdfViewerService.isRenderQueueEmpty()) {

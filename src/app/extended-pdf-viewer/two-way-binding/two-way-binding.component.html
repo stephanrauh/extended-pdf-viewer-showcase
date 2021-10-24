@@ -9,16 +9,14 @@
         <mat-form-field class="margin">
           <input matInput  [(ngModel)]="rotation" placeholder="[(rotation)]=0 | 90 | 180 | 270" />
         </mat-form-field>
-        <mat-form-field>
-          <input matInput  [(ngModel)]="sidebarVisible" placeholder="[(sidebarVisible)]" />
-        </mat-form-field>
+          <mat-checkbox [(ngModel)]="sidebarVisible">[(sidebarVisible)]</mat-checkbox>
         <br />
         <mat-form-field class="margin">
           <input matInput  [(ngModel)]="zoom" placeholder="[(zoom)]" />
         </mat-form-field>
         <br />
         <mat-form-field class="margin">
-          <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]" />
+          <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]=0 (vertical) | 1 (horizontal) | 2 (block)" />
         </mat-form-field>
         <mat-form-field>
           <input matInput  [(ngModel)]="spread" placeholder="[(spread)]='off' | 'even' | 'odd'" />

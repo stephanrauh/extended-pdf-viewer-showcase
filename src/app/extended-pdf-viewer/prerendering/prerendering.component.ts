@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import {
-  IPDFViewerApplication,
   NgxExtendedPdfViewerService,
-  PageRenderedEvent,
+  pdfDefaultOptions,
 } from 'ngx-extended-pdf-viewer';
 
 @Component({
@@ -15,19 +14,21 @@ export class PrerenderingComponent {
 
   public page: number = 17;
 
-  public pageLabel: string = "";
+  public pageLabel: string = '';
 
-  public prerenderedPages = "";
+  public prerenderedPages = '';
 
-  public currentlyRenderedPages = "";
+  public currentlyRenderedPages = '';
 
-  public currentlyRequestedPage: string | number = "(none)";
+  public currentlyRequestedPage: string | number = '(none)';
 
-  public pagesToRender = "(none)";
+  public pagesToRender = '(none)';
 
-  public visiblePages = "";
+  public visiblePages = '';
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService) {}
+  constructor(private pdfViewerService: NgxExtendedPdfViewerService) {
+    pdfDefaultOptions.ignoreDestinationZoom = true;
+  }
 
   public onPageRendered(): void {
     if (!this.pdfViewerService.isRenderQueueEmpty()) {
@@ -38,27 +39,37 @@ export class PrerenderingComponent {
     const pagesBefore = this.spreadMode === 'off' ? 2 : 2;
     const pagesAfter = this.spreadMode === 'off' ? 2 : 5;
     let startPage = Math.max(this.page - pagesBefore, 1);
-    let endPage = Math.min(this.page  + pagesAfter, this.pdfViewerService.numberOfPages());
+    let endPage = Math.min(
+      this.page + pagesAfter,
+      this.pdfViewerService.numberOfPages()
+    );
 
     let finished = true;
     for (let page = startPage; page <= endPage; page++) {
       const pageIndex = page - 1;
       if (!this.pdfViewerService.hasPageBeenRendered(pageIndex)) {
-          this.pdfViewerService.addPageToRenderQueue(pageIndex);
-          this.statistics(pageIndex + 1, `${startPage} -> ${endPage}`);
+        this.pdfViewerService.addPageToRenderQueue(pageIndex);
+        this.statistics(pageIndex + 1, `${startPage} -> ${endPage}`);
         finished = false;
         break;
       }
     }
     if (finished) {
-      this.statistics("(none)", `${startPage} -> ${endPage}`);
+      this.statistics('(none)', `${startPage} -> ${endPage}`);
     }
   }
 
-  private statistics(requestedPage: number | string, pagesToRender: string): void {
-    this.currentlyRenderedPages = String(this.pdfViewerService.currentlyRenderedPages());
+  private statistics(
+    requestedPage: number | string,
+    pagesToRender: string
+  ): void {
+    this.currentlyRenderedPages = String(
+      this.pdfViewerService.currentlyRenderedPages()
+    ).replace(/,/g, ', ');
     this.currentlyRequestedPage = requestedPage;
     this.pagesToRender = pagesToRender;
-    this.visiblePages = String(this.pdfViewerService.getCurrentlyVisiblePageNumbers());
+    this.visiblePages = String(
+      this.pdfViewerService.getCurrentlyVisiblePageNumbers()
+    ).replace(',', ', ');
   }
 }
