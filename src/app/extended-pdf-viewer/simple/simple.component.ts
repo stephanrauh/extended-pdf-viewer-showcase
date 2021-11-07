@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { IPDFViewerApplication, PageRenderedEvent } from 'ngx-extended-pdf-viewer';
+import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
 import { LogService } from '../../log.service';
 
 @Component({
   selector: 'app-simple',
   templateUrl: './simple.component.html',
   styleUrls: ['./simple.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleComponent {
   // tslint:disable-next-line: variable-name
@@ -18,6 +20,12 @@ export class SimpleComponent {
   public showPdfViewer = true;
 
   public height: string = "95%";
+
+  public time = 0;
+  public currentTime = 0;
+
+  private startTime = new Date().getTime();
+  private currentStartTime = new Date().getTime();
 
   /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
   private themeIfLocalStorageIsUnavailable = "light";
@@ -63,8 +71,7 @@ export class SimpleComponent {
   }
 
   constructor(public logService: LogService) {
-//    pdfDefaultOptions.assetsFolder = 'https://unpkg.com/browse/ngx-extended-pdf-viewer@10.0.0-alpha.9/assets';
-//    pdfDefaultOptions.workerSrc = () => 'https://unpkg.com/browse/ngx-extended-pdf-viewer@10.0.0-alpha.9/assets/pdf.worker-2.10.550.min.js';
+      this.startTime = new Date().getTime();
   }
 
   public onUpdateFindResult(event: any): void {
@@ -77,6 +84,7 @@ export class SimpleComponent {
 
   public async getDivAtPosition(page: number, position: number): Promise<void> {
     const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
+
     if (!PDFViewerApplication.pdfViewer._pages[page].textLayer) {
       await PDFViewerApplication.pdfViewer._pages[page].draw();
     } else {
@@ -84,5 +92,17 @@ export class SimpleComponent {
       const divs = textLayer.textDivs;
       const textSnippets = textLayer.textContentItemsStr;
     }
+  }
+
+  public onPageRender(): void {
+    this.currentStartTime = new Date().getTime();
+  }
+
+  public onPageRendered(event: PageRenderEvent): void {
+    const endTime = new Date().getTime();
+    if (event.pageNumber === 5 && this.time === 0) {
+      this.time = endTime - this.startTime;
+    }
+    this.currentTime = endTime - this.currentStartTime;
   }
 }
