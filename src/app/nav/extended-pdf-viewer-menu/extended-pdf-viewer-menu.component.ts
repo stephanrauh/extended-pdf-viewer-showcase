@@ -38,7 +38,6 @@ export class ExtendedPdfViewerMenuComponent implements OnInit {
       }
       const active = url.endsWith(href);
       if (active) {
-        console.log(href);
         item.classList.add('active');
       } else {
         item.classList.remove('active');
