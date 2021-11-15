@@ -33,6 +33,11 @@ export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
   public ngAfterViewInit(): void {
     const container = document.querySelector('#viewerContainer') as HTMLElement;
     this.scrollbar = new PerfectScrollbar(container, this.config);
+
+    const sidebar = document.querySelector('#thumbnailView') as HTMLElement;
+    if (sidebar) {
+      this.scrollbar = new PerfectScrollbar(sidebar, this.config);
+    }
   }
 
   public ngOnDestroy(): void {
