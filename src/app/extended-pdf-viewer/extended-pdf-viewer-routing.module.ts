@@ -48,6 +48,7 @@ import { BookModeComponent } from './book-mode/book-mode.component';
 import { PresentationComponent } from './presentations/presentations.component';
 import { PrerenderingComponent } from './prerendering/prerendering.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
+import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-console-log.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
   { path: 'display-options', component: DisplayOptionsComponent },
   { path: 'export', component: ExportComponent },
   { path: 'file-info', component: FileInfoComponent },
+  { path: 'filtering-console-log', component: FilteringConsoleLogComponent},
   { path: 'forms', component: FormsComponent },
   { path: 'layers', component: LayersComponent },
   { path: 'getting-started', component: GettingStartedComponent },

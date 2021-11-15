@@ -51,6 +51,7 @@ import { BookModeComponent } from './book-mode/book-mode.component';
 import { PresentationComponent } from './presentations/presentations.component';
 import { PrerenderingComponent } from './prerendering/prerendering.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
+import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-console-log.component';
 
 @NgModule({
   imports: [
@@ -106,7 +107,8 @@ import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.compon
     LayersComponent,
     PresentationComponent,
     PrerenderingComponent,
-    TwoWayBindingComponent
+    TwoWayBindingComponent,
+    FilteringConsoleLogComponent
   ],
 })
 export class ExtendedPdfViewerModule {}
