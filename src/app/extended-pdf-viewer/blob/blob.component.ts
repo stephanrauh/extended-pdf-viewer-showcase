@@ -1,8 +1,6 @@
 import {
   Component,
   OnInit,
-  ChangeDetectionStrategy,
-  ApplicationRef,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BlobService } from './blob.service';

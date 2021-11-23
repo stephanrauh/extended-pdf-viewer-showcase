@@ -15,6 +15,7 @@ export class FindComponent {
 
   public fuzzy = false;
   public highlightAll = false;
+  public currentPage = false;
   public matchCase = false;
   public wholeWord = false;
   public ignoreAccents = false;
@@ -60,6 +61,7 @@ export class FindComponent {
         [this._searchtext, this.searchtext2, this._searchtext3],
         {
           highlightAll: this.highlightAll,
+          currentPage: this.currentPage,
           matchCase: this.matchCase,
           wholeWords: this.wholeWord,
           ignoreAccents: this.ignoreAccents,
@@ -70,6 +72,7 @@ export class FindComponent {
       if (
         this.ngxExtendedPdfViewerService.find(this._searchtext, {
           highlightAll: this.highlightAll,
+          currentPage: this.currentPage,
           matchCase: this.matchCase,
           wholeWords: this.wholeWord,
           ignoreAccents: this.ignoreAccents,

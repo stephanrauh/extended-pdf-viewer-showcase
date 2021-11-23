@@ -46,7 +46,7 @@ export class NavComponent {
     private notification: PDFNotificationService
   ) {
     try {
-      this.notification.pdfjsVersion.subscribe((s) => (this.pdfjsVersion = s));
+      this.pdfjsVersion = this.notification.pdfjsVersion;
       this.activateViewer();
     } catch (exception) {
       alert("Error! " + exception);

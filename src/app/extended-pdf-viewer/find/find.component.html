@@ -21,6 +21,9 @@
       <mat-checkbox class="margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()">highlight all</mat-checkbox>
     </section>
     <section class="section">
+      <mat-checkbox class="margin" [(ngModel)]="currentPage" (change)="onCheckboxClicked()">current page only</mat-checkbox>
+    </section>
+    <section class="section">
       <mat-checkbox class="margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()">match case</mat-checkbox>
     </section>
     <section class="section">
@@ -78,6 +81,7 @@
     [handTool]="false"
     [showHandToolButton]="true"
     [page]="9"
+    [minifiedJSLibraries]="false"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

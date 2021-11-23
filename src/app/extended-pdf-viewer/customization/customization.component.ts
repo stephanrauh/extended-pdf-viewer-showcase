@@ -145,6 +145,7 @@ const TOOLBAR: TreeNode[] = [
             name: '<pdf-findbar-options-one-container>',
             children: [
               { name: '<pdf-find-highlight-all>', id: 'findHighlightAll' },
+              { name: '<pdf-find-highlight-all>', id: 'findCurrentPage' },
               { name: ' <pdf-find-match-case>', id: 'findMatchCase' }
             ]
           },
