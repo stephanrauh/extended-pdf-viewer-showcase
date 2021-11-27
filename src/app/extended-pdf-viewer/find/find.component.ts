@@ -116,6 +116,7 @@ export class FindComponent {
   public onCheckboxClicked() {
     this.ngxExtendedPdfViewerService.find(this._searchtext, {
       highlightAll: this.highlightAll,
+      currentPage: this.currentPage,
       matchCase: this.matchCase,
       wholeWords: this.wholeWord,
       ignoreAccents: this.ignoreAccents
