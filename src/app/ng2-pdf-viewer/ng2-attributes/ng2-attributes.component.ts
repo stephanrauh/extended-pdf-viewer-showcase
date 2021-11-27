@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
+import { IColumn, IColumnType, ISortDirection } from '@stephanrauh/angular2-smart-table';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
@@ -31,19 +32,19 @@ export class Ng2AttributesComponent implements AfterViewInit {
     columns: {
       attribute: {
         title: 'Attribute',
-        type: "html",
-        sortDirection: 'asc',
+        type: IColumnType.Html,
+        sortDirection: ISortDirection.ASC,
         compareFunction: this.compareFunction
-      },
+      } ,
       description: {
         title: 'Description',
-        type: 'html',
-      },
+        type: IColumnType.Html,
+      } ,
       defaultValue: {
         title: 'Default value',
         width: '100px',
         filter: false,
-      },
+      } as IColumn,
     },
     pager: {
       display: false,

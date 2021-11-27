@@ -24,7 +24,7 @@ import { NgModule } from '@angular/core';
 import { Ie11MarkdownComponent } from './ie11-markdown/ie11-markdown.component';
 import { DefaultRoutesComponent } from './default-routes/default-routes.component';
 import { CommonModule } from '@angular/common';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { Angular2SmartTableModule } from '@stephanrauh/angular2-smart-table';
 import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
 
 @NgModule({
@@ -58,7 +58,7 @@ import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
     MatToolbarModule,
     MatTreeModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
-    Ng2SmartTableModule
+    Angular2SmartTableModule
   ],
   exports: [
     CommonModule,
@@ -85,7 +85,7 @@ import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
     MatTooltipModule,
     MatToolbarModule,
     MatTreeModule,
-    Ng2SmartTableModule,
+    Angular2SmartTableModule,
     CopyrightBoxComponent
   ],
 })
