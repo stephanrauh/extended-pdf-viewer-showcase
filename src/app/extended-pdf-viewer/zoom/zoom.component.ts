@@ -56,7 +56,7 @@ export class ZoomComponent {
     if (isNaN(Number(zoom))) {
       this._zoomSetting = zoom;
     } else {
-      this._zoomSetting = zoom + '%';
+      this._zoomSetting = `${zoom}%`;
     }
   }
 
