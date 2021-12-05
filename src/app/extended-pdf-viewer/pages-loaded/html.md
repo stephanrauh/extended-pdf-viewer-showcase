@@ -10,6 +10,7 @@
   (pagesLoaded)="onPagesLoaded($event)"
   (pageRendered)="onEvent('pageRendered', $event)"
   (pdfDownloaded)="onEvent('pdfDownloaded', $event)"
+  (pdfLoadingStarts)="onEvent('pdfLoadingStarts', $event)"
   (pdfLoaded)="onEvent('pdfLoaded', $event)"
   (pdfLoadingFailed)="onEvent('pdfLoadingFailed', $event)"
   (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"

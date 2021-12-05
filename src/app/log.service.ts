@@ -10,7 +10,6 @@ export class LogService {
   constructor() {
     Window['ngxConsoleFilter'] = (level: string, message: any): boolean => {
       if (message === 'simple') {
-        debugger;
       }
       this.logs.push(message);
       return true;
