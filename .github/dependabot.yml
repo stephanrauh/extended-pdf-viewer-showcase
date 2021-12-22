@@ -1,0 +1,95 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.24
+    - 14.14.25
+    - 14.14.30
+    - 14.14.31
+    - 14.14.32
+    - 14.14.33
+    - 14.14.34
+    - 14.14.35
+    - 14.14.36
+    - 14.14.39
+    - 14.14.41
+    - 15.0.0
+  - dependency-name: "@angular/cli"
+    versions:
+    - 11.1.2
+    - 11.1.3
+    - 11.2.1
+    - 11.2.10
+    - 11.2.2
+    - 11.2.3
+    - 11.2.4
+    - 11.2.5
+    - 11.2.6
+    - 11.2.8
+    - 11.2.9
+  - dependency-name: "@angular-devkit/build-angular"
+    versions:
+    - 0.1101.2
+    - 0.1101.3
+    - 0.1102.0
+    - 0.1102.1
+    - 0.1102.10
+    - 0.1102.2
+    - 0.1102.3
+    - 0.1102.4
+    - 0.1102.5
+    - 0.1102.6
+    - 0.1102.8
+    - 0.1102.9
+  - dependency-name: "@angular/language-service"
+    versions:
+    - 11.1.1
+    - 11.1.2
+    - 11.2.0
+    - 11.2.1
+    - 11.2.10
+    - 11.2.11
+    - 11.2.2
+    - 11.2.3
+    - 11.2.4
+    - 11.2.5
+    - 11.2.6
+    - 11.2.7
+    - 11.2.8
+    - 11.2.9
+  - dependency-name: tslib
+    versions:
+    - 2.2.0
+  - dependency-name: rxjs
+    versions:
+    - 6.6.6
+    - 6.6.7
+  - dependency-name: ng2-pdf-viewer
+    versions:
+    - 6.4.0
+    - 6.4.1
+  - dependency-name: ngx-markdown
+    versions:
+    - 11.1.0
+    - 11.1.1
+    - 11.1.2
+  - dependency-name: ngx-extended-pdf-viewer
+    versions:
+    - 8.0.0-beta.5
+    - 8.0.0-beta.6
+    - 8.0.0-beta.9
+    - 8.1.2
+  - dependency-name: pdfjs-dist
+    versions:
+    - 2.6.347
+  - dependency-name: typescript
+    versions:
+    - 4.1.3
+    - 4.1.4
+    - 4.1.5
