@@ -1,17 +1,29 @@
 <mat-card class="distance-16 mat-elevation-z8">
-  <h1>Range requests</h1>
+  <h1>Range requests and streaming</h1>
   <p>
-    Sometimes PDF files are large, even huge. By default, the PDF loader doesn't load the entire PDF file. Instead, it loads it in chunks.
-    So it can display the first page while it's still loading the other pages.
+    Sometimes PDF files are large, even huge. By default, the PDF loader doesn't load the entire PDF file. Instead, it loads it in chunks,
+    and it uses streaming if the server allows it to do so. So the viewer can display the first page while it's still loading the other pages.
   </p>
   <p>
     Most of the time, you don't have to configure this feature (unless you want to switch it off). It just works. If it doesn't, check if
-    your server supports range requests. If it does, the response headers have the attribute <code>accept-ranges: bytes</code>.
+    your server supports range requests. If it does, the response headers have the attributes
   </p>
+  <ul>
+    <li><code>"Content-Length"</code></li>
+    <li><code>"Accept-Ranges": "bytes",</code></li>
+    <li><code>"Content-Encoding"</code></li>
+  </ul>
 
-  <p>Vishal Patel has written a article <a href="https://medium.com/@vishal1909/how-to-handle-partial-content-in-node-js-8b0a5aea216">range request</a>
-    and how to implement them in a simple node.js server. He's also published the source code
-    <a href="https://github.com/phoenixinfotech1984/node-content-range/blob/master/server.js">on GitHub</a>.</p>
+  <h2>CORS</h2>
+  If your PDF file is served by a different server than the Angular application, you must add the CORS headers to the response. Here's a simple demo
+  server sending the correct headers:
+
+  <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/range-requests/ts.md"> </app-ie11-markdown>
+
+  Kudos go to Chetan Patil who helped me figure this out.
+
+  <p>If you want to dig deeper: Vishal Patel has written a article on <a href="https://medium.com/@vishal1909/how-to-handle-partial-content-in-node-js-8b0a5aea216">range requests</a>
+    and how to implement them in a simple node.js server.</p>
 
   <h2>Getting rid of range requests and lazy loading</h2>
   <p>
