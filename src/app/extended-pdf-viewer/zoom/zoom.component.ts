@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-zoom',
   templateUrl: './zoom.component.html',
   styleUrls: ['./zoom.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ZoomComponent {
   private _zoomSetting: number | string | undefined = 'page-width';

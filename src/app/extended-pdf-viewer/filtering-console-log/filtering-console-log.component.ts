@@ -10,7 +10,7 @@ export class FilteringConsoleLogComponent {
 
   constructor() {
     Window['ngxConsoleFilter'] = (level: string, message: any): boolean => {
-      if (message.includes('running on')) {
+      if (message?.includes && message?.includes('running on')) {
         this.version = message;
         return false;
       }

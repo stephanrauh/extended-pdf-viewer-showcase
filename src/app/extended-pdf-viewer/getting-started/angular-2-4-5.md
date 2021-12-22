@@ -1,5 +1,8 @@
 ### Angular 2, 4, 5, and Ionic 3
 
+**Caveat**: I don't support old Angular or Ionic versions. Nonetheless, I've collected some hint that might help you get
+the PDF viewer up and running.
+
 Please note that you have to use an old version of ngx-extended-pdf-viewer to get it up and running with such an old version of Angular. That's because old versions of Angular force you to use old versions of TypeScript. Of course, you can take a current version of ngx-extended-viewer and translate the source code to an older dialect of TypeScript.
 
 With some effort, ngx-extended-pdf-viewer works with Angular 5 and Ionic 3. Thanks to GitHub user @tanzl88 for finding out how. They've also provided a running demo projekt: https://github.com/tanzl88/ionic-3-extended-pdf-viewer.

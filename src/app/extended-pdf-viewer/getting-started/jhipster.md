@@ -1,3 +1,5 @@
+**Caveat**: I don't support non-standard installations. This includes JHipster. Nonetheless, I've collected some hint that might help you get the PDF viewer up and running.
+
 1. Locate the `CopyWebpackPlugin` in the file `webpack.common.js` (currently line 70) and add this line:
 
 ```javascript
