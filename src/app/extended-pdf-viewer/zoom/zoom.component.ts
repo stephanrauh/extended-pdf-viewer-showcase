@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
 
 @Component({
   selector: 'app-zoom',
@@ -35,7 +37,16 @@ export class ZoomComponent {
     3,
     3.5,
     4,
+    7,
+    10,
+    15,
   ];
+
+  public time = 0;
+  public currentTime = 0;
+
+  private startTime = new Date().getTime();
+  private currentStartTime = new Date().getTime();
 
   public get zoomLevelsDisplay(): string {
     return this.zoomLevels.toString().replace(',', ', ');
@@ -61,7 +72,20 @@ export class ZoomComponent {
     }
   }
 
+  constructor() {
+      pdfDefaultOptions.maxCanvasPixels = -1;
+  }
+
   public updateZoomFactor(zoom: number): void {
     this.currentZoomFactor = zoom;
+  }
+
+  public onPageRender(): void {
+    this.currentStartTime = new Date().getTime();
+  }
+
+  public onPageRendered(): void {
+    const endTime = new Date().getTime();
+    this.currentTime = endTime - this.currentStartTime;
   }
 }

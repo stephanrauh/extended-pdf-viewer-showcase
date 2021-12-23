@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IPDFViewerApplication, PageRenderedEvent } from 'ngx-extended-pdf-viewer';
+import { IPDFViewerApplication } from 'ngx-extended-pdf-viewer';
 import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
 import { LogService } from '../../log.service';
 
