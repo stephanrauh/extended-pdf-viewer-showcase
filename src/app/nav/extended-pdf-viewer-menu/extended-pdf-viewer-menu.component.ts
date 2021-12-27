@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, tap } from 'rxjs';
 
@@ -9,6 +9,10 @@ import { filter, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExtendedPdfViewerMenuComponent implements OnInit {
+
+  @Input()
+  public drawer: any;
+
   constructor(private router: Router, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {

@@ -14,7 +14,7 @@ import { versions } from './versions';
 })
 export class NavComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe('(max-width: 810px)')
+    .observe('(max-width: 1023px)')
     .pipe(map((result) => result.matches));
 
   public version = versions.extendedPdfViewer;

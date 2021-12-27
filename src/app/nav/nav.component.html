@@ -1,16 +1,16 @@
 <mat-toolbar color="primary" class="mat-elevation-z8">
-  <mat-toolbar-row>
+  <mat-toolbar-row style="height:50px;">
     <app-octocat></app-octocat>
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" >
+      <mat-icon aria-label="Side nav toggle icon" style="margin-left: -20px;margin-top:17px;zoom:133%">menu</mat-icon>
     </button>
-    <span
+    <span style="left:65px;position:absolute"
       >Angular PDF viewer showcase. Running on Angular {{ angularVersion }}{{ pdfjsVersion }} and {{library}}
       {{ version }}.</span
     >
   </mat-toolbar-row>
-  <mat-toolbar-row class="second-row">
-    <mat-radio-group aria-label="Demo" [(ngModel)]="viewer">
+  <mat-toolbar-row class="second-row" style="height:50px;">
+    <mat-radio-group aria-label="Demo" [(ngModel)]="viewer" style="left:65px;position:absolute">
       Choose a library:
       <mat-radio-button class="distance-16" value="ngx-extended-pdf-viewer">ngx-extended-pdf-viewer (pdf.js 2.12)</mat-radio-button>
       <mat-radio-button class="distance-16" value="bleeding-edge">ngx-extended-pdf-viewer (pdf.js 2.13)</mat-radio-button>
@@ -25,9 +25,9 @@
     fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)"
+    [opened]="true"
   >
-    <app-extended-pdf-viewer-menu *ngIf="ngxExtendedPdfViewer"></app-extended-pdf-viewer-menu>
+    <app-extended-pdf-viewer-menu *ngIf="ngxExtendedPdfViewer" [drawer]="drawer"></app-extended-pdf-viewer-menu>
     <app-ng2-pdf-viewer-menu *ngIf="ng2PdfViewer"></app-ng2-pdf-viewer-menu>
   </mat-sidenav>
   <mat-sidenav-content>
