@@ -33,6 +33,18 @@ export class FormsComponent implements OnChanges {
 
   public rawFormData!: any[];
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.ngxService.recalculateSize());
+  }
+
   public formData: {
     [fieldName: string]: string | string[] | number | boolean;
   } = {};

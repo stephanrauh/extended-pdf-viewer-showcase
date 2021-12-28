@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IPDFViewerApplication } from 'ngx-extended-pdf-viewer';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
 import { LogService } from '../../log.service';
 
@@ -30,7 +30,17 @@ export class SimpleComponent {
   /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
   private themeIfLocalStorageIsUnavailable = "light";
 
+  private _fullscreen = false;
 
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
 
   public set selectedTab(index: number) {
     if (localStorage) {
@@ -70,7 +80,7 @@ export class SimpleComponent {
     }
   }
 
-  constructor(public logService: LogService) {
+  constructor(public logService: LogService, private pdfService: NgxExtendedPdfViewerService) {
       this.startTime = new Date().getTime();
   }
 

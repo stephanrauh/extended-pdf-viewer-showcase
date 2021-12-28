@@ -17,8 +17,19 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   showProgress = false;
   showCompleted = false;
   hideBuiltInProgress = true;
+    private _fullscreen = false;
 
-  constructor(private printService: NgxExtendedPdfViewerService) {
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
+  constructor(private pdfService: NgxExtendedPdfViewerService) {
     // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 
@@ -71,7 +82,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   }
 
   print() {
-    this.printService.print();
+    this.pdfService.print();
   }
 
   cancel() {

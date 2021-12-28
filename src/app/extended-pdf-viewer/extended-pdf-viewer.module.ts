@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { ExtendedPdfViewerRoutingModule } from './extended-pdf-viewer-routing.module';
 import { SimpleComponent } from './simple/simple.component';
 import { SharedModule } from '../shared/shared.module';
-import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import {
+  NgxExtendedPdfViewerModule,
+  pdfDefaultOptions,
+} from 'ngx-extended-pdf-viewer';
 import { AttributesComponent } from './attributes/attributes.component';
 import { Base64Component } from './base64/base64.component';
 import { BlobComponent } from './blob/blob.component';
@@ -52,6 +55,9 @@ import { PresentationComponent } from './presentations/presentations.component';
 import { PrerenderingComponent } from './prerendering/prerendering.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-console-log.component';
+
+const absoluteCMapUrl = pdfDefaultOptions.cMapUrl().replace('./', '/');
+pdfDefaultOptions.cMapUrl = () => absoluteCMapUrl;
 
 @NgModule({
   imports: [
@@ -108,7 +114,7 @@ import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-
     PresentationComponent,
     PrerenderingComponent,
     TwoWayBindingComponent,
-    FilteringConsoleLogComponent
+    FilteringConsoleLogComponent,
   ],
 })
 export class ExtendedPdfViewerModule {}

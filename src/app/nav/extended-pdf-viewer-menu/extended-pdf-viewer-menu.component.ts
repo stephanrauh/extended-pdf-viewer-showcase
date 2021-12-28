@@ -1,6 +1,7 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter, tap } from 'rxjs';
+import { filter, map, Observable, take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-extended-pdf-viewer-menu',
@@ -9,11 +10,14 @@ import { filter, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExtendedPdfViewerMenuComponent implements OnInit {
+  private isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe('(max-width: 1023px)')
+    .pipe(map((result) => result.matches));
 
   @Input()
   public drawer: any;
 
-  constructor(private router: Router, private cd: ChangeDetectorRef) {}
+  constructor(private router: Router, private cd: ChangeDetectorRef,private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -47,5 +51,12 @@ export class ExtendedPdfViewerMenuComponent implements OnInit {
         item.classList.remove('active');
       }
     });
+  }
+
+  public async toggleDrawer(): Promise<void> {
+    const mobile = await this.isHandset$.pipe(take(1)).toPromise();
+    if (mobile) {
+      this.drawer.toggle();
+    }
   }
 }

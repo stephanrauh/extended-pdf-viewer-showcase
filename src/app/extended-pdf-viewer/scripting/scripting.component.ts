@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-scripting',
@@ -9,7 +9,19 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 })
 export class ScriptingComponent {
 
-  constructor() {
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
+  constructor(private pdfService: NgxExtendedPdfViewerService) {
     if (localStorage) {
       const setting = localStorage.getItem('ngx-extended-pdf-viewer.enableScripting');
       if (setting) {

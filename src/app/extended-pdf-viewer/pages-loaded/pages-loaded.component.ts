@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-pages-loaded',
@@ -9,7 +9,19 @@ import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
 export class PagesLoadedComponent implements OnInit {
   public messages: Array<string> = [];
 
-  constructor() {}
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
+  constructor(private pdfService: NgxExtendedPdfViewerService) {}
 
   ngOnInit() {}
 

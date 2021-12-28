@@ -22,6 +22,18 @@ export class ExportComponent implements OnInit {
 
   public selectedTabIndex = 0;
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfViewerService.recalculateSize());
+  }
+
   constructor(private pdfViewerService: NgxExtendedPdfViewerService) {
     pdfDefaultOptions.textLayerMode = 1;
   }
@@ -61,7 +73,7 @@ export class ExportComponent implements OnInit {
 
   public exportAsText(): void {
     this.selectedTabIndex = 3;
-    (async () => this.showText(await this.pdfViewerService.getPageAsText(1)))();
+    (async () => this.showText(await this.pdfViewerService.getPageAsText(6)))();
   }
 
   private showText(text: string): void {

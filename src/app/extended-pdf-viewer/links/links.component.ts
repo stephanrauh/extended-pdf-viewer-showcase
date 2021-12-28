@@ -3,6 +3,7 @@ import {
   pdfDefaultOptions,
   LinkTarget,
   PageRenderedEvent,
+  NgxExtendedPdfViewerService,
 } from 'ngx-extended-pdf-viewer';
 @Component({
   selector: 'app-links',
@@ -17,6 +18,18 @@ export class LinksComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   private _target!: number;
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
   // tslint:disable-next-line: variable-name
   private _selectedTab = 0;
 
@@ -30,7 +43,7 @@ export class LinksComponent implements OnInit {
     return this._selectedTab;
   }
 
-  constructor() {}
+  constructor(private pdfService: NgxExtendedPdfViewerService) {}
 
   public set target(t: number) {
     if (this._target !== t) {

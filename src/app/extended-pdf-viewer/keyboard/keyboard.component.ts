@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-keyboard',
@@ -11,6 +12,18 @@ export class KeyboardComponent implements OnInit {
   public acceptKeys: Array<string> = [];
 
   public ignoreKeys = ['j', 'k', 'F4'];
+
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
 
   private accept(key: string, add: boolean): void {
     if (add) {
@@ -106,9 +119,9 @@ export class KeyboardComponent implements OnInit {
     });
   }
 
-  constructor() {}
+  constructor(private pdfService: NgxExtendedPdfViewerService) {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 
   public set acceptCtrlF(v: boolean) {
     this.accept('CTRL+F', v);

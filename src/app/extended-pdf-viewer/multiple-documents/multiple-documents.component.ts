@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FileInputChanged, IPDFViewerApplication } from 'ngx-extended-pdf-viewer';
+import { FileInputChanged, IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-multiple-documents',
@@ -11,9 +11,21 @@ export class MultipleDocumentsComponent implements OnInit {
 
   public dragAndDrop = true;
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
   public url = new URL(`${location.protocol}//${location.host}/assets/pdfs/GraalVM.pdf`);
 
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone, private pdfService: NgxExtendedPdfViewerService) {}
 
   public ngOnInit(): void {
     setTimeout(() => {

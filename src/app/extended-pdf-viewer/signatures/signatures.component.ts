@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { timestamp } from 'rxjs/operators';
 
 @Component({
@@ -13,6 +13,18 @@ export class SignaturesComponent {
 
   public showPdf = true;
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
   public get showSignature(): boolean {
     return this._showSignature;
   }
@@ -23,7 +35,7 @@ export class SignaturesComponent {
     setTimeout(() => this.showPdf = true, 100);
   }
 
-  constructor() {
+  constructor(private pdfService: NgxExtendedPdfViewerService) {
     // pdfDefaultOptions.renderInteractiveForms = false;
   }
 }

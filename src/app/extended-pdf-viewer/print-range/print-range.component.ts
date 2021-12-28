@@ -18,6 +18,18 @@ export class PrintRangeComponent implements OnDestroy {
 
   private _excluded = '2,4,6,8';
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.printService.recalculateSize());
+  }
+
   public get excluded(): string {
     return this._excluded;
   }

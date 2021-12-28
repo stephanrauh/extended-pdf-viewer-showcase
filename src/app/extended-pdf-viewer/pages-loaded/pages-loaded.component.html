@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="48%">
+  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
+  <mat-card class="distance16 mat-elevation-z8" fxFlex="48%">
     <mat-tab-group>
       <mat-tab label="HTML template">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/pages-loaded/html.md"> </app-ie11-markdown>
@@ -11,12 +11,12 @@
     </mat-tab-group>
   </mat-card>
 
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="50%">
+  <mat-card class="distance16 mat-elevation-z8" fxFlex="50%">
     <mat-card-header>
       <b>Messages sent by the PDF ngx-extended-pdf-viewer</b>
     </mat-card-header>
     <mat-card-content>
-      <div class="messages distance-16">
+      <div class="messages distance16">
         <div *ngIf="!messages">
           No message yet. This means no document has been loaded yet.
         </div>
@@ -26,7 +26,12 @@
   </mat-card>
 </div>
 
-<mat-card class="distance-16 mat-elevation-z8 use-available-height">
+<mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+  <button mat-button (click)="fullscreen=!fullscreen" style="float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+    </svg>
+  </button>
 <small>Copyright hint: the PDF file has been published on <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">Wikimedia</a> by the anonymous user Paroliver
 under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a> license, as stated <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">here</a>.</small>
   <ngx-extended-pdf-viewer

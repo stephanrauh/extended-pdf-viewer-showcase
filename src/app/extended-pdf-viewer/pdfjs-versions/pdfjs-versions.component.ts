@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-pdfjs-versions',
@@ -7,7 +7,19 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./pdfjs-versions.component.css'],
 })
 export class PdfjsVersionsComponent {
-  constructor() {
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
+  constructor(private pdfService: NgxExtendedPdfViewerService) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 }

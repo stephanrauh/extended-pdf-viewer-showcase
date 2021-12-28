@@ -1,4 +1,5 @@
 import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 // import { NgxExtendedPdfViewerComponent } from 'ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.component';
 
 @Component({
@@ -14,6 +15,18 @@ export class CustomToolbarComponent {
 
   public zoom = '100%';
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
   public set theme(theme: string) {
     if (this._theme !== theme) {
       this.showPdfViewer = false;
@@ -27,4 +40,6 @@ export class CustomToolbarComponent {
   public get theme(): string {
     return this._theme;
   }
+
+  constructor(private pdfService: NgxExtendedPdfViewerService) {}
 }

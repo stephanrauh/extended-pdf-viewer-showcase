@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-two-way-binding',
@@ -29,6 +29,18 @@ export class TwoWayBindingComponent {
 
   public zoom: number | string = 'auto';
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
   public set selectedTab(index: number) {
     if (localStorage) {
       localStorage.setItem(
@@ -48,4 +60,6 @@ export class TwoWayBindingComponent {
     }
     return 0;
   }
+
+  constructor(private pdfService: NgxExtendedPdfViewerService) {}
 }

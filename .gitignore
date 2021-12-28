@@ -47,3 +47,5 @@ testem.log
 Thumbs.db
 .htaccess
 **/VG-2021-07-19.pdf
+/src/assets/pdfs/1205_._.AI._.A4DM-compressed.pdf
+/src/assets/pdfs/2gb-sample-file.pdf

@@ -1,5 +1,5 @@
 ```html
-<div fxLayout="row" fxLayoutAlign="space-between">
+<div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
   <div fxFlex="48%" class="scrollbar">
     <pdf-viewer [src]="'/assets/pdfs/GraalVM Dictionary Bytecode, Interpreters, C1 Compiler, C2 Compiler, CPUs, and More.pdf'"
       [render-text]="renderText"

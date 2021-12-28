@@ -17,6 +17,18 @@ export class BlobComponent implements OnInit {
 
   public downloaded: string | undefined;
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.ngxService.recalculateSize());
+  }
+
   constructor(
     private http: HttpClient,
     private blobService: BlobService,

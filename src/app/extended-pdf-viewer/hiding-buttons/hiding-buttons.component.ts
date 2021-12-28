@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-hiding-buttons',
@@ -24,6 +25,18 @@ export class HidingButtonsComponent {
   public showPropertiesButton = false;
   public downloadFileName = 'user-defined-name.pdf';
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
   public get sourcecode() {
     return `<ngx-extended-pdf-viewer
   [src]="'/assets/pdfs/pdf-sample.pdf'"
@@ -47,4 +60,6 @@ export class HidingButtonsComponent {
 </ngx-extended-pdf-viewer>
 `;
   }
+
+  constructor(private pdfService: NgxExtendedPdfViewerService) {}
 }

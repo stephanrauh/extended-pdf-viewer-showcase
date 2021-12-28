@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
+  <mat-card class="distance16 mat-elevation-z8" fxFlex="40%">
     <mat-tab-group>
       <mat-tab label="live demo">
         <mat-checkbox class="margin" [(ngModel)]="showToolbar">showToolbar</mat-checkbox> (hiding the toolbar hides every button)
@@ -68,13 +68,18 @@
     </mat-tab-group>
   </mat-card>
 
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="58%">
+  <mat-card class="distance16 mat-elevation-z8" fxFlex="58%">
     <app-ie11-markdown  [data]="sourcecode | language : 'typescript'">
     </app-ie11-markdown>
   </mat-card>
 </div>
 
-<mat-card class="distance-16 mat-elevation-z8 use-available-height">
+<mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+  <button mat-button (click)="fullscreen=!fullscreen" style="float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+    </svg>
+  </button>
   <small>Copyright hint: the PDF has been published by Stefan Hellweger and Xiaofeng Wang under a
   <a target="#" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> on
   <a target="#" href="https://arxiv.org/abs/1503.01850">https://arxiv.org/abs/1503.01850</a></small

@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between">
-  <mat-card class="distance-16 mat-elevation-z8" fxFlex="40%">
+  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
+  <mat-card class="distance16 mat-elevation-z8" fxFlex="40%">
     <mat-tab-group>
       <mat-tab label="Signatures without verification">
         <p><b>Using this feature is dangerous!</b>
@@ -41,7 +41,7 @@
       </mat-tab>
     </mat-tab-group>
   </mat-card>
-  <mat-card class="distance-16 mat-elevation-z8 progress" fxFlex="58%">
+  <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="58%">
       <mat-tab-group>
         <mat-tab label="HTML template">
          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/html.md"> </app-ie11-markdown>
@@ -53,7 +53,12 @@
   </mat-card>
 </div>
 
-<mat-card class="distance-16 mat-elevation-z8 use-available-height">
+<mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+  <button mat-button (click)="fullscreen=!fullscreen" style="float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+    </svg>
+  </button>
   <small
     >Copyright hint: the PDF file is published
     <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/514#issuecomment-720089147" target="#">with kind permission by Cristiano Rafael Steffens</a>.

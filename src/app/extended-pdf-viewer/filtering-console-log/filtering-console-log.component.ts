@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-filtering-console-log',
@@ -8,7 +9,19 @@ import { Component } from '@angular/core';
 export class FilteringConsoleLogComponent {
   public version = '';
 
-  constructor() {
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
+  constructor(private pdfService: NgxExtendedPdfViewerService) {
     Window['ngxConsoleFilter'] = (level: string, message: any): boolean => {
       if (message?.includes && message?.includes('running on')) {
         this.version = message;

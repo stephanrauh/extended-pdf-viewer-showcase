@@ -3,6 +3,7 @@ import { pdfData2 } from './secondPdfBase64';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-base64',
@@ -16,7 +17,19 @@ export class Base64Component {
 
   public firstPdf = true;
 
-  constructor(private httpClient: HttpClient) {}
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
+  constructor(private httpClient: HttpClient, private pdfService: NgxExtendedPdfViewerService) {}
 
   public ngOnInit(): void {
     this.httpClient

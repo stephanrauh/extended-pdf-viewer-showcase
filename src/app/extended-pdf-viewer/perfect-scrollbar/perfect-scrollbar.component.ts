@@ -1,4 +1,5 @@
 import { Component, Inject, AfterViewInit, OnDestroy } from '@angular/core';
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import PerfectScrollbar from 'perfect-scrollbar';
@@ -25,19 +26,35 @@ export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
 
   public scrollbar: PerfectScrollbar | undefined = undefined;
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
   constructor(
     @Inject(PERFECT_SCROLLBAR_CONFIG)
-    public config: PerfectScrollbarConfigInterface
+    public config: PerfectScrollbarConfigInterface, private pdfService: NgxExtendedPdfViewerService
   ) {}
 
   public ngAfterViewInit(): void {
-    const container = document.querySelector('#viewerContainer') as HTMLElement;
-    this.scrollbar = new PerfectScrollbar(container, this.config);
+    setTimeout(() => {
+    if (!this.scrollbar) {
+      const container = document.querySelector('#viewerContainer') as HTMLElement;
+      this.scrollbar = new PerfectScrollbar(container, this.config);
 
-    const sidebar = document.querySelector('#thumbnailView') as HTMLElement;
-    if (sidebar) {
-      this.scrollbar = new PerfectScrollbar(sidebar, this.config);
+      const sidebar = document.querySelector('#thumbnailView') as HTMLElement;
+      if (sidebar) {
+        this.scrollbar = new PerfectScrollbar(sidebar, this.config);
+      }
     }
+  }, 1000);
   }
 
   public ngOnDestroy(): void {

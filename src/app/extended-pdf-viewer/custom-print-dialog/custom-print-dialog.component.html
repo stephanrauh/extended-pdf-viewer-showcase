@@ -1,7 +1,6 @@
-
 <article class="pdf-wrapper" fxLayout="column" fxFill>
   <div class="pdf-code-wrapper" fxLayout="row" fxLayoutAlign="space-between">
-    <mat-card class="overflow-none distance-16 mat-elevation-z8" fxFlex="20%">
+    <mat-card class="overflow-none distance16 mat-elevation-z8" fxFlex="20%">
       <div fxLayout="column" fxLayoutGap="10px">
         <button mat-raised-button color="primary" (click)="print()">Print</button>
         <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
@@ -26,7 +25,7 @@
       </div>
     </mat-card>
 
-    <mat-card class="overflow-y-scroll distance-16 mat-elevation-z8 progress" fxFlex="79%">
+    <mat-card class="overflow-y-scroll distance16 mat-elevation-z8 progress" fxFlex="79%">
       <mat-tab-group>
         <mat-tab label="HTML template">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-print-dialog/html.md"> </app-ie11-markdown>
@@ -38,7 +37,7 @@
     </mat-card>
   </div>
 
-  <mat-card class="pdf-card distance-16 mat-elevation-z8 use-available-space">
+  <mat-card class="pdf-card distance16 mat-elevation-z8 use-available-space">
     <ngx-extended-pdf-viewer
       [src]="'/assets/pdfs/A%20COOL%20KID%20LIKE%20ME.pdf'"
       [useBrowserLocale]="true"

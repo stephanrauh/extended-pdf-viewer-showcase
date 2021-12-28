@@ -12,6 +12,8 @@ export class BookModeComponent {
 
   public page = 1;
 
+  public fullscreen = true;
+
   constructor() { }
 
   public onPageRender(event: PageRenderEvent): void {

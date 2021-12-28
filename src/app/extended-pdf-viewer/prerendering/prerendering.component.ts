@@ -26,6 +26,18 @@ export class PrerenderingComponent {
 
   public visiblePages = '';
 
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfViewerService.recalculateSize());
+  }
+
   constructor(private pdfViewerService: NgxExtendedPdfViewerService) {
     pdfDefaultOptions.ignoreDestinationZoom = true;
   }

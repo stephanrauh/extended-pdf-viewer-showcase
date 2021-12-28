@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
 
 @Component({
@@ -45,7 +45,18 @@ export class ZoomComponent {
   public time = 0;
   public currentTime = 0;
 
-  private startTime = new Date().getTime();
+    private _fullscreen = false;
+
+  public get fullscreen(): boolean {
+    return this._fullscreen;
+  }
+
+  public set fullscreen(full: boolean) {
+    this._fullscreen = full;
+    setTimeout(() =>
+    this.pdfService.recalculateSize());
+  }
+
   private currentStartTime = new Date().getTime();
 
   public get zoomLevelsDisplay(): string {
@@ -72,7 +83,7 @@ export class ZoomComponent {
     }
   }
 
-  constructor() {
+  constructor(private pdfService: NgxExtendedPdfViewerService) {
       pdfDefaultOptions.maxCanvasPixels = -1;
   }
 
