@@ -55,9 +55,12 @@ import { PresentationComponent } from './presentations/presentations.component';
 import { PrerenderingComponent } from './prerendering/prerendering.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-console-log.component';
+import { TouchEmulator } from '../touch-emulator';
 
 const absoluteCMapUrl = pdfDefaultOptions.cMapUrl().replace('./', '/');
 pdfDefaultOptions.cMapUrl = () => absoluteCMapUrl;
+
+new TouchEmulator();
 
 @NgModule({
   imports: [
