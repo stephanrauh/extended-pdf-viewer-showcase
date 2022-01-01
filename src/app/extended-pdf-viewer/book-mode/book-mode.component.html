@@ -1,26 +1,9 @@
 <div fxLayout="column" fxFill>
   <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
   <mat-card class="distance16 mat-elevation-z8" fxFlex="40%">
-    <p>The book mode is intended to show a page-flip effect. Currently, this feature is
-      under development. Truth to tell, it's possible it won't work reliable enough.
-      Consider it a preview.
+    <p>The book mode displays the PDF file like a book and renders a
+      nice page-turn effect.
     </p>
-    <p>
-      <b>Problems to solve before making it an official features:</b>
-    </p>
-    <ul>
-      <li>Turning the first page shows the wrong page.</li>
-      <li>I need to tweak the pre-loading algothm to provide a smoother user experience.
-      </li>
-    </ul>
-    <mat-tab-group  *ngIf="false">
-      <mat-tab label="Getting started">
-        <p>
-          The PDF viewer supports the single-page mode. In this mode, you can scroll from page to page. Instead,
-          you can only navigate to a new page by setting the page number or clicking a chapter in the sidebar.
-        </p>
-      </mat-tab>
-    </mat-tab-group>
   </mat-card>
   <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="58%">
     <mat-tab-group>
