@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-find',
   templateUrl: './find.component.html',
-  styleUrls: ['./find.component.css']
+  styleUrls: ['./find.component.css'],
 })
 export class FindComponent {
   // tslint:disable-next-line:variable-name
@@ -16,7 +16,7 @@ export class FindComponent {
   public fuzzy = false;
   public highlightAll = false;
   public currentPage = false;
-  private _pageRange = "";
+  private _pageRange = '';
   public matchCase = false;
   public wholeWord = false;
   public ignoreAccents = false;
@@ -28,7 +28,20 @@ export class FindComponent {
 
   public findState: FindState | undefined;
 
-    private _fullscreen = false;
+  private _fullscreen = false;
+
+  private _selectedTab: number = 0;
+
+  public get selectedTab(): number {
+    return this._selectedTab;
+  }
+
+  public set selectedTab(tab) {
+    this._selectedTab = tab;
+    if (tab !== 1) {
+      this.resetFindResult();
+    }
+  }
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -36,8 +49,7 @@ export class FindComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.ngxExtendedPdfViewerService.recalculateSize());
+    setTimeout(() => this.ngxExtendedPdfViewerService.recalculateSize());
   }
 
   public get pageRange(): string {
@@ -60,7 +72,7 @@ export class FindComponent {
       case FindState.WRAPPED:
         return 'wrapped';
     }
-    return "";
+    return '';
   }
 
   public get searchtext(): string {
@@ -79,18 +91,15 @@ export class FindComponent {
       this.totalMatches = undefined;
     }
     if (this.multipleSearchTerms) {
-      this.ngxExtendedPdfViewerService.findMultiple(
-        [this._searchtext, this.searchtext2, this._searchtext3],
-        {
-          highlightAll: this.highlightAll,
-          currentPage: this.currentPage,
-          matchCase: this.matchCase,
-          wholeWords: this.wholeWord,
-          ignoreAccents: this.ignoreAccents,
-          fuzzySearch: this.fuzzy,
-          pageRange: this.pageRange
-        }
-      );
+      this.ngxExtendedPdfViewerService.findMultiple([this._searchtext, this.searchtext2, this._searchtext3], {
+        highlightAll: this.highlightAll,
+        currentPage: this.currentPage,
+        matchCase: this.matchCase,
+        wholeWords: this.wholeWord,
+        ignoreAccents: this.ignoreAccents,
+        fuzzySearch: this.fuzzy,
+        pageRange: this.pageRange,
+      });
     } else {
       if (
         this.ngxExtendedPdfViewerService.find(this._searchtext, {
@@ -100,7 +109,7 @@ export class FindComponent {
           wholeWords: this.wholeWord,
           ignoreAccents: this.ignoreAccents,
           fuzzySearch: this.fuzzy,
-          pageRange: this.pageRange
+          pageRange: this.pageRange,
         })
       ) {
       }
@@ -124,9 +133,7 @@ export class FindComponent {
     this.find();
   }
 
-  constructor(
-    private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef) {}
 
   public updateFindState(result: FindState) {
     this.findState = result;
@@ -136,6 +143,9 @@ export class FindComponent {
     this.currentMatchNumber = result.current;
     this.totalMatches = result.total;
     this.cdr.detectChanges();
+    if (this._selectedTab === 1) {
+      this.onUpdateFindResult(result);
+    }
   }
 
   public onCheckboxClicked() {
@@ -146,7 +156,7 @@ export class FindComponent {
       wholeWords: this.wholeWord,
       ignoreAccents: this.ignoreAccents,
       fuzzySearch: this.fuzzy,
-      pageRange: this.pageRange
+      pageRange: this.pageRange,
     });
   }
 
@@ -156,5 +166,40 @@ export class FindComponent {
 
   public findPrevious(): void {
     this.ngxExtendedPdfViewerService.findPrevious();
+  }
+
+  public resetFindResult(): void {
+    const allSpans = document.querySelectorAll('.textLayer > span') as NodeList;
+    allSpans.forEach((span, index) => {
+      (span as HTMLElement).classList.remove('fade-out');
+    });
+  }
+
+  public onUpdateFindResult(event: FindResultMatchesCount): void {
+    const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
+    const matchIndexes = event.matches as Array<Array<number>>;
+    const matchesLengths = event.matchesLength as Array<Array<number>>;
+    const matchesColors = event.matchesColor as Array<Array<number>>;
+
+    setTimeout(() => {
+      matchIndexes.forEach((findings, page) => {
+        if (findings?.length > 0) {
+          const currentPage = PDFViewerApplication.pdfViewer._pages[page];
+          if (currentPage.textHighlighter.textDivs) {
+            if (page && matchesLengths[page][0] > 0) {
+              const converted = currentPage.textHighlighter._convertMatches([matchIndexes[page]], [matchesLengths[page]], [matchesColors[page]]) as Array<any>;
+              const allSpans = currentPage.div.querySelectorAll('.textLayer > span') as NodeList;
+              allSpans.forEach((span, index) => {
+                if (converted.some((highlight) => index >= highlight.begin.divIdx && index <= highlight.end.divIdx)) {
+                  (span as HTMLElement).classList.remove('fade-out');
+                } else {
+                  (span as HTMLElement).classList.add('fade-out');
+                }
+              });
+            }
+          }
+        }
+      });
+    }, 200);
   }
 }

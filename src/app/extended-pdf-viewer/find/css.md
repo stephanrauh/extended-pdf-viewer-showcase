@@ -1,16 +1,4 @@
-.narrow {
-  width: 30%;
-}
-.padding {
-  padding-left: 2em;
-  padding-right: 2em;
-}
-
-.no-padding {
-  margin-top: -1em;
-  margin-bottom: -1.25em;
-}
-
+```css
 ::ng-deep ngx-extended-pdf-viewer div.textLayer,
 ::ng-deep ngx-extended-pdf-viewer div.textLayer .fade-out {
   opacity: 1;
@@ -25,3 +13,4 @@
   background-color: red;
   opacity: 0.2;
 }
+```
