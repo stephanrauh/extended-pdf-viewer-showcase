@@ -1,3 +1,4 @@
+import { PasswordsComponent } from './passwords/passwords.component';
 import { NgModule } from '@angular/core';
 
 import { ExtendedPdfViewerRoutingModule } from './extended-pdf-viewer-routing.module';
@@ -95,6 +96,7 @@ new TouchEmulator();
     BookModeComponent,
     PdfjsVersionsComponent,
     PrintRangeComponent,
+    PasswordsComponent,
     RangeRequestsComponent,
     ScriptingComponent,
     SignaturesComponent,

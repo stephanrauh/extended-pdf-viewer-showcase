@@ -1,3 +1,4 @@
+import { PasswordsComponent } from './passwords/passwords.component';
 import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -53,24 +54,24 @@ import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-
 const routes: Routes = [
   {
     path: 'simple',
-    component: SimpleComponent
+    component: SimpleComponent,
   },
   { path: 'alternatives', component: AlternativesComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'base64', component: Base64Component },
   { path: 'blob', component: BlobComponent, canActivate: [PreloadGuard] },
   { path: 'changelog', component: ChangelogComponent },
-  { path: 'changelog', component: ChangelogComponent},
+  { path: 'changelog', component: ChangelogComponent },
   { path: 'contextmenu', component: ContextmenuComponent },
-  { path: 'options', component: DefaultOptionsComponent},
-  { path: 'customization', component: CustomizationComponent},
+  { path: 'options', component: DefaultOptionsComponent },
+  { path: 'customization', component: CustomizationComponent },
   { path: 'custom-toolbar', component: CustomToolbarComponent },
   { path: 'custom-sidebar', component: CustomSidebarComponent },
   { path: 'custom-thumbnails', component: CustomThumbnailsComponent },
   { path: 'display-options', component: DisplayOptionsComponent },
   { path: 'export', component: ExportComponent },
   { path: 'file-info', component: FileInfoComponent },
-  { path: 'filtering-console-log', component: FilteringConsoleLogComponent},
+  { path: 'filtering-console-log', component: FilteringConsoleLogComponent },
   { path: 'forms', component: FormsComponent },
   { path: 'layers', component: LayersComponent },
   { path: 'getting-started', component: GettingStartedComponent },
@@ -86,10 +87,11 @@ const routes: Routes = [
   { path: 'mobile', component: MobileComponent },
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },
+  { path: 'passwords', component: PasswordsComponent },
   { path: 'pdfjs-versions', component: PdfjsVersionsComponent },
   { path: 'range-requests', component: RangeRequestsComponent },
   { path: 'scripting', component: ScriptingComponent },
-  { path: 'signatures', component: SignaturesComponent},
+  { path: 'signatures', component: SignaturesComponent },
   { path: 'simple', component: SimpleComponent },
   { path: 'smartphone', component: SmartphoneComponent },
   { path: 'textlayer', component: TextlayerComponent },
@@ -111,6 +113,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ExtendedPdfViewerRoutingModule { }
+export class ExtendedPdfViewerRoutingModule {}
