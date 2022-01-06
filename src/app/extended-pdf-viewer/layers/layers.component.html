@@ -1,38 +1,71 @@
 <div fxLayout="column" fxFill>
   <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-  <mat-card class="distance16 mat-elevation-z8" fxFlex="40%">
-    <p>
-      Starting with ngx-extended-pdf-viewer 5.0 (and pdf.js 2.6), PDF files with layers are supported.
-      You can hide and show each layer in the new "layers" tab of the sidebar. This also works for
-      hidden layers.
-    </p>
-    <p>Just in case you don't speak French: the word "calque" in the list of layers simply means "layer".</p>
-  </mat-card>
-  <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="58%">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/forms/html.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
+    <mat-card class="distance16 mat-elevation-z8" fxFlex="52%">
+      <mat-tab-group>
+        <mat-tab label="UI">
+          <p>
+            Starting with ngx-extended-pdf-viewer 5.0 (and pdf.js 2.6), PDF files with layers are supported. You can hide and show each layer in the new
+            "layers" tab of the sidebar. This also works for hidden layers.
+          </p>
+          <p>Just in case you don't speak French: the word "calque" in the list of layers simply means "layer".</p>
+        </mat-tab>
+        <mat-tab label="API">
+          <code>ngxExtendedPdfViewerService</code> offers two methods allowing you to control the layers programmatically:
+          <ul>
+            <li>
+              <code>listLayers()</code> yields a list of the layers. Don't call it too early. A good point in time is the event
+              <code>(pagesLoaded)</code>.
+            </li>
+            <li>
+              <code>toggleLayer(id)</code> toggles a layer. You need to pass the ID of the layer. The ID, in turn, is part of the
+              result of <code>listLayers()</code>.
+            </li>
+          </ul>
+          Note there's not two-way binding. The PDF viewer doesn't fire an event if the user toggles the layers in the PDF file.
+          However, you can register a callback to a low-level API like so: <code>PDFViewerApplication.eventBus.on('optionalcontentconfig', callback)</code>
+          <p><b>Live demo:</b></p>
+          <span *ngFor="let layer of layers">
+            <button *ngIf="layer.visible" mat-button mat-raised-button color="primary" (click)="toggle(layer.layerId)">toggle {{ layer.name }}</button>
+            <button *ngIf="!layer.visible" mat-button mat-stroked-button color="primary" (click)="toggle(layer.layerId)">toggle {{ layer.name }}</button>
+          </span>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+    <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="46%">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/layers/html.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="API - TypeScript">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/layers/ts-api.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="API - HTML">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/layers/html-api.md"> </app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
 
-
-<mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <small>
-    Copyright hint: the file has been published by Paroliver under a
-    <a target="#" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0 international license</a> on
-    <a target="#" href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">commons.wikimedia.org</a>
-  </small>.
-  <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'"
-    [height]="'90vh'"
-    [useBrowserLocale]="true">
-  </ngx-extended-pdf-viewer>
-</mat-card>
+  <mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen = !fullscreen" style="float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
+      <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small>
+      Copyright hint: the file has been published by Paroliver under a
+      <a target="#" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0 international license</a> on
+      <a target="#" href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf"
+        >commons.wikimedia.org</a
+      > </small
+    >.
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'"
+      [height]="'90vh'"
+      [useBrowserLocale]="true"
+      [minifiedJSLibraries]="false"
+      (pagesLoaded)="listLayers()"
+    >
+    </ngx-extended-pdf-viewer>
+  </mat-card>
 </div>
