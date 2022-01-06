@@ -36,7 +36,7 @@
     "ngx-extended-pdf-viewer": "^11.0.3",
     "ngx-markdown": "^13.0.0",
     "ngx-perfect-scrollbar": "^10.1.1",
-    "pdfjs-dist": "~2.7.570",
+    "pdfjs-dist": "~2.12.313",
     "perfect-scrollbar": "^1.5.3",
     "prismjs": "^1.26.0",
     "rxjs": "^7.5.1",
