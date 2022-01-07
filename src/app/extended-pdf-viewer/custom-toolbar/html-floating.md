@@ -7,11 +7,12 @@
   [useBrowserLocale]="true"
   [textLayer]="true"
   [zoom]="zoom"
-  [showZoomButtons]="false">
+  [showZoomButtons]="false"
+  [showFreeFloatingBar]="showFreeFloatingBar">
 </ngx-extended-pdf-viewer>
 
 <ng-template #floatingZoombar>
-  <div style="position: absolute;bottom:20px;left:41%;z-index:1;background-color:black;padding:4px;padding-bottom: 8px;border:1px solid lightgray">
+  <div style="position: absolute;bottom:20px;left:41%;z-index:1;background-color:#dbe5e9;padding:4px;padding-bottom: 8px;border:1px solid darkgray">
     <div>
       <pdf-zoom-dropdown class="invisible"></pdf-zoom-dropdown>
 

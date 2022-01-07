@@ -13,9 +13,10 @@
       <br />
       <mat-radio-button value="checkbox">radiobutton zoom</mat-radio-button>
       <br />
-      <mat-radio-button value="additional">additional buttons</mat-radio-button>
+      <mat-radio-button value="additional">additional buttons + custom color</mat-radio-button>
       <br />
       <mat-radio-button value="floating">floating zoombar</mat-radio-button>
+      <mat-checkbox class="padding-left" [(ngModel)]="showFreeFloatingBar">show it! (uncheck to hide)</mat-checkbox>
       <br>
       <mat-radio-button value="multi">multiple lines</mat-radio-button>
     </mat-radio-group>
@@ -32,7 +33,7 @@
       <mat-tab label="additional components" *ngIf="theme=='additional'">
         <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
       </mat-tab>
-      <mat-tab label="changing the theme dynamically">
+      <mat-tab label="changing the toolbars dynamically">
         <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-reinitialization.md'"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
@@ -56,6 +57,7 @@
     [textLayer]="true"
     [zoom]="zoom"
     [showZoomButtons]="theme != 'floating'"
+    [showFreeFloatingBar]="showFreeFloatingBar"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>
@@ -112,7 +114,7 @@
 
 
 <ng-template #additionalButtons>
-  <div id="toolbarViewer" style="background-color:darkblue">
+  <div id="toolbarViewer" style="background-color:rgb(232 246 255)">
     <div id="toolbarViewerLeft">
       <pdf-toggle-sidebar></pdf-toggle-sidebar>
       <div class="toolbarButtonSpacer"></div>
@@ -133,7 +135,7 @@
 </ng-template>
 
 <ng-template #floatingZoombar>
-  <div style="position: absolute;bottom:20px;left:41%;z-index:1;background-color:black;padding:4px;padding-bottom: 8px;border:1px solid lightgray">
+  <div style="position: absolute;bottom:20px;left:41%;z-index:1;background-color:#dbe5e9;padding:4px;padding-bottom: 8px;border:1px solid darkgray">
     <div>
       <pdf-zoom-dropdown class="invisible"></pdf-zoom-dropdown>
 

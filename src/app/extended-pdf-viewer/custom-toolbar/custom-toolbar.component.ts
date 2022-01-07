@@ -13,9 +13,11 @@ export class CustomToolbarComponent {
 
   public showPdfViewer = true;
 
+  public showFreeFloatingBar = true;
+
   public zoom = '100%';
 
-    private _fullscreen = false;
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;
