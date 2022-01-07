@@ -1,3 +1,4 @@
+import { MouseWheelComponent } from './mouse-wheel/mouse-wheel.component';
 import { PasswordsComponent } from './passwords/passwords.component';
 import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar.component';
 import { NgModule } from '@angular/core';
@@ -65,6 +66,7 @@ const routes: Routes = [
   { path: 'contextmenu', component: ContextmenuComponent },
   { path: 'options', component: DefaultOptionsComponent },
   { path: 'customization', component: CustomizationComponent },
+  { path: 'custom-print-dialog', component: CustomPrintDialogComponent },
   { path: 'custom-toolbar', component: CustomToolbarComponent },
   { path: 'custom-sidebar', component: CustomSidebarComponent },
   { path: 'custom-thumbnails', component: CustomThumbnailsComponent },
@@ -89,6 +91,11 @@ const routes: Routes = [
   { path: 'pages-loaded', component: PagesLoadedComponent },
   { path: 'passwords', component: PasswordsComponent },
   { path: 'pdfjs-versions', component: PdfjsVersionsComponent },
+  { path: 'page-view-mode', component: PageViewModeComponent },
+  { path: 'print-range', component: PrintRangeComponent },
+  { path: 'perfect-scrollbar', component: PerfectScrollbarComponent },
+  { path: 'presentations', component: PresentationComponent },
+  { path: 'prerendering', component: PrerenderingComponent },
   { path: 'range-requests', component: RangeRequestsComponent },
   { path: 'scripting', component: ScriptingComponent },
   { path: 'signatures', component: SignaturesComponent },
@@ -97,14 +104,9 @@ const routes: Routes = [
   { path: 'textlayer', component: TextlayerComponent },
   { path: 'touch-gestures', component: TouchGesturesComponent },
   { path: 'troubleshooting', component: TroubleshootingComponent },
-  { path: 'zoom', component: ZoomComponent },
-  { path: 'custom-print-dialog', component: CustomPrintDialogComponent },
-  { path: 'page-view-mode', component: PageViewModeComponent },
-  { path: 'print-range', component: PrintRangeComponent },
-  { path: 'perfect-scrollbar', component: PerfectScrollbarComponent },
-  { path: 'presentations', component: PresentationComponent },
-  { path: 'prerendering', component: PrerenderingComponent },
   { path: 'two-way-binding', component: TwoWayBindingComponent },
+  { path: 'wheel', component: MouseWheelComponent },
+  { path: 'zoom', component: ZoomComponent },
   {
     path: '**',
     redirectTo: 'simple',

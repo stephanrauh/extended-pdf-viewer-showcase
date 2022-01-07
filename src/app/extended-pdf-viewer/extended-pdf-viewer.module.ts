@@ -1,3 +1,4 @@
+import { MouseWheelComponent } from './mouse-wheel/mouse-wheel.component';
 import { PasswordsComponent } from './passwords/passwords.component';
 import { NgModule } from '@angular/core';
 
@@ -120,6 +121,7 @@ new TouchEmulator();
     PrerenderingComponent,
     TwoWayBindingComponent,
     FilteringConsoleLogComponent,
+    MouseWheelComponent
   ],
 })
 export class ExtendedPdfViewerModule {}
