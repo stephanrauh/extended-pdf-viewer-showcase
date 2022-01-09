@@ -1,3 +1,4 @@
+import { CustomBackgroundComponent } from './custom-background/custom-background.component';
 import { MouseWheelComponent } from './mouse-wheel/mouse-wheel.component';
 import { PasswordsComponent } from './passwords/passwords.component';
 import { NgModule } from '@angular/core';
@@ -79,6 +80,7 @@ new TouchEmulator();
     ContextmenuComponent,
     DefaultOptionsComponent,
     CustomizationComponent,
+    CustomBackgroundComponent,
     CustomSidebarComponent,
     CustomThumbnailsComponent,
     ExportComponent,

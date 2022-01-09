@@ -12,7 +12,9 @@
     "prestart": "node extract-versions.js",
     "start2": "ng serve --host 0.0.0.0 --disable-host-check",
     "start": "ng serve --configuration development  --base-href /angularapp/ --deploy-url /angularapp/ -o",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "quick": "cd ../ngx-extended-pdf-viewer && ./quick.sh && npm run showcase && cd ../extended-pdf-viewer-showcase && ng s --host 0.0.0.0",
+    "full": "cd ../ngx-extended-pdf-viewer && ./updateMozillasPdfViewer.sh && npm run showcase && cd ../extended-pdf-viewer-showcase && ng s --host 0.0.0.0"
   },
   "private": true,
   "dependencies": {
@@ -34,7 +36,7 @@
     "classlist.js": "^1.1.20150312",
     "ng2-completer": "^9.0.1",
     "ng2-pdf-viewer": "^7.0.2",
-    "ngx-extended-pdf-viewer": "^11.1.0",
+    "ngx-extended-pdf-viewer": "^11.1.1",
     "ngx-markdown": "^13.0.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "pdfjs-dist": "~2.7.570",

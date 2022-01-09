@@ -1,3 +1,4 @@
+import { CustomBackgroundComponent } from './custom-background/custom-background.component';
 import { MouseWheelComponent } from './mouse-wheel/mouse-wheel.component';
 import { PasswordsComponent } from './passwords/passwords.component';
 import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar.component';
@@ -66,6 +67,7 @@ const routes: Routes = [
   { path: 'contextmenu', component: ContextmenuComponent },
   { path: 'options', component: DefaultOptionsComponent },
   { path: 'customization', component: CustomizationComponent },
+  { path: 'custom-background', component: CustomBackgroundComponent},
   { path: 'custom-print-dialog', component: CustomPrintDialogComponent },
   { path: 'custom-toolbar', component: CustomToolbarComponent },
   { path: 'custom-sidebar', component: CustomSidebarComponent },

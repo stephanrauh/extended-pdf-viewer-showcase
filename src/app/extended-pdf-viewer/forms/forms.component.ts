@@ -33,7 +33,7 @@ export class FormsComponent implements OnChanges {
 
   public rawFormData!: any[];
 
-    private _fullscreen = false;
+    private _fullscreen = true;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

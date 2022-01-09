@@ -1,0 +1,58 @@
+<div fxLayout="column" fxFill>
+  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
+    <mat-card class="distance16 mat-elevation-z8" fxFlex="45%">
+      <p>You can draw the PDF file on a background of your choice.</p>
+      <p><b>Handle with care!</b> PDF files are   - by design - files you can trust. The reader expects them not to be manipulated. Modifiying the background of the
+        PDF file is just that. You're displaying the file in a way the author didn't want you to do. That's the reason why ngx-extended-pdf-viewer always
+        shows a fat red warning telling the reader what's going on. I ask you not to remove this message. If you do, you might undermine trust in the PDF file format.
+        Please don't do that!</p>
+      <mat-radio-group aria-label="Chose a custom background" [(ngModel)]="choice">
+        <mat-radio-button [value]="undefined">[pdfBackgroundColor]="undefined" (or just omit it)</mat-radio-button>
+        <br />
+        <mat-radio-button [value]="'#e8e1c4'">pdfBackgroundColor="'#e8e1c4'" </mat-radio-button>
+        <br />
+        <mat-radio-button [value]="'by-page'">pdfBackgroundColor ="colorByPage()" (sourcecode on the right hand side)</mat-radio-button>
+        <br />
+        <mat-radio-button [value]="'image'">pdfBackgroundColor="oldPaper()" (sourcecode on the right hand side)</mat-radio-button>
+      </mat-radio-group>
+
+    </mat-card>
+    <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="53%">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+          <app-ie11-markdown *ngIf="activeTab===1" ngPreserveWhitespaces src="/assets/extended-pdf-viewer/custom-background/html.md"> </app-ie11-markdown>
+          <app-ie11-markdown *ngIf="activeTab===2" ngPreserveWhitespaces src="/assets/extended-pdf-viewer/custom-background/html2.md"> </app-ie11-markdown>
+          <app-ie11-markdown *ngIf="activeTab===3" ngPreserveWhitespaces src="/assets/extended-pdf-viewer/custom-background/html3.md"> </app-ie11-markdown>
+          <app-ie11-markdown *ngIf="activeTab===4" ngPreserveWhitespaces src="/assets/extended-pdf-viewer/custom-background/html4.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="Typescript">
+          <app-ie11-markdown *ngIf="activeTab===1" ngPreserveWhitespaces src="/assets/extended-pdf-viewer/custom-background/ts.md"> </app-ie11-markdown>
+          <app-ie11-markdown *ngIf="activeTab===2" ngPreserveWhitespaces src="/assets/extended-pdf-viewer/custom-background/ts.md"> </app-ie11-markdown>
+          <app-ie11-markdown *ngIf="activeTab===3" ngPreserveWhitespaces src="/assets/extended-pdf-viewer/custom-background/ts3.md"> </app-ie11-markdown>
+          <app-ie11-markdown *ngIf="activeTab===4" ngPreserveWhitespaces src="/assets/extended-pdf-viewer/custom-background/ts4.md"> </app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+
+  <mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen = !fullscreen" style="float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
+      <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small>Copyright hint: this PDF file is my own work. The background image has been published by sipa under a
+      <a target="#" href="https://pixabay.com/de/service/license/">Pixabay licence</a> on
+      <a target="#" href="https://pixabay.com/de/photos/papier-pergament-d%C3%BCnn-struktur-539779/">Pixabay</a>.</small>.
+    <ngx-extended-pdf-viewer
+      *ngIf="visible"
+      [src]="'/assets/pdfs/What About GraalVM.pdf'"
+      [useBrowserLocale]="true"
+      [pdfBackground]="background"
+      [pdfBackgroundColorToReplace]="'#ffffff'"
+      [minifiedJSLibraries]="false"
+      [sidebarVisible]="false"
+    >
+    </ngx-extended-pdf-viewer>
+  </mat-card>
+</div>
