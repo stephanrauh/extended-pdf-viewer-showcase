@@ -42,7 +42,7 @@
     "pdfjs-dist": "~2.7.570",
     "perfect-scrollbar": "^1.5.3",
     "prismjs": "^1.26.0",
-    "rxjs": "^7.5.1",
+    "rxjs": "^7.5.2",
     "tslib": "^2.3.1",
     "web-animations-js": "^2.3.2",
     "zone.js": "0.11.4"
