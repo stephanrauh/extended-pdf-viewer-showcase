@@ -20,11 +20,11 @@ describe('PDF viewer smoke test', () => {
     cy.visit('http://localhost:4200')
   })
 
-  it('displays two todo items by default', () => {
+  it('displays 333 pages by default', () => {
     // We use the `cy.get()` command to get all elements that match the selector.
     // Then, we use `should` to assert that there are two matched items,
     // which are the two default items.
-    cy.get('.page').should('have.length', 2)
+    cy.get('.page').should('have.length', 333)
 
   })
 
