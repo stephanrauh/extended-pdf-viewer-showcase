@@ -2,10 +2,20 @@
   <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
     <mat-card class="distance16 mat-elevation-z8" fxFlex="45%">
       <p>You can override the default function <code>Window.ngxConsoleFilter(logLevel, message)</code> to filter the log messages.</p>
-      <p>This live demo filters the version number from the console messages and stores it in a variable so it can be shown here:</p>
+      <p>
+        This live demo re-defines <code>ngxConsolefilter()</code> to grab the version number from the console messages and to store it in a variable so it can
+        be shown here:
+      </p>
       <p>
         <i>{{ version }}</i>
       </p>
+      <p>
+        The original use-case of <code>ngxConsolefilter()</code> is suppressing messages you don't want to log. For example, many PDF documents cause the viewer
+        to emit messages like <code>Warning: TT: undefined function: 32</code>. That's one of the messages you can almost always safely ignore, so it doesn't
+        make sense to pump it into, say, an ELK stack. If your cust om implementation of <code>ngxConsolefilter()</code> returns false depending on the message
+        text, the message is never logged.
+      </p>
+      <p>The live demo shows that, too: when you open the console window, you'll see every message with the exception of the version info.</p>
     </mat-card>
     <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="53%">
       <mat-tab-group>
@@ -20,11 +30,11 @@
   </div>
 
   <mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
+    <button mat-button (click)="fullscreen = !fullscreen" style="float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
+      <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
     <small>Copyright hint: this presentation is my own work</small>.
     <ngx-extended-pdf-viewer
       [src]="'/assets/pdfs/GraalVM.pdf'"
