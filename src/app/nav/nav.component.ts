@@ -109,6 +109,7 @@ export class NavComponent {
         this.pdfjsVersion =
           ', pdf.js ' + (window as any).pdfjsLib.version + ',';
       } else {
+        this.pdfjsVersion =''; // maybe we're currently showing one of the pages without example file
         this.determinePdfJsVersion();
       }
     }, 100);
