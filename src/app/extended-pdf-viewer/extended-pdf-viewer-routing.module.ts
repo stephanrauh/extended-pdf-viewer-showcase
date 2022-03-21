@@ -52,6 +52,7 @@ import { PresentationComponent } from './presentations/presentations.component';
 import { PrerenderingComponent } from './prerendering/prerendering.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-console-log.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,7 @@ const routes: Routes = [
   { path: 'keycloak', component: KeycloakComponent },
   { path: 'mobile', component: MobileComponent },
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
+  { path: 'navigation', component: NavigationComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },
   { path: 'passwords', component: PasswordsComponent },
   { path: 'pdfjs-versions', component: PdfjsVersionsComponent },

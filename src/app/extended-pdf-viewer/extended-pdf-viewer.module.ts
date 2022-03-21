@@ -59,6 +59,7 @@ import { PrerenderingComponent } from './prerendering/prerendering.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-console-log.component';
 import { TouchEmulator } from '../touch-emulator';
+import { NavigationComponent } from './navigation/navigation.component';
 
 const absoluteCMapUrl = pdfDefaultOptions.cMapUrl().replace('./', '/');
 pdfDefaultOptions.cMapUrl = () => absoluteCMapUrl;
@@ -94,6 +95,7 @@ new TouchEmulator();
     KeycloakComponent,
     MultipleDocumentsComponent,
     MobileComponent,
+    NavigationComponent,
     PagesLoadedComponent,
     PageViewModeComponent,
     BookModeComponent,
