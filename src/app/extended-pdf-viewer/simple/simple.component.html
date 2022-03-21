@@ -4,13 +4,21 @@
     <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab=$event">
       <mat-tab label="Getting started">
         <p>
+        Open a terminal and enter this command at your project's root folder:
+        <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/schematics.md"> </app-ie11-markdown>
+        This configures your project, adds an example component and an example PDF file, so you
+        just need to add the new <code>&lt;add-example-pdf-viewer></code> tag to one of you <code>*.html</code> files.
+      </p>
+      </mat-tab>
+      <mat-tab label="Basic parameters">
+          <p>
           This demo shows the default viewer. In most cases, you can also omit the property <code>[useBrowserLocale]</code>. It's a
           performance optimization: the showcase embeds the translation files in the <code>index.html</code>. This approach is faster than
           the flexible default approach which supports more then 120 languages and dialects.
         </p>
         <p>
-          If you're missing the find dialog and the text selection: that's a performance optimization. The
-          <a href="/base64">base64 demo</a> adds the text layer. That's a bit slower, but allows you to find and select text.
+          If you've set up the PDF viewer, but are missing the find dialog and the text selection: that's a performance optimization.
+          Activate the `[textLayer]` to enable these two features.
         </p>
         <p>
           The <code>height</code> attribute can often be omitted, too. The showcase only needs it because its layout framework, Angular
