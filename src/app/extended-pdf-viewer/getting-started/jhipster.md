@@ -1,5 +1,12 @@
 **Caveat**: I don't support non-standard installations. This includes JHipster. Nonetheless, I've collected some hint that might help you get the PDF viewer up and running.
 
+1. Install the library with `npm install`:
+
+```batch
+npm i ngx-extended-pdf-viewer --save
+```
+
+
 1. Locate the `CopyWebpackPlugin` in the file `webpack.common.js` (currently line 70) and add this line:
 
 ```javascript
@@ -43,3 +50,20 @@ require('ngx-extended-pdf-viewer/assets/web/viewer.min.js');
   window["pdfjs-dist/build/pdf"] = root["pdfjs-dist/build/pdf"] = root.pdfjsLib = factory(); // <-- modified line
 })(this, function() {
 ```
+
+## Almost there!
+
+Add `NgxExtendedPdfViewerModule` to the import section of your module file. If your IDE doesn't find
+    the import automatically, here it is:
+
+```typescript
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+```
+
+Now you can display the PDF file like so:
+
+```html
+<ngx-extended-pdf-viewer [src]="'assets/example.pdf'" [useBrowserLocale]="true"></ngx-extended-pdf-viewer>
+```
+
+_Hint:_ If you are using JHipster, note there's no `assets` folder, so most likely the path of the URL is something like `[src]="'content/example.pdf'"`.

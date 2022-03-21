@@ -1,19 +1,4 @@
-## Almost there!
 
-Add `NgxExtendedPdfViewerModule` to the import section of your module file. If your IDE doesn't find
-    the import automatically, here it is:
-
-```typescript
-import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-```
-
-Now you can display the PDF file like so:
-
-```html
-<ngx-extended-pdf-viewer [src]="'assets/example.pdf'" [useBrowserLocale]="true"></ngx-extended-pdf-viewer>
-```
-
-_Hint:_ If you are using JHipster, note there's no `assets` folder, so most likely the path of the URL is something like `[src]="'content/example.pdf'"`.
 
 ## What if I'm getting my PDF file from a REST resource?
 

@@ -1,4 +1,10 @@
-Open the file `angular.json` (or `.angular-cli.json` if you're using an older version of Angular) and configure Angular to copy the `assets` folder of the library into the `assets` folder of your application:
+Install the library with `npm install`:
+
+```batch
+npm i ngx-extended-pdf-viewer --save
+```
+
+Next, open the file `angular.json` (or `.angular-cli.json` if you're using an older version of Angular) and configure Angular to copy the `assets` folder of the library into the `assets` folder of your application:
 
 ```json
   "assets": [
@@ -43,4 +49,19 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 2. A line in your constructor
 ```ts 
 pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+```
+
+## Almost there!
+
+Add `NgxExtendedPdfViewerModule` to the import section of your module file. If your IDE doesn't find
+    the import automatically, here it is:
+
+```typescript
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+```
+
+Now you can display the PDF file like so:
+
+```html
+<ngx-extended-pdf-viewer [src]="'assets/example.pdf'" [useBrowserLocale]="true"></ngx-extended-pdf-viewer>
 ```
