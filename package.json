@@ -30,7 +30,7 @@
     "@angular/platform-browser-dynamic": "^13.2.2",
     "@angular/router": "^13.2.2",
     "@fontsource/material-icons": "^4.5.2",
-    "@fontsource/roboto": "^4.5.3",
+    "@fontsource/roboto": "^4.5.5",
     "@stephanrauh/angular2-smart-table": "^2.0.9",
     "angular-material-icons": "^0.7.1",
     "classlist.js": "^1.1.20150312",
