@@ -1,5 +1,4 @@
 import { Component, OnChanges } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-ng2-side-by-side',
@@ -15,9 +14,7 @@ export class Ng2SideBySideComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  constructor() {}
 }

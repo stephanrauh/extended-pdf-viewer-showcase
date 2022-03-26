@@ -27,6 +27,7 @@ Now you can use the PDF viewer in your components:
   <pdf-viewer [src]="pdfSrc" 
               [render-text]="true"
               style="display: block;"
+              style="width: 100%; height: 100%"
   ></pdf-viewer>
   `
 })

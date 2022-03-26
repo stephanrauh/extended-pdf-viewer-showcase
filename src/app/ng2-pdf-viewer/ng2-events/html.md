@@ -8,6 +8,7 @@
             (on-progress)="onEvent('on-progres', $event)"
             (pageChange)="onEvent('pageChange', $event)"
             (error)="onError($event)"
+            style="width: 100%; height: 100%"
             >
 </pdf-viewer>
 ```

@@ -4,6 +4,7 @@
             [render-text]="true"
             [page]="1"
             [show-all]="false"
-            [external-link-target]="target">
+            [external-link-target]="target"
+            style="width: 100%; height: 100%">
 </pdf-viewer>
 ```
