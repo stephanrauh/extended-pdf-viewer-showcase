@@ -1,0 +1,44 @@
+<div fxLayout="column" fxFill>
+  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
+    <mat-card class="distance16 mat-elevation-z8" fxFlex="45%">
+      <mat-tab-group>
+        <mat-tab label="Displaying PDF files side-by-side">
+          <p>To display multiple PDF files on the same page, you need to put them in an iFrame.
+            This is because pdf.js pollutes the global namespace, and although the Mozilla team
+            are working on it, that's something that's not easy to fix.
+          </p>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+    <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="53%">
+      <mat-tab-group>
+        <mat-tab label="HTML template 1">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="HTML template 2">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html2.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="Typescript">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/ts.md"> </app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+
+  <mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen = !fullscreen" style="float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
+      <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+
+    <div>
+      <small>Copyright hint: the PDF files are my own work. </small>
+    </div>
+
+    <div style="width: 100%">
+      <iframe id="embedded" src="/extended-pdf-viewer/iframe/cdk" style="height: 100vh; width: 47%"></iframe>
+      <iframe id="embedded" src="/extended-pdf-viewer/iframe/graalvm" style="height: 100vh; width: 47%; float: right"></iframe>
+    </div>
+  </mat-card>
+</div>

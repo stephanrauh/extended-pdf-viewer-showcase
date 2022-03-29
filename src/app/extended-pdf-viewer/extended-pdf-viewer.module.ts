@@ -60,6 +60,8 @@ import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.compon
 import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-console-log.component';
 import { TouchEmulator } from '../touch-emulator';
 import { NavigationComponent } from './navigation/navigation.component';
+import { SideBySideComponent } from './side-by-side/side-by-side.component';
+import { IFrameComponent } from './iframe/iframe.component';
 
 const absoluteCMapUrl = pdfDefaultOptions.cMapUrl().replace('./', '/');
 pdfDefaultOptions.cMapUrl = () => absoluteCMapUrl;
@@ -125,7 +127,9 @@ new TouchEmulator();
     PrerenderingComponent,
     TwoWayBindingComponent,
     FilteringConsoleLogComponent,
-    MouseWheelComponent
+    MouseWheelComponent,
+    SideBySideComponent,
+    IFrameComponent
   ],
 })
 export class ExtendedPdfViewerModule {}

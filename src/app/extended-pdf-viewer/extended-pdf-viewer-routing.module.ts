@@ -53,6 +53,8 @@ import { PrerenderingComponent } from './prerendering/prerendering.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-console-log.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { IFrameComponent } from './iframe/iframe.component';
+import { SideBySideComponent } from './side-by-side/side-by-side.component';
 
 const routes: Routes = [
   {
@@ -84,6 +86,7 @@ const routes: Routes = [
   { path: 'i18n', component: I18nComponent },
   { path: 'infinite-scroll', component: InfiniteScrollComponent },
   { path: 'book-mode', component: BookModeComponent },
+  { path: 'iframe/:id', component: IFrameComponent },
   { path: 'intro', component: IntroComponent },
   { path: 'hiding-buttons', component: HidingButtonsComponent },
   { path: 'links', component: LinksComponent },
@@ -102,6 +105,7 @@ const routes: Routes = [
   { path: 'prerendering', component: PrerenderingComponent },
   { path: 'range-requests', component: RangeRequestsComponent },
   { path: 'scripting', component: ScriptingComponent },
+  { path: 'side-by-side', component: SideBySideComponent },
   { path: 'signatures', component: SignaturesComponent },
   { path: 'simple', component: SimpleComponent },
   { path: 'smartphone', component: SmartphoneComponent },
