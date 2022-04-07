@@ -42,8 +42,6 @@ export class NavComponent {
   constructor(private breakpointObserver: BreakpointObserver, private notification: PDFNotificationService, private route: ActivatedRoute) {
     route.url.subscribe((url) => {
       this.hideMenu = location.pathname.includes('iframe');
-      console.error(location.pathname);
-      console.error(this.hideMenu);
     });
 
     try {
