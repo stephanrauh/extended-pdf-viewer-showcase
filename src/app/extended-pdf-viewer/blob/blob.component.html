@@ -4,6 +4,12 @@
     <mat-tab-group>
       <mat-tab label="Displaying BLOBs">
         <p>To display a BLOB, just pass it to the <code>src</code> attribute.</p>
+        <p>Chose a document:</p>
+        <mat-radio-group [(ngModel)]="choice" aria-label="Chose a document:">
+          <mat-radio-button [value]="'preloaded'" (click)="usePreloadedFile()">show a Blob that's already in memory</mat-radio-button>
+          <br />
+          <mat-radio-button [value]="'from-disk'" (click)="loadLargeFile()">load a large Blob via REST</mat-radio-button>
+        </mat-radio-group>
       </mat-tab>
       <mat-tab label="Downloading BLOBs">
         <p>You can also download the PDF file as a BLOB. For instance, the user can upload a file, and you can use the method

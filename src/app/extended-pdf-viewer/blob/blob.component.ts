@@ -13,11 +13,13 @@ import { LogService } from '../../log.service';
   styleUrls: ['./blob.component.css'],
 })
 export class BlobComponent implements OnInit {
-  public src!: Blob;
+  public src = this.blobService.src;
 
   public downloaded: string | undefined;
 
-    private _fullscreen = false;
+  private _fullscreen = false;
+
+  public choice = "preloaded";
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -35,7 +37,6 @@ export class BlobComponent implements OnInit {
     private ngxService: NgxExtendedPdfViewerService,
     public logService: LogService
   ) {
-    this.usePreloadedFile();
   }
 
   public ngOnInit(): void {}
