@@ -5,6 +5,7 @@
     "ng": "ng",
     "prebuild": "node extract-versions.js",
     "build": "ng build --prod",
+    "postbuild": "rm - dist/pdf-showcase/assets/pdfs/under-copyright",
     "test": "ng test",
     "lint": "ng lint",
     "express": "ng b && cd ./dist/pdf-showcase/ && node ./server.js",
