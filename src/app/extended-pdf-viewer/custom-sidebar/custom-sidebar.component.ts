@@ -4,9 +4,9 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 @Component({
   selector: 'app-custom-sidebar',
   templateUrl: './custom-sidebar.component.html',
-  styleUrls: ['./custom-sidebar.component.css']
+  styleUrls: ['./custom-sidebar.component.css'],
 })
-export class CustomSidebarComponent implements OnInit {
+export class CustomSidebarComponent {
   // tslint:disable-next-line: variable-name
   public _theme = 'without';
 
@@ -14,7 +14,7 @@ export class CustomSidebarComponent implements OnInit {
 
   public sidebarOpen = true;
 
-    private _fullscreen = false;
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -22,19 +22,16 @@ export class CustomSidebarComponent implements OnInit {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+    setTimeout(() => this.pdfService.recalculateSize());
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}
-
-  ngOnInit() {}
 
   public set theme(theme: string) {
     if (this._theme !== theme) {
       this.showPdfViewer = false;
       this._theme = theme;
-      setTimeout(() => this.showPdfViewer = true, 500);
+      setTimeout(() => (this.showPdfViewer = true), 500);
     } else {
       this._theme = theme;
     }

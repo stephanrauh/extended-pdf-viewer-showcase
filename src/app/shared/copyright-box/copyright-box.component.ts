@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './copyright-box.component.html',
   styleUrls: ['./copyright-box.component.css'],
 })
-export class CopyrightBoxComponent implements OnInit {
+export class CopyrightBoxComponent {
   @Input()
   public author!: string;
 
@@ -20,8 +20,4 @@ export class CopyrightBoxComponent implements OnInit {
 
   @Input()
   public licence!: string;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

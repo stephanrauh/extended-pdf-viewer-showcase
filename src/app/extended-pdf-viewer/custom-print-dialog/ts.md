@@ -10,7 +10,7 @@ interface EventBus {
   selector: 'app-custom-progress-bar',
   templateUrl: './custom-print-dialog.component.html',
   styleUrls: ['./custom-print-dialog.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   private _eventBus: EventBus;
@@ -23,19 +23,17 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   showCompleted = false;
   hideBuiltInProgress = true;
 
-  constructor() {}
-
   ngOnInit() {
     const node = document.querySelector('#printContainer');
     if (node) {
-      this._observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
+      this._observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
           try {
             const count: number = mutation.target.childNodes.length;
             if (count > 0) {
               this.currentPageRendered = count;
               this.printPercentage = Math.round((count / this.totalPages) * 100);
-            }            
+            }
           } catch (error) {
             this.printPercentage = 0;
           }
@@ -43,7 +41,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
       });
 
       this._observer.observe(node, {
-        childList: true
+        childList: true,
       });
     }
   }
@@ -59,11 +57,11 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
     this._eventBus = event.source['eventBus'];
   }
 
-  onBeforePrint() {    
+  onBeforePrint() {
     if (this.hideBuiltInProgress) {
       const node: Element = document.querySelector('.pdf-wrapper #printServiceOverlay .dialog');
       node.setAttribute('style', 'display:none!important');
-    }    
+    }
     this.showCompleted = false;
     this.showProgress = true;
   }
@@ -74,7 +72,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
     this.showCompleted = true;
   }
 
-  print() {  
+  print() {
     this._eventBus.dispatch('print');
   }
 
@@ -83,7 +81,7 @@ export class CustomPrintDialogComponent implements OnInit, OnDestroy {
   }
 
   get isPrintCancelled(): boolean {
-    return (this.totalPages !== this.currentPageRendered);
+    return this.totalPages !== this.currentPageRendered;
   }
 
   public onProgress(progress: ProgressBarEvent): void {

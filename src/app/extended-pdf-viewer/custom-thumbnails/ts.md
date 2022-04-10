@@ -18,11 +18,7 @@
   styleUrls: ['./custom-thumbnails.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CustomThumbnailsComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-
+export class CustomThumbnailsComponent {
   public onPageChange(page: number): void {
     const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
     if (radiobuttons) {
