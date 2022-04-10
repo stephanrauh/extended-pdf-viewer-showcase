@@ -1,18 +1,14 @@
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { countries } from './countries';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.css'],
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class FormsComponent implements OnChanges {
+export class FormsComponent {
   public selectedTab = 0;
 
   public firstName = 'Lucía';
@@ -35,14 +31,15 @@ export class FormsComponent implements OnChanges {
 
   private _fullscreen = false;
 
+  private initialized = false;
+
   public get fullscreen(): boolean {
     return this._fullscreen;
   }
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.ngxService.recalculateSize());
+    setTimeout(() => this.ngxService.recalculateSize());
   }
 
   public formData: {
@@ -50,7 +47,10 @@ export class FormsComponent implements OnChanges {
   } = {};
 
   public delayedUpdateFormData(): void {
-    setTimeout(() => this.updateFormData());
+    setTimeout(() => {
+      this.initialized = true;
+      this.updateFormData();
+    });
   }
 
   public updateFormData(): void {
@@ -69,28 +69,23 @@ export class FormsComponent implements OnChanges {
     };
   }
 
-  public setFormData(
-    data: { [fieldName: string]: string | string[] | number | boolean } | any
-  ) {
-    console.log(data);
-    this.firstName = data.firstName as string;
-    this.lastName = data.lastName as string;
-    this.jobExperience = data.yearsOfExperience as string;
-    this.country = data.country as string;
-    (this.databases = data.databases as string[]),
-      (this.educationLevel = data.educationLevel as string),
-      (this.otherJobExperience = data.otherJobExperience as string);
-    this.typeScript = Boolean(data.typeScript);
-    this.javaScript = Boolean(data.javaScript);
-    this.java = Boolean(data.java);
-    this.cSharp = Boolean(data.cSharp);
+  public setFormData(data: { [fieldName: string]: string | string[] | number | boolean } | any) {
+    if (this.initialized) {
+      this.firstName = data.firstName as string;
+      this.lastName = data.lastName as string;
+      this.jobExperience = data.yearsOfExperience as string;
+      this.country = data.country as string;
+      (this.databases = data.databases as string[]),
+        (this.educationLevel = data.educationLevel as string),
+        (this.otherJobExperience = data.otherJobExperience as string);
+      this.typeScript = Boolean(data.typeScript);
+      this.javaScript = Boolean(data.javaScript);
+      this.java = Boolean(data.java);
+      this.cSharp = Boolean(data.cSharp);
+    }
   }
 
-  constructor(private ngxService: NgxExtendedPdfViewerService) {
-    this.updateFormData();
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {}
+  constructor(private ngxService: NgxExtendedPdfViewerService) {}
 
   public async downloadAsBlob(): Promise<void> {
     this.downloaded = undefined;
@@ -114,5 +109,15 @@ export class FormsComponent implements OnChanges {
       maxLen: annotation.fieldAnnotation.maxLen,
       rect: annotation.fieldAnnotation.rect,
     }));
+  }
+
+  public onSelectTab(event: MatTabChangeEvent): void {
+    if (event.index === 1) {
+      this.selectedTab = 2;
+    } else if (event.index === 2) {
+      this.selectedTab = 4;
+    } else if (event.index === 3) {
+      this.selectedTab = 5;
+    }
   }
 }
