@@ -70,7 +70,7 @@ export class ExportComponent {
 
   public exportAsText(): void {
     this.selectedTabIndex = 3;
-    (async () => this.showText(await this.pdfViewerService.getPageAsText(6)))();
+    (async () => this.showText(await this.pdfViewerService.getPageAsText(1)))();
   }
 
   private showText(text: string): void {
