@@ -91,7 +91,12 @@ export class FormsComponent {
     this.downloaded = undefined;
     const blob = await this.ngxService.getCurrentDocumentAsBlob();
     if (blob) {
-      this.downloaded = 'The BLOB contains ' + blob.size + ' byte.';
+      this.downloaded =
+        'The BLOB contains ' +
+        blob.size +
+        ' byte. If your browser support that, the PDF file opens in a new tab or window, using the native PDF viewer of your browser.';
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
     } else {
       this.downloaded = 'download failed';
     }
