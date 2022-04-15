@@ -5,11 +5,10 @@ import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf
   selector: 'app-scripting',
   templateUrl: './scripting.component.html',
   styleUrls: ['./scripting.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScriptingComponent {
-
-    private _fullscreen = false;
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -17,31 +16,35 @@ export class ScriptingComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+    setTimeout(() => this.pdfService.recalculateSize());
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {
-    if (localStorage) {
-      const setting = localStorage.getItem('ngx-extended-pdf-viewer.enableScripting');
-      if (setting) {
-        pdfDefaultOptions.enableScripting = setting === "true";
+    try {
+      if (localStorage) {
+        const setting = localStorage.getItem('ngx-extended-pdf-viewer.enableScripting');
+        if (setting) {
+          pdfDefaultOptions.enableScripting = setting === 'true';
+        }
       }
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
     }
   }
 
   public get enableScripting(): boolean {
-    return  pdfDefaultOptions.enableScripting;
+    return pdfDefaultOptions.enableScripting;
   }
 
   public set enableScripting(enable: boolean) {
     pdfDefaultOptions.enableScripting = enable;
-    if (localStorage) {
-      localStorage.setItem(
-        'ngx-extended-pdf-viewer.enableScripting',
-        String(enable)
-      );
-      document.location = document.location;
+    try {
+      if (localStorage) {
+        localStorage.setItem('ngx-extended-pdf-viewer.enableScripting', String(enable));
+        document.location = document.location;
+      }
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
     }
   }
 }

@@ -17,7 +17,7 @@ export class TextlayerComponent {
 
   private alreadyRendered: Array<HTMLSpanElement> = [];
 
-    private _fullscreen = false;
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -25,8 +25,7 @@ export class TextlayerComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+    setTimeout(() => this.pdfService.recalculateSize());
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {
@@ -34,9 +33,14 @@ export class TextlayerComponent {
   }
 
   public get enhancedTextLayer(): boolean {
-    if (localStorage) {
-      return "true"===localStorage.getItem('enhancedTextLayer');
-    } else {
+    try {
+      if (localStorage) {
+        return 'true' === localStorage.getItem('enhancedTextLayer');
+      } else {
+        return true;
+      }
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
       return true;
     }
   }
@@ -44,13 +48,17 @@ export class TextlayerComponent {
   public set enhancedTextLayer(b: boolean) {
     if (b !== this.enhancedTextLayer) {
       pdfDefaultOptions.textLayerMode = b ? 2 : 1;
-      if (localStorage) {
-        localStorage.setItem('enhancedTextLayer', String(b));
-        location = location;
-      } else {
+      try {
+        if (localStorage) {
+          localStorage.setItem('enhancedTextLayer', String(b));
+          location = location;
+        } else {
+          alert("Cannot demonstrate this feature because your browser doesn't support localStorage.");
+        }
+      } catch (safariSecurityException) {
+        // localStorage is not available on Safari
         alert("Cannot demonstrate this feature because your browser doesn't support localStorage.");
       }
-
     }
   }
 
@@ -81,7 +89,7 @@ export class TextlayerComponent {
 
   public doMarkLongWordsInSpan(span: HTMLSpanElement): void {
     if (!this._markLongWords) {
-      span.innerHTML = span.innerText.replace("\n", '');
+      span.innerHTML = span.innerText.replace('\n', '');
     } else {
       const withMarks = span.innerText
         .split(' ')

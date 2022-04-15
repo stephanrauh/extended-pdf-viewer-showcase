@@ -7,7 +7,7 @@ import { LogService } from '../../log.service';
   selector: 'app-simple',
   templateUrl: './simple.component.html',
   styleUrls: ['./simple.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleComponent {
   // tslint:disable-next-line: variable-name
@@ -19,7 +19,7 @@ export class SimpleComponent {
 
   public showPdfViewer = true;
 
-  public height: string = "95%";
+  public height: string = '95%';
 
   public time = 0;
   public currentTime = 0;
@@ -28,7 +28,7 @@ export class SimpleComponent {
   private currentStartTime = new Date().getTime();
 
   /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
-  private themeIfLocalStorageIsUnavailable = "light";
+  private themeIfLocalStorageIsUnavailable = 'light';
 
   private _fullscreen = false;
 
@@ -38,54 +38,76 @@ export class SimpleComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+    setTimeout(() => this.pdfService.recalculateSize());
+  }
+
+  public localStorageIsSupported() {
+    try {
+      if (localStorage) {
+        return true;
+      }
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
+    }
+    return false;
   }
 
   public set selectedTab(index: number) {
-    if (localStorage) {
-      localStorage.setItem(
-        'ngx-extended-pdf-viewer.simple.selectedTab',
-        String(index)
-      );
+    try {
+      if (localStorage) {
+        localStorage.setItem('ngx-extended-pdf-viewer.simple.selectedTab', String(index));
+      }
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
     }
-}
+  }
 
   public get selectedTab(): number {
-    if (localStorage) {
-      return (
-        Number(
-          localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')
-        ) || 0
-      );
+    try {
+      if (localStorage) {
+        return Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
+      }
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
     }
     return 0;
   }
 
   public set theme(theme: string) {
-    if (theme !== this.theme && localStorage) {
-      localStorage.setItem('ngx-extended-pdf-viewer.theme', theme);
-      location = location;
-    } else {
+    try {
+      if (theme !== this.theme && localStorage) {
+        localStorage.setItem('ngx-extended-pdf-viewer.theme', theme);
+        location = location;
+      } else {
+        this.themeIfLocalStorageIsUnavailable = theme;
+        location = location;
+      }
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
       this.themeIfLocalStorageIsUnavailable = theme;
       location = location;
     }
   }
 
   public get theme(): string {
-    if (localStorage) {
-      return localStorage.getItem('ngx-extended-pdf-viewer.theme') || 'light';
-    } else {
+    try {
+      if (localStorage) {
+        return localStorage.getItem('ngx-extended-pdf-viewer.theme') || 'light';
+      } else {
+        return this.themeIfLocalStorageIsUnavailable;
+      }
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
       return this.themeIfLocalStorageIsUnavailable;
     }
   }
 
   constructor(public logService: LogService, private pdfService: NgxExtendedPdfViewerService) {
-      this.startTime = new Date().getTime();
+    this.startTime = new Date().getTime();
   }
 
   public onUpdateFindResult(event: any): void {
-    console.log("UpdateFindResult " + event.matches);
+    console.log('UpdateFindResult ' + event.matches);
   }
 
   public async getDiv(): Promise<void> {

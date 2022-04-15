@@ -29,7 +29,7 @@ export class TwoWayBindingComponent {
 
   public zoom: number | string = 'auto';
 
-    private _fullscreen = false;
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -37,28 +37,29 @@ export class TwoWayBindingComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+    setTimeout(() => this.pdfService.recalculateSize());
   }
 
   public set selectedTab(index: number) {
-    if (localStorage) {
-      localStorage.setItem(
-        'ngx-extended-pdf-viewer.simple.selectedTab',
-        String(index)
-      );
+    try {
+      if (localStorage) {
+        localStorage.setItem('ngx-extended-pdf-viewer.simple.selectedTab', String(index));
+      }
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
     }
   }
 
   public get selectedTab(): number {
-    if (localStorage) {
-      return (
-        Number(
-          localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')
-        ) || 0
-      );
+    try {
+      if (localStorage) {
+        return Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
+      }
+      return 0;
+    } catch (safariSecurityException) {
+      // localStorage is not available on Safari
+      return 0;
     }
-    return 0;
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}
