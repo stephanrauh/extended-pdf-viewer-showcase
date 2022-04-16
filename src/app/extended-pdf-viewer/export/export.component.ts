@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class ExportComponent {
   public imageDataURL: string | undefined = undefined;
 
+  public background: string | undefined;
+
   public extractedText = 'no text extracted yet';
 
   public scale!: number;
@@ -65,7 +67,7 @@ export class ExportComponent {
   public exportAsImage(): void {
     this.selectedTabIndex = 2;
     const scale = { width: this.width, height: this.height, scale: this.scale };
-    (async () => this.showImage(await this.pdfViewerService.getPageAsImage(1, scale)))();
+    (async () => this.showImage(await this.pdfViewerService.getPageAsImage(1, scale, this.background)))();
   }
 
   public exportAsText(): void {
