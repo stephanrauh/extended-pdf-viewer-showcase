@@ -6,10 +6,7 @@ import { NgModule } from '@angular/core';
 import { ExtendedPdfViewerRoutingModule } from './extended-pdf-viewer-routing.module';
 import { SimpleComponent } from './simple/simple.component';
 import { SharedModule } from '../shared/shared.module';
-import {
-  NgxExtendedPdfViewerModule,
-  pdfDefaultOptions,
-} from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerModule, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { AttributesComponent } from './attributes/attributes.component';
 import { Base64Component } from './base64/base64.component';
 import { BlobComponent } from './blob/blob.component';
@@ -62,6 +59,7 @@ import { TouchEmulator } from '../touch-emulator';
 import { NavigationComponent } from './navigation/navigation.component';
 import { SideBySideComponent } from './side-by-side/side-by-side.component';
 import { IFrameComponent } from './iframe/iframe.component';
+import { ThemingComponent } from './theming/theming.component';
 
 const absoluteCMapUrl = pdfDefaultOptions.cMapUrl().replace('./', '/');
 pdfDefaultOptions.cMapUrl = () => absoluteCMapUrl;
@@ -69,11 +67,7 @@ pdfDefaultOptions.cMapUrl = () => absoluteCMapUrl;
 new TouchEmulator();
 
 @NgModule({
-  imports: [
-    ExtendedPdfViewerRoutingModule,
-    SharedModule,
-    NgxExtendedPdfViewerModule,
-  ],
+  imports: [ExtendedPdfViewerRoutingModule, SharedModule, NgxExtendedPdfViewerModule],
   declarations: [
     SimpleComponent,
     AttributesComponent,
@@ -129,7 +123,8 @@ new TouchEmulator();
     FilteringConsoleLogComponent,
     MouseWheelComponent,
     SideBySideComponent,
-    IFrameComponent
+    IFrameComponent,
+    ThemingComponent,
   ],
 })
 export class ExtendedPdfViewerModule {}
