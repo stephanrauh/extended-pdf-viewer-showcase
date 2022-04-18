@@ -41,7 +41,7 @@
     "ngx-markdown": "^13.1.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "perfect-scrollbar": "^1.5.5",
-    "prismjs": "^1.27.0",
+    "prismjs": "^1.28.0",
     "rxjs": "^7.5.5",
     "tslib": "^2.3.1",
     "web-animations-js": "^2.3.2",
