@@ -107,6 +107,7 @@ export class FormsComponent {
     this.rawFormData = raw.map((annotation: any) => ({
       alternativeText: annotation.fieldAnnotation.alternativeText,
       fieldName: annotation.fieldAnnotation.fieldName,
+      value: annotation.fieldAnnotation.value,
       fieldType: annotation.fieldAnnotation.fieldType,
       fieldValue: annotation.fieldAnnotation.fieldValue,
       pageNumber: annotation.pageNumber,

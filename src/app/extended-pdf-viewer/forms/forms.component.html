@@ -103,6 +103,8 @@
           <p>You can access low-level form data using <code>NgxExtendedPdfViewerService.getFormData().</code></p>
           <p>You can use this demo to find out the names of the fields in the PDF file.</p>
           <p><b>Caveat:</b> The API is subject to change.</p>
+          <p>Also note that radiobuttons (and checkboxes which are used as radiobuttons) have a very peculiar representation.
+            This is a low-level API, so it displays all the internal complexity.</p>
           <section class="section" style="margin-top: 5px; margin-bottom: 10px">
             <button mat-raised-button color="primary" (click)="readRawFormDescription()" style="margin-left: 10px">read low-level form description</button>
           </section>
@@ -171,6 +173,7 @@
       [formData]="formData"
       (formDataChange)="setFormData($event)"
       (pageRendered)="delayedUpdateFormData()"
+      [minifiedJSLibraries]="false"
     >
     </ngx-extended-pdf-viewer>
   </mat-card>
