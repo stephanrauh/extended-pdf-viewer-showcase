@@ -56,6 +56,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { IFrameComponent } from './iframe/iframe.component';
 import { SideBySideComponent } from './side-by-side/side-by-side.component';
 import { ThemingComponent } from './theming/theming.component';
+import { ScrollingComponent } from './scrolling/scrolling.component';
 
 const routes: Routes = [
   {
@@ -106,6 +107,7 @@ const routes: Routes = [
   { path: 'prerendering', component: PrerenderingComponent },
   { path: 'range-requests', component: RangeRequestsComponent },
   { path: 'scripting', component: ScriptingComponent },
+  { path: 'scrolling', component: ScrollingComponent },
   { path: 'side-by-side', component: SideBySideComponent },
   { path: 'signatures', component: SignaturesComponent },
   { path: 'simple', component: SimpleComponent },
