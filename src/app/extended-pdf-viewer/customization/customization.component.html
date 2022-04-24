@@ -26,12 +26,17 @@
       The default UI naturally forms a tree. Below, you'll find a high-level abstraction of this tree. Your customization doesn't have to
       follow this structure. It's just the default.
     </li>
-    <li>The customization hooks defined by <code>&lt;ngx-extended-pdf-viewer&gt;</code> allow you to modify certain subtrees. Currently there are four hooks:
+    <li>The customization hooks defined by <code>&lt;ngx-extended-pdf-viewer&gt;</code> allow you to modify certain subtrees. Currently there are nine hooks:
     <ul>
       <li><code>[customToolbar]</code> allows you to modify the entire black bar above the PDF document.</li>
+      <li><code>[customFreeFloatingBar]</code> allows you to add your own toolbar. The original use-case is a toolbar floating above the PDF file. But if you're familiar with CSS magic, you're probably not limited to that.</li>
       <li><code>[customSecondaryToolbar]</code> represents the menu at the right-hand side of the PDF viewer.</li>
+      <li><code>[customFindbar]</code> allows you to define your own findbar.</li>
       <li><code>[customFindbarButtons]</code> allows you to modify the entire find bar (the black bar that's shown after typing <code>CTRL+F</code>).</li>
       <li><code>[customFindbarInputArea]</code> is responsible for a small part of the find bar: the input field and the previous/next buttons.</li>
+      <li><code>[customSidebar]</code> defines your own sidebar. See <a href="/extended-pdf-viewer/custom-sidebar">the custom sidebar demo.</a> </li>
+      <li><code>[customThumbnail]</code> See <a href="/extended-pdf-viewer/custom-thumbnails">the custom thumbnails demo.</a></li>
+      <li><code>[customPdfViewer]</code> is your door to modify everything except the CSS imports.</li>
     </ul>
     </li>
     <li>
