@@ -37,7 +37,7 @@
     "classlist.js": "^1.1.20150312",
     "ng2-completer": "^9.0.1",
     "ng2-pdf-viewer": "^9.0.0",
-    "ngx-extended-pdf-viewer": "13.0.0-alpha.16",
+    "ngx-extended-pdf-viewer": "13.0.0",
     "ngx-markdown": "^13.1.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "perfect-scrollbar": "^1.5.5",
