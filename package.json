@@ -29,7 +29,7 @@
     "@angular/material": "^13.3.2",
     "@angular/platform-browser": "^13.3.2",
     "@angular/platform-browser-dynamic": "^13.3.2",
-    "@angular/router": "^13.3.2",
+    "@angular/router": "^13.3.10",
     "@fontsource/material-icons": "^4.5.4",
     "@fontsource/roboto": "^4.5.5",
     "@stephanrauh/angular2-smart-table": "^2.0.9",
