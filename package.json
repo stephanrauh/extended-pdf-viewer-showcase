@@ -13,8 +13,8 @@
     "start2": "ng serve --host 0.0.0.0 --disable-host-check",
     "start": "ng serve --configuration development  --base-href /angularapp/ --deploy-url /angularapp/ -o",
     "cypress": "cypress open",
-    "quick": "cd ../ngx-extended-pdf-viewer && ./quick.sh && npm run showcase && cd ../extended-pdf-viewer-showcase && ng s --host 0.0.0.0",
-    "full": "cd ../ngx-extended-pdf-viewer && ./updateMozillasPdfViewer.sh && npm run showcase && cd ../extended-pdf-viewer-showcase && ng s --host 0.0.0.0",
+    "quick": "cd ../ngx-extended-pdf-viewer && ./quick.sh && npm run showcase && cd ../extended-pdf-viewer-showcase && npm run prebuild && ng s --host 0.0.0.0",
+    "full": "cd ../ngx-extended-pdf-viewer && ./updateMozillasPdfViewer.sh && npm run showcase && cd ../extended-pdf-viewer-showcase && npm run prebuild && ng s --host 0.0.0.0",
     "ts": "cd ../ngx-extended-pdf-viewer && npm run showcase && cd ../extended-pdf-viewer-showcase && ng s --host 0.0.0.0"
   },
   "private": true,

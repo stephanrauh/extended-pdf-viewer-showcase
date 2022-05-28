@@ -13,6 +13,8 @@
       <mat-radio-button [value]="1">horizontal</mat-radio-button>
       <br />
       <mat-radio-button [value]="2">wrapped</mat-radio-button>
+      <br />
+      <mat-radio-button [value]="3">singe-page view</mat-radio-button>
     </mat-radio-group>
 
   </mat-card>
@@ -37,11 +39,11 @@
   </button>
   <ngx-extended-pdf-viewer
     [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
-    [height]="'90vh'"
     [showBorders]="showBorders"
     [useBrowserLocale]="true"
     [(scrollMode)]="scrollMode"
     zoom="30%"
+    [minifiedJSLibraries]="false"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

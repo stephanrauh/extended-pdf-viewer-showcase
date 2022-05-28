@@ -1,29 +1,11 @@
 ```html
-  <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/A%20COOL%20KID%20LIKE%20ME.pdf'"
-    [useBrowserLocale]="true"
-    height="calc(100vh - 475px)"
-    zoom="50%"
-    [showSidebarButton]="false"
-    [showFindButton]="false"
-    [showPagingButtons]="false"
-    [showZoomButtons]="false"
-    [showPresentationModeButton]="false"
-    [showOpenFileButton]="false"
-    [showPrintButton]="false"
-    [showDownloadButton]="false"
-    [filenameForDownload]="false"
-    [showBookmarkButton]="false"
-    [showSecondaryToolbarButton]="false"
-    [showRotateButton]="false"
-    [showHandToolButton]="false"
-    [showScrollingButton]="false"
-    [showSpreadButton]="false"
-    [showPropertiesButton]="false"
-    (pagesLoaded)="onPagesLoaded($event)"
-    (beforePrint)="onBeforePrint()"
-    (afterPrint)="onAfterPrint()"
-    (progress)="onProgress($event)"
-  >
-  </ngx-extended-pdf-viewer>
+<ngx-extended-pdf-viewer
+  [src]="'/assets/pdfs/A%20COOL%20KID%20LIKE%20ME.pdf'"
+  [useBrowserLocale]="true"
+  zoom="50%"
+  [showToolbar]="false"
+  (beforePrint)="onBeforePrint()"
+  (afterPrint)="onAfterPrint()"
+  (progress)="onProgress($event)">
+</ngx-extended-pdf-viewer>
 ```

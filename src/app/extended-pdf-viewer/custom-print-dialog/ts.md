@@ -12,80 +12,50 @@ interface EventBus {
   styleUrls: ['./custom-print-dialog.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CustomPrintDialogComponent implements OnInit, OnDestroy {
-  private _eventBus: EventBus;
-  private _observer: MutationObserver;
+export class CustomPrintDialogComponent {
+  public printPercentage = 0;
+  public totalPages = 0;
+  public currentPageRendered = 0;
+  public showProgress = false;
+  public showCompleted = false;
+  public hideBuiltInProgress = true;
 
-  printPercentage = 0;
-  totalPages = 0;
-  currentPageRendered = 0;
-  showProgress = false;
-  showCompleted = false;
-  hideBuiltInProgress = true;
+  constructor(private pdfService: NgxExtendedPdfViewerService) {  }
 
-  ngOnInit() {
-    const node = document.querySelector('#printContainer');
-    if (node) {
-      this._observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          try {
-            const count: number = mutation.target.childNodes.length;
-            if (count > 0) {
-              this.currentPageRendered = count;
-              this.printPercentage = Math.round((count / this.totalPages) * 100);
-            }
-          } catch (error) {
-            this.printPercentage = 0;
-          }
-        });
-      });
-
-      this._observer.observe(node, {
-        childList: true,
-      });
-    }
-  }
-
-  ngOnDestroy() {
-    if (this._observer) {
-      this._observer.disconnect();
-    }
-  }
-
-  onPagesLoaded(event: PagesLoadedEvent) {
-    this.totalPages = event.pagesCount;
-    this._eventBus = event.source['eventBus'];
-  }
-
-  onBeforePrint() {
+  public onBeforePrint() {
     if (this.hideBuiltInProgress) {
-      const node: Element = document.querySelector('.pdf-wrapper #printServiceOverlay .dialog');
+      const node = document.querySelector('.pdf-wrapper #printServiceDialog') as Element;
       node.setAttribute('style', 'display:none!important');
     }
     this.showCompleted = false;
     this.showProgress = true;
   }
 
-  onAfterPrint() {
-    const node: Element = document.querySelector('.pdf-wrapper #printServiceOverlay .dialog');
+  public onAfterPrint() {
+    const node = document.querySelector('.pdf-wrapper #printServiceDialog') as Element;
     node.removeAttribute('style');
     this.showCompleted = true;
+    this.showProgress = false;
   }
 
-  print() {
-    this._eventBus.dispatch('print');
+  public print() {
+    this.pdfService.print();
   }
 
-  cancel() {
-    document.getElementById('printCancel').click();
+  public cancel() {
+    document.getElementById('printCancel')?.click();
   }
 
   get isPrintCancelled(): boolean {
     return this.totalPages !== this.currentPageRendered;
   }
 
-  public onProgress(progress: ProgressBarEvent): void {
-    console.log(progress);
+  public onProgress(event: ProgressBarEvent): void {
+    if (this.showProgress) {
+      this.totalPages = event.total;
+      this.printPercentage = event.percent;
+      this.currentPageRendered = event.page ?? 0;
+    }
   }
 }
 ```

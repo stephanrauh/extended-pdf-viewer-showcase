@@ -21,9 +21,7 @@
             You can theme the PDF viewer and - to a limited extent - also the how forms are displayed in a PDF files. However, most PDF document define how the
             form is displayed. ngx-extended-pdf-viewer does not overwrite the rules defined by the PDF author.
           </p>
-          <p>
-            That's why the input fields of the live demo have a light background. That's hard-coded in the PDF file.
-          </p>
+          <p>That's why the input fields of the live demo have a light background. That's hard-coded in the PDF file.</p>
           <p>Currently, the demo doesn't switch themes as reliable as it should. Consider it a preview.</p>
         </mat-tab>
         <mat-tab label="Dark theme / dark forms">
@@ -31,9 +29,7 @@
             You can theme the PDF viewer and - to a limited extent - also the how forms are displayed in a PDF files. However, most PDF document define how the
             form is displayed. ngx-extended-pdf-viewer does not overwrite the rules defined by the PDF author.
           </p>
-          <p>
-            That's why the input fields of the live demo have a light background. That's hard-coded in the PDF file.
-          </p>
+          <p>That's why the input fields of the live demo have a light background. That's hard-coded in the PDF file.</p>
           <p>Currently, the demo doesn't switch themes as reliable as it should. Consider it a preview.</p>
         </mat-tab>
       </mat-tab-group>
@@ -56,5 +52,7 @@
         <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
       </svg>
     </button>
+    <ngx-extended-pdf-viewer [src]="src" [useBrowserLocale]="true" [theme]="theme" [formTheme]="formTheme" [backgroundColor]="backgroundColor">
+    </ngx-extended-pdf-viewer>
   </mat-card>
 </div>
