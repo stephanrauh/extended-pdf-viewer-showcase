@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FindOptions, IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-find',
@@ -131,6 +132,8 @@ export class FindComponent {
     this._searchtext3 = text;
     this.find();
   }
+
+  public isLocalhost = isLocalhost();
 
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef) {}
 

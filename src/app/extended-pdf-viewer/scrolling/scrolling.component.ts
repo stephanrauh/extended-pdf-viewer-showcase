@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-scrolling',
@@ -8,6 +9,8 @@ import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions }
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollingComponent {
+  public isLocalhost = isLocalhost();
+
   private _fullscreen = false;
 
   public get fullscreen(): boolean {

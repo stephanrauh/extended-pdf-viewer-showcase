@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { PagesLoadedEvent, NgxExtendedPdfViewerService, ProgressBarEvent } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-custom-progress-bar',
@@ -16,6 +17,8 @@ export class CustomPrintDialogComponent {
   public showCompleted = false;
   public hideBuiltInProgress = true;
   private _fullscreen = false;
+
+  public isLocalhost = isLocalhost();
 
   public get fullscreen(): boolean {
     return this._fullscreen;

@@ -44,7 +44,7 @@
   <ngx-extended-pdf-viewer
     [src]="'/assets/pdfs/160F-2019.pdf'"
     [useBrowserLocale]="true"
-    [minifiedJSLibraries]="false"
+    [minifiedJSLibraries]="!isLocalhost"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxExtendedPdfViewerService, PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-pages-loaded',
@@ -8,6 +9,8 @@ import { NgxExtendedPdfViewerService, PagesLoadedEvent } from 'ngx-extended-pdf-
 })
 export class PagesLoadedComponent {
   public messages: Array<string> = [];
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

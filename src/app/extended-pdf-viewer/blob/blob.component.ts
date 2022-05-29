@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { BlobService } from './blob.service';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-blob',
@@ -20,6 +21,8 @@ export class BlobComponent implements OnInit {
   private _fullscreen = false;
 
   public choice = "preloaded";
+
+  public isLocalhost = isLocalhost();
 
   public get fullscreen(): boolean {
     return this._fullscreen;

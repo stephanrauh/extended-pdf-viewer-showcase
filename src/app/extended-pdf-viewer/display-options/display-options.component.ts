@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-display-options',
@@ -22,7 +23,9 @@ export class DisplayOptionsComponent {
     this.ngZone.run(() => this._scrollMode = mode);
   }
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

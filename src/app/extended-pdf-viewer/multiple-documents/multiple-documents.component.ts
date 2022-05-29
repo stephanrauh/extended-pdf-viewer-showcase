@@ -1,5 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FileInputChanged, IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-multiple-documents',
@@ -11,7 +12,9 @@ export class MultipleDocumentsComponent implements OnInit {
 
   public dragAndDrop = true;
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

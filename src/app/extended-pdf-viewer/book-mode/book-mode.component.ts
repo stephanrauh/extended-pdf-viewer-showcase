@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageRenderedEvent } from 'ngx-extended-pdf-viewer';
 import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-book-mode',
@@ -13,6 +14,8 @@ export class BookModeComponent {
   public page = 1;
 
   public fullscreen = true;
+
+  public isLocalhost = isLocalhost();
 
   constructor() { }
 

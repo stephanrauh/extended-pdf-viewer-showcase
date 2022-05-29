@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 // import { NgxExtendedPdfViewerComponent } from 'ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.component';
 
 @Component({
@@ -16,6 +17,8 @@ export class CustomToolbarComponent {
   public showFreeFloatingBar = true;
 
   public zoom = '100%';
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

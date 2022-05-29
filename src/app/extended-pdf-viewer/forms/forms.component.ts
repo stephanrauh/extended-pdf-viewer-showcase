@@ -2,6 +2,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { countries } from './countries';
 import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { isLocalhost } from '../common/utilities';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -32,6 +33,8 @@ export class FormsComponent {
   private _fullscreen = false;
 
   private initialized = false;
+
+  public isLocalhost = isLocalhost();
 
   public get fullscreen(): boolean {
     return this._fullscreen;

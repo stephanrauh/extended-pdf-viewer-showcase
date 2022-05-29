@@ -3,6 +3,7 @@ import {
   NgxExtendedPdfViewerService,
   pdfDefaultOptions,
 } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-prerendering',
@@ -26,7 +27,9 @@ export class PrerenderingComponent {
 
   public visiblePages = '';
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

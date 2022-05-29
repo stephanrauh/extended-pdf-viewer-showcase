@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-zoom',
@@ -45,7 +46,9 @@ export class ZoomComponent {
   public time = 0;
   public currentTime = 0;
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

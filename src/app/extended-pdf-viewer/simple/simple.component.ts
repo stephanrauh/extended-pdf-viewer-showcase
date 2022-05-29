@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
 import { LogService } from '../../log.service';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-simple',
@@ -29,6 +30,8 @@ export class SimpleComponent {
 
   /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
   private themeIfLocalStorageIsUnavailable = 'light';
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-scripting',
@@ -8,6 +9,9 @@ import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScriptingComponent {
+
+  public isLocalhost = isLocalhost();
+
   private _fullscreen = false;
 
   public get fullscreen(): boolean {

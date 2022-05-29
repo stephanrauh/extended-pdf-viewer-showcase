@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { isLocalhost } from '../common/utilities';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -26,7 +27,9 @@ export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
 
   public scrollbar: PerfectScrollbar | undefined = undefined;
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

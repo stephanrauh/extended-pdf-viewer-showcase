@@ -173,7 +173,7 @@
       [formData]="formData"
       (formDataChange)="setFormData($event)"
       (pageRendered)="delayedUpdateFormData()"
-      [minifiedJSLibraries]="false"
+      [minifiedJSLibraries]="!isLocalhost"
     >
     </ngx-extended-pdf-viewer>
   </mat-card>

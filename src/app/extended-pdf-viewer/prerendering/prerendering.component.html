@@ -80,6 +80,7 @@
     [useBrowserLocale]="true"
     [textLayer]="true"
     (pageRendered)="onPageRendered()"
+    [minifiedJSLibraries]="!isLocalhost"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

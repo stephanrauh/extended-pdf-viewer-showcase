@@ -68,7 +68,7 @@
     [sidebarVisible]="showWidgets"
     [zoom]="zoom"
     [scrollMode]="zoom == '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped"
-    [minifiedJSLibraries]="false"
+    [minifiedJSLibraries]="!isLocalhost"
     [pageViewMode]="'infinite-scroll'"
   >
   </ngx-extended-pdf-viewer>

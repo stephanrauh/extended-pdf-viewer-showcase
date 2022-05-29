@@ -1,5 +1,6 @@
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { Component, OnInit } from '@angular/core';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-export',
@@ -23,6 +24,8 @@ export class ExportComponent {
   public heightDisplay!: number;
 
   public selectedTabIndex = 0;
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

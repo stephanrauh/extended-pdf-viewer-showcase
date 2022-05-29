@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-keyboard',
@@ -12,6 +13,8 @@ export class KeyboardComponent {
   public acceptKeys: Array<string> = [];
 
   public ignoreKeys = ['j', 'k', 'F4'];
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

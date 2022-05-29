@@ -137,6 +137,7 @@
             [minifiedJSLibraries]="false"
             (pageRendered)="onPageRendered($event)"
             (pageRender)="onPageRender()"
+            [minifiedJSLibraries]="!isLocalhost"
           >
           </ngx-extended-pdf-viewer>
         </mat-tab>

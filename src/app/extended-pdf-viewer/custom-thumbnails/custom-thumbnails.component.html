@@ -65,7 +65,8 @@
       [height]="'90vh'"
       [useBrowserLocale]="true"
       (pageChange)="onPageChange($event)"
-      (thumbnailDrawn)="onThumbnailDrawn($event)">
+      (thumbnailDrawn)="onThumbnailDrawn($event)"
+      [minifiedJSLibraries]="!isLocalhost">
   </ngx-extended-pdf-viewer>
 </mat-card>
 </div>

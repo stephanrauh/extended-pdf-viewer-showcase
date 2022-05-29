@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, PdfLayer } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-layers',
@@ -10,6 +11,8 @@ export class LayersComponent {
   public selectedTab = 0;
 
   public layers: Array<PdfLayer> = [];
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

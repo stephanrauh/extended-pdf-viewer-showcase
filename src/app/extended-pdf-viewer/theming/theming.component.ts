@@ -1,6 +1,7 @@
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { isLocalhost } from '../common/utilities';
 @Component({
   selector: 'app-forms',
   templateUrl: './theming.component.html',
@@ -9,6 +10,8 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 })
 export class ThemingComponent {
   public _selectedTab = 1;
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, PdfBackground, PdfBackgroundParameters } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-custom-background',
@@ -17,6 +18,8 @@ export class CustomBackgroundComponent {
   private _choice: string | undefined = undefined;
 
   public activeTab = 1;
+
+  public isLocalhost = isLocalhost();
 
   public get choice() {
     return this._choice;

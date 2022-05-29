@@ -78,6 +78,7 @@
     [height]="'90vh'"
     [useBrowserLocale]="true"
     (pageRendered)="afterPageRendered($event)"
+    [minifiedJSLibraries]="!isLocalhost"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

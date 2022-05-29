@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { NgxExtendedPdfViewerService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 (window as any).updateThumbnailSelection = (page: number) => {
   (window as any).PDFViewerApplication.page = page;
@@ -23,7 +24,9 @@ import { NgxExtendedPdfViewerService, PdfThumbnailDrawnEvent } from 'ngx-extende
 export class CustomThumbnailsComponent implements OnInit, OnDestroy {
   private onEnterListener = (event: CustomEvent) => this.showTooltip(event);
   private onLeaveListener = (event: CustomEvent) => this.hideTooltip(event);
-    private _fullscreen = false;
+  private _fullscreen = false;
+
+  public isLocalhost = isLocalhost();
 
   public get fullscreen(): boolean {
     return this._fullscreen;

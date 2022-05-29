@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { PDFPrintRange } from 'ngx-extended-pdf-viewer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-print-range',
@@ -18,7 +19,9 @@ export class PrintRangeComponent implements OnDestroy {
 
   private _excluded = '2,4,6,8';
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-page-view-mode',
@@ -14,7 +15,9 @@ export class PageViewModeComponent {
 
   public showBorders = true;
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

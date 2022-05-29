@@ -46,7 +46,7 @@
       (beforePrint)="onBeforePrint()"
       (afterPrint)="onAfterPrint()"
       (progress)="onProgress($event)"
-      [minifiedJSLibraries]="false"
+      [minifiedJSLibraries]="!isLocalhost"
     >
     </ngx-extended-pdf-viewer>
   </mat-card>

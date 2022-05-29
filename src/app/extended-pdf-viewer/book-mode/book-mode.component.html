@@ -38,6 +38,7 @@
     [showBorders]="false"
     (pageRendered)="onPageRendered($event)"
     (pageRender)="onPageRender($event)"
+    [minifiedJSLibraries]="!isLocalhost"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

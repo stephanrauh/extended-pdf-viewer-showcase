@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-two-way-binding',
@@ -28,6 +29,8 @@ export class TwoWayBindingComponent {
   public spread: 'off' | 'even' | 'odd' = 'off';
 
   public zoom: number | string = 'auto';
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

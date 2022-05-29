@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-pdfjs-versions',
@@ -7,7 +8,10 @@ import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf
   styleUrls: ['./pdfjs-versions.component.css'],
 })
 export class PdfjsVersionsComponent {
-    private _fullscreen = false;
+
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

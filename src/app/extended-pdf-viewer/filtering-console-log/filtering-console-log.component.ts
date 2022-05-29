@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-filtering-console-log',
@@ -9,7 +10,9 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 export class FilteringConsoleLogComponent {
   public version = '';
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

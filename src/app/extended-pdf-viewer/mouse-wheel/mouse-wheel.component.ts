@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-mouse-wheel',
@@ -10,6 +11,8 @@ export class MouseWheelComponent {
   public selectedTab = 0;
 
   public wheelAction: 'scroll' | 'zoom' = 'zoom';
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

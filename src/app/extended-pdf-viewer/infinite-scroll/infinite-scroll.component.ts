@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, PagesLoadedEvent, pdfDefaultOptions, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-infinite-scroll',
@@ -24,7 +25,9 @@ export class InfiniteScrollComponent {
 
   public showPdfViewer = true;
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

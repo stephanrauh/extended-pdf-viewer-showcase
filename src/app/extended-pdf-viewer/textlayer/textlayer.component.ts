@@ -1,6 +1,7 @@
 import { NgxExtendedPdfViewerService, PageRenderedEvent, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-textlayer',
@@ -16,6 +17,8 @@ export class TextlayerComponent {
   private _showTextLayer = false;
 
   private alreadyRendered: Array<HTMLSpanElement> = [];
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

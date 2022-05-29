@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-custom-sidebar',
@@ -13,6 +14,8 @@ export class CustomSidebarComponent {
   public showPdfViewer = true;
 
   public sidebarOpen = true;
+
+  public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-hiding-buttons',
@@ -25,7 +26,9 @@ export class HidingButtonsComponent {
   public showPropertiesButton = false;
   public downloadFileName = 'user-defined-name.pdf';
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

@@ -54,7 +54,8 @@ under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-
     (pdfLoadingFailed)="onPdfLoadingFailed($event)"
     (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"
     (updateFindState)="onEvent('updateFindState', $event)"
-    (progress)="onEvent('progress', $event)">
+    (progress)="onEvent('progress', $event)"
+    [minifiedJSLibraries]="!isLocalhost">
   </ngx-extended-pdf-viewer>
 </mat-card>
 </div>

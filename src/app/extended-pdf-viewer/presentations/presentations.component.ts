@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-presentations',
@@ -7,7 +8,10 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./presentations.component.css'],
 })
 export class PresentationComponent {
-    private _fullscreen = false;
+
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

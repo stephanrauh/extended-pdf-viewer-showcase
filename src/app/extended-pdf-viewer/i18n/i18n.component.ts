@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-i18n',
@@ -13,7 +14,9 @@ export class I18nComponent {
 
   private _language: string | undefined = 'nl-BE';
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

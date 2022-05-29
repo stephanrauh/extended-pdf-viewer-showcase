@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { timestamp } from 'rxjs/operators';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-signatures',
@@ -13,7 +14,9 @@ export class SignaturesComponent {
 
   public showPdf = true;
 
-    private _fullscreen = false;
+  public isLocalhost = isLocalhost();
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;

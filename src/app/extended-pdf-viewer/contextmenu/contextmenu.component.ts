@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-contextmenu',
@@ -10,7 +11,9 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 export class ContextmenuComponent {
   public allowContextMenu = false;
 
-    private _fullscreen = false;
+  private _fullscreen = false;
+
+  public isLocalhost = isLocalhost();
 
   public get fullscreen(): boolean {
     return this._fullscreen;

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-base64',
@@ -17,7 +18,9 @@ export class Base64Component {
 
   public firstPdf = true;
 
-    private _fullscreen = false;
+  private _fullscreen = false;
+
+  public isLocalhost = isLocalhost();
 
   public get fullscreen(): boolean {
     return this._fullscreen;
