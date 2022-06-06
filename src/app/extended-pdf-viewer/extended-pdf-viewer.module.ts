@@ -61,6 +61,7 @@ import { SideBySideComponent } from './side-by-side/side-by-side.component';
 import { IFrameComponent } from './iframe/iframe.component';
 import { ThemingComponent } from './theming/theming.component';
 import { ScrollingComponent } from './scrolling/scrolling.component';
+import { BrowserSupportComponent } from './browser-support/browser-support.component';
 
 const absoluteCMapUrl = pdfDefaultOptions.cMapUrl().replace('./', '/');
 pdfDefaultOptions.cMapUrl = () => absoluteCMapUrl;
@@ -74,6 +75,7 @@ new TouchEmulator();
     AttributesComponent,
     Base64Component,
     BlobComponent,
+    BrowserSupportComponent,
     ChangelogComponent,
     ContextmenuComponent,
     DefaultOptionsComponent,

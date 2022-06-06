@@ -42,7 +42,6 @@ export class PasswordsComponent {
         PDFViewerApplication.passwordPrompt = this.originalPasswordPrompt;
       }
     }
-    console.log(this.password);
     setTimeout(() => {
       this.src = '/assets/pdfs/GraalVM-password-protected.pdf';
     },200);

@@ -57,6 +57,7 @@ import { IFrameComponent } from './iframe/iframe.component';
 import { SideBySideComponent } from './side-by-side/side-by-side.component';
 import { ThemingComponent } from './theming/theming.component';
 import { ScrollingComponent } from './scrolling/scrolling.component';
+import { BrowserSupportComponent } from './browser-support/browser-support.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,7 @@ const routes: Routes = [
   { path: 'attributes', component: AttributesComponent },
   { path: 'base64', component: Base64Component },
   { path: 'blob', component: BlobComponent, canActivate: [PreloadGuard] },
+  { path: 'browser-support', component: BrowserSupportComponent},
   { path: 'changelog', component: ChangelogComponent },
   { path: 'changelog', component: ChangelogComponent },
   { path: 'contextmenu', component: ContextmenuComponent },

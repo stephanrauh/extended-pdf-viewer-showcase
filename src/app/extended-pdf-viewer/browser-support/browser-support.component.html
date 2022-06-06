@@ -1,0 +1,28 @@
+<mat-card class="distance16 mat-elevation-z8">
+  <h1>Browser support</h1>
+  <p>
+    The goal of the project is to be compatible with almost every popular browser that's up-to-date.
+    In other words, I frequently run tests on Chrome, Firefox, and Safari on an iPad, and I update all of them
+    pretty soon.
+  </p>
+  <p>There's also a limited support for older browsers:</p>
+  <ul>
+    <li>By default, the library ships binaries compiled to a pretty contemporary JavaScript version. The precise EcmaScript version varies over time,
+      but sometimes even the ESR versions of Firefox are too old to run this code.</li>
+    <li>As a fallback, the library can also run ES2015 code. Most of the time, this suffices to run the PDF viewer on iOS and Android devices
+      that haven't been updated during the last one or two years.
+    </li>
+    <li>Internet Explorer is not supported. If you need an IE11 version, you can try ngx-extended-pdf-viewer 7.3.2,
+      but without any support from my side.</li>
+  </ul>
+
+  <p>When the library initializes, it runs a few checks:</p>
+  <ul>
+    <li>Does the browser support private fields and methods using the <code>#</code> prefix?</li>
+    <li>Does it support optional chaining?</li>
+    <li>Does ot support logical assignment operators?</li>
+  </ul>
+
+  <p>If any of these checks fails, the library uses the slow and huge ES2015 build.</p>
+  <p></p>
+</mat-card>
