@@ -11,6 +11,8 @@ import { isLocalhost } from '../common/utilities';
 })
 export class FormsComponent {
   public selectedTab = 0;
+  public theme='light';
+  public formTheme='light';
 
   public firstName = 'Lucía';
 

@@ -133,6 +133,17 @@
           </section>
           <p *ngIf="downloaded">{{ downloaded }}</p>
         </mat-tab>
+        <mat-tab label="Themes">
+          <p>You can download the PDF file as a BLOB. The user can fill the PDF form, and you can download the file containing the user's input.</p>
+          <section class="section" style="margin-top: 5px; margin-bottom: 10px">
+            <button mat-raised-button color="primary" (click)="downloadAsBlob()" style="margin-left: 10px">
+              download the file as BLOB and open it in a new tab
+            </button>
+          </section>
+          <mat-checkbox [checked]="theme==='light'" (change)="theme = $event.checked?'light':'dark'" class="margin-right"> [theme] = {{theme}} </mat-checkbox>
+          <mat-checkbox [checked]="formTheme==='light'" (change)="formTheme = $event.checked?'light':'dark'" class="margin-right"> [formTheme] = {{formTheme}} </mat-checkbox>
+
+        </mat-tab>
       </mat-tab-group>
     </mat-card>
     <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="38%">
@@ -166,6 +177,8 @@
       </svg>
     </button>
     <ngx-extended-pdf-viewer
+      [theme]="theme"
+      [formTheme]="formTheme"
       [src]="'/assets/pdfs/OoPdfFormExample.pdf'"
       [height]="'90vh'"
       [zoom]="'auto'"
