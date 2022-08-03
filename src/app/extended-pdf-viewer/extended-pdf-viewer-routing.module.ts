@@ -58,6 +58,7 @@ import { SideBySideComponent } from './side-by-side/side-by-side.component';
 import { ThemingComponent } from './theming/theming.component';
 import { ScrollingComponent } from './scrolling/scrolling.component';
 import { BrowserSupportComponent } from './browser-support/browser-support.component';
+import { TouchGesturesComponentAdvanced } from './touch-gestures-advanced/touch-gestures-advanced.component';
 
 const routes: Routes = [
   {
@@ -117,6 +118,7 @@ const routes: Routes = [
   { path: 'textlayer', component: TextlayerComponent },
   { path: 'theming', component: ThemingComponent },
   { path: 'touch-gestures', component: TouchGesturesComponent },
+  { path: 'enable-relative-coords', component: TouchGesturesComponentAdvanced},
   { path: 'troubleshooting', component: TroubleshootingComponent },
   { path: 'two-way-binding', component: TwoWayBindingComponent },
   { path: 'wheel', component: MouseWheelComponent },

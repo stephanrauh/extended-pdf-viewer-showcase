@@ -1,0 +1,13 @@
+```html
+<ngx-extended-pdf-viewer
+  [src]="'/assets/pdfs/demo.pdf'"
+  [height]="'90vh'"
+  [useBrowserLocale]="true"
+  [enablePinchOnMobile]="enablePinchOnMobile"
+  [minZoom]="0.5"
+  [maxZoom]="1.5"
+  [zoomLevels]="zoomLevels"
+  [enableRelativeCoords]="true"
+>
+</ngx-extended-pdf-viewer>
+```
