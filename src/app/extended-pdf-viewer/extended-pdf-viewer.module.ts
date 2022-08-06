@@ -64,9 +64,6 @@ import { ScrollingComponent } from './scrolling/scrolling.component';
 import { BrowserSupportComponent } from './browser-support/browser-support.component';
 import { TouchGesturesComponentAdvanced } from './touch-gestures-advanced/touch-gestures-advanced.component';
 
-const absoluteCMapUrl = pdfDefaultOptions.cMapUrl().replace('./', '/');
-pdfDefaultOptions.cMapUrl = () => absoluteCMapUrl;
-
 new TouchEmulator();
 
 @NgModule({
