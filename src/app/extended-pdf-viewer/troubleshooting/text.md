@@ -77,8 +77,15 @@ If you're using Bootstrap, you can also use the event `(onshown)` like so:
 ```
 
 ## Trouble with printing (aka: compatibility to Bootstrap and other CSS frameworks)
+Problems with printing are almost always problems of your CSS code. That doesn't necessarily mean you've done anything wrong.
+Most people run into this kind of trouble when using a CSS framework that hasn't been written with ngx-extended-pdf-viewer in mind.
+That, in turn, is probably true for every CSS framework out there. The core library assumes there's no CSS framework at all.
+It's the PDF viewer of Firefox, so that's a reasonable assumption.
 
-Broken print is the most popular reason to open a bug tracker issue. Almost always the problems are caused by your CSS framework. Thing is, the PDF viewer doesn't really print anything. It just hides the entire page using CSS and adds high-resolution images to the document. After that, the PDF viewer simply calls the print function of your browser. Basically, it's printing the entire HTML page. Your custom CSS is still active. If it reduces the font size, you end up with scaled-down pages in print.
+
+If you wonder how CSS and printing are related: the thing is that the PDF viewer doesn't really print anything. It just hides the entire page using CSS and adds high-resolution images to the HTML document. After that, the PDF viewer simply calls the print function of your browser. Basically, it's printing the entire HTML page, including your Angular application. If everything works as intended, you don't notice because your Angular application is hidden.
+
+However, your custom CSS is still active. For example, if it reduces the font size, you end up with scaled-down pages in print.
 
 ngx-extended-pdf-viewer covers several popular CSS frameworks (such as BootsFaces and Material Design), but it's still possible there's a conflict I haven't seen yet. If so, checking the `display` and `overflow` properties is a good starting point. Often adding this CSS snippet solves the problem:
 
@@ -90,6 +97,24 @@ ngx-extended-pdf-viewer covers several popular CSS frameworks (such as BootsFace
   }
 }
 ```
+## Empty pages when printing
+
+If you find empty pages in your print, often adding these CSS rules to your global `styles.scss` helps:
+
+```css
+@media print {
+  #printContainer > .printedPage {
+    width: 99%;
+  }
+}
+```
+
+## Hunting down other printing issues
+
+You can debug print issues yourself. I've written detailed instructions here: <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/1431#issuecomment-1162091452">https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/1431#issuecomment-1162091452</a>. When starting the
+debugging session, you'll probably want to compare the CSS rules of your project with the reference project. You can either use the Angular schmetics
+to create a fresh project within a few minutes (see <a href="https://pdfviewer.net/extended-pdf-viewer/getting-started">https://pdfviewer.net/extended-pdf-viewer/getting-started</a>), or you can use the <a href="https://mozilla.github.io/pdf.js/web/viewer.html">showcase of Mozilla's project</a>.
+
 
 ### Possibly outdated hint: printing with Bootstrap
 
