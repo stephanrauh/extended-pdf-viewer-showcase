@@ -110,7 +110,9 @@ export class SimpleComponent {
     // in general, do not use absolute URLs!
     // I've just added the following line to make sure that absolute URLs don't break again in future
     // (see https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/1478)
-    pdfDefaultOptions.assetsFolder = 'http://localhost:4200/assets';
+    if (!pdfDefaultOptions.assetsFolder.includes("bleeding-edge")) {
+      pdfDefaultOptions.assetsFolder = 'http://localhost:4200/assets';
+    }
   }
 
   public onUpdateFindResult(event: any): void {
