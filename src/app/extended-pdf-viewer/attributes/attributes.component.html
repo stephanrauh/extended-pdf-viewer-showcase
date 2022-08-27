@@ -1,12 +1,33 @@
 <mat-card class="distance16 mat-elevation-z8" fxFlex="97%">
-  <h1>Attributes, events, and attributes with two-way-binding</h1>
-  <h2>Legend:</h2>
-  <ul>
-    <li>[(attribute)] describes an attribute with two-way-binding</li>
-    <li>[attribute] means that PDF-viewer reacts when the attribute changes</li>
-    <li>(attribute) means an event is raised when the user changes a setting</li>
-    <li>attribute (without special characters) means the attribute is used at load time only. Subsequent changes are ignored.</li>
-    </ul>
+  <mat-tab-group>
+    <mat-tab label="Displaying BLOBs">
 
-  <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
+      <h1>Attributes, events, and attributes with two-way-binding</h1>
+      <h2>Legend:</h2>
+      <ul>
+        <li>[(attribute)] describes an attribute with two-way-binding</li>
+        <li>[attribute] means that PDF-viewer reacts when the attribute changes</li>
+        <li>(attribute) means an event is raised when the user changes a setting</li>
+        <li>attribute (without special characters) means the attribute is used at load time only. Subsequent changes are
+          ignored.</li>
+      </ul>
+
+      <angular2-smart-table [settings]="attributeTableSettings" [source]="attributesAndEvents"></angular2-smart-table>
+    </mat-tab>
+    <mat-tab label="Low-level API">
+      <h1>Accessing the base library directly</h1>
+      <p>
+        The PDF viewer is based on a Mozilla project, pdf.js, which offers many options and features I didn't expose as
+        an API of ngx-extended-pdf-viewer. Nonetheless, it's there, so you can use it as long as you know what you're
+        doing. The API I'm describing below isn't likely to change any time soon, but that's difficult to predict,
+        so be careful. If you run into such a change, please open an issue at <a
+          href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues">GitHub</a> so I can update
+        the documentation. Note that I won't try to keep my fork of the base library compatible. That's simply
+        impossible with such an active project.
+      </p>
+      <angular2-smart-table [settings]="lowLevelApiTableSettings" [source]="lowLevelApi"></angular2-smart-table>
+
+    </mat-tab>
+  </mat-tab-group>
+
 </mat-card>
