@@ -3,6 +3,6 @@
 ```
 ng add ngx-extended-pdf-viewer
 ``` 
-3. Add the new component `<app-example-pdf-viewer>` to your` `<app-component>` to display the PDF file.
+3. Add the new component `<app-example-pdf-viewer>` to your `<app-component>` to display the PDF file.
 
 After that, you'll probably want to delete the example PDF file and move the code out of the example component.

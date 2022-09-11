@@ -30,6 +30,8 @@ export class TwoWayBindingComponent {
 
   public zoom: number | string = 'auto';
 
+  public currentZoomFactor!: number;
+
   public isLocalhost = isLocalhost();
 
   private _fullscreen = false;

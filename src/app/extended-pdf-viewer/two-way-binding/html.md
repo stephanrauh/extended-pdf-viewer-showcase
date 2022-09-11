@@ -8,6 +8,7 @@
     [(scrollMode)]="scrollMode"
     [(sidebarVisible)]="sidebarVisible"
     [(spread)]="spreadMode"
-    [(zoom)]="zoom">
+    [(zoom)]="zoom"
+    (currentZoomFactor)="currentZoomFactor">
 </ngx-extended-pdf-viewer>
 ```

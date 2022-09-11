@@ -32,37 +32,7 @@ export class TextlayerComponent {
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {
-    pdfDefaultOptions.textLayerMode = this.enhancedTextLayer ? 2 : 1;
-  }
-
-  public get enhancedTextLayer(): boolean {
-    try {
-      if (localStorage) {
-        return 'true' === localStorage.getItem('enhancedTextLayer');
-      } else {
-        return true;
-      }
-    } catch (safariSecurityException) {
-      // localStorage is not available on Safari
-      return true;
-    }
-  }
-
-  public set enhancedTextLayer(b: boolean) {
-    if (b !== this.enhancedTextLayer) {
-      pdfDefaultOptions.textLayerMode = b ? 2 : 1;
-      try {
-        if (localStorage) {
-          localStorage.setItem('enhancedTextLayer', String(b));
-          location = location;
-        } else {
-          alert("Cannot demonstrate this feature because your browser doesn't support localStorage.");
-        }
-      } catch (safariSecurityException) {
-        // localStorage is not available on Safari
-        alert("Cannot demonstrate this feature because your browser doesn't support localStorage.");
-      }
-    }
+    pdfDefaultOptions.textLayerMode = 1;
   }
 
   public get showBoxes(): boolean {
@@ -150,6 +120,6 @@ export class TextlayerComponent {
   }
 
   public textLayerRendered($event: TextLayerRenderedEvent): void {
-    console.log('should use enhanced text selection', $event.source['enhanceTextSelection']);
+    console.log('textLayerRendered');
   }
 }

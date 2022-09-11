@@ -18,8 +18,6 @@
     <mat-checkbox class="margin" [(ngModel)]="showBoxes">put each text layer <code>&lt;span&gt;</code> into a box</mat-checkbox>
     <br>
     <mat-checkbox class="margin" [(ngModel)]="showTextLayer">show the text layer</mat-checkbox>
-    <br>
-    <mat-checkbox class="margin" [(ngModel)]="enhancedTextLayer">use the enhanced text layer</mat-checkbox> (requires reload)
     <p>The demos show that the text layer isn't perfect. The positions are good enough for finding and marking text, but
       they don't match the precise positions. Plus, sometime words are spread among several <code>&lt;span&gt;</code> tags.
     </p>
@@ -38,9 +36,6 @@
       </mat-tab>
       <mat-tab label="mark long words">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts3.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="text layer mode">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts4.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>

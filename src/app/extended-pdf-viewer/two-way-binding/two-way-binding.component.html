@@ -14,9 +14,10 @@
         <mat-form-field class="margin">
           <input matInput  [(ngModel)]="zoom" placeholder="[(zoom)]" />
         </mat-form-field>
+        (currentZoomFactor)="{{currentZoomFactor}}"
         <br />
         <mat-form-field class="margin">
-          <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]=0 (vertical) | 1 (horizontal) | 2 (block)" />
+          <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]=0 (vertical) | 1 (horizontal) | 2 (block) | 3 (single page)" />
         </mat-form-field>
         <mat-form-field>
           <input matInput  [(ngModel)]="spread" placeholder="[(spread)]='off' | 'even' | 'odd'" />
@@ -86,6 +87,7 @@
     [(sidebarVisible)]="sidebarVisible"
     [(spread)]="spread"
     [(zoom)]="zoom"
+    (currentZoomFactor)="currentZoomFactor=$event"
     [minifiedJSLibraries]="!isLocalhost"
   >
   </ngx-extended-pdf-viewer>
