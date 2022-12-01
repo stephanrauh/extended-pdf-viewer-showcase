@@ -513,7 +513,6 @@ export class KeyboardComponent {
     [acceptKeys]="${this.acceptKeysDisplay}"
     backgroundColor="#ffffff"
     [height]="'90vh'"
-    [useBrowserLocale]="true"
     [page]="2"
     showPresentationModeButton="true"
 >

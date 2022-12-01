@@ -5,8 +5,8 @@
         <mat-tab label="Default approach (slow)">
           <p>ngx-extended-pdf-viewer ships with translation for more than 100 languages and dialects. When you copy the
             <code>node_modules/ngx-extended-pdf-viewer/assets/locale</code> folder to the <code>assets/locale</code>
-            folder of your application, you can select your language by setting the <code>[language]</code> attribute
-            and by setting <code>[useBrowserLocale]="true"</code>.
+            folder of your application, you can select your language by setting the <code>[language]</code> attribute.
+            If you omit this attribute, the default locale of the browser is used.
           </p>
           <mat-form-field>
             <mat-label>language</mat-label>
@@ -27,10 +27,10 @@
         </mat-tab>
         <mat-tab label="fast way">
           <p>
-            Do you need merely one or two languages? Set <code>[useBrowserLocale]="false"</code> and add
+            Do you need merely one or two languages? Add
               the translation file to the <code>index.html</code> (or any other HTML file that's present in the DOM
               when ngx-extended-pdf-viewer initializes).</p>
-          <p>I've prepared HTML snippets for each language in the
+          <p>You'll find the HTML snippets for each language in the
               folder <code>node_modules/ngx-extended-pdf-viewer/assets/inline-locale-files</code>.
           </p>
           <p>The locales are Json files. If you need a single language, you can simply copy the content
@@ -79,7 +79,6 @@
     <ngx-extended-pdf-viewer *ngIf="selectedTab === 1  && !hidePdfViewer"
     [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
     backgroundColor="#ffffff"
-    [useBrowserLocale]="false"
     [textLayer]="true"
     [language]="'pl'"
     [minifiedJSLibraries]="!isLocalhost"

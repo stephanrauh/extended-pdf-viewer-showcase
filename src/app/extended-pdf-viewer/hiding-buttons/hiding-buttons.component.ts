@@ -59,7 +59,7 @@ export class HidingButtonsComponent {
   [showScrollingButton]="${this.showScrollingButton}"
   [showSpreadButton]="${this.showSpreadButton}"
   [showPropertiesButton]="${this.showPropertiesButton}"
-  [useBrowserLocale]="true" height="250px" zoom="25%">
+  height="250px" zoom="25%">
 </ngx-extended-pdf-viewer>
 `;
   }
