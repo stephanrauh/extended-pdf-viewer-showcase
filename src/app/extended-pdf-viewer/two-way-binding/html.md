@@ -7,6 +7,7 @@
     [(rotation)]="rotation"
     [(scrollMode)]="scrollMode"
     [(sidebarVisible)]="sidebarVisible"
+    [(activeSidebarView)]="activeSidebarView"
     [(spread)]="spreadMode"
     [(zoom)]="zoom"
     (currentZoomFactor)="currentZoomFactor">

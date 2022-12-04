@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { PdfSidebarView } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
@@ -23,6 +24,8 @@ export class TwoWayBindingComponent {
   public scrollMode: ScrollModeType = ScrollModeType.vertical;
 
   public sidebarVisible = true;
+
+  public activeSidebarView: PdfSidebarView = PdfSidebarView.THUMBS;
 
   public src = './assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf';
 
@@ -65,6 +68,13 @@ export class TwoWayBindingComponent {
       // localStorage is not available on Safari
       return 0;
     }
+  }
+
+  public load(file: string): void {
+    const view = this.activeSidebarView;
+    this.src=file;
+    // loading a file resets the default view
+    setTimeout(() => this.activeSidebarView = view, 150);
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}

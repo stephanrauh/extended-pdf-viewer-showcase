@@ -7,23 +7,41 @@
           Many properties of ngx-extended-pdf-viewer support two-way binding.
         </p>
         <mat-form-field class="margin">
-          <input matInput  [(ngModel)]="rotation" placeholder="[(rotation)]=0 | 90 | 180 | 270" />
-        </mat-form-field>
-          <mat-checkbox [(ngModel)]="sidebarVisible">[(sidebarVisible)]</mat-checkbox>
-        <br />
-        <mat-form-field class="margin">
           <input matInput  [(ngModel)]="zoom" placeholder="[(zoom)]" />
         </mat-form-field>
-        (currentZoomFactor)="{{currentZoomFactor}}"
+        <span>(currentZoomFactor)="{{currentZoomFactor}}"</span>
         <br />
+
         <mat-form-field class="margin">
-          <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]=0 (vertical) | 1 (horizontal) | 2 (block) | 3 (single page)" />
+          <input matInput  [(ngModel)]="rotation" placeholder="[(rotation)]=0 | 90 | 180 | 270" />
         </mat-form-field>
         <mat-form-field>
           <input matInput  [(ngModel)]="spread" placeholder="[(spread)]='off' | 'even' | 'odd'" />
         </mat-form-field>
         <br />
+
         <mat-form-field class="full-width">
+          <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]" />
+          <mat-hint>0=vertical 1=horizontal 2=block 3=single page</mat-hint>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="margin-top">
+          <input matInput  [(ngModel)]="activeSidebarView" placeholder="[(activeSidebarView)]" />
+          <mat-hint>1=thumbnails 2=outline 3=attachments 4=layers</mat-hint>
+        </mat-form-field>
+        <button *ngIf="activeSidebarView == 2"
+                 (click)="load('./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf')">PDF with outline</button>
+        <button *ngIf="activeSidebarView == 3"
+                  (click)="load('./assets/pdfs/annotation-fileattachment.pdf')">PDF with attachments</button>
+        <button *ngIf="activeSidebarView == 4"
+                (click)="load('/assets/pdfs/themes_de_la_Science-fiction.pdf')">PDF with layers</button>
+        <br />
+
+        <mat-checkbox class="margin" [(ngModel)]="sidebarVisible">[(sidebarVisible)]</mat-checkbox>
+        <br />
+
+        <mat-form-field class="full-width margin-top">
           <input matInput  [(ngModel)]="src" placeholder="[(src)]" />
         </mat-form-field>
       </mat-tab>
@@ -84,6 +102,7 @@
     [(pageLabel)]="pageLabel"
     [(rotation)]="rotation"
     [(sidebarVisible)]="sidebarVisible"
+    [(activeSidebarView)]="activeSidebarView"
     [(spread)]="spread"
     [(zoom)]="zoom"
     (currentZoomFactor)="currentZoomFactor=$event"
