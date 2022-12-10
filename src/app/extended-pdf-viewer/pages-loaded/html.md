@@ -15,6 +15,12 @@
   (pdfLoadingFailed)="onEvent('pdfLoadingFailed', $event)"
   (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"
   (updateFindState)="onEvent('updateFindState', $event)"
-  (progress)="onEvent('onProgress', $event)">
+  (progress)="onEvent('onProgress', $event)"
+  (annotationLayerRendered)="onEvent('annotationLayerRendered', $event)"
+  (annotationEditorLayerRendered)="onEvent('annotationEditorLayerRendered', $event)"
+  (xfaLayerRendered)="onEvent('xfaLayerRendered', $event)"
+  (outlineLoaded)="onEvent('outlineLoaded', $event)"
+  (attachmentsloaded)="onEvent('attachmentsloaded', $event)"
+  (layersloaded)="onEvent('layersloaded', $event)">
 </ngx-extended-pdf-viewer>
 ```

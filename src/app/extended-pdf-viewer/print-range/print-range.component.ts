@@ -11,7 +11,7 @@ import { isLocalhost } from '../common/utilities';
   styleUrls: ['./print-range.component.css'],
 })
 export class PrintRangeComponent implements OnDestroy {
-  private programmaticAPI = true;
+  private activeTab: number = 0;
 
   public from = 1;
 
@@ -22,6 +22,8 @@ export class PrintRangeComponent implements OnDestroy {
   public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
+
+  public replaceBrowserPrint = true;
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -105,11 +107,12 @@ export class PrintRangeComponent implements OnDestroy {
   }
 
   public tabChanged(index: MatTabChangeEvent) {
-    this.programmaticAPI = index.index === 0;
+    this.activeTab = index.index;
+
   }
 
   public get sourcecode(): string {
-    if (this.programmaticAPI) {
+    if (this.activeTab === 0) {
       return `@Component({ ... })
 export class PrintRangeComponent {
   constructor(private printService: NgxExtendedPdfViewerService) {}
@@ -124,19 +127,25 @@ export class PrintRangeComponent {
     this.printService.print(range);
   }
 }`;
-    } else {
-      return `@Component({ ... })
+} else if (this.activeTab === 1) {
+  return `@Component({ ... })
 export class PrintRangeComponent {
   constructor(private printService: NgxExtendedPdfViewerService) {}
 
   public setPrintRange(): void {
-    const range = {
-      ${this.from ? 'from: [' + this.from + '],' : ''}
-      ${this.to ? 'to: [' + this.to + '],' : ''}
-      ${this.excludedAsArray ? 'excluded: [' + this.excludedAsArray + '],' : ''}
-      ${this.includedAsArray ? 'included: [' + this.includedAsArray + '],' : ''}
-    } as PDFPrintRange;
-    this.printService.setPrintRange(range);
+  const range = {
+    ${this.from ? 'from: [' + this.from + '],' : ''}
+    ${this.to ? 'to: [' + this.to + '],' : ''}
+    ${this.excludedAsArray ? 'excluded: [' + this.excludedAsArray + '],' : ''}
+    ${this.includedAsArray ? 'included: [' + this.includedAsArray + '],' : ''}
+  } as PDFPrintRange;
+  this.printService.setPrintRange(range);
+  }
+}`;
+    } else {
+      return `@Component({ ... })
+export class PrintComponent {
+  public replaceBrowserPrint = ${this.replaceBrowserPrint};
   }
 }`;
     }
