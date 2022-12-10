@@ -70,10 +70,6 @@ updates:
     versions:
     - 6.6.6
     - 6.6.7
-  - dependency-name: ng2-pdf-viewer
-    versions:
-    - 6.4.0
-    - 6.4.1
   - dependency-name: ngx-markdown
     versions:
     - 11.1.0

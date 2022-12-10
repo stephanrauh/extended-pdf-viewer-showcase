@@ -22,8 +22,6 @@ export class NavComponent {
 
   public ngxExtendedPdfViewer = true;
 
-  public ng2PdfViewer = false;
-
   public hideMenu = false;
 
   public set viewer(v: string) {
@@ -57,13 +55,7 @@ export class NavComponent {
       if (localStorage) {
         const previousViewer = localStorage.getItem('showcase.viewer');
         localStorage.setItem('showcase.viewer', this.viewer);
-        if (previousViewer === 'ng2-pdf-viewer' && this.viewer !== 'ng2-pdf-viewer') {
-          location.pathname = '/extended-pdf-viewer';
-        } else if (previousViewer !== 'ng2-pdf-viewer' && this.viewer === 'ng2-pdf-viewer') {
-          location.pathname = '/ng2-pdf-viewer';
-        } else {
           location = location; // trigger reload
-        }
       }
     } catch (safariSecurityException) {
       // localStorage is not available on Safari
@@ -72,14 +64,6 @@ export class NavComponent {
   public activateViewer(): void {
     try {
       if (localStorage) {
-        if (location.pathname.startsWith('/ng2-pdf-viewer')) {
-          localStorage.setItem('showcase.viewer', 'ng2-pdf-viewer');
-        }
-        if (location.pathname.startsWith('/extended-pdf-viewer')) {
-          if (localStorage.getItem('showcase.viewer') === 'ng2-pdf-viewer') {
-            localStorage.setItem('showcase.viewer', 'ngx-extended-pdf-viewer');
-          }
-        }
         this._viewer = localStorage.getItem('showcase.viewer');
       }
     } catch (safariSecurityException) {
@@ -94,12 +78,6 @@ export class NavComponent {
     } else if (this._viewer === 'bleeding-edge') {
       pdfDefaultOptions.assetsFolder = 'bleeding-edge';
       this.determinePdfJsVersion();
-    } else if (this._viewer === 'ng2-pdf-viewer') {
-      this.ngxExtendedPdfViewer = false;
-      this.ng2PdfViewer = true;
-      this.pdfjsVersion = ', pdf.js ' + versions.pdfJsDist;
-      this.library = 'ng2-pdf-viewer';
-      this.version = versions.ng2PdfViewer;
     }
   }
 

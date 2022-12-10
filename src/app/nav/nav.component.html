@@ -18,14 +18,12 @@
         Choose a library:
         <mat-radio-button class="distance16" value="ngx-extended-pdf-viewer">ngx-extended-pdf-viewer (pdf.js 2.16)</mat-radio-button>
         <mat-radio-button class="distance16" value="bleeding-edge">ngx-extended-pdf-viewer (pdf.js 3.0)</mat-radio-button>
-        <mat-radio-button class="distance16" value="ng2-pdf-viewer">ng2-pdf-viewer (pdf.js 2.11)</mat-radio-button>
       </mat-radio-group>
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="'side'" [opened]="true">
       <app-extended-pdf-viewer-menu *ngIf="ngxExtendedPdfViewer" [drawer]="drawer"></app-extended-pdf-viewer-menu>
-      <app-ng2-pdf-viewer-menu *ngIf="ng2PdfViewer"></app-ng2-pdf-viewer-menu>
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="with-border">

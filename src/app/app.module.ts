@@ -9,7 +9,6 @@ import { SharedModule } from './shared/shared.module';
 import { OctocatComponent } from './nav/octocat/octocat.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ExtendedPdfViewerMenuComponent } from './nav/extended-pdf-viewer-menu/extended-pdf-viewer-menu.component';
-import { Ng2PdfViewerMenuComponent } from './nav/ng2-pdf-viewer-menu/ng2-pdf-viewer-menu.component';
 
 
 @NgModule({
@@ -18,7 +17,6 @@ import { Ng2PdfViewerMenuComponent } from './nav/ng2-pdf-viewer-menu/ng2-pdf-vie
     NavComponent,
     OctocatComponent,
     ExtendedPdfViewerMenuComponent,
-    Ng2PdfViewerMenuComponent,
   ],
   imports: [
     BrowserAnimationsModule,
