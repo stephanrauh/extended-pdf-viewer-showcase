@@ -35,7 +35,7 @@
     "angular2-smart-table": "^2.7.1",
     "classlist.js": "^1.1.20150312",
     "ng2-completer": "^9.0.1",
-    "ngx-extended-pdf-viewer": "^16.0.0-alpa.0",
+    "ngx-extended-pdf-viewer": "^16.0.0-alpha.1",
     "ngx-markdown": "^15.0.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "perfect-scrollbar": "^1.5.5",
