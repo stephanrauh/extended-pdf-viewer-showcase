@@ -99,17 +99,17 @@ export class TextlayerComponent {
   }
 
   public highlightWords(event: TextLayerRenderedEvent): void {
-    event.source.textDivs.forEach((span) => {
+    (event as any).source.textLayer.textDivs.forEach((span) => {
       this.alreadyRendered.push(span);
     });
 
     if (this.showTextLayer) {
-      event.source.textDivs.forEach((span) => {
+      (event as any).source.textLayer.textDivs.forEach((span) => {
         span.classList.add('box');
       });
     }
     if (this._markLongWords) {
-      event.source.textDivs.forEach((span) => {
+      (event as any).source.textLayer.textDivs.forEach((span) => {
         this.doMarkLongWordsInSpan(span);
       });
     }
