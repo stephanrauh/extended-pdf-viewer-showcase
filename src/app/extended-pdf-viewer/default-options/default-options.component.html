@@ -91,7 +91,10 @@
            By default PDF.js attempts to load PDF files in chunks. The default value
            is `false`.</dd>
           <dt>docBaseUrl</dt>
-          <dd></dd>
+          <dd>The base URL used when a link or an outline item uses a relative URL.
+            These elements are supposed to use absolute URLs, but if they don't,
+            use `docBaseUrl` as a work-around.
+          </dd>
           <dt>fontExtraProperties</dt>
           <dd>Include additional properties,
            which are unused during rendering of PDF documents, when exporting the

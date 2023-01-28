@@ -2,6 +2,7 @@
 <ngx-extended-pdf-viewer
   [src]="'/assets/pdfs/pdf-sample.pdf'"
   [showSidebarButton]="showSidebarButton"
+  [showEditor]="showEditor"
   [showFindButton]="showFindButton"
   [showPagingButtons]="showPagingButtons"
   [showZoomButtons]="showZoomButtons"
@@ -9,7 +10,6 @@
   [showOpenFileButton]="showOpenFileButton"
   [showPrintButton]="showPrintButton"
   [showDownloadButton]="showDownloadButton"
-  [showBookmarkButton]="showBookmarkButton"
   [showSecondaryToolbarButton]="showSecondaryToolbarButton"
   [showRotateButton]="showRotateButton"
   [showHandToolButton]="showHandToolButton"

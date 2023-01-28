@@ -22,7 +22,6 @@
       <pdf-print></pdf-print>
       <app-open-in-new-tab></app-open-in-new-tab>
       <pdf-download></pdf-download>
-      <pdf-bookmark></pdf-bookmark>
       <div class="verticalToolbarSeparator hiddenSmallView"></div>
       <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
     </div>

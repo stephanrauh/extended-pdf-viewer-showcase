@@ -9,7 +9,6 @@
     [showDownloadButton]="false"
     [showPrintButton]="false"
     [showSecondaryToolbarButton]="false"
-    [showBookmarkButton]="false"
     [backgroundColor]="'#161C1E'"
   >
   </ngx-extended-pdf-viewer>

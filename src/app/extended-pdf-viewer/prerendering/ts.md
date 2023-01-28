@@ -22,7 +22,7 @@ export class PrerenderingComponent {
 
     for (let page = startPage; page <= endPage; page++) {
       const pageIndex = page - 1;
-      if (this.pdfViewerService.hasPageBeenRendered(pageIndex)) {
+      if (!this.pdfViewerService.hasPageBeenRendered(pageIndex)) {
           this.pdfViewerService.addPageToRenderQueue(pageIndex);
           break; // break because you can request only one page at a time
       }

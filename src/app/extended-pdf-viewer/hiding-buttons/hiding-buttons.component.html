@@ -15,6 +15,8 @@
         <br />
         <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
         <br />
+        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showEditor">showEditor</mat-checkbox>
+        <br />
         <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
         <br />
         <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
@@ -25,8 +27,6 @@
         <mat-form-field class="margin" *ngIf="showDownloadButton">
           <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
         </mat-form-field>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showBookmarkButton">showBookmarkButton</mat-checkbox>
         <br />
         <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
         <br />
@@ -89,6 +89,7 @@
     [showToolbar]="showToolbar"
     [showSidebarButton]="showSidebarButton"
     [showFindButton]="showFindButton"
+    [showEditor]="showEditor"
     [textLayer]="true"
     [showPagingButtons]="showPagingButtons"
     [showZoomButtons]="showZoomButtons"
@@ -97,7 +98,6 @@
     [showPrintButton]="showPrintButton"
     [showDownloadButton]="showDownloadButton"
     [filenameForDownload]="downloadFileName"
-    [showBookmarkButton]="showBookmarkButton"
     [showSecondaryToolbarButton]="showSecondaryToolbarButton"
     [showRotateButton]="showRotateButton"
     [showHandToolButton]="showHandToolButton"

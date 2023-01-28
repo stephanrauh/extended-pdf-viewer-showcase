@@ -31,7 +31,6 @@ const TOOLBAR: TreeNode[] = [
               { name: '<pdf-open-file>', id: 'openFile' },
               { name: '<pdf-print>', id: 'print' },
               { name: '<pdf-download>', id: 'download' },
-              { name: '<pdf-bookmark>', id: 'viewBookmark' },
               {
                 name: '<pdf-toggle-secondary-toolbar>',
                 id: 'secondaryToolbarToggle'
@@ -68,10 +67,6 @@ const TOOLBAR: TreeNode[] = [
           { name: '<button title="Open (file)">', id: 'secondaryOpenFile' },
           { name: '<button title="Print">', id: 'secondaryPrint' },
           { name: '<button title="Download">', id: 'secondaryDownload' },
-          {
-            name: '<button title="Current view (copy or open in new window)">',
-            id: 'secondaryViewBookmark'
-          },
           { name: '<button title="Go to First Page">', id: 'firstPage' },
           { name: '<button title="Go to Last Page">', id: 'lastPage' },
           { name: '<button title="Rotate Clockwise">', id: 'pageRotateCw' },
