@@ -107,6 +107,12 @@ export class SimpleComponent {
 
   constructor(public logService: LogService, private pdfService: NgxExtendedPdfViewerService) {
     this.startTime = new Date().getTime();
+
+    // increase the range chunk size for testing purposes
+    // In general, that's not a good idea, but if you know what you're doing, you may
+    // be able to tweak performance by fine-tuning the range chunk size according to the
+    // needs of your application and infrastructure
+    pdfDefaultOptions.rangeChunkSize=1024*128;
   }
 
   public onUpdateFindResult(event: any): void {
