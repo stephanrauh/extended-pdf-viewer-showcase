@@ -22,7 +22,9 @@
             </li>
           </ul>
           Note there's not two-way binding. The PDF viewer doesn't fire an event if the user toggles the layers in the PDF file.
-          However, you can register a callback to a low-level API like so: <code>PDFViewerApplication.eventBus.on('optionalcontentconfig', callback)</code>
+          However, you can register a callback to a low-level API like so: <br><code>PDFViewerApplication.eventBus.on(<br>
+            &nbsp;&nbsp;'optionalcontentconfig',<br>
+            &nbsp;&nbsp;callback)</code>
           <p><b>Live demo:</b></p>
           <span *ngFor="let layer of layers">
             <button *ngIf="layer.visible" mat-button mat-raised-button color="primary" (click)="toggle(layer.layerId)">toggle {{ layer.name }}</button>

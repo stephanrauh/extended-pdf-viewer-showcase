@@ -51,7 +51,8 @@ export class AttributesComponent implements OnInit, AfterViewInit {
     },
     pager: {
       display: false,
-    },
+      perPage: 5000
+    }
   };
 
   public lowLevelApiTableSettings = {
