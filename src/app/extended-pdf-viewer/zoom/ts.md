@@ -1,7 +1,6 @@
 ```typescript
 @Component({ ... })
 export class ZoomComponent {
-  public enablePinchOnMobile = true;
   public isMobile = 'ontouchstart' in document.documentElement;
   public minZoom = 0.33;
   public maxZoom = 3;

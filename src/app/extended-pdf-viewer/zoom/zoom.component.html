@@ -50,24 +50,7 @@
           Note that the test adds a one-time performance penalty
           when the width or height of the canvas exceeds 4096 pixels.</p>
       </mat-tab>
-      <mat-tab label="touch gestures">
-        <p>
-          By default, the pinch gesture simple zooms the entire page on mobile devices. If you want to zoom the PDF file without zooming the
-          rest of the page, you can activate the <code>enablePinchOnMobile</code> option. This doesn't modify the behavior of desktop PC and
-          laptops. Most touchpads translate the finger gestures to mouse wheel events. This approach works well enough, so the PDF viewer
-          doesn't add additional support for touch gestures. However, the detection may be imprecise.
-        </p>
-        <p>
-          <b>State of the art:</b>
-          <br />
-          This feature is currently under development. Among other things, it ignores scrolling. The touch gestures are only recognized if
-          the fingers rest on the PDF file. However, if you scroll the window, this detection currently fails.
-        </p>
-        <mat-checkbox [disabled]="!isMobile" [(ngModel)]="enablePinchOnMobile">enable the pinch gesture on mobile devices</mat-checkbox>
-        <p *ngIf="isMobile">This device has been detected as a mobile device.</p>
-        <p *ngIf="!isMobile">This device has been detected as device without touch screen. <code>enablePinchOnMobile</code> is ignored.</p>
-      </mat-tab>
-    </mat-tab-group>
+     </mat-tab-group>
   </mat-card>
 
   <mat-card class="distance16 mat-elevation-z8 use-available-height" fxFlex="43%">
@@ -97,7 +80,6 @@
     [minZoom]="minZoom"
     [maxZoom]="maxZoom"
     [zoomLevels]="zoomLevels"
-    [enablePinchOnMobile]="enablePinchOnMobile"
     (pageRender)="onPageRender()"
     (pageRendered)="onPageRendered()"
     [minifiedJSLibraries]="!isLocalhost"

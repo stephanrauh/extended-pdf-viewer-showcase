@@ -22,8 +22,14 @@
           <dt>assetsFolder</dt>
           <dd>URL of the assets folder (relative to the <code>index.html</code>). Changing this attribute modifies the value
           of the default options <code>cMapUrl</code> and <code></code>.</dd>
+          <dt>annotationEditorMode</dt>
+          <dd></dd>
+          <dt>annotationMode</dt>
+          <dd>Seting this flag to 0 disables forms.</dd>
+          <dt>defaultZoomDelay</dt>
+          <dd>When you zoom a page using a pinch gesture, it's initially zoomed using fast but inaccurate CSS. After the `defaultZoomDelay`, the page is re-rendered. The default is 400 milliseconds.</dd>
           <dt>cursorToolOnLoad</dt>
-          <dd>What happens when you click and move the mouse?
+          <dd>What happens when you click and move the mouse while keeping the mouse button pressed?
             <ul>
               <li>select: 0</li>
               <li>hand tool: 1 (i.e. move the PDF with the mouse)</li>
@@ -39,9 +45,7 @@
           <dt>enablePermissions</dt>
           <dd>evaluate the permission granted by the author of the PDF file; currently only the "copy" permission is implemented; default value: <code>false</code></dd>
           <dt>enablePrintAutoRotate</dt>
-          <dd>rotates landscape page to portrait pagen when printing; default value: <code>false</code></dd>
-          <dt>enableWebGL</dt>
-          <dd>Enables WebGL accelerated rendering for some operations. The default value is <code>false</code>. Remove with pdf.js 2.9.</dd>
+          <dd>rotates landscape page to portrait pagen when printing; default value: <code>true</code></dd>
           <dt>externalLinkRel</dt>
           <dd>Specifies the `rel` attribute for external links. Defaults to stripping the referrer</dd>
           <dt>externalLinkTarget</dt>
@@ -50,16 +54,24 @@
           <dd>Ignore the zoom argument in the destination array. The default value is <code>false</code>.</dd>
           <dt>imageResourcesPath</dt>
           <dd>Path for image resources, mainly for annotation icons. Include trailing slash</dd>
+          <dt>locale</dt>
+          <dd>Allows you to set the default language of the pdf viewer. However, the recommended way to do this in ngx-extended-pdf-viewer is using the attributes <code>[useBrowserLocale]="false" [language]="'pl'"</code>.</dd>
           <dt>maxCanvasPixels</dt>
           <dd>The maximum supported canvas size in total pixels, i.e. width * height. Use -1 for no limit.
             The default value is 4096 * 4096 (16 mega-pixels). The canvas size is also limited by your browser.</dd>
+          <dt>forcePageColors</dt>
+          <dd>not supported by ngx-extended-pdf-viewer</dd>
+          <dt>pageColorsBackground</dt>
+          <dd>not supported by ngx-extended-pdf-viewer</dd>
+          <dt>pageColorsForeground</dt>
+          <dd>not supported by ngx-extended-pdf-viewer</dd>
+          <dt>rangeChunkSize</dt>
+          <dd>Let's you fine-tune page-loading by defining the size of the chunks that are loaded. The default value is 65536 bytes. Modify this setting only when you know what you're doing.</dd>
           <dt>renderer</dt>
           <dd>render the PDF file on a <code>&lt;canvas&gt;</code> or an SVG image; default value is <code>"canvas"</code>;
           legal values are <code>"canvas"</code> and <code>"svg"</code>. Removed with pdf.js 2.9</dd>
           <dt>renderForms</dt>
-          <dd>(starting with pdf.js 2.11) activate forms embedded in PDF files; since version 5.0.0 the default value is <code>true</code></dd>
-          <dt>renderInteractiveForms</dt>
-          <dd>(old name until pdf.js 2.10) activate forms embedded in PDF files; since version 5.0.0 the default value is <code>true</code></dd>
+          <dd>activate forms embedded in PDF files; the default value is <code>true</code></dd>
           <dt>useOnlyCssZoom</dt>
           <dd>Enables CSS only zooming. The default value is `false`</dd>
           <dt>cMapPacked</dt>

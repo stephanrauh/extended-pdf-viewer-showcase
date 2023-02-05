@@ -14,8 +14,6 @@ export class ZoomComponent {
 
   public isMobile = 'ontouchstart' in document.documentElement;
 
-  public enablePinchOnMobile = this.isMobile;
-
   public minZoom = 0.33;
 
   public maxZoom = 15;
