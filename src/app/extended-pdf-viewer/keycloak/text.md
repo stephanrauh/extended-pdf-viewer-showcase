@@ -40,4 +40,10 @@ To run it, just follow the instructions of the readme file.
 
 HMAC *should* work similarly, but it doesn't require the prefix `"Bearer "`. Just pass the access token to `authorization`.
 
-If you need more flexibility, you can use the attribute `httpHeaders` to pass an arbitrary array of http headers.
+If you need more flexibility, you can
+<ul>
+<li> use the attribute <code>httpHeaders</code> to pass an arbitrary array of http headers.</li>
+<li>set <code>[authorization]="true"</code>. In this case, the authorization header is not set. However, the flag <code>withCredentials</code> of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials">XMLHttpRequest</a> is set to true. If pdf.js uses the modern fetch API instead, <code>withCredentials</code> activates the option <code>credentials: 'include'</code>. </li>
+</ul>
+
+
