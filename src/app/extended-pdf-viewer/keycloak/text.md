@@ -43,7 +43,7 @@ HMAC *should* work similarly, but it doesn't require the prefix `"Bearer "`. Jus
 If you need more flexibility, you can
 <ul>
 <li> use the attribute <code>httpHeaders</code> to pass an arbitrary array of http headers.</li>
-<li>set <code>[authorization]="true"</code>. In this case, the authorization header is not set. However, the flag <code>withCredentials</code> of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials">XMLHttpRequest</a> is set to true. If pdf.js uses the modern fetch API instead, <code>withCredentials</code> activates the option <code>credentials: 'include'</code>. </li>
+<li>set <code>[authorization]="true"</code>. In this case, the authorization header is not set. However, the flag <code>withCredentials</code> of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials">XMLHttpRequest</a> is set to true. If pdf.js uses the modern fetch API instead, <code>withCredentials</code> activates the option <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#sending_a_request_with_credentials_included"><code>credentials: 'include'</code></a>.</li>
 </ul>
 
 
