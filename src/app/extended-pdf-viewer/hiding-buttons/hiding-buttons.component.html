@@ -1,111 +1,298 @@
 <div fxLayout="column" fxFill>
   <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-  <mat-card class="distance16 mat-elevation-z8" fxFlex="40%">
-    <mat-tab-group>
-      <mat-tab label="live demo">
-        <mat-checkbox class="margin" [(ngModel)]="showToolbar">showToolbar</mat-checkbox> (hiding the toolbar hides every button)
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox> (only shown if there are menu items)
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showFindButton">showFindButton</mat-checkbox> (requires text layer)
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showEditor">showEditor</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
-        <mat-form-field class="margin" *ngIf="showDownloadButton">
-          <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
-        </mat-form-field>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
-        <br />
-        <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
-      </mat-tab>
-      <mat-tab label="changes in version 2.1.0">
-        <p>
-          The attribute <code>[showSecondaryToolbarButton]</code> has become more useful and more predictable
-          since version 2.1.0. However, if you're updating from an earlier version, you may notice
-          a difference. I don't think it's a breaking change, but it's worth documenting:
-        </p>
-        <ul>
-          <li>Until version 2.0.0, the PDF viewer displayed or hid the primary toolbar and the
-            secondary toolbar (i.e. the menu on the right-hand side on
-            most languages) depending on the parameters. That has always been bad because this
-            algorithm didn't support responsive design. On smaller screens, more and more
-            buttons are shifted to the secondary menu, but that didn't mean it'd become visible.
-            With the advent of version 2.0.0, things got worse: the new customization options mean there's
-            no way to guess the correct setting from the parameters. As a consequence, I implemented
-            a slow-but-reliable algorithm looking at the real DOM and its effective CSS.
-          </li>
-          <li><code>[showSecondaryToolbarButton]="false"</code> means the "kebab menu" button never becomes
-            visible. In other words: there's no secondary toolbar, no matter what the user does.
-          </li>
-          <li><code>[showSecondaryToolbarButton]="false"</code> means the "kebab menu" button is visible
-            if necessary. If the secondary toolbar is empty, the kebab menu button is hidden.
-          </li>
-          <li>The primary toolbar is only shown if it's not empty. Since version 2.1.0, that
-            may happen even if <code>[showSecondaryToolbarButton]="true"</code>, because it checks whether the
-          </li>
-        </ul>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
+    <mat-card class="distance16 mat-elevation-z8" [fxFlex]="settingsWidth">
+      <mat-tab-group (selectedTabChange)="currentTab = $event.index">
+        <mat-tab label="live demo">
+          <mat-checkbox class="margin" [(ngModel)]="showToolbar">showToolbar</mat-checkbox> (hiding the toolbar hides every button)
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox> (only shown
+          if there are menu items)
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showFindButton">showFindButton</mat-checkbox> (requires text layer)
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showEditorDraw">showEditorDraw</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showEditorText">showEditorText</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
+          <mat-form-field class="margin" *ngIf="showDownloadButton">
+            <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
+          </mat-form-field>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
+        </mat-tab>
+        <mat-tab label="responsive design">
+          <div id="outerContainer">
+            Currently active breakpoints:
+            <span class="visibleTinyView">none </span>
+            <span class="hiddenTinyView">xs </span>
+            <span class="hiddenSmallView">sm </span>
+            <span class="hiddenMediumView">md </span>
+            <span class="hiddenLargeView">lg </span>
+            <span class="hiddenXLView">xl </span>
+            <span class="hiddenXXLView">xxl </span>
+          </div>
+          <br />
+          <mat-form-field class="margin">
+            <mat-label>showSidebarButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showSidebarButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showFindButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showFindButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showPagingButtons </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showPagingButtons" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showZoomButtons </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showZoomButtons" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showEditorDraw </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showEditorDraw" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showEditorText </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showEditorText" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showPresentationModeButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showPresentationModeButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showOpenFileButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showOpenFileButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showPrintButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showPrintButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-  <mat-card class="distance16 mat-elevation-z8" fxFlex="58%">
-    <app-ie11-markdown  [data]="sourcecode | language : 'typescript'">
-    </app-ie11-markdown>
-  </mat-card>
-</div>
+          <mat-form-field class="margin">
+            <mat-label>showRotateButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showRotateButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showHandToolButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showHandToolButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showScrollingButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showScrollingButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showSpreadButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showSpreadButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="margin">
+            <mat-label>showPropertiesButton </mat-label>
+            <mat-select [disabled]="!showToolbar" [(value)]="showPropertiesButton" class="margin">
+              <mat-option [value]="false">false (hidden)</mat-option>
+              <mat-option [value]="true">true (default)</mat-option>
+              <mat-option value="always-visible">always-visible</mat-option>
+              <mat-option value="xs">xs</mat-option>
+              <mat-option value="sm">sm</mat-option>
+              <mat-option value="md">md</mat-option>
+              <mat-option value="lg">lg</mat-option>
+              <mat-option value="xl">xl</mat-option>
+              <mat-option value="xxl">xxl</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
 
-<mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <small>Copyright hint: the PDF has been published by Stefan Hellweger and Xiaofeng Wang under a
-  <a target="#" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> on
-  <a target="#" href="https://arxiv.org/abs/1503.01850">https://arxiv.org/abs/1503.01850</a></small
->
-  <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/user-experience.pdf'"
-    [showToolbar]="showToolbar"
-    [showSidebarButton]="showSidebarButton"
-    [showFindButton]="showFindButton"
-    [showEditor]="showEditor"
-    [textLayer]="true"
-    [showPagingButtons]="showPagingButtons"
-    [showZoomButtons]="showZoomButtons"
-    [showPresentationModeButton]="showPresentationModeButton"
-    [showOpenFileButton]="showOpenFileButton"
-    [showPrintButton]="showPrintButton"
-    [showDownloadButton]="showDownloadButton"
-    [filenameForDownload]="downloadFileName"
-    [showSecondaryToolbarButton]="showSecondaryToolbarButton"
-    [showRotateButton]="showRotateButton"
-    [showHandToolButton]="showHandToolButton"
-    [showScrollingButton]="showScrollingButton"
-    [showSpreadButton]="showSpreadButton"
-    [showPropertiesButton]="showPropertiesButton"
-    [minifiedJSLibraries]="!isLocalhost"
-  >
-  </ngx-extended-pdf-viewer>
-</mat-card>
+    <mat-card *ngIf="currentTab !== 1" class="distance16 mat-elevation-z8 hiddenXLView" [fxFlex]="codeWidth">
+      <app-ie11-markdown [data]="sourcecode | language : 'typescript'"> </app-ie11-markdown>
+    </mat-card>
+  </div>
+
+  <mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen = !fullscreen" style="float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
+      <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small
+      >Copyright hint: the PDF has been published by Stefan Hellweger and Xiaofeng Wang under a
+      <a target="#" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> on
+      <a target="#" href="https://arxiv.org/abs/1503.01850">https://arxiv.org/abs/1503.01850</a></small
+    >
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/user-experience.pdf'"
+      [showToolbar]="showToolbar"
+      [showSidebarButton]="showSidebarButton"
+      [showFindButton]="showFindButton"
+      [showEditorDraw]="showEditorDraw"
+      [showEditorText]="showEditorText"
+      [textLayer]="true"
+      [showPagingButtons]="showPagingButtons"
+      [showZoomButtons]="showZoomButtons"
+      [showPresentationModeButton]="showPresentationModeButton"
+      [showOpenFileButton]="showOpenFileButton"
+      [showPrintButton]="showPrintButton"
+      [showDownloadButton]="showDownloadButton"
+      [filenameForDownload]="downloadFileName"
+      [showSecondaryToolbarButton]="showSecondaryToolbarButton"
+      [showRotateButton]="showRotateButton"
+      [showHandToolButton]="showHandToolButton"
+      [showScrollingButton]="showScrollingButton"
+      [showSpreadButton]="showSpreadButton"
+      [showPropertiesButton]="showPropertiesButton"
+      [minifiedJSLibraries]="!isLocalhost"
+    >
+    </ngx-extended-pdf-viewer>
+  </mat-card>
 </div>

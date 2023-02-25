@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { Component } from '@angular/core';
+import { NgxExtendedPdfViewerService, ResponsiveVisibility } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
@@ -11,7 +11,8 @@ export class HidingButtonsComponent {
   public showToolbar = true;
   public showSidebarButton = false;
   public showFindButton = false;
-  public showEditor = false;
+  public showEditorDraw = false;
+  public showEditorText = false;
   public showPagingButtons = false;
   public showZoomButtons = false;
   public showPresentationModeButton = false;
@@ -30,6 +31,31 @@ export class HidingButtonsComponent {
 
   private _fullscreen = false;
 
+  public settingsWidth = "60%";
+
+  public codeWidth = "38%";
+
+  private _currentTab = 0;
+
+  public get currentTab(): number {
+    return this._currentTab;
+  }
+
+  public set currentTab(tab: number) {
+    this._currentTab = tab;
+    if (this.currentTab===1) {
+      this.codeWidth = "0";
+      this.settingsWidth = "100%";
+      this.showToolbar = true;
+      this.showSecondaryToolbarButton = true;
+    } else {
+      this.codeWidth = "38%";
+      this.settingsWidth = "60%";
+    }
+  }
+
+  public options: Array<ResponsiveVisibility> = [true, false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+
   public get fullscreen(): boolean {
     return this._fullscreen;
   }
@@ -47,7 +73,8 @@ export class HidingButtonsComponent {
   [showSidebarButton]="${this.showSidebarButton}"
   [showFindButton]="${this.showFindButton}"
   [showPagingButtons]="${this.showPagingButtons}"
-  [showEditor]="${this.showEditor}"
+  [showEditorDraw]="${this.showEditorDraw}"
+  [showEditorText]="${this.showEditorText}"
   [showZoomButtons]="${this.showZoomButtons}"
   [showPresentationModeButton]="${this.showPresentationModeButton}"
   [showOpenFileButton]="${this.showOpenFileButton}"
