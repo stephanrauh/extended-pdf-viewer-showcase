@@ -26,6 +26,7 @@
       </mat-form-field>
       <button mat-raised-button color="primary" (click)="exportAsImage()" [disabled]="!height && !width && !scale">Export as image</button>
       <button mat-raised-button color="primary" (click)="exportAsText()" style="margin-left: 16px">Export as text</button>
+      <button mat-raised-button color="primary" (click)="exportAsLines()" style="margin-left: 16px">Export as lines</button>
     </mat-card>
     <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="58%">
       <mat-tab-group [selectedIndex]="selectedTabIndex">

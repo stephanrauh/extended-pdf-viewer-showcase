@@ -78,6 +78,13 @@ export class ExportComponent {
     (async () => this.showText(await this.pdfViewerService.getPageAsText(1)))();
   }
 
+  public async exportAsLines(): Promise<void> {
+    const lines = await this.pdfViewerService.getPageAsLines(1);
+    console.log(lines);
+    debugger;
+
+  }
+
   private showText(text: string): void {
     this.extractedText = text;
   }

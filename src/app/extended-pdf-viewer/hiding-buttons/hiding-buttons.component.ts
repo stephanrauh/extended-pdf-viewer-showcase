@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, ResponsiveVisibility } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
@@ -11,8 +11,8 @@ export class HidingButtonsComponent {
   public showToolbar = true;
   public showSidebarButton = false;
   public showFindButton = false;
-  public showEditorDraw = false;
-  public showEditorText = false;
+  public showDrawEditor = false;
+  public showTextEditor = false;
   public showPagingButtons = false;
   public showZoomButtons = false;
   public showPresentationModeButton = false;
@@ -26,6 +26,56 @@ export class HidingButtonsComponent {
   public showSpreadButton = false;
   public showPropertiesButton = false;
   public downloadFileName = 'user-defined-name.pdf';
+
+  public get xs() {
+    return PdfBreakpoints.xs;
+  }
+
+  public set xs(value: number) {
+    PdfBreakpoints.xs = value;
+  }
+
+  public get sm() {
+    return PdfBreakpoints.sm;
+  }
+
+  public set sm(value: number) {
+    PdfBreakpoints.sm = value;
+  }
+
+  public get md() {
+    return PdfBreakpoints.md;
+  }
+
+  public set md(value: number) {
+    PdfBreakpoints.md = value;
+  }
+
+
+  public get lg() {
+    return PdfBreakpoints.lg;
+  }
+
+  public set lg(value: number) {
+    PdfBreakpoints.lg = value;
+  }
+
+
+  public get xl() {
+    return PdfBreakpoints.xl;
+  }
+
+  public set xl(value: number) {
+    PdfBreakpoints.xl = value;
+  }
+
+  public get xxl() {
+    return PdfBreakpoints.xxl;
+  }
+
+  public set xxl(value: number) {
+    PdfBreakpoints.xxl = value;
+  }
 
   public isLocalhost = isLocalhost();
 
@@ -43,7 +93,7 @@ export class HidingButtonsComponent {
 
   public set currentTab(tab: number) {
     this._currentTab = tab;
-    if (this.currentTab===1) {
+    if (this.currentTab===2 || this.currentTab === 3) {
       this.codeWidth = "0";
       this.settingsWidth = "100%";
       this.showToolbar = true;
@@ -73,8 +123,8 @@ export class HidingButtonsComponent {
   [showSidebarButton]="${this.showSidebarButton}"
   [showFindButton]="${this.showFindButton}"
   [showPagingButtons]="${this.showPagingButtons}"
-  [showEditorDraw]="${this.showEditorDraw}"
-  [showEditorText]="${this.showEditorText}"
+  [showDrawEditor]="${this.showDrawEditor}"
+  [showTextEditor]="${this.showTextEditor}"
   [showZoomButtons]="${this.showZoomButtons}"
   [showPresentationModeButton]="${this.showPresentationModeButton}"
   [showOpenFileButton]="${this.showOpenFileButton}"
