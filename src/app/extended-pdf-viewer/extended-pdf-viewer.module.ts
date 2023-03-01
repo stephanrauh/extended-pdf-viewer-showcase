@@ -63,11 +63,12 @@ import { ThemingComponent } from './theming/theming.component';
 import { ScrollingComponent } from './scrolling/scrolling.component';
 import { BrowserSupportComponent } from './browser-support/browser-support.component';
 import { CustomRenderComponent } from './attributes/custom-render-component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 new TouchEmulator();
 
 @NgModule({
-  imports: [ExtendedPdfViewerRoutingModule, SharedModule, NgxExtendedPdfViewerModule],
+  imports: [ExtendedPdfViewerRoutingModule, SharedModule, NgxExtendedPdfViewerModule, FlexLayoutModule],
   declarations: [
     SimpleComponent,
     AttributesComponent,
