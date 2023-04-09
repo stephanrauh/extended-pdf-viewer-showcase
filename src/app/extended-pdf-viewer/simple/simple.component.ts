@@ -113,6 +113,7 @@ export class SimpleComponent {
     // be able to tweak performance by fine-tuning the range chunk size according to the
     // needs of your application and infrastructure
     pdfDefaultOptions.rangeChunkSize=1024*128;
+    pdfDefaultOptions.activateWillReadFrequentlyFlag=true;
   }
 
   public onUpdateFindResult(event: any): void {

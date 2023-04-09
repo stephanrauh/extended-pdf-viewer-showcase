@@ -109,8 +109,8 @@ export class TouchEmulator {
       ) {
         // auto set
         if (clientX == undefined || clientY == undefined) {
-          clientX = pageX - window.pageXOffset;
-          clientY = pageY - window.pageYOffset;
+          clientX = pageX - globalThis.pageXOffset;
+          clientY = pageY - globalThis.pageYOffset;
         }
 
         return new Touch(target, identifier, {
@@ -139,22 +139,22 @@ export class TouchEmulator {
 
     this.fakeTouchSupport();
 
-    window.addEventListener('keydown', this.toggleTouch, true);
+    globalThis.addEventListener('keydown', this.toggleTouch, true);
 
-    window.addEventListener('mousedown', (event) => this.onMouse('touchstart')(event), true);
-    window.addEventListener('mousemove', (event) => this.onMouse('touchmove')(event), true);
-    window.addEventListener('mouseup', (event) => this.onMouse('touchend')(event), true);
+    globalThis.addEventListener('mousedown', (event) => this.onMouse('touchstart')(event), true);
+    globalThis.addEventListener('mousemove', (event) => this.onMouse('touchmove')(event), true);
+    globalThis.addEventListener('mouseup', (event) => this.onMouse('touchend')(event), true);
 
-    window.addEventListener('mouseenter', (event) => this.preventMouseEvents(event), true);
-    window.addEventListener('mouseleave', (event) => this.preventMouseEvents(event), true);
-    window.addEventListener('mouseout', (event) => this.preventMouseEvents(event), true);
-    window.addEventListener('mouseover', (event) => this.preventMouseEvents(event), true);
+    globalThis.addEventListener('mouseenter', (event) => this.preventMouseEvents(event), true);
+    globalThis.addEventListener('mouseleave', (event) => this.preventMouseEvents(event), true);
+    globalThis.addEventListener('mouseout', (event) => this.preventMouseEvents(event), true);
+    globalThis.addEventListener('mouseover', (event) => this.preventMouseEvents(event), true);
 
     // it uses itself!
-    window.addEventListener('touchstart', (event) => this.showTouches(event), true);
-    window.addEventListener('touchmove', (event) => this.showTouches(event), true);
-    window.addEventListener('touchend', (event) => this.showTouches(event), true);
-    window.addEventListener('touchcancel', (event) => this.showTouches(event), true);
+    globalThis.addEventListener('touchstart', (event) => this.showTouches(event), true);
+    globalThis.addEventListener('touchmove', (event) => this.showTouches(event), true);
+    globalThis.addEventListener('touchend', (event) => this.showTouches(event), true);
+    globalThis.addEventListener('touchcancel', (event) => this.showTouches(event), true);
     console.log('Touch gesture emulation has been enabled.');
     console.log(
       'Hit the ALT or OPTION key twice in a second to active touch gestures. Caveat: this disables your mouse.'
@@ -186,10 +186,14 @@ export class TouchEmulator {
    * @returns {boolean}
    */
   private hasTouchSupport() {
+    if (typeof window === 'undefined') {
+      // server-side rendering
+      return false;
+    }
     return (
       'ontouchstart' in window || // touch events
-      // (window.Modernizr && window.Modernizr.touch) || // modernizr
-      navigator.maxTouchPoints > 2
+      // (globalThis.Modernizr && globalThis.Modernizr.touch) || // modernizr
+      navigator?.maxTouchPoints > 2
     ); // pointer events
   }
 

@@ -19,6 +19,13 @@
       </mat-tab>
       <mat-tab label="Available options">
         <dl>
+          <dt>activateWillReadFrequentlyFlag</dt>
+          <dd>This is an experimental option. By default it's set to <code>false</code>. Sometimes, setting it to <code>true</code> solves rendering issues on Chrome on Windows. However,
+            this has a negative impact on performance. Only activate this feature if nothing else helps. At the moment, my recommendation - admittedly based on gut feeling
+            and very little insight into PDF file creation - is to double-check if there's something wrong with your PDF file. The only PDF file with rendering issues
+            looks innocently simple but renders remarkably slow, so I suspect the problems are caused by the internal architecture of the PDF file. If you're running into this issue and
+            have some insight what's going on, please reach out to me. The community of developers is going to appreciate your help!
+          </dd>
           <dt>assetsFolder</dt>
           <dd>URL of the assets folder (relative to the <code>index.html</code>). Changing this attribute modifies the value
           of the default options <code>cMapUrl</code> and <code></code>.</dd>
@@ -27,7 +34,7 @@
           <dt>annotationMode</dt>
           <dd>Seting this flag to 0 disables forms.</dd>
           <dt>defaultZoomDelay</dt>
-          <dd>When you zoom a page using a pinch gesture, it's initially zoomed using fast but inaccurate CSS. After the `defaultZoomDelay`, the page is re-rendered. The default is 400 milliseconds.</dd>
+          <dd>When you zoom a page using a pinch gesture, it's initially zoomed using fast but inaccurate CSS. After the <code>defaultZoomDelay</code>, the page is re-rendered. The default is 400 milliseconds.</dd>
           <dt>cursorToolOnLoad</dt>
           <dd>What happens when you click and move the mouse while keeping the mouse button pressed?
             <ul>
@@ -47,7 +54,7 @@
           <dt>enablePrintAutoRotate</dt>
           <dd>rotates landscape page to portrait pagen when printing; default value: <code>true</code></dd>
           <dt>externalLinkRel</dt>
-          <dd>Specifies the `rel` attribute for external links. Defaults to stripping the referrer</dd>
+          <dd>Specifies the <code>rel</code> attribute for external links. Defaults to stripping the referrer</dd>
           <dt>externalLinkTarget</dt>
           <dd>documented <a href="/link">here</a></dd>
           <dt>ignoreDestinationZoom</dt>
@@ -73,7 +80,7 @@
           <dt>renderForms</dt>
           <dd>activate forms embedded in PDF files; the default value is <code>true</code></dd>
           <dt>useOnlyCssZoom</dt>
-          <dd>Enables CSS only zooming. The default value is `false`</dd>
+          <dd>Enables CSS only zooming. The default value is <code>false</code></dd>
           <dt>cMapPacked</dt>
           <dd>Specifies if the Adobe CMaps are binary packed or not; the default value is <code>true</code></dd>
           <dt>cMapUrl</dt>
@@ -85,38 +92,38 @@
           <dd>Caveat: this feature seems to be broken.<br> Disable pre-fetching of PDF file
            data. When range requests are enabled PDF.js will automatically keep
            fetching more data even if it isn't needed to display the current page.
-           The default value is `false`.
+           The default value is <code>false</code>.
            NOTE: It is also necessary to disable streaming, see below, in order for
            disabling of pre-fetching to work correctly.
            </dd>
           <dt>disableFontFace</dt>
           <dd>By default fonts are converted to
-           OpenType fonts and loaded via `@font-face` rules. If disabled, fonts will
+           OpenType fonts and loaded via <code>@font-face</code> rules. If disabled, fonts will
            be rendered using a built-in font renderer that constructs the glyphs with
-           primitive path commands. The default value is `false`.</dd>
+           primitive path commands. The default value is <code>false</code>.</dd>
           <dt>disableRange</dt>
           <dd>Caveat: this feature seems to be broken.<br>Disable range request loading of PDF
            files. When enabled, and if the server supports partial content requests,
-           then the PDF will be fetched in chunks. The default value is `false`.</dd>
+           then the PDF will be fetched in chunks. The default value is <code>false</code>.</dd>
           <dt>disableStream</dt>
           <dd>Disable streaming of PDF file data.
            By default PDF.js attempts to load PDF files in chunks. The default value
-           is `false`.</dd>
+           is <code>false</code>.</dd>
           <dt>docBaseUrl</dt>
           <dd>The base URL used when a link or an outline item uses a relative URL.
             These elements are supposed to use absolute URLs, but if they don't,
-            use `docBaseUrl` as a work-around.
+            use <code>docBaseUrl</code> as a work-around.
           </dd>
           <dt>fontExtraProperties</dt>
           <dd>Include additional properties,
            which are unused during rendering of PDF documents, when exporting the
            parsed font data from the worker-thread. This may be useful for debugging
            purposes (and backwards compatibility), but note that it will lead to
-           increased memory usage. The default value is `false`.</dd>
+           increased memory usage. The default value is <code>false</code>.</dd>
           <dt>isEvalSupported</dt>
           <dd>Determines if we can evaluate strings
            as JavaScript. Primarily used to improve performance of font rendering, and
-           when parsing PDF functions. The default value is `true`.</dd>
+           when parsing PDF functions. The default value is <code>true</code>.</dd>
           <dt>maxImageSize</dt>
           <dd>The maximum allowed image size in total
            pixels, i.e. width * height. Images above this value will not be rendered.

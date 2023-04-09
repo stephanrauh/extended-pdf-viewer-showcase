@@ -81,7 +81,6 @@ export class ExportComponent {
   public async exportAsLines(): Promise<void> {
     const lines = await this.pdfViewerService.getPageAsLines(1);
     console.log(lines);
-    debugger;
 
   }
 

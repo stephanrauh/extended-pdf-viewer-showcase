@@ -1,14 +1,13 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 
-import { SharedModule } from './shared/shared.module';
-import { OctocatComponent } from './nav/octocat/octocat.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppCommonModule } from './app.common.module';
 import { ExtendedPdfViewerMenuComponent } from './nav/extended-pdf-viewer-menu/extended-pdf-viewer-menu.component';
+import { OctocatComponent } from './nav/octocat/octocat.component';
 
 
 @NgModule({
@@ -19,9 +18,8 @@ import { ExtendedPdfViewerMenuComponent } from './nav/extended-pdf-viewer-menu/e
     ExtendedPdfViewerMenuComponent,
   ],
   imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    SharedModule,
+    AppCommonModule,
+    FlexLayoutModule,
     AppRoutingModule,
   ],
   providers: [],

@@ -37,7 +37,6 @@ import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
   imports: [
     CommonModule,
     FormsModule,
-    FlexLayoutModule,
     HttpClientModule,
     LayoutModule,
     MarkdownModule,
@@ -65,7 +64,6 @@ import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
     AlternativesComponent,
     Ie11MarkdownComponent,
     FormsModule,
-    FlexLayoutModule,
     HttpClientModule,
     LayoutModule,
     MarkdownModule,

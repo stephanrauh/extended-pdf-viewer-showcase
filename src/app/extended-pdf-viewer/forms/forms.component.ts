@@ -49,32 +49,33 @@ export class FormsComponent {
 
   public formData: {
     [fieldName: string]: string | string[] | number | boolean;
-  } = {};
+  } = {
+    "AliasFamilyName": "del Bosque"
+  };
 
   public delayedUpdateFormData(): void {
     setTimeout(() => {
       this.initialized = true;
       this.updateFormData();
-    });
+    }, 500);
   }
 
   public updateFormData(): void {
-    this.formData = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      yearsOfExperience: this.jobExperience,
-      typeScript: this.typeScript,
-      javaScript: this.javaScript,
-      java: this.java,
-      cSharp: this.cSharp,
-      country: this.country,
-      databases: this.databases,
-      educationLevel: this.educationLevel,
-      otherJobExperience: this.otherJobExperience,
-    };
+    this.formData = {};
+    if (this.formData) {
+      this.formData['ServiceIn']="01";
+      this.formData['FamilyName']="Du Bois";
+      this.formData['GivenName']="Michelle";
+      this.formData['AliasNameIndicator']="Y";
+      this.formData['CanadaUS']="1";
+      this.formData['Other']="1";
+    }
   }
 
   public setFormData(data: { [fieldName: string]: string | string[] | number | boolean } | any) {
+//    console.log("Nom: " + data['A.NOM']);
+//    console.log("Prenom: " + data['A.PRENOM']);
+//    console.log(data);
     if (this.initialized) {
       this.firstName = data.firstName as string;
       this.lastName = data.lastName as string;
@@ -101,7 +102,7 @@ export class FormsComponent {
         blob.size +
         ' byte. If your browser support that, the PDF file opens in a new tab or window, using the native PDF viewer of your browser.';
       const url = URL.createObjectURL(blob);
-      window.open(url, '_blank');
+      globalThis.open(url, '_blank');
     } else {
       this.downloaded = 'download failed';
     }

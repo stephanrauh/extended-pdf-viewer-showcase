@@ -86,7 +86,7 @@
         </mat-tab>
         <mat-tab label="Corner cases">
           <p>
-            The "job experience" field of the live demo shows a corner case. The Angular application shows a different number than the form when loading the
+            The "job experience" field of the live demo shows a corner case. The Angular application shows a different value than the form when loading the
             page.
           </p>
           <p>
@@ -176,16 +176,19 @@
         <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
       </svg>
     </button>
-    <ngx-extended-pdf-viewer
+      <!-- [src]="'/assets/pdfs/under-copyright/XFA-Canada-Immigration.pdf'" -->
+      <!-- [src]="'/assets/pdfs/OoPdfFormExample.pdf'"-->
+      <ngx-extended-pdf-viewer
       [theme]="theme"
       [formTheme]="formTheme"
-      [src]="'/assets/pdfs/OoPdfFormExample.pdf'"
+      [src]="'/assets/pdfs/under-copyright/XFA-Canada-Immigration.pdf'"
       [height]="'90vh'"
       [zoom]="'auto'"
       [formData]="formData"
       (formDataChange)="setFormData($event)"
       (pageRendered)="delayedUpdateFormData()"
       [minifiedJSLibraries]="!isLocalhost"
+      [showUnverifiedSignatures]="true"
     >
     </ngx-extended-pdf-viewer>
   </mat-card>
