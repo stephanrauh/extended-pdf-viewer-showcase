@@ -17,9 +17,8 @@
             <input
               matInput
               class="margin"
-              (change)="this.updateFormData()"
-              (ngModelChange)="this.delayedUpdateFormData()"
               [(ngModel)]="firstName"
+              (ngModelChange)="this.delayedUpdateFormData()"
               placeholder="first name"
             />
           </mat-form-field>
@@ -27,7 +26,6 @@
             <input
               matInput
               class="margin"
-              (change)="this.updateFormData()"
               (ngModelChange)="this.delayedUpdateFormData()"
               [(ngModel)]="lastName"
               placeholder="last name"
@@ -43,7 +41,6 @@
             <input
               matInput
               class="margin"
-              (change)="this.updateFormData()"
               (ngModelChange)="this.delayedUpdateFormData()"
               [(ngModel)]="jobExperience"
               placeholder="job experience (corner case!)"
@@ -64,7 +61,6 @@
               matInput
               class="margin"
               rows="3"
-              (change)="this.updateFormData()"
               (ngModelChange)="this.delayedUpdateFormData()"
               [(ngModel)]="otherJobExperience"
               placeholder="Other Job Experience"
@@ -141,8 +137,6 @@
             </button>
           </section>
           <mat-checkbox [checked]="theme==='light'" (change)="theme = $event.checked?'light':'dark'" class="margin-right"> [theme] = {{theme}} </mat-checkbox>
-          <mat-checkbox [checked]="formTheme==='light'" (change)="formTheme = $event.checked?'light':'dark'" class="margin-right"> [formTheme] = {{formTheme}} </mat-checkbox>
-
         </mat-tab>
       </mat-tab-group>
     </mat-card>
@@ -180,13 +174,11 @@
       <!-- [src]="'/assets/pdfs/OoPdfFormExample.pdf'"-->
       <ngx-extended-pdf-viewer
       [theme]="theme"
-      [formTheme]="formTheme"
-      [src]="'/assets/pdfs/under-copyright/XFA-Canada-Immigration.pdf'"
+      [src]="'/assets/pdfs/OoPdfFormExample.pdf'"
       [height]="'90vh'"
       [zoom]="'auto'"
       [formData]="formData"
       (formDataChange)="setFormData($event)"
-      (pageRendered)="delayedUpdateFormData()"
       [minifiedJSLibraries]="!isLocalhost"
       [showUnverifiedSignatures]="true"
     >

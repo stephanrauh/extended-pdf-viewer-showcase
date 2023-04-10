@@ -11,15 +11,14 @@ import { isLocalhost } from '../common/utilities';
 })
 export class FormsComponent {
   public selectedTab = 0;
-  public theme='light';
-  public formTheme='light';
+  public theme = 'light';
 
   public firstName = 'Lucía';
 
   public lastName = 'Garzas';
   public country = 'Spain';
   public jobExperience = '6';
-  public typeScript = true;
+  public typeScript = false;
   public javaScript = true;
   public java = true;
   public cSharp = true;
@@ -34,8 +33,6 @@ export class FormsComponent {
 
   private _fullscreen = false;
 
-  private initialized = false;
-
   public isLocalhost = isLocalhost();
 
   public get fullscreen(): boolean {
@@ -49,49 +46,49 @@ export class FormsComponent {
 
   public formData: {
     [fieldName: string]: string | string[] | number | boolean;
-  } = {
-    "AliasFamilyName": "del Bosque"
-  };
-
-  public delayedUpdateFormData(): void {
-    setTimeout(() => {
-      this.initialized = true;
-      this.updateFormData();
-    }, 500);
-  }
+  } = {};
 
   public updateFormData(): void {
-    this.formData = {};
-    if (this.formData) {
-      this.formData['ServiceIn']="01";
-      this.formData['FamilyName']="Du Bois";
-      this.formData['GivenName']="Michelle";
-      this.formData['AliasNameIndicator']="Y";
-      this.formData['CanadaUS']="1";
-      this.formData['Other']="1";
-    }
+    this.formData = {
+      ...this.formData,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      yearsOfExperience: this.jobExperience,
+      typeScript: this.typeScript,
+      javaScript: this.javaScript,
+      java: this.java,
+      cSharp: this.cSharp,
+      country: this.country,
+      databases: this.databases,
+      educationLevel: this.educationLevel,
+      otherJobExperience: this.otherJobExperience,
+    };
   }
 
   public setFormData(data: { [fieldName: string]: string | string[] | number | boolean } | any) {
-//    console.log("Nom: " + data['A.NOM']);
-//    console.log("Prenom: " + data['A.PRENOM']);
-//    console.log(data);
-    if (this.initialized) {
       this.firstName = data.firstName as string;
       this.lastName = data.lastName as string;
       this.jobExperience = data.yearsOfExperience as string;
       this.country = data.country as string;
-      (this.databases = data.databases as string[]),
-        (this.educationLevel = data.educationLevel as string),
-        (this.otherJobExperience = data.otherJobExperience as string);
+      this.databases = data.databases as string[];
+      this.educationLevel = data.educationLevel as string;
+      this.otherJobExperience = data.otherJobExperience as string;
       this.typeScript = Boolean(data.typeScript);
       this.javaScript = Boolean(data.javaScript);
       this.java = Boolean(data.java);
       this.cSharp = Boolean(data.cSharp);
-    }
+      this.updateFormData();
   }
 
-  constructor(private ngxService: NgxExtendedPdfViewerService) {}
+  constructor(private ngxService: NgxExtendedPdfViewerService) {
+    this.updateFormData();
+  }
+
+  public delayedUpdateFormData(): void {
+    setTimeout(() => {
+      this.updateFormData();
+    });
+  }
 
   public async downloadAsBlob(): Promise<void> {
     this.downloaded = undefined;
@@ -100,7 +97,7 @@ export class FormsComponent {
       this.downloaded =
         'The BLOB contains ' +
         blob.size +
-        ' byte. If your browser support that, the PDF file opens in a new tab or window, using the native PDF viewer of your browser.';
+        ' byte. If your browser supports that, the PDF file opens in a new tab or window, using the native PDF viewer of your browser.';
       const url = URL.createObjectURL(blob);
       globalThis.open(url, '_blank');
     } else {
