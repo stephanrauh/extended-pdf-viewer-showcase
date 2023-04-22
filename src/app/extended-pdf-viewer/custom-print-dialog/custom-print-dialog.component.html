@@ -4,7 +4,7 @@
       <div fxLayout="column" fxLayoutGap="10px">
         <p><b>Caveat:</b> Currently, the cancel button of the demo doesn't work because pdf.js opens a modal dialog.</p>
         <button mat-raised-button color="primary" (click)="print()">Print</button>
-        <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+        <p *ngIf="showProgress">Hit the escape key to cancel printing</p>
         <mat-checkbox [(ngModel)]="hideBuiltInProgress">Hide PDFJS Progress Dialog</mat-checkbox>
 
         <div *ngIf="showProgress" style="padding-bottom:10px; padding-top:10px">
