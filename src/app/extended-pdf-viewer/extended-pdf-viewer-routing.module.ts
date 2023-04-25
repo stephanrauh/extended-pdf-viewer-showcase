@@ -57,6 +57,7 @@ import { SideBySideComponent } from './side-by-side/side-by-side.component';
 import { ThemingComponent } from './theming/theming.component';
 import { ScrollingComponent } from './scrolling/scrolling.component';
 import { BrowserSupportComponent } from './browser-support/browser-support.component';
+import { ServerSideRenderingComponent } from './server-side-rendering/server-side-rendering.component';
 
 const routes: Routes = [
   {
@@ -108,6 +109,7 @@ const routes: Routes = [
   { path: 'range-requests', component: RangeRequestsComponent },
   { path: 'scripting', component: ScriptingComponent },
   { path: 'scrolling', component: ScrollingComponent },
+  { path: 'server-side-rendering', component: ServerSideRenderingComponent },
   { path: 'side-by-side', component: SideBySideComponent },
   { path: 'signatures', component: SignaturesComponent },
   { path: 'simple', component: SimpleComponent },

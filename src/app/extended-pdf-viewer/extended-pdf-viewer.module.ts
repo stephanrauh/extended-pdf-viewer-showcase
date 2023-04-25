@@ -63,6 +63,7 @@ import { ScrollingComponent } from './scrolling/scrolling.component';
 import { BrowserSupportComponent } from './browser-support/browser-support.component';
 import { CustomRenderComponent } from './attributes/custom-render-component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ServerSideRenderingComponent } from './server-side-rendering/server-side-rendering.component';
 
 new TouchEmulator();
 
@@ -127,6 +128,7 @@ new TouchEmulator();
     SideBySideComponent,
     IFrameComponent,
     ThemingComponent,
+    ServerSideRenderingComponent,
   ],
 })
 export class ExtendedPdfViewerModule {}
