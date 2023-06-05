@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
-  selector: 'app-export',
-  templateUrl: './export.component.html',
-  styleUrls: ['./export.component.css'],
+  selector: 'app-export-image',
+  templateUrl: './export-image.component.html',
+  styleUrls: ['./export-image.component.css'],
 })
-export class ExportComponent {
+export class ExportImageComponent {
   public imageDataURL: string | undefined = undefined;
 
   public background: string | undefined;

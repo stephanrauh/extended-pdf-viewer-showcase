@@ -2,11 +2,9 @@
   <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
     <mat-card class="distance16 mat-elevation-z8" fxFlex="40%">
       <p>
-        You can extract images and text from the PDF file that's currently displayed. The text of the PDF scales smoothlessly; you can print it with high
-        resolution. However, the images usually don't scale as gracefully, as you can see in the example document.
+        You can export the PDF file as an image. Note that the text of the PDF usually scales smoothlessly; you can print it with high
+        resolution. However, the images embedded in the PDF file usually don't scale as gracefully, as you can see in the example document.
       </p>
-      <p><b>Caveat:</b> The current API is subject to change. That's why the methods have a "_preview" suffix. The goal is to fully support async/await.</p>
-      <p>To export an image, fill one (and only one) of the input fields below. The text export doesn't require the input fields.</p>
       <mat-form-field style="width: 90%">
         <mat-label>desired width (pixels)</mat-label>
         <input matInput class="margin" [(ngModel)]="width" placeholder="1000" [disabled]="!!height || !!scale" />
@@ -25,16 +23,14 @@
         <input matInput class="margin" [(ngModel)]="background" placeholder="rgba(255,0,0,0.3)" />
       </mat-form-field>
       <button mat-raised-button color="primary" (click)="exportAsImage()" [disabled]="!height && !width && !scale">Export as image</button>
-      <button mat-raised-button color="primary" (click)="exportAsText()" style="margin-left: 16px">Export as text</button>
-      <button mat-raised-button color="primary" (click)="exportAsLines()" style="margin-left: 16px">Export as lines</button>
     </mat-card>
     <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="58%">
       <mat-tab-group [selectedIndex]="selectedTabIndex">
         <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/export/html.md"> </app-ie11-markdown>
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/html.md"> </app-ie11-markdown>
         </mat-tab>
         <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/export/ts.md"> </app-ie11-markdown>
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/ts.md"> </app-ie11-markdown>
         </mat-tab>
         <mat-tab label="extracted image">
           <div class="distance16">
@@ -45,11 +41,6 @@
               <img src="{{ imageDataURL }}" />
             </div>
             <div *ngIf="!imageDataURL">no image extracted yet</div>
-          </div>
-        </mat-tab>
-        <mat-tab label="extracted text">
-          <div class="distance16">
-            {{ extractedText }}
           </div>
         </mat-tab>
       </mat-tab-group>

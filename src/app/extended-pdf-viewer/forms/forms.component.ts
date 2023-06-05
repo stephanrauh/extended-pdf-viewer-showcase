@@ -14,6 +14,7 @@ export class FormsComponent {
   public selectedTab = 0;
   public theme = 'light';
   public xfa = false;
+  public disableForms = false;
 
   public firstName = 'Lucía';
 

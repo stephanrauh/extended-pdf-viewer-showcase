@@ -1,13 +1,6 @@
 ```typescript
 constructor(private pdfViewerService: NgxExtendedPdfViewerService) {}
 
-public exportAsText(): void {
-  (async () => {
-    const text = await this.pdfViewerService.getPageAsText(1);
-    console.log(text);
-  })();
-}
-
 public exportAsImage(): void {
   const scale = {width: this.width}; 
   // or: scale = {height: this.height};
@@ -30,6 +23,4 @@ private getImageDimensions(dataURL: string): void {
   };
   i.src = dataURL;
 }
-
-
 ```

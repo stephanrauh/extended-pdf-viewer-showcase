@@ -144,7 +144,10 @@
           <p>The demo requires you to download <a href="a Canadian immigration form"></a> and to open it
           in the PDF viewer. I apologize for the inconvenience - until now, I've failed to find or create
           a demo file with a liberal license.</p>
-
+          <!--
+          <mat-checkbox [checked]="disableForms" (change)="disableForms=$event.checked" class="margin-right">[disableForms]="true" </mat-checkbox>
+          <br />
+          -->
           <mat-form-field appearance="fill" class="margin-right">
             <mat-label>Service in</mat-label>
             <mat-select (selectionChange)="this.updateFormData()" [(ngModel)]="serviceIn">
@@ -218,6 +221,7 @@
       <ngx-extended-pdf-viewer
       *ngIf="visible"
       [theme]="theme"
+      [disableForms]="disableForms"
       [src]="src"
       [height]="'90vh'"
       [zoom]="'auto'"
