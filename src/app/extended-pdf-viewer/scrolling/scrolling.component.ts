@@ -13,7 +13,7 @@ export class ScrollingComponent {
 
   private _fullscreen = false;
 
-  public selectedTab = 1;
+  public selectedTab = 0;
 
   public zoom="page-width";
 

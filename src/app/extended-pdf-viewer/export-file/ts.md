@@ -5,7 +5,7 @@ constructor(private pdfViewerService: NgxExtendedPdfViewerService) {}
   
   public async export(): Promise<void> {
     this.selectedTabIndex = 2;
-    this.blob = await this.pdfViewerService.export();
+    this.blob = await this.pdfViewerService.getCurrentDocumentAsBlob();
   }
 }
 ```

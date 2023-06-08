@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { MouseWheelComponent } from './mouse-wheel/mouse-wheel.component';
 import { PasswordsComponent } from './passwords/passwords.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -128,7 +127,6 @@ new TouchEmulator();
     PrerenderingComponent,
     TwoWayBindingComponent,
     FilteringConsoleLogComponent,
-    MouseWheelComponent,
     SideBySideComponent,
     IFrameComponent,
     ThemingComponent,

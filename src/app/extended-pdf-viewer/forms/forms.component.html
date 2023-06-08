@@ -177,14 +177,12 @@
             <br />
           <mat-checkbox [checked]="canadaUS==='1'" (change)="this.setCanadaUs($event)" class="margin-right"> Is your telephone number a number in Canada or the USA? </mat-checkbox>
           <br />
-          Have you ever used a nickname?
+          <span>Have you ever used a nickname? </span>
           <mat-radio-group (change)="this.updateFormData()" [(ngModel)]="aliasNameIndicator" aria-label="Nickname" [fxLayoutGap]="'20px'">
             <mat-radio-button value="Y">Yes</mat-radio-button>
             <mat-radio-button value="N">No</mat-radio-button>
           </mat-radio-group>
-
-
-
+          <span style="font-size:70%"> (this field is on page 2, near the bottom)</span>
         </mat-tab>
       </mat-tab-group>
     </mat-card>

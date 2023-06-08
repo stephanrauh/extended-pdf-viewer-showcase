@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MouseWheelComponent } from './mouse-wheel/mouse-wheel.component';
 import { PasswordsComponent } from './passwords/passwords.component';
 import { PerfectScrollbarComponent } from './perfect-scrollbar/perfect-scrollbar.component';
 
@@ -123,7 +122,6 @@ const routes: Routes = [
   { path: 'touch-gestures', component: TouchGesturesComponent },
   { path: 'troubleshooting', component: TroubleshootingComponent },
   { path: 'two-way-binding', component: TwoWayBindingComponent },
-  { path: 'wheel', component: MouseWheelComponent },
   { path: 'zoom', component: ZoomComponent },
   {
     path: '**',

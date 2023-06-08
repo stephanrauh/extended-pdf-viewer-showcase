@@ -31,8 +31,8 @@ export class ExportFileComponent {
     pdfDefaultOptions.textLayerMode = 1;
   }
 
-  public async export(): Promise<void> {
+  public async getCurrentDocumentAsBlob(): Promise<void> {
     this.selectedTabIndex = 2;
-    this.blob = await this.pdfViewerService.export();
+    this.blob = await this.pdfViewerService.getCurrentDocumentAsBlob();
   }
 }
