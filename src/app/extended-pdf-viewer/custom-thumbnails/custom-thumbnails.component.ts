@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { NgxExtendedPdfViewerService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, PDFNotificationService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 (window as any).updateThumbnailSelection = (page: number) => {
@@ -21,10 +21,10 @@ import { isLocalhost } from '../common/utilities';
   styleUrls: ['./custom-thumbnails.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CustomThumbnailsComponent implements OnInit, OnDestroy {
-  private onEnterListener = (event: CustomEvent) => this.showTooltip(event);
-  private onLeaveListener = (event: CustomEvent) => this.hideTooltip(event);
+export class CustomThumbnailsComponent {
   private _fullscreen = false;
+
+  public pdfjsVersion!: string;
 
   public isLocalhost = isLocalhost();
 
@@ -34,20 +34,11 @@ export class CustomThumbnailsComponent implements OnInit, OnDestroy {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+    setTimeout(() => this.pdfService.recalculateSize());
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
-
-  ngOnInit() {
-    (document as any).addEventListener('hoveringOverThumbnail', this.onEnterListener);
-    (document as any).addEventListener('leavingThumbnail', this.onLeaveListener);
-  }
-
-  ngOnDestroy() {
-    (document as any).removeEventListener('hoveringOverThumbnail', this.onEnterListener);
-    (document as any).removeEventListener('leavingThumbnail', this.onLeaveListener);
+  constructor(private pdfService: NgxExtendedPdfViewerService, private notification: PDFNotificationService) {
+    this.pdfjsVersion = this.notification.pdfjsVersion;
   }
 
   public onPageChange(page: number): void {
@@ -83,42 +74,9 @@ export class CustomThumbnailsComponent implements OnInit, OnDestroy {
       overlay.style.backgroundColor = '#FF000040';
       type = 'ready for review';
     }
-    thumbnail.onmouseenter = (event: MouseEvent) => {
-      const thumbnailHoverEvent = new CustomEvent('hoveringOverThumbnail', {
-        detail: {
-          thumbnail,
-          page,
-          type,
-        },
-      });
-      document.dispatchEvent(thumbnailHoverEvent);
-    };
-
-    thumbnail.onmouseleave = (event: MouseEvent) => {
-      const thumbnailLeaveEvent = new CustomEvent('leavingThumbnail', {
-        detail: {
-          thumbnail,
-          page,
-          type,
-        },
-      });
-      document.dispatchEvent(thumbnailLeaveEvent);
-    };
-  }
-
-  private showTooltip(event: CustomEvent): void {
-    const thumbnail = event.detail.thumbnail as HTMLElement;
-    const page = event.detail.page as number;
-    const type = event.detail.type as string;
-    const textDiv = thumbnail.querySelector('.thumbnail-text') as HTMLElement;
-    textDiv.style.display = 'block';
-    textDiv.innerHTML = type;
-    console.log('show tooltip of page ' + page + ' (' + type + ')');
-  }
-
-  private hideTooltip(event: CustomEvent): void {
-    const thumbnail = event.detail.thumbnail as HTMLElement;
-    const textDiv = thumbnail.querySelector('.thumbnail-text') as HTMLElement;
-    textDiv.style.display = 'none';
+    const textNode = thumbnail.querySelector(".thumbnail-text") as HTMLDivElement;
+    if (textNode) {
+      textNode.innerText=type;
+    }
   }
 }

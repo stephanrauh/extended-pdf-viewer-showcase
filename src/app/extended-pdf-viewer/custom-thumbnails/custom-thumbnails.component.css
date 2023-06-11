@@ -16,5 +16,10 @@
   transform: rotate(-45deg);
   z-index: 1;
   color: black;
-  display:none;
+  font-size:120%;
+}
+
+.pdf-js-version-3-7 .thumbnail-text {
+  left: 10px;
+  top: 70px;
 }
