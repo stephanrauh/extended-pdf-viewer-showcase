@@ -1,7 +1,7 @@
 <div fxLayout="column" fxFill>
   <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
     <mat-card class="distance16 mat-elevation-z8" fxFlex="45%">
-      <p>You can override the default function <code>Window.ngxConsoleFilter(logLevel, message)</code> to filter the log messages.</p>
+      <p>You can override the default function <code>globalThis.ngxConsoleFilter(logLevel, message)</code> to filter the log messages.</p>
       <p>
         This live demo re-defines <code>ngxConsolefilter()</code> to grab the version number from the console messages and to store it in a variable so it can
         be shown here:
@@ -16,6 +16,7 @@
         text, the message is never logged.
       </p>
       <p>The live demo shows that, too: when you open the console window, you'll see every message with the exception of the version info.</p>
+      <p><b>Breaking change: </b>Before version 17, you have to register the filter function with the<code>Window</code> object instead of <code>globalThis</code>.</p>
     </mat-card>
     <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="53%">
       <mat-tab-group>

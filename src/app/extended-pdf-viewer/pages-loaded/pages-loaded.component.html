@@ -60,7 +60,8 @@ under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-
     (outlineLoaded)="onEvent('outlineLoaded', $event)"
     (attachmentsloaded)="onEvent('attachmentsloaded', $event)"
     (layersloaded)="onEvent('layersloaded', $event)"
-    [minifiedJSLibraries]="!isLocalhost">
+    [minifiedJSLibraries]="!isLocalhost"
+    (thumbnailDrawn)="onEvent('thumbnailDrawn', $event)">
   </ngx-extended-pdf-viewer>
 </mat-card>
 </div>

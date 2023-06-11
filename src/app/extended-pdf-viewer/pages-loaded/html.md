@@ -21,6 +21,7 @@
   (xfaLayerRendered)="onEvent('xfaLayerRendered', $event)"
   (outlineLoaded)="onEvent('outlineLoaded', $event)"
   (attachmentsloaded)="onEvent('attachmentsloaded', $event)"
-  (layersloaded)="onEvent('layersloaded', $event)">
+  (layersloaded)="onEvent('layersloaded', $event)"
+  (thumbnailDrawn)="onEvent('thumbnailDrawn', $event)">
 </ngx-extended-pdf-viewer>
 ```

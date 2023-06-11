@@ -8,7 +8,7 @@ export class FilteringConsoleLogComponent {
   public version = '';
 
   constructor() {
-    Window['ngxConsoleFilter'] = (level: string, message: any): boolean => {
+    globalThis['ngxConsoleFilter'] = (level: string, message: any): boolean => {
       if (message.includes('running on')) {
         this.version = message;
         return false;
