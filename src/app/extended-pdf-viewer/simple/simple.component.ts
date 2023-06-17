@@ -131,8 +131,8 @@ export class SimpleComponent {
       await PDFViewerApplication.pdfViewer._pages[page].draw();
     } else {
       const textLayer = PDFViewerApplication.pdfViewer._pages[page].textLayer;
-      const divs = textLayer.textDivs;
-      const textSnippets = textLayer.textContentItemsStr;
+      const divs = textLayer?.textDivs;
+      const textSnippets = textLayer?.textContentItemsStr;
     }
   }
 

@@ -1,4 +1,4 @@
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { FreeTextEditorAnnotation, IPDFViewerApplication, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { Component, OnInit } from '@angular/core';
 import { isLocalhost } from '../common/utilities';
 
@@ -32,12 +32,12 @@ export class ExportAnnotationsComponent {
   }
 
   public exportAnnotations(): void {
-    this.selectedTabIndex = 2;
+    this.selectedTabIndex = 4;
     this.rawAnnotations = this.pdfViewerService.getSerializedAnnotations();
   }
 
   public addTextEditor(): void {
-    const textEditorAnnotation = {
+    const textEditorAnnotation: FreeTextEditorAnnotation = {
       annotationType: 3,
       color: [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)],
       fontSize: Math.random() * 10 + 20,
@@ -55,12 +55,12 @@ export class ExportAnnotationsComponent {
   }
 
   public addDrawing(): void {
-    const x = 100;
-    const y = 600;
-    const drawing = {
+    const x = 400*Math.random();
+    const y = 350+500*Math.random();
+    const drawing: InkEditorAnnotation = {
       annotationType: 15,
-      color: [0, 0, 0],
-      thickness: 1,
+      color: [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)],
+      thickness: Math.random()*10,
       opacity: 1,
       paths: [
         {

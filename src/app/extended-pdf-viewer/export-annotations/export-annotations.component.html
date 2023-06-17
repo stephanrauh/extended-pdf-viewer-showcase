@@ -16,17 +16,23 @@
         <mat-tab label="HTML template">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/html.md"> </app-ie11-markdown>
         </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts.md"> </app-ie11-markdown>
+        <mat-tab label="TS - text">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - add text.md"> </app-ie11-markdown>
         </mat-tab>
-        <mat-tab label="annotations">
+        <mat-tab label="TS - drawing">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - add drawing.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="TS - removing editors">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - removing.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="live demo">
           <div class="distance16">
             <div *ngIf="rawAnnotations">
               <ul *ngFor="let anno of rawAnnotations">
                 <li>{{anno | json }}</li>
               </ul>
             </div>
-            <div *ngIf="!rawAnnotations">no annotations</div>
+            <div *ngIf="!rawAnnotations">No annotations. Use the editor or the buttons to add text or drawings to the PDF file.</div>
           </div>
         </mat-tab>
       </mat-tab-group>
@@ -41,7 +47,6 @@
     </button>
     <ngx-extended-pdf-viewer
       [src]="'/assets/pdfs/pdf-sample.pdf'"
-      [height]="'90vh'"
       [textLayer]="true"
       [showHandToolButton]="true"
       [handTool]="false"
