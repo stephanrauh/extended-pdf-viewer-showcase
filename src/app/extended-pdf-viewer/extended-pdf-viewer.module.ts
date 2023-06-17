@@ -65,6 +65,7 @@ import { TouchGesturesComponent } from './touch-gestures/touch-gestures.componen
 import { TroubleshootingComponent } from './troubleshooting/troubleshooting.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { ZoomComponent } from './zoom/zoom.component';
+import { ExportAnnotationsComponent } from './export-annotations/export-annotations.component';
 
 new TouchEmulator();
 
@@ -83,6 +84,7 @@ new TouchEmulator();
     CustomizationComponent,
     CustomSidebarComponent,
     CustomThumbnailsComponent,
+    ExportAnnotationsComponent,
     ExportFileComponent,
     ExportImageComponent,
     ExportTextComponent,

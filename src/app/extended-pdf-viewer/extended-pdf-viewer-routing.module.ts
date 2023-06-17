@@ -59,6 +59,7 @@ import { TouchGesturesComponent } from './touch-gestures/touch-gestures.componen
 import { TroubleshootingComponent } from './troubleshooting/troubleshooting.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { ZoomComponent } from './zoom/zoom.component';
+import { ExportAnnotationsComponent } from './export-annotations/export-annotations.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,7 @@ const routes: Routes = [
   { path: 'export-file', component: ExportFileComponent },
   { path: 'export-image', component: ExportImageComponent },
   { path: 'export-text', component: ExportTextComponent },
+  { path: 'export-annotations', component: ExportAnnotationsComponent },
   { path: 'file-info', component: FileInfoComponent },
   { path: 'filtering-console-log', component: FilteringConsoleLogComponent },
   { path: 'forms', component: FormsComponent },

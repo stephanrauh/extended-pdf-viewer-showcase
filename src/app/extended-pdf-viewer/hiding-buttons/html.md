@@ -2,7 +2,6 @@
 <ngx-extended-pdf-viewer
   [src]="'/assets/pdfs/pdf-sample.pdf'"
   [showSidebarButton]="showSidebarButton"
-  [showEditor]="showEditor"
   [showFindButton]="showFindButton"
   [showPagingButtons]="showPagingButtons"
   [showZoomButtons]="showZoomButtons"
