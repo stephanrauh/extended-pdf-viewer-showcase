@@ -66,6 +66,7 @@ import { TroubleshootingComponent } from './troubleshooting/troubleshooting.comp
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { ZoomComponent } from './zoom/zoom.component';
 import { ExportAnnotationsComponent } from './export-annotations/export-annotations.component';
+import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 
 new TouchEmulator();
 
@@ -106,6 +107,7 @@ new TouchEmulator();
     PrintRangeComponent,
     PasswordsComponent,
     RangeRequestsComponent,
+    ResponsiveDesignComponent,
     ScriptingComponent,
     ScrollingComponent,
     SignaturesComponent,

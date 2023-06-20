@@ -3,11 +3,11 @@ import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints } fro
 import { isLocalhost } from '../common/utilities';
 
 @Component({
-  selector: 'app-hiding-buttons',
-  templateUrl: './hiding-buttons.component.html',
-  styleUrls: ['./hiding-buttons.component.css']
+  selector: 'app-responsive-design',
+  templateUrl: './responsive-design.component.html',
+  styleUrls: ['./responsive-design.component.css']
 })
-export class HidingButtonsComponent {
+export class ResponsiveDesignComponent {
   public showToolbar = true;
   public showSidebarButton = false;
   public showFindButton = false;
@@ -27,6 +27,55 @@ export class HidingButtonsComponent {
   public showPropertiesButton = false;
   public downloadFileName = 'user-defined-name.pdf';
 
+  public get xs() {
+    return PdfBreakpoints.xs;
+  }
+
+  public set xs(value: number) {
+    PdfBreakpoints.xs = value;
+  }
+
+  public get sm() {
+    return PdfBreakpoints.sm;
+  }
+
+  public set sm(value: number) {
+    PdfBreakpoints.sm = value;
+  }
+
+  public get md() {
+    return PdfBreakpoints.md;
+  }
+
+  public set md(value: number) {
+    PdfBreakpoints.md = value;
+  }
+
+
+  public get lg() {
+    return PdfBreakpoints.lg;
+  }
+
+  public set lg(value: number) {
+    PdfBreakpoints.lg = value;
+  }
+
+
+  public get xl() {
+    return PdfBreakpoints.xl;
+  }
+
+  public set xl(value: number) {
+    PdfBreakpoints.xl = value;
+  }
+
+  public get xxl() {
+    return PdfBreakpoints.xxl;
+  }
+
+  public set xxl(value: number) {
+    PdfBreakpoints.xxl = value;
+  }
 
   public isLocalhost = isLocalhost();
 
@@ -44,9 +93,15 @@ export class HidingButtonsComponent {
 
   public set currentTab(tab: number) {
     this._currentTab = tab;
-
+    if (this.currentTab===1 || this.currentTab === 2) {
+      this.codeWidth = "0";
+      this.settingsWidth = "100%";
+      this.showToolbar = true;
+      this.showSecondaryToolbarButton = true;
+    } else {
       this.codeWidth = "38%";
       this.settingsWidth = "60%";
+    }
   }
 
   public options: Array<ResponsiveVisibility> = [true, false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
@@ -80,9 +135,26 @@ export class HidingButtonsComponent {
   [showHandToolButton]="${this.showHandToolButton}"
   [showScrollingButton]="${this.showScrollingButton}"
   [showSpreadButton]="${this.showSpreadButton}"
-  [showPropertiesButton]="${this.showPropertiesButton}">
+  [showPropertiesButton]="${this.showPropertiesButton}"
+  height="250px" zoom="25%">
 </ngx-extended-pdf-viewer>
 `;
+  }
+
+  public get breakpoints(): string {
+    return `
+    @Component({ ... })
+export class CustomBreakpointsComponent {
+  constructor() {
+    // these are the default values
+    PdfBreakpoints.xs = ${this.xs}; // unit: pixels
+    PdfBreakpoints.sm = ${this.sm};
+    PdfBreakpoints.md = ${this.md};
+    PdfBreakpoints.lg = ${this.lg};
+    PdfBreakpoints.xl = ${this.xl};
+    PdfBreakpoints.xxl = ${this.xxl};
+  }
+}`;
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}

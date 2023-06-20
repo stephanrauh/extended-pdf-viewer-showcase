@@ -60,6 +60,7 @@ import { TroubleshootingComponent } from './troubleshooting/troubleshooting.comp
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { ZoomComponent } from './zoom/zoom.component';
 import { ExportAnnotationsComponent } from './export-annotations/export-annotations.component';
+import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 
 const routes: Routes = [
   {
@@ -97,6 +98,7 @@ const routes: Routes = [
   { path: 'iframe/:id', component: IFrameComponent },
   { path: 'intro', component: IntroComponent },
   { path: 'hiding-buttons', component: HidingButtonsComponent },
+  { path: 'responsive-design', component: ResponsiveDesignComponent },
   { path: 'links', component: LinksComponent },
   { path: 'keyboard', component: KeyboardComponent },
   { path: 'keycloak', component: KeycloakComponent },
