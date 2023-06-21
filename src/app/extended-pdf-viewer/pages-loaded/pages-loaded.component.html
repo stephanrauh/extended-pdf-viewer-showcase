@@ -35,7 +35,7 @@
 <small>Copyright hint: the PDF file has been published on <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">Wikimedia</a> by the anonymous user Paroliver
 under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a> license, as stated <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">here</a>.</small>
   <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+    [src]="'/assets/pdfs/Introduction.pdf'"
     [page]="9"
     [height]="'90vh'"
     [showHandToolButton]="true"
@@ -60,8 +60,10 @@ under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-
     (outlineLoaded)="onEvent('outlineLoaded', $event)"
     (attachmentsloaded)="onEvent('attachmentsloaded', $event)"
     (layersloaded)="onEvent('layersloaded', $event)"
+    (thumbnailDrawn)="onEvent('thumbnailDrawn', $event)"
+    (findbarVisible)="onEvent('findbarVisible', $event)"
     [minifiedJSLibraries]="!isLocalhost"
-    (thumbnailDrawn)="onEvent('thumbnailDrawn', $event)">
+    >
   </ngx-extended-pdf-viewer>
 </mat-card>
 </div>

@@ -10,7 +10,8 @@ import { isLocalhost } from '../common/utilities';
 export class HidingButtonsComponent {
   public showToolbar = true;
   public showSidebarButton = false;
-  public showFindButton = false;
+  public showFindButton = true;
+  public findbarVisible = false;
   public showDrawEditor = false;
   public showTextEditor = false;
   public showPagingButtons = false;
@@ -25,6 +26,7 @@ export class HidingButtonsComponent {
   public showScrollingButton = false;
   public showSpreadButton = false;
   public showPropertiesButton = false;
+  public propertiesDialogVisible = true;
   public downloadFileName = 'user-defined-name.pdf';
 
 

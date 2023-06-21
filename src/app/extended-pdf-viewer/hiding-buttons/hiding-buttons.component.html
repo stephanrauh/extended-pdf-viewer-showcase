@@ -12,6 +12,7 @@
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
           <br />
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showFindButton">showFindButton</mat-checkbox> (requires text layer)
+          <mat-checkbox class="margin" [disabled]="!showToolbar && showFindButton" [(ngModel)]="findbarVisible">findbarVisible</mat-checkbox>
           <br />
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
           <br />
@@ -41,6 +42,7 @@
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
           <br />
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="propertiesDialogVisible">propertiesDialogVisible</mat-checkbox>
         </mat-tab>
 
         <mat-tab label="responsive design">
@@ -89,6 +91,8 @@
       [showScrollingButton]="showScrollingButton"
       [showSpreadButton]="showSpreadButton"
       [showPropertiesButton]="showPropertiesButton"
+      [(findbarVisible)]="findbarVisible"
+      [(propertiesDialogVisible)]="propertiesDialogVisible"
       [minifiedJSLibraries]="!isLocalhost"
     >
     </ngx-extended-pdf-viewer>
