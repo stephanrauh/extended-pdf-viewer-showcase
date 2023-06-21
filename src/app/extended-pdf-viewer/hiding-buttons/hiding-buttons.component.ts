@@ -26,7 +26,7 @@ export class HidingButtonsComponent {
   public showScrollingButton = false;
   public showSpreadButton = false;
   public showPropertiesButton = false;
-  public propertiesDialogVisible = true;
+  public propertiesDialogVisible = false;
   public downloadFileName = 'user-defined-name.pdf';
 
 
