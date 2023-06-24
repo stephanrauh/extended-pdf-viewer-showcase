@@ -1,3 +1,10 @@
+## Modals
+Putting an `<ngx-extended-pdf-viewer>` into a modal often causes timing problems. If the modal doesn't initialize the PDF viewer,
+add a short timeout. The idea is to show the PDF viewer with a short delay, so the modal has enough time to render.
+
+If the PDF viewer prints exceptions in the console log when closing the modal, you may want to call `ngOnDestroy()`
+manually. <a href="/modal">The demo on modals</a> demonstrates this approach.
+
 ## Promise.allSettled is not a function
 
 Please update the library `zone.js` to a current version. At the time of writing, that's 0.10.3. For some reason, the default setup of Angular locks `zone.js` to an old version. In most cases, the update shouldn't cause problems.
