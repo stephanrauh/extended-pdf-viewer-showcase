@@ -1,0 +1,25 @@
+<div fxLayout="column" fxFill>
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <mat-card class="distance16 mat-elevation-z8" fxFlex="40%">
+      <p>
+        Modal dialogs often remove the HTML code from the DOM before calling <code>ngOnDestroy()</code> of the <code>NgxExtendedPdfViewerComponent</code>,
+        resulting in a couple of error messages on the console. To avoid this, call <code>ngOnDestroy()</code>
+        manually before removing the HTML code. The demo shows how to do this with an Angular Material dialog.
+      </p>
+      <p>
+        If you close the modal very quickly, you may see messages like "worker destroyed" or "transport destroyed" in the console log. This simply means that
+        you've destroyed the PDF viewer while it's still rendering. If you need to get rid of these messages, register a custom
+        <a href="/extended-pdf-viewer/filtering-console-log"><code>globalThis.ngxConsoleFilter(logLevel, message)</code></a
+        >.
+      </p>
+      <button mat-button mat-raised-button color="primary" (click)="openDialog()">open modal</button>
+    </mat-card>
+    <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="58%">
+      <mat-tab-group>
+        <mat-tab label="Typescript">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/modal/ts.md"> </app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+</div>

@@ -67,6 +67,9 @@ import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.compon
 import { ZoomComponent } from './zoom/zoom.component';
 import { ExportAnnotationsComponent } from './export-annotations/export-annotations.component';
 import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
+import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { ModalComponent } from './modal/modal.component';
+
 
 new TouchEmulator();
 
@@ -97,6 +100,7 @@ new TouchEmulator();
     IntroComponent,
     HidingButtonsComponent,
     KeycloakComponent,
+    ModalComponent,
     MultipleDocumentsComponent,
     MobileComponent,
     NavigationComponent,
@@ -135,6 +139,8 @@ new TouchEmulator();
     IFrameComponent,
     ThemingComponent,
     ServerSideRenderingComponent,
+    ModalDialogComponent,
+
   ],
 })
 export class ExtendedPdfViewerModule {}

@@ -26,6 +26,7 @@ import { DefaultRoutesComponent } from './default-routes/default-routes.componen
 import { CommonModule } from '@angular/common';
 import { Angular2SmartTableModule } from 'angular2-smart-table';
 import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -70,6 +72,7 @@ import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

@@ -61,6 +61,7 @@ import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.compon
 import { ZoomComponent } from './zoom/zoom.component';
 import { ExportAnnotationsComponent } from './export-annotations/export-annotations.component';
 import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
+import { ModalComponent } from './modal/modal.component';
 
 const routes: Routes = [
   {
@@ -103,6 +104,7 @@ const routes: Routes = [
   { path: 'keyboard', component: KeyboardComponent },
   { path: 'keycloak', component: KeycloakComponent },
   { path: 'mobile', component: MobileComponent },
+  { path: 'modal', component: ModalComponent },
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'navigation', component: NavigationComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },
