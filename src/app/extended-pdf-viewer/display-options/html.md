@@ -1,9 +1,11 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'/assets/pdfs/pdf-sample.pdf'"
-  [height]="'90vh'"
+  [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
   [showBorders]="showBorders"
-  [useBrowserLocale]="true"
+  [(scrollMode)]="scrollMode"
+  [(pageViewMode)]="pageViewMode"
+  [(spread)]="spread"
+  zoom="30%"
 >
 </ngx-extended-pdf-viewer>
 ```

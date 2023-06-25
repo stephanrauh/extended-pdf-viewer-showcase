@@ -3,18 +3,10 @@
 export class DisplayOptionsComponent {
   public showBorders = false;
 
-  public backgroundColor = '#F8F8FD';
+  public scrollMode = ScrollModeType.horizontal;
 
-  private _scrollMode = ScrollModeType.horizontal;
+  public pageViewMode: PageViewModeType = 'multiple';
 
-  public get scrollMode(): ScrollModeType {
-    return this._scrollMode;
-  }
-
-  public set scrollMode(mode: ScrollModeType) {
-    this.ngZome.run(() => this._scrollMode = mode);
-  }
-
-  constructor(private ngZome: NgZone) {}
+  public spread: 'off' | 'odd' | 'even' = 'off';
 }
 ```

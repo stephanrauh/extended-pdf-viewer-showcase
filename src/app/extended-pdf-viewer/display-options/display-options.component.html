@@ -4,19 +4,49 @@
     <p>
       A few options allow you to influence the way the PDF file is rendered.
     </p>
+    <p><b>Caveat:</b> Being able to modify <code>[pageViewMode]</code> has been introduced with
+      version 17.3.0. So it's a pretty new feature. It's possible some errors slipped my attention yet. If so,
+      <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues">please open a ticket</a>.</p>
     <p>
       <mat-checkbox class="margin" [(ngModel)]="showBorders">[showBorders]="true"</mat-checkbox>
     </p>
+    <div>
+    <div fxFlex="33%">
     <mat-radio-group aria-label="ScrollMode" [(ngModel)]="scrollMode" style="line-height: 1.5;">
-      <mat-radio-button [value]="0">vertical (default)</mat-radio-button>
+      <mat-radio-button [value]="0">0 (vertical) (default)</mat-radio-button>
       <br />
-      <mat-radio-button [value]="1">horizontal</mat-radio-button>
+      <mat-radio-button [value]="1">1 (horizontal)</mat-radio-button>
       <br />
-      <mat-radio-button [value]="2">wrapped</mat-radio-button>
+      <mat-radio-button [value]="2">2 (wrapped)</mat-radio-button>
       <br />
-      <mat-radio-button [value]="3">singe-page view</mat-radio-button>
+      <mat-radio-button [value]="3">3 (single-page view)</mat-radio-button>
     </mat-radio-group>
-
+  </div>
+  <div fxFlex="33%">
+    <mat-radio-group aria-label="Spread" [(ngModel)]="spread" [disabled]="scrollMode===1 || scrollMode===2 || pageViewMode==='book'" style="line-height: 1.5;">
+      <mat-radio-button [value]="'off'">off (default)</mat-radio-button>
+      <br />
+      <mat-radio-button [value]="'odd'">odd</mat-radio-button>
+      <br />
+      <mat-radio-button [value]="'even'">even</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div fxFlex="33%">
+    <mat-radio-group aria-label="PageViewMode" [(ngModel)]="pageViewMode" style="line-height: 1.5;">
+      <mat-radio-button [value]="'single'">single</mat-radio-button>
+      <br />
+      <mat-radio-button [value]="'book'">book</mat-radio-button>
+      <br />
+      <mat-radio-button [value]="'multiple'">multiple (default)</mat-radio-button>
+      <br />
+      <mat-radio-button [value]="'infinite-scroll'">infinite scroll</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+<div style="padding-top:20px">
+  Book mode and single-page mode don't look too impressive with the default zoom setting of 30%. However, this zoom setting enables you to see the effect of <code>scrollMode="2"</code>
+  (i.e. wrapped).
+</div>
   </mat-card>
 
   <mat-card class="distance16 mat-elevation-z8" fxFlex="58%">
@@ -41,6 +71,8 @@
     [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
     [showBorders]="showBorders"
     [(scrollMode)]="scrollMode"
+    [(pageViewMode)]="pageViewMode"
+    [(spread)]="spread"
     zoom="30%"
     [minifiedJSLibraries]="!isLocalhost"
   >

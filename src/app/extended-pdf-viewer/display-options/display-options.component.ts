@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, PageViewModeType, ScrollModeType, SpreadModeType } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
@@ -10,18 +10,11 @@ import { isLocalhost } from '../common/utilities';
 export class DisplayOptionsComponent {
   public showBorders = false;
 
-  public backgroundColor = '#F8F8FD';
+  public scrollMode = ScrollModeType.horizontal;
 
-  // tslint:disable-next-line: variable-name
-  private _scrollMode = ScrollModeType.horizontal;
+  public pageViewMode: PageViewModeType = 'multiple';
 
-  public get scrollMode(): ScrollModeType {
-    return this._scrollMode;
-  }
-
-  public set scrollMode(mode: ScrollModeType) {
-    this.ngZone.run(() => this._scrollMode = mode);
-  }
+  public spread: 'off' | 'odd' | 'even' = 'off';
 
   public isLocalhost = isLocalhost();
 
@@ -33,8 +26,7 @@ export class DisplayOptionsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+    setTimeout(() => this.pdfService.recalculateSize());
   }
 
   constructor(private ngZone: NgZone, private pdfService: NgxExtendedPdfViewerService) {}
