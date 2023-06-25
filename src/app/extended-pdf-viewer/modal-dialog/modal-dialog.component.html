@@ -1,2 +1,5 @@
 <button mat-button mat-raised-button color="primary" (click)="onCloseClick()">Close</button>
-<ngx-extended-pdf-viewer src="/assets/pdfs/Bootstrap-vs-Material-Design-vs-Prime-vs-Tailwind.pdf"></ngx-extended-pdf-viewer>
+<ngx-extended-pdf-viewer
+  src="/assets/pdfs/Bootstrap-vs-Material-Design-vs-Prime-vs-Tailwind.pdf"
+  [minifiedJSLibraries]="!isLocalhost"
+></ngx-extended-pdf-viewer>
