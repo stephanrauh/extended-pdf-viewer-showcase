@@ -20,7 +20,7 @@ export class SimpleComponent {
 
   public showPdfViewer = true;
 
-  public height: string = '95%';
+  public height: string = 'auto';
 
   public time = 0;
   public currentTime = 0;
