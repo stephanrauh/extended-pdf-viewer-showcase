@@ -62,6 +62,7 @@ import { ZoomComponent } from './zoom/zoom.component';
 import { ExportAnnotationsComponent } from './export-annotations/export-annotations.component';
 import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 import { ModalComponent } from './modal/modal.component';
+import { CSSComponent } from './css/css.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,7 @@ const routes: Routes = [
   { path: 'changelog', component: ChangelogComponent },
   { path: 'changelog', component: ChangelogComponent },
   { path: 'contextmenu', component: ContextmenuComponent },
+  { path: 'css', component: CSSComponent },
   { path: 'options', component: DefaultOptionsComponent },
   { path: 'customization', component: CustomizationComponent },
   { path: 'custom-print-dialog', component: CustomPrintDialogComponent },

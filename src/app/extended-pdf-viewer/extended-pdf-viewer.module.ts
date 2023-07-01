@@ -69,6 +69,7 @@ import { ExportAnnotationsComponent } from './export-annotations/export-annotati
 import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { ModalComponent } from './modal/modal.component';
+import { CSSComponent } from './css/css.component';
 
 
 new TouchEmulator();
@@ -84,6 +85,7 @@ new TouchEmulator();
     ChangelogComponent,
     ContextmenuComponent,
     DefaultOptionsComponent,
+    CSSComponent,
     CustomRenderComponent,
     CustomizationComponent,
     CustomSidebarComponent,
