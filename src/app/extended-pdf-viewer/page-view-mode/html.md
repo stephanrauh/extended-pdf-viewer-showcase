@@ -4,6 +4,7 @@
     [useBrowserLocale]="true"
     [(page)]="page"
     pageViewMode="single"
-    [spread]="spreadMode">
+    [spread]="spreadMode"
+    [height]="'auto'">
 </ngx-extended-pdf-viewer>
 ```

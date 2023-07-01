@@ -13,7 +13,7 @@ export class BookModeComponent {
 
   public page = 1;
 
-  public fullscreen = true;
+  public fullscreen = false;
 
   public isLocalhost = isLocalhost();
 

@@ -96,3 +96,7 @@ dd:after {
   display: block;
   clear: both;
 }
+
+.ngx-extended-pdf-viewer-prevent-touch-move .mat-drawer-content {
+  touch-action: none;
+}

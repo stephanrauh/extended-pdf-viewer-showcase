@@ -4,6 +4,7 @@
     [useBrowserLocale]="true"
     [password]="password"
     [minifiedJSLibraries]="false"
+    [height]="'auto'"
   >
   </ngx-extended-pdf-viewer>
 ```

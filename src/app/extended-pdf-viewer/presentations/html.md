@@ -10,6 +10,7 @@
     [showPrintButton]="false"
     [showSecondaryToolbarButton]="false"
     [backgroundColor]="'#161C1E'"
+    [height]="'auto'"
   >
   </ngx-extended-pdf-viewer>
 ```

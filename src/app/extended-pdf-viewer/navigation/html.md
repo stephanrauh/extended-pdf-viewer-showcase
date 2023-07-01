@@ -3,6 +3,7 @@
   [src]="'./assets/pdfs/latex.pdf'"
   [(page)]="page"
   [nameddest]="namedDest"
+  [height]="'auto'"
 >
 </ngx-extended-pdf-viewer>
 ```

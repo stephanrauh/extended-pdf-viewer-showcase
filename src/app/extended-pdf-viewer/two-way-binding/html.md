@@ -2,6 +2,7 @@
  <ngx-extended-pdf-viewer
     [src]="src"
     [(handTool)]="handTool"
+    [height]="'auto'"
     [(page)]="page"
     [(pageLabel)]="pageLabel"
     [(rotation)]="rotation"
