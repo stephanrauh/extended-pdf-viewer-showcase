@@ -16,6 +16,8 @@ export class MultipleDocumentsComponent implements OnInit {
 
   private _fullscreen = false;
 
+  public bookMode = false;
+
   public get fullscreen(): boolean {
     return this._fullscreen;
   }

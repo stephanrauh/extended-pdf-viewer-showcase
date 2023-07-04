@@ -9,13 +9,17 @@
       <mat-label>[(src)]=</mat-label>
       <mat-select [(value)]="src" class="margin">
         <mat-option [value]="undefined">no document</mat-option>
-        <mat-option value="/assets/pdfs/Introduction.pdf">/assets/pdfs/Introduction.pdf</mat-option>
-        <mat-option value="/assets/pdfs/pdf-sample.pdf">/assets/pdfs/pdf-sample.pdf</mat-option>
+        <mat-option *ngIf="!bookMode" value="/assets/pdfs/Introduction.pdf">/assets/pdfs/Introduction.pdf</mat-option>
+        <mat-option *ngIf="!bookMode" value="/assets/pdfs/pdf-sample.pdf">/assets/pdfs/pdf-sample.pdf</mat-option>
+        <mat-option value="/assets/pdfs/GraalVM Dictionary Bytecode, Interpreters, C1 Compiler, C2 Compiler, CPUs, and More.pdf">/assets/pdfs/GraalVM Dictionary....pdf</mat-option>
+        <mat-option value="/assets/pdfs/What About GraalVM.pdf">/assets/What About GraalVM.pdf</mat-option>
         <mat-option [value]="url">new URL('{{url.toString()}}')</mat-option>
       </mat-select>
     </mat-form-field>
     <br />
     <mat-checkbox [(ngModel)]="dragAndDrop">enable dragging and dropping files to the PDF viewer</mat-checkbox>
+    <br />
+    <mat-checkbox [(ngModel)]="bookMode">book mode (capricious - some documents work, some don't)</mat-checkbox>
 
     <p>Current value of <code>[src]</code>: {{ src === undefined ? 'undefined' : '"'+ src + '"' }}</p>
   </mat-card>
@@ -43,6 +47,8 @@
     backgroundColor="#ffffff"
     [enableDragAndDrop]="dragAndDrop"
     [minifiedJSLibraries]="!isLocalhost"
+    [zoom]="'page-fit'"
+    [pageViewMode]="bookMode ? 'book' : 'multiple'"
   > </ngx-extended-pdf-viewer>
 </mat-card>
 </div>

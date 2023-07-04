@@ -114,6 +114,7 @@ export class SimpleComponent {
     // needs of your application and infrastructure
     pdfDefaultOptions.rangeChunkSize=1024*128;
     pdfDefaultOptions.activateWillReadFrequentlyFlag=true;
+    pdfDefaultOptions.assetsFolder = 'http://127.0.0.1:4200/assets';
   }
 
   public onUpdateFindResult(event: any): void {
@@ -138,6 +139,10 @@ export class SimpleComponent {
 
   public onPageRender(): void {
     this.currentStartTime = new Date().getTime();
+    console.log(pdfDefaultOptions.cMapUrl());
+console.log(pdfDefaultOptions.sandboxBundleSrc());
+console.log(pdfDefaultOptions.workerSrc());
+console.log(pdfDefaultOptions.standardFontDataUrl());
   }
 
   public onPageRendered(event: PageRenderEvent): void {
