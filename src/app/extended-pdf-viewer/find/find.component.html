@@ -4,17 +4,10 @@
       <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab=$event">
         <mat-tab label="Find API">
           <section class="section">
-            <mat-form-field [class.narrow]="multipleSearchTerms">
+            <mat-form-field>
               <input matInput class="margin" [(ngModel)]="searchtext" placeholder="search term" />
             </mat-form-field>
             &nbsp;
-            <mat-form-field *ngIf="multipleSearchTerms" class="narrow">
-              <input matInput class="margin" [(ngModel)]="searchtext2" placeholder="2nd search term" />
-            </mat-form-field>
-            &nbsp;
-            <mat-form-field *ngIf="multipleSearchTerms" class="narrow">
-              <input matInput class="margin" [(ngModel)]="searchtext3" placeholder="3nd search term" />
-            </mat-form-field>
             <small *ngIf="findState !== undefined"
               ><span style="margin-left: 24px">{{ findStateText }}</span>
               <span style="margin-left: 24px" *ngIf="totalMatches && totalMatches > 0">Result {{ currentMatchNumber }} of {{ totalMatches }} </span></small
@@ -24,28 +17,14 @@
             <mat-checkbox class="margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()">highlight all</mat-checkbox>
           </section>
           <section class="section">
-            <mat-checkbox class="margin" [(ngModel)]="currentPage" (change)="onCheckboxClicked()">current page only</mat-checkbox>
-            <span class="padding">or</span>
-            <mat-form-field class="no-padding">
-              <input matInput class="margin" [(ngModel)]="pageRange" placeholder='page range (e.g."2,4,5-6")' />
-            </mat-form-field>
-          </section>
-          <section class="section">
             <mat-checkbox class="margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()">match case</mat-checkbox>
           </section>
           <section class="section">
             <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()">whole word</mat-checkbox>
           </section>
           <section class="section">
-            <mat-checkbox class="margin" [(ngModel)]="multipleSearchTerms" (change)="onCheckboxClicked()">multiple search terms</mat-checkbox>
-          </section>
-          <section class="section">
             <mat-checkbox class="margin" [(ngModel)]="ignoreAccents" (change)="onCheckboxClicked()">ignore accents and diacritics</mat-checkbox>
             <small style="margin-left: 24px">(try "licao" to find "lição")</small>
-          </section>
-          <section class="section">
-            <mat-checkbox class="margin" [(ngModel)]="fuzzy" (change)="onCheckboxClicked()">fuzzy search (slow!)</mat-checkbox>
-            <small style="margin-left: 24px">(try "sillable" or "syllabel" to find "syllable")</small>
           </section>
           <section class="section" style="margin-top: 5px; margin-bottom: 10px">
             <button mat-raised-button color="primary" (click)="findNext()">next</button>
