@@ -63,6 +63,7 @@ import { ExportAnnotationsComponent } from './export-annotations/export-annotati
 import { ResponsiveDesignComponent } from './responsive-design/responsive-design.component';
 import { ModalComponent } from './modal/modal.component';
 import { CSSComponent } from './css/css.component';
+import { AnnotationLayerComponent } from './annotation-layer/annotation-layer.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,7 @@ const routes: Routes = [
     component: SimpleComponent,
   },
   { path: 'alternatives', component: AlternativesComponent },
+  { path: 'annotation-layer', component: AnnotationLayerComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'base64', component: Base64Component },
   { path: 'blob', component: BlobComponent, canActivate: [PreloadGuard] },
