@@ -54,6 +54,7 @@
         [showHandToolButton]="true"
         [showPresentationModeButton]="true"
         [handTool]="true"
+        (annotationLayerRendered)="onAnnotationLayerRendered($event)"
       >
       </ngx-extended-pdf-viewer>
     </div>

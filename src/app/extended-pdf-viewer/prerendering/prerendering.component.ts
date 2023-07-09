@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  AnnotationLayerRenderedEvent,
   NgxExtendedPdfViewerService,
   pdfDefaultOptions,
 } from 'ngx-extended-pdf-viewer';
@@ -86,5 +87,16 @@ export class PrerenderingComponent {
     this.visiblePages = String(
       this.pdfViewerService.getCurrentlyVisiblePageNumbers()
     ).replace(',', ', ');
+  }
+
+  public onAnnotationLayerRendered(event: AnnotationLayerRenderedEvent): void {
+    const copyrightHint = event.source.div.querySelector('.freeTextAnnotation');
+    if (copyrightHint && copyrightHint instanceof HTMLElement) {
+      copyrightHint.style.left="20%";
+      const canvas = copyrightHint.querySelector("canvas");
+      if (canvas) {
+        canvas.style.width="50%"
+      }
+    }
   }
 }

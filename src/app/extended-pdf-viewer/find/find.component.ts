@@ -15,7 +15,7 @@ export class FindComponent {
   public highlightAll = false;
   public matchCase = false;
   public wholeWord = false;
-  public ignoreAccents = false;
+  public matchDiacritics = false;
 
   public currentMatchNumber: number | undefined;
 
@@ -80,7 +80,7 @@ export class FindComponent {
       highlightAll: this.highlightAll,
       matchCase: this.matchCase,
       wholeWords: this.wholeWord,
-      ignoreAccents: this.ignoreAccents,
+      matchDiacritics: this.matchDiacritics,
     });
   }
 
@@ -106,7 +106,7 @@ export class FindComponent {
       highlightAll: this.highlightAll,
       matchCase: this.matchCase,
       wholeWords: this.wholeWord,
-      ignoreAccents: this.ignoreAccents,
+      matchDiacritics: this.matchDiacritics,
     });
   }
 

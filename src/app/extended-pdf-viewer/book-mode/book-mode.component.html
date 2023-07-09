@@ -47,6 +47,7 @@
     [minifiedJSLibraries]="!isLocalhost"
     [showPresentationModeButton]="true"
     [textLayer]="true"
+    (annotationLayerRendered)="onAnnotationLayerRendered($event)"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-server-side-rendering',
@@ -19,4 +19,15 @@ export class ServerSideRenderingComponent {
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}
+
+  public onAnnotationLayerRendered(event: AnnotationLayerRenderedEvent): void {
+    const copyrightHint = event.source.div.querySelector('.freeTextAnnotation');
+    if (copyrightHint && copyrightHint instanceof HTMLElement) {
+      copyrightHint.style.left="20%";
+      const canvas = copyrightHint.querySelector("canvas");
+      if (canvas) {
+        canvas.style.width="50%"
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { AnnotationLayerRenderedEvent, IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
 import { LogService } from '../../log.service';
 import { isLocalhost } from '../common/utilities';
@@ -138,10 +138,6 @@ export class SimpleComponent {
 
   public onPageRender(): void {
     this.currentStartTime = new Date().getTime();
-    console.log(pdfDefaultOptions.cMapUrl());
-console.log(pdfDefaultOptions.sandboxBundleSrc());
-console.log(pdfDefaultOptions.workerSrc());
-console.log(pdfDefaultOptions.standardFontDataUrl());
   }
 
   public onPageRendered(event: PageRenderEvent): void {
@@ -156,5 +152,16 @@ console.log(pdfDefaultOptions.standardFontDataUrl());
     console.log(canvasWrapper.parentElement); // shows the page number in the console
     const canvasWrappers = document.querySelectorAll(".canvasWrapper");
     console.log("Number of canvaswrappers: " + canvasWrappers.length);
+  }
+
+  public onAnnotationLayerRendered(event: AnnotationLayerRenderedEvent): void {
+    const copyrightHint = event.source.div.querySelector('.freeTextAnnotation');
+    if (copyrightHint && copyrightHint instanceof HTMLElement) {
+      copyrightHint.style.left="20%";
+      const canvas = copyrightHint.querySelector("canvas");
+      if (canvas) {
+        canvas.style.width="50%"
+      }
+    }
   }
 }

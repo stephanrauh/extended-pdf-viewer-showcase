@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
 import { PdfSidebarView } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
@@ -78,4 +78,16 @@ export class TwoWayBindingComponent {
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}
+
+  public onAnnotationLayerRendered(event: AnnotationLayerRenderedEvent): void {
+    const copyrightHint = event.source.div.querySelector('.freeTextAnnotation');
+    if (copyrightHint && copyrightHint instanceof HTMLElement) {
+      debugger;
+      copyrightHint.style.left="20%";
+      const canvas = copyrightHint.querySelector("canvas");
+      if (canvas) {
+        canvas.style.width="50%"
+      }
+    }
+  }
 }

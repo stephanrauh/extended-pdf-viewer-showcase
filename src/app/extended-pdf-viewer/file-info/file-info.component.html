@@ -82,6 +82,7 @@
     [height]="'90vh'"
     (pagesLoaded)="onPagesLoaded()"
     [minifiedJSLibraries]="!isLocalhost"
+    (annotationLayerRendered)="onAnnotationLayerRendered($event)"
   >
   </ngx-extended-pdf-viewer>
 </mat-card>

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PageRenderedEvent } from 'ngx-extended-pdf-viewer';
+import { AnnotationLayerRenderedEvent, PageRenderedEvent } from 'ngx-extended-pdf-viewer';
 import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
 import { isLocalhost } from '../common/utilities';
 
@@ -35,5 +35,16 @@ export class BookModeComponent {
       }
     }
     console.log(result);
+  }
+
+  public onAnnotationLayerRendered(event: AnnotationLayerRenderedEvent): void {
+    const copyrightHint = event.source.div.querySelector('.freeTextAnnotation');
+    if (copyrightHint && copyrightHint instanceof HTMLElement) {
+      copyrightHint.style.left="20%";
+      const canvas = copyrightHint.querySelector("canvas");
+      if (canvas) {
+        canvas.style.width="50%"
+      }
+    }
   }
 }

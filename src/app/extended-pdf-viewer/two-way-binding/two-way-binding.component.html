@@ -108,6 +108,7 @@
     [(zoom)]="zoom"
     (currentZoomFactor)="currentZoomFactor=$event"
     [minifiedJSLibraries]="!isLocalhost"
+    (annotationLayerRendered)="onAnnotationLayerRendered($event)"
   >
   </ngx-extended-pdf-viewer>
 
