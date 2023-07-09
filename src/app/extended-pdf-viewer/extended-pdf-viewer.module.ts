@@ -71,6 +71,7 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { ModalComponent } from './modal/modal.component';
 import { CSSComponent } from './css/css.component';
 import { AnnotationLayerComponent } from './annotation-layer/annotation-layer.component';
+import { SecurityComponent } from './security/security.component';
 
 
 new TouchEmulator();
@@ -132,6 +133,7 @@ new TouchEmulator();
     ResponsiveDesignComponent,
     ScriptingComponent,
     ScrollingComponent,
+    SecurityComponent,
     ServerSideRenderingComponent,
     SideBySideComponent,
     SignaturesComponent,

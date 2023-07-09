@@ -64,6 +64,7 @@ import { ResponsiveDesignComponent } from './responsive-design/responsive-design
 import { ModalComponent } from './modal/modal.component';
 import { CSSComponent } from './css/css.component';
 import { AnnotationLayerComponent } from './annotation-layer/annotation-layer.component';
+import { SecurityComponent } from './security/security.component';
 
 const routes: Routes = [
   {
@@ -122,6 +123,7 @@ const routes: Routes = [
   { path: 'range-requests', component: RangeRequestsComponent },
   { path: 'scripting', component: ScriptingComponent },
   { path: 'scrolling', component: ScrollingComponent },
+  { path: 'security', component: SecurityComponent },
   { path: 'server-side-rendering', component: ServerSideRenderingComponent },
   { path: 'side-by-side', component: SideBySideComponent },
   { path: 'signatures', component: SignaturesComponent },
