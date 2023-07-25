@@ -149,9 +149,9 @@ export class SimpleComponent {
     const canvasWrapper = event.source.div.querySelector(
       '.canvasWrapper'
       ) as HTMLElement;
-    console.log(canvasWrapper.parentElement); // shows the page number in the console
-    const canvasWrappers = document.querySelectorAll(".canvasWrapper");
-    console.log("Number of canvaswrappers: " + canvasWrappers.length);
+//    console.log(canvasWrapper.parentElement); // shows the page number in the console
+//    const canvasWrappers = document.querySelectorAll(".canvasWrapper");
+//    console.log("Number of canvaswrappers: " + canvasWrappers.length);
   }
 
   public onAnnotationLayerRendered(event: AnnotationLayerRenderedEvent): void {
