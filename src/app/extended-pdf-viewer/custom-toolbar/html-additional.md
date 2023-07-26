@@ -16,6 +16,7 @@
       <pdf-find-button [showFindButton]="true" [textLayer]="true"></pdf-find-button>
       <pdf-paging-area></pdf-paging-area>
     </div>
+    <pdf-zoom-toolbar ></pdf-zoom-toolbar> <!-- toolbar viewer middle -->
     <div id="toolbarViewerRight">
       <pdf-open-file></pdf-open-file>
       <pdf-presentation-mode></pdf-presentation-mode>
@@ -25,7 +26,6 @@
       <div class="verticalToolbarSeparator hiddenSmallView"></div>
       <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
     </div>
-    <pdf-zoom-toolbar ></pdf-zoom-toolbar>
   </div>
 </ng-template>
 ```

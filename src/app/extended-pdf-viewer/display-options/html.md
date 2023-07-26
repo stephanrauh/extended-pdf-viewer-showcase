@@ -1,11 +1,17 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
-  [showBorders]="showBorders"
-  [(scrollMode)]="scrollMode"
-  [(pageViewMode)]="pageViewMode"
-  [(spread)]="spread"
-  zoom="30%"
->
+    [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
+    [showBorders]="showBorders"
+    [(scrollMode)]="scrollMode"
+    [(pageViewMode)]="pageViewMode"
+    [(spread)]="spread"
+    zoom="30%"
+    [showVerticalScrollButton]="'always-visible'"
+    [showHorizontalScrollButton]="'always-visible'"
+    [showWrappedScrollButton]="'always-visible'"
+    [showSpreadButton]="'always-visible'"
+    [showInfiniteScrollButton]="'always-visible'"
+    [showBookModeButton]="'always-visible'"
+    [showSinglePageModeButton]="'always-visible'">
 </ngx-extended-pdf-viewer>
 ```
