@@ -17,23 +17,12 @@ const TOOLBAR: TreeNode[] = [
               {
                 name: '<pdf-paging-area>',
                 children: [
+                  { name: '<pdf-first-page>', id: 'primaryFirstPage' },
                   { name: '<pdf-previous-page>', id: 'previous' },
+                  { name: '<pdf-page-number>', id: 'pageNumber' },
                   { name: '<pdf-next-page>', id: 'next' },
-                  { name: '<pdf-page-number>', id: 'pageNumber' }
+                  { name: '<pdf-last-page>', id: 'primaryLastPage' },
                 ]
-              }
-            ]
-          },
-          {
-            name: '<div id="toolbarViewerRight">',
-            children: [
-              { name: '<pdf-presentation-mode>', id: 'presentationMode' },
-              { name: '<pdf-open-file>', id: 'openFile' },
-              { name: '<pdf-print>', id: 'print' },
-              { name: '<pdf-download>', id: 'download' },
-              {
-                name: '<pdf-toggle-secondary-toolbar>',
-                id: 'secondaryToolbarToggle'
               }
             ]
           },
@@ -44,7 +33,39 @@ const TOOLBAR: TreeNode[] = [
               { name: '<pdf-zoom-in>', id: 'zoomIn' },
               { name: '<pdf-zoom-dropdown>', id: 'scaleSelect' }
             ]
-          }
+          },
+          {
+            name: '<div id="toolbarViewerRight">',
+            children: [
+              { name: '<pdf-document-properties>', id: 'documentProperties' },
+              { name: '<pdf-no-spread>', id: 'spreadNone' },
+              { name: '<pdf-odd-spread>', id: 'spreadOdd' },
+              { name: '<pdf-even-spread>', id: 'spreadEven' },
+              { name: '<pdf-single-page-mode>', id: 'scrollPage' },
+              { name: '<pdf-vertical-scroll-mode>', id: 'scrollVertical' },
+              { name: '<pdf-horizontal-scroll>', id: 'scrollHorizontal' },
+              { name: '<pdf-wrapped-scroll-mode>', id: 'scrollWrapped' },
+              { name: '<pdf-infinite-scroll>', id: 'infiniteScroll' },
+              { name: '<pdf-book-mode>', id: 'book-mode' },
+              { name: '<pdf-hand-tool>', id: 'primaryCursorHandTool' },
+              { name: '<pdf-select-tool>', id: 'primaryCursorSelectTool' },
+              { name: '<pdf-rotate-page [clockwise]="true">', id: 'primaryPageRotateCw' },
+              { name: '<pdf-rotate-page> [clockwise]="false"', id: 'primaryPageRotateCcw' },
+              { name: '<pdf-presentation-mode>', id: 'presentationMode' },
+              { name: '<pdf-open-file>', id: 'openFile' },
+              { name: '<pdf-print>', id: 'print' },
+              { name: '<pdf-download>', id: 'download' },
+              { name: '<pdf-editor>', children: [
+                { name: '<pdf-stamp-editor>', id: 'editorStamp' },
+                { name: '<pdf-text-editor>', id: 'editorFreeText' },
+                { name: '<pdf-ink-editor>', id: 'editorInk' },
+              ]},
+              {
+                name: '<pdf-toggle-secondary-toolbar>',
+                id: 'secondaryToolbarToggle'
+              }
+            ]
+          },
         ]
       }
     ]
@@ -136,37 +157,12 @@ const TOOLBAR: TreeNode[] = [
               { name: '<pdf-find-next>', id: 'findNext' }
             ]
           },
-          {
-            name: '<pdf-findbar-options-one-container>',
-            children: [
               { name: '<pdf-find-highlight-all>', id: 'findHighlightAll' },
               { name: '<pdf-find-highlight-all>', id: 'findCurrentPage' },
-              { name: ' <pdf-find-match-case>', id: 'findMatchCase' }
-            ]
-          },
-          {
-            name: '<pdf-findbar-options-two-container>',
-            children: [
+              { name: ' <pdf-find-match-case>', id: 'findMatchCase' },
               { name: '<pdf-find-entire-word>', id: 'findEntireWord' },
-              {
-                name: '<pdf-find-entire-phrase>',
-                children: [
-                  {
-                    name: '<input type="checkbox>"',
-                    id: 'findMultipleSearchTexts'
-                  },
-                  { name: '<input type="checkbox">', id: 'individualWordsMode' }
-                ]
-              }
-            ]
-          },
-          {
-            name: '<pdf-findbar-options-three-container>',
-            children: [
-              { name: '<pdf-find-ignore-accents>', id: 'findIgnoreAccents' },
-              { name: '<pdf-find-results-count>', id: 'findResultsCount' }
-            ]
-          },
+              { name: '<pdf-match-diacritics>', id: 'findMatchDiacritics' },
+              { name: '<pdf-find-results-count>', id: 'findResultsCount' },
           { name: '<pdf-findbar-message-container>', id: 'findMsg' }
         ]
       }

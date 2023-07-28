@@ -40,212 +40,92 @@
           <mat-form-field class="margin">
             <mat-label>showSidebarButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showSidebarButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of traditionalOptions" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showFindButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showFindButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showPagingButtons </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showPagingButtons">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showZoomButtons </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showZoomButtons">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showDrawEditor </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showDrawEditor">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showTextEditor </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showTextEditor">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showPresentationModeButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showPresentationModeButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showOpenFileButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showOpenFileButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showPrintButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showPrintButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showDownloadButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showDownloadButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="margin">
             <mat-label>showRotateButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showRotateButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showHandToolButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showHandToolButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showScrollingButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showScrollingButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showSpreadButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showSpreadButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showPropertiesButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showPropertiesButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
         </mat-tab>
@@ -300,212 +180,92 @@
           <mat-form-field class="margin">
             <mat-label>showSidebarButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showSidebarButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of traditionalOptions" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showFindButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showFindButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showPagingButtons </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showPagingButtons">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showZoomButtons </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showZoomButtons">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showDrawEditor </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showDrawEditor">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showTextEditor </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showTextEditor">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showPresentationModeButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showPresentationModeButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showOpenFileButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showOpenFileButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showPrintButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showPrintButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showDownloadButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showDownloadButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="margin">
             <mat-label>showRotateButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showRotateButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showHandToolButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showHandToolButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showScrollingButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showScrollingButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showSpreadButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showSpreadButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="margin">
             <mat-label>showPropertiesButton </mat-label>
             <mat-select [disabled]="!showToolbar" [(value)]="showPropertiesButton">
-              <mat-option [value]="false">false (hidden)</mat-option>
-              <mat-option [value]="true">true (uses the defaults)</mat-option>
-              <mat-option value="always-visible">always-visible</mat-option>
-              <mat-option value="xs">xs</mat-option>
-              <mat-option value="sm">sm</mat-option>
-              <mat-option value="md">md</mat-option>
-              <mat-option value="lg">lg</mat-option>
-              <mat-option value="xl">xl</mat-option>
-              <mat-option value="xxl">xxl</mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">{{withExplanation(option)}}</mat-option>
             </mat-select>
           </mat-form-field>
         </mat-tab>

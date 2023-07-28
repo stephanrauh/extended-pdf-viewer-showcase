@@ -10,7 +10,7 @@ import { isLocalhost } from '../common/utilities';
 })
 export class CustomToolbarComponent {
   // tslint:disable-next-line: variable-name
-  public _theme = 'multi';
+  public _theme = 'additional';
 
   public showPdfViewer = true;
 

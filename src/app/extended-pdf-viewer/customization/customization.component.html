@@ -1,8 +1,8 @@
 <mat-card class="distance16 mat-elevation-z8" fxFlex="97%">
   <h2>Features you can customize</h2>
   <p>
-    Version 2.0.0 of <code>&lt;ngx-extended-pdf-viewer&gt;</code> allows you to customize the toolbar and the menu of the PDF viewer.
-    Previously, all you could do was to hide certain buttons and menu items. Now, you can also
+    <code>&lt;ngx-extended-pdf-viewer&gt;</code> allows you to customize the toolbar and the menu of the PDF viewer.
+    You can
   </p>
   <ul>
     <li>re-arrange the pre-defined items any way you like;</li>
@@ -41,7 +41,13 @@
     </li>
     <li>
       The underlying PDF framework, pdf.js, recognizes the buttons and menu items by their <code>id</code>. If you want to modify an
-      existing functionality, keep in mind you have to provide the id. Otherwise, pdf.js will raise and exception.
+      existing functionality, keep in mind you have to provide the id. Otherwise, pdf.js might raise an exception, and your custom button
+      won't work.
+    </li>
+    <li>However, most buttons are component you can either use or copy. You can see the full list of toolbar buttons
+      <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/main/projects/ngx-extended-pdf-viewer/src/lib/toolbar/pdf-toolbar/pdf-toolbar.component.html">
+        in the GitHub repository of <code>&lt;ngx-extended-pdf-viewer&gt;</code>.
+      </a>
     </li>
     <li>
       I'm sure there's a lot of headroom for improvements. Don't hesitate to report any shortcoming on
@@ -51,13 +57,38 @@
 
   <h2>Toolbar</h2>
   <p>The toolbar is the black bar containing the buttons above the PDF file.</p>
+  <p><b>Legend:</b>The red text tells you which id the component renders internally. When you use the component, don't add the id. Otherwise,
+  the id is used twice. In many cases, this causes errors. However, since version 18, most buttons
+  replaced the pdf.js implementation by an Angular implementation, so the ids aren't as important as they used to be
+  in earlier versions.</p>
   <app-tree [treeData]="toolbar"></app-tree>
 
   <h2>Findbar</h2>
   <p>The findbar becomes visible after hitting <code>CTRL+F</code>.</p>
   <app-tree [treeData]="findbar"></app-tree>
 
-  <h2>Secondary menu</h2>
+  <h2>Secondary menu (since version 18)</h2>
+  <p>
+    Since version 18, almost every button is able to move dynamically from the toolbar to the secondary menu.
+    The idea is to move buttons from the toolbar to the secondary menu until the toolbar fits on the screen,
+    so small displays can still show all buttons.
+  </p>
+  <p>Every toolbar button has a <code>show&lt;ButtonName&gt;</code> attribute which defines the breakpoint of
+  the button. If the screen is wider than the breakpoint, the button is displayed in the toolbar. Otherwise
+it's displayed in the secondary menu. There are also two special values: <code>always-visible</code> means
+the button is never moved to the secondary menu. Conversely, <code>'always-in-secondary-menu'</code>
+means the button always hides in the secondary menu.</p>
+<p>There's an interactive live-demo at <a href="/extended-pdf-viewer/responsive-design">the responsive design page of this showcase.</a></p>
+<p>If you use the <code>&lt;pdf-shy-button&gt;</code> component to define your custom buttons they also
+benefit from responsive design.</p>
+
+<h2>Adding custom buttons to the toolbar and/or the secondary menu</h2>
+<app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
+
+  <h2>Secondary menu (before version 18)</h2>
+  <p><b>Important:</b> This section describes how the seondary menu worked in older versions.
+  The old customizations should still work in version 18+, but I recommend migrating to the new
+approach because it's both simpler and more flexible.</p>
   <p>The secondary toolbar is the menu that opens on the right-hand side. It contains many buttons
     of the primary toolbar. On small displays, widgets are shifted from the primary toolbar to the
     secondary toolbar until the primary toolbar fits on the screen. Similarly, when the window size

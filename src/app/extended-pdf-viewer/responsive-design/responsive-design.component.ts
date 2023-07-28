@@ -9,23 +9,38 @@ import { isLocalhost } from '../common/utilities';
 })
 export class ResponsiveDesignComponent {
   public showToolbar = true;
-  public showSidebarButton = false;
-  public showFindButton = false;
-  public showDrawEditor = false;
-  public showTextEditor = false;
-  public showPagingButtons = false;
-  public showZoomButtons = false;
-  public showPresentationModeButton = false;
-  public showOpenFileButton = false;
-  public showPrintButton = false;
-  public showDownloadButton = true;
-  public showSecondaryToolbarButton = true;
-  public showRotateButton = false;
-  public showHandToolButton = false;
-  public showScrollingButton = false;
-  public showSpreadButton = false;
-  public showPropertiesButton = false;
+  public showSidebarButton: ResponsiveVisibility = 'xxl';
+  public showFindButton: ResponsiveVisibility = 'xxl';
+  public showDrawEditor: ResponsiveVisibility = 'xxl';
+  public showTextEditor: ResponsiveVisibility = 'xxl';
+  public showPagingButtons: ResponsiveVisibility = 'xxl';
+  public showZoomButtons: ResponsiveVisibility = 'xxl';
+  public showPresentationModeButton: ResponsiveVisibility = 'xxl';
+  public showOpenFileButton: ResponsiveVisibility = 'xxl';
+  public showPrintButton: ResponsiveVisibility = 'xxl';
+  public showDownloadButton: ResponsiveVisibility = 'xxl';
+  public showSecondaryToolbarButton: ResponsiveVisibility = 'always-visible';
+  public showRotateButton: ResponsiveVisibility = 'xxl';
+  public showHandToolButton: ResponsiveVisibility = 'xxl';
+  public showScrollingButton: ResponsiveVisibility = 'xxl';
+  public showSpreadButton: ResponsiveVisibility = 'xxl';
+  public showPropertiesButton: ResponsiveVisibility = 'xxl' ;
   public downloadFileName = 'user-defined-name.pdf';
+
+
+  public traditionalOptions: Array<ResponsiveVisibility> = [true, false, 'always-visible',  'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+
+  public options: Array<ResponsiveVisibility> = [true, false, 'always-visible', 'always-in-secondary-menu', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+
+  public withExplanation(option: ResponsiveVisibility) {
+    if (option === true) {
+      return 'true (uses the defaults)';
+    } else if (option === false) {
+      return 'false (hidden)';
+    } else {
+      return option;
+    }
+  }
 
   public get xs() {
     return PdfBreakpoints.xs;
@@ -103,8 +118,6 @@ export class ResponsiveDesignComponent {
       this.settingsWidth = "60%";
     }
   }
-
-  public options: Array<ResponsiveVisibility> = [true, false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
   public get fullscreen(): boolean {
     return this._fullscreen;

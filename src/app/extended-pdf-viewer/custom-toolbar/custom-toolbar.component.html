@@ -1,25 +1,30 @@
 <div fxLayout="column" fxFill>
   <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
   <mat-card class="distance16 mat-elevation-z8" fxFlex="40%" style="margin-bottom:20px">
-    <p>
-      ngx-extended-pdf-viewer allows you to define your own custom toolbar, menu, and it even allows you to create
-      your own sidebar and your own thumbnails.
-    </p>
-    <mat-label title="Demo theme"></mat-label>
-    <mat-radio-group aria-label="Demo" [(ngModel)]="theme">
-      <mat-radio-button value="default">standard layout</mat-radio-button>
-      <br />
-      <mat-radio-button value="findbar">custom findbar</mat-radio-button>
-      <br />
-      <mat-radio-button value="checkbox">radiobutton zoom</mat-radio-button>
-      <br />
-      <mat-radio-button value="additional">custom color and additional button ("open PDF in new tab")</mat-radio-button>
-      <br />
-      <mat-radio-button value="floating">floating zoombar</mat-radio-button>
-      <mat-checkbox class="padding-left" [(ngModel)]="showFreeFloatingBar">show it! (uncheck to hide)</mat-checkbox>
-      <br>
-      <mat-radio-button value="multi">multiple lines</mat-radio-button>
-    </mat-radio-group>
+    <mat-tab-group>
+      <mat-tab label="live demo">
+        <p>
+          ngx-extended-pdf-viewer allows you to define your own custom toolbar, menu, and it even allows you to create
+          your own sidebar and your own thumbnails.
+        </p>
+        <mat-label title="Demo theme"></mat-label>
+        <mat-radio-group aria-label="Demo" [(ngModel)]="theme">
+          <mat-radio-button value="default">standard layout</mat-radio-button>
+          <br />
+          <mat-radio-button value="findbar">custom findbar (large input field in a dedicated line)</mat-radio-button>
+          <br />
+          <mat-radio-button value="checkbox">radiobutton zoom</mat-radio-button>
+          <br />
+          <mat-radio-button value="additional">custom color and additional button ("open PDF in new tab")</mat-radio-button>
+          <br />
+          <mat-radio-button value="floating">floating zoombar</mat-radio-button>
+          <mat-checkbox class="padding-left" [(ngModel)]="showFreeFloatingBar">show it! (uncheck to hide)</mat-checkbox>
+        </mat-radio-group>
+      </mat-tab>
+      <mat-tab label="responsive custom buttons">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
+      </mat-tab>
+    </mat-tab-group>
   </mat-card>
   <p></p>
   <mat-card class="distance16 mat-elevation-z8" fxFlex="58%">
@@ -29,6 +34,9 @@
       </mat-tab>
       <mat-tab label="HTML template">
         <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-'+ theme+'.md'"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="CSS template" *ngIf="theme=='findbar'">
+        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/css-'+ theme+'.md'"> </app-ie11-markdown>
       </mat-tab>
       <mat-tab label="additional components" *ngIf="theme=='additional'">
         <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
@@ -49,10 +57,9 @@
   <ngx-extended-pdf-viewer *ngIf="showPdfViewer"
     [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : undefined"
     [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : undefined"
-    [customToolbar]="theme === 'multi'? multiToolbar: theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons : undefined)"
+    [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons : undefined)"
     [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : undefined"
     [src]="'/assets/pdfs/dachstein.pdf'"
-    [height]="'50vh'"
     [textLayer]="true"
     [zoom]="zoom"
     [showZoomButtons]="theme != 'floating'"
@@ -66,28 +73,23 @@
 <ng-template #customFindbarInputArea>
   <div id="findbarInputContainer">
     <pdf-search-input-field></pdf-search-input-field>
-    <br />
-    <pdf-find-previous></pdf-find-previous>
-    <pdf-find-next></pdf-find-next>
   </div>
 </ng-template>
 
 <ng-template #customFindbarButtons>
-  <pdf-find-input-area [customFindbarInputArea]="customFindbarInputArea"></pdf-find-input-area>
-  <div id="findbarOptionsOneContainer">
+  <div class="no-float">
+    <pdf-find-input-area [customFindbarInputArea]="customFindbarInputArea"></pdf-find-input-area>
+  </div>
+  <div class="no-float">
     <pdf-find-highlight-all></pdf-find-highlight-all>
     <pdf-find-match-case></pdf-find-match-case>
-  </div>
-  <br />
-  <div id="findbarOptionsTwoContainer">
     <pdf-find-entire-word></pdf-find-entire-word>
-  </div>
-  <br />
-  <div id="findbarOptionsThreeContainer">
     <pdf-find-results-count></pdf-find-results-count>
+    <pdf-findbar-message-container></pdf-findbar-message-container>
+    <pdf-find-previous></pdf-find-previous>
+    <pdf-find-next></pdf-find-next>
   </div>
-  <br />
-  <pdf-findbar-message-container></pdf-findbar-message-container>
+
 </ng-template>
 
 <ng-template #customCheckboxZoomToolbar>
@@ -150,36 +152,3 @@
     </div>
   </div>
 </ng-template>
-
-<ng-template #multiToolbar>
-  <div class="header">
-    <pdf-toggle-sidebar style="padding-top:5px"></pdf-toggle-sidebar>
-
-    <button mat-icon-button id="zoomIn">
-      <mat-icon>zoom_in</mat-icon>
-    </button>
-    <button mat-icon-button id="zoomOut">
-      <mat-icon>zoom_out</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>fullscreen</mat-icon>
-    </button>
-
-    <button mat-icon-button id="primaryPageRotateCw">
-      <mat-icon>replay</mat-icon>
-    </button>
-
-    <pdf-find-button></pdf-find-button>
-    <div class="flex-spacer"></div>
-    <button mat-icon-button id="print">
-      <mat-icon>print</mat-icon>
-    </button>
-    <button mat-icon-button id="download">
-      <mat-icon>download</mat-icon>
-    </button>
-    <div style="float:right">
-      <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
-    </div>
-  </div>
-</ng-template>
-

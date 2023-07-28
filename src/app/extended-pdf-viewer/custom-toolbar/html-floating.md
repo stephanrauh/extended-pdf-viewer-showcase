@@ -3,8 +3,6 @@
   #pdfViewer
   [customFreeFloatingBar]="floatingZoombar"
   [src]="'/assets/pdfs/dachstein.pdf'"
-  [height]="'50vh'"
-  [useBrowserLocale]="true"
   [textLayer]="true"
   [zoom]="zoom"
   [showZoomButtons]="false"

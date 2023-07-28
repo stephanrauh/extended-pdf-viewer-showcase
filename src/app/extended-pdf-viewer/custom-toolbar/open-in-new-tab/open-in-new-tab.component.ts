@@ -5,11 +5,17 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './open-in-new-tab.component.html',
   styleUrls: ['./open-in-new-tab.component.css']
 })
-export class OpenInNewTabComponent implements OnInit {
+export class OpenInNewTabComponent {
 
-  constructor() { }
+  public hasBeenClicked = false;
 
-  ngOnInit(): void {
-  }
+  public onClick = () => {};
 
+  constructor() {
+    const self = this;
+    this.onClick = () => {
+      self.hasBeenClicked = true;
+      window.open('assets/pdfs/dachstein.pdf', '#');
+    };
+   }
 }
