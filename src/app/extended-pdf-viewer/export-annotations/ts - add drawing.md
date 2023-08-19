@@ -9,12 +9,12 @@ public addDrawing(): void {
     opacity: 1,
     paths: [
       {
-        bezier: [0.5, 14, 0.5, 44, 44, 66, 88, 44],
-        points: [0.5, 14, 0.5, 44],
+        bezier: [x+0.5, y, x+0.5, y+44, x+44, y+66, x+88, y+44],
+        points: [x+0.5, y, x+0.5, y+44],
       },
     ],
     pageIndex: 0,
-    rect: [x, y, x+100, y+100],
+    rect: [x, y, x+100, y+66],
     rotation: 0,
   };
   this.pdfViewerService.addEditorAnnotation(drawing);

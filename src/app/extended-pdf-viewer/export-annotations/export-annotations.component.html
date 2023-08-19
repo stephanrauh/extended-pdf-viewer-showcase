@@ -4,6 +4,8 @@
       <p>
         You can export text and drawings you've added to a PDF file.
       </p>
+      <p><b>Breaking change between pdf.js 3.5 and 3.9:</b> The coordinates of the serialized drawings have changed.
+        Please keep in mind that this is an internal API of pdf.js, so it's subject to change without notice.</p>
       <button mat-raised-button color="primary" (click)="exportAnnotations()" style="margin-left: 16px">Export annotations</button>
       <button mat-raised-button color="primary" (click)="addTextEditor()" style="margin-left: 16px">Add text editor</button>
       <button mat-raised-button color="primary" (click)="addDrawing()" style="margin-left: 16px">Add drawing</button>
@@ -28,8 +30,9 @@
         <mat-tab label="live demo">
           <div class="distance16">
             <div *ngIf="rawAnnotations">
-              <ul *ngFor="let anno of rawAnnotations">
-                <li>{{anno | json }}</li>
+              <p>You can edit the annotations. They are updated when you click outside the text area.</p>
+              <ul *ngFor="let anno of rawAnnotations; let i = index">
+                <li><textarea [value]="rawAnnotations[i]|json" (change)="updateAnnotation(i, $event)"></textarea></li>
               </ul>
             </div>
             <div *ngIf="!rawAnnotations">No annotations. Use the editor or the buttons to add text or drawings to the PDF file.</div>
