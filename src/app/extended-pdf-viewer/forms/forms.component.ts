@@ -137,7 +137,7 @@ export class FormsComponent {
   }
 
   constructor(private ngxService: NgxExtendedPdfViewerService) {
-    this.onSelectTab({ index: 4 } as MatTabChangeEvent);
+    this.onSelectTab({ index: 0 } as MatTabChangeEvent);
     this.updateFormData();
   }
 
@@ -186,10 +186,22 @@ export class FormsComponent {
     this.leftTab = event.index;
     if (event.index === 1) {
       this.selectedTab = 2;
+      setTimeout(() => {
+        this.src = '/assets/pdfs/OoPdfFormExample.pdf';
+        this.visible = true;
+      });
     } else if (event.index === 2) {
       this.selectedTab = 4;
+      setTimeout(() => {
+        this.src = '/assets/pdfs/OoPdfFormExample.pdf';
+        this.visible = true;
+      });
     } else if (event.index === 3) {
       this.selectedTab = 5;
+      setTimeout(() => {
+        this.src = '/assets/pdfs/OoPdfFormExample.pdf';
+        this.visible = true;
+      });
     } else if (event.index === 4) {
       this.formData = {};
       this.visible = false;
