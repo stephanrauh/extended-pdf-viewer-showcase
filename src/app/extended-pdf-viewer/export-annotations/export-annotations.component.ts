@@ -37,21 +37,33 @@ export class ExportAnnotationsComponent {
   }
 
   public addTextEditor(): void {
+    const x = Math.round(Math.random() * 400);
+    const y = Math.round(350 + Math.random() * 500);
+    const fontSize = Math.round(Math.random() * 30 + 10);
+    const height = fontSize * 1.75;
+    const width = fontSize * 5.8;
     const textEditorAnnotation: FreeTextEditorAnnotation = {
       annotationType: 3,
       color: [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)],
-      fontSize: Math.random() * 10 + 20,
+      fontSize: fontSize,
       value: 'Hello world!',
       pageIndex: 0,
       rect: [
-        50, // height?
-        Math.random() * 500 + 350, // y
-        Math.random() * 400, // x
-        100, // width?
+        x,
+        y,
+        x+width,
+        y+height
       ],
       rotation: 0,
     };
+    console.log(textEditorAnnotation);
+    console.log('Before update');
     this.pdfViewerService.addEditorAnnotation(textEditorAnnotation);
+    console.log('After update');
+    let anno = this.pdfViewerService.getSerializedAnnotations();
+    if (anno) {
+      console.log(anno[0]);
+    }
   }
 
   public addDrawing(): void {
@@ -91,9 +103,13 @@ export class ExportAnnotationsComponent {
 
   public updateAnnotation(index: number, event: Event): void {
     const textarea = event.target as HTMLTextAreaElement;
+    console.log('Before update');
+    let anno = this.pdfViewerService.getSerializedAnnotations();
+    if (anno) {
+      console.log(anno[0]);
+    }
     if (this.rawAnnotations) {
       const value = textarea.value.replace(/\n/g, '');
-      debugger;
       this.rawAnnotations[index] = JSON.parse(value);
 
       this.removeEditors();
@@ -101,5 +117,19 @@ export class ExportAnnotationsComponent {
         this.pdfViewerService.addEditorAnnotation(annotation);
       }
     }
+    console.log('After update');
+    anno = this.pdfViewerService.getSerializedAnnotations();
+    if (anno) {
+      console.log(anno[0]);
+    }
+  }
+
+  public adjustSize(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+
+  public countRows(json: string): number {
+    return json?.split(/\r\n|\r|\n/)?.length;
   }
 }

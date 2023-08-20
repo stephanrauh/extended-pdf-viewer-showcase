@@ -30,10 +30,12 @@
         <mat-tab label="live demo">
           <div class="distance16">
             <div *ngIf="rawAnnotations">
-              <p>You can edit the annotations. They are updated when you click outside the text area.</p>
-              <ul *ngFor="let anno of rawAnnotations; let i = index">
-                <li><textarea [value]="rawAnnotations[i]|json" (change)="updateAnnotation(i, $event)"></textarea></li>
-              </ul>
+              <p>You can edit the annotations. Click outside the text areas to trigger rendering.</p>
+              <ol *ngFor="let anno of rawAnnotations; let i = index">
+                <li><textarea [value]="rawAnnotations[i]|json" (change)="updateAnnotation(i, $event)"
+                  (input)="adjustSize($event)" rows="{{countRows(rawAnnotations[i]|json)}}"
+                  cols="60"></textarea></li>
+              </ol>
             </div>
             <div *ngIf="!rawAnnotations">No annotations. Use the editor or the buttons to add text or drawings to the PDF file.</div>
           </div>
