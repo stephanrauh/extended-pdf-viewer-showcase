@@ -146,22 +146,7 @@ export class SimpleComponent {
       this.time = endTime - this.startTime;
     }
     this.currentTime = endTime - this.currentStartTime;
-    const canvasWrapper = event.source.div.querySelector(
-      '.canvasWrapper'
-      ) as HTMLElement;
-//    console.log(canvasWrapper.parentElement); // shows the page number in the console
-//    const canvasWrappers = document.querySelectorAll(".canvasWrapper");
-//    console.log("Number of canvaswrappers: " + canvasWrappers.length);
   }
 
-  public onAnnotationLayerRendered(event: AnnotationLayerRenderedEvent): void {
-    const copyrightHint = event.source.div.querySelector('.freeTextAnnotation');
-    if (copyrightHint && copyrightHint instanceof HTMLElement) {
-      copyrightHint.style.left="20%";
-      const canvas = copyrightHint.querySelector("canvas");
-      if (canvas) {
-        canvas.style.width="50%"
-      }
-    }
-  }
+
 }

@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFill>
   <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-    <mat-card class="distance16 mat-elevation-z8" fxFlex="40%">
+    <mat-card class="distance16 mat-elevation-z8" fxFlex="60%">
         <p>
           The PDF viewer always renders the PDF file as a canvas. Often, it also generates additional layers on top of the canvas:
         </p>
@@ -16,13 +16,19 @@
           <p>
           For example, this demo uses the event listener
           <code>(annotationLayerRendered)</code> to fix a layout error in the document itself. The author has added a copyright box on page ii.
-          For some reason, most PDF viewers display the text in such a large font it doesn't fit on the page.
-          The demo uses the event to manipulate the layer and to make it look like the author probably intended it to look.
-          Unfortunately, the bug still shows in the thumbnail view.
+          By default, the box is too large, so the box is clipped. That looks attractive, too, but this demo reduces the size of the box
+          to make it fit into the box without clipping it. As a side effect, the underlying link to a popular book vendor becomes visible.
+        </p><p>
+          Note that I don't want to do advertising. Please ignore the actual link unless you've read the example PDF and if you want to support
+          the author by buying his book.
+          To see the link, move the mouse slowly over the box until it becomes yellow. Technically speaking, I suspect that's a bug of
+          pdf.js, because other PDF viewers always render the link without showing the info box.</p>
+          <p>
+          There's a catch: the <code>(annotationLayerRendered)</code> trick does not work in the thumbnail view.
           </p>
       </mat-card>
 
-    <mat-card class="distance16 mat-elevation-z8" fxFlex="58%">
+    <mat-card class="distance16 mat-elevation-z8" fxFlex="38%">
       <mat-tab-group>
         <mat-tab label="HTML template">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/annotation-layer/html.md"> </app-ie11-markdown>

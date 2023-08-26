@@ -29,7 +29,10 @@ export class AnnotationLayerComponent {
       copyrightHint.style.left="20%";
       const canvas = copyrightHint.querySelector("canvas");
       if (canvas) {
-        canvas.style.width="50%"
+        canvas.style.width="75%";
+        canvas.style.height="75%";
+        canvas.style.top="20px";
+        canvas.style.left="10%";
       }
     }
   }
