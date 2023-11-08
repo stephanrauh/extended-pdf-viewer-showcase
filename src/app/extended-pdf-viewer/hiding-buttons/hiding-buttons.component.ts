@@ -14,6 +14,7 @@ export class HidingButtonsComponent {
   public findbarVisible = false;
   public showDrawEditor = false;
   public showTextEditor = false;
+  public showStampEditor = false;
   public showPagingButtons = false;
   public showZoomButtons = false;
   public showPresentationModeButton = false;
@@ -71,6 +72,7 @@ export class HidingButtonsComponent {
   [showFindButton]="${this.showFindButton}"
   [showPagingButtons]="${this.showPagingButtons}"
   [showDrawEditor]="${this.showDrawEditor}"
+  [showStampEditor]="${this.showStampEditor}"
   [showTextEditor]="${this.showTextEditor}"
   [showZoomButtons]="${this.showZoomButtons}"
   [showPresentationModeButton]="${this.showPresentationModeButton}"
