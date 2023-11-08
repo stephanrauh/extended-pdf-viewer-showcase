@@ -1,7 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter, map, Observable, take, tap } from 'rxjs';
+import { Observable } from 'rxjs';
+import { filter, map, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-extended-pdf-viewer-menu',
