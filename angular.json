@@ -104,10 +104,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pdf-showcase:build:production"
+              "buildTarget": "pdf-showcase:build:production"
             },
             "development": {
-              "browserTarget": "pdf-showcase:build:development"
+              "buildTarget": "pdf-showcase:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -115,7 +115,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pdf-showcase:build"
+            "buildTarget": "pdf-showcase:build"
           }
         },
         "test": {
@@ -158,7 +158,7 @@
           "defaultConfiguration": "production"
         },
         "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
           "configurations": {
             "development": {
               "browserTarget": "pdf-showcase:build:development",
@@ -172,7 +172,7 @@
           "defaultConfiguration": "development"
         },
         "prerender": {
-          "builder": "@nguniversal/builders:prerender",
+          "builder": "@angular-devkit/build-angular:prerender",
           "options": {
             "routes": [
               "/"

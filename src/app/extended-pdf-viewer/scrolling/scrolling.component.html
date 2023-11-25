@@ -8,10 +8,10 @@
         offers a programmatic API:</p>
         <ul>
           <li><code>scrollPageIntoView(42)</code> is equivalent to <code>[page]="42"</code>.</li>
-          <li><code>scrollPageIntoView(42, {{ '{' }}top: '100%'})</code> scrolls to the bottom of page 42.</li>
-          <li><code>scrollPageIntoView(42, {{ '{' }}top: '50%'})</code> scrolls to the middle of page 42.</li>
-          <li><code>scrollPageIntoView(42, {{ '{' }}top: 500 })</code> scrolls to page 42, and then 500 pixels down.</li>
-          <li><code>scrollPageIntoView(42, {{ '{' }}left: '100%' })</code> scrolls to the right hand side of the page.</li>
+          <li><code>scrollPageIntoView(42, {{ '{' }}top: '100%'&#125;)</code> scrolls to the bottom of page 42.</li>
+          <li><code>scrollPageIntoView(42, {{ '{' }}top: '50%'&#125;)</code> scrolls to the middle of page 42.</li>
+          <li><code>scrollPageIntoView(42, {{ '{' }}top: 500 &#125;)</code> scrolls to page 42, and then 500 pixels down.</li>
+          <li><code>scrollPageIntoView(42, {{ '{' }}left: '100%' &#125;)</code> scrolls to the right hand side of the page.</li>
         </ul>
         <p>Note that numerical values refer to pixels, so which part of the page become visible depends on the zoom level. Better use percentages.</p>
           <button class="button" mat-raised-button color="primary" (click)="scroll(10, '100%')">scroll(page=10, top="100%")</button>
