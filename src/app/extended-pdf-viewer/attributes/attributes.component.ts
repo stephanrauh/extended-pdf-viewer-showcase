@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, AfterViewInit, OnInit } from '@angular/core';
-import { IColumnType, ISortDirection, Settings } from 'angular2-smart-table';
+import { Settings } from 'angular2-smart-table';
 import { firstValueFrom } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { CustomRenderComponent } from './custom-render-component';
 
 @Component({
   selector: 'app-attributes',
@@ -35,18 +33,18 @@ export class AttributesComponent implements OnInit, AfterViewInit {
     columns: {
       attribute: {
         title: 'Attribute',
-        type: IColumnType.Html,
-        sortDirection: 'asc' as ISortDirection,
+        type: 'html',
+        sortDirection: 'asc',
         compareFunction: this.compareFunction,
       },
       description: {
         title: 'Description',
-        type: IColumnType.Html,
+        type: 'html',
       },
       defaultValue: {
         title: 'Default value',
         width: '100px',
-        filter: false,
+        filter: { type: 'text'},
       },
     },
     pager: {
@@ -55,7 +53,7 @@ export class AttributesComponent implements OnInit, AfterViewInit {
     }
   };
 
-  public lowLevelApiTableSettings = {
+  public lowLevelApiTableSettings: Settings = {
     actions: {
       edit: false,
       delete: false,
@@ -67,20 +65,16 @@ export class AttributesComponent implements OnInit, AfterViewInit {
     columns: {
       attribute: {
         title: 'Attribute',
-        type: IColumnType.Html,
-        sortDirection: 'asc' as ISortDirection,
+        sortDirection: 'asc',
         compareFunction: this.compareFunction,
       },
       description: {
         title: 'Description',
-        type: IColumnType.Html,
       },
       sourcecode: {
         title: 'Source code',
         width: '100px',
-        type: IColumnType.Custom,
-        renderComponent: CustomRenderComponent,
-        filter: false,
+        type: 'html',
       },
     },
     pager: {

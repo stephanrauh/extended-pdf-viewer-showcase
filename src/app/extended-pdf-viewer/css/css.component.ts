@@ -32,13 +32,13 @@ export class CSSComponent implements OnInit, AfterViewInit {
     columns: {
       attribute: {
         title: 'CSS rule',
-        type: IColumnType.Html,
+        type: 'html',
         sortDirection: 'asc' as ISortDirection,
         compareFunction: this.compareFunction,
       },
       description: {
         title: 'Description',
-        type: IColumnType.Html,
+        type: 'html',
       },
     },
     pager: {

@@ -7,7 +7,7 @@ import { AlternativesComponent } from '../shared/alternatives/alternatives.compo
 import { AttributesComponent } from './attributes/attributes.component';
 import { Base64Component } from './base64/base64.component';
 import { BlobComponent } from './blob/blob.component';
-import { PreloadGuard } from './blob/preload.guard';
+import { preloadGuard } from './blob/preload.guard';
 import { BookModeComponent } from './book-mode/book-mode.component';
 import { BrowserSupportComponent } from './browser-support/browser-support.component';
 import { ChangelogComponent } from './changelog/changelog.component';
@@ -75,7 +75,7 @@ const routes: Routes = [
   { path: 'annotation-layer', component: AnnotationLayerComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'base64', component: Base64Component },
-  { path: 'blob', component: BlobComponent, canActivate: [PreloadGuard] },
+  { path: 'blob', component: BlobComponent, canActivate: [preloadGuard] },
   { path: 'browser-support', component: BrowserSupportComponent },
   { path: 'changelog', component: ChangelogComponent },
   { path: 'changelog', component: ChangelogComponent },
