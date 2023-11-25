@@ -1,6 +1,6 @@
-<div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-  <mat-card class="distance16 mat-elevation-z8" fxFlex="40%">
+<div class="flex-container-column fill-container">
+  <div class="flex-container-row"  *ngIf="!fullscreen">
+  <mat-card class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
     <p>
       pdf.js ships with a JavaScript engine. There's little security risk because they're executing
       JavaScript in a sandbox. Even so, you can deactivate scripting altogether.
@@ -20,7 +20,7 @@
     <mat-checkbox class="margin" [(ngModel)]="enableScripting">enable JavaScript</mat-checkbox> (forces reload)
   </mat-card>
 
-  <mat-card class="distance16 mat-elevation-z8 use-available-height" fxFlex="58%">
+  <mat-card class="distance16 mat-elevation-z8 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
     <mat-tab-group>
       <mat-tab label="HTML template">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/html.md"> </app-ie11-markdown>

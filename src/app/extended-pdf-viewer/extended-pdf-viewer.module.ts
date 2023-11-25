@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PasswordsComponent } from './passwords/passwords.component';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SharedModule } from '../shared/shared.module';
 import { TouchEmulator } from '../touch-emulator';
@@ -77,7 +76,7 @@ import { SecurityComponent } from './security/security.component';
 new TouchEmulator();
 
 @NgModule({
-  imports: [ExtendedPdfViewerRoutingModule, SharedModule, NgxExtendedPdfViewerModule, FlexLayoutModule],
+  imports: [ExtendedPdfViewerRoutingModule, SharedModule, NgxExtendedPdfViewerModule],
   declarations: [
     AnnotationLayerComponent,
     AttributesComponent,

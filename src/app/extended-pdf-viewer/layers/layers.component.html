@@ -1,6 +1,6 @@
-<div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-    <mat-card class="distance16 mat-elevation-z8" fxFlex="52%">
+<div class="flex-container-column fill-container">
+  <div class="flex-container-row"  *ngIf="!fullscreen">
+    <mat-card class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:52%">
       <mat-tab-group>
         <mat-tab label="UI">
           <p>
@@ -33,7 +33,7 @@
         </mat-tab>
       </mat-tab-group>
     </mat-card>
-    <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="46%">
+    <mat-card class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:46%">
       <mat-tab-group>
         <mat-tab label="HTML template">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/layers/html.md"> </app-ie11-markdown>

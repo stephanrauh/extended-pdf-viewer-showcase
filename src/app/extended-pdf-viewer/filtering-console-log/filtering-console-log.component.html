@@ -1,6 +1,6 @@
-<div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-    <mat-card class="distance16 mat-elevation-z8" fxFlex="45%">
+<div class="flex-container-column fill-container">
+  <div class="flex-container-row"  *ngIf="!fullscreen">
+    <mat-card class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
       <p>You can override the default function <code>globalThis.ngxConsoleFilter(logLevel, message)</code> to filter the log messages.</p>
       <p>
         This live demo re-defines <code>ngxConsolefilter()</code> to grab the version number from the console messages and to store it in a variable so it can
@@ -18,7 +18,7 @@
       <p>The live demo shows that, too: when you open the console window, you'll see every message with the exception of the version info.</p>
       <p><b>Breaking change: </b>Before version 17, you have to register the filter function with the<code>Window</code> object instead of <code>globalThis</code>.</p>
     </mat-card>
-    <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="53%">
+    <mat-card class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
       <mat-tab-group>
         <mat-tab label="Typescript">
           <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/filtering-console-log/ts.md"> </app-ie11-markdown>

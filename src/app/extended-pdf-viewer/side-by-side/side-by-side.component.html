@@ -1,6 +1,6 @@
-<div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-    <mat-card class="distance16 mat-elevation-z8" fxFlex="45%">
+<div class="flex-container-column fill-container">
+  <div class="flex-container-row"  *ngIf="!fullscreen">
+    <mat-card class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
       <mat-tab-group>
         <mat-tab label="Displaying PDF files side-by-side">
           <p>To display multiple PDF files on the same page, you need to put them in an iFrame.
@@ -10,7 +10,7 @@
         </mat-tab>
       </mat-tab-group>
     </mat-card>
-    <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="53%">
+    <mat-card class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
       <mat-tab-group>
         <mat-tab label="HTML template 1">
           <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md"> </app-ie11-markdown>

@@ -1,6 +1,6 @@
-<div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-    <mat-card class="distance16 mat-elevation-z8 use-available-height" fxFlex="40%">
+<div class="flex-container-column fill-container">
+  <div class="flex-container-row"  *ngIf="!fullscreen">
+    <mat-card class="distance16 mat-elevation-z8 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
       <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab=$event">
         <mat-tab label="Default approach (slow)">
           <p>ngx-extended-pdf-viewer ships with translation for more than 100 languages and dialects. When you copy the
@@ -54,7 +54,7 @@
       </mat-tab-group>
     </mat-card>
 
-    <mat-card class="distance16 mat-elevation-z8" fxFlex="58%">
+    <mat-card class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
       <mat-tab-group>
         <mat-tab label="HTML template"  *ngIf="selectedTab === 0">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/i18n/html.md"> </app-ie11-markdown>

@@ -1,6 +1,6 @@
-<div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-    <mat-card class="distance16 mat-elevation-z8" fxFlex="60%">
+<div class="flex-container-column fill-container">
+  <div class="flex-container-row"  *ngIf="!fullscreen">
+    <mat-card class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
       <mat-tab-group [selectedIndex]="leftTab" (selectedTabChange)="onSelectTab($event)">
         <mat-tab label="Displaying Forms">
           <p>
@@ -73,10 +73,10 @@
           <mat-checkbox [checked]="cSharp" (change)="cSharp = $event.checked; this.updateFormData()" class="margin-right"> C# </mat-checkbox>
 
           <br />
-          <mat-radio-group (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" [fxLayoutGap]="'20px'">
-            <mat-radio-button value="highSchool">High School Diploma</mat-radio-button>
-            <mat-radio-button value="associateDegree">Associate's Degree</mat-radio-button>
-            <mat-radio-button value="bachelorDegree">Bachelor's Degree</mat-radio-button>
+          <mat-radio-group (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level">
+            <mat-radio-button value="highSchool" style="margin-right:20px">High School Diploma</mat-radio-button>
+            <mat-radio-button value="associateDegree" style="margin-right:20px">Associate's Degree</mat-radio-button>
+            <mat-radio-button value="bachelorDegree" style="margin-right:20px">Bachelor's Degree</mat-radio-button>
             <mat-radio-button value="masterDegree">Master's Degree</mat-radio-button>
           </mat-radio-group>
         </mat-tab>
@@ -178,15 +178,15 @@
           <mat-checkbox [checked]="canadaUS==='1'" (change)="this.setCanadaUs($event)" class="margin-right"> Is your telephone number a number in Canada or the USA? </mat-checkbox>
           <br />
           <span>Have you ever used a nickname? </span>
-          <mat-radio-group (change)="this.updateFormData()" [(ngModel)]="aliasNameIndicator" aria-label="Nickname" [fxLayoutGap]="'20px'">
-            <mat-radio-button value="Y">Yes</mat-radio-button>
+          <mat-radio-group (change)="this.updateFormData()" [(ngModel)]="aliasNameIndicator" aria-label="Nickname">
+            <mat-radio-button value="Y" style="margin-right:20px">Yes</mat-radio-button>
             <mat-radio-button value="N">No</mat-radio-button>
           </mat-radio-group>
           <span style="font-size:70%"> (this field is on page 2, near the bottom)</span>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
-    <mat-card class="distance16 mat-elevation-z8 progress" fxFlex="38%">
+    <mat-card class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
       <mat-tab-group [(selectedIndex)]="selectedTab">
         <mat-tab label="HTML template">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/forms/html.md"> </app-ie11-markdown>

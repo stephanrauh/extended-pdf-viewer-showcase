@@ -1,6 +1,6 @@
-<div fxLayout="column" fxFill>
-  <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-    <mat-card class="distance16 mat-elevation-z8" [fxFlex]="settingsWidth">
+<div class="flex-container-column fill-container">
+  <div class="flex-container-row"  *ngIf="!fullscreen">
+    <mat-card class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+settingsWidth">
       <mat-tab-group (selectedTabChange)="currentTab = $event.index">
         <mat-tab label="breakpoints">
           <p>
@@ -273,20 +273,20 @@
       </mat-tab-group>
     </mat-card>
 
-    <mat-card *ngIf="currentTab === 0" class="distance16 mat-elevation-z8" [fxFlex]="codeWidth">
+    <mat-card *ngIf="currentTab === 0" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
       <app-ie11-markdown src="/assets/extended-pdf-viewer/hiding-buttons/ts.md"> </app-ie11-markdown>
     </mat-card>
-    <mat-card *ngIf="currentTab === 1" class="distance16 mat-elevation-z8" [fxFlex]="codeWidth">
+    <mat-card *ngIf="currentTab === 1" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
       <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
     </mat-card>
-    <mat-card *ngIf="currentTab === 2" class="distance16 mat-elevation-z8" [fxFlex]="codeWidth">
-      <mat-tab-group  class="distance16 mat-elevation-z8" [fxFlex]="codeWidth">
+    <mat-card *ngIf="currentTab === 2" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
+      <mat-tab-group  class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
         <mat-tab label="Defining breakpoints">
-          <mat-card class="distance16 mat-elevation-z8" [fxFlex]="codeWidth">
+          <mat-card class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
             <app-ie11-markdown [data]="breakpoints | language : 'typescript'"> </app-ie11-markdown>
           </mat-card>
         </mat-tab>      <mat-tab label="Button visibility">
-        <mat-card class="distance16 mat-elevation-z8" [fxFlex]="codeWidth">
+        <mat-card class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
           <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
         </mat-card>
       </mat-tab>

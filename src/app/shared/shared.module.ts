@@ -1,5 +1,4 @@
 import { AlternativesComponent } from './alternatives/alternatives.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
