@@ -120,3 +120,12 @@ dd:after {
 .margin-right {
   margin-right: 10px;
 }
+
+html {
+  --mdc-checkbox-state-layer-size: 23px;
+}
+
+.mat-mdc-list-base {
+
+  --mdc-list-list-item-one-line-container-height: 32px;
+}
