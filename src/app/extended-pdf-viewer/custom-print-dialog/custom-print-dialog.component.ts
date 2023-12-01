@@ -33,7 +33,7 @@ export class CustomPrintDialogComponent {
 
   public onBeforePrint() {
     if (this.hideBuiltInProgress) {
-      const node = document.querySelector('.pdf-wrapper #printServiceDialog') as Element;
+      const node = document.querySelector('ngx-extended-pdf-viewer #printServiceDialog') as Element;
       node.setAttribute('style', 'display:none!important');
     }
     this.showCompleted = false;
@@ -41,7 +41,7 @@ export class CustomPrintDialogComponent {
   }
 
   public onAfterPrint() {
-    const node = document.querySelector('.pdf-wrapper #printServiceDialog') as Element;
+    const node = document.querySelector('ngx-extended-pdf-viewer #printServiceDialog') as Element;
     node.removeAttribute('style');
     this.showCompleted = true;
     this.showProgress = false;
