@@ -43,21 +43,10 @@
                 "output": "/assets/locale/"
               },
               {
-                "glob": "**/*",
-                "input": "node_modules/ngx-extended-pdf-viewer/bleeding-edge",
-                "output": "/bleeding-edge/"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets/i18n",
-                "output": "/bleeding-edge/locale/"
-              },
-              {
                 "glob": "**/*.md",
                 "input": "src/app/",
                 "output": "/assets"
               },
-
               {
                 "glob": "changelog.md",
                 "input": "node_modules/ngx-extended-pdf-viewer/",
