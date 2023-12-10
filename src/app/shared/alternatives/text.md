@@ -39,9 +39,11 @@ Did I say nobody's using iFrames in 2020? A developer nicknamed Code Hippie does
 
 The iFrame approach is simple and robust. If you're not happy with ngx-extended-pdf-viewer, go for the library of Codehippie. You'll lose some options - but most likely you don't need them anyways.
 
+As of December 2023, the library uses a rather old version of pdf.js (2.2), but that shouldn't be a problem in most applications.
+
 ## ng2-pdf-viewer: Displaying PDF files in a no-nonsense way
 
-This library is the way to go if you just want to render PDF files and nothing else. No toolbar, no thumbnails, just the plain PDF file. <a href="https://www.npmjs.com/package/ng2-pdf-viewer">ng2-pdf-viewer</a> gives you a decent API, is actively maintained, and is popular enough to feel trustworthy. At the time of writing, it saw more than 99.000 downloads a month. Without having used the library myself, I suppose Vadym Yatsyuk is doing a great job with his library.
+This library is the way to go if you just want to render PDF files and nothing else. No toolbar, no thumbnails, just the plain PDF file. <a href="https://www.npmjs.com/package/ng2-pdf-viewer">ng2-pdf-viewer</a> gives you a decent API and is popular enough to feel trustworthy. At the time of writing, it saw more than 150.000 downloads a month. Some time ago, I presented the library in this showcase, but I removed it again because of compatibility problem with current Angular versions. As of December 2023, the library uses a rather old version of pdf.js (2.6), but that shouldn't be a problem in most applications.
 
 ## ng2-image-viewer
 
