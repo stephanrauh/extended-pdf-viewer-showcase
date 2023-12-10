@@ -1,41 +1,18 @@
 <div fxLayout="row" fxLayoutAlign="space-between" *ngIf="!fullscreen">
-    <mat-card class="overflow-none distance16 mat-elevation-z8" fxFlex="50%">
+    <mat-card class="overflow-none distance16 mat-elevation-z8" fxFlex="100%">
       <div fxLayout="column" fxLayoutGap="10px">
-        ngx-extended-pdf-viewer ships with two versions of pdf.js:
+        Most versions of ngx-extended-pdf-viewer ship with two versions of pdf.js:
         <ul>
           <li>The <code>assets</code> folder contains the latest release of pdf.js.</li>
           <li>The <code>bleeding-edge</code> folder contains a developer build of pdf.js. That code is newer
           than the latest release, but it's not an officially supported version, so it's primarily there for testing purposes.
         </li>
         </ul>
-        You can switch to the newer either by modifying the <code>angular.json</code> or
-        by setting <code>pdfDefaultOptions.assetsFolder</code>.
+        However, version 18 only offers the stable branch 3.10 of my branch of pdf.js. I've removed the bleeding edge branch because I've already started publishing
+        preview versions of version 19, which features pdf.js 4.0.
       </div>
-      <div>This option also allows to use use a non-standard project directory layout.</div>
-      <div>Note that it's not possible to change the pdf.js engine at runtime. You need to set it
-        before <code>&lt;ngx-extended-pdf-viewer/&gt;</code> is loaded. This demo uses the
-        "bleeding edge" version of pdf.js after a full-page reload (i.e. after hitting the F5 key).
-      </div>
+
     </mat-card>
 
-    <mat-card class="overflow-y-scroll distance16 mat-elevation-z8 progress" fxFlex="49%">
-      <mat-tab-group>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/pdfjs-versions/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/pdfjs-versions/html.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
-
-  <mat-card class="pdf-card distance16 mat-elevation-z8">
-    <ngx-extended-pdf-viewer
-      [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
-      height="calc(100vh - 435px)"
-      zoom="50%"
-      [minifiedJSLibraries]="!isLocalhost">
-    </ngx-extended-pdf-viewer>
-  </mat-card>
+   </div>
 

@@ -62,23 +62,7 @@ export class NavComponent {
     }
   }
   public activateViewer(): void {
-    try {
-      if (localStorage) {
-        this._viewer = localStorage.getItem('showcase.viewer');
-      }
-    } catch (safariSecurityException) {
-      // localStorage is not available on Safari
-    }
-    if (!this._viewer) {
-      this._viewer = 'ngx-extended-pdf-viewer';
-    }
-    if (this._viewer === 'ngx-extended-pdf-viewer') {
-      pdfDefaultOptions.assetsFolder = 'assets';
-      this.determinePdfJsVersion();
-    } else if (this._viewer === 'bleeding-edge') {
-      pdfDefaultOptions.assetsFolder = 'bleeding-edge';
-      this.determinePdfJsVersion();
-    }
+     this.determinePdfJsVersion();
   }
 
   private determinePdfJsVersion(): void {

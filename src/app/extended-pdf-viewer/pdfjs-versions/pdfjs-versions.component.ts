@@ -24,6 +24,6 @@ export class PdfjsVersionsComponent {
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {
-    pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+    // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 }
