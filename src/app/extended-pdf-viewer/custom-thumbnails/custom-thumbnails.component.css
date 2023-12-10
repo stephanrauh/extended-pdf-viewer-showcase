@@ -11,8 +11,8 @@
 
 .thumbnail-text {
   position: relative;
-  top: 25px;
-  left: 50px;
+  top: 50%;
+  left: 14%;
   transform: rotate(-45deg);
   z-index: 1;
   color: black;

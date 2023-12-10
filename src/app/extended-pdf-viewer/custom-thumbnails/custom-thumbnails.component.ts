@@ -54,7 +54,7 @@ export class CustomThumbnailsComponent {
   }
 
   public onThumbnailDrawn(thumbnailEvent: PdfThumbnailDrawnEvent): void {
-    console.log('Thumnail drawn ' + thumbnailEvent);
+    console.log('Thumbnail drawn ' + thumbnailEvent);
     const thumbnail = thumbnailEvent.thumbnail;
     const page = thumbnailEvent.pageId;
 
