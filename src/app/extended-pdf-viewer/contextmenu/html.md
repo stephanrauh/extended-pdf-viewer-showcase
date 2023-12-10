@@ -3,7 +3,6 @@
   [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'"
   [contextMenuAllowed]="allowContextMenu"
   [height]="'auto'"
-  [useBrowserLocale]="true"
 >
 </ngx-extended-pdf-viewer>
 ```

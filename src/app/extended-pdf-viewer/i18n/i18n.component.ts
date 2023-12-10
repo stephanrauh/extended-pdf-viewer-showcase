@@ -10,7 +10,7 @@ import { isLocalhost } from '../common/utilities';
 export class I18nComponent {
   public hidePdfViewer = false;
 
-  public _selectedTab: number = 1;
+  public _selectedTab = 0;
 
   private _language: string | undefined = 'nl-BE';
 

@@ -16,6 +16,6 @@
   [showScrollingButton]="showScrollingButton"
   [showSpreadButton]="showSpreadButton"
   [showPropertiesButton]="showPropertiesButton"
-  [useBrowserLocale]="true" height="250px" zoom="25%">
+  height="250px" zoom="25%">
 </ngx-extended-pdf-viewer>
 ```

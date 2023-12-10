@@ -4,6 +4,5 @@
     (updateFindMatchesCount)="updateFindMatchesCount($event)"
     (updateFindState)="updateFindState($event)"
     backgroundColor="#ffffff"
-    [useBrowserLocale]="true"
     page="9">
 ```

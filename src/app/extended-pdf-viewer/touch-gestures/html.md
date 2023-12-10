@@ -1,7 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
   [src]="'/assets/pdfs/demo.pdf'"
-  [useBrowserLocale]="true"
   [minZoom]="0.5"
   [maxZoom]="1.5"
 >

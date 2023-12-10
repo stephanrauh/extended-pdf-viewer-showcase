@@ -1,7 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
   [src]="'/assets/pdfs/OoPdfFormExample.pdf'"
-  [useBrowserLocale]="true"
   [formData]="formData"
   (formDataChange)="setFormData($event)"
   (pageRendered)="delayedUpdateFormData()"

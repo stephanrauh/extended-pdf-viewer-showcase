@@ -3,7 +3,6 @@
   [base64Src]="base64"
   backgroundColor="#ffffff"
   [height]="'90vh'"
-  [useBrowserLocale]="true"
   [handTool]="false"
   [showHandToolButton]="true"
 >

@@ -2,7 +2,6 @@
 <ngx-extended-pdf-viewer
     [src]="'/assets/pdfs/GraalVM.pdf'"
     [zoom]="'auto'"
-    [useBrowserLocale]="true"
     [showPresentationModeButton]="true"
     [showRotateButton]="false"
     [showHandToolButton]="false"

@@ -19,7 +19,7 @@ Next, open the file `angular.json` (or `.angular-cli.json` if you're using an ol
   "scripts": []
 ```
 
-This simply copies the entire assets folder. If you're concerned about disk memory, you can omit the subfolders `inline-locale-files` and `additional-locale`. If you need only one language, you can reduce the list to `locale.properties` and your language folder.
+This simply copies the entire assets folder. If you're concerned about disk memory, you can omit the subfolder `additional-locale`. If you need only one language, you can reduce the list to `locale.json` and your language folder.
 
 _Hint:_ There are two ways to define the language files needed for the labels of the buttons and screen elements of the PDF viewer. The second method is described below in the "internationalization" section.
 
@@ -63,5 +63,5 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 Now you can display the PDF file like so:
 
 ```html
-<ngx-extended-pdf-viewer [src]="'assets/example.pdf'" [useBrowserLocale]="true"></ngx-extended-pdf-viewer>
+"tr<ngx-extended-pdf-viewer [src]="'assets/example.pdf'"></ngx-extended-pdf-viewer>
 ```

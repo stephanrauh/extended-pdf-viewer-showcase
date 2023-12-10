@@ -7,7 +7,6 @@ To display the PDF file, you have to pass the attribute `authorization` like so:
 ```html
 <ngx-extended-pdf-viewer
         [src]="'http://localhost:8080/api/documents/testpdf'"
-        height="80vh" [useBrowserLocale]="true"
         [authorization]="bearerToken"
 >
 </ngx-extended-pdf-viewer>

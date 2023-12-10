@@ -3,7 +3,6 @@
     [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
     [height]="'90vh'"
     [showBorders]="showBorders"
-    [useBrowserLocale]="true"
     [(scrollMode)]="scrollMode"
     zoom="30%"
 >

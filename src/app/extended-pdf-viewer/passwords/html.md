@@ -1,7 +1,6 @@
 ```html
   <ngx-extended-pdf-viewer
     [src]="src"
-    [useBrowserLocale]="true"
     [password]="password"
     [minifiedJSLibraries]="false"
     [height]="'auto'"

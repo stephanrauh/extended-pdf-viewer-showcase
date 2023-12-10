@@ -3,7 +3,6 @@
     [src]="'/assets/pdfs/stluciadance.com.pdf'"
     [customThumbnail]="radiobuttonThumbnail"
     [height]="'90vh'"
-    [useBrowserLocale]="true"
     (pageChange)="onPageChange($event)"
     (thumbnailDrawn)="onThumbnailDrawn($event)">
 </ngx-extended-pdf-viewer>

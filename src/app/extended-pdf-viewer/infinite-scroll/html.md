@@ -3,7 +3,6 @@
     *ngIf="showPdfViewer"
     [src]="'...'"
     [pageViewMode]="'infinite-scroll'"
-    [useBrowserLocale]="true"
     [textLayer]="showWidgets"
     (pagesLoaded)="onPagesLoaded($event)"
     [showHandToolButton]="showWidgets"

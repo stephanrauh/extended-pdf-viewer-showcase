@@ -2,7 +2,6 @@
 <ngx-extended-pdf-viewer
   [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
   [height]="'90vh'"
-  [useBrowserLocale]="true"
   (pageChange)="onEvent('pageChange', $event)"
   (afterPrint)="onEvent('afterPrint', $event)"
   (beforePrint)="onEvent('beforePrint', $event)"

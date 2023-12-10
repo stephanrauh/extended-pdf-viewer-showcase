@@ -1,7 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
   [src]="url"
-  [zoom]="'auto'"
-  [useBrowserLocale]="true">
+  [zoom]="'auto'">
 </ngx-extended-pdf-viewer>
 ```
