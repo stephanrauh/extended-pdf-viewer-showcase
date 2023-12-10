@@ -59,3 +59,4 @@ Thumbs.db
 *.docx
 /ftp.sh
 .env
+/ftp/.env
