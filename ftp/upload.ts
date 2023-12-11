@@ -5,7 +5,7 @@ require('dotenv').config();
 
 console.log(process.env.ftphost);
 
-const remoteRootFolder = '/test2';
+const remoteRootFolder = '/pdfviewer.net';
 
 synchronizeDistFolderWithFtpFolder();
 
@@ -59,6 +59,7 @@ async function synchronizeDistFolderWithFtpFolder() {
 
     const allRemoteFiles = {};
     const allRemoteFolders = {};
+    console.log("Collecting the remote files (this takes 1-2 minutes)");
     await collectRemoteFiles(client, remoteRootFolder, allRemoteFiles, allRemoteFolders);
     console.log('--------');
     console.log(Object.keys(allRemoteFolders).length + ' remote folders');
@@ -87,7 +88,7 @@ async function synchronizeDistFolderWithFtpFolder() {
         if (allRemoteFiles[remoteFile]) {
           const info = fs.statSync(file);
           const remoteInfo = allRemoteFiles[remoteFile] as ftp.FileInfo;
-          if (info.size === remoteInfo.size) {
+          if (info.size === remoteInfo.size && !file.includes("index.html")) {
             // console.log("Skipping " + remoteFile);
           } else {
             // console.log("Different size");
@@ -106,9 +107,12 @@ async function synchronizeDistFolderWithFtpFolder() {
 
     for (let remoteFile of Object.keys(allRemoteFiles)) {
       if (remoteFile) {
-        const localFile = remoteFile.replace(remoteRootFolder, '../dist/pdf-showcase/browser');
-        if (!allFiles.includes(localFile)) {
-          console.log("delete " + remoteFile);
+        if (!remoteFile.includes(".htaccess")) {
+          const localFile = remoteFile.replace(remoteRootFolder, '../dist/pdf-showcase/browser');
+          if (!allFiles.includes(localFile)) {
+            console.log("delete " + remoteFile);
+            await client.remove(remoteFile);
+          }
         }
       }
     }
@@ -117,6 +121,7 @@ async function synchronizeDistFolderWithFtpFolder() {
         const localFolder = remoteFolder.replace(remoteRootFolder, '../dist/pdf-showcase/browser');
         if (!allFolders.includes(localFolder)) {
           console.log("delete " + remoteFolder);
+          await client.removeDir(remoteFolder);
         }
       }
     }
