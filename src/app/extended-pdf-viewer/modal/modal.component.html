@@ -1,6 +1,6 @@
 <div class="flex-container-column fill-container">
   <div class="flex-container-row" >
-    <mat-card class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
       <p>
         Modal dialogs often remove the HTML code from the DOM before calling <code>ngOnDestroy()</code> of the <code>NgxExtendedPdfViewerComponent</code>,
         resulting in a couple of error messages on the console. To avoid this, call <code>ngOnDestroy()</code>
@@ -14,7 +14,7 @@
       </p>
       <button mat-button mat-raised-button color="primary" (click)="openDialog()">open modal</button>
     </mat-card>
-    <mat-card class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
       <mat-tab-group>
         <mat-tab label="Typescript">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/modal/ts.md"> </app-ie11-markdown>

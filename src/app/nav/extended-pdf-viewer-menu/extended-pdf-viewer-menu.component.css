@@ -1,3 +1,7 @@
-::ng-deep .mat-list-base .mat-list-item.active {
+::ng-deep .mat-mdc-list-base .mat-mdc-list-item.active {
   color: blue;
+}
+
+.mat-mdc-list-base a.mat-mdc-list-item {
+  height: 30px;
 }

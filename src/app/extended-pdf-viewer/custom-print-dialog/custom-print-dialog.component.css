@@ -28,6 +28,7 @@
 
 /* Remove animation from progres bar  */
 /* MutationObserver events are faster than animation causing a choppy animation */
-.pdf-wrapper .mat-progress-bar .mat-progress-bar-fill {
+/* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version.  */
+.pdf-wrapper .mat-mdc-progress-bar .mat-progress-bar-fill {
     transition: none;
   }

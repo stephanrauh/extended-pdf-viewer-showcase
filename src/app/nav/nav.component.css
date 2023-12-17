@@ -27,12 +27,12 @@
   z-index: 11;
 }
 
-.mat-list-base .mat-list-item {
+.mat-mdc-list-base .mat-mdc-list-item {
   height: 32px;
   font-size: 14px;
 }
 
-.mat-list-base .mat-list-item:hover {
+.mat-mdc-list-base .mat-mdc-list-item:hover {
   color: blue;
 }
 
@@ -41,7 +41,7 @@
   padding-top: 24px;
 }
 
-.mat-nav-list a.mat-list-item.long-text {
+.mat-nav-list a.mat-mdc-list-item.long-text {
   padding-top: 5px;
   padding-bottom: 5px;
 }
@@ -61,4 +61,8 @@
 .second-row {
   margin-top: -16px;
   padding-bottom: 8px;
+}
+
+::ng-deep .second-row .mat-mdc-radio-button .mdc-form-field {
+  color: white;
 }

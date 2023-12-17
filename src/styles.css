@@ -4,6 +4,34 @@
 @import "~@fontsource/roboto/500.css";
 @import "~@fontsource/material-icons/index.css";
 
+.mat-mdc-radio-button .mdc-radio  {
+  --mdc-radio-state-layer-size: 30px !important;
+}
+
+.mat-mdc-radio-touch-target {
+  height: 32px !important;
+}
+
+.mat-mdc-card {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.mat-mdc-tab-header {
+  --mat-tab-header-label-text-tracking: 0;
+}
+
+.mat-mdc-list-base {
+    --mdc-list-list-item-label-text-tracking: 0;
+    --mdc-list-list-item-trailing-supporting-text-tracking: 0;
+}
+
+.mat-mdc-radio-button .mdc-form-field,
+.mat-mdc-checkbox .mdc-form-field {
+  color: #000000f8;
+  font-size: 16px;
+}
+
 html {
   height: 100%;
 }
@@ -62,11 +90,12 @@ body > app-root > app-nav > .mat-toolbar-single-row {
   margin-bottom: 0;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
 mat-tab-group, .mat-tab-body-wrapper {
   height: 100%;
 }
 
-.mat-list-base a.mat-list-item {
+.mat-mdc-list-base a.mat-mdc-list-item {
   font-size: 15px;
   height: 36px;
 }

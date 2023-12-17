@@ -9,7 +9,7 @@
   list-style-type: none;
 }
 
-.mat-tree-node .mat-icon-button {
+.mat-tree-node .mat-mdc-icon-button {
   height: 24px;
   line-height: 24px;
 }

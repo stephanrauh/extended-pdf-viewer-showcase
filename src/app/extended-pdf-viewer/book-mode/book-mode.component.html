@@ -1,6 +1,6 @@
 <div class="flex-container-column fill-container">
   <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
     <p>The book mode displays the PDF file like a book and renders a
       nice page-turn effect.
     </p>
@@ -11,7 +11,7 @@
       <li>If the available space of the viewer isn't wide enough, weird effects happen.</li>
     </ul>
   </mat-card>
-  <mat-card class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
     <mat-tab-group>
       <mat-tab label="HTML template">
        <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/book-mode/html.md"> </app-ie11-markdown>
@@ -23,8 +23,8 @@
   </mat-card>
 </div>
 
-<mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
     <svg style="width:24px;height:24px" viewBox="0 0 24 24">
       <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
     </svg>

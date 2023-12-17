@@ -1,6 +1,6 @@
 <div class="flex-container-column fill-container">
   <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+settingsWidth">
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+settingsWidth">
       <mat-tab-group (selectedTabChange)="currentTab = $event.index">
         <mat-tab label="breakpoints">
           <p>
@@ -273,20 +273,20 @@
       </mat-tab-group>
     </mat-card>
 
-    <mat-card *ngIf="currentTab === 0" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
+    <mat-card appearance="outlined" *ngIf="currentTab === 0" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
       <app-ie11-markdown src="/assets/extended-pdf-viewer/hiding-buttons/ts.md"> </app-ie11-markdown>
     </mat-card>
-    <mat-card *ngIf="currentTab === 1" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
+    <mat-card appearance="outlined" *ngIf="currentTab === 1" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
       <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
     </mat-card>
-    <mat-card *ngIf="currentTab === 2" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
+    <mat-card appearance="outlined" *ngIf="currentTab === 2" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
       <mat-tab-group  class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
         <mat-tab label="Defining breakpoints">
-          <mat-card class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
+          <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
             <app-ie11-markdown [data]="breakpoints | language : 'typescript'"> </app-ie11-markdown>
           </mat-card>
         </mat-tab>      <mat-tab label="Button visibility">
-        <mat-card class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
+        <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
           <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
         </mat-card>
       </mat-tab>
@@ -294,8 +294,8 @@
     </mat-card>
   </div>
 
-  <mat-card class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-    <button mat-button (click)="fullscreen = !fullscreen" style="float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
       <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
         <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
       </svg>
