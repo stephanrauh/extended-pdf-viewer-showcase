@@ -1,3 +1,3 @@
 export function isLocalhost(): boolean {
-  return true || location.hostname === 'localhost';
+  return location.hostname === 'localhost';
 }
