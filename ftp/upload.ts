@@ -88,7 +88,7 @@ async function synchronizeDistFolderWithFtpFolder() {
         if (allRemoteFiles[remoteFile]) {
           const info = fs.statSync(file);
           const remoteInfo = allRemoteFiles[remoteFile] as ftp.FileInfo;
-          if (info.size === remoteInfo.size && !file.includes("index.html")) {
+          if (info.size === remoteInfo.size && !file.includes("index.html") && !file.includes(".mjs")) {
             // console.log("Skipping " + remoteFile);
           } else {
             // console.log("Different size");

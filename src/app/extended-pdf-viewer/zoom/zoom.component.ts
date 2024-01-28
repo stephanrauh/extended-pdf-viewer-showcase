@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions, PageRenderEvent } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AnnotationLayerRenderedEvent, PageRenderedEvent } from 'ngx-extended-pdf-viewer';
-import { PageRenderEvent } from 'ngx-extended-pdf-viewer/lib/events/page-render-event';
+import { PageRenderedEvent, PageRenderEvent } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
