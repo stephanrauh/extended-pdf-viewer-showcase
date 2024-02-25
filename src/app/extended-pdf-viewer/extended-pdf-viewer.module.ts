@@ -71,6 +71,7 @@ import { ModalComponent } from './modal/modal.component';
 import { CSSComponent } from './css/css.component';
 import { AnnotationLayerComponent } from './annotation-layer/annotation-layer.component';
 import { SecurityComponent } from './security/security.component';
+import { AnnotationLayerApiComponent } from './annotation-layer-api/annotation-layer-api.component';
 
 
 new TouchEmulator();
@@ -79,6 +80,7 @@ new TouchEmulator();
   imports: [ExtendedPdfViewerRoutingModule, SharedModule, NgxExtendedPdfViewerModule],
   declarations: [
     AnnotationLayerComponent,
+    AnnotationLayerApiComponent,
     AttributesComponent,
     Base64Component,
     BlobComponent,
