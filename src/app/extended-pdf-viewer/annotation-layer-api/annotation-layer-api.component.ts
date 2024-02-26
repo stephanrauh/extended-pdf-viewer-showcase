@@ -25,6 +25,14 @@ export class AnnotationLayerApiComponent {
 
   public async addImage(parameters: any): Promise<void> {
     const { left, bottom, right, top, rotation } = parameters;
-    await this.pdfService.addImageToAnnotationLayer('assets/images/ChatGPT-PDF-Viewer-Logo.jpg', 11, left, bottom, right, top, rotation);
+    await this.pdfService.addImageToAnnotationLayer({
+      urlOrDataUrl: 'assets/images/ChatGPT-PDF-Viewer-Logo.jpg',
+      page: 11,
+      left,
+      bottom,
+      right,
+      top,
+      rotation
+    });
   }
 }

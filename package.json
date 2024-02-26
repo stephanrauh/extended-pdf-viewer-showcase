@@ -41,7 +41,7 @@
     "angular2-smart-table": "^3.2.0",
     "basic-ftp": "^5.0.4",
     "dotenv": "^16.4.5",
-    "ngx-extended-pdf-viewer": "^19.4.0-alpha.0",
+    "ngx-extended-pdf-viewer": "^19.4.0-alpha.2",
     "ngx-markdown": "^17.1.1",
     "ngx-perfect-scrollbar": "^10.1.1",
     "perfect-scrollbar": "^1.5.5",
