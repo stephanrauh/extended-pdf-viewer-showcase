@@ -2,9 +2,7 @@
   <div class="flex-container-row"  *ngIf="!fullscreen">
     <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
       <p>
-        You can export the PDF as a Blob. If the user has filled the fields of a form of the PDF,
-        they're part of the Blob. However, text and pencil drawings (i.e. the editor additions)
-        aren't added to the BLOB yet (see issues 1772 and 1679).
+        You can export the PDF as a Blob, including filled fields and drawings, texts, images, and highlights added by the user.
       </p>
        <button mat-raised-button color="primary" (click)="getCurrentDocumentAsBlob()" style="margin-left: 16px">Export the PDF file</button>
     </mat-card>
