@@ -37,6 +37,10 @@
           <br />
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
           <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateCwButton">showRotateCwButton</mat-checkbox>
+          <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateCcwButton">showRotateCcwButton</mat-checkbox>
+          <br />
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
           <br />
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
@@ -94,7 +98,8 @@
       [showDownloadButton]="showDownloadButton"
       [filenameForDownload]="downloadFileName"
       [showSecondaryToolbarButton]="showSecondaryToolbarButton"
-      [showRotateButton]="showRotateButton"
+      [showRotateCwButton]="showRotateCwButton"
+      [showRotateCcwButton]="showRotateCcwButton"
       [showHandToolButton]="showHandToolButton"
       [showScrollingButton]="showScrollingButton"
       [showSpreadButton]="showSpreadButton"

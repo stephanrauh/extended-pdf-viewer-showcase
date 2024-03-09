@@ -22,7 +22,8 @@ export class HidingButtonsComponent {
   public showPrintButton = false;
   public showDownloadButton = true;
   public showSecondaryToolbarButton = true;
-  public showRotateButton = false;
+  public showRotateCwButton = false;
+  public showRotateCcwButton = false;
   public showHandToolButton = false;
   public showScrollingButton = false;
   public showSpreadButton = false;
@@ -30,6 +31,10 @@ export class HidingButtonsComponent {
   public propertiesDialogVisible = false;
   public downloadFileName = 'user-defined-name.pdf';
 
+  public set showRotateButton(rotate: boolean) {
+    this.showRotateCwButton = rotate;
+    this.showRotateCcwButton = rotate;
+  }
 
   public isLocalhost = isLocalhost();
 
@@ -81,6 +86,8 @@ export class HidingButtonsComponent {
   [showDownloadButton]="${this.showDownloadButton}"
   [showSecondaryToolbarButton]="${this.showSecondaryToolbarButton}"
   [showRotateButton]="${this.showRotateButton}"
+  [showRotateCwButton]="${this.showRotateCwButton}"
+  [showRotateCcwButton]="${this.showRotateCcwButton}"
   [showHandToolButton]="${this.showHandToolButton}"
   [showScrollingButton]="${this.showScrollingButton}"
   [showSpreadButton]="${this.showSpreadButton}"

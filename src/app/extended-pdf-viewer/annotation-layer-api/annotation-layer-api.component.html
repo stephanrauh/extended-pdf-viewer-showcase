@@ -11,7 +11,6 @@
             Adding images to a PDF file is a popular feature. While this is not possible with this library - it is a viewer, not an editor - you can do
             something similar. You add an an image to the annotation layer. In most cases, you won't see the difference.
           </p>
-          <p><b>This API is subject to change. I'm still developing it.</b></p>
           <table style="background-color: transparent">
             <tr>
               <td>
@@ -37,8 +36,25 @@
                 </button>
               </td>
               <td>
-                <button mat-raised-button color="primary" style="height: 4em" (click)="addImage({ left: '50%', top: '50%', rotation: 270 })">
-                  addImage({{ 'left: 50%, top: 50%; rotation: 270' }})
+                <button mat-raised-button color="primary" style="height: 4em" (click)="addImage({ left: '50%', top: '50%', rotation: 0 })">
+                  addImage({{ 'left: 50%, top: 50%; rotation: 0' }})
+                </button>
+              </td>
+            </tr>
+            <tr>
+            <td>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  style="margin-right: 10px; height: 4em"
+                  (click)="addImage({ right: '50px', top: '100px'})"
+                >
+                addImage({{ 'right: 50px, top: 100px }})
+                </button>
+              </td>
+              <td>
+                <button mat-raised-button color="primary" style="height: 4em" (click)="addImage({ left: '250px', bottom: '350px' })">
+                  addImage({{ 'left: 250px, bottom: 350px'}})
                 </button>
               </td>
             </tr>
@@ -48,7 +64,7 @@
           <p>The parameters <code>left</code>, <code>bottom</code>, <code>right</code>, and <code>top</code> can be:</p>
           <ul>
             <li>percentages (e.g. <code>left: '50%'</code>)</li>
-            <li>pixels (e.g. <code>left: '100px'</code>) (not implemented yet!)</li>
+            <li>pixels (e.g. <code>left: '100px'</code>)</li>
             <li>PDF coordinates (e.g. <code>left: 100</code>)</li>
           </ul>
           <p>If you omit a coordinate, it's put at the logical origin:</p>
@@ -58,6 +74,9 @@
             <li>omitting right amounts to <code>right: "100%"</code></li>
             <li>omitting top amounts to <code>top: "100%"</code></li>
             </ul>
+            <p>Caveat: In Chrome, the calculation of the <code>bottom</code> coordinate appears to be off by a few pixels.
+              This discrepancy seems to stem from a bug in the PDF rendering engine, resulting in a canvas that is larger than
+              expected (at least in my demo documents). The bug also shows in the title page. This issue does not occur in Firefox.</p>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
