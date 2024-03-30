@@ -13,6 +13,9 @@
            style="width: var(--thumbnail-width); height: var(--thumbnail-height);">
         <img class="thumbnailImage" />
       </div>
+      <div style="margin-top: -20px; text-align: center; width: 20px;height: 20px; border-radius: 50%; background-color: blue; color: white; line-height: 20px">
+        #PAGE_NUMBER
+      </div>
     </div>
   </a>
 </ng-template>

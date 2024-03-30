@@ -55,4 +55,8 @@ export class Base64Component {
     }
     this.firstPdf = !this.firstPdf;
   }
+
+  public onPdfLoaded(event: any): void {
+    console.log('onPdfLoaded', event);
+  }
 }

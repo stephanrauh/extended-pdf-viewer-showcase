@@ -35,6 +35,7 @@
       [showHandToolButton]="true"
       [sidebarVisible]="true"
       [minifiedJSLibraries]="!isLocalhost"
+      (pdfLoaded)="onPdfLoaded($event)"
     >
     </ngx-extended-pdf-viewer>
   </mat-card>

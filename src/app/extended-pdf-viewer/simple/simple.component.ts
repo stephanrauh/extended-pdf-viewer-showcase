@@ -135,8 +135,16 @@ export class SimpleComponent {
     }
   }
 
-  public onPageRender(): void {
+  public onPageRender(event: any): void {
     this.currentStartTime = new Date().getTime();
+  }
+
+  public onPageLoaded(event: any): void {
+    console.log("Page Load", event);
+  }
+
+  public onPdfLoaded(event: any): void {
+    console.log("Loaded", event);
   }
 
   public onPageRendered(event: PageRenderEvent): void {
@@ -145,6 +153,7 @@ export class SimpleComponent {
       this.time = endTime - this.startTime;
     }
     this.currentTime = endTime - this.currentStartTime;
+    console.log("Rendered", event);
   }
 
 

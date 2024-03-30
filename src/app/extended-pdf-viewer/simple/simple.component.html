@@ -137,9 +137,9 @@
             (updateFindMatchesCount)="onUpdateFindResult($event)"
             [minifiedJSLibraries]="false"
             (pageRendered)="onPageRendered($event)"
-            (pageRender)="onPageRender()"
             [minifiedJSLibraries]="!isLocalhost"
             [handTool]="true"
+            (pageLoaded)="onPageLoaded($event)"
           >
           </ngx-extended-pdf-viewer>
         </mat-tab>

@@ -10,12 +10,8 @@
         </p>
         <p>If you want to use CSS classes, set `encapsulation: ViewEncapsulation.None`. </p>
 
-        <p>In the HTML definition, you can use these variables:</p>
-        <ul>
-          <li><code>PAGE_NUMBER</code></li>
-          <li><code>WIDTH_OF_RING</code> width of the ring around the thumbnail. This ring is used to highlight the selected page.</li>
-          <li><code>HEIGHT_OF_RING</code> height of the ring around the thumbnail.</li>
-        </ul>
+        <p>In the HTML definition, you can use these variable <code>PAGE_NUMBER</code>.</p>
+
       </mat-tab>
       <mat-tab label="Call JavaScript code">
         <p>You can call JavaScript code from the HTML template. Just register a method in the global `window` namespace
@@ -24,6 +20,8 @@
         <p><b>Caveat:</b> the function is not automatically removed from the global name space when the Angular
         component is destroyed. This might cause memory leaks.</p>
         <p>This demo also shows that you sometimes need to wrap your code in a `setTimeout()`.</p>
+        <p><b>Breaking change with version 19.6</b> Until recently, my demo used array indices to detect the active radio button, but the indices have shifted.
+           It's better to use the `data-page-number` attribute.</p>
       </mat-tab>
       <mat-tab label="Call Angular code">
         <p>The second approach allows you to call Angular code. You need to register a custom event. The demo
@@ -32,6 +30,8 @@
         all the methods and attributes of the Angular component.</p>
         <p><b>Caveat:</b> There's only one Angular component rendering all the thumbnails. You can think of it
         as a service. So the event has to send the reference to the thumbnail or the page number.</p>
+        <p><b>Breaking change with version 19.6</b> Until recently, my demo used array indices to detect the active radio button, but the indices have shifted.
+          It's better to use the `data-page-number` attribute.</p>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
@@ -40,10 +40,7 @@
       <mat-tab label="HTML template (1/2)">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/html.md"></app-ie11-markdown>
       </mat-tab>
-      <mat-tab label="HTML template (2/2)" *ngIf="pdfjsVersion<'3.7'">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/template.md"></app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="HTML template (2/2)" *ngIf="pdfjsVersion>'3.7'">
+      <mat-tab label="HTML template (2/2)">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/template37.md"></app-ie11-markdown>
       </mat-tab>
       <mat-tab label="Call JavaScript code">
@@ -68,7 +65,9 @@
       [height]="'90vh'"
       (pageChange)="onPageChange($event)"
       (thumbnailDrawn)="onThumbnailDrawn($event)"
-      [minifiedJSLibraries]="!isLocalhost">
+      [minifiedJSLibraries]="!isLocalhost"
+      [sidebarVisible]="true"
+      [activeSidebarView]="1">
   </ngx-extended-pdf-viewer>
 </mat-card>
 </div>
@@ -80,11 +79,15 @@
         class="thumbnail-radiobutton"
         type="radio"
         style="top: 100px;right: 25px;position: relative;transform:scale(1.5)"
-        onClick="window.updateThumbnailSelection(PAGE_NUMBER)">
+        onClick="window.updateThumbnailSelection(PAGE_NUMBER)"
+        data-page-number="PAGE_NUMBER">
       <div class="thumbnail-text">
       </div>
       <div class="image-container" style="width: var(--thumbnail-width); height: var(--thumbnail-height);">
         <img class="thumbnailImage" />
+      </div>
+      <div style="margin-top: -30px; margin-left: auto; margin-right: auto; text-align: center; width: 25px; height: 25px; border-radius: 50%; background-color: blue; color: white; line-height: 25px">
+        #PAGE_NUMBER
       </div>
     </div>
   </a>

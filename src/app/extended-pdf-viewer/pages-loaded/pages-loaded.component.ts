@@ -33,7 +33,7 @@ export class PagesLoadedComponent {
         event.source = undefined;
       }
       try {
-        e = 'Event type: ' + event.constructor.name + ' Event: ' + JSON.stringify(event);
+        e = 'Event type: ' + event.constructor.name + ' Event: ' + JSON.stringify(event).substring(0, 60);
       } catch (exception) {
         e = 'Event type: ' + event.constructor.name + ' Event: ' + event;
       }

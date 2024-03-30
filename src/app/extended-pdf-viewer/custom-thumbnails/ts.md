@@ -6,7 +6,7 @@
     if (radiobuttons) {
       for (let i = 1; i <= radiobuttons.length; i++) {
         const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
-        cbx.checked = i === page + 1;
+        cbx.checked = cbx.getAttribute("data-page-number") === String(page);
       }
     }
   });
@@ -24,7 +24,7 @@ export class CustomThumbnailsComponent {
     if (radiobuttons) {
       for (let i = 1; i <= radiobuttons.length; i++) {
         const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
-        cbx.checked = i === page + 1;
+        cbx.checked = cbx.getAttribute("data-page-number") === String(page);
       }
     }
   }

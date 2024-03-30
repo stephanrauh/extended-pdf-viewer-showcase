@@ -13,7 +13,9 @@
 
   <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
     <mat-card-header>
-      <b>Messages sent by the PDF ngx-extended-pdf-viewer</b>
+      <b>Messages sent by the PDF</b>
+      <button mat-icon-button (click)="messages = []" style="margin-top:-13px"><mat-icon>delete_forever</mat-icon></button>
+
     </mat-card-header>
     <mat-card-content>
       <div class="messages distance16">
@@ -56,6 +58,7 @@ under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-
     (progress)="onEvent('progress', $event)"
     (annotationLayerRendered)="onEvent('annotationLayerRendered', $event)"
     (annotationEditorLayerRendered)="onEvent('annotationEditorLayerRendered', $event)"
+    (annotationEditorEvent)="onEvent('annotationEditorEvent', $event)"
     (xfaLayerRendered)="onEvent('xfaLayerRendered', $event)"
     (outlineLoaded)="onEvent('outlineLoaded', $event)"
     (attachmentsloaded)="onEvent('attachmentsloaded', $event)"
