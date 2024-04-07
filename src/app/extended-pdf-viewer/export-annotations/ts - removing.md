@@ -4,7 +4,9 @@ public removeEditors(): void {
 }
 
 public removeTextEditors(): void {
-  const filter = (serial: any) => serial.annotationType === 3;
+  const filter = (serial: any) => 
+    serial?.annotationType === 3 && 
+    serial?.pageIndex === 0;
   this.pdfViewerService.removeEditorAnnotations(filter);
 }
 

@@ -72,6 +72,7 @@ import { CSSComponent } from './css/css.component';
 import { AnnotationLayerComponent } from './annotation-layer/annotation-layer.component';
 import { SecurityComponent } from './security/security.component';
 import { AnnotationLayerApiComponent } from './annotation-layer-api/annotation-layer-api.component';
+import { EditorSettingsComponent } from './editor-settings/editor-settings.component';
 
 
 new TouchEmulator();
@@ -97,6 +98,7 @@ new TouchEmulator();
     CustomToolbarComponent,
     DefaultOptionsComponent,
     DisplayOptionsComponent,
+    EditorSettingsComponent,
     ExportAnnotationsComponent,
     ExportFileComponent,
     ExportImageComponent,

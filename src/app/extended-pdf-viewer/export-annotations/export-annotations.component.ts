@@ -1,5 +1,5 @@
-import { FreeTextEditorAnnotation, IPDFViewerApplication, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { Component, OnInit } from '@angular/core';
+import { FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { Component } from '@angular/core';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
@@ -17,6 +17,8 @@ export class ExportAnnotationsComponent {
   private _fullscreen = false;
 
   public rawAnnotations: Array<any> | null = null;
+
+  public src = '/assets/pdfs/pdf-sample.pdf';
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -92,7 +94,7 @@ export class ExportAnnotationsComponent {
   }
 
   public removeTextEditors(): void {
-    const filter = (serial: any) => serial?.annotationType === 3;
+    const filter = (serial: any) => serial?.annotationType === 3 && serial?.pageIndex === 0;
     this.pdfViewerService.removeEditorAnnotations(filter);
   }
 
@@ -131,5 +133,13 @@ export class ExportAnnotationsComponent {
 
   public countRows(json: string): number {
     return json?.split(/\r\n|\r|\n/)?.length;
+  }
+
+  public changePdfFile(tab: number): void {
+    if (tab === 0) {
+      this.src ='/assets/pdfs/pdf-sample.pdf';
+    } else if (tab === 1) {
+      this.src = '/assets/pdfs/OoPdfFormExample.pdf';
+    }
   }
 }

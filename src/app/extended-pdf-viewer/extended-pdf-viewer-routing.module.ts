@@ -66,6 +66,7 @@ import { CSSComponent } from './css/css.component';
 import { AnnotationLayerComponent } from './annotation-layer/annotation-layer.component';
 import { SecurityComponent } from './security/security.component';
 import { AnnotationLayerApiComponent } from './annotation-layer-api/annotation-layer-api.component';
+import { EditorSettingsComponent } from './editor-settings/editor-settings.component';
 
 const routes: Routes = [
   {
@@ -94,6 +95,7 @@ const routes: Routes = [
   { path: 'export-image', component: ExportImageComponent },
   { path: 'export-text', component: ExportTextComponent },
   { path: 'export-annotations', component: ExportAnnotationsComponent },
+  { path: 'editor-setting', component: EditorSettingsComponent},
   { path: 'file-info', component: FileInfoComponent },
   { path: 'filtering-console-log', component: FilteringConsoleLogComponent },
   { path: 'forms', component: FormsComponent },
