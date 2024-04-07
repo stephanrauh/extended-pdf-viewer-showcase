@@ -36,10 +36,12 @@
             prevent this, you'll want to adopt the `OnPush` change detection strategy.
           </p>
           <mat-form-field class="margin">
-            <input matInput [(ngModel)]="page" placeholder="Current page number" />
+            <mat-label>Current page number</mat-label>
+            <input matInput [(ngModel)]="page" />
           </mat-form-field>
           <mat-form-field>
-            <input matInput [(ngModel)]="pageLabel" placeholder="Current page label" />
+            <mat-label>Current page label</mat-label>
+            <input matInput [(ngModel)]="pageLabel" />
           </mat-form-field>
         </mat-tab>
         <mat-tab label="Color themes">
