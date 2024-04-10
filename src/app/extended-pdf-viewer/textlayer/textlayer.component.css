@@ -3,11 +3,12 @@
   border-radius: 8px;
 }
 
-ngx-extended-pdf-viewer div.show-text-layer > span {
-  color: unset;
+ngx-extended-pdf-viewer div.show-text-layer > span,
+ngx-extended-pdf-viewer div.show-text-layer > span > * {
+  color: #0000C080;
 }
 
 .long-word {
-  background-color: blue;
+  background-color: rgba(0, 0, 255, 0.555);
   display: inline;
 }
