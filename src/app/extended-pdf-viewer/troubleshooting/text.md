@@ -151,7 +151,7 @@ If you need more information, have a look at these issues:
 
 ## Localization
 
-Did you set the attribute `useBrowserLocale`? By default, it's false. Usually, it's better to set it to true. The pdf viewer uses the language the user has set in their browser settings and loads a translation file from the assets folder. If that doesn't work, please check the settings in the Angular.json file.
+If the PDF viewer doesn't show in your native language (or the language you're configured with the `[language]` attribute), please check the network tab and the settings in the Angular.json file. You must copy the  folder `node_modules/ngx-extended-pdf-viewer/assets/locale` recursively to the folder `assets/locale`. If you only want to support a few language, you can reduce the size of the installation by omitting the other language files. However, that doesn't improve performance.
 
 ## Multiple PDF viewers on the same page (e.g. tabs)
 
