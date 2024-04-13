@@ -67,8 +67,8 @@
             ></textarea>
           </mat-form-field>
           <br />
-          <mat-checkbox [checked]="typeScript" (change)="typeScript = $event.checked; this.updateFormData()" class="margin-right"> TypeScript </mat-checkbox>
-          <mat-checkbox [checked]="javaScript" (change)="javaScript = $event.checked; this.updateFormData()" class="margin-right"> JavaScript </mat-checkbox>
+          <mat-checkbox [checked]="typeScript==='Yes'" (change)="typeScript = $event.checked ? 'Yes': 'No'; this.updateFormData()" class="margin-right"> TypeScript </mat-checkbox>
+          <mat-checkbox [checked]="javaScript==='Yes'" (change)="javaScript = $event.checked ? 'Yes': 'No'; this.updateFormData()" class="margin-right"> JavaScript </mat-checkbox>
           <mat-checkbox [checked]="java" (change)="java = $event.checked; this.updateFormData()" class="margin-right"> Java </mat-checkbox>
           <mat-checkbox [checked]="cSharp" (change)="cSharp = $event.checked; this.updateFormData()" class="margin-right"> C# </mat-checkbox>
 
@@ -80,6 +80,26 @@
             <mat-radio-button value="masterDegree">Master's Degree</mat-radio-button>
           </mat-radio-group>
         </mat-tab>
+
+        <mat-tab label="Checkboxes and radiobuttons">
+          <p>
+            Checkboxes and radiobuttons are remarkable flexible in PDF forms:
+          </p>
+          <ul>
+            <li>Checkboxes usually don't map to boolean values. Instead, they often use "export values" like "Yes" and "No".</li>
+            <li>Checkboxes can be used as radiobuttons and vice versa.</li>
+          </ul>
+          <p>ngx-extended-pdf-viewer aims to support all these options. However, even after so many years of development users report
+            bugs because my original implementation was too simple. I hope I've managed to fix all the bugs now.
+          </p>
+          <p>One result of my original misconception is that checkboxes both support boolean values and the real export values.
+            However, the `(formData)` event always reports the export values. You need to convert it to boolean values yourself.
+            The demo showcases this; you can find the source code at
+            <a target="_blank"
+            href="https://github.com/stephanrauh/extended-pdf-viewer-showcase/tree/main/src/app/extended-pdf-viewer/forms">https://github.com/stephanrauh/extended-pdf-viewer-showcase/tree/main/src/app/extended-pdf-viewer/forms</a>.
+          </p>
+        </mat-tab>
+
         <mat-tab label="Corner cases">
           <p>
             The "job experience" field of the live demo shows a corner case. The Angular application shows a different value than the form when loading the

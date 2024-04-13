@@ -24,8 +24,10 @@ export class FormsComponent {
   public lastName = 'Garzas';
   public country = 'Spain';
   public jobExperience = '6';
-  public typeScript = false;
-  public javaScript = true;
+  // two checkboxes that use the "export value" defined in the PDF:
+  public typeScript = "Yes";
+  public javaScript = "No";
+  // two checkboxes that use boolean values instead of the "export value" defined in the PDF:
   public java = true;
   public cSharp = true;
   public databases = ['oracle', 'db2', 'sqlServer'];
@@ -128,8 +130,8 @@ export class FormsComponent {
       this.databases = data.databases as string[];
       this.educationLevel = data.educationLevel as string;
       this.otherJobExperience = data.otherJobExperience as string;
-      this.typeScript = Boolean(data.typeScript);
-      this.javaScript = Boolean(data.javaScript);
+      this.typeScript = data.typeScript;
+      this.javaScript = data.javaScript;
       this.java = Boolean(data.java);
       this.cSharp = Boolean(data.cSharp);
       this.updateFormData();
@@ -184,25 +186,25 @@ export class FormsComponent {
 
   public onSelectTab(event: MatTabChangeEvent): void {
     this.leftTab = event.index;
-    if (event.index === 1) {
+    if (event.index === 2) {
       this.selectedTab = 2;
       setTimeout(() => {
         this.src = '/assets/pdfs/OoPdfFormExample.pdf';
         this.visible = true;
       });
-    } else if (event.index === 2) {
+    } else if (event.index === 3) {
       this.selectedTab = 4;
       setTimeout(() => {
         this.src = '/assets/pdfs/OoPdfFormExample.pdf';
         this.visible = true;
       });
-    } else if (event.index === 3) {
+    } else if (event.index === 4) {
       this.selectedTab = 5;
       setTimeout(() => {
         this.src = '/assets/pdfs/OoPdfFormExample.pdf';
         this.visible = true;
       });
-    } else if (event.index === 4) {
+    } else if (event.index === 5) {
       this.formData = {};
       this.visible = false;
       setTimeout(() => {
