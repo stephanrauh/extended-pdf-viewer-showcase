@@ -74,6 +74,9 @@
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-batch.min.js",
               "node_modules/prismjs/components/prism-css.min.js",
+              "node_modules/prismjs/components/prism-yaml.min.js",
+              "node_modules/prismjs/components/prism-nginx.min.js",
+              "node_modules/prismjs/components/prism-xml-doc.min.js",
               "node_modules/prismjs/components/prism-json.min.js",
               "node_modules/prismjs/components/prism-typescript.min.js"
             ]
