@@ -1,0 +1,51 @@
+
+<article class="custom-find-wrapper pdf-wrapper flex-container-column fill-container">
+  <div class="pdf-code-wrapper flex-container-row" >
+    <mat-card appearance="outlined" class="overflow-none distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%">
+      <div class="flex-container-column">
+        <p>
+          Demonstration of customizing the find functionality.
+          This works by overriding the default find functionality of the pdf.js viewer, adding support for regex search in this example."
+          A more complete implementation would provide a custom find bar.
+        </p>
+        <p>
+          <b>Note:</b> This is a simple demo does not protect against invalid regex. Also note that the case is (deliberately) ignored by the demo. So <code>(?<=\s)([A-i]+ough)</code> doesn't work as you might expect.
+          Instead, use <code>(?<=\s)([a-i]+ough)</code>.
+        </p>
+
+        <mat-form-field>
+          <input matInput class="margin" [(ngModel)]="searchtext" placeholder="Regex Search Term" />
+        </mat-form-field>
+        <div class="row">
+          <button mat-raised-button color="primary" (click)="findRegex()">Find</button>
+          <button mat-raised-button color="primary" (click)="findNext()">Next</button>
+          <button mat-raised-button color="primary" (click)="findPrevious()">Previous</button>
+        </div>
+        <small class="row">
+          <span style="margin-left: 24px" *ngIf="totalMatches && totalMatches > 0">Result {{ currentMatchNumber }} of {{ totalMatches }} </span>
+        </small>
+      </div>
+    </mat-card>
+
+    <mat-card appearance="outlined" class="overflow-y-scroll distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:59%">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/html.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="TypeScript">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts.md"> </app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+
+  <mat-card appearance="outlined" class="pdf-card distance16 mat-elevation-z8 use-available-space">
+    <ngx-extended-pdf-viewer
+      src="/assets/pdfs/Portugues-para-principiantes-1538054164.pdf"
+      [textLayer]="true"
+      [showFindButton]="false"
+      (updateFindMatchesCount)="onUpdateFindMatchesCount($event)"
+      (pdfLoaded)="pdfLoaded()">
+    </ngx-extended-pdf-viewer>
+  </mat-card>
+</article>
