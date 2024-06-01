@@ -1,0 +1,9 @@
+```html
+<ngx-extended-pdf-viewer
+  src="/assets/pdfs/Portugues-para-principiantes-1538054164.pdf"
+  [textLayer]="true"
+  [showFindButton]="false"
+  (updateFindMatchesCount)="onUpdateFindMatchesCount($event)"
+  (pdfLoaded)="pdfLoaded()">
+</ngx-extended-pdf-viewer>
+```

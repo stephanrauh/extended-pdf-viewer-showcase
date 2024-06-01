@@ -67,6 +67,7 @@ import { AnnotationLayerComponent } from './annotation-layer/annotation-layer.co
 import { SecurityComponent } from './security/security.component';
 import { AnnotationLayerApiComponent } from './annotation-layer-api/annotation-layer-api.component';
 import { EditorSettingsComponent } from './editor-settings/editor-settings.component';
+import { CustomFindComponent } from './custom-find/custom-find.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,7 @@ const routes: Routes = [
   { path: 'custom-toolbar', component: CustomToolbarComponent },
   { path: 'custom-sidebar', component: CustomSidebarComponent },
   { path: 'custom-thumbnails', component: CustomThumbnailsComponent },
+  { path: 'custom-find', component: CustomFindComponent },
   { path: 'display-options', component: DisplayOptionsComponent },
   { path: 'export-file', component: ExportFileComponent },
   { path: 'export-image', component: ExportImageComponent },
