@@ -73,6 +73,7 @@ import { AnnotationLayerComponent } from './annotation-layer/annotation-layer.co
 import { SecurityComponent } from './security/security.component';
 import { AnnotationLayerApiComponent } from './annotation-layer-api/annotation-layer-api.component';
 import { EditorSettingsComponent } from './editor-settings/editor-settings.component';
+import { CustomFindComponent } from './custom-find/custom-find.component';
 
 
 new TouchEmulator();
@@ -94,6 +95,7 @@ new TouchEmulator();
     CustomPrintDialogComponent,
     CustomRenderComponent,
     CustomSidebarComponent,
+    CustomFindComponent,
     CustomThumbnailsComponent,
     CustomToolbarComponent,
     DefaultOptionsComponent,
