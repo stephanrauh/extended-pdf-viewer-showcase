@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { isLocalhost } from '../common/utilities';
 
 interface CustomFindOptions extends FindOptions {
   matchRegex: boolean;
@@ -22,6 +23,8 @@ export class CustomFindComponent {
 
   currentMatchNumber: number | undefined;
   totalMatches: number | undefined;
+
+  public isLocalhost = isLocalhost();
 
   private originalConvertToRegExpString: any;
 
