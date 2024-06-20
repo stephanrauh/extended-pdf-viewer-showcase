@@ -105,6 +105,7 @@ export class SimpleComponent {
   }
 
   constructor(public logService: LogService, private pdfService: NgxExtendedPdfViewerService) {
+    logService.init();
     this.startTime = new Date().getTime();
 
     // increase the range chunk size for testing purposes

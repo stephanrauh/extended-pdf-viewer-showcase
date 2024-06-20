@@ -8,10 +8,11 @@ export class LogService {
   public logs: Array<string> = [];
 
   constructor(@Inject(PLATFORM_ID) private platformId: any, private windowRefService: WindowRefService) {
-    if (windowRefService.nativeWindow) {
-      windowRefService.nativeWindow['ngxConsoleFilter'] = (level: string, message: any): boolean => {
-        if (message === 'simple') {
-        }
+  }
+
+  public init() {
+    if (this.windowRefService.nativeWindow) {
+      this.windowRefService.nativeWindow['ngxConsoleFilter'] = (level: string, message: any): boolean => {
         this.logs.push(message);
         return true;
       };

@@ -1,5 +1,5 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { AfterViewInit, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 import { WindowRefService } from 'src/app/window-ref.servce';
 
@@ -21,13 +21,24 @@ export class FilteringConsoleLogComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+    setTimeout(() => this.pdfService.recalculateSize());
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService, @Inject(PLATFORM_ID) private platformId: any, private windowRefService: WindowRefService) {
-    if (windowRefService.nativeWindow) {
+  constructor(
+    private pdfService: NgxExtendedPdfViewerService,
+    @Inject(PLATFORM_ID) private platformId: any,
+    private windowRefService: WindowRefService,
+    private notificationService: PDFNotificationService
+  ) {
+    notificationService.onPDFJSInit.subscribe(() => {
+      this.init();
+    });
+  }
+
+  public init(): void {
+    if (this.windowRefService.nativeWindow) {
       globalThis['ngxConsoleFilter'] = (level: string, message: any): boolean => {
+        debugger;
         if (message?.includes && message?.includes('modified by ngx-extended-pdf-viewer')) {
           this.version = message;
           return false;

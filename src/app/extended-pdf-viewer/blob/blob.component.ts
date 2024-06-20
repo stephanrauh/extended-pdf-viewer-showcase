@@ -40,6 +40,7 @@ export class BlobComponent implements OnInit {
     private ngxService: NgxExtendedPdfViewerService,
     public logService: LogService
   ) {
+    logService.init();
   }
 
   public ngOnInit(): void {}

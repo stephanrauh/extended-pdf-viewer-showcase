@@ -1,7 +1,9 @@
 <div class="flex-container-column fill-container">
   <div class="flex-container-row"  *ngIf="!fullscreen">
     <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-      The attribute <code>[namedDest]</code> allows you to navigate to a "name destination" of the PDF file.
+      <p>
+      The attribute <code>[namedDest]</code> allows you to navigate to a "named destination" of the PDF file.
+    </p>
       <section class="section" style="margin-top: 5px; margin-bottom: 10px">
         <button mat-raised-button color="primary" (click)="page = 5">[page]="5"</button>
         <button mat-raised-button color="primary" (click)="namedDest = 'section.10'" style="margin-left: 10px">[nameDest]="section.10"</button>
