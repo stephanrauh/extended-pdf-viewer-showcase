@@ -38,7 +38,6 @@ export class FilteringConsoleLogComponent {
   public init(): void {
     if (this.windowRefService.nativeWindow) {
       globalThis['ngxConsoleFilter'] = (level: string, message: any): boolean => {
-        debugger;
         if (message?.includes && message?.includes('modified by ngx-extended-pdf-viewer')) {
           this.version = message;
           return false;

@@ -26,6 +26,11 @@
             looks innocently simple but renders remarkably slow, so I suspect the problems are caused by the internal architecture of the PDF file. If you're running into this issue and
             have some insight what's going on, please reach out to me. The community of developers is going to appreciate your help!
           </dd>
+          <dt>enableHWA</dt>
+          <dd>Enable hardware acceleration. The default value is <code>true</code>. If you're running into rendering issues, try setting this flag to <code>false</code>.
+           Note that this flag is only avaible in pdf.js 4.4 and above, and that it's the exact opposite of the flag <code>activateWillReadFrequentlyFlag</code> in pdf.js 4.3
+           and below.
+          </dd>
           <dt>assetsFolder</dt>
           <dd>URL of the assets folder (relative to the <code>index.html</code>). Changing this attribute modifies the value
           of the default options <code>cMapUrl</code> and <code></code>.</dd>
