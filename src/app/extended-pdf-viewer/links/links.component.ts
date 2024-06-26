@@ -11,13 +11,13 @@ import { isLocalhost } from '../common/utilities';
   templateUrl: './links.component.html',
   styleUrls: ['./links.component.css'],
 })
-export class LinksComponent implements OnInit {
+export class LinksComponent  {
   public LinkTarget = LinkTarget;
 
   public hidden = false;
 
   // tslint:disable-next-line: variable-name
-  private _target!: number;
+  private _target: number = LinkTarget.BLANK;;
 
   public isLocalhost = isLocalhost();
 
@@ -46,13 +46,16 @@ export class LinksComponent implements OnInit {
     return this._selectedTab;
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  constructor(private pdfService: NgxExtendedPdfViewerService) {
+    pdfDefaultOptions.externalLinkTarget = this._target;
+  }
 
   public set target(t: number) {
     if (this._target !== t) {
       this._target = t;
       this.hidden = true;
       pdfDefaultOptions.externalLinkTarget = t;
+      console.log('externalLinkTarget', pdfDefaultOptions.externalLinkTarget);
       setTimeout(() => (this.hidden = false), 250);
     }
   }
@@ -70,10 +73,6 @@ export class LinksComponent implements OnInit {
         a.target = '';
       });
     }
-  }
-
-  public ngOnInit() {
-    this.target = LinkTarget.BLANK;
   }
 
   public get sourcecode(): string {
