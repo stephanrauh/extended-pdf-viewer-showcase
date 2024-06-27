@@ -80,7 +80,12 @@ the button is never moved to the secondary menu. Conversely, <code>'always-in-se
 means the button always hides in the secondary menu.</p>
 <p>There's an interactive live-demo at <a href="/extended-pdf-viewer/responsive-design">the responsive design page of this showcase.</a></p>
 <p>If you use the <code>&lt;pdf-shy-button&gt;</code> component to define your custom buttons they also
-benefit from responsive design.</p>
+benefit from responsive design. However, there's a catch: if you're using the <code>&lt;pdf-shy-button&gt;</code>,
+you can use the `action` attribute to define custom logic. Basically, the `action` attribute is treated like a fat arrow function -
+and that means it's inheriting the `this` reference from the `PdfShyButton` class. The constructor of your button component
+is never called, and neither is <code>ngOnInit</code>. Probably that sounds more confusing than it is, so
+don't worry - it's easy to implement custom "shy" buttons. Just keep in mind that <code>this</code> is not
+what you might expect.</p>
 
 <h2>Adding custom buttons to the toolbar and/or the secondary menu</h2>
 <app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
