@@ -3,7 +3,9 @@
     <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
       <mat-tab-group (selectedIndexChange)="changePdfFile($event)">
         <mat-tab label="live demo">
-          <p>You can export text and drawings you've added to a PDF file.</p>
+          <p>You can export text, drawings, images, and highlight you've added to a PDF file. You can also add texts and drawings programmatically.
+            However, the PDF viewer doesn't support adding highlights programmatically. As for images, that's supported, but using the <a href="./annotation-layer-api">high-level different API</a>.
+          </p>
           <p>
             <b>Breaking change between pdf.js 3.5 and 3.9:</b> The coordinates of the serialized drawings have changed. Please keep in mind that this is an
             internal API of pdf.js, so it's subject to change without notice.
