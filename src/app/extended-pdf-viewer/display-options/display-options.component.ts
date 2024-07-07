@@ -26,7 +26,7 @@ export class DisplayOptionsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() => this.pdfService.recalculateSize());
+
   }
 
   constructor(private ngZone: NgZone, private pdfService: NgxExtendedPdfViewerService) {}

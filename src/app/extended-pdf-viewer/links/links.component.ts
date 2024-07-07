@@ -29,8 +29,7 @@ export class LinksComponent  {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+
   }
 
   // tslint:disable-next-line: variable-name

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { pdfDefaultOptions, PDFNotificationService, PDFScriptLoaderService } from 'ngx-extended-pdf-viewer';
 import { versions } from './versions';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -37,7 +37,9 @@ export class NavComponent {
 
   public pdfjsVersion = '';
 
-  constructor(private breakpointObserver: BreakpointObserver, private notification: PDFNotificationService, private route: ActivatedRoute) {
+  constructor(private breakpointObserver: BreakpointObserver, private notification: PDFNotificationService, private route: ActivatedRoute
+
+  ) {
     route.url.subscribe((url) => {
       this.hideMenu = location.pathname.includes('iframe');
     });

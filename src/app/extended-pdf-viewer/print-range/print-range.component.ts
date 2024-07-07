@@ -31,8 +31,6 @@ export class PrintRangeComponent implements OnDestroy {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.printService.recalculateSize());
   }
 
   public get excluded(): string {

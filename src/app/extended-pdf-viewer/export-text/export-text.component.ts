@@ -28,7 +28,6 @@ export class ExportTextComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() => this.pdfViewerService.recalculateSize());
   }
 
   constructor(private pdfViewerService: NgxExtendedPdfViewerService) {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, PLATFORM_ID, effect } from '@angular/core';
 import { NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 import { WindowRefService } from 'src/app/window-ref.servce';
@@ -21,7 +21,7 @@ export class FilteringConsoleLogComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() => this.pdfService.recalculateSize());
+
   }
 
   constructor(
@@ -30,8 +30,10 @@ export class FilteringConsoleLogComponent {
     private windowRefService: WindowRefService,
     private notificationService: PDFNotificationService
   ) {
-    notificationService.onPDFJSInit.subscribe(() => {
-      this.init();
+    effect(() => {
+      if (notificationService.onPDFJSInitSignal()) {
+        this.init();
+      }
     });
   }
 

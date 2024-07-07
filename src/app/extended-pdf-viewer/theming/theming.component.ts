@@ -27,7 +27,7 @@ export class ThemingComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() => this.ngxService.recalculateSize());
+
   }
 
   public get selectedTab() {

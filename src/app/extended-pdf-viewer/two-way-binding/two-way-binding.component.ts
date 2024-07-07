@@ -45,7 +45,7 @@ export class TwoWayBindingComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() => this.pdfService.recalculateSize());
+
   }
 
   public set selectedTab(index: number) {

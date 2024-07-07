@@ -53,8 +53,7 @@ export class ZoomComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+
   }
 
   private currentStartTime = new Date().getTime();

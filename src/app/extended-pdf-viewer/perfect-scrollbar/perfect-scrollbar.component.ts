@@ -37,8 +37,7 @@ export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+
   }
 
   constructor(

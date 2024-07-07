@@ -19,8 +19,7 @@ export class SmartphoneComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}

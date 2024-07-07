@@ -44,7 +44,6 @@ export class FindComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() => this.ngxExtendedPdfViewerService.recalculateSize());
   }
 
   public get findStateText(): string {

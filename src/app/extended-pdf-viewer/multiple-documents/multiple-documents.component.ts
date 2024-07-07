@@ -24,8 +24,7 @@ export class MultipleDocumentsComponent implements OnInit {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+
   }
 
   public url = new URL(`${location.protocol}//${location.host}/assets/pdfs/GraalVM.pdf`);

@@ -30,8 +30,6 @@ export class BlobComponent implements OnInit {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.ngxService.recalculateSize());
   }
 
   constructor(

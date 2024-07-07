@@ -65,8 +65,7 @@ export class HidingButtonsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() =>
-    this.pdfService.recalculateSize());
+
   }
 
   public get sourcecode() {

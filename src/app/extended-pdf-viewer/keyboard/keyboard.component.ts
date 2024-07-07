@@ -24,7 +24,7 @@ export class KeyboardComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() => this.pdfService.recalculateSize());
+
   }
 
   private accept(key: string, add: boolean): void {

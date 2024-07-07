@@ -19,8 +19,8 @@
       </mat-tab>
       <mat-tab label="Available options">
         <dl>
-          <dt>activateWillReadFrequentlyFlag</dt>
-          <dd>This is an experimental option. By default it's set to <code>false</code>. Sometimes, setting it to <code>true</code> solves rendering issues on Chrome on Windows. However,
+          <dt><s>activateWillReadFrequentlyFlag</s></dt>
+          <dd>This is an experimental option, removed in version 21 because it's been replaced by <code>enableHWA</code>. By default it's set to <code>false</code>. Sometimes, setting it to <code>true</code> solves rendering issues on Chrome on Windows. However,
             this has a negative impact on performance. Only activate this feature if nothing else helps. At the moment, my recommendation - admittedly based on gut feeling
             and very little insight into PDF file creation - is to double-check if there's something wrong with your PDF file. The only PDF file with rendering issues
             looks innocently simple but renders remarkably slow, so I suspect the problems are caused by the internal architecture of the PDF file. If you're running into this issue and

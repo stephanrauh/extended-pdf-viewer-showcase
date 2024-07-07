@@ -2,7 +2,7 @@
   <ngx-extended-pdf-viewer
     [src]="src"
     [password]="password"
-    [minifiedJSLibraries]="false"
+    
     [height]="'auto'"
   >
   </ngx-extended-pdf-viewer>

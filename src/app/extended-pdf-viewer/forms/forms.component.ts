@@ -69,7 +69,7 @@ export class FormsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-    setTimeout(() => this.ngxService.recalculateSize());
+
   }
 
   public updateFormData(): void {
