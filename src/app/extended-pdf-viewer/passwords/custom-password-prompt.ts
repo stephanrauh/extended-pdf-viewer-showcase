@@ -13,4 +13,5 @@ export class CustomPasswordPrompt implements PasswordPrompt {
   setUpdateCallback(updateCallback: (password: string) => void, reason: 1 | 2) {
     this.updateCallback = updateCallback;
   }
+  public close(): void {}
 }

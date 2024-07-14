@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
+import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
 import { isLocalhost } from '../common/utilities';
 
@@ -33,6 +33,7 @@ export class SimpleComponent {
   public isLocalhost = isLocalhost();
 
   private _fullscreen = false;
+  private PDFViewerApplication?: IPDFViewerApplication;
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -104,7 +105,7 @@ export class SimpleComponent {
     }
   }
 
-  constructor(public logService: LogService) {
+  constructor(public logService: LogService, notificationService: PDFNotificationService) {
 
     this.startTime = new Date().getTime();
 
@@ -114,6 +115,9 @@ export class SimpleComponent {
     // needs of your application and infrastructure
     pdfDefaultOptions.rangeChunkSize=1024*128;
     pdfDefaultOptions.activateWillReadFrequentlyFlag=true;
+    effect(() => {
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+    });
   }
 
   public onUpdateFindResult(event: any): void {
@@ -125,12 +129,13 @@ export class SimpleComponent {
   }
 
   public async getDivAtPosition(page: number, position: number): Promise<void> {
-    const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
-
-    if (!PDFViewerApplication.pdfViewer._pages[page].textLayer) {
-      await PDFViewerApplication.pdfViewer._pages[page].draw();
+    if (!this.PDFViewerApplication) {
+      return;
+    }
+    if (!this.PDFViewerApplication.pdfViewer._pages[page].textLayer) {
+      await this.PDFViewerApplication.pdfViewer._pages[page].draw();
     } else {
-      const textLayer = PDFViewerApplication.pdfViewer._pages[page].textLayer;
+      const textLayer = this.PDFViewerApplication.pdfViewer._pages[page].textLayer;
       const divs = textLayer?.textDivs;
       const textSnippets = textLayer?.textContentItemsStr;
     }

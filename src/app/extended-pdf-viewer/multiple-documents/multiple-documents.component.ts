@@ -1,5 +1,5 @@
-import { Component, NgZone, OnInit } from '@angular/core';
-import { FileInputChanged, IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { Component, effect, NgZone, OnInit } from '@angular/core';
+import { FileInputChanged, IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
@@ -17,6 +17,7 @@ export class MultipleDocumentsComponent implements OnInit {
   private _fullscreen = false;
 
   public bookMode = false;
+  private PDFViewerApplication?: IPDFViewerApplication;
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -29,12 +30,15 @@ export class MultipleDocumentsComponent implements OnInit {
 
   public url = new URL(`${location.protocol}//${location.host}/assets/pdfs/GraalVM.pdf`);
 
-  constructor(private ngZone: NgZone, private pdfService: NgxExtendedPdfViewerService) {}
+  constructor(private ngZone: NgZone, notificationService: PDFNotificationService) {
+    effect(() => {
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+    });
+  }
 
   public ngOnInit(): void {
     setTimeout(() => {
-      const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
-      PDFViewerApplication.eventBus.on('fileinputchange', (event: FileInputChanged) => {
+      this.PDFViewerApplication?.eventBus.on('fileinputchange', (event: FileInputChanged) => {
         this.ngZone.run(() => {
           if (event.dropEvent) {
             console.log("Drop Event: ", event.dropEvent);

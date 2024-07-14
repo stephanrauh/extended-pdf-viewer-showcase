@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, PasswordPrompt, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { Component, effect } from '@angular/core';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService, PasswordPrompt, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 import { CustomPasswordPrompt } from './custom-password-prompt';
 
@@ -19,27 +19,29 @@ export class PasswordsComponent {
   private originalPasswordPrompt!: PasswordPrompt;
 
   public isLocalhost = isLocalhost();
+  private PDFViewerApplication?: IPDFViewerApplication;
 
   public get choice() {
     return this._choice;
   }
 
   public set choice(choice: string | undefined) {
+    if (!this.PDFViewerApplication) {
+      return;
+    }
     this._choice = choice;
     (this.password as any) = choice;
     (this.src as any) = undefined;
     if (choice === 'graalvm-sucks?') {
-      const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
       if (!this.originalPasswordPrompt) {
-        this.originalPasswordPrompt = PDFViewerApplication.passwordPrompt;
+        this.originalPasswordPrompt = this.PDFViewerApplication.passwordPrompt;
       }
       pdfDefaultOptions.passwordPrompt = new CustomPasswordPrompt();
-      PDFViewerApplication.passwordPrompt = new CustomPasswordPrompt();
+      this.PDFViewerApplication.passwordPrompt = new CustomPasswordPrompt();
     } else {
       if (this.originalPasswordPrompt) {
         pdfDefaultOptions.passwordPrompt = this.originalPasswordPrompt;
-        const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
-        PDFViewerApplication.passwordPrompt = this.originalPasswordPrompt;
+        this.PDFViewerApplication.passwordPrompt = this.originalPasswordPrompt;
       }
     }
     setTimeout(() => {
@@ -58,7 +60,11 @@ export class PasswordsComponent {
 
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
+  constructor(private pdfService: NgxExtendedPdfViewerService, notificationService: PDFNotificationService) {
     this.choice = "graalvm-rocks!";
+
+    effect(() => {
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+    });
   }
 }

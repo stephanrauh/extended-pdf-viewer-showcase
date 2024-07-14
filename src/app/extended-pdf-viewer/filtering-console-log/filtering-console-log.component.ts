@@ -43,7 +43,8 @@ export class FilteringConsoleLogComponent {
       if (this.PDFViewerApplication?.ngxConsole) {
         this.PDFViewerApplication.ngxConsole.ngxConsoleFilter = (level: string, message: any): boolean => {
           if (message?.includes && message?.includes('modified by ngx-extended-pdf-viewer')) {
-            this.version = message;
+            const index = message.indexOf('(PDF.js');
+            this.version = message.substring(index+1).replace(')', '');
             return false;
           }
           return true;

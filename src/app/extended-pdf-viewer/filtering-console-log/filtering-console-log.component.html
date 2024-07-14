@@ -6,9 +6,14 @@
         This live demo re-defines <code>ngxConsolefilter()</code> to grab the version number from the console messages and to store it in a variable so it can
         be shown here:
       </p>
-      <p>
+      <p *ngIf="version">
         <i>{{ version }}</i>
       </p>
+      <p *ngIf="!version">
+        <i>(Since version 21.0, this demo requires you to reload the page. That's a side-effect of an optimization: the core library is re-used if you're navigating from page to page.
+          The message containing the version number is only printed during the initial load).</i>
+      </p>
+
       <p>
         The original use-case of <code>ngxConsolefilter()</code> is suppressing messages you don't want to log. For example, many PDF documents cause the viewer
         to emit messages like <code>Warning: TT: undefined function: 32</code>. That's one of the messages you can almost always safely ignore, so it doesn't

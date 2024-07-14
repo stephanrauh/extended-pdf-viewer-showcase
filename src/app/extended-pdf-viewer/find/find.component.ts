@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { FindOptions, IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { ChangeDetectorRef, Component, effect } from '@angular/core';
+import { FindOptions, IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
@@ -26,6 +26,7 @@ export class FindComponent {
   private _fullscreen = false;
 
   private _selectedTab: number = 0;
+  private PDFViewerApplication!: IPDFViewerApplication;
 
   public get selectedTab(): number {
     return this._selectedTab;
@@ -85,7 +86,13 @@ export class FindComponent {
 
   public isLocalhost = isLocalhost();
 
-  constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef) {}
+  constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef,
+    notificationService: PDFNotificationService
+  ) {
+    effect(() => {
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+    });
+  }
 
   public updateFindState(result: FindState) {
     this.findState = result;
@@ -125,14 +132,13 @@ export class FindComponent {
   }
 
   private onUpdateFindResult(event: FindResultMatchesCount): void {
-    const PDFViewerApplication: IPDFViewerApplication = (window as any).PDFViewerApplication;
     const matchIndexes = event.matches as Array<Array<number>>;
     const matchesLengths = event.matchesLength as Array<Array<number>>;
 
     setTimeout(() => {
       matchIndexes.forEach((findings, page) => {
         if (findings?.length > 0) {
-          const currentPage = PDFViewerApplication.pdfViewer._pages[page];
+          const currentPage = this.PDFViewerApplication.pdfViewer._pages[page];
           if (currentPage.textHighlighter.textDivs) {
             if (page && matchesLengths[page][0] > 0) {
               const converted = currentPage.textHighlighter._convertMatches([matchIndexes[page]], [matchesLengths[page]]) as Array<any>;
