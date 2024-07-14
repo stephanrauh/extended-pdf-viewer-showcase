@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, Inject, OnInit, PLATFORM_ID, effect } from '@angular/core';
-import { NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { Component, effect } from '@angular/core';
+import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 import { WindowRefService } from 'src/app/window-ref.servce';
 
@@ -13,6 +13,8 @@ export class FilteringConsoleLogComponent {
 
   public isLocalhost = isLocalhost();
 
+  private PDFViewerApplication!: IPDFViewerApplication;
+
   private _fullscreen = false;
 
   public get fullscreen(): boolean {
@@ -21,17 +23,16 @@ export class FilteringConsoleLogComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
+
+
   constructor(
-    private pdfService: NgxExtendedPdfViewerService,
-    @Inject(PLATFORM_ID) private platformId: any,
     private windowRefService: WindowRefService,
-    private notificationService: PDFNotificationService
+    notificationService: PDFNotificationService
   ) {
     effect(() => {
-      if (notificationService.onPDFJSInitSignal()) {
+      if (this.PDFViewerApplication = notificationService.onPDFJSInitSignal()) {
         this.init();
       }
     });
@@ -39,13 +40,15 @@ export class FilteringConsoleLogComponent {
 
   public init(): void {
     if (this.windowRefService.nativeWindow) {
-      globalThis['ngxConsoleFilter'] = (level: string, message: any): boolean => {
-        if (message?.includes && message?.includes('modified by ngx-extended-pdf-viewer')) {
-          this.version = message;
-          return false;
-        }
-        return true;
-      };
+      if (this.PDFViewerApplication?.ngxConsole) {
+        this.PDFViewerApplication.ngxConsole.ngxConsoleFilter = (level: string, message: any): boolean => {
+          if (message?.includes && message?.includes('modified by ngx-extended-pdf-viewer')) {
+            this.version = message;
+            return false;
+          }
+          return true;
+        };
+      }
     }
   }
 }

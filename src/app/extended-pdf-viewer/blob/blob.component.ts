@@ -5,7 +5,6 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { BlobService } from './blob.service';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { LogService } from '../../log.service';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
@@ -35,10 +34,9 @@ export class BlobComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private blobService: BlobService,
-    private ngxService: NgxExtendedPdfViewerService,
-    public logService: LogService
+    private ngxService: NgxExtendedPdfViewerService
   ) {
-    logService.init();
+
   }
 
   public ngOnInit(): void {}

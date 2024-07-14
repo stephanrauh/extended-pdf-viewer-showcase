@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PageRenderEvent, IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
 import { isLocalhost } from '../common/utilities';
 
@@ -104,8 +104,8 @@ export class SimpleComponent {
     }
   }
 
-  constructor(public logService: LogService, private pdfService: NgxExtendedPdfViewerService) {
-    logService.init();
+  constructor(public logService: LogService) {
+
     this.startTime = new Date().getTime();
 
     // increase the range chunk size for testing purposes

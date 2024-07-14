@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { NgxExtendedPdfViewerService, PDFNotificationService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { PDFNotificationService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 (window as any).updateThumbnailSelection = (page: number) => {
@@ -9,8 +9,8 @@ import { isLocalhost } from '../common/utilities';
     if (radiobuttons) {
       for (let i = 1; i <= radiobuttons.length; i++) {
         const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
-        console.log('updateThumbnailSelection', i, page, cbx.getAttribute("data-page-number"));
-        cbx.checked = cbx.getAttribute("data-page-number") === String(page);
+        console.log('updateThumbnailSelection', i, page, cbx.getAttribute('data-page-number'));
+        cbx.checked = cbx.getAttribute('data-page-number') === String(page);
       }
     }
   });
@@ -35,21 +35,18 @@ export class CustomThumbnailsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService, private notification: PDFNotificationService) {
+  constructor(private notification: PDFNotificationService) {
     this.pdfjsVersion = this.notification.pdfjsVersion;
   }
 
   public onPageChange(page: number): void {
-    const radiobuttons = document.getElementsByClassName(
-      'thumbnail-radiobutton'
-    );
+    const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
     if (radiobuttons) {
       for (let i = 1; i <= radiobuttons.length; i++) {
         const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
-        cbx.checked = cbx.getAttribute("data-page-number") === String(page);
+        cbx.checked = cbx.getAttribute('data-page-number') === String(page);
       }
     }
   }
@@ -75,9 +72,9 @@ export class CustomThumbnailsComponent {
       overlay.style.backgroundColor = '#FF000040';
       type = 'ready for review';
     }
-    const textNode = thumbnail.querySelector(".thumbnail-text") as HTMLDivElement;
+    const textNode = thumbnail.querySelector('.thumbnail-text') as HTMLDivElement;
     if (textNode) {
-      textNode.innerText=type;
+      textNode.innerText = type;
     }
   }
 }

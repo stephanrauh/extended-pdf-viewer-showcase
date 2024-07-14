@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { ChangeDetectorRef, Component, effect } from '@angular/core';
+import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 interface CustomFindOptions extends FindOptions {
@@ -12,7 +12,7 @@ interface CustomFindOptions extends FindOptions {
   styleUrls: ['./custom-find.component.scss'],
 })
 export class CustomFindComponent {
-  searchtext = '(?<=\\s)([A-z]+ough)';
+  public searchtext = '(?<=\\s)([A-z]+ough)';
   findOptions: CustomFindOptions = {
     highlightAll: true,
     matchCase: false,
@@ -21,36 +21,39 @@ export class CustomFindComponent {
     matchRegex: true,
   };
 
-  currentMatchNumber: number | undefined;
-  totalMatches: number | undefined;
+  public currentMatchNumber: number | undefined;
+  public totalMatches: number | undefined;
 
   public isLocalhost = isLocalhost();
 
+  private pdfViewerApplication: IPDFViewerApplication | undefined;
+
   private originalConvertToRegExpString: any;
 
-  get pdfViewerApplication(): IPDFViewerApplication {
-    return (window as any).PDFViewerApplication;
-  }
 
-  constructor(private readonly cdr: ChangeDetectorRef) {  }
+  constructor(private readonly cdr: ChangeDetectorRef,  public notificationService: PDFNotificationService) {
+    effect(() => {
+      this.pdfViewerApplication = notificationService.onPDFJSInitSignal();
+    });
+   }
 
-  pdfLoaded() {
+  public pdfLoaded(): void {
     this.overideFindFeature();
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.restoreFindFeature();
   }
 
-  findRegex() {
+  public findRegex(): void {
     this.dispatchFind('find');
   }
 
-  findNext(): void {
+  public findNext(): void {
     this.dispatchFind('again', false);
   }
 
-  findPrevious(): void {
+  public findPrevious(): void {
     this.dispatchFind('again', true);
   }
 
@@ -61,6 +64,10 @@ export class CustomFindComponent {
   }
 
   private overideFindFeature() {
+    if (!this.pdfViewerApplication) {
+      console.error("PDF Viewer Application is not initialized");
+      return;
+    }
     const findController = this.pdfViewerApplication.findController as any;
 
     this.originalConvertToRegExpString = findController._convertToRegExpString;
@@ -74,13 +81,15 @@ export class CustomFindComponent {
 
   private restoreFindFeature() {
     if (this.originalConvertToRegExpString) {
+      if (this.pdfViewerApplication) {
       const findController = this.pdfViewerApplication.findController as any;
       findController._convertToRegExpString = this.originalConvertToRegExpString;
+      }
     }
   }
 
   private dispatchFind(type: string, findPrevious = false): void {
-    this.pdfViewerApplication.eventBus.dispatch('find', {
+    this.pdfViewerApplication?.eventBus.dispatch('find', {
       ...this.findOptions,
       query: this.searchtext,
       type,

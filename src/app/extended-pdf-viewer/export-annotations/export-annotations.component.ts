@@ -1,4 +1,4 @@
-import { FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { EditorAnnotation, FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { Component } from '@angular/core';
 import { isLocalhost } from '../common/utilities';
 
@@ -16,7 +16,7 @@ export class ExportAnnotationsComponent {
 
   private _fullscreen = false;
 
-  public rawAnnotations: Array<any> | null = null;
+  public rawAnnotations: EditorAnnotation[] | null | undefined = null;
 
   public src = '/assets/pdfs/pdf-sample.pdf';
 

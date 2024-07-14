@@ -81,6 +81,7 @@
       <a target="#" href="https://arxiv.org/abs/1503.01850">https://arxiv.org/abs/1503.01850</a></small
     >
     <ngx-extended-pdf-viewer
+    [filenameForDownload]="downloadFileName"
       [src]="'/assets/pdfs/user-experience.pdf'"
       [height]="'auto'"
       [showToolbar]="showToolbar"
@@ -96,7 +97,6 @@
       [showOpenFileButton]="showOpenFileButton"
       [showPrintButton]="showPrintButton"
       [showDownloadButton]="showDownloadButton"
-      [filenameForDownload]="downloadFileName"
       [showSecondaryToolbarButton]="showSecondaryToolbarButton"
       [showRotateCwButton]="showRotateCwButton"
       [showRotateCcwButton]="showRotateCcwButton"

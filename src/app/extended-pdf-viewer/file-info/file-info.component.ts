@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import {
   AnnotationLayerRenderedEvent,
+  IPDFViewerApplication,
   NgxExtendedPdfViewerService,
   PdfDocumentInfo,
-  PdfDocumentPropertiesExtractor
+  PdfDocumentPropertiesExtractor,
+  PDFNotificationService
 } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
@@ -14,6 +16,8 @@ import { isLocalhost } from '../common/utilities';
   styleUrls: ['./file-info.component.css'],
 })
 export class FileInfoComponent {
+
+  private PDFViewerApplication: IPDFViewerApplication | undefined;
 
   public fileInfo!: PdfDocumentInfo;
 
@@ -31,8 +35,14 @@ export class FileInfoComponent {
   }
 
   public onPagesLoaded() {
-    new PdfDocumentPropertiesExtractor().getDocumentProperties().then((result) => this.fileInfo = result);
+    if (this.PDFViewerApplication) {
+    new PdfDocumentPropertiesExtractor().getDocumentProperties(this.PDFViewerApplication).then((result) => this.fileInfo = result);
+    }
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  constructor(public notificationService: PDFNotificationService) {
+    effect(() => {
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+    });
+  }
 }

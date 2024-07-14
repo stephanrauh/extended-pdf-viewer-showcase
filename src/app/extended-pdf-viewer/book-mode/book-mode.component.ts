@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PageRenderedEvent, PageRenderEvent } from 'ngx-extended-pdf-viewer';
+import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
+import { IPDFViewerApplication, PageRenderedEvent, PageRenderEvent, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
@@ -16,7 +16,13 @@ export class BookModeComponent {
 
   public isLocalhost = isLocalhost();
 
-  constructor() { }
+  private PDFViewerApplication!: IPDFViewerApplication;
+
+  constructor(notificationService: PDFNotificationService) {
+    effect(() => {
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+    });
+  }
 
   public onPageRender(event: PageRenderEvent): void {
     console.log("Going to render page " + event.pageNumber);
@@ -25,7 +31,7 @@ export class BookModeComponent {
   public onPageRendered(event: PageRenderedEvent): void {
     let result = '';
     result += `${String(event.pageNumber).padStart(4, ' ')} `;
-    for (const page of (window as any).PDFViewerApplication.pdfViewer._pages) {
+    for (const page of this.PDFViewerApplication.pdfViewer._pages) {
       const isLoading = page.div.querySelector('.loadingIcon');
       if (isLoading) {
         result += '!';
