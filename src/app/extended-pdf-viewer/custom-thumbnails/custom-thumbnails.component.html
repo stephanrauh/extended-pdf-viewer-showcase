@@ -1,92 +1,82 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <p>You can customize the thumbnails. To do so you need to define something
-          that looks like an Angular template, but isn't an Angular template.
-          It's not part of the Angular interpolation and lifecycle, so there are
-          several restrictions. This demo shows over to circumvent them.^
-        </p>
-        <p>If you want to use CSS classes, set `encapsulation: ViewEncapsulation.None`. </p>
+  <div class="flex-container-row" *ngIf="!fullscreen">
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+          <p>
+            You can customize the thumbnails. To do so you need to define something that looks like an Angular template, but isn't an Angular template. It's not
+            part of the Angular interpolation and lifecycle, so there are several restrictions. This demo shows over to circumvent them.
+          </p>
+          <p>If you want to use CSS classes, set `encapsulation: ViewEncapsulation.None`.</p>
+          <p>In the HTML definition, you can use these variable <code>PAGE_NUMBER</code>.</p>
+          <p>If you need more fine-grained control, modify the thumbnail in an event listener of `(thumbnailDrawn)`. The demo
+            uses this option to color the thumbails differently and to add the diagonal text.
+          </p>
+        </mat-tab>
+        <mat-tab label="Call Angular code">
+          <p>
+            If you want to call Angular code from the template, implement `(thumbnailDrawn)` and use it to register the event listener.
+            If you're not using ngZone, you need to call
+            `ChangeDetectorRef.detectChanges()` or `ChangeDetectorRef.markForCheck()`.
+          </p>
+          <p>The demo set the initial state of the radio buttons in `(thumbnailDrawn)`.
+          It also adds an event listener to rotate the pages on double-click.</p>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
+      <mat-tab-group>
+        <mat-tab label="HTML template (1/2)">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/html.md"></app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="HTML template (2/2)">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/template37.md"></app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="(thumbnailDrawn)">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts.md"></app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="Call Angular code">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts2.md"></app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
 
-        <p>In the HTML definition, you can use these variable <code>PAGE_NUMBER</code>.</p>
-
-      </mat-tab>
-      <mat-tab label="Call JavaScript code">
-        <p>You can call JavaScript code from the HTML template. Just register a method in the global `window` namespace
-          and call it from the HTML template. The demo uses this approach to implement clicking on the radio buttons.
-        </p>
-        <p><b>Caveat:</b> the function is not automatically removed from the global name space when the Angular
-        component is destroyed. This might cause memory leaks.</p>
-        <p>This demo also shows that you sometimes need to wrap your code in a `setTimeout()`.</p>
-        <p><b>Breaking change with version 19.6</b> Until recently, my demo used array indices to detect the active radio button, but the indices have shifted.
-           It's better to use the `data-page-number` attribute.</p>
-      </mat-tab>
-      <mat-tab label="Call Angular code">
-        <p>The second approach allows you to call Angular code. You need to register a custom event. The demo
-        uses this event to implement the mouse-over-event. The Angular component registers an event listener.
-        When you want to call a method from JavaScript, just send the event. This approach allows you to access
-        all the methods and attributes of the Angular component.</p>
-        <p><b>Caveat:</b> There's only one Angular component rendering all the thumbnails. You can think of it
-        as a service. So the event has to send the reference to the thumbnail or the page number.</p>
-        <p><b>Breaking change with version 19.6</b> Until recently, my demo used array indices to detect the active radio button, but the indices have shifted.
-          It's better to use the `data-page-number` attribute.</p>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template (1/2)">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/html.md"></app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="HTML template (2/2)">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/template37.md"></app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Call JavaScript code">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts.md"></app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Call Angular code">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts2.md"></app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <ngx-extended-pdf-viewer
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button
+      mat-button
+      (click)="fullscreen = !fullscreen"
+      style="display: none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px"
+    >
+      <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <ngx-extended-pdf-viewer
       [src]="'/assets/pdfs/stluciadance.com.pdf'"
       [customThumbnail]="radiobuttonThumbnail"
-      [height]="'90vh'"
       (pageChange)="onPageChange($event)"
       (thumbnailDrawn)="onThumbnailDrawn($event)"
-
       [sidebarVisible]="true"
-      [activeSidebarView]="1">
-  </ngx-extended-pdf-viewer>
-</mat-card>
+      [activeSidebarView]="1"
+      [rotation]="rotation"
+    >
+    </ngx-extended-pdf-viewer>
+  </mat-card>
 </div>
 
 <ng-template #radiobuttonThumbnail>
   <a class="pdf-viewer-template">
-    <div class="thumbnail" data-page-number="PAGE_NUMBER" style="border:none">
-      <input id="thumbnail-cbx-PAGE_NUMBER"
-        class="thumbnail-radiobutton"
-        type="radio"
-        style="top: 100px;right: 25px;position: relative;transform:scale(1.5)"
-        onClick="window.updateThumbnailSelection(PAGE_NUMBER)"
-        data-page-number="PAGE_NUMBER">
-      <div class="thumbnail-text">
-      </div>
-      <div class="image-container" style="width: var(--thumbnail-width); height: var(--thumbnail-height);">
+    <div class="thumbnail" data-page-number="PAGE_NUMBER" style="border: none">
+      <input id="thumbnail-cbx-PAGE_NUMBER" data-page-number="PAGE_NUMBER" class="thumbnail-radiobutton" type="radio" style="top: 100px; right: 25px; position: relative; transform: scale(1.5)"
+      />
+      <div class="thumbnail-text"></div>
+      <div class="image-container" style="width: var(--thumbnail-width); height: var(--thumbnail-height)">
         <img class="thumbnailImage" />
       </div>
-      <div style="margin-top: -30px; margin-left: auto; margin-right: auto; text-align: center; width: 25px; height: 25px; border-radius: 50%; background-color: blue; color: white; line-height: 25px">
+      <div
+        style="margin-top: -30px;margin-left: auto;margin-right: auto;text-align: center;width: 25px;height: 25px;border-radius: 50%;background-color: blue;
+          color: white;line-height: 25px;">
         #PAGE_NUMBER
       </div>
     </div>

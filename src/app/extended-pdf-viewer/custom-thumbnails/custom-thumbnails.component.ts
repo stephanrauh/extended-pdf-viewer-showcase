@@ -1,20 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { PDFNotificationService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
+import { Component, effect, ViewEncapsulation } from '@angular/core';
+import { IPDFViewerApplication, PDFNotificationService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
-
-(window as any).updateThumbnailSelection = (page: number) => {
-  (window as any).PDFViewerApplication.page = page;
-  setTimeout(() => {
-    const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
-    if (radiobuttons) {
-      for (let i = 1; i <= radiobuttons.length; i++) {
-        const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
-        console.log('updateThumbnailSelection', i, page, cbx.getAttribute('data-page-number'));
-        cbx.checked = cbx.getAttribute('data-page-number') === String(page);
-      }
-    }
-  });
-};
 
 @Component({
   selector: 'app-custom-thumbnails',
@@ -25,7 +11,7 @@ import { isLocalhost } from '../common/utilities';
 export class CustomThumbnailsComponent {
   private _fullscreen = false;
 
-  public pdfjsVersion!: string;
+  public rotation: 0 | 180 = 0;
 
   public isLocalhost = isLocalhost();
 
@@ -37,18 +23,24 @@ export class CustomThumbnailsComponent {
     this._fullscreen = full;
   }
 
-  constructor(private notification: PDFNotificationService) {
-    this.pdfjsVersion = this.notification.pdfjsVersion;
+  private PDFViewerApplication!: IPDFViewerApplication;
+
+  constructor(notificationService: PDFNotificationService) {
+    effect(() => {
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+    });
   }
 
   public onPageChange(page: number): void {
-    const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
-    if (radiobuttons) {
-      for (let i = 1; i <= radiobuttons.length; i++) {
-        const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
-        cbx.checked = cbx.getAttribute('data-page-number') === String(page);
+    setTimeout(() => {
+      const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
+      if (radiobuttons) {
+        for (let i = 1; i <= radiobuttons.length; i++) {
+          const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
+          cbx.checked = cbx.getAttribute('data-page-number') === String(page);
+        }
       }
-    }
+    });
   }
 
   public onThumbnailDrawn(thumbnailEvent: PdfThumbnailDrawnEvent): void {
@@ -56,8 +48,11 @@ export class CustomThumbnailsComponent {
     const thumbnail = thumbnailEvent.thumbnail;
     const page = thumbnailEvent.pageId;
 
-    if (page === (window as any).PDFViewerApplication.page) {
-      (window as any).updateThumbnailSelection(page);
+    if (page === this.PDFViewerApplication.page) {
+      const radiobutton = thumbnail.querySelector('input.thumbnail-radiobutton');
+      if (radiobutton instanceof HTMLInputElement) {
+        radiobutton.checked = true;
+      }
     }
 
     const overlay = thumbnail.querySelector('.image-container') as HTMLElement;
@@ -76,5 +71,9 @@ export class CustomThumbnailsComponent {
     if (textNode) {
       textNode.innerText = type;
     }
+
+    overlay.ondblclick = () => {
+      this.rotation = this.rotation ? 0 : 180;
+    };
   }
 }

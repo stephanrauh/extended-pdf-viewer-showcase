@@ -2,8 +2,9 @@
 <ngx-extended-pdf-viewer
     [src]="'/assets/pdfs/stluciadance.com.pdf'"
     [customThumbnail]="radiobuttonThumbnail"
-    [height]="'90vh'"
     (pageChange)="onPageChange($event)"
-    (thumbnailDrawn)="onThumbnailDrawn($event)">
+    (thumbnailDrawn)="onThumbnailDrawn($event)"
+    [sidebarVisible]="true"
+    [activeSidebarView]="1">
 </ngx-extended-pdf-viewer>
 ```

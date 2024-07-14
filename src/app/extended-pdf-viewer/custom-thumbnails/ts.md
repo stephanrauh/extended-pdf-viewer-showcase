@@ -1,32 +1,29 @@
-```typescript
-(window as any).updateThumbnailSelection = (page: number) => {
-  (window as any).PDFViewerApplication.page = page;
-  setTimeout(() => {
-    const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
-    if (radiobuttons) {
-      for (let i = 1; i <= radiobuttons.length; i++) {
-        const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
-        cbx.checked = cbx.getAttribute("data-page-number") === String(page);
+  ```typescript
+  public onThumbnailDrawn(thumbnailEvent: PdfThumbnailDrawnEvent): void {
+    const thumbnail = thumbnailEvent.thumbnail;
+
+    if (page === this.PDFViewerApplication.page) {
+      const radiobutton = thumbnail.querySelector('input.thumbnail-radiobutton');
+      if (radiobutton instanceof HTMLInputElement) {
+        radiobutton.checked = true;
       }
     }
-  });
-};
 
-@Component({
-  selector: 'app-custom-thumbnails',
-  templateUrl: './custom-thumbnails.component.html',
-  styleUrls: ['./custom-thumbnails.component.css'],
-  encapsulation: ViewEncapsulation.None,
-})
-export class CustomThumbnailsComponent {
-  public onPageChange(page: number): void {
-    const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
-    if (radiobuttons) {
-      for (let i = 1; i <= radiobuttons.length; i++) {
-        const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
-        cbx.checked = cbx.getAttribute("data-page-number") === String(page);
-      }
+    const overlay = thumbnail.querySelector('.image-container') as HTMLElement;
+    let type: string;
+    if (page <= 2) {
+      overlay.style.backgroundColor = '#0000FF40';
+      type = 'title page';
+    } else if (page === 3 || page === 4) {
+      overlay.style.backgroundColor = '#00FF0040';
+      type = 'table of contents';
+    } else {
+      overlay.style.backgroundColor = '#FF000040';
+      type = 'ready for review';
+    }
+    const textNode = thumbnail.querySelector('.thumbnail-text') as HTMLDivElement;
+    if (textNode) {
+      textNode.innerText = type;
     }
   }
-}
 ```
