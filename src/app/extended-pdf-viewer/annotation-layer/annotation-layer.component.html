@@ -1,31 +1,37 @@
 <div class="flex-container-column fill-container">
   <div class="flex-container-row"  *ngIf="!fullscreen">
     <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:100%; box-sizing: border-box; max-width:60%;">
-        <p>
-          The PDF viewer always renders the PDF file as a canvas. Often, it also generates additional layers on top of the canvas:
-        </p>
-          <ul>
-          <li>The text layer allows you to mark and copy text. It's also the base of the search engine. You can render fast if
-            you set <code>[textLayer]="false"</code>, but if you do, your users can't use the find bar.</li>
-          <li>Interactive forms are part of the annotation layer.</li>
-          <li>The editors of this PDF viewer use another layer to store you drawings and free-text.</li>
-          </ul>
+      <mat-tab-group>
+        <mat-tab label="Types of layers">
           <p>
-          You don't have to think much about these layers most of the time. However, these layers are HTML divs, and you can
-          manipulate them. </p>
-          <p>
-          For example, this demo uses the event listener
-          <code>(annotationLayerRendered)</code> to fix a layout error in the document itself. The author has added a copyright box on page ii.
-          By default, the box is too large, so the box is clipped. That looks attractive, too, but this demo reduces the size of the box
-          to make it fit into the box without clipping it. As a side effect, the underlying link to a popular book vendor becomes visible.
-        </p><p>
-          Note that I don't want to do advertising. Please ignore the actual link unless you've read the example PDF and if you want to support
-          the author by buying his book.
-          To see the link, move the mouse slowly over the box until it becomes yellow. Technically speaking, I suspect that's a bug of
-          pdf.js, because other PDF viewers always render the link without showing the info box.</p>
-          <p>
-          There's a catch: the <code>(annotationLayerRendered)</code> trick does not work in the thumbnail view.
+            The PDF viewer always renders the PDF file as a canvas. Often, it also generates additional layers on top of the canvas:
           </p>
+            <ul>
+            <li>The text layer allows you to mark and copy text. It's also the base of the search engine. You can render fast if
+              you set <code>[textLayer]="false"</code>, but if you do, your users can't use the find bar.</li>
+            <li>Interactive forms are part of the annotation layer.</li>
+            <li>The editors of this PDF viewer use another layer to store you drawings and free-text.</li>
+            </ul>
+            <p>
+            You don't have to think much about these layers most of the time. However, these layers are HTML divs, and you can
+            manipulate them. </p>
+            </mat-tab>
+            <mat-tab label="Manipulating the annotation layer">
+            <p>
+            This demo uses the event listener
+            <code>(annotationLayerRendered)</code> to fix a layout error in the document itself. The author has added a copyright box on page ii.
+            By default, the box is too large, so the box is clipped. That looks attractive, too, but this demo reduces the size of the box
+            to make it fit into the box without clipping it. As a side effect, the underlying link to a popular book vendor becomes visible.
+          </p><p>
+            The demo also simulates a click on the popup trigger area. The popup appears on the right-hand side of
+            the copyright box and has the same content. That looks a bit off - it's probably another bug of the PDF file. However, you can use this trick to open
+            comment annotations programmatically, but I can't demonstrate that because I don't have a document under a friendly copyright at hand.</p>
+            <p>
+            There's a catch: the <code>(annotationLayerRendered)</code> trick does not work in the thumbnail view.
+            </p>
+            <button mat-button mat-raised-button color="primary" (click)="toggleEveryPopup()">Toggle popup programmatically</button>
+        </mat-tab>
+      </mat-tab-group>
       </mat-card>
 
     <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
@@ -35,6 +41,9 @@
         </mat-tab>
         <mat-tab label="TypeScript">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/annotation-layer/ts.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="Open popups programmatically">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/annotation-layer/ts2.md"> </app-ie11-markdown>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
@@ -54,7 +63,6 @@
   </button>
     <ngx-extended-pdf-viewer
       [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
-
       [page]="2"
       [zoom]="'auto'"
       (annotationLayerRendered)="onAnnotationLayerRendered($event)"

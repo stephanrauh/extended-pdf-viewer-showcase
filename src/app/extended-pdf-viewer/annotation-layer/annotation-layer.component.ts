@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { AnnotationLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
@@ -21,7 +21,7 @@ export class AnnotationLayerComponent {
 
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  constructor() {}
 
   public onAnnotationLayerRendered(event: AnnotationLayerRenderedEvent): void {
     const copyrightHint = event.source.div.querySelector('.freeTextAnnotation');
@@ -35,5 +35,11 @@ export class AnnotationLayerComponent {
         canvas.style.left="10%";
       }
     }
+  }
+
+  public toggleEveryPopup(): void {
+    document.querySelectorAll('.popupTriggerArea').forEach((popupTriggerArea) => {
+      (popupTriggerArea as HTMLElement).click();
+    });
   }
 }
