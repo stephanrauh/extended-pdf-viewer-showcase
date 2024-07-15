@@ -1,8 +1,7 @@
 ```html
   <ngx-extended-pdf-viewer
     [src]="src"
-    [password]="password"
-    
+    [password]="password"    
     [height]="'auto'"
   >
   </ngx-extended-pdf-viewer>

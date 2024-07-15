@@ -1,6 +1,5 @@
 import { Component, effect } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, PasswordPrompt, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { IPDFViewerApplication, PasswordPrompt, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { CustomPasswordPrompt } from './custom-password-prompt';
 
 @Component({
@@ -10,15 +9,15 @@ import { CustomPasswordPrompt } from './custom-password-prompt';
 })
 export class PasswordsComponent {
 
-  public src!: string;
+  public src: string = '/assets/pdfs/GraalVM-password-protected.pdf';
 
-  public password = "graalvm-rocks!";
+  public password: string | undefined = undefined;
 
   private _choice: string | undefined = undefined;
 
   private originalPasswordPrompt!: PasswordPrompt;
 
-  public isLocalhost = isLocalhost();
+
   private PDFViewerApplication?: IPDFViewerApplication;
 
   public get choice() {
@@ -46,7 +45,7 @@ export class PasswordsComponent {
     }
     setTimeout(() => {
       this.src = '/assets/pdfs/GraalVM-password-protected.pdf';
-    },200);
+    });
   }
 
   private _fullscreen = false;
@@ -60,7 +59,7 @@ export class PasswordsComponent {
 
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService, notificationService: PDFNotificationService) {
+  constructor(notificationService: PDFNotificationService) {
     this.choice = "graalvm-rocks!";
 
     effect(() => {
