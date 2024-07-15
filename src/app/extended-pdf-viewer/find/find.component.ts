@@ -84,7 +84,7 @@ export class FindComponent {
     });
   }
 
-  public isLocalhost = isLocalhost();
+
 
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef,
     notificationService: PDFNotificationService

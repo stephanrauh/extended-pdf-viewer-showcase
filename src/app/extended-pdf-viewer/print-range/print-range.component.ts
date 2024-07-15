@@ -19,7 +19,7 @@ export class PrintRangeComponent implements OnDestroy {
 
   private _excluded = '2,4,6,8';
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

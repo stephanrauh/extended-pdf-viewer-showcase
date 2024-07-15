@@ -19,7 +19,7 @@ export class LinksComponent  {
   // tslint:disable-next-line: variable-name
   private _target: number = LinkTarget.BLANK;;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

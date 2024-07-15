@@ -10,7 +10,7 @@ import { isLocalhost } from '../common/utilities';
 export class AnnotationLayerApiComponent {
   private _fullscreen = false;
 
-  public isLocalhost = isLocalhost();
+
 
   public get fullscreen(): boolean {
     return this._fullscreen;

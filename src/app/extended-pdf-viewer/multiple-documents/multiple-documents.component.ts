@@ -12,7 +12,7 @@ export class MultipleDocumentsComponent implements OnInit {
 
   public dragAndDrop = true;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

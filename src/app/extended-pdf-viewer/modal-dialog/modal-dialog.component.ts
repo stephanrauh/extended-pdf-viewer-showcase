@@ -11,7 +11,7 @@ export class ModalDialogComponent {
   @ViewChild(NgxExtendedPdfViewerComponent, {static: false})
   private pdfViewer!: NgxExtendedPdfViewerComponent;
 
-  public isLocalhost = isLocalhost();
+
 
   constructor(public dialogRef: MatDialogRef<ModalDialogComponent>) {
     dialogRef.beforeClosed().subscribe((result) => {

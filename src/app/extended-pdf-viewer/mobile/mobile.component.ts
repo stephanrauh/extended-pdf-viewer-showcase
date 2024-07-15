@@ -10,7 +10,7 @@ import { isLocalhost } from '../common/utilities';
 export class MobileComponent {
   public mobileFriendlyZoomSetting = '150%';
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

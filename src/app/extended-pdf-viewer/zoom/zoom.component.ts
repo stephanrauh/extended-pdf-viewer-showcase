@@ -43,7 +43,7 @@ export class ZoomComponent {
   public time = 0;
   public currentTime = 0;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

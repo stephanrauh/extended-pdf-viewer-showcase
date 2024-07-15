@@ -35,7 +35,7 @@ export class TwoWayBindingComponent {
 
   public currentZoomFactor!: number;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

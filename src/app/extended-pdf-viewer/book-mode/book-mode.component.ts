@@ -14,7 +14,7 @@ export class BookModeComponent {
 
   public fullscreen = false;
 
-  public isLocalhost = isLocalhost();
+
 
   private PDFViewerApplication!: IPDFViewerApplication;
 

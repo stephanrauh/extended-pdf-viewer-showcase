@@ -14,7 +14,7 @@ export class SignaturesComponent {
 
   public showPdf = true;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

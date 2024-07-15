@@ -9,7 +9,7 @@ import { isLocalhost } from '../common/utilities';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollingComponent {
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

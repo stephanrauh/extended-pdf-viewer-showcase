@@ -12,7 +12,7 @@ export class ExportFileComponent {
 
   public selectedTabIndex = 0;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

@@ -24,7 +24,7 @@ export class CustomFindComponent {
   public currentMatchNumber: number | undefined;
   public totalMatches: number | undefined;
 
-  public isLocalhost = isLocalhost();
+
 
   private pdfViewerApplication: IPDFViewerApplication | undefined;
 

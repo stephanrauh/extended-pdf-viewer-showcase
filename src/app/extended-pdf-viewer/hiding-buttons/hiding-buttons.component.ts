@@ -36,7 +36,7 @@ export class HidingButtonsComponent {
     this.showRotateCcwButton = rotate;
   }
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

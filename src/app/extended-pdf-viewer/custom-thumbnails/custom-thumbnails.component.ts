@@ -13,7 +13,7 @@ export class CustomThumbnailsComponent {
 
   public rotation: 0 | 180 = 0;
 
-  public isLocalhost = isLocalhost();
+
 
   public get fullscreen(): boolean {
     return this._fullscreen;

@@ -21,7 +21,7 @@ export class BlobComponent implements OnInit {
 
   public choice = "preloaded";
 
-  public isLocalhost = isLocalhost();
+
 
   public get fullscreen(): boolean {
     return this._fullscreen;

@@ -27,7 +27,7 @@ export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
 
   public scrollbar: PerfectScrollbar | undefined = undefined;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

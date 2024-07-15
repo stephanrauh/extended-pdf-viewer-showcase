@@ -18,7 +18,7 @@ export class CustomPrintDialogComponent {
   public hideBuiltInProgress = true;
   private _fullscreen = false;
 
-  public isLocalhost = isLocalhost();
+
 
   public get fullscreen(): boolean {
     return this._fullscreen;

@@ -30,7 +30,7 @@ export class SimpleComponent {
   /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
   private themeIfLocalStorageIsUnavailable = 'light';
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
   private PDFViewerApplication?: IPDFViewerApplication;

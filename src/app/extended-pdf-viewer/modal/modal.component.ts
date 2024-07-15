@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
-  public isLocalhost = isLocalhost();
+
 
 
 

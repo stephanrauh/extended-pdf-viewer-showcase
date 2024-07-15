@@ -92,7 +92,7 @@ export class ResponsiveDesignComponent {
     PdfBreakpoints.xxl = value;
   }
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

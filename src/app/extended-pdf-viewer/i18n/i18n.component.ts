@@ -14,7 +14,7 @@ export class I18nComponent {
 
   private _language: string | undefined = 'nl-BE';
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

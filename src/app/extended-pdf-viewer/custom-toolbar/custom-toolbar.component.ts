@@ -18,7 +18,7 @@ export class CustomToolbarComponent {
 
   public zoom = '100%';
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

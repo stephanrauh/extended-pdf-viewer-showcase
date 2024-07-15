@@ -11,7 +11,7 @@ import { WindowRefService } from 'src/app/window-ref.servce';
 export class FilteringConsoleLogComponent {
   public version = '';
 
-  public isLocalhost = isLocalhost();
+
 
   private PDFViewerApplication!: IPDFViewerApplication;
 

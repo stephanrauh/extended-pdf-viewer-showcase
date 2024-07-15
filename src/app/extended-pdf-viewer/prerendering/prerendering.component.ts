@@ -28,7 +28,7 @@ export class PrerenderingComponent {
 
   public visiblePages = '';
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

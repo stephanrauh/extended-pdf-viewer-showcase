@@ -12,7 +12,7 @@ export class LayersComponent {
 
   public layers: Array<PdfLayer> = [];
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

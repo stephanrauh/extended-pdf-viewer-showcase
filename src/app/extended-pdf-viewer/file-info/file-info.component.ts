@@ -21,7 +21,7 @@ export class FileInfoComponent {
 
   public fileInfo!: PdfDocumentInfo;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

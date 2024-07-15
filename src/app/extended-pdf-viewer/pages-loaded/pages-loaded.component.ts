@@ -10,7 +10,7 @@ import { isLocalhost } from '../common/utilities';
 export class PagesLoadedComponent {
   public messages: Array<string> = [];
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

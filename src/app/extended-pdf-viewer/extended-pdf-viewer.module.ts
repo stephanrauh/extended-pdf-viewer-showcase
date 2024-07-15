@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PasswordsComponent } from './passwords/passwords.component';
 
-import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerModule, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { SharedModule } from '../shared/shared.module';
 import { TouchEmulator } from '../touch-emulator';
 import { AttributesComponent } from './attributes/attributes.component';
@@ -74,9 +74,12 @@ import { SecurityComponent } from './security/security.component';
 import { AnnotationLayerApiComponent } from './annotation-layer-api/annotation-layer-api.component';
 import { EditorSettingsComponent } from './editor-settings/editor-settings.component';
 import { CustomFindComponent } from './custom-find/custom-find.component';
+import { isLocalhost } from './common/utilities';
 
 
 new TouchEmulator();
+
+pdfDefaultOptions._internalFilenameSuffix = isLocalhost()? '' : '.min';
 
 @NgModule({
   imports: [ExtendedPdfViewerRoutingModule, SharedModule, NgxExtendedPdfViewerModule],

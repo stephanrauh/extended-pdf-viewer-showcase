@@ -9,7 +9,7 @@ import { isLocalhost } from '../common/utilities';
 })
 export class PresentationComponent {
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

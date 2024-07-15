@@ -11,7 +11,7 @@ import { isLocalhost } from '../common/utilities';
 export class ThemingComponent {
   public _selectedTab = 1;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

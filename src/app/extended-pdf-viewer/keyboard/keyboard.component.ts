@@ -14,7 +14,7 @@ export class KeyboardComponent {
 
   public ignoreKeys = ['j', 'k', 'F4'];
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

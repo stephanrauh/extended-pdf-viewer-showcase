@@ -15,7 +15,7 @@ export class CustomSidebarComponent {
 
   public sidebarOpen = true;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

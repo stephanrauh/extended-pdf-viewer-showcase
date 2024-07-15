@@ -25,7 +25,7 @@ export class InfiniteScrollComponent {
 
   public showPdfViewer = true;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

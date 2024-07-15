@@ -25,7 +25,7 @@ export class ExportImageComponent {
 
   public selectedTabIndex = 0;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

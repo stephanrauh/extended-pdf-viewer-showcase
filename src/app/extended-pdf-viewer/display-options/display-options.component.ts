@@ -16,7 +16,7 @@ export class DisplayOptionsComponent {
 
   public spread: 'off' | 'odd' | 'even' = 'off';
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

@@ -13,7 +13,7 @@ export class ContextmenuComponent {
 
   private _fullscreen = false;
 
-  public isLocalhost = isLocalhost();
+
 
   public get fullscreen(): boolean {
     return this._fullscreen;

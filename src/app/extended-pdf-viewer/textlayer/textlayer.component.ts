@@ -18,7 +18,7 @@ export class TextlayerComponent {
 
   private alreadyRendered: Array<HTMLSpanElement> = [];
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

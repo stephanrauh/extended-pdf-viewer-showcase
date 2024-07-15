@@ -60,7 +60,7 @@ export class FormsComponent {
     [fieldName: string]: string | string[] | number | boolean;
   } = {};
 
-  public isLocalhost = isLocalhost();
+
   public leftTab = 0;
 
   public get fullscreen(): boolean {

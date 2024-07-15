@@ -10,7 +10,7 @@ import { isLocalhost } from '../common/utilities';
 })
 export class ScriptingComponent {
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 

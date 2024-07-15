@@ -15,7 +15,7 @@ export class PageViewModeComponent {
 
   public showBorders = true;
 
-  public isLocalhost = isLocalhost();
+
 
   private _fullscreen = false;
 
