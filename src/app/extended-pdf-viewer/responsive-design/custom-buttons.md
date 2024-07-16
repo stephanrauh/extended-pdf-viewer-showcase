@@ -26,14 +26,14 @@ pre-defined texts of the `viewer.properties` file. In most cases, `[title]` shou
 The `[action]` attribute is a bit tricky. You can't use `this` in the event listener method because the event listener is used both for the toolbar (`this` is available here) and the secondary menu (`this` is undefined here). I'm sure I've selected a clumsy solution, but here's my current approach:
 
 ```ts
-export class PdfInfiniteScrollComponent {
+export class PdfInfiniteScrollComponent implements OnDestroy {
   @Input() 
   public pageViewMode: PageViewModeType;
 
   @Output()
   public pageViewModeChange = new EventEmitter<PageViewModeType>();
 
-  public onClick: () => void;
+  public onClick?: () => void;
 
   constructor() {
     const emitter = this.pageViewModeChange;
@@ -42,6 +42,10 @@ export class PdfInfiniteScrollComponent {
            emitter.emit('infinite-scroll');
       });
     };
+  }
+
+  public ngOnDestroy(): void {
+    this.onClick = undefined;
   }
 }
 ```

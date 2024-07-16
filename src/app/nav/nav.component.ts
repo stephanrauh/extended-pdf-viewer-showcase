@@ -37,7 +37,7 @@ export class NavComponent {
 
   public pdfjsVersion = '';
 
-  constructor(private breakpointObserver: BreakpointObserver, private notification: PDFNotificationService, private route: ActivatedRoute
+  constructor(private breakpointObserver: BreakpointObserver, route: ActivatedRoute
 
   ) {
     route.url.subscribe((url) => {
@@ -45,7 +45,6 @@ export class NavComponent {
     });
 
     try {
-      this.pdfjsVersion = this.notification.pdfjsVersion;
       this.activateViewer();
     } catch (exception) {
       alert('Error! ' + exception);
@@ -55,7 +54,6 @@ export class NavComponent {
   public switchViewer(): void {
     try {
       if (localStorage) {
-        const previousViewer = localStorage.getItem('showcase.viewer');
         localStorage.setItem('showcase.viewer', this.viewer);
           location = location; // trigger reload
       }

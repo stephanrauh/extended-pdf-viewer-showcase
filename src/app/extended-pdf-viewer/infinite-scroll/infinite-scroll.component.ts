@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, PagesLoadedEvent, pdfDefaultOptions, ScrollModeType } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { ScrollModeType } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-infinite-scroll',
@@ -21,11 +20,9 @@ export class InfiniteScrollComponent {
 
   public zoom = '100%';
 
-  public file = 0;
+  public file = 1;
 
   public showPdfViewer = true;
-
-
 
   private _fullscreen = false;
 
@@ -35,12 +32,9 @@ export class InfiniteScrollComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
-    // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
-  }
+  constructor() {  }
 
   public get showWidgets(): boolean {
     return this._showWidgets;

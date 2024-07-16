@@ -29,7 +29,6 @@ import { FileInfoComponent } from './file-info/file-info.component';
 import { FilteringConsoleLogComponent } from './filtering-console-log/filtering-console-log.component';
 import { FindComponent } from './find/find.component';
 import { FormsComponent } from './forms/forms.component';
-import { GettingStartedComponent } from './getting-started/getting-started.component';
 import { HidingButtonsComponent } from './hiding-buttons/hiding-buttons.component';
 import { I18nComponent } from './i18n/i18n.component';
 import { IconInfoComponent } from './icons/icon-info/icon-info.component';
@@ -112,7 +111,6 @@ pdfDefaultOptions._internalFilenameSuffix = isLocalhost()? '' : '.min';
     FilteringConsoleLogComponent,
     FindComponent,
     FormsComponent,
-    GettingStartedComponent,
     HidingButtonsComponent,
     I18nComponent,
     IconInfoComponent,

@@ -7,6 +7,7 @@ import { NavComponent } from './nav/nav.component';
 import { AppCommonModule } from './app.common.module';
 import { ExtendedPdfViewerMenuComponent } from './nav/extended-pdf-viewer-menu/extended-pdf-viewer-menu.component';
 import { OctocatComponent } from './nav/octocat/octocat.component';
+import { GettingStartedComponent } from './nav/getting-started/getting-started.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { OctocatComponent } from './nav/octocat/octocat.component';
     NavComponent,
     OctocatComponent,
     ExtendedPdfViewerMenuComponent,
+    GettingStartedComponent
   ],
   imports: [
     AppCommonModule,

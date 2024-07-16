@@ -4,9 +4,7 @@
 
 You can get the PDF viewer up and running in roughly two minutes. You need node.js, npm and a current version of Angular. This library aims to be compatible to the last four versions of Angular, which gives you two years time to update.
 
-At the moment, I maintain two versions of ngx-extended-pdf-viewer:
-- Version 18 supports Angular 12 - 17.
-- Version 19 supports Angular 16 and 17 (and probably also one or two future versions).
+With very few exceptions, I only maintain the most current version of the viewer. As much as I'd like to provide bug fixes to older versions, I don't have enough time to spare.
 
 ## Just in case you haven't got an Angular project yet
 
