@@ -1,16 +1,12 @@
-import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { Component, effect } from '@angular/core';
 
 @Component({
   selector: 'app-mobile',
   templateUrl: './mobile.component.html',
-  styleUrls: ['./mobile.component.css']
+  styleUrls: ['./mobile.component.css'],
 })
 export class MobileComponent {
   public mobileFriendlyZoomSetting = '150%';
-
-
 
   private _fullscreen = false;
 
@@ -20,8 +16,5 @@ export class MobileComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
-
-  constructor(private pdfService: NgxExtendedPdfViewerService){}
 }

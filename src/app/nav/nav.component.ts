@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { pdfDefaultOptions, PDFNotificationService, PDFScriptLoaderService } from 'ngx-extended-pdf-viewer';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { versions } from './versions';
 import { ActivatedRoute } from '@angular/router';
 @Component({
