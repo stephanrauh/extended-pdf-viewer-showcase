@@ -67,6 +67,7 @@ import { SecurityComponent } from './security/security.component';
 import { AnnotationLayerApiComponent } from './annotation-layer-api/annotation-layer-api.component';
 import { EditorSettingsComponent } from './editor-settings/editor-settings.component';
 import { CustomFindComponent } from './custom-find/custom-find.component';
+import { CSPComponent } from './csp/csp.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,7 @@ const routes: Routes = [
   { path: 'changelog', component: ChangelogComponent },
   { path: 'changelog', component: ChangelogComponent },
   { path: 'contextmenu', component: ContextmenuComponent },
+  { path: 'csp', component: CSPComponent },
   { path: 'css', component: CSSComponent },
   { path: 'options', component: DefaultOptionsComponent },
   { path: 'customization', component: CustomizationComponent },

@@ -74,6 +74,7 @@ import { AnnotationLayerApiComponent } from './annotation-layer-api/annotation-l
 import { EditorSettingsComponent } from './editor-settings/editor-settings.component';
 import { CustomFindComponent } from './custom-find/custom-find.component';
 import { isLocalhost } from './common/utilities';
+import { CSPComponent } from './csp/csp.component';
 
 
 new TouchEmulator();
@@ -92,6 +93,7 @@ pdfDefaultOptions._internalFilenameSuffix = isLocalhost()? '' : '.min';
     BrowserSupportComponent,
     ChangelogComponent,
     ContextmenuComponent,
+    CSPComponent,
     CSSComponent,
     CustomizationComponent,
     CustomPrintDialogComponent,
