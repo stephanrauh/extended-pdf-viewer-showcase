@@ -19,17 +19,10 @@
       </mat-tab>
       <mat-tab label="Available options">
         <dl>
-          <dt><s>activateWillReadFrequentlyFlag</s></dt>
-          <dd>This is an experimental option, removed in version 21 because it's been replaced by <code>enableHWA</code>. By default it's set to <code>false</code>. Sometimes, setting it to <code>true</code> solves rendering issues on Chrome on Windows. However,
-            this has a negative impact on performance. Only activate this feature if nothing else helps. At the moment, my recommendation - admittedly based on gut feeling
-            and very little insight into PDF file creation - is to double-check if there's something wrong with your PDF file. The only PDF file with rendering issues
-            looks innocently simple but renders remarkably slow, so I suspect the problems are caused by the internal architecture of the PDF file. If you're running into this issue and
-            have some insight what's going on, please reach out to me. The community of developers is going to appreciate your help!
-          </dd>
           <dt>enableHWA</dt>
           <dd>Enable hardware acceleration. The default value is <code>true</code>. If you're running into rendering issues, try setting this flag to <code>false</code>.
-           Note that this flag is only avaible in pdf.js 4.4 and above, and that it's the exact opposite of the flag <code>activateWillReadFrequentlyFlag</code> in pdf.js 4.3
-           and below.
+           Note that this flag is only avaible in pdf.js 4.4 and above, and that it's the exact opposite of the flag <code>activateWillReadFrequentlyFlag</code>
+           that has been removed in version 21.
           </dd>
           <dt>assetsFolder</dt>
           <dd>URL of the assets folder (relative to the <code>index.html</code>). Changing this attribute modifies the value
