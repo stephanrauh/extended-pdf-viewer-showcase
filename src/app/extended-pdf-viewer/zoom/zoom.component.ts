@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, pdfDefaultOptions, PageRenderEvent } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
+import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { WindowRefService } from 'src/app/window-ref.servce';
 
 @Component({
   selector: 'app-zoom',
@@ -9,6 +9,9 @@ import { isLocalhost } from '../common/utilities';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ZoomComponent {
+
+  public resolution = "";
+
   private _zoomSetting: number | string | undefined = 'page-width';
 
   public isMobile = 'ontouchstart' in document.documentElement;
@@ -82,9 +85,30 @@ export class ZoomComponent {
     }
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
-      pdfDefaultOptions.maxCanvasPixels = -1;
+  constructor(private windowRefService: WindowRefService,
+    notificationService: PDFNotificationService) {
+      if (this.windowRefService.nativeWindow) {
+        effect(() => {
+          const PDFViewerApplication = notificationService.onPDFJSInitSignal();
+          if (PDFViewerApplication) {
+            this.init(PDFViewerApplication);
+          }
+        });
+      }
   }
+
+  public init(PDFViewerApplication: IPDFViewerApplication): void {
+    if (PDFViewerApplication?.ngxConsole) {
+      PDFViewerApplication.ngxConsole.ngxConsoleFilter = (level: string, message: any): boolean => {
+        if (message?.includes && message?.includes('Reduced the maximum resolution')) {
+          const index = message.indexOf('Reduced the maximum resolution');
+          this.resolution = message.substring(index);
+          return true;
+        }
+        return true;
+      };
+  }
+}
 
   public updateZoomFactor(zoom: number): void {
     this.currentZoomFactor = zoom;

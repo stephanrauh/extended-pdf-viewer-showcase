@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { timestamp } from 'rxjs/operators';
-import { isLocalhost } from '../common/utilities';
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'app-signatures',
@@ -35,9 +33,5 @@ export class SignaturesComponent {
     this._showSignature = show;
     this.showPdf = false;
     setTimeout(() => this.showPdf = true, 100);
-  }
-
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
-    // pdfDefaultOptions.renderInteractiveForms = false;
   }
 }

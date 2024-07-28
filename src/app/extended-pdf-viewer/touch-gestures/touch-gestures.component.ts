@@ -29,5 +29,6 @@ export class TouchGesturesComponent {
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {
     pdfDefaultOptions.doubleTapZoomFactor = "125%";
+    pdfDefaultOptions.doubleTapResetsZoomOnSecondDoubleTap=true;
   }
 }

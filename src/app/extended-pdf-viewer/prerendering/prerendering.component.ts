@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import {
-  AnnotationLayerRenderedEvent,
   NgxExtendedPdfViewerService,
   pdfDefaultOptions,
 } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-prerendering',

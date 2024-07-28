@@ -6,6 +6,12 @@
       <p>The double-tap (or double-click) gesture enlarges the PDF file. By default, the target zoom is "page-width". You can define a
         different target zoom by setting <code>pdfDefaultOptions.doubleTapZoomFactor</code>. In this demo, that's 125%.
       </p>
+      <p>There are three additional settings:</p>
+      <ul>
+        <li><code>pdfDefaultOptions.doubleTapZoomsInHandMode</code> Activates the double-tap gesture when the hand mode is active. True by default. </li>
+        <li><code>pdfDefaultOptions.doubleTapZoomsInTextSelectionMode</code> Activates the double-tap gesture when the select mode is active. False by default.</li>
+        <li><code>pdfDefaultOptions.doubleTapResetsZoomOnSecondDoubleTap</code> Allows you to reset the zoom on a second double-tap. False by default (but true in this demo).</li>
+      </ul>
       </mat-tab>
 
 

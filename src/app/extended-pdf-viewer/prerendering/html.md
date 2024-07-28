@@ -7,5 +7,5 @@
     [(pageLabel)]="pageLabel"
     [textLayer]="true"
     (pageRendered)="onPageRendered()">
-    </ngx-extended-pdf-viewer>
+</ngx-extended-pdf-viewer>
 ```

@@ -20,6 +20,8 @@
           <br />
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDrawEditor">showDrawEditor</mat-checkbox>
           <br />
+          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHighlightEditor">showHighlightEditor</mat-checkbox>
+          <br />
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showStampEditor">showStampEditor</mat-checkbox>
           <br />
           <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showTextEditor">showTextEditor</mat-checkbox>
@@ -89,6 +91,7 @@
       [showFindButton]="showFindButton"
       [showDrawEditor]="showDrawEditor"
       [showStampEditor]="showStampEditor"
+      [showHighlightEditor]="showHighlightEditor"
       [showTextEditor]="showTextEditor"
       [textLayer]="true"
       [showPagingButtons]="showPagingButtons"

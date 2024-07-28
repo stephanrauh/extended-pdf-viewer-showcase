@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, OnDestroy } from '@angular/core';
 import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
 import { isLocalhost } from '../common/utilities';
@@ -9,7 +9,7 @@ import { isLocalhost } from '../common/utilities';
   styleUrls: ['./simple.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SimpleComponent {
+export class SimpleComponent implements OnDestroy {
   // tslint:disable-next-line: variable-name
   public _selectedTab = 0;
 
@@ -29,8 +29,6 @@ export class SimpleComponent {
 
   /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
   private themeIfLocalStorageIsUnavailable = 'light';
-
-
 
   private _fullscreen = false;
   private PDFViewerApplication?: IPDFViewerApplication;
@@ -113,7 +111,7 @@ export class SimpleComponent {
     // In general, that's not a good idea, but if you know what you're doing, you may
     // be able to tweak performance by fine-tuning the range chunk size according to the
     // needs of your application and infrastructure
-    pdfDefaultOptions.rangeChunkSize=1024*128;
+    pdfDefaultOptions.rangeChunkSize=1024*256;
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
     });
@@ -161,5 +159,7 @@ export class SimpleComponent {
     console.log("Rendered", event);
   }
 
-
+  public ngOnDestroy() {
+    pdfDefaultOptions.rangeChunkSize = 64 * 1024; // restore the default value
+  }
 }

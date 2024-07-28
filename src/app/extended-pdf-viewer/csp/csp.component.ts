@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
@@ -7,7 +7,7 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./csp.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CSPComponent {
+export class CSPComponent implements OnDestroy {
   // tslint:disable-next-line: variable-name
   public _useInlineScripts = false;
 
@@ -26,4 +26,7 @@ export class CSPComponent {
     location.search = `useInlineScripts=${value}`;
   }
 
+  public ngOnDestroy() {
+    pdfDefaultOptions.rangeChunkSize = 64 * 1024; // restore the default value
+  }
 }

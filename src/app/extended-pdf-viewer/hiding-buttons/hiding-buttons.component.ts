@@ -13,6 +13,7 @@ export class HidingButtonsComponent {
   public showFindButton = true;
   public findbarVisible = false;
   public showDrawEditor = false;
+  public showHighlightEditor = false;
   public showTextEditor = false;
   public showStampEditor = false;
   public showPagingButtons = false;

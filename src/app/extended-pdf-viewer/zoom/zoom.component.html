@@ -19,6 +19,7 @@
           <mat-radio-button value="page-width">[zoom]="page-width"</mat-radio-button>
         </mat-radio-group>
         <div class="distance-top">Selected zoom level: {{ zoomSetting === undefined ? "undefined" : zoomSetting }}; current zoom level: {{ currentZoomFactor | percent }}</div>
+        <p *ngIf="resolution">{{resolution}}</p>
       </mat-tab>
       <mat-tab label="zoom levels">
         <p>The attributes <code>minZoom</code> and  <code>maxZoom</code> limit the zoom factor you can get by pinching or by hitting the "+" or "-" button.
@@ -39,14 +40,18 @@
         </section>
       </mat-tab>
       <mat-tab label="huge zoom levels">
-        <p>By default, the PDF viewer renders the PDF file on a canvas with up tp 4096 x 4096 pixels. You can lift this restriction by setting
-          <code>pdfDefaultOptions.maxCanvasPixels = -1</code> in the constructor. Depending on your device, this may result in a performance
-          penalty. ngx-extended-pdf-viewer runs a test to determine the maximum size. Depending on your hardware and browsers,
-          you <a target="#" href="https://www.npmjs.com/package/canvas-size#test-results">can reach a resolution of up to 16,384 x 16,384 pixels</a>.
+        <p>If the resolution of the PDF is very high, the PDF viewer calculates the maximum canvas size. If the canvas size exceeds the
+          maximum canvas size, ngx-extended-pdf-viewer reduces the resolution and activates CSS scaling. On most devices and with most
+          PDF documents, this probably never happens. The demo exceeds the maximum canvas size by setting the zoom level to 1500%.</p>
+          <p>You can trade performance for blurryness by limiting the maximum canvas size by setting <code>pdfDefaultOptions.maxCanvasPixels</code>
+            in the constructor.</p>
+          <p>Here's a
+             <a target="#" href="https://www.npmjs.com/package/canvas-size#test-results">list of the maximum canvas sizes on many browsers and devices</a>.
         </p>
         <p>If you exceed this setting, or if the necessary canvas size is larger than <code>pdfDefaultOptions.maxCanvasPixels</code> defines,
           ngx-extended-pdf-viewer limits the canvas size and activates CSS scaling. So you can get higher zoom levels, but the
           text may be blurry.</p>
+          <p *ngIf="resolution">{{resolution}}</p>
       </mat-tab>
      </mat-tab-group>
   </mat-card>
