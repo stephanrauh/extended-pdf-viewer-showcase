@@ -34,7 +34,7 @@ export class ExportAnnotationsComponent {
   }
 
   public exportAnnotations(): void {
-    this.selectedTabIndex = 4;
+    this.selectedTabIndex = 5;
     this.rawAnnotations = this.pdfViewerService.getSerializedAnnotations();
   }
 
