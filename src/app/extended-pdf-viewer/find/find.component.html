@@ -3,15 +3,23 @@
     <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:55%">
       <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab=$event">
         <mat-tab label="Find API">
-          <section class="section">
-            <mat-form-field>
+          <section class="section" style="display: flex">
+            <mat-form-field style="flex-shrink: 0;">
               <input matInput class="margin" [(ngModel)]="searchtext" placeholder="search term" />
             </mat-form-field>
-            &nbsp;
+            <div style="width:20px"></div>
+            <div style="flex: auto">
             <small *ngIf="findState !== undefined"
-              ><span style="margin-left: 24px">{{ findStateText }}</span>
-              <span style="margin-left: 24px" *ngIf="totalMatches && totalMatches > 0">Result {{ currentMatchNumber }} of {{ totalMatches }} </span></small
+            >{{ findStateText }}
+            <br>
+            <span *ngIf="pagesWithResult.length>0"
+            ><span >on page {{ pagesWithResult.join(", ") }}</span>
+            </span>
+            <br>
+            <span *ngIf="totalMatches && totalMatches > 0"> selected: result {{ currentMatchNumber }} of {{ totalMatches }} </span></small
             >
+
+          </div>
           </section>
           <section class="section">
             <mat-checkbox class="margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()">highlight all</mat-checkbox>
@@ -26,6 +34,10 @@
             <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()">match diacritics</mat-checkbox>
             <small style="margin-left: 24px">(try "licao" to find "lição")</small>
           </section>
+          <section class="section">
+            <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()">don't scroll the find result into view</mat-checkbox>
+          </section>
+
           <section class="section" style="margin-top: 5px; margin-bottom: 10px">
             <button mat-raised-button color="primary" (click)="findNext()">next</button>
             <button mat-raised-button color="primary" (click)="findPrevious()" style="margin-left: 10px">previous</button>
@@ -96,7 +108,7 @@
       [height]="'90vh'"
       [handTool]="false"
       [showHandToolButton]="true"
-      [page]="9"
+      [page]="1"
 
     >
     </ngx-extended-pdf-viewer>

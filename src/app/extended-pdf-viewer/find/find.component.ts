@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, effect } from '@angular/core';
-import { FindOptions, IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, RenderedTextLayerHighlights } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
   selector: 'app-find',
@@ -10,7 +9,7 @@ import { isLocalhost } from '../common/utilities';
 })
 export class FindComponent {
   // tslint:disable-next-line:variable-name
-  public _searchtext = '';
+  public _searchtext = 'Brazilian';
 
   public highlightAll = false;
   public matchCase = false;
@@ -27,6 +26,9 @@ export class FindComponent {
 
   private _selectedTab: number = 0;
   private PDFViewerApplication!: IPDFViewerApplication;
+  public dontScrollIntoView: boolean | undefined;
+
+  public pagesWithResult: Array<number> = [];
 
   public get selectedTab(): number {
     return this._selectedTab;
@@ -71,16 +73,24 @@ export class FindComponent {
   }
 
   private find() {
+    this.pagesWithResult = [];
     if (!this._searchtext) {
       this.findState = undefined;
       this.currentMatchNumber = undefined;
       this.totalMatches = undefined;
     }
-    this.ngxExtendedPdfViewerService.find(this._searchtext, {
+    const numberOfResultsPromises = this.ngxExtendedPdfViewerService.find(this._searchtext, {
       highlightAll: this.highlightAll,
       matchCase: this.matchCase,
       wholeWords: this.wholeWord,
       matchDiacritics: this.matchDiacritics,
+      dontScrollIntoView: this.dontScrollIntoView
+    });
+    numberOfResultsPromises?.forEach(async (numberOfResultsPromise, pageIndex) => {
+      const numberOfResultsPerPage = await numberOfResultsPromise;
+      if (numberOfResultsPerPage > 0) {
+        this.pagesWithResult.push(pageIndex);
+      }
     });
   }
 
@@ -91,6 +101,11 @@ export class FindComponent {
   ) {
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+      this.PDFViewerApplication?.eventBus?.on('renderedtextlayerhighlights', (event: RenderedTextLayerHighlights) => {
+        event.highlights.forEach((highlight) => {
+          highlight.style.border = '2px solid black';
+        });
+      });
     });
   }
 
@@ -102,9 +117,6 @@ export class FindComponent {
     this.currentMatchNumber = result.current;
     this.totalMatches = result.total;
     this.cdr.detectChanges();
-    if (this._selectedTab === 1) {
-      this.onUpdateFindResult(result);
-    }
   }
 
   public onCheckboxClicked() {
@@ -113,6 +125,7 @@ export class FindComponent {
       matchCase: this.matchCase,
       wholeWords: this.wholeWord,
       matchDiacritics: this.matchDiacritics,
+      dontScrollIntoView: this.dontScrollIntoView
     });
   }
 
@@ -131,29 +144,5 @@ export class FindComponent {
     });
   }
 
-  private onUpdateFindResult(event: FindResultMatchesCount): void {
-    const matchIndexes = event.matches as Array<Array<number>>;
-    const matchesLengths = event.matchesLength as Array<Array<number>>;
 
-    setTimeout(() => {
-      matchIndexes.forEach((findings, page) => {
-        if (findings?.length > 0) {
-          const currentPage = this.PDFViewerApplication.pdfViewer._pages[page];
-          if (currentPage.textHighlighter.textDivs) {
-            if (page && matchesLengths[page][0] > 0) {
-              const converted = currentPage.textHighlighter._convertMatches([matchIndexes[page]], [matchesLengths[page]]) as Array<any>;
-              const allSpans = currentPage.div.querySelectorAll('.textLayer > span') as NodeList;
-              allSpans.forEach((span, index) => {
-                if (converted.some((highlight) => index >= highlight.begin.divIdx && index <= highlight.end.divIdx)) {
-                  (span as HTMLElement).classList.remove('fade-out');
-                } else {
-                  (span as HTMLElement).classList.add('fade-out');
-                }
-              });
-            }
-          }
-        }
-      });
-    }, 200);
-  }
 }

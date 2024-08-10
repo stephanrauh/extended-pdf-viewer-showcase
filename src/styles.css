@@ -12,6 +12,10 @@
   height: 32px !important;
 }
 
+.mat-mdc-checkbox-touch-target {
+  height: 32px !important;
+}
+
 .mat-mdc-card {
   padding-left: 0.5em;
   padding-right: 0.5em;
