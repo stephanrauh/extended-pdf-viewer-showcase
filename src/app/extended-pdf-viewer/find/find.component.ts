@@ -9,12 +9,19 @@ import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
 })
 export class FindComponent {
   // tslint:disable-next-line:variable-name
-  public _searchtext = 'Brazilian';
+  public _searchtext = '';
 
   public highlightAll = false;
   public matchCase = false;
   public wholeWord = false;
   public matchDiacritics = false;
+
+  public _searchtext2 = 'Portuguese';
+
+  public highlightAll2 = false;
+  public matchCase2 = false;
+  public wholeWord2 = false;
+  public matchDiacritics2 = false;
 
   public currentMatchNumber: number | undefined;
 
@@ -27,6 +34,8 @@ export class FindComponent {
   private _selectedTab: number = 0;
   private PDFViewerApplication!: IPDFViewerApplication;
   public dontScrollIntoView: boolean | undefined;
+  public dontScrollIntoView2: boolean | undefined;
+
 
   public pagesWithResult: Array<number> = [];
 
@@ -36,7 +45,15 @@ export class FindComponent {
 
   public set selectedTab(tab) {
     this._selectedTab = tab;
-    if (tab !== 1) {
+    if (tab === 1) {
+      this._searchtext2 = "Portuguese";
+      this.highlightAll2 = true;
+      this.find2();
+      this._searchtext = "Brazilian";
+      this.highlightAll = true;
+      this.find();
+    }
+    if (tab !== 2) {
       this.resetFindResult();
     }
   }
@@ -72,7 +89,16 @@ export class FindComponent {
     this.find();
   }
 
-  private find() {
+  public get searchtext2(): string {
+    return this._searchtext2;
+  }
+
+  public set searchtext2(text: string) {
+    this._searchtext2 = text;
+    this.find2();
+  }
+
+  private find(): void {
     this.pagesWithResult = [];
     if (!this._searchtext) {
       this.findState = undefined;
@@ -84,7 +110,31 @@ export class FindComponent {
       matchCase: this.matchCase,
       wholeWords: this.wholeWord,
       matchDiacritics: this.matchDiacritics,
-      dontScrollIntoView: this.dontScrollIntoView
+      dontScrollIntoView: this.dontScrollIntoView,
+      useSecondaryFindcontroller: false
+    });
+    numberOfResultsPromises?.forEach(async (numberOfResultsPromise, pageIndex) => {
+      const numberOfResultsPerPage = await numberOfResultsPromise;
+      if (numberOfResultsPerPage > 0) {
+        this.pagesWithResult.push(pageIndex);
+      }
+    });
+  }
+
+  private find2(): void {
+    this.pagesWithResult = [];
+    if (!this._searchtext2) {
+      this.findState = undefined;
+      this.currentMatchNumber = undefined;
+      this.totalMatches = undefined;
+    }
+    const numberOfResultsPromises = this.ngxExtendedPdfViewerService.find(this._searchtext2, {
+      highlightAll: this.highlightAll2,
+      matchCase: this.matchCase2,
+      wholeWords: this.wholeWord2,
+      matchDiacritics: this.matchDiacritics2,
+      dontScrollIntoView: this.dontScrollIntoView2,
+      useSecondaryFindcontroller: true
     });
     numberOfResultsPromises?.forEach(async (numberOfResultsPromise, pageIndex) => {
       const numberOfResultsPerPage = await numberOfResultsPromise;
@@ -125,16 +175,29 @@ export class FindComponent {
       matchCase: this.matchCase,
       wholeWords: this.wholeWord,
       matchDiacritics: this.matchDiacritics,
-      dontScrollIntoView: this.dontScrollIntoView
+      dontScrollIntoView: this.dontScrollIntoView,
+      useSecondaryFindcontroller: false
     });
   }
 
-  public findNext(): void {
-    this.ngxExtendedPdfViewerService.findNext();
+  public onCheckboxClicked2() {
+    this.ngxExtendedPdfViewerService.find(this._searchtext2, {
+      highlightAll: this.highlightAll2,
+      matchCase: this.matchCase2,
+      wholeWords: this.wholeWord2,
+      matchDiacritics: this.matchDiacritics2,
+      dontScrollIntoView: this.dontScrollIntoView2,
+      useSecondaryFindcontroller: true
+    });
   }
 
-  public findPrevious(): void {
-    this.ngxExtendedPdfViewerService.findPrevious();
+
+  public findNext(useSecondaryFindcontroller: boolean): void {
+    this.ngxExtendedPdfViewerService.findNext(useSecondaryFindcontroller);
+  }
+
+  public findPrevious(useSecondaryFindcontroller: boolean): void {
+    this.ngxExtendedPdfViewerService.findPrevious(useSecondaryFindcontroller);
   }
 
   public resetFindResult(): void {
