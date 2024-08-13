@@ -4,16 +4,16 @@
 
 <div *ngIf="!hideMenu">
   <mat-toolbar color="primary" class="mat-elevation-z8">
-    <mat-toolbar-row style="height: 50px">
+    <mat-toolbar-row class="first-row">
       <app-octocat></app-octocat>
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon" style="margin-left: -20px; margin-top: 17px; zoom: 133%">menu</mat-icon>
-      </button>
       <span style="left: 65px; position: absolute"
         >Angular PDF viewer showcase. Running on Angular {{ angularVersion }}{{ pdfjsVersion }} and {{ library }} {{ version }}.</span
       >
     </mat-toolbar-row>
-    <mat-toolbar-row class="second-row" style="height: 50px">
+    <mat-toolbar-row class="second-row">
+      <button type="button" class="side-nav-toggle" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
       <mat-radio-group aria-label="Demo" [(ngModel)]="viewer" style="left: 65px; position: absolute">
         Choose a version:
         <mat-radio-button class="distance16" value="ngx-extended-pdf-viewer">stable (based on pdf.js 4.5)</mat-radio-button>
