@@ -3,12 +3,9 @@
     <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width: 55%">
       <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event">
         <mat-tab label="Find API">
-            <div>
-              <section class="section" style="padding-top:8px;padding-bottom: 8px">
-                <b>User find controller</b> (using the API influences the UI, as you can see in the find bar)
-              </section>
+            <div class="padding-top">
               <section class="section">
-                <mat-form-field style="flex-shrink: 0">
+                <mat-form-field>
                   <input matInput class="margin" [(ngModel)]="searchtext" placeholder="search term" />
                 </mat-form-field>
               </section>
@@ -51,13 +48,18 @@
           </section>
         </mat-tab>
         <mat-tab label="User FindController vs. API FindController">
+          <div class="padding-top">
+            You can use two find controllers. The first one is the user find controller, which is part of the UI. The second one is the API find controller.
+            The API find controller can be used by programmers, and it has the advantage that the user still can use the find functionality without
+            interfering with the API find controller.
+          </div>
           <div style="display: flex">
             <div>
               <section class="section" style="padding-top:8px;padding-bottom: 8px">
                 <b>User find controller</b> (using the API influences the UI, as you can see in the find bar)
               </section>
               <section class="section">
-                <mat-form-field style="flex-shrink: 0">
+                <mat-form-field>
                   <input matInput class="margin" [(ngModel)]="searchtext" placeholder="search term" />
                 </mat-form-field>
               </section>
@@ -83,6 +85,7 @@
                 <button mat-raised-button color="primary" (click)="findNext(false)">next</button>
                 <button mat-raised-button color="primary" (click)="findPrevious(false)" style="margin-left: 10px">previous</button>
               </section>
+              <section>CSS class of the search results: <code>hightlight</code>.</section>
 
             </div>
             <div style="width: 20px"></div>
@@ -93,7 +96,7 @@
               </section>
 
               <section class="section">
-                <mat-form-field style="flex-shrink: 0">
+                <mat-form-field>
                   <input matInput class="margin" [(ngModel)]="searchtext2" placeholder="search term" />
                 </mat-form-field>
               </section>
@@ -119,7 +122,7 @@
                 <button mat-raised-button color="primary" (click)="findNext(true)">next</button>
                 <button mat-raised-button color="primary" (click)="findPrevious(true)" style="margin-left: 10px">previous</button>
               </section>
-
+              <section>CSS class of the search results: <code>customHightlight</code>.</section>
             </div>
           </div>
           <section>
@@ -145,15 +148,9 @@
               is a list of find positions. Basically, such a position the number of characters before the hit.
             </li>
             <li><code>matchesLength</code> is a similar array of arrays of numbers. In a nutshell, it tells you how long your search term is.</li>
-            <li>
-              <code>matchesColor</code> is also an array of arrays of numbers. It's only populates in the "multiple search term" mode. It tells you which search
-              result belong to which search term.
-            </li>
           </ul>
           You can get the text of each page by calling <code>ngxPdfViewerService.getPageAsText()</code>. If you want to find out which part of the DOM shows the
-          find result, you need some internal API of pdf.js. In particular, the <code>textHighlighter</code> seems to be useful. The live demo below uses the
-          <code>textHighlighter</code> to fade out every <code>span</code> that does not belong to the search result. Unfortunately, the fade-out effect doesn't
-          play well with the gray and green text boxes of the demo PDf, but you'll see the effect.
+          find result, you need to catch the event <code>renderedtextlayerhighlights</code>. This demo uses this event to add a black border to the find results.
         </mat-tab>
         <mat-tab label="Notes on the demo">
           <ul>

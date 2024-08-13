@@ -52,6 +52,10 @@ export class FindComponent {
       this._searchtext = "Brazilian";
       this.highlightAll = true;
       this.find();
+    } else {
+      this._searchtext2 = "";
+      this.highlightAll2 = false;
+      this.find2();
     }
     if (tab !== 2) {
       this.resetFindResult();
@@ -143,8 +147,6 @@ export class FindComponent {
       }
     });
   }
-
-
 
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef,
     notificationService: PDFNotificationService
