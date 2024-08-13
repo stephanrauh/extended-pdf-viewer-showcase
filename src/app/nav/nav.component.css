@@ -63,6 +63,15 @@
   padding-bottom: 8px;
 }
 
+.first-row,.second-row {
+  height: 50px;
+}
+
+.side-nav-toggle {
+  margin-left: -11px;
+  zoom: 133%
+}
+
 ::ng-deep .second-row .mat-mdc-radio-button .mdc-form-field {
   color: white;
 }
