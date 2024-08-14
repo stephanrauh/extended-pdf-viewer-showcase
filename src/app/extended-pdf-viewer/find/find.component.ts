@@ -1,6 +1,14 @@
 import { ChangeDetectorRef, Component, effect } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, RenderedTextLayerHighlights } from 'ngx-extended-pdf-viewer';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions, PDFNotificationService, RenderedTextLayerHighlights } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
+import { PDFFindController } from './pdf_find_controller.js';
+
+class MyFindController extends PDFFindController {
+  constructor({ linkService, eventBus, updateMatchesCountOnProgress = true, pageViewMode }: any) {
+    super({ linkService, eventBus, updateMatchesCountOnProgress, pageViewMode });
+    console.log('MyFindController constructor');
+  }
+}
 
 @Component({
   selector: 'app-find',
@@ -151,6 +159,7 @@ export class FindComponent {
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef,
     notificationService: PDFNotificationService
   ) {
+    pdfDefaultOptions.findController = MyFindController;
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
       this.PDFViewerApplication?.eventBus?.on('renderedtextlayerhighlights', (event: RenderedTextLayerHighlights) => {
