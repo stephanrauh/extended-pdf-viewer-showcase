@@ -14,6 +14,11 @@ export class CustomFindComponent {
     matchRegex: true
   };
 
+
+  constructor(notificationService: PDFNotificationService) {
+    effect(() => this.pdfViewerApplication = notificationService.onPDFJSInitSignal());
+  }
+
   // Override the find feature to support regex after the PDF is loaded
   pdfLoaded() {
     this.overrideFindFeature();
