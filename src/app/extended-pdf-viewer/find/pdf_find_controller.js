@@ -589,7 +589,7 @@ class PDFFindController {
       left: selectedLeft + MATCH_SCROLL_OFFSET_LEFT,
     };
     /** #492 modified by ngx-extended-pdf-viewer */
-    scrollIntoView(element, spot, /* scrollMatches = */ true, this._pageViewMode === 'infinite-scroll');
+    scrollIntoView(element, spot, /* scrollMatches = */ true, this._pageViewMode === "infinite-scroll");
     /** #492 end of modification */
   }
 

@@ -54,12 +54,20 @@ export class FindComponent {
   public set selectedTab(tab) {
     this._selectedTab = tab;
     if (tab === 1) {
-      this._searchtext2 = "Portuguese";
-      this.highlightAll2 = true;
-      this.find2();
-      this._searchtext = "Brazilian";
-      this.highlightAll = true;
-      this.find();
+        this._searchtext = "Brazilian";
+        this.highlightAll = true;
+        const promises = this.find() as Array<Promise<number>>;
+
+        // delay the second search to make sure the first search has scrolled to the first result
+        const wrappedPromises = promises.map(p =>
+          p.then(result => result > 0 ? result : Promise.reject())
+        );
+        ((async () => {
+        await Promise.any(wrappedPromises);
+        this._searchtext2 = "Portuguese";
+        this.highlightAll2 = true;
+        this.find2();
+        }))();
     } else {
       this._searchtext2 = "";
       this.highlightAll2 = false;
@@ -110,7 +118,7 @@ export class FindComponent {
     this.find2();
   }
 
-  private find(): void {
+  private find(): Array<Promise<number>> | undefined {
     this.pagesWithResult = [];
     if (!this._searchtext) {
       this.findState = undefined;
@@ -131,9 +139,10 @@ export class FindComponent {
         this.pagesWithResult.push(pageIndex);
       }
     });
+    return numberOfResultsPromises;
   }
 
-  private find2(): void {
+  private find2(): Array<Promise<number>> | undefined {
     this.pagesWithResult = [];
     if (!this._searchtext2) {
       this.findState = undefined;
@@ -154,6 +163,7 @@ export class FindComponent {
         this.pagesWithResult.push(pageIndex);
       }
     });
+    return numberOfResultsPromises;
   }
 
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef,
