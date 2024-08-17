@@ -479,7 +479,6 @@ class PDFFindController {
   // #2482 end of modification by ngx-extended-pdf-viewer
 
   onFind(state) {
-    console.log('custom onFind', state);
     if (!state) {
       return;
     }

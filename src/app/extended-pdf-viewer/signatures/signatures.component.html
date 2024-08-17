@@ -1,21 +1,22 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-    <mat-tab-group>
-      <mat-tab label="Signatures without verification">
-        <p><b>Using this feature is dangerous!</b>
-        </p>
-        <p>
-          PDF forms can bear a digital signature. Such a signature confirms that the PDF that
-          it's been created by the author (and not someone else).
-        </p>
-        <p>
-          However, ngx-extended-pdf-viewer <b>does not verify the validity</b> of the signature.
-          One of the test files has an invalid signature. The signature is displayed without
-          any hint it's faulty. So use this feature carefully! Do not show the
-          signature unless you're 100% sure it's valid. Otherwise, users may draw wrong conclusions.
-        </p>
-        <p>To activate signatures, you must set the attribute <code>showUnverifiedSignatures</code>.
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <mat-tab-group>
+          <mat-tab label="Signatures without verification">
+            <p><b>Using this feature is dangerous!</b>
+          </p>
+          <p>
+            PDF forms can bear a digital signature. Such a signature confirms that the PDF that
+            it's been created by the author (and not someone else).
+          </p>
+          <p>
+            However, ngx-extended-pdf-viewer <b>does not verify the validity</b> of the signature.
+            One of the test files has an invalid signature. The signature is displayed without
+            any hint it's faulty. So use this feature carefully! Do not show the
+            signature unless you're 100% sure it's valid. Otherwise, users may draw wrong conclusions.
+          </p>
+          <p>To activate signatures, you must set the attribute <code>showUnverifiedSignatures</code>.
         </p>
         <mat-checkbox class="margin" [(ngModel)]="showSignature">show signature</mat-checkbox>
       </mat-tab>
@@ -42,16 +43,17 @@
     </mat-tab-group>
   </mat-card>
   <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-         <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/html.md"> </app-ie11-markdown>
-        </mat-tab>
+    <mat-tab-group>
+      <mat-tab label="HTML template">
+        <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/html.md"> </app-ie11-markdown>
+      </mat-tab>
       <mat-tab label="Typescript">
-       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/ts.md"> </app-ie11-markdown>
+        <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/ts.md"> </app-ie11-markdown>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
 </div>
+}
 
 <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
   <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
@@ -63,13 +65,13 @@
     >Copyright hint: the PDF file is published
     <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/514#issuecomment-720089147" target="#">with kind permission by Cristiano Rafael Steffens</a>.
   </small>
-  <ngx-extended-pdf-viewer
-    *ngIf="showPdf"
-    [src]="'/assets/pdfs/unverified-signature.pdf'"
-    [height]="'90vh'"
-    [showUnverifiedSignatures]="showSignature"
-
-  >
-  </ngx-extended-pdf-viewer>
+  @if (showPdf) {
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/unverified-signature.pdf'"
+      [height]="'90vh'"
+      [showUnverifiedSignatures]="showSignature"
+      >
+    </ngx-extended-pdf-viewer>
+  }
 </mat-card>
 </div>

@@ -1,36 +1,42 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-      <p>You can extract text from the PDF file that's currently displayed.</p>
-      <p>You can get the text either as plain text or as text with metadata. The second option,
-        <code>NgxExtendedPdfViewerService::getPageAsLines</code>,
-        returns an array that tries to split the text into lines, along with the coordinates of the line
-        and a flag indicating whether the line is written left-to-right or right-to-left. To see
-        the metadata open the console window of the demo. The Angular live demo only shows the lines without
-        metadata.
-      </p>
-      <button mat-raised-button color="primary" (click)="exportAsText()" style="margin-left: 16px">Export as text</button>
-      <button mat-raised-button color="primary" (click)="exportAsLines()" style="margin-left: 16px">Export as lines</button>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-      <mat-tab-group [selectedIndex]="selectedTabIndex">
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-text/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-text/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="extracted text">
-          <div class="distance16" *ngIf="extractedText">
-            {{ extractedText }}
-          </div>
-          <div *ngFor="let line of extractedLines">
-            {{line}}
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <p>You can extract text from the PDF file that's currently displayed.</p>
+        <p>You can get the text either as plain text or as text with metadata. The second option,
+          <code>NgxExtendedPdfViewerService::getPageAsLines</code>,
+          returns an array that tries to split the text into lines, along with the coordinates of the line
+          and a flag indicating whether the line is written left-to-right or right-to-left. To see
+          the metadata open the console window of the demo. The Angular live demo only shows the lines without
+          metadata.
+        </p>
+        <button mat-raised-button color="primary" (click)="exportAsText()" style="margin-left: 16px">Export as text</button>
+        <button mat-raised-button color="primary" (click)="exportAsLines()" style="margin-left: 16px">Export as lines</button>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group [selectedIndex]="selectedTabIndex">
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-text/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-text/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="extracted text">
+            @if (extractedText) {
+              <div class="distance16">
+                {{ extractedText }}
+              </div>
+            }
+            @for (line of extractedLines; track line) {
+              <div>
+                {{line}}
+              </div>
+            }
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
@@ -45,7 +51,7 @@
       [showHandToolButton]="true"
       [handTool]="false"
 
-    >
+      >
     </ngx-extended-pdf-viewer>
   </mat-card>
 </div>

@@ -1,26 +1,27 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-      <p>
-      The attribute <code>[namedDest]</code> allows you to navigate to a "named destination" of the PDF file.
-    </p>
-      <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-        <button mat-raised-button color="primary" (click)="page = 5">[page]="5"</button>
-        <button mat-raised-button color="primary" (click)="namedDest = 'section.10'" style="margin-left: 10px">[nameDest]="section.10"</button>
-      </section>
-    </mat-card>
-
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/navigation/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/navigation/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <p>
+          The attribute <code>[namedDest]</code> allows you to navigate to a "named destination" of the PDF file.
+        </p>
+        <section class="section" style="margin-top: 5px; margin-bottom: 10px">
+          <button mat-raised-button color="primary" (click)="page = 5">[page]="5"</button>
+          <button mat-raised-button color="primary" (click)="namedDest = 'section.10'" style="margin-left: 10px">[nameDest]="section.10"</button>
+        </section>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/navigation/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/navigation/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
@@ -38,7 +39,7 @@
       [(page)]="page"
       [nameddest]="namedDest"
       [height]="'auto'"
-    >
+      >
     </ngx-extended-pdf-viewer>
   </mat-card>
 </div>

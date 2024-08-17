@@ -6,19 +6,23 @@
       <button mat-icon-button disabled class="spacer"></button>
       <span>
         {{ node.prefix }}
-        <span *ngIf="node.id" class="hook" [matTooltipPosition]="'after'"
-          matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
-          id="{{ node.id }}"
-          <app-icon-info class="icon id" ></app-icon-info>
-        </span>
-        <span *ngIf="node.content" class="customizable" [matTooltipPosition]="'after'"
-        matTooltip="You can use this property to replace the content of this component with your custom content.">
-          custom content: [{{node.content}}]
-          <app-icon-info class="icon"></app-icon-info>
-        </span>
+        @if (node.id) {
+          <span class="hook" [matTooltipPosition]="'after'"
+            matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+            id="{{ node.id }}"
+            <app-icon-info class="icon id" ></app-icon-info>
+          </span>
+        }
+        @if (node.content) {
+          <span class="customizable" [matTooltipPosition]="'after'"
+            matTooltip="You can use this property to replace the content of this component with your custom content.">
+            custom content: [{{node.content}}]
+            <app-icon-info class="icon"></app-icon-info>
+          </span>
+        }
         {{node.suffix}}
       </span>
-  </li>
+    </li>
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
   <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
@@ -31,16 +35,20 @@
         </button>
         <span>
           {{ node.prefix }}
-          <span *ngIf="node.id" class="hook" [matTooltipPosition]="'after'"
-            matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
-            id="{{ node.id }}"
-            <app-icon-info class="icon id" ></app-icon-info>
-          </span>
-          <span *ngIf="node.content" class="customizable"  [matTooltipPosition]="'after'"
-          matTooltip="You can use this property to replace the content of this component with your custom content.">
-            custom content: [{{node.content}}]
-            <app-icon-info class="icon"></app-icon-info>
-          </span>
+          @if (node.id) {
+            <span class="hook" [matTooltipPosition]="'after'"
+              matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+              id="{{ node.id }}"
+              <app-icon-info class="icon id" ></app-icon-info>
+            </span>
+          }
+          @if (node.content) {
+            <span class="customizable"  [matTooltipPosition]="'after'"
+              matTooltip="You can use this property to replace the content of this component with your custom content.">
+              custom content: [{{node.content}}]
+              <app-icon-info class="icon"></app-icon-info>
+            </span>
+          }
           {{node.suffix}}
         </span>
       </div>

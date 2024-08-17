@@ -1,14 +1,6 @@
 import { ChangeDetectorRef, Component, effect } from '@angular/core';
 import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions, PDFNotificationService, RenderedTextLayerHighlights } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
-import { PDFFindController } from './pdf_find_controller.js';
-
-class MyFindController extends PDFFindController {
-  constructor({ linkService, eventBus, updateMatchesCountOnProgress = true, pageViewMode }: any) {
-    super({ linkService, eventBus, updateMatchesCountOnProgress, pageViewMode });
-    console.log('MyFindController constructor');
-  }
-}
 
 @Component({
   selector: 'app-find',
@@ -79,9 +71,6 @@ export class FindComponent {
       this._searchtext2 = "";
       this.highlightAll2 = false;
       this.find2();
-    }
-    if (tab !== 2) {
-      this.resetFindResult();
     }
   }
 
@@ -181,7 +170,6 @@ export class FindComponent {
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef,
     notificationService: PDFNotificationService
   ) {
-    pdfDefaultOptions.findController = MyFindController;
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
       this.PDFViewerApplication?.eventBus?.on('renderedtextlayerhighlights', (event: RenderedTextLayerHighlights) => {
@@ -237,13 +225,4 @@ export class FindComponent {
   public findPrevious(useSecondaryFindcontroller: boolean): void {
     this.ngxExtendedPdfViewerService.findPrevious(useSecondaryFindcontroller);
   }
-
-  public resetFindResult(): void {
-    const allSpans = document.querySelectorAll('.textLayer > span') as NodeList;
-    allSpans.forEach((span) => {
-      (span as HTMLElement).classList.remove('fade-out');
-    });
-  }
-
-
 }

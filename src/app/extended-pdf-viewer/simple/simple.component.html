@@ -1,105 +1,117 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-      <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event">
-        <mat-tab label="Getting started">
-          <p>
-            Open a terminal and enter this command at your project's root folder:
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/schematics.md"> </app-ie11-markdown>
-            This configures your project, adds an example component and an example PDF file, so you just need to add the new
-            <code>&lt;add-example-pdf-viewer></code> tag to one of your <code>*.html</code> files.
-          </p>
-        </mat-tab>
-        <mat-tab label="Basic parameters">
-          <p>
-            This demo shows the default viewer. The default configuration is pretty straightforward, as you can see on the right-hand side.
-          </p>
-          <p>
-            If you've set up the PDF viewer, but are missing the find dialog and the text selection: that's a performance optimization. Activate the
-            `[textLayer]` to enable these two features.
-          </p>
-          <p>
-            The <code>height</code> attribute can often be omitted, too. The showcase only needs it because its layout framework, Angular Material, sets the
-            height of the PDF viewer to zero pixels by default.
-          </p>
-        </mat-tab>
-        <mat-tab label="Page and page label">
-          <p>The page is the number page number. It always starts with 1.</p>
-          <p>
-            The page label is the page number assigned by the author of the PDF document. For example, the document below uses roman numbers for the table of
-            contents and arabic numbers for the main body.
-          </p>
-          <p>
-            If you try to use both `[(page)]` and `[(pageLabel)]` with two-way binding, you'll run into `ExpressionChangedAfterItHasBeenCheckedErrors`. To
-            prevent this, you'll want to adopt the `OnPush` change detection strategy.
-          </p>
-          <mat-form-field class="margin">
-            <mat-label>Current page number</mat-label>
-            <input matInput [(ngModel)]="page" />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Current page label</mat-label>
-            <input matInput [(ngModel)]="pageLabel" />
-          </mat-form-field>
-        </mat-tab>
-        <mat-tab label="Color themes">
-          <p>
-            You can choose between two predefined color themes, or you can provide your own custom color theme. Note that switching the themes doesn't work
-            reliably without a full reload (i.e. hitting the F5 or CMD+R key). This demo reloads the page programmatically each time you change the theme.
-          </p>
-          <mat-radio-group *ngIf="localStorageIsSupported()" aria-label="Color themes" [(ngModel)]="theme" style="line-height: 1.5">
-            <mat-radio-button value="dark">dark theme</mat-radio-button>
-            <br />
-            <mat-radio-button value="light">light theme</mat-radio-button>
-          </mat-radio-group>
-          <p *ngIf="!localStorageIsSupported()">The interactive live demo is deactivated because your browser doesn't support localStorage.</p>
-        </mat-tab>
-        <mat-tab label="Height">
-          <p>
-            If you omit the <code>[height]</code> attribute, the PDF viewer tries to use all the available vertical space. To make this work, make sure the
-            surrounding container is large enough to contain the PDF viewer. By default, many CSS frameworks set the height of an empty container to zero
-            pixels. You can use the <code>height</code> attribute to work around this limitation or to fine-tune the amount of screen estate you need.
-          </p>
-          <mat-radio-group aria-label="Height" [(ngModel)]="height" style="line-height: 1.5">
-            <mat-radio-button [value]="undefined">default (i.e. [height]="undefined")</mat-radio-button>
-            <br />
-            <mat-radio-button value="100%">[height]="'100%'"</mat-radio-button>
-            <br />
-            <mat-radio-button value="95%">[height]="'95%'"</mat-radio-button>
-            <br />
-            <mat-radio-button value="90vh">[height]="'90vh'"</mat-radio-button>
-            <br />
-            <mat-radio-button value="200px">[height]="'200px'"</mat-radio-button>
-          </mat-radio-group>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <div *ngIf="selectedTab === 0">
-        <mat-tab-group>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html.md"> </app-ie11-markdown>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
+        <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event">
+          <mat-tab label="Getting started">
+            <p>
+              Open a terminal and enter this command at your project's root folder:
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/schematics.md"> </app-ie11-markdown>
+              This configures your project, adds an example component and an example PDF file, so you just need to add the new
+              <code>&lt;add-example-pdf-viewer></code> tag to one of your <code>*.html</code> files.
+            </p>
+          </mat-tab>
+          <mat-tab label="Basic parameters">
+            <p>
+              This demo shows the default viewer. The default configuration is pretty straightforward, as you can see on the right-hand side.
+            </p>
+            <p>
+              If you've set up the PDF viewer, but are missing the find dialog and the text selection: that's a performance optimization. Activate the
+              `[textLayer]` to enable these two features.
+            </p>
+            <p>
+              The <code>height</code> attribute can often be omitted, too. The showcase only needs it because its layout framework, Angular Material, sets the
+              height of the PDF viewer to zero pixels by default.
+            </p>
+          </mat-tab>
+          <mat-tab label="Page and page label">
+            <p>The page is the number page number. It always starts with 1.</p>
+            <p>
+              The page label is the page number assigned by the author of the PDF document. For example, the document below uses roman numbers for the table of
+              contents and arabic numbers for the main body.
+            </p>
+            <p>
+              If you try to use both `[(page)]` and `[(pageLabel)]` with two-way binding, you'll run into `ExpressionChangedAfterItHasBeenCheckedErrors`. To
+              prevent this, you'll want to adopt the `OnPush` change detection strategy.
+            </p>
+            <mat-form-field class="margin">
+              <mat-label>Current page number</mat-label>
+              <input matInput [(ngModel)]="page" />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Current page label</mat-label>
+              <input matInput [(ngModel)]="pageLabel" />
+            </mat-form-field>
+          </mat-tab>
+          <mat-tab label="Color themes">
+            <p>
+              You can choose between two predefined color themes, or you can provide your own custom color theme. Note that switching the themes doesn't work
+              reliably without a full reload (i.e. hitting the F5 or CMD+R key). This demo reloads the page programmatically each time you change the theme.
+            </p>
+            @if (localStorageIsSupported()) {
+              <mat-radio-group aria-label="Color themes" [(ngModel)]="theme" style="line-height: 1.5">
+                <mat-radio-button value="dark">dark theme</mat-radio-button>
+                <br />
+                <mat-radio-button value="light">light theme</mat-radio-button>
+              </mat-radio-group>
+            }
+            @if (!localStorageIsSupported()) {
+              <p>The interactive live demo is deactivated because your browser doesn't support localStorage.</p>
+            }
+          </mat-tab>
+          <mat-tab label="Height">
+            <p>
+              If you omit the <code>[height]</code> attribute, the PDF viewer tries to use all the available vertical space. To make this work, make sure the
+              surrounding container is large enough to contain the PDF viewer. By default, many CSS frameworks set the height of an empty container to zero
+              pixels. You can use the <code>height</code> attribute to work around this limitation or to fine-tune the amount of screen estate you need.
+            </p>
+            <mat-radio-group aria-label="Height" [(ngModel)]="height" style="line-height: 1.5">
+              <mat-radio-button [value]="undefined">default (i.e. [height]="undefined")</mat-radio-button>
+              <br />
+              <mat-radio-button value="100%">[height]="'100%'"</mat-radio-button>
+              <br />
+              <mat-radio-button value="95%">[height]="'95%'"</mat-radio-button>
+              <br />
+              <mat-radio-button value="90vh">[height]="'90vh'"</mat-radio-button>
+              <br />
+              <mat-radio-button value="200px">[height]="'200px'"</mat-radio-button>
+            </mat-radio-group>
           </mat-tab>
         </mat-tab-group>
-      </div>
-      <mat-tab-group *ngIf="selectedTab === 1">
-        <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html2.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="Typescript">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-      <mat-tab-group *ngIf="selectedTab === 2">
-        <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html3.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="Typescript">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts3.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
+        @if (selectedTab === 0) {
+          <div>
+            <mat-tab-group>
+              <mat-tab label="HTML template">
+                <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html.md"> </app-ie11-markdown>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        }
+        @if (selectedTab === 1) {
+          <mat-tab-group>
+            <mat-tab label="HTML template">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html2.md"> </app-ie11-markdown>
+            </mat-tab>
+            <mat-tab label="Typescript">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts.md"> </app-ie11-markdown>
+            </mat-tab>
+          </mat-tab-group>
+        }
+        @if (selectedTab === 2) {
+          <mat-tab-group>
+            <mat-tab label="HTML template">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html3.md"> </app-ie11-markdown>
+            </mat-tab>
+            <mat-tab label="Typescript">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts3.md"> </app-ie11-markdown>
+            </mat-tab>
+          </mat-tab-group>
+        }
+      </mat-card>
+    </div>
+  }
 
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
@@ -115,35 +127,42 @@
         <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
         <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>
         <br />
-        <span *ngIf="time">Time till page 5 shows: {{ time }} ms; last rendering time: {{ currentTime }} ms</span>
-        <span *ngIf="!time">&nbsp;</span>
+        @if (time) {
+          <span>Time till page 5 shows: {{ time }} ms; last rendering time: {{ currentTime }} ms</span>
+        }
+        @if (!time) {
+          <span>&nbsp;</span>
+        }
       </small>
     </div>
 
     <div style="width: 100%">
       <mat-tab-group>
         <mat-tab label="live demo">
-          <ngx-extended-pdf-viewer
-            *ngIf="showPdfViewer"
-            [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
-            [zoom]="'auto'"
-            [height]="height"
-            [textLayer]="true"
-            [showPresentationModeButton]="true"
-            [(page)]="page"
-            [(pageLabel)]="pageLabel"
-            [theme]="theme"
-            (updateFindMatchesCount)="onUpdateFindResult($event)"
-            (pageRendered)="onPageRendered($event)"
-            (pageLoaded)="onPageLoaded($event)"
-            [filenameForDownload]="'The Public Domain - Enclosing the Commons of the Mind.pdf'"
-          >
-          </ngx-extended-pdf-viewer>
+          @if (showPdfViewer) {
+            <ngx-extended-pdf-viewer
+              [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
+              [zoom]="'auto'"
+              [height]="height"
+              [textLayer]="true"
+              [showPresentationModeButton]="true"
+              [(page)]="page"
+              [(pageLabel)]="pageLabel"
+              [theme]="theme"
+              (updateFindMatchesCount)="onUpdateFindResult($event)"
+              (pageRendered)="onPageRendered($event)"
+              (pageLoaded)="onPageLoaded($event)"
+              [filenameForDownload]="'The Public Domain - Enclosing the Commons of the Mind.pdf'"
+              >
+            </ngx-extended-pdf-viewer>
+          }
         </mat-tab>
         <mat-tab label="console messages">
-          <div *ngFor="let l of logService.logs">
-            {{ l }}
-          </div>
+          @for (l of logService.logs; track l) {
+            <div>
+              {{ l }}
+            </div>
+          }
         </mat-tab>
       </mat-tab-group>
     </div>

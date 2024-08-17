@@ -1,88 +1,89 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-    <p>
-      A few options allow you to influence the way the PDF file is rendered.
-    </p>
-    <p><b>Caveat:</b> Being able to modify <code>[pageViewMode]</code> has been introduced with
-      version 17.3.0. So it's a pretty new feature. It's possible some errors slipped my attention yet. If so,
-      <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues">please open a ticket</a>.</p>
-    <p>
-      <mat-checkbox class="margin" [(ngModel)]="showBorders">[showBorders]="true"</mat-checkbox>
-    </p>
-    <div>
-    <div style="flex: 1 1 100%; box-sizing: border-box; max-width:33%">
-    <mat-radio-group aria-label="ScrollMode" [(ngModel)]="scrollMode" style="line-height: 1.5;">
-      <mat-radio-button [value]="0">0 (vertical) (default)</mat-radio-button>
-      <br />
-      <mat-radio-button [value]="1">1 (horizontal)</mat-radio-button>
-      <br />
-      <mat-radio-button [value]="2">2 (wrapped)</mat-radio-button>
-      <br />
-      <mat-radio-button [value]="3">3 (single-page view)</mat-radio-button>
-    </mat-radio-group>
-  </div>
-  <div style="flex: 1 1 100%; box-sizing: border-box; max-width:33%">
-    <mat-radio-group aria-label="Spread" [(ngModel)]="spread" [disabled]="scrollMode===1 || scrollMode===2 || pageViewMode==='book'" style="line-height: 1.5;">
-      <mat-radio-button [value]="'off'">off (default)</mat-radio-button>
-      <br />
-      <mat-radio-button [value]="'odd'">odd</mat-radio-button>
-      <br />
-      <mat-radio-button [value]="'even'">even</mat-radio-button>
-    </mat-radio-group>
-  </div>
-  <div style="flex: 1 1 100%; box-sizing: border-box; max-width:33%">
-    <mat-radio-group aria-label="PageViewMode" [(ngModel)]="pageViewMode" style="line-height: 1.5;">
-      <mat-radio-button [value]="'single'">single</mat-radio-button>
-      <br />
-      <mat-radio-button [value]="'book'">book</mat-radio-button>
-      <br />
-      <mat-radio-button [value]="'multiple'">multiple (default)</mat-radio-button>
-      <br />
-      <mat-radio-button [value]="'infinite-scroll'">infinite scroll</mat-radio-button>
-    </mat-radio-group>
-  </div>
-</div>
-<div style="padding-top:20px">
-  Book mode and single-page mode don't look too impressive with the default zoom setting of 30%. However, this zoom setting enables you to see the effect of <code>scrollMode="2"</code>
-  (i.e. wrapped).
-</div>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <p>
+          A few options allow you to influence the way the PDF file is rendered.
+        </p>
+        <p><b>Caveat:</b> Being able to modify <code>[pageViewMode]</code> has been introduced with
+        version 17.3.0. So it's a pretty new feature. It's possible some errors slipped my attention yet. If so,
+        <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues">please open a ticket</a>.</p>
+        <p>
+          <mat-checkbox class="margin" [(ngModel)]="showBorders">[showBorders]="true"</mat-checkbox>
+        </p>
+        <div>
+          <div style="flex: 1 1 100%; box-sizing: border-box; max-width:33%">
+            <mat-radio-group aria-label="ScrollMode" [(ngModel)]="scrollMode" style="line-height: 1.5;">
+              <mat-radio-button [value]="0">0 (vertical) (default)</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="1">1 (horizontal)</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="2">2 (wrapped)</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="3">3 (single-page view)</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div style="flex: 1 1 100%; box-sizing: border-box; max-width:33%">
+            <mat-radio-group aria-label="Spread" [(ngModel)]="spread" [disabled]="scrollMode===1 || scrollMode===2 || pageViewMode==='book'" style="line-height: 1.5;">
+              <mat-radio-button [value]="'off'">off (default)</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="'odd'">odd</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="'even'">even</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div style="flex: 1 1 100%; box-sizing: border-box; max-width:33%">
+            <mat-radio-group aria-label="PageViewMode" [(ngModel)]="pageViewMode" style="line-height: 1.5;">
+              <mat-radio-button [value]="'single'">single</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="'book'">book</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="'multiple'">multiple (default)</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="'infinite-scroll'">infinite scroll</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div style="padding-top:20px">
+          Book mode and single-page mode don't look too impressive with the default zoom setting of 30%. However, this zoom setting enables you to see the effect of <code>scrollMode="2"</code>
+          (i.e. wrapped).
+        </div>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/display-options/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/display-options/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
+
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
+      [showBorders]="showBorders"
+      [(scrollMode)]="scrollMode"
+      [(pageViewMode)]="pageViewMode"
+      [(spread)]="spread"
+      zoom="30%"
+
+      [showVerticalScrollButton]="'always-visible'"
+      [showHorizontalScrollButton]="'always-visible'"
+      [showWrappedScrollButton]="'always-visible'"
+      [showSpreadButton]="'always-visible'"
+      [showInfiniteScrollButton]="'always-visible'"
+      [showBookModeButton]="'always-visible'"
+      [showSinglePageModeButton]="'always-visible'"
+      >
+    </ngx-extended-pdf-viewer>
   </mat-card>
-
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/display-options/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="TypeScript">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/display-options/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
-    [showBorders]="showBorders"
-    [(scrollMode)]="scrollMode"
-    [(pageViewMode)]="pageViewMode"
-    [(spread)]="spread"
-    zoom="30%"
-
-    [showVerticalScrollButton]="'always-visible'"
-    [showHorizontalScrollButton]="'always-visible'"
-    [showWrappedScrollButton]="'always-visible'"
-    [showSpreadButton]="'always-visible'"
-    [showInfiniteScrollButton]="'always-visible'"
-    [showBookModeButton]="'always-visible'"
-    [showSinglePageModeButton]="'always-visible'"
-  >
-  </ngx-extended-pdf-viewer>
-</mat-card>
 </div>

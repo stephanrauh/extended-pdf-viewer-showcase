@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, effect } from '@angular/core';
-import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { MyCustomFindController } from './my-custom-find-controller';
 
 interface CustomFindOptions extends FindOptions {
   matchRegex: boolean;
@@ -30,8 +30,11 @@ export class CustomFindComponent {
 
   private originalConvertToRegExpString: any;
 
+  public currentTab=0;
+
 
   constructor(private readonly cdr: ChangeDetectorRef,  public notificationService: PDFNotificationService) {
+    pdfDefaultOptions.findController = MyCustomFindController;
     effect(() => {
       this.pdfViewerApplication = notificationService.onPDFJSInitSignal();
     });

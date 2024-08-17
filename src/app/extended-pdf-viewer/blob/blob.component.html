@@ -1,68 +1,71 @@
 <div class="flex-container-column fill-container">
-<div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-    <mat-tab-group>
-      <mat-tab label="Displaying BLOBs">
-        <p>To display a BLOB, just pass it to the <code>src</code> attribute.</p>
-        <p>Chose a document:</p>
-        <mat-radio-group [(ngModel)]="choice" aria-label="Chose a document:">
-          <mat-radio-button [value]="'preloaded'" (click)="usePreloadedFile()">show a Blob that's already in memory</mat-radio-button>
-          <br />
-          <mat-radio-button [value]="'from-disk'" (click)="loadLargeFile()">load a large Blob via REST</mat-radio-button>
-        </mat-radio-group>
-      </mat-tab>
-      <mat-tab label="Downloading BLOBs">
-        <p>You can also download the PDF file as a BLOB. For instance, the user can upload a file, and you can use the method
-          <code>NgxExtendedPdfViewerService.getCurrentDocumentAsBlob()</code> to send the file to your server. Or the user
-          can fill a form embedded in the PDF file, and you can download the file containing the user's input.
-        </p>
-      <section class="section" style="margin-top:5px; margin-bottom:10px">
-        <button mat-raised-button color="primary" (click)="downloadAsBlob()" style="margin-left:10px">download the file as a BLOB</button>
-      </section>
-      <p *ngIf="downloaded">{{downloaded}}</p>
-      </mat-tab>
-      <mat-tab label="Troubleshooting">
-        <p>In rare cases, developers report they can't open the BLOB, but managed to open the same file as a Base64 file using
-          the attribute <code>[base64Src]</code>.
-          You can use this code snippets to convert a BLOB to a Base64 file:
-        </p>
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/workaround.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <mat-tab-group>
+          <mat-tab label="Displaying BLOBs">
+            <p>To display a BLOB, just pass it to the <code>src</code> attribute.</p>
+            <p>Chose a document:</p>
+            <mat-radio-group [(ngModel)]="choice" aria-label="Chose a document:">
+              <mat-radio-button [value]="'preloaded'" (click)="usePreloadedFile()">show a Blob that's already in memory</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="'from-disk'" (click)="loadLargeFile()">load a large Blob via REST</mat-radio-button>
+            </mat-radio-group>
+          </mat-tab>
+          <mat-tab label="Downloading BLOBs">
+            <p>You can also download the PDF file as a BLOB. For instance, the user can upload a file, and you can use the method
+              <code>NgxExtendedPdfViewerService.getCurrentDocumentAsBlob()</code> to send the file to your server. Or the user
+              can fill a form embedded in the PDF file, and you can download the file containing the user's input.
+            </p>
+            <section class="section" style="margin-top:5px; margin-bottom:10px">
+              <button mat-raised-button color="primary" (click)="downloadAsBlob()" style="margin-left:10px">download the file as a BLOB</button>
+            </section>
+            @if (downloaded) {
+              <p>{{downloaded}}</p>
+            }
+          </mat-tab>
+          <mat-tab label="Troubleshooting">
+            <p>In rare cases, developers report they can't open the BLOB, but managed to open the same file as a Base64 file using
+              the attribute <code>[base64Src]</code>.
+              You can use this code snippets to convert a BLOB to a Base64 file:
+            </p>
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/workaround.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="Preload-Guard and service">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts2.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="Download PDF as a BLOB">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts3.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="TypeScript">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Preload-Guard and service">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts2.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Download PDF as a BLOB">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts3.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <small>Copyright hint: the e-book has been published by James Boyle under a
-    <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
-    <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>.</small>
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small>Copyright hint: the e-book has been published by James Boyle under a
+      <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+      <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>.</small>
       <ngx-extended-pdf-viewer
-      [src]="src"
-      [height]="'auto'"
+        [src]="src"
+        [height]="'auto'"
 
-    >
-    </ngx-extended-pdf-viewer>
-</mat-card>
-</div>
+        >
+      </ngx-extended-pdf-viewer>
+    </mat-card>
+  </div>

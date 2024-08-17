@@ -1,43 +1,44 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-    <p>
-      The context menu of the pdf viewer adds little value. In some cases, it may even confuse users. So you can use the attribute
-      <code>[contextMenuAllowed]="false"</code>
-      to get rid of option like "save as an image" and "inspect".
-    </p>
-    <mat-checkbox class="margin" [(ngModel)]="allowContextMenu">allowContextMenu</mat-checkbox>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <p>
+          The context menu of the pdf viewer adds little value. In some cases, it may even confuse users. So you can use the attribute
+          <code>[contextMenuAllowed]="false"</code>
+          to get rid of option like "save as an image" and "inspect".
+        </p>
+        <mat-checkbox class="margin" [(ngModel)]="allowContextMenu">allowContextMenu</mat-checkbox>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/contextmenu/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/contextmenu/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
+
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small>
+      Copyright hint: the file has been published by Paroliver under a
+      <a target="#" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0 international license</a> on
+      <a target="#" href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">commons.wikimedia.org</a>
+    </small>.
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'"
+      [height]="'auto'"
+      [contextMenuAllowed]="allowContextMenu"
+
+      >
+    </ngx-extended-pdf-viewer>
   </mat-card>
-
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/contextmenu/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="TypeScript">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/contextmenu/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <small>
-    Copyright hint: the file has been published by Paroliver under a
-    <a target="#" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0 international license</a> on
-    <a target="#" href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">commons.wikimedia.org</a>
-  </small>.
-  <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'"
-    [height]="'auto'"
-    [contextMenuAllowed]="allowContextMenu"
-
-  >
-  </ngx-extended-pdf-viewer>
-</mat-card>
 </div>

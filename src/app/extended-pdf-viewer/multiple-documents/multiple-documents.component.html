@@ -1,54 +1,58 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-    <p>
-      The attribute <code>src</code> allows you to switch between different documents. There's also the attribute
-      <code> [base64Src]</code> for base64 encoded documents.
-    </p>
-    <mat-form-field style="width:430px">
-      <mat-label>[(src)]=</mat-label>
-      <mat-select [(value)]="src" class="margin">
-        <mat-option [value]="undefined">no document</mat-option>
-        <mat-option *ngIf="!bookMode" value="/assets/pdfs/Introduction.pdf">/assets/pdfs/Introduction.pdf</mat-option>
-        <mat-option *ngIf="!bookMode" value="/assets/pdfs/pdf-sample.pdf">/assets/pdfs/pdf-sample.pdf</mat-option>
-        <mat-option value="/assets/pdfs/GraalVM Dictionary Bytecode, Interpreters, C1 Compiler, C2 Compiler, CPUs, and More.pdf">/assets/pdfs/GraalVM Dictionary....pdf</mat-option>
-        <mat-option value="/assets/pdfs/What About GraalVM.pdf">/assets/What About GraalVM.pdf</mat-option>
-        <mat-option [value]="url">new URL('{{url.toString()}}')</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <br />
-    <mat-checkbox [(ngModel)]="dragAndDrop">enable dragging and dropping files to the PDF viewer</mat-checkbox>
-    <br />
-    <mat-checkbox [(ngModel)]="bookMode">book mode (capricious - some documents work, some don't)</mat-checkbox>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <p>
+          The attribute <code>src</code> allows you to switch between different documents. There's also the attribute
+          <code> [base64Src]</code> for base64 encoded documents.
+        </p>
+        <mat-form-field style="width:430px">
+          <mat-label>[(src)]=</mat-label>
+          <mat-select [(value)]="src" class="margin">
+            <mat-option [value]="undefined">no document</mat-option>
+            @if (!bookMode) {
+              <mat-option value="/assets/pdfs/Introduction.pdf">/assets/pdfs/Introduction.pdf</mat-option>
+            }
+            @if (!bookMode) {
+              <mat-option value="/assets/pdfs/pdf-sample.pdf">/assets/pdfs/pdf-sample.pdf</mat-option>
+            }
+            <mat-option value="/assets/pdfs/GraalVM Dictionary Bytecode, Interpreters, C1 Compiler, C2 Compiler, CPUs, and More.pdf">/assets/pdfs/GraalVM Dictionary....pdf</mat-option>
+            <mat-option value="/assets/pdfs/What About GraalVM.pdf">/assets/What About GraalVM.pdf</mat-option>
+            <mat-option [value]="url">new URL('{{url.toString()}}')</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br />
+        <mat-checkbox [(ngModel)]="dragAndDrop">enable dragging and dropping files to the PDF viewer</mat-checkbox>
+        <br />
+        <mat-checkbox [(ngModel)]="bookMode">book mode (capricious - some documents work, some don't)</mat-checkbox>
+        <p>Current value of <code>[src]</code>: {{ src === undefined ? 'undefined' : '"'+ src + '"' }}</p>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/multiple-documents/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/multiple-documents/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
-    <p>Current value of <code>[src]</code>: {{ src === undefined ? 'undefined' : '"'+ src + '"' }}</p>
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <ngx-extended-pdf-viewer
+      [(src)]="src"
+      backgroundColor="#ffffff"
+      [enableDragAndDrop]="dragAndDrop"
+
+      [zoom]="'page-fit'"
+      [pageViewMode]="bookMode ? 'book' : 'multiple'"
+    > </ngx-extended-pdf-viewer>
   </mat-card>
-
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/multiple-documents/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="TypeScript">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/multiple-documents/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <ngx-extended-pdf-viewer
-    [(src)]="src"
-    backgroundColor="#ffffff"
-    [enableDragAndDrop]="dragAndDrop"
-
-    [zoom]="'page-fit'"
-    [pageViewMode]="bookMode ? 'book' : 'multiple'"
-  > </ngx-extended-pdf-viewer>
-</mat-card>
 </div>

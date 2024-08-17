@@ -1,39 +1,44 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-      <p>You can override the default function <code>globalThis.ngxConsoleFilter(logLevel, message)</code> to filter the log messages.</p>
-      <p>
-        This live demo re-defines <code>ngxConsolefilter()</code> to grab the version number from the console messages and to store it in a variable so it can
-        be shown here:
-      </p>
-      <p *ngIf="version">
-        <i>{{ version }}</i>
-      </p>
-      <p *ngIf="!version">
-        <i>(Since version 21.0, this demo requires you to reload the page. That's a side-effect of an optimization: the core library is re-used if you're navigating from page to page.
-          The message containing the version number is only printed during the initial load).</i>
-      </p>
-
-      <p>
-        The original use-case of <code>ngxConsolefilter()</code> is suppressing messages you don't want to log. For example, many PDF documents cause the viewer
-        to emit messages like <code>Warning: TT: undefined function: 32</code>. That's one of the messages you can almost always safely ignore, so it doesn't
-        make sense to pump it into, say, an ELK stack or Splunk. If your custom implementation of <code>ngxConsolefilter()</code> returns false depending on the message
-        text, the message is never logged.
-      </p>
-      <p>The live demo shows that, too: when you open the console window, you'll see every message with the exception of the version info.</p>
-      <p><b>Breaking change: </b>Before version 17, you have to register the filter function with the<code>Window</code> object instead of <code>globalThis</code>.</p>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <mat-tab-group>
-        <mat-tab label="Typescript">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/filtering-console-log/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/filtering-console-log/html.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
+        <p>You can override the default function <code>globalThis.ngxConsoleFilter(logLevel, message)</code> to filter the log messages.</p>
+        <p>
+          This live demo re-defines <code>ngxConsolefilter()</code> to grab the version number from the console messages and to store it in a variable so it can
+          be shown here:
+        </p>
+        @if (version) {
+          <p>
+            <i>{{ version }}</i>
+          </p>
+        }
+        @if (!version) {
+          <p>
+            <i>(Since version 21.0, this demo requires you to reload the page. That's a side-effect of an optimization: the core library is re-used if you're navigating from page to page.
+            The message containing the version number is only printed during the initial load).</i>
+          </p>
+        }
+        <p>
+          The original use-case of <code>ngxConsolefilter()</code> is suppressing messages you don't want to log. For example, many PDF documents cause the viewer
+          to emit messages like <code>Warning: TT: undefined function: 32</code>. That's one of the messages you can almost always safely ignore, so it doesn't
+          make sense to pump it into, say, an ELK stack or Splunk. If your custom implementation of <code>ngxConsolefilter()</code> returns false depending on the message
+          text, the message is never logged.
+        </p>
+        <p>The live demo shows that, too: when you open the console window, you'll see every message with the exception of the version info.</p>
+        <p><b>Breaking change: </b>Before version 17, you have to register the filter function with the<code>Window</code> object instead of <code>globalThis</code>.</p>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
+        <mat-tab-group>
+          <mat-tab label="Typescript">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/filtering-console-log/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/filtering-console-log/html.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
@@ -53,7 +58,7 @@
       [showSecondaryToolbarButton]="false"
       [backgroundColor]="'#161C1E'"
 
-    >
+      >
     </ngx-extended-pdf-viewer>
   </mat-card>
 </div>

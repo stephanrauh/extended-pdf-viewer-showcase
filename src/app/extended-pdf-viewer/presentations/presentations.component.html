@@ -1,49 +1,51 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-    <p>
-      The full-screen mode of pdf.js (and, by extension, ngx-extended-pdf-viewer)
-      is optimized for presentations. There's little else you can do with it:
-      you can't scroll, nor can you zoom in or out.
-    </p>
-    <p>You can't activate the full-screen mode programmatically. It must be triggered
-      by the user.
-    </p>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
+        <p>
+          The full-screen mode of pdf.js (and, by extension, ngx-extended-pdf-viewer)
+          is optimized for presentations. There's little else you can do with it:
+          you can't scroll, nor can you zoom in or out.
+        </p>
+        <p>You can't activate the full-screen mode programmatically. It must be triggered
+          by the user.
+        </p>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="Typescript">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
+
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small
+      >Copyright hint: this presentation is my own work</small
+      >.
+      <ngx-extended-pdf-viewer
+        [src]="'/assets/pdfs/GraalVM.pdf'"
+        [zoom]="'auto'"
+        [showPresentationModeButton]="true"
+        [showRotateButton]="false"
+        [showHandToolButton]="false"
+        [showDownloadButton]="false"
+        [showPrintButton]="false"
+        [showSecondaryToolbarButton]="false"
+        [backgroundColor]="'#161C1E'"
+
+        [height]="'auto'"
+        >
+      </ngx-extended-pdf-viewer>
     </mat-card>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-         <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html.md"> </app-ie11-markdown>
-        </mat-tab>
-      <mat-tab label="Typescript">
-       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <small
-    >Copyright hint: this presentation is my own work</small
-  >.
-  <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/GraalVM.pdf'"
-    [zoom]="'auto'"
-    [showPresentationModeButton]="true"
-    [showRotateButton]="false"
-    [showHandToolButton]="false"
-    [showDownloadButton]="false"
-    [showPrintButton]="false"
-    [showSecondaryToolbarButton]="false"
-    [backgroundColor]="'#161C1E'"
-
-    [height]="'auto'"
-  >
-  </ngx-extended-pdf-viewer>
-</mat-card>
-</div>
+  </div>

@@ -1,53 +1,55 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-    <p>You can customize both the sidebar. The only disadvantage is you have to set the
-    `top` position yourself. If you're offering an optional mobile-frieny large toolbar,
-    the `top` position of custom sidebars is not adjusted automatically.
-    </p>
-    <mat-radio-group aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;">
-      <mat-radio-button value="default">sidebar with standard layout</mat-radio-button>
-      <br />
-      <mat-radio-button value="without">sidebar without toolbar</mat-radio-button>
-      <br />
-      <mat-radio-button value="fancy">fancy layout</mat-radio-button>
-    </mat-radio-group>
-    <br />
-    <p>The attribute <code>[(sidebarVisible)]</code> supports two-way binding. It's updated when the user opens or hide the sidebar.</p>
-    <mat-checkbox [(ngModel)]="sidebarOpen">show sidebar</mat-checkbox>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <p>You can customize both the sidebar. The only disadvantage is you have to set the
+          `top` position yourself. If you're offering an optional mobile-frieny large toolbar,
+          the `top` position of custom sidebars is not adjusted automatically.
+        </p>
+        <mat-radio-group aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;">
+          <mat-radio-button value="default">sidebar with standard layout</mat-radio-button>
+          <br />
+          <mat-radio-button value="without">sidebar without toolbar</mat-radio-button>
+          <br />
+          <mat-radio-button value="fancy">fancy layout</mat-radio-button>
+        </mat-radio-group>
+        <br />
+        <p>The attribute <code>[(sidebarVisible)]</code> supports two-way binding. It's updated when the user opens or hide the sidebar.</p>
+        <mat-checkbox [(ngModel)]="sidebarOpen">show sidebar</mat-checkbox>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="no toolbar">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/without-toolbar.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="fancy sidebar">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/fancy-sidebar.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    @if (showPdfViewer) {
+      <ngx-extended-pdf-viewer
+        [src]="'/assets/pdfs/stluciadance.com.pdf'"
+        [customSidebar]="theme==='fancy' ? fancySidebar: theme === 'without'? withoutSidebar: undefined"
+        [(sidebarVisible)]="sidebarOpen"
+        [textLayer]="true"
+        [showHandToolButton]="true"
+        >
+      </ngx-extended-pdf-viewer>
+    }
   </mat-card>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="no toolbar">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/without-toolbar.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="fancy sidebar">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/fancy-sidebar.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <ngx-extended-pdf-viewer
-     *ngIf="showPdfViewer"
-     [src]="'/assets/pdfs/stluciadance.com.pdf'"
-     [customSidebar]="theme==='fancy' ? fancySidebar: theme === 'without'? withoutSidebar: undefined"
-     [(sidebarVisible)]="sidebarOpen"
-     [textLayer]="true"
-     [showHandToolButton]="true"
-     >
-  </ngx-extended-pdf-viewer>
-</mat-card>
 </div>
 
 <ng-template #withoutSidebar>

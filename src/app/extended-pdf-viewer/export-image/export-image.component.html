@@ -1,51 +1,57 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-      <p>
-        You can export the PDF file as an image. Note that the text of the PDF usually scales smoothlessly; you can print it with high
-        resolution. However, the images embedded in the PDF file usually don't scale as gracefully, as you can see in the example document.
-      </p>
-      <mat-form-field style="width: 90%">
-        <mat-label>desired width (pixels)</mat-label>
-        <input matInput class="margin" [(ngModel)]="width" placeholder="1000" [disabled]="!!height || !!scale" />
-      </mat-form-field>
-      <mat-form-field style="width: 90%">
-        <mat-label>desired height (pixels)</mat-label>
-        <input matInput class="margin" [(ngModel)]="height" placeholder="1500" [disabled]="!!width || !!scale" />
-        <mat-error>Please fill only one of the input fields</mat-error>
-      </mat-form-field>
-      <mat-form-field style="width: 90%">
-        <mat-label>zoom factor (numeric, not percentage) (values above 5 are slow!)</mat-label>
-        <input matInput class="margin" [(ngModel)]="scale" placeholder="0.5" [disabled]="!!width || !!height" />
-      </mat-form-field>
-      <mat-form-field style="width: 90%">
-        <mat-label>background color and transparency</mat-label>
-        <input matInput class="margin" [(ngModel)]="background" placeholder="rgba(255,0,0,0.3)" />
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="exportAsImage()" [disabled]="!height && !width && !scale">Export as image</button>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-      <mat-tab-group [selectedIndex]="selectedTabIndex">
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="extracted image">
-          <div class="distance16">
-            <div *ngIf="imageDataURL">
-              <div>Width: {{ widthDisplay }}</div>
-              <div>Height: {{ heightDisplay }}</div>
-              <div>Data URL: {{ imageDataURL.substring(0, 50) }} Length: {{ imageDataURL.length }} bytes</div>
-              <img src="{{ imageDataURL }}" />
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <p>
+          You can export the PDF file as an image. Note that the text of the PDF usually scales smoothlessly; you can print it with high
+          resolution. However, the images embedded in the PDF file usually don't scale as gracefully, as you can see in the example document.
+        </p>
+        <mat-form-field style="width: 90%">
+          <mat-label>desired width (pixels)</mat-label>
+          <input matInput class="margin" [(ngModel)]="width" placeholder="1000" [disabled]="!!height || !!scale" />
+        </mat-form-field>
+        <mat-form-field style="width: 90%">
+          <mat-label>desired height (pixels)</mat-label>
+          <input matInput class="margin" [(ngModel)]="height" placeholder="1500" [disabled]="!!width || !!scale" />
+          <mat-error>Please fill only one of the input fields</mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 90%">
+          <mat-label>zoom factor (numeric, not percentage) (values above 5 are slow!)</mat-label>
+          <input matInput class="margin" [(ngModel)]="scale" placeholder="0.5" [disabled]="!!width || !!height" />
+        </mat-form-field>
+        <mat-form-field style="width: 90%">
+          <mat-label>background color and transparency</mat-label>
+          <input matInput class="margin" [(ngModel)]="background" placeholder="rgba(255,0,0,0.3)" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="exportAsImage()" [disabled]="!height && !width && !scale">Export as image</button>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group [selectedIndex]="selectedTabIndex">
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="extracted image">
+            <div class="distance16">
+              @if (imageDataURL) {
+                <div>
+                  <div>Width: {{ widthDisplay }}</div>
+                  <div>Height: {{ heightDisplay }}</div>
+                  <div>Data URL: {{ imageDataURL.substring(0, 50) }} Length: {{ imageDataURL.length }} bytes</div>
+                  <img src="{{ imageDataURL }}" />
+                </div>
+              }
+              @if (!imageDataURL) {
+                <div>no image extracted yet</div>
+              }
             </div>
-            <div *ngIf="!imageDataURL">no image extracted yet</div>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
@@ -60,7 +66,7 @@
       [showHandToolButton]="true"
       [handTool]="false"
 
-    >
+      >
     </ngx-extended-pdf-viewer>
   </mat-card>
 </div>

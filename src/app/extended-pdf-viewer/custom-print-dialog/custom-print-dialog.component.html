@@ -4,25 +4,36 @@
       <div class="flex-container-column">
         <p><b>Caveat:</b> Currently, the cancel button of the demo doesn't work because pdf.js opens a modal dialog.</p>
         <button mat-raised-button color="primary" (click)="print()">Print</button>
-        <p *ngIf="showProgress">Hit the escape key to cancel printing</p>
+        @if (showProgress) {
+          <p>Hit the escape key to cancel printing</p>
+        }
         <mat-checkbox [(ngModel)]="hideBuiltInProgress">Hide PDFJS Progress Dialog</mat-checkbox>
 
-        <div *ngIf="showProgress" style="padding-bottom:10px; padding-top:10px">
-          <div>Processing page {{ currentPageRendered }} of {{ totalPages }}</div>
-        </div>
+        @if (showProgress) {
+          <div style="padding-bottom:10px; padding-top:10px">
+            <div>Processing page {{ currentPageRendered }} of {{ totalPages }}</div>
+          </div>
+        }
 
-        <mat-progress-bar
-          *ngIf="showProgress"
-          class="print__progress"
-          color="primary"
-          mode="determinate"
-          value="{{ printPercentage }}"
-        ></mat-progress-bar>
+        @if (showProgress) {
+          <mat-progress-bar
+            class="print__progress"
+            color="primary"
+            mode="determinate"
+            value="{{ printPercentage }}"
+          ></mat-progress-bar>
+        }
 
-        <div *ngIf="showCompleted" style="padding-bottom:10px; padding-top:10px">
-          <div *ngIf="!isPrintCancelled" style="color:green">Printing completed!</div>
-          <div *ngIf="isPrintCancelled" style="color:red">Printing was cancelled!</div>
-        </div>
+        @if (showCompleted) {
+          <div style="padding-bottom:10px; padding-top:10px">
+            @if (!isPrintCancelled) {
+              <div style="color:green">Printing completed!</div>
+            }
+            @if (isPrintCancelled) {
+              <div style="color:red">Printing was cancelled!</div>
+            }
+          </div>
+        }
       </div>
     </mat-card>
 
@@ -47,7 +58,7 @@
       (afterPrint)="onAfterPrint()"
       (progress)="onProgress($event)"
 
-    >
+      >
     </ngx-extended-pdf-viewer>
   </mat-card>
 </article>

@@ -1,35 +1,37 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-      <mat-tab-group>
-        <mat-tab label="Server-side rendering">
-          <p>
-            Starting with version 16.2.14, ngx-extended-pdf-viewer supports server-side rendering out-of-the-box.
-          </p>
-          <p>There's no live demo yet because it's not that easy to make the showcase support SSR.
-            However, the <a target="new" href="https://www.beyondjava.net/page/beyondjava-conference">presentations on my blog</a>
-            employ ngx-extended-pdf-viewer with server-side rendering. For example,
-            have a look at
-            <a target="new" href="https://www.beyondjava.net/presentations/GraalVM-Javaland-2023-Final">the slides of my JavaLand talk</a>.
-          </p>
-        </mat-tab>
-        <mat-tab label="Older versions">
-          <p>
-            Before version 16.2, ngx-extended-pdf-viewer used a special module to support server-side rendering.
-            If you're still using it, update to ngx-extended-pdf-viewer 17+ and abandon
-            <code>NgxExtededPdfViewerServerModule</code> in favor of the new, unified approach.
-          </p>
-        </mat-tab>
-     </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
+        <mat-tab-group>
+          <mat-tab label="Server-side rendering">
+            <p>
+              Starting with version 16.2.14, ngx-extended-pdf-viewer supports server-side rendering out-of-the-box.
+            </p>
+            <p>There's no live demo yet because it's not that easy to make the showcase support SSR.
+              However, the <a target="new" href="https://www.beyondjava.net/page/beyondjava-conference">presentations on my blog</a>
+              employ ngx-extended-pdf-viewer with server-side rendering. For example,
+              have a look at
+              <a target="new" href="https://www.beyondjava.net/presentations/GraalVM-Javaland-2023-Final">the slides of my JavaLand talk</a>.
+            </p>
+          </mat-tab>
+          <mat-tab label="Older versions">
+            <p>
+              Before version 16.2, ngx-extended-pdf-viewer used a special module to support server-side rendering.
+              If you're still using it, update to ngx-extended-pdf-viewer 17+ and abandon
+              <code>NgxExtededPdfViewerServerModule</code> in favor of the new, unified approach.
+            </p>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
         <mat-tab-group>
           <mat-tab label="HTML template">
             <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/server-side-rendering/html.md"> </app-ie11-markdown>
           </mat-tab>
         </mat-tab-group>
-    </mat-card>
-  </div>
+      </mat-card>
+    </div>
+  }
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
       <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
@@ -54,7 +56,7 @@
         [showHandToolButton]="true"
         [showPresentationModeButton]="true"
         [handTool]="true"
-      >
+        >
       </ngx-extended-pdf-viewer>
     </div>
   </mat-card>

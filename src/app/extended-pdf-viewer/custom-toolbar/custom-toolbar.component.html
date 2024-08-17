@@ -1,73 +1,80 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;" style="margin-bottom:20px">
-    <mat-tab-group>
-      <mat-tab label="live demo">
-        <p>
-          ngx-extended-pdf-viewer allows you to define your own custom toolbar, menu, and it even allows you to create
-          your own sidebar and your own thumbnails.
-        </p>
-        <mat-label title="Demo theme"></mat-label>
-        <mat-radio-group aria-label="Demo" [(ngModel)]="theme">
-          <mat-radio-button value="default">standard layout</mat-radio-button>
-          <br />
-          <mat-radio-button value="findbar">custom findbar (large input field in a dedicated line)</mat-radio-button>
-          <br />
-          <mat-radio-button value="checkbox">radiobutton zoom</mat-radio-button>
-          <br />
-          <mat-radio-button value="additional">custom color and additional button ("open PDF in new tab")</mat-radio-button>
-          <br />
-          <mat-radio-button value="floating">floating zoombar</mat-radio-button>
-          <mat-checkbox class="padding-left" [(ngModel)]="showFreeFloatingBar">show it! (uncheck to hide)</mat-checkbox>
-        </mat-radio-group>
-      </mat-tab>
-      <mat-tab label="responsive custom buttons">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-  <p></p>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-    <mat-tab-group>
-      <mat-tab label="TypeScript">
-        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-'+ theme+'.md'"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-'+ theme+'.md'"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="CSS template" *ngIf="theme=='findbar'">
-        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/css-'+ theme+'.md'"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="additional components" *ngIf="theme=='additional'">
-        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="changing the toolbars dynamically">
-        <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-reinitialization.md'"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;" style="margin-bottom:20px">
+        <mat-tab-group>
+          <mat-tab label="live demo">
+            <p>
+              ngx-extended-pdf-viewer allows you to define your own custom toolbar, menu, and it even allows you to create
+              your own sidebar and your own thumbnails.
+            </p>
+            <mat-label title="Demo theme"></mat-label>
+            <mat-radio-group aria-label="Demo" [(ngModel)]="theme">
+              <mat-radio-button value="default">standard layout</mat-radio-button>
+              <br />
+              <mat-radio-button value="findbar">custom findbar (large input field in a dedicated line)</mat-radio-button>
+              <br />
+              <mat-radio-button value="checkbox">radiobutton zoom</mat-radio-button>
+              <br />
+              <mat-radio-button value="additional">custom color and additional button ("open PDF in new tab")</mat-radio-button>
+              <br />
+              <mat-radio-button value="floating">floating zoombar</mat-radio-button>
+              <mat-checkbox class="padding-left" [(ngModel)]="showFreeFloatingBar">show it! (uncheck to hide)</mat-checkbox>
+            </mat-radio-group>
+          </mat-tab>
+          <mat-tab label="responsive custom buttons">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+      <p></p>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-'+ theme+'.md'"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-'+ theme+'.md'"> </app-ie11-markdown>
+          </mat-tab>
+          @if (theme=='findbar') {
+            <mat-tab label="CSS template">
+              <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/css-'+ theme+'.md'"> </app-ie11-markdown>
+            </mat-tab>
+          }
+          @if (theme=='additional') {
+            <mat-tab label="additional components">
+              <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
+            </mat-tab>
+          }
+          <mat-tab label="changing the toolbars dynamically">
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-reinitialization.md'"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <ngx-extended-pdf-viewer *ngIf="showPdfViewer"
-    [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : undefined"
-    [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : undefined"
-    [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons : undefined)"
-    [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : undefined"
-    [src]="'/assets/pdfs/dachstein.pdf'"
-    [textLayer]="true"
-    [zoom]="zoom"
-    [showZoomButtons]="theme != 'floating'"
-    [showFreeFloatingBar]="showFreeFloatingBar"
-
-  >
-  </ngx-extended-pdf-viewer>
-</mat-card>
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    @if (showPdfViewer) {
+      <ngx-extended-pdf-viewer
+        [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : undefined"
+        [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : undefined"
+        [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons : undefined)"
+        [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : undefined"
+        [src]="'/assets/pdfs/dachstein.pdf'"
+        [textLayer]="true"
+        [zoom]="zoom"
+        [showZoomButtons]="theme != 'floating'"
+        [showFreeFloatingBar]="showFreeFloatingBar"
+        >
+      </ngx-extended-pdf-viewer>
+    }
+  </mat-card>
 </div>
 
 <ng-template #customFindbarInputArea>

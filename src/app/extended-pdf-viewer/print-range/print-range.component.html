@@ -1,12 +1,13 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="overflow-none distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
-      <div class="flex-container-column">
-        <mat-tab-group (selectedTabChange)="tabChanged($event)">
-           <mat-tab label="printService.print()">
-            <p>You can print the PDF file by calling <code>NgxExtendedPdfViewerService.print()</code>.
-            The (optional) parameter defines the print range. Limiting the print range is
-            useful for very large documents that'd crash your browser - such as trying
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="overflow-none distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+        <div class="flex-container-column">
+          <mat-tab-group (selectedTabChange)="tabChanged($event)">
+            <mat-tab label="printService.print()">
+              <p>You can print the PDF file by calling <code>NgxExtendedPdfViewerService.print()</code>.
+              The (optional) parameter defines the print range. Limiting the print range is
+              useful for very large documents that'd crash your browser - such as trying
             to print documents containing several hundred pages with Internet Explorer 11.</p>
             <section class="section">
               <mat-form-field>
@@ -26,95 +27,96 @@
                 <input matInput class="margin" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)"/>
               </mat-form-field>
             </section>
-
             <button mat-raised-button color="primary" (click)="print()">NgxExtendedPdfViewerService.print()</button>
           </mat-tab>
           <mat-tab label="setPrintRange()">
             <p>Calling <code>NgxExtendedPdfViewerService.setPrintRange()</code> limits
-              the print range of the print button and CTRL+P. This also includes the
-              programmatic API <code>print()</code> if the parameter is omitted.</p>
+            the print range of the print button and CTRL+P. This also includes the
+            programmatic API <code>print()</code> if the parameter is omitted.</p>
             <p>To prevent nasty surprises, implement an <code>ngDestroy()</code> callback and use it
-              to call <code>NgxExtendedPdfViewerService.removePrintRange()</code>.
-            </p>
-              <section class="section">
-                <mat-form-field>
-                  <input matInput class="margin" [(ngModel)]="from" placeholder="from page number" />
-                </mat-form-field>
-                <mat-form-field style="padding-left:10px;">
-                  <input matInput class="margin" [(ngModel)]="to" placeholder="to page number"/>
-                </mat-form-field>
-              </section>
-              <section class="section">
-                <mat-form-field style="width:90%">
-                  <input matInput class="margin" [(ngModel)]="included" placeholder="including (comma separatated list of page numbers)"/>
-                </mat-form-field>
-              </section>
-              <section class="section">
-                <mat-form-field style="width:90%">
-                  <input matInput class="margin" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)"/>
-                </mat-form-field>
-              </section>
-              <button mat-raised-button color="primary" (click)="setPrintRange()">NgxExtendedPdfViewerService.setPrintRange()</button>
-            </mat-tab>
-            <mat-tab label="Override browser print">
-              <p>Setting the attribute `replaceBrowserPrint` allows you to replace the browser default print functionality
-                by printing the PDF file. No matter what your web page looks like, if `replaceBrowserPrint` is true, both
-                the keys <code>CTRL+P</code> and the print menu of the browser print the PDF file. If you set `replaceBrowserPrint="false"`,
-                both CTRL+P and the print menu print the web page.
-              </p>
-              <p>Caveat: starting with version 16.0.0, the `replaceBrowserPrint` is active by default.</p>
-              <mat-checkbox class="margin" [(ngModel)]="replaceBrowserPrint">replaceBrowserPrint="true"</mat-checkbox>
-            </mat-tab>
-            <mat-tab label="Auto rotation">
-              <p>By default, the PDF viewer rotates landscape pages when printing. You can switch this off by setting
-                <code>enablePrintAutoRotate</code> to false. This is useful if you want to print a PDF file with a mix of
-                portrait and landscape pages and you want to keep the orientation of the pages as they are in the PDF file.
-              </p>
-              <mat-checkbox class="margin" [(ngModel)]="enablePrintAutoRotate">enablePrintAutoRotate="true"</mat-checkbox>
-            </mat-tab>
-            <mat-tab label="Print resolution">
-              <p>The attribute <code>printResolution</code> specifies the print resolution, with a default value of 150 dpi. If the specified resolution exceeds the browser's capabilities, it is adjusted downward, including a 5% margin for safety.</p>
-              <mat-radio-group aria-label="Print resolution" [(ngModel)]="printResolution">
-                <mat-radio-button value="10">[printResolution]="10"</mat-radio-button>
-                <mat-radio-button value="75">[printResolution]="75"</mat-radio-button>
-                <mat-radio-button value="150">[printResolution]="150"</mat-radio-button>
-                <mat-radio-button value="300">[printResolution]="300"</mat-radio-button>
-                <mat-radio-button value="600">[printResolution]="600"</mat-radio-button>
-                <mat-radio-button value="1200">[printResolution]="1200"</mat-radio-button>
-                <mat-radio-button value="2400">[printResolution]="2400"</mat-radio-button>
-                <mat-radio-button value="3600">[printResolution]="3600"</mat-radio-button>
-              </mat-radio-group>
-            </mat-tab>
-          </mat-tab-group>
-          <p *ngIf="resolution">Your browser supports a maximum resolution of {{resolution}}</p>
-        </div>
-    </mat-card>
-
-    <mat-card appearance="outlined" class="overflow-y-scroll distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:49%">
-      <mat-tab-group>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown [data]="sourcecode | language : 'typescript'"> </app-ie11-markdown>
+            to call <code>NgxExtendedPdfViewerService.removePrintRange()</code>.
+          </p>
+          <section class="section">
+            <mat-form-field>
+              <input matInput class="margin" [(ngModel)]="from" placeholder="from page number" />
+            </mat-form-field>
+            <mat-form-field style="padding-left:10px;">
+              <input matInput class="margin" [(ngModel)]="to" placeholder="to page number"/>
+            </mat-form-field>
+          </section>
+          <section class="section">
+            <mat-form-field style="width:90%">
+              <input matInput class="margin" [(ngModel)]="included" placeholder="including (comma separatated list of page numbers)"/>
+            </mat-form-field>
+          </section>
+          <section class="section">
+            <mat-form-field style="width:90%">
+              <input matInput class="margin" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)"/>
+            </mat-form-field>
+          </section>
+          <button mat-raised-button color="primary" (click)="setPrintRange()">NgxExtendedPdfViewerService.setPrintRange()</button>
         </mat-tab>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html.md"> </app-ie11-markdown>
+        <mat-tab label="Override browser print">
+          <p>Setting the attribute `replaceBrowserPrint` allows you to replace the browser default print functionality
+            by printing the PDF file. No matter what your web page looks like, if `replaceBrowserPrint` is true, both
+            the keys <code>CTRL+P</code> and the print menu of the browser print the PDF file. If you set `replaceBrowserPrint="false"`,
+            both CTRL+P and the print menu print the web page.
+          </p>
+          <p>Caveat: starting with version 16.0.0, the `replaceBrowserPrint` is active by default.</p>
+          <mat-checkbox class="margin" [(ngModel)]="replaceBrowserPrint">replaceBrowserPrint="true"</mat-checkbox>
         </mat-tab>
-        <mat-tab label="auto rotation">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html3.md"> </app-ie11-markdown>
+        <mat-tab label="Auto rotation">
+          <p>By default, the PDF viewer rotates landscape pages when printing. You can switch this off by setting
+            <code>enablePrintAutoRotate</code> to false. This is useful if you want to print a PDF file with a mix of
+            portrait and landscape pages and you want to keep the orientation of the pages as they are in the PDF file.
+          </p>
+          <mat-checkbox class="margin" [(ngModel)]="enablePrintAutoRotate">enablePrintAutoRotate="true"</mat-checkbox>
         </mat-tab>
-        <mat-tab label="print resolution">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html2.md"> </app-ie11-markdown>
+        <mat-tab label="Print resolution">
+          <p>The attribute <code>printResolution</code> specifies the print resolution, with a default value of 150 dpi. If the specified resolution exceeds the browser's capabilities, it is adjusted downward, including a 5% margin for safety.</p>
+          <mat-radio-group aria-label="Print resolution" [(ngModel)]="printResolution">
+            <mat-radio-button value="10">[printResolution]="10"</mat-radio-button>
+            <mat-radio-button value="75">[printResolution]="75"</mat-radio-button>
+            <mat-radio-button value="150">[printResolution]="150"</mat-radio-button>
+            <mat-radio-button value="300">[printResolution]="300"</mat-radio-button>
+            <mat-radio-button value="600">[printResolution]="600"</mat-radio-button>
+            <mat-radio-button value="1200">[printResolution]="1200"</mat-radio-button>
+            <mat-radio-button value="2400">[printResolution]="2400"</mat-radio-button>
+            <mat-radio-button value="3600">[printResolution]="3600"</mat-radio-button>
+          </mat-radio-group>
         </mat-tab>
       </mat-tab-group>
-    </mat-card>
-  </div>
-
-  <mat-card appearance="outlined" class="pdf-card distance16 mat-elevation-z8 use-available-height">
-    <ngx-extended-pdf-viewer
-      [src]="src"
-      [replaceBrowserPrint]="replaceBrowserPrint"
-      zoom="50%"
-      [printResolution]="printResolution"
-      [enablePrintAutoRotate]="enablePrintAutoRotate">
-    </ngx-extended-pdf-viewer>
+      @if (resolution) {
+        <p>Your browser supports a maximum resolution of {{resolution}}</p>
+      }
+    </div>
   </mat-card>
+  <mat-card appearance="outlined" class="overflow-y-scroll distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:49%">
+    <mat-tab-group>
+      <mat-tab label="TypeScript">
+        <app-ie11-markdown [data]="sourcecode | language : 'typescript'"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="HTML template">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="auto rotation">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html3.md"> </app-ie11-markdown>
+      </mat-tab>
+      <mat-tab label="print resolution">
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html2.md"> </app-ie11-markdown>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+}
+
+<mat-card appearance="outlined" class="pdf-card distance16 mat-elevation-z8 use-available-height">
+  <ngx-extended-pdf-viewer
+    [src]="src"
+    [replaceBrowserPrint]="replaceBrowserPrint"
+    zoom="50%"
+    [printResolution]="printResolution"
+    [enablePrintAutoRotate]="enablePrintAutoRotate">
+  </ngx-extended-pdf-viewer>
+</mat-card>
 </div>

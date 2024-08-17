@@ -1,116 +1,118 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-    <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab=$event">
-      <mat-tab label="Getting started">
-        <p>
-          Many properties of ngx-extended-pdf-viewer support two-way binding.
-        </p>
-        <mat-form-field class="margin">
-          <input matInput  [(ngModel)]="zoom" placeholder="[(zoom)]" />
-        </mat-form-field>
-        <span>(currentZoomFactor)="{{currentZoomFactor}}"</span>
-        <br />
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
+        <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab=$event">
+          <mat-tab label="Getting started">
+            <p>
+              Many properties of ngx-extended-pdf-viewer support two-way binding.
+            </p>
+            <mat-form-field class="margin">
+              <input matInput  [(ngModel)]="zoom" placeholder="[(zoom)]" />
+            </mat-form-field>
+            <span>(currentZoomFactor)="{{currentZoomFactor}}"</span>
+            <br />
+            <mat-form-field class="margin">
+              <input matInput  [(ngModel)]="rotation" placeholder="[(rotation)]=0 | 90 | 180 | 270" />
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput  [(ngModel)]="spread" placeholder="[(spread)]='off' | 'even' | 'odd'" />
+            </mat-form-field>
+            <br />
+            <mat-form-field class="full-width">
+              <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]" />
+              <mat-hint>0=vertical 1=horizontal 2=block 3=single page</mat-hint>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="margin-top full-width">
+              <input matInput  [(ngModel)]="activeSidebarView" placeholder="[(activeSidebarView)]" />
+              <mat-hint>1=thumbnails 2=outline 3=attachments 4=layers</mat-hint>
+            </mat-form-field>
+            @if (activeSidebarView == 2) {
+              <button
+              (click)="load('./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf')">PDF with outline</button>
+            }
+            @if (activeSidebarView == 3) {
+              <button
+              (click)="load('./assets/pdfs/annotation-fileattachment.pdf')">PDF with attachments</button>
+            }
+            @if (activeSidebarView == 4) {
+              <button
+              (click)="load('/assets/pdfs/themes_de_la_Science-fiction.pdf')">PDF with layers</button>
+            }
+            <br />
+            <mat-checkbox class="margin" [(ngModel)]="sidebarVisible">[(sidebarVisible)]</mat-checkbox>
+            <br />
+            <mat-form-field class="full-width margin-top">
+              <input matInput  [(ngModel)]="src" placeholder="[(src)]" />
+            </mat-form-field>
+          </mat-tab>
+          <mat-tab label="Page and page label">
+            <p>The page is the number page number. It always starts with 1.</p>
+            <p>
+              The page label is the page number assigned by the author of the PDF document. For example, the document below uses roman numbers
+              for the table of contents and arabic numbers for the main body.
+            </p>
+            <p>
+              If you try to use both `[(page)]` and `[(pageLabel)]` with two-way binding, you'll run into
+              `ExpressionChangedAfterItHasBeenCheckedErrors`. To prevent this, you'll want to adopt the `OnPush` change detection strategy.
+            </p>
+            <mat-form-field class="margin">
+              <input matInput  [(ngModel)]="page" placeholder="Current page number" />
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput  [(ngModel)]="pageLabel" placeholder="Current page label" />
+            </mat-form-field>
+          </mat-tab>
+          <mat-tab label="Forms">
+            <p>ngx-extended-pdf-viewer offers two-way binding between Angular attributes and Acroforms embedded in your PDF. Please visit the
+              <a [routerLink]="'/extended-pdf-viewer/forms'">dedicated demo</a>.
+            </p>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/two-way-binding/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="Typescript">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/two-way-binding/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
-        <mat-form-field class="margin">
-          <input matInput  [(ngModel)]="rotation" placeholder="[(rotation)]=0 | 90 | 180 | 270" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput  [(ngModel)]="spread" placeholder="[(spread)]='off' | 'even' | 'odd'" />
-        </mat-form-field>
-        <br />
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small>Note there's a bug in the PDF file. See the <a [routerLink]="['/annotation-layer']">annotation layer demo</a> to see the bugfix.</small>
+    <small
+      >Copyright hint: the e-book has been published by James Boyle under a
+      <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+      <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a></small
+      >.
+      <ngx-extended-pdf-viewer
+        [(src)]="src"
+        [height]="'auto'"
+        [textLayer]="true"
+        [(scrollMode)]="scrollMode"
+        [(handTool)]="handTool"
+        [(page)]="page"
+        [(pageLabel)]="pageLabel"
+        [(rotation)]="rotation"
+        [(sidebarVisible)]="sidebarVisible"
+        [(activeSidebarView)]="activeSidebarView"
+        [(spread)]="spread"
+        [(zoom)]="zoom"
+        (currentZoomFactor)="currentZoomFactor=$event"
 
-        <mat-form-field class="full-width">
-          <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]" />
-          <mat-hint>0=vertical 1=horizontal 2=block 3=single page</mat-hint>
-        </mat-form-field>
-        <br />
+        >
+      </ngx-extended-pdf-viewer>
 
-        <mat-form-field class="margin-top full-width">
-          <input matInput  [(ngModel)]="activeSidebarView" placeholder="[(activeSidebarView)]" />
-          <mat-hint>1=thumbnails 2=outline 3=attachments 4=layers</mat-hint>
-        </mat-form-field>
-        <button *ngIf="activeSidebarView == 2"
-                 (click)="load('./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf')">PDF with outline</button>
-        <button *ngIf="activeSidebarView == 3"
-                  (click)="load('./assets/pdfs/annotation-fileattachment.pdf')">PDF with attachments</button>
-        <button *ngIf="activeSidebarView == 4"
-                (click)="load('/assets/pdfs/themes_de_la_Science-fiction.pdf')">PDF with layers</button>
-        <br />
-
-        <mat-checkbox class="margin" [(ngModel)]="sidebarVisible">[(sidebarVisible)]</mat-checkbox>
-        <br />
-
-        <mat-form-field class="full-width margin-top">
-          <input matInput  [(ngModel)]="src" placeholder="[(src)]" />
-        </mat-form-field>
-      </mat-tab>
-      <mat-tab label="Page and page label">
-        <p>The page is the number page number. It always starts with 1.</p>
-        <p>
-          The page label is the page number assigned by the author of the PDF document. For example, the document below uses roman numbers
-          for the table of contents and arabic numbers for the main body.
-        </p>
-        <p>
-          If you try to use both `[(page)]` and `[(pageLabel)]` with two-way binding, you'll run into
-          `ExpressionChangedAfterItHasBeenCheckedErrors`. To prevent this, you'll want to adopt the `OnPush` change detection strategy.
-        </p>
-        <mat-form-field class="margin">
-          <input matInput  [(ngModel)]="page" placeholder="Current page number" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput  [(ngModel)]="pageLabel" placeholder="Current page label" />
-        </mat-form-field>
-      </mat-tab>
-      <mat-tab label="Forms">
-        <p>ngx-extended-pdf-viewer offers two-way binding between Angular attributes and Acroforms embedded in your PDF. Please visit the
-          <a [routerLink]="'/extended-pdf-viewer/forms'">dedicated demo</a>.
-        </p>
-      </mat-tab>
-
-    </mat-tab-group>
-  </mat-card>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-         <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/two-way-binding/html.md"> </app-ie11-markdown>
-        </mat-tab>
-      <mat-tab label="Typescript">
-       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/two-way-binding/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <small>Note there's a bug in the PDF file. See the <a [routerLink]="['/annotation-layer']">annotation layer demo</a> to see the bugfix.</small>
-  <small
-    >Copyright hint: the e-book has been published by James Boyle under a
-    <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
-    <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a></small
-  >.
-  <ngx-extended-pdf-viewer
-    [(src)]="src"
-    [height]="'auto'"
-    [textLayer]="true"
-    [(scrollMode)]="scrollMode"
-    [(handTool)]="handTool"
-    [(page)]="page"
-    [(pageLabel)]="pageLabel"
-    [(rotation)]="rotation"
-    [(sidebarVisible)]="sidebarVisible"
-    [(activeSidebarView)]="activeSidebarView"
-    [(spread)]="spread"
-    [(zoom)]="zoom"
-    (currentZoomFactor)="currentZoomFactor=$event"
-
-  >
-  </ngx-extended-pdf-viewer>
-
-</mat-card>
-</div>
+    </mat-card>
+  </div>

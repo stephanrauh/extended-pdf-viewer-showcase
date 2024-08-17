@@ -1,74 +1,78 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/pages-loaded/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="TypeScript">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/pages-loaded/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/pages-loaded/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/pages-loaded/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+        <mat-card-header>
+          <b>Messages sent by the PDF</b>
+          <button mat-icon-button (click)="messages = []" style="margin-top:-13px"><mat-icon>delete_forever</mat-icon></button>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="messages distance16">
+            @if (!messages) {
+              <div>
+                No message yet. This means no document has been loaded yet.
+              </div>
+            }
+            @for (m of messages; track m) {
+              <div>{{ m }}</div>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
+
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small>Copyright hint: the PDF file has been published on <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">Wikimedia</a> by the anonymous user Paroliver
+    under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a> license, as stated <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">here</a>.</small>
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/Introduction.pdf'"
+      [page]="9"
+      [height]="'90vh'"
+      [showHandToolButton]="true"
+      [textLayer]="true"
+      (pageChange)="onEvent('pageChange', $event)"
+      (afterPrint)="onEvent('afterPrint', $event)"
+      (beforePrint)="onEvent('beforePrint', $event)"
+      (currentZoomFactor)="onEvent('currentZoomFactor', $event)"
+      (pagesLoaded)="onPagesLoaded($event)"
+      (pageRender)="onEvent('pageRender', $event)"
+      (pageRendered)="onEvent('pageRendered', $event)"
+      (pdfDownloaded)="onEvent('pdfDownloaded', $event)"
+      (pdfLoadingStarts)="onEvent('pdfLoadingStarts', $event)"
+      (pdfLoaded)="onEvent('pdfLoaded', $event)"
+      (pdfLoadingFailed)="onPdfLoadingFailed($event)"
+      (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"
+      (updateFindState)="onEvent('updateFindState', $event)"
+      (progress)="onEvent('progress', $event)"
+      (annotationLayerRendered)="onEvent('annotationLayerRendered', $event)"
+      (annotationEditorLayerRendered)="onEvent('annotationEditorLayerRendered', $event)"
+      (annotationEditorEvent)="onEvent('annotationEditorEvent', $event)"
+      (xfaLayerRendered)="onEvent('xfaLayerRendered', $event)"
+      (outlineLoaded)="onEvent('outlineLoaded', $event)"
+      (attachmentsloaded)="onEvent('attachmentsloaded', $event)"
+      (layersloaded)="onEvent('layersloaded', $event)"
+      (thumbnailDrawn)="onEvent('thumbnailDrawn', $event)"
+      (findbarVisible)="onEvent('findbarVisible', $event)"
+      (propertiesDialogVisible)="onEvent('propertiesDialogVisible', $event)"
+      (annotationEditorModeChanged)="onEvent('annotationEditorModeChanged', $event)"
+
+      >
+    </ngx-extended-pdf-viewer>
   </mat-card>
-
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
-    <mat-card-header>
-      <b>Messages sent by the PDF</b>
-      <button mat-icon-button (click)="messages = []" style="margin-top:-13px"><mat-icon>delete_forever</mat-icon></button>
-
-    </mat-card-header>
-    <mat-card-content>
-      <div class="messages distance16">
-        <div *ngIf="!messages">
-          No message yet. This means no document has been loaded yet.
-        </div>
-        <div *ngFor="let m of messages">{{ m }}</div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-<small>Copyright hint: the PDF file has been published on <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">Wikimedia</a> by the anonymous user Paroliver
-under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a> license, as stated <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">here</a>.</small>
-  <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/Introduction.pdf'"
-    [page]="9"
-    [height]="'90vh'"
-    [showHandToolButton]="true"
-    [textLayer]="true"
-    (pageChange)="onEvent('pageChange', $event)"
-    (afterPrint)="onEvent('afterPrint', $event)"
-    (beforePrint)="onEvent('beforePrint', $event)"
-    (currentZoomFactor)="onEvent('currentZoomFactor', $event)"
-    (pagesLoaded)="onPagesLoaded($event)"
-    (pageRender)="onEvent('pageRender', $event)"
-    (pageRendered)="onEvent('pageRendered', $event)"
-    (pdfDownloaded)="onEvent('pdfDownloaded', $event)"
-    (pdfLoadingStarts)="onEvent('pdfLoadingStarts', $event)"
-    (pdfLoaded)="onEvent('pdfLoaded', $event)"
-    (pdfLoadingFailed)="onPdfLoadingFailed($event)"
-    (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"
-    (updateFindState)="onEvent('updateFindState', $event)"
-    (progress)="onEvent('progress', $event)"
-    (annotationLayerRendered)="onEvent('annotationLayerRendered', $event)"
-    (annotationEditorLayerRendered)="onEvent('annotationEditorLayerRendered', $event)"
-    (annotationEditorEvent)="onEvent('annotationEditorEvent', $event)"
-    (xfaLayerRendered)="onEvent('xfaLayerRendered', $event)"
-    (outlineLoaded)="onEvent('outlineLoaded', $event)"
-    (attachmentsloaded)="onEvent('attachmentsloaded', $event)"
-    (layersloaded)="onEvent('layersloaded', $event)"
-    (thumbnailDrawn)="onEvent('thumbnailDrawn', $event)"
-    (findbarVisible)="onEvent('findbarVisible', $event)"
-    (propertiesDialogVisible)="onEvent('propertiesDialogVisible', $event)"
-    (annotationEditorModeChanged)="onEvent('annotationEditorModeChanged', $event)"
-
-    >
-  </ngx-extended-pdf-viewer>
-</mat-card>
 </div>

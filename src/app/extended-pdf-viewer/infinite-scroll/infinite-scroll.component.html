@@ -1,74 +1,82 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-    <mat-tab-group>
-      <mat-tab label="Getting started">
-        <p>
-          This option allows you to display the PDF file without scrollbar.
-        </p>
-        <p>
-          <mat-checkbox class="margin" [(ngModel)]="showWidgets">show widgets</mat-checkbox> (forces reload)
-        </p>
-        <p>
-        <mat-radio-group aria-label="File selection" [(ngModel)]="file" style="line-height: 1.5;">
-          <mat-radio-button [value]="0">tiny file (1 page, 41 KB)</mat-radio-button>
-          <br />
-          <mat-radio-button [value]="1">small file (4 pages, 700 KB)</mat-radio-button>
-          <br />
-          <mat-radio-button [value]="2">huge file (300+ pages, 2 MB)</mat-radio-button>
-        </mat-radio-group>
-      </p>
-      <p *ngIf="file === 2">
-        <mat-radio-group aria-label="Zoom" [(ngModel)]="zoom" style="line-height: 1.5;">
-          <mat-radio-button [value]="'100%'">zoom: 100%</mat-radio-button>
-          <br />
-          <mat-radio-button [value]="'7%'">zoom: 7%, scrollMode = wrapped</mat-radio-button> (demonstrates performance challenges)
-        </mat-radio-group>
-        {{zoom}} {{zoom == '100%'}} {{zoom == '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped}}
-      </p>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <mat-tab-group>
+          <mat-tab label="Getting started">
+            <p>
+              This option allows you to display the PDF file without scrollbar.
+            </p>
+            <p>
+              <mat-checkbox class="margin" [(ngModel)]="showWidgets">show widgets</mat-checkbox> (forces reload)
+            </p>
+            <p>
+              <mat-radio-group aria-label="File selection" [(ngModel)]="file" style="line-height: 1.5;">
+                <mat-radio-button [value]="0">tiny file (1 page, 41 KB)</mat-radio-button>
+                <br />
+                <mat-radio-button [value]="1">small file (4 pages, 700 KB)</mat-radio-button>
+                <br />
+                <mat-radio-button [value]="2">huge file (300+ pages, 2 MB)</mat-radio-button>
+              </mat-radio-group>
+            </p>
+            @if (file === 2) {
+              <p>
+                <mat-radio-group aria-label="Zoom" [(ngModel)]="zoom" style="line-height: 1.5;">
+                  <mat-radio-button [value]="'100%'">zoom: 100%</mat-radio-button>
+                  <br />
+                  <mat-radio-button [value]="'7%'">zoom: 7%, scrollMode = wrapped</mat-radio-button> (demonstrates performance challenges)
+                </mat-radio-group>
+                {{zoom}} {{zoom == '100%'}} {{zoom == '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped}}
+              </p>
+            }
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/infinite-scroll/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="Typescript">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/infinite-scroll/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/infinite-scroll/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Typescript">
-       <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/infinite-scroll/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <small *ngIf="file===1"
-    >Copyright hint: the PDF has been published by Stefan Hellweger and Xiaofeng Wang under a
-    <a target="#" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> on
-    <a target="#" href="https://arxiv.org/abs/1503.01850">https://arxiv.org/abs/1503.01850</a></small
-  >
-  <small *ngIf="file===2"
-    >Copyright hint: the e-book has been published by James Boyle under a
-    <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
-    <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>.</small
-  >
-  <ngx-extended-pdf-viewer
-    *ngIf="showPdfViewer"
-    [src]="filenames[file]"
-    [textLayer]="showWidgets"
-    [showHandToolButton]="showWidgets"
-    [showToolbar]="showWidgets"
-    [sidebarVisible]="showWidgets"
-    [zoom]="zoom"
-    [scrollMode]="zoom == '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped"
-    [pageViewMode]="'infinite-scroll'"
-  >
-  </ngx-extended-pdf-viewer>
-</mat-card>
-</div>
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    @if (file===1) {
+      <small
+        >Copyright hint: the PDF has been published by Stefan Hellweger and Xiaofeng Wang under a
+        <a target="#" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> on
+        <a target="#" href="https://arxiv.org/abs/1503.01850">https://arxiv.org/abs/1503.01850</a></small
+        >
+      }
+      @if (file===2) {
+        <small
+          >Copyright hint: the e-book has been published by James Boyle under a
+          <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+          <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>.</small
+          >
+        }
+        @if (showPdfViewer) {
+          <ngx-extended-pdf-viewer
+            [src]="filenames[file]"
+            [textLayer]="showWidgets"
+            [showHandToolButton]="showWidgets"
+            [showToolbar]="showWidgets"
+            [sidebarVisible]="showWidgets"
+            [zoom]="zoom"
+            [scrollMode]="zoom == '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped"
+            [pageViewMode]="'infinite-scroll'"
+            >
+          </ngx-extended-pdf-viewer>
+        }
+      </mat-card>
+    </div>

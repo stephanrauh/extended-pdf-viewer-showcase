@@ -1,75 +1,81 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+settingsWidth">
-      <mat-tab-group (selectedTabChange)="currentTab = $event.index">
-        <mat-tab label="simple demo">
-          <p>You can hide every button of the toolbar and every menu item of the secondary menu.</p>
-          <mat-checkbox class="margin" [(ngModel)]="showToolbar">showToolbar</mat-checkbox> (hiding the toolbar hides every button)
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox> (only shown
-          if there are menu items)
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showFindButton">showFindButton</mat-checkbox> (requires text layer)
-          <mat-checkbox class="margin" [disabled]="!showToolbar && showFindButton" [(ngModel)]="findbarVisible">findbarVisible</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDrawEditor">showDrawEditor</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHighlightEditor">showHighlightEditor</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showStampEditor">showStampEditor</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showTextEditor">showTextEditor</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
-          <mat-form-field class="margin" *ngIf="showDownloadButton">
-            <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
-          </mat-form-field>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateCwButton">showRotateCwButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateCcwButton">showRotateCcwButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
-          <br />
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
-          <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="propertiesDialogVisible">propertiesDialogVisible</mat-checkbox>
-        </mat-tab>
-
-        <mat-tab label="responsive design">
-          <p>Are you looking for the tabs that used to be here? The reponsive design demos have moved <a href="/responsive-design">to a dedicated page</a>.</p>
-        </mat-tab>
-        <mat-tab label="responsive custom buttons">
-          <p>The live demo is on <a href="/extended-pdf-viewer/custom-toolbar">the custom toolbar page.</a></p>
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-
-    <mat-card appearance="outlined" *ngIf="currentTab === 0" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
-      <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
-    </mat-card>
-    <mat-card appearance="outlined" *ngIf="currentTab === 1" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
-      <app-ie11-markdown src="/assets/extended-pdf-viewer/hiding-buttons/ts.md"> </app-ie11-markdown>
-    </mat-card>
-  </div>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+settingsWidth">
+        <mat-tab-group (selectedTabChange)="currentTab = $event.index">
+          <mat-tab label="simple demo">
+            <p>You can hide every button of the toolbar and every menu item of the secondary menu.</p>
+            <mat-checkbox class="margin" [(ngModel)]="showToolbar">showToolbar</mat-checkbox> (hiding the toolbar hides every button)
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox> (only shown
+            if there are menu items)
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showFindButton">showFindButton</mat-checkbox> (requires text layer)
+            <mat-checkbox class="margin" [disabled]="!showToolbar && showFindButton" [(ngModel)]="findbarVisible">findbarVisible</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDrawEditor">showDrawEditor</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHighlightEditor">showHighlightEditor</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showStampEditor">showStampEditor</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showTextEditor">showTextEditor</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
+            @if (showDownloadButton) {
+              <mat-form-field class="margin">
+                <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
+              </mat-form-field>
+            }
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateCwButton">showRotateCwButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateCcwButton">showRotateCcwButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showScrollingButton">showScrollingButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
+            <br />
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
+            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="propertiesDialogVisible">propertiesDialogVisible</mat-checkbox>
+          </mat-tab>
+          <mat-tab label="responsive design">
+            <p>Are you looking for the tabs that used to be here? The reponsive design demos have moved <a href="/responsive-design">to a dedicated page</a>.</p>
+          </mat-tab>
+          <mat-tab label="responsive custom buttons">
+            <p>The live demo is on <a href="/extended-pdf-viewer/custom-toolbar">the custom toolbar page.</a></p>
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+      @if (currentTab === 0) {
+        <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
+          <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
+        </mat-card>
+      }
+      @if (currentTab === 1) {
+        <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/hiding-buttons/ts.md"> </app-ie11-markdown>
+        </mat-card>
+      }
+    </div>
+  }
 
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
@@ -81,36 +87,36 @@
       >Copyright hint: the PDF has been published by Stefan Hellweger and Xiaofeng Wang under a
       <a target="#" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> on
       <a target="#" href="https://arxiv.org/abs/1503.01850">https://arxiv.org/abs/1503.01850</a></small
-    >
-    <ngx-extended-pdf-viewer
-    [filenameForDownload]="downloadFileName"
-      [src]="'/assets/pdfs/user-experience.pdf'"
-      [height]="'auto'"
-      [showToolbar]="showToolbar"
-      [showSidebarButton]="showSidebarButton"
-      [showFindButton]="showFindButton"
-      [showDrawEditor]="showDrawEditor"
-      [showStampEditor]="showStampEditor"
-      [showHighlightEditor]="showHighlightEditor"
-      [showTextEditor]="showTextEditor"
-      [textLayer]="true"
-      [showPagingButtons]="showPagingButtons"
-      [showZoomButtons]="showZoomButtons"
-      [showPresentationModeButton]="showPresentationModeButton"
-      [showOpenFileButton]="showOpenFileButton"
-      [showPrintButton]="showPrintButton"
-      [showDownloadButton]="showDownloadButton"
-      [showSecondaryToolbarButton]="showSecondaryToolbarButton"
-      [showRotateCwButton]="showRotateCwButton"
-      [showRotateCcwButton]="showRotateCcwButton"
-      [showHandToolButton]="showHandToolButton"
-      [showScrollingButton]="showScrollingButton"
-      [showSpreadButton]="showSpreadButton"
-      [showPropertiesButton]="showPropertiesButton"
-      [(findbarVisible)]="findbarVisible"
-      [(propertiesDialogVisible)]="propertiesDialogVisible"
+      >
+      <ngx-extended-pdf-viewer
+        [filenameForDownload]="downloadFileName"
+        [src]="'/assets/pdfs/user-experience.pdf'"
+        [height]="'auto'"
+        [showToolbar]="showToolbar"
+        [showSidebarButton]="showSidebarButton"
+        [showFindButton]="showFindButton"
+        [showDrawEditor]="showDrawEditor"
+        [showStampEditor]="showStampEditor"
+        [showHighlightEditor]="showHighlightEditor"
+        [showTextEditor]="showTextEditor"
+        [textLayer]="true"
+        [showPagingButtons]="showPagingButtons"
+        [showZoomButtons]="showZoomButtons"
+        [showPresentationModeButton]="showPresentationModeButton"
+        [showOpenFileButton]="showOpenFileButton"
+        [showPrintButton]="showPrintButton"
+        [showDownloadButton]="showDownloadButton"
+        [showSecondaryToolbarButton]="showSecondaryToolbarButton"
+        [showRotateCwButton]="showRotateCwButton"
+        [showRotateCcwButton]="showRotateCcwButton"
+        [showHandToolButton]="showHandToolButton"
+        [showScrollingButton]="showScrollingButton"
+        [showSpreadButton]="showSpreadButton"
+        [showPropertiesButton]="showPropertiesButton"
+        [(findbarVisible)]="findbarVisible"
+        [(propertiesDialogVisible)]="propertiesDialogVisible"
 
-    >
-    </ngx-extended-pdf-viewer>
-  </mat-card>
-</div>
+        >
+      </ngx-extended-pdf-viewer>
+    </mat-card>
+  </div>

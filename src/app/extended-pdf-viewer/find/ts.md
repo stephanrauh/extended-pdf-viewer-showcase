@@ -5,6 +5,8 @@ export class FindComponent {
   public matchCase = false;
   public wholeWord = false;
   public ignoreAccents = false;
+  public multiple = false;
+  public matchRegExp = false;
 
   public _searchtext = '';
 
@@ -13,14 +15,12 @@ export class FindComponent {
   }
 
   public set searchtext(text: string) {
-     if (this.ngxExtendedPdfViewerService.find(
-              text,
-              { highlightAll: this.highlightAll,
-                matchCase: this.matchCase,
-                wholeWords: this.wholeWord,
-                ignoreAccents: this.ignoreAccents})) {
-      this._searchtext = text;
-    }
+    this._searchtext = text;
+    this.find();
+  }
+
+  public get searchtext2(): string {
+    return this._searchtext2;
   }
 
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService) {}
@@ -44,6 +44,33 @@ export class FindComponent {
   public updateFindMatchesCount(result: FindResultMatchesCount) {
     this.currentMatchNumber = result.current;
     this.totalMatches = result.total;
+  }
+
+   private find(): Array<Promise<number>> | undefined {
+    this.pagesWithResult = [];
+    if (!this._searchtext) {
+      this.findState = undefined;
+      this.currentMatchNumber = undefined;
+      this.totalMatches = undefined;
+    }
+    let searchtext = this.multiple ? this._searchtext.split(' ') : this._searchtext;
+    const numberOfResultsPromises = this.ngxExtendedPdfViewerService.find(searchtext, {
+      highlightAll: this.highlightAll,
+      matchCase: this.matchCase,
+      wholeWords: this.wholeWord,
+      matchDiacritics: this.matchDiacritics,
+      dontScrollIntoView: this.dontScrollIntoView,
+      useSecondaryFindcontroller: false,
+      findMultiple: this.multiple,
+      regexp: this.matchRegExp
+    });
+    numberOfResultsPromises?.forEach(async (numberOfResultsPromise, pageIndex) => {
+      const numberOfResultsPerPage = await numberOfResultsPromise;
+      if (numberOfResultsPerPage > 0) {
+        this.pagesWithResult.push(pageIndex);
+      }
+    });
+    return numberOfResultsPromises;
   }
 }
 ```

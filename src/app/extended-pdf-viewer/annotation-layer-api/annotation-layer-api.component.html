@@ -1,86 +1,86 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row" *ngIf="!fullscreen">
-    <mat-card
-      appearance="outlined"
-      class="distance16 mat-elevation-z8 margin-right"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%; box-sizing: border-box; max-width: 60%"
-    >
-      <mat-tab-group>
-        <mat-tab [label]="'Images'">
-          <p>
-            Adding images to a PDF file is a popular feature. While this is not possible with this library - it is a viewer, not an editor - you can do
-            something similar. You add an an image to the annotation layer. In most cases, you won't see the difference.
-          </p>
-          <table style="background-color: transparent">
-            <tr>
-              <td>
-                <button mat-raised-button color="primary" style="margin-right: 10px; height: 4em" (click)="addImage({ bottom: '50%', right: '50%' })">
-                  addImage({{ 'bottom: 50%; right: 50%' }})
-                </button>
-              </td>
-              <td>
-                <button mat-raised-button color="primary" style="height: 4em" (click)="addImage({ left: '50%', bottom: '50%', rotation: 90 })">
-                  addImage({{ 'left: 50%, bottom: 50%; rotation: 90' }})
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  style="margin-right: 10px; height: 4em"
-                  (click)="addImage({ right: '50%', top: '50%', rotation: 180 })"
-                >
-                addImage({{ 'right: 50%; top: 50%; rotation: 180' }})
-                </button>
-              </td>
-              <td>
-                <button mat-raised-button color="primary" style="height: 4em" (click)="addImage({ left: '50%', top: '50%', rotation: 0 })">
-                  addImage({{ 'left: 50%, top: 50%; rotation: 0' }})
-                </button>
-              </td>
-            </tr>
-            <tr>
-            <td>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  style="margin-right: 10px; height: 4em"
-                  (click)="addImage({ right: '50px', top: '100px'})"
-                >
-                addImage({{ 'right: 50px, top: 100px }})
-                </button>
-              </td>
-              <td>
-                <button mat-raised-button color="primary" style="height: 4em" (click)="addImage({ left: '250px', bottom: '350px' })">
-                  addImage({{ 'left: 250px, bottom: 350px'}})
-                </button>
-              </td>
-            </tr>
-          </table>
-        </mat-tab>
-        <mat-tab [label]="'Coordinates'">
-          <p>The parameters <code>left</code>, <code>bottom</code>, <code>right</code>, and <code>top</code> can be:</p>
-          <ul>
-            <li>percentages (e.g. <code>left: '50%'</code>)</li>
-            <li>pixels (e.g. <code>left: '100px'</code>)</li>
-            <li>PDF coordinates (e.g. <code>left: 100</code>)</li>
-          </ul>
-          <p>If you omit a coordinate, it's put at the logical origin:</p>
-          <ul>
-            <li>omitting left amounts to <code>left: 0</code></li>
-            <li>omitting bottom amounts to <code>bottom: 0</code></li>
-            <li>omitting right amounts to <code>right: "100%"</code></li>
-            <li>omitting top amounts to <code>top: "100%"</code></li>
+  @if (!fullscreen) {
+    <div class="flex-container-row">
+      <mat-card
+        appearance="outlined"
+        class="distance16 mat-elevation-z8 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%; box-sizing: border-box; max-width: 60%"
+        >
+        <mat-tab-group>
+          <mat-tab [label]="'Images'">
+            <p>
+              Adding images to a PDF file is a popular feature. While this is not possible with this library - it is a viewer, not an editor - you can do
+              something similar. You add an an image to the annotation layer. In most cases, you won't see the difference.
+            </p>
+            <table style="background-color: transparent">
+              <tr>
+                <td>
+                  <button mat-raised-button color="primary" style="margin-right: 10px; height: 4em" (click)="addImage({ bottom: '50%', right: '50%' })">
+                    addImage({{ 'bottom: 50%; right: 50%' }})
+                  </button>
+                </td>
+                <td>
+                  <button mat-raised-button color="primary" style="height: 4em" (click)="addImage({ left: '50%', bottom: '50%', rotation: 90 })">
+                    addImage({{ 'left: 50%, bottom: 50%; rotation: 90' }})
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    style="margin-right: 10px; height: 4em"
+                    (click)="addImage({ right: '50%', top: '50%', rotation: 180 })"
+                    >
+                    addImage({{ 'right: 50%; top: 50%; rotation: 180' }})
+                  </button>
+                </td>
+                <td>
+                  <button mat-raised-button color="primary" style="height: 4em" (click)="addImage({ left: '50%', top: '50%', rotation: 0 })">
+                    addImage({{ 'left: 50%, top: 50%; rotation: 0' }})
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    style="margin-right: 10px; height: 4em"
+                    (click)="addImage({ right: '50px', top: '100px'})"
+                    >
+                    addImage({{ 'right: 50px, top: 100px }})
+                  </button>
+                </td>
+                <td>
+                  <button mat-raised-button color="primary" style="height: 4em" (click)="addImage({ left: '250px', bottom: '350px' })">
+                    addImage({{ 'left: 250px, bottom: 350px'}})
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </mat-tab>
+          <mat-tab [label]="'Coordinates'">
+            <p>The parameters <code>left</code>, <code>bottom</code>, <code>right</code>, and <code>top</code> can be:</p>
+            <ul>
+              <li>percentages (e.g. <code>left: '50%'</code>)</li>
+              <li>pixels (e.g. <code>left: '100px'</code>)</li>
+              <li>PDF coordinates (e.g. <code>left: 100</code>)</li>
+            </ul>
+            <p>If you omit a coordinate, it's put at the logical origin:</p>
+            <ul>
+              <li>omitting left amounts to <code>left: 0</code></li>
+              <li>omitting bottom amounts to <code>bottom: 0</code></li>
+              <li>omitting right amounts to <code>right: "100%"</code></li>
+              <li>omitting top amounts to <code>top: "100%"</code></li>
             </ul>
             <p>Caveat: In Chrome, the calculation of the <code>bottom</code> coordinate appears to be off by a few pixels.
-              This discrepancy seems to stem from a bug in the PDF rendering engine, resulting in a canvas that is larger than
-              expected (at least in my demo documents). The bug also shows in the title page. This issue does not occur in Firefox.</p>
+            This discrepancy seems to stem from a bug in the PDF rendering engine, resulting in a canvas that is larger than
+          expected (at least in my demo documents). The bug also shows in the title page. This issue does not occur in Firefox.</p>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
-
     <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width: 38%">
       <mat-tab-group>
         <mat-tab label="HTML template">
@@ -92,19 +92,20 @@
       </mat-tab-group>
     </mat-card>
   </div>
+}
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-    <small
-      >Copyright hint: the e-book has been published by James Boyle under a
-      <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
-      <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a></small
+<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+  <small
+    >Copyright hint: the e-book has been published by James Boyle under a
+    <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+    <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a></small
     >.
 
     <button
       mat-button
       (click)="fullscreen = !fullscreen"
       style="display: none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px"
-    >
+      >
       <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
         <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
       </svg>
@@ -115,7 +116,7 @@
       [sidebarVisible]="true"
       [zoom]="'page-fit'"
       [page]="11"
-    >
+      >
     </ngx-extended-pdf-viewer>
   </mat-card>
 </div>

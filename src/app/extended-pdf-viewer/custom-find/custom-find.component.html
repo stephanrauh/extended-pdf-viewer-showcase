@@ -1,52 +1,86 @@
-
 <article class="custom-find-wrapper pdf-wrapper flex-container-column fill-container">
-  <div class="pdf-code-wrapper flex-container-row" >
-    <mat-card appearance="outlined" class="overflow-none distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%">
-      <div class="flex-container-column">
-        <p>
-          Demonstration of customizing the find functionality.
-          This works by overriding the default find functionality of the pdf.js viewer, adding support for regex search in this example."
-          A more complete implementation would provide a custom find bar.
-        </p>
-        <p>
-          <b>Note:</b> This is a simple demo does not protect against invalid regex. Also note that the case is (deliberately) ignored by the demo. So <code>(?<=\s)([A-i]+ough)</code> doesn't work as you might expect.
-          Instead, use <code>(?<=\s)([a-i]+ough)</code>.
-        </p>
+  <div class="pdf-code-wrapper flex-container-row">
+    <mat-card appearance="outlined" class="overflow-none distance16 mat-elevation-z8 margin-right"
+      style="flex: 1 1 100%; box-sizing: border-box; max-width:40%">
+      <mat-tab-group (selectedTabChange)="currentTab=$event.index">
+        <mat-tab label="since version 21.3.0">
+          <p>This is a very advanced usecase.</p>
+          <p>
+            If you want to implement your own find algorithm, define a class implementing the find controller and
+            pass it to the attribute <code>pdfDefaultOptions.findController</code> before opening the PDF file.
+          </p>
+          <p>
+            To get started, copy the files <code>pdf_find_controller.js</code>, <code>ui_utils.js</code>, and <code>pdf_find_utils.js</code>
+            from <a href="https://github.com/stephanrauh/extended-pdf-viewer-showcase/tree/main/src/app/extended-pdf-viewer/custom-find">the source code of this showcase</a>
+             to your project and extend your own find controller from the class
+            <code>PDFFindController</code>.
+          </p>
+          <p>
+            The live demo below doesn't do much. It only prints console messages when the custom find controller is instantiated
+            and when the find algorithm is called.
+          </p>
+        </mat-tab>
+        <mat-tab label="before version 21.3.0">
+          <div class="flex-container-column">
+            <p>
+              Demonstration of customizing the find functionality.
+              This works by overriding the default find functionality of the pdf.js viewer, adding support for regex
+              search in this example."
+              A more complete implementation would provide a custom find bar.
+            </p>
+            <p>
+              <b>Note:</b> This is a simple demo does not protect against invalid regex. Also note that the case is
+              (deliberately) ignored by the demo. So <code>(?<=\s)([A-i]+ough)</code> doesn't work as you might expect.
+              Instead, use <code>(?<=\s)([a-i]+ough)</code>.
+            </p>
+            <p><b>Note:</b> Since version 21.3.0, you can pass regular expressions to the find controller without having to customize it.
+            See <a href="/extended-pdf-viewer/find">the programmatic API page</a> for details.</p>
 
-        <mat-form-field>
-          <input matInput class="margin" [(ngModel)]="searchtext" placeholder="Regex Search Term" />
-        </mat-form-field>
-        <div class="row">
-          <button mat-raised-button color="primary" (click)="findRegex()">Find</button>
-          <button mat-raised-button color="primary" (click)="findNext()">Next</button>
-          <button mat-raised-button color="primary" (click)="findPrevious()">Previous</button>
-        </div>
-        <small class="row">
-          <span style="margin-left: 24px" *ngIf="totalMatches && totalMatches > 0">Result {{ currentMatchNumber }} of {{ totalMatches }} </span>
-        </small>
-      </div>
+            <mat-form-field>
+              <input matInput class="margin" [(ngModel)]="searchtext" placeholder="Regex Search Term" />
+            </mat-form-field>
+            <div class="row">
+              <button mat-raised-button color="primary" (click)="findRegex()">Find</button>
+              <button mat-raised-button color="primary" (click)="findNext()">Next</button>
+              <button mat-raised-button color="primary" (click)="findPrevious()">Previous</button>
+            </div>
+            <small class="row">
+              @if (totalMatches && totalMatches > 0) {
+              <span style="margin-left: 24px">Result {{ currentMatchNumber }} of {{ totalMatches }} </span>
+              }
+            </small>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </mat-card>
 
-    <mat-card appearance="outlined" class="overflow-y-scroll distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:59%">
+    <mat-card appearance="outlined" class="overflow-y-scroll distance16 mat-elevation-z8 progress"
+      style="flex: 1 1 100%; box-sizing: border-box; max-width:59%">
       <mat-tab-group>
         <mat-tab label="HTML template">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/html.md"> </app-ie11-markdown>
         </mat-tab>
+        @if (currentTab===0) {
+        <mat-tab label="TypeScript">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts-new.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="TypeScript">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts-find-controller.md"> </app-ie11-markdown>
+        </mat-tab>
+        }
+        @if (currentTab===1) {
         <mat-tab label="TypeScript">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts.md"> </app-ie11-markdown>
         </mat-tab>
+        }
       </mat-tab-group>
     </mat-card>
   </div>
 
   <mat-card appearance="outlined" class="pdf-card distance16 mat-elevation-z8 use-available-space">
-    <ngx-extended-pdf-viewer
-      src="/assets/pdfs/Portugues-para-principiantes-1538054164.pdf"
-      [textLayer]="true"
-      [showFindButton]="false"
-      (updateFindMatchesCount)="onUpdateFindMatchesCount($event)"
-      (pdfLoaded)="pdfLoaded()"
-      >
+    <ngx-extended-pdf-viewer src="/assets/pdfs/Portugues-para-principiantes-1538054164.pdf" [textLayer]="true"
+      [showFindButton]="false" (updateFindMatchesCount)="onUpdateFindMatchesCount($event)" (pdfLoaded)="pdfLoaded()"
+      [showFindButton]="currentTab===0">
     </ngx-extended-pdf-viewer>
   </mat-card>
 </article>

@@ -1,34 +1,40 @@
-<div *ngIf="hideMenu">
-  <router-outlet></router-outlet>
-</div>
+@if (hideMenu) {
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+}
 
-<div *ngIf="!hideMenu">
-  <mat-toolbar color="primary" class="mat-elevation-z8">
-    <mat-toolbar-row class="first-row">
-      <app-octocat></app-octocat>
-      <span style="left: 65px; position: absolute"
-        >Angular PDF viewer showcase. Running on Angular {{ angularVersion }}{{ pdfjsVersion }} and {{ library }} {{ version }}.</span
-      >
-    </mat-toolbar-row>
-    <mat-toolbar-row class="second-row">
-      <button type="button" class="side-nav-toggle" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <mat-radio-group aria-label="Demo" [(ngModel)]="viewer" style="left: 65px; position: absolute">
-        Choose a version:
-        <mat-radio-button class="distance16" value="ngx-extended-pdf-viewer">stable (based on pdf.js 4.5)</mat-radio-button>
-        <mat-radio-button class="distance16" value="bleeding-edge">bleeding edge (sneak preview of pdf.js 4.6)</mat-radio-button>
-      </mat-radio-group>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="'side'" [opened]="true">
-      <app-extended-pdf-viewer-menu *ngIf="ngxExtendedPdfViewer" [drawer]="drawer"></app-extended-pdf-viewer-menu>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div class="with-border">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+@if (!hideMenu) {
+  <div>
+    <mat-toolbar color="primary" class="mat-elevation-z8">
+      <mat-toolbar-row class="first-row">
+        <app-octocat></app-octocat>
+        <span style="left: 65px; position: absolute"
+          >Angular PDF viewer showcase. Running on Angular {{ angularVersion }}{{ pdfjsVersion }} and {{ library }} {{ version }}.</span
+          >
+        </mat-toolbar-row>
+        <mat-toolbar-row class="second-row">
+          <button type="button" class="side-nav-toggle" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+          <mat-radio-group aria-label="Demo" [(ngModel)]="viewer" style="left: 65px; position: absolute">
+            Choose a version:
+            <mat-radio-button class="distance16" value="ngx-extended-pdf-viewer">stable (based on pdf.js 4.5)</mat-radio-button>
+            <mat-radio-button class="distance16" value="bleeding-edge">bleeding edge (sneak preview of pdf.js 4.6)</mat-radio-button>
+          </mat-radio-group>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="'side'" [opened]="true">
+          @if (ngxExtendedPdfViewer) {
+            <app-extended-pdf-viewer-menu [drawer]="drawer"></app-extended-pdf-viewer-menu>
+          }
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <div class="with-border">
+            <router-outlet></router-outlet>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
+  }

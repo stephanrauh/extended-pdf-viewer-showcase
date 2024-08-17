@@ -1,29 +1,31 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-      <mat-tab-group>
-        <mat-tab label="Displaying PDF files side-by-side">
-          <p>To display multiple PDF files on the same page, you need to put them in an iFrame.
-            This is because pdf.js pollutes the global namespace, and although the Mozilla team
-            are working on it, that's something that's not easy to fix.
-          </p>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <mat-tab-group>
-        <mat-tab label="HTML template 1">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="HTML template 2">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html2.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="Typescript">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
+        <mat-tab-group>
+          <mat-tab label="Displaying PDF files side-by-side">
+            <p>To display multiple PDF files on the same page, you need to put them in an iFrame.
+              This is because pdf.js pollutes the global namespace, and although the Mozilla team
+              are working on it, that's something that's not easy to fix.
+            </p>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
+        <mat-tab-group>
+          <mat-tab label="HTML template 1">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="HTML template 2">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html2.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="Typescript">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">

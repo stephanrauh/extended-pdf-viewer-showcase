@@ -1,31 +1,37 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-      <p>
-        You can export the PDF as a Blob, including filled fields and drawings, texts, images, and highlights added by the user.
-      </p>
-       <button mat-raised-button color="primary" (click)="getCurrentDocumentAsBlob()" style="margin-left: 16px">Export the PDF file</button>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-      <mat-tab-group [selectedIndex]="selectedTabIndex">
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-file/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/export-file/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="extracted file">
-          <div class="distance16">
-            <div *ngIf="blob">
-              <p>Blob type: {{blob.type}}</p>
-              <p>Blob size: {{blob.size}}</p>
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <p>
+          You can export the PDF as a Blob, including filled fields and drawings, texts, images, and highlights added by the user.
+        </p>
+        <button mat-raised-button color="primary" (click)="getCurrentDocumentAsBlob()" style="margin-left: 16px">Export the PDF file</button>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group [selectedIndex]="selectedTabIndex">
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-file/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-file/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="extracted file">
+            <div class="distance16">
+              @if (blob) {
+                <div>
+                  <p>Blob type: {{blob.type}}</p>
+                  <p>Blob size: {{blob.size}}</p>
+                </div>
+              }
+              @if (!blob) {
+                <div>no file downloaded yet</div>
+              }
             </div>
-            <div *ngIf="!blob">no file downloaded yet</div>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
 
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <button mat-button (click)="fullscreen = !fullscreen" style="display:none; float: right; height: 24px; line-height: 24px; min-width: 24px; padding: 0; margin-top: -4px">
@@ -40,7 +46,7 @@
       [showHandToolButton]="true"
       [handTool]="false"
 
-    >
+      >
     </ngx-extended-pdf-viewer>
   </mat-card>
 </div>

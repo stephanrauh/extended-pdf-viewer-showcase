@@ -1,51 +1,52 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row"  *ngIf="!fullscreen">
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-    <p>
-      pdf.js ships with a JavaScript engine. There's little security risk because they're executing
-      JavaScript in a sandbox. Even so, you can deactivate scripting altogether.
-    </p>
-    <p>If you want to deactivate the JavaScript engine, keep two things in mind:</p>
-    <ul>
-      <li>You must disable JavaScript before loading the pdf.js engine. Usually initializing
-        <code>pdfDefaultOptions.enableScripting = false;</code> in the constructor of your component
-        is early enough (unless you've already opened a PDF document before).
-      </li>
-      <li>If your PDF file contains a script to print the file immediately after opening it,
-        it's still printed. The only difference is it's not printed using the JavaScript engine,
-        so any option your JavaScript code may pass is lost.
-      </li>
-    </ul>
-    <p>The demo needs JavaScript to put the cursor into the first form field, to validate your input, and to implement the "re-initialize" button.</p>
-    <mat-checkbox class="margin" [(ngModel)]="enableScripting">enable JavaScript</mat-checkbox> (forces reload)
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <p>
+          pdf.js ships with a JavaScript engine. There's little security risk because they're executing
+          JavaScript in a sandbox. Even so, you can deactivate scripting altogether.
+        </p>
+        <p>If you want to deactivate the JavaScript engine, keep two things in mind:</p>
+        <ul>
+          <li>You must disable JavaScript before loading the pdf.js engine. Usually initializing
+            <code>pdfDefaultOptions.enableScripting = false;</code> in the constructor of your component
+            is early enough (unless you've already opened a PDF document before).
+          </li>
+          <li>If your PDF file contains a script to print the file immediately after opening it,
+            it's still printed. The only difference is it's not printed using the JavaScript engine,
+            so any option your JavaScript code may pass is lost.
+          </li>
+        </ul>
+        <p>The demo needs JavaScript to put the cursor into the first form field, to validate your input, and to implement the "re-initialize" button.</p>
+        <mat-checkbox class="margin" [(ngModel)]="enableScripting">enable JavaScript</mat-checkbox> (forces reload)
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="TypeScript">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  }
+
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small>
+      Copyright hint: the PDF file is part of test suite of the <a href="https://github.com/mozilla/pdf.js/blob/master/test/pdfs/160F-2019.pdf">pdf.js</a> project.
+    </small>.
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/160F-2019.pdf'"
+
+      [height]="'auto'"
+      >
+    </ngx-extended-pdf-viewer>
   </mat-card>
-
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="TypeScript">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
-  <small>
-    Copyright hint: the PDF file is part of test suite of the <a href="https://github.com/mozilla/pdf.js/blob/master/test/pdfs/160F-2019.pdf">pdf.js</a> project.
-  </small>.
-  <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/160F-2019.pdf'"
-
-    [height]="'auto'"
-  >
-  </ngx-extended-pdf-viewer>
-</mat-card>
 </div>
