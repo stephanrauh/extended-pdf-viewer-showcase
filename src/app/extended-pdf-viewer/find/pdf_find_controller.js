@@ -826,12 +826,20 @@ class PDFFindController {
     if (query.length === 0) {
       return; // Do nothing: the matches should be wiped out already.
     }
-    const { caseSensitive, entireWord } = this.#state;
+    const { caseSensitive, entireWord, findMultiple, matchRegExp } = this.#state;
     const pageContent = this._pageContents[pageIndex];
     const hasDiacritics = this._hasDiacritics[pageIndex];
 
     let isUnicode = false;
-    if (typeof query === "string") {
+    // #2339 modified by ngx-extended-pdf-viewer
+    if (findMultiple && typeof query === "string") {
+      query = query.split(/\s+/);
+    }
+    if (matchRegExp && typeof query === "string") {
+      query = new RegExp(query, caseSensitive ? "g" : "gi");
+      isUnicode = hasDiacritics;
+    } else if (typeof query === "string") {
+      // #2339 end of modification by ngx-extended-pdf-viewer
       [isUnicode, query] = this._convertToRegExpString(query, hasDiacritics); // #2339 modified by ngx-extended-pdf-viewer
     } else {
       // Words are sorted in reverse order to be sure that "foobar" is matched

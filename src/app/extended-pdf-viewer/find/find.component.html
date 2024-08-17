@@ -16,11 +16,18 @@
                 <mat-checkbox class="margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()">match case</mat-checkbox>
               </section>
               <section class="section">
-                <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()">whole word</mat-checkbox>
+                <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()" [disabled]="matchRegExp">whole word</mat-checkbox>
               </section>
               <section class="section">
-                <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()">match diacritics</mat-checkbox>
-                <small style="margin-left: 24px">(try "licao" to find "lição")</small>
+                <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()" [disabled]="matchRegExp">match diacritics</mat-checkbox>
+                <small style="margin-left: 1em">try licao to find lição</small>
+              </section>
+              <section class="section">
+                <mat-checkbox class="margin" [(ngModel)]="multiple" (change)="onCheckboxClicked()" [disabled]="matchRegExp">multiple words (separated by space)</mat-checkbox>
+              </section>
+              <section class="section">
+                <mat-checkbox class="margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()">match regular expression</mat-checkbox>
+                <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small>
               </section>
               <section class="section">
                 <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()"
@@ -70,11 +77,18 @@
                 <mat-checkbox class="margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()">match case</mat-checkbox>
               </section>
               <section class="section">
-                <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()">whole word</mat-checkbox>
+                <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()" [disabled]="matchRegExp">whole word</mat-checkbox>
               </section>
               <section class="section">
-                <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()">match diacritics</mat-checkbox>
-                <small style="margin-left: 24px">(try "licao" to find "lição")</small>
+                <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()" [disabled]="matchRegExp">match diacritics</mat-checkbox>
+                <small style="margin-left: 1em">try licao to find lição</small>
+              </section>
+              <section class="section">
+                <mat-checkbox class="margin" [(ngModel)]="multiple" (change)="onCheckboxClicked()" [disabled]="matchRegExp">multiple words (separated by space)</mat-checkbox>
+              </section>
+              <section class="section">
+                <mat-checkbox class="margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()">match regular expression</mat-checkbox>
+                <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small>
               </section>
               <section class="section">
                 <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()"
@@ -107,11 +121,18 @@
                 <mat-checkbox class="margin" [(ngModel)]="matchCase2" (change)="onCheckboxClicked2()">match case</mat-checkbox>
               </section>
               <section class="section">
-                <mat-checkbox class="margin" [(ngModel)]="wholeWord2" (change)="onCheckboxClicked2()">whole word</mat-checkbox>
+                <mat-checkbox class="margin" [(ngModel)]="wholeWord2" (change)="onCheckboxClicked2()" [disabled]="matchRegExp2">whole word</mat-checkbox>
               </section>
               <section class="section">
-                <mat-checkbox class="margin" [(ngModel)]="matchDiacritics2" (change)="onCheckboxClicked2()">match diacritics</mat-checkbox>
-                <small style="margin-left: 24px">(try "licao" to find "lição")</small>
+                <mat-checkbox class="margin" [(ngModel)]="matchDiacritics2" (change)="onCheckboxClicked2()" [disabled]="matchRegExp2">match diacritics</mat-checkbox>
+                <small style="margin-left: 1em">try licao to find lição</small>
+              </section>
+              <section class="section">
+                <mat-checkbox class="margin" [(ngModel)]="multiple2" (change)="onCheckboxClicked()" [disabled]="matchRegExp2">multiple words (separated by space)</mat-checkbox>
+              </section>
+              <section class="section">
+                <mat-checkbox class="margin" [(ngModel)]="matchRegExp2" (change)="onCheckboxClicked()">match regular expression</mat-checkbox>
+                <small style="margin-left: 1em">try nasalized|nasalization</small>
               </section>
               <section class="section">
                 <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView2" (change)="onCheckboxClicked()"
@@ -205,6 +226,7 @@
       [handTool]="false"
       [showHandToolButton]="true"
       [page]="1"
+      [showFindRegexp]="true"
     >
     </ngx-extended-pdf-viewer>
   </mat-card>

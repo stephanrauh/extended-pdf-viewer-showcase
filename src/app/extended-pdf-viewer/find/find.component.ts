@@ -24,12 +24,20 @@ export class FindComponent {
   public wholeWord = false;
   public matchDiacritics = false;
 
+  public multiple = false;
+
+  public matchRegExp = false;
+
   public _searchtext2 = 'Portuguese';
 
   public highlightAll2 = false;
   public matchCase2 = false;
   public wholeWord2 = false;
   public matchDiacritics2 = false;
+
+  public multiple2 = false;
+
+  public matchRegExp2 = false;
 
   public currentMatchNumber: number | undefined;
 
@@ -43,7 +51,6 @@ export class FindComponent {
   private PDFViewerApplication!: IPDFViewerApplication;
   public dontScrollIntoView: boolean | undefined;
   public dontScrollIntoView2: boolean | undefined;
-
 
   public pagesWithResult: Array<number> = [];
 
@@ -125,13 +132,16 @@ export class FindComponent {
       this.currentMatchNumber = undefined;
       this.totalMatches = undefined;
     }
-    const numberOfResultsPromises = this.ngxExtendedPdfViewerService.find(this._searchtext, {
+    let searchtext = this.multiple ? this._searchtext.split(' ') : this._searchtext;
+    const numberOfResultsPromises = this.ngxExtendedPdfViewerService.find(searchtext, {
       highlightAll: this.highlightAll,
       matchCase: this.matchCase,
       wholeWords: this.wholeWord,
       matchDiacritics: this.matchDiacritics,
       dontScrollIntoView: this.dontScrollIntoView,
-      useSecondaryFindcontroller: false
+      useSecondaryFindcontroller: false,
+      findMultiple: this.multiple,
+      regexp: this.matchRegExp
     });
     numberOfResultsPromises?.forEach(async (numberOfResultsPromise, pageIndex) => {
       const numberOfResultsPerPage = await numberOfResultsPromise;
@@ -155,7 +165,9 @@ export class FindComponent {
       wholeWords: this.wholeWord2,
       matchDiacritics: this.matchDiacritics2,
       dontScrollIntoView: this.dontScrollIntoView2,
-      useSecondaryFindcontroller: true
+      useSecondaryFindcontroller: true,
+      findMultiple: this.multiple2,
+      regexp: this.matchRegExp2
     });
     numberOfResultsPromises?.forEach(async (numberOfResultsPromise, pageIndex) => {
       const numberOfResultsPerPage = await numberOfResultsPromise;
@@ -191,11 +203,14 @@ export class FindComponent {
   }
 
   public onCheckboxClicked() {
-    this.ngxExtendedPdfViewerService.find(this._searchtext, {
+    let searchtext = this.multiple ? this._searchtext.split(' ') : this._searchtext;
+    this.ngxExtendedPdfViewerService.find(searchtext, {
       highlightAll: this.highlightAll,
       matchCase: this.matchCase,
       wholeWords: this.wholeWord,
       matchDiacritics: this.matchDiacritics,
+      findMultiple: this.multiple,
+      regexp: this.matchRegExp,
       dontScrollIntoView: this.dontScrollIntoView,
       useSecondaryFindcontroller: false
     });
@@ -207,6 +222,8 @@ export class FindComponent {
       matchCase: this.matchCase2,
       wholeWords: this.wholeWord2,
       matchDiacritics: this.matchDiacritics2,
+      findMultiple: this.multiple2,
+      regexp: this.matchRegExp2,
       dontScrollIntoView: this.dontScrollIntoView2,
       useSecondaryFindcontroller: true
     });
