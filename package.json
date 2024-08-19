@@ -37,7 +37,7 @@
     "@angular/platform-server": "^17.3.12",
     "@angular/router": "^17.3.12",
     "@fontsource/material-icons": "^4.5.4",
-    "@fontsource/roboto": "^4.5.8",
+    "@fontsource/roboto": "^5.0.14",
     "angular2-smart-table": "^3.2.0",
     "basic-ftp": "^5.0.5",
     "dotenv": "^16.4.5",
