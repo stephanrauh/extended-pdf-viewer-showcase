@@ -20,15 +20,17 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/pdf-showcase/browser",
+            "outputPath": {
+              "base": "dist/pdf-showcase"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/server.js",
               "src/.htaccess",
               "src/favicon.ico",
               "src/assets",
@@ -57,7 +59,6 @@
                 "input": "src/app/",
                 "output": "/assets"
               },
-
               {
                 "glob": "changelog.md",
                 "input": "node_modules/ngx-extended-pdf-viewer/",
@@ -79,7 +80,8 @@
               "node_modules/prismjs/components/prism-xml-doc.min.js",
               "node_modules/prismjs/components/prism-json.min.js",
               "node_modules/prismjs/components/prism-typescript.min.js"
-            ]
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -93,9 +95,7 @@
               "statsJson": true
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -132,66 +132,6 @@
             "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "src/styles.css"],
             "scripts": []
           }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/pdf-showcase/server",
-            "main": "server.ts",
-            "tsConfig": "tsconfig.server.json"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
-            },
-            "development": {
-              "optimization": false,
-              "sourceMap": true,
-              "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-ssr": {
-          "builder": "@angular-devkit/build-angular:ssr-dev-server",
-          "configurations": {
-            "development": {
-              "browserTarget": "pdf-showcase:build:development",
-              "serverTarget": "pdf-showcase:server:development"
-            },
-            "production": {
-              "browserTarget": "pdf-showcase:build:production",
-              "serverTarget": "pdf-showcase:server:production"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "prerender": {
-          "builder": "@angular-devkit/build-angular:prerender",
-          "options": {
-            "routes": [
-              "/"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "pdf-showcase:build:production",
-              "serverTarget": "pdf-showcase:server:production"
-            },
-            "development": {
-              "browserTarget": "pdf-showcase:build:development",
-              "serverTarget": "pdf-showcase:server:development"
-            }
-          },
-          "defaultConfiguration": "production"
         }
       }
     }
