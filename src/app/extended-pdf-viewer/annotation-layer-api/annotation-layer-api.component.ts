@@ -23,6 +23,10 @@ export class AnnotationLayerApiComponent {
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}
 
+  public onAnnotationEditorEvent(event: any): void {
+    console.log('Event annotationEditorEvent: ', event);
+  }
+
   public async addImage(parameters: any): Promise<void> {
     const { left, bottom, right, top, rotation } = parameters;
     await this.pdfService.addImageToAnnotationLayer({
