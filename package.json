@@ -6,7 +6,8 @@
     "prebuild": "node extract-versions.js && rm -rf .angular",
     "build": "ng build --configuration production",
     "postbuild": "rm -r -f dist/pdf-showcase/browser/assets/pdfs/under-copyright && rm -f dist/pdf-showcase/browser/stats.json",
-    "release": "npm run build && cd ftp && npx tsx upload.ts",
+    "release":     "npm run build && cp dist/pdf-showcase/browser/extended-pdf-viewer/simple/index.html dist/pdf-showcase/browser && cp ftp/.htaccess dist/pdf-showcase/browser && cd ftp && npx tsx upload.ts",
+    "testrelease": "npm run build && cp dist/pdf-showcase/browser/extended-pdf-viewer/simple/index.html dist/pdf-showcase/browser && cp ftp/.htaccess dist/pdf-showcase/browser && cd ftp && npx http-server dist/pdf-showcase/browser",
     "test": "ng test",
     "lint": "ng lint",
     "express": "ng b && cd ./dist/pdf-showcase/ && node ./server.js",
@@ -16,10 +17,8 @@
     "quick": "cd ../ngx-extended-pdf-viewer && ./quick.sh && npm run showcase && cd ../extended-pdf-viewer-showcase && npm run prebuild && ng s --host 0.0.0.0",
     "full": "cd ../ngx-extended-pdf-viewer && npm run prebuild && ./updateMozillasPdfViewer.sh && npm run showcase && cd ../extended-pdf-viewer-showcase && npm run prebuild && ng s --host 0.0.0.0",
     "ts": "cd ../ngx-extended-pdf-viewer && npm run showcase && cd ../extended-pdf-viewer-showcase && ng s --host 0.0.0.0",
-    "full:ssr": "cd ../ngx-extended-pdf-viewer && ./updateMozillasPdfViewer.sh && npm run showcase && cd ../extended-pdf-viewer-showcase && npm run prebuild && npm run dev:ssr",
     "build:stats": "ng build --stats-json",
-    "analyze": "webpack-bundle-analyzer dist/pdf-showcase/browser/stats.json",
-    "serve:ssr:pdf-showcase": "node dist/pdf-showcase/server/server.mjs"
+    "analyze": "webpack-bundle-analyzer dist/pdf-showcase/browser/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -58,7 +57,7 @@
     "@angular/language-service": "^18.2.1",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.12",
-    "@types/node": "^22.5.0",
+    "@types/node": "^18.18.0",
     "brotli": "^1.3.3",
     "codelyzer": "^6.0.2",
     "express": "^4.19.2",

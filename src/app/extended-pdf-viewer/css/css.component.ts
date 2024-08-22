@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { IColumnType, ISortDirection, Settings } from 'angular2-smart-table';
 import { firstValueFrom } from 'rxjs';
+import { isBrowser } from '../common/utilities';
 
 @Component({
   selector: 'app-css',
@@ -43,8 +44,8 @@ export class CSSComponent implements OnInit, AfterViewInit {
     },
     pager: {
       display: false,
-      perPage: 5000
-    }
+      perPage: 5000,
+    },
   };
 
   constructor(private httpClient: HttpClient, private element: ElementRef) {}
@@ -64,11 +65,13 @@ export class CSSComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    let html = this.element.nativeElement as HTMLElement;
-    let inputFields = html.querySelectorAll('input');
-    inputFields.forEach((field) => {
-      field.placeholder = '(type to filter)';
-    });
+    if (isBrowser()) {
+      const html = this.element.nativeElement as HTMLElement;
+      const inputFields = html.querySelectorAll('input');
+      inputFields.forEach((field) => {
+        field.placeholder = '(type to filter)';
+      });
+    }
   }
 
   private removeHeader(raw: string): string {

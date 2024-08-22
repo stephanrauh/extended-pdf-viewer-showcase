@@ -4,6 +4,7 @@ import { DefaultRoutesComponent } from './shared/default-routes/default-routes.c
 import { GettingStartedComponent } from './nav/getting-started/getting-started.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/extended-pdf-viewer/simple', pathMatch: 'full' },
   { path: 'extended-pdf-viewer/getting-started', component: GettingStartedComponent },
   {
     path: 'extended-pdf-viewer',

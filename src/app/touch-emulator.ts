@@ -16,13 +16,7 @@ class Touch {
   public screenX: number;
   public screenY: number;
 
-  constructor(
-    public target,
-    public identifier,
-    pos,
-    deltaX: number = 0,
-    deltaY: number = 0
-  ) {
+  constructor(public target, public identifier, pos, deltaX: number = 0, deltaY: number = 0) {
     deltaX = deltaX || 0;
     deltaY = deltaY || 0;
 
@@ -61,26 +55,25 @@ class TouchList extends Array<any> {
 }
 */
 
-  /**
-   * create empty touchlist with the methods
-   * @constructor
-   * @returns touchList
-   */
+/**
+ * create empty touchlist with the methods
+ * @constructor
+ * @returns touchList
+ */
 
-   function createEmptyTouchList(): TouchList | Array<Touch> {
-    var touchList: Array<Touch> = [];
+function createEmptyTouchList(): TouchList | Array<Touch> {
+  var touchList: Array<Touch> = [];
 
-    (touchList as any).item = function(index) {
-        return this[index] || null;
-    };
+  (touchList as any).item = function (index) {
+    return this[index] || null;
+  };
 
-    // specified by Mozilla
-    (touchList as any).identifiedTouch = function(id) {
-        return this[id + 1] || null;
-    };
-    return touchList;
-
-  }
+  // specified by Mozilla
+  (touchList as any).identifiedTouch = function (id) {
+    return this[id + 1] || null;
+  };
+  return touchList;
+}
 
 export class TouchEmulator {
   private isMultiTouch = false;
@@ -95,73 +88,61 @@ export class TouchEmulator {
 
   constructor() {
     // polyfills
-    if (!(document as any).createTouch) {
-      (document as any).createTouch = function (
-        view,
-        target,
-        identifier,
-        pageX,
-        pageY,
-        screenX,
-        screenY,
-        clientX,
-        clientY
-      ) {
-        // auto set
-        if (clientX == undefined || clientY == undefined) {
-          clientX = pageX - globalThis.pageXOffset;
-          clientY = pageY - globalThis.pageYOffset;
-        }
+    if (this.isBrowser()) {
+      if (!(document as any).createTouch) {
+        (document as any).createTouch = function (view, target, identifier, pageX, pageY, screenX, screenY, clientX, clientY) {
+          // auto set
+          if (clientX == undefined || clientY == undefined) {
+            clientX = pageX - globalThis.pageXOffset;
+            clientY = pageY - globalThis.pageYOffset;
+          }
 
-        return new Touch(target, identifier, {
-          pageX: pageX,
-          pageY: pageY,
-          screenX: screenX,
-          screenY: screenY,
-          clientX: clientX,
-          clientY: clientY,
-        });
-      };
+          return new Touch(target, identifier, {
+            pageX: pageX,
+            pageY: pageY,
+            screenX: screenX,
+            screenY: screenY,
+            clientX: clientX,
+            clientY: clientY,
+          });
+        };
+      }
+
+      if (!(document as any).createTouchList) {
+        (document as any).createTouchList = function () {
+          var touchList = createEmptyTouchList();
+          for (var i = 0; i < arguments.length; i++) {
+            (touchList as Array<Touch>).push(arguments[i]);
+          }
+          return touchList;
+        };
+      }
+      if (this.hasTouchSupport()) {
+        return;
+      }
+
+      this.fakeTouchSupport();
+
+      globalThis.addEventListener('keydown', this.toggleTouch, true);
+
+      globalThis.addEventListener('mousedown', (event) => this.onMouse('touchstart')(event), true);
+      globalThis.addEventListener('mousemove', (event) => this.onMouse('touchmove')(event), true);
+      globalThis.addEventListener('mouseup', (event) => this.onMouse('touchend')(event), true);
+
+      globalThis.addEventListener('mouseenter', (event) => this.preventMouseEvents(event), true);
+      globalThis.addEventListener('mouseleave', (event) => this.preventMouseEvents(event), true);
+      globalThis.addEventListener('mouseout', (event) => this.preventMouseEvents(event), true);
+      globalThis.addEventListener('mouseover', (event) => this.preventMouseEvents(event), true);
+
+      // it uses itself!
+      globalThis.addEventListener('touchstart', (event) => this.showTouches(event), true);
+      globalThis.addEventListener('touchmove', (event) => this.showTouches(event), true);
+      globalThis.addEventListener('touchend', (event) => this.showTouches(event), true);
+      globalThis.addEventListener('touchcancel', (event) => this.showTouches(event), true);
+      console.log('Touch gesture emulation has been enabled.');
+      console.log('Hit the ALT or OPTION key twice in a second to active touch gestures. Caveat: this disables your mouse.');
+      console.log('Hitting the ALT or OPTION key twice again deactivates touch gestures again and allow you to use your mouse again.');
     }
-
-    if (!(document as any).createTouchList) {
-      (document as any).createTouchList = function () {
-        var touchList = createEmptyTouchList();
-        for (var i = 0; i < arguments.length; i++) {
-          (touchList as Array<Touch>).push(arguments[i]);
-        }
-        return touchList;
-      };
-    }
-    if (this.hasTouchSupport()) {
-      return;
-    }
-
-    this.fakeTouchSupport();
-
-    globalThis.addEventListener('keydown', this.toggleTouch, true);
-
-    globalThis.addEventListener('mousedown', (event) => this.onMouse('touchstart')(event), true);
-    globalThis.addEventListener('mousemove', (event) => this.onMouse('touchmove')(event), true);
-    globalThis.addEventListener('mouseup', (event) => this.onMouse('touchend')(event), true);
-
-    globalThis.addEventListener('mouseenter', (event) => this.preventMouseEvents(event), true);
-    globalThis.addEventListener('mouseleave', (event) => this.preventMouseEvents(event), true);
-    globalThis.addEventListener('mouseout', (event) => this.preventMouseEvents(event), true);
-    globalThis.addEventListener('mouseover', (event) => this.preventMouseEvents(event), true);
-
-    // it uses itself!
-    globalThis.addEventListener('touchstart', (event) => this.showTouches(event), true);
-    globalThis.addEventListener('touchmove', (event) => this.showTouches(event), true);
-    globalThis.addEventListener('touchend', (event) => this.showTouches(event), true);
-    globalThis.addEventListener('touchcancel', (event) => this.showTouches(event), true);
-    console.log('Touch gesture emulation has been enabled.');
-    console.log(
-      'Hit the ALT or OPTION key twice in a second to active touch gestures. Caveat: this disables your mouse.'
-    );
-    console.log(
-      'Hitting the ALT or OPTION key twice again deactivates touch gestures again and allow you to use your mouse again.'
-    );
   }
 
   /**
@@ -242,11 +223,7 @@ export class TouchEmulator {
       // The EventTarget on which the touch point started when it was first placed on the surface,
       // even if the touch point has since moved outside the interactive area of that element.
       // also, when the target doesnt exist anymore, we update it
-      if (
-        ev.type == 'mousedown' ||
-        !this.eventTarget ||
-        (this.eventTarget && !this.eventTarget.dispatchEvent)
-      ) {
+      if (ev.type == 'mousedown' || !this.eventTarget || (this.eventTarget && !this.eventTarget.dispatchEvent)) {
         this.eventTarget = ev.target;
       }
 
@@ -296,14 +273,8 @@ export class TouchEmulator {
     (touchEvent as any).shiftKey = mouseEv.shiftKey;
 
     (touchEvent as any).touches = this.getActiveTouches(mouseEv, eventName);
-    (touchEvent as any).targetTouches = this.getActiveTouches(
-      mouseEv,
-      eventName
-    );
-    (touchEvent as any).changedTouches = this.getChangedTouches(
-      mouseEv,
-      eventName
-    );
+    (touchEvent as any).targetTouches = this.getActiveTouches(mouseEv, eventName);
+    (touchEvent as any).changedTouches = this.getChangedTouches(mouseEv, eventName);
 
     this.eventTarget?.dispatchEvent(touchEvent);
   }
@@ -321,24 +292,8 @@ export class TouchEmulator {
       var deltaX = this.multiTouchStartPos.pageX - mouseEv.pageX;
       var deltaY = this.multiTouchStartPos.pageY - mouseEv.pageY;
 
-      (touchList as Array<Touch>).push(
-        new Touch(
-          this.eventTarget,
-          1,
-          this.multiTouchStartPos,
-          deltaX * -1 - f,
-          deltaY * -1 + f
-        )
-      );
-      (touchList as Array<Touch>).push(
-        new Touch(
-          this.eventTarget,
-          2,
-          this.multiTouchStartPos,
-          deltaX + f,
-          deltaY - f
-        )
-      );
+      (touchList as Array<Touch>).push(new Touch(this.eventTarget, 1, this.multiTouchStartPos, deltaX * -1 - f, deltaY * -1 + f));
+      (touchList as Array<Touch>).push(new Touch(this.eventTarget, 2, this.multiTouchStartPos, deltaX + f, deltaY - f));
     } else {
       (touchList as Array<Touch>).push(new Touch(this.eventTarget, 1, mouseEv, 0, 0));
     }
@@ -358,11 +313,7 @@ export class TouchEmulator {
     }
 
     var touchList = this.createTouchList(mouseEv);
-    if (
-      this.isMultiTouch &&
-      mouseEv.type != 'mouseup' &&
-      eventName == 'touchend'
-    ) {
+    if (this.isMultiTouch && mouseEv.type != 'mouseup' && eventName == 'touchend') {
       (touchList as Array<Touch>).splice(1, 1);
     }
     return touchList;
@@ -382,11 +333,7 @@ export class TouchEmulator {
     //
     // but when the mouseEv.type is mouseup, we want to send all touches because then
     // no new input will be possible
-    if (
-      this.isMultiTouch &&
-      mouseEv.type != 'mouseup' &&
-      (eventName == 'touchstart' || eventName == 'touchend')
-    ) {
+    if (this.isMultiTouch && mouseEv.type != 'mouseup' && (eventName == 'touchstart' || eventName == 'touchend')) {
       (touchList as Array<Touch>).splice(0, 1);
     }
 
@@ -404,8 +351,7 @@ export class TouchEmulator {
       touch = ev.touches[i];
       el = this.touchElements[touch.identifier];
       if (!el) {
-        el = this.touchElements[touch.identifier] =
-          document.createElement('div');
+        el = this.touchElements[touch.identifier] = document.createElement('div');
         document.body.appendChild(el);
       }
 
@@ -439,12 +385,7 @@ export class TouchEmulator {
    */
   private template(touch) {
     var size = 30;
-    var transform =
-      'translate(' +
-      (touch.clientX - size / 2) +
-      'px, ' +
-      (touch.clientY - size / 2) +
-      'px)';
+    var transform = 'translate(' + (touch.clientX - size / 2) + 'px, ' + (touch.clientY - size / 2) + 'px)';
     return {
       position: 'fixed',
       left: 0,
@@ -468,5 +409,12 @@ export class TouchEmulator {
       transform: transform,
       zIndex: 100,
     };
+  }
+
+  /**
+   * Checks if the code is running in a browser environment.
+   */
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof document !== 'undefined';
   }
 }

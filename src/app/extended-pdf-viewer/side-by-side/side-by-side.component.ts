@@ -20,11 +20,4 @@ export class SideBySideComponent {
     this._fullscreen = full;
 
   }
-
-
-
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
-}
-
-
 }

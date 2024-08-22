@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from './shared/shared.module';
-import { WindowRefService } from './window-ref.servce';
 
 
 @NgModule({
@@ -22,7 +21,6 @@ import { WindowRefService } from './window-ref.servce';
     SharedModule,
     AppRoutingModule,
   ],
-  providers: [WindowRefService],
   bootstrap: [AppComponent]
 })
 export class AppCommonModule {}

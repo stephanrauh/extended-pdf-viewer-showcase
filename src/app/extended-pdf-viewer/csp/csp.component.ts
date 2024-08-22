@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { isBrowser } from '../common/utilities';
 
 @Component({
   selector: 'app-csp',
@@ -12,9 +13,11 @@ export class CSPComponent implements OnDestroy {
   public _useInlineScripts = false;
 
   constructor() {
-    const urlParams = new URLSearchParams(window.location.search);
-    this._useInlineScripts = urlParams.get('useInlineScripts')==='true';
-    pdfDefaultOptions.rangeChunkSize = 1024 * 1024;
+    if (isBrowser()) {
+      const urlParams = new URLSearchParams(window.location.search);
+      this._useInlineScripts = urlParams.get('useInlineScripts') === 'true';
+      pdfDefaultOptions.rangeChunkSize = 1024 * 1024;
+    }
   }
 
   public get useInlineScripts() {
@@ -22,8 +25,10 @@ export class CSPComponent implements OnDestroy {
   }
 
   public set useInlineScripts(value: boolean) {
-    this._useInlineScripts = value;
-    location.search = `useInlineScripts=${value}`;
+    if (isBrowser()) {
+      this._useInlineScripts = value;
+      location.search = `useInlineScripts=${value}`;
+    }
   }
 
   public ngOnDestroy() {

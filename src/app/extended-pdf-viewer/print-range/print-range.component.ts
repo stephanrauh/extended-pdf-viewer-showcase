@@ -1,9 +1,8 @@
 import { Component, effect, OnDestroy } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { PDFPrintRange } from 'ngx-extended-pdf-viewer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { WindowRefService } from 'src/app/window-ref.servce';
 
 @Component({
   selector: 'app-print-range',
@@ -16,7 +15,7 @@ export class PrintRangeComponent implements OnDestroy {
 
   public get src(): string {
     if (this.activeTab === 3) {
-      return "assets/pdfs/fancy.pdf";
+      return 'assets/pdfs/fancy.pdf';
     }
     return '/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf';
   }
@@ -81,20 +80,13 @@ export class PrintRangeComponent implements OnDestroy {
 
   public includedAsArray = PrintRangeComponent.toArray(this.included);
 
-  constructor(
-    private printService: NgxExtendedPdfViewerService,
-    private snackBar: MatSnackBar,
-    private windowRefService: WindowRefService,
-    notificationService: PDFNotificationService
-  ) {
-    if (this.windowRefService.nativeWindow) {
-      effect(() => {
-        this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
-        if (this.PDFViewerApplication) {
-          this.init(this.PDFViewerApplication);
-        }
-      });
-    }
+  constructor(private printService: NgxExtendedPdfViewerService, private snackBar: MatSnackBar, notificationService: PDFNotificationService) {
+    effect(() => {
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+      if (this.PDFViewerApplication) {
+        this.init(this.PDFViewerApplication);
+      }
+    });
   }
 
   public init(PDFViewerApplication: IPDFViewerApplication): void {
@@ -169,7 +161,7 @@ export class PrintRangeComponent {
       ${this.includedAsArray ? 'included: [' + this.includedAsArray + '],' : ''}
     } as PDFPrintRange;
     this.printService.print(range);
-}`.replaceAll("      \n", "");
+}`.replaceAll('      \n', '');
     } else if (this.activeTab === 1) {
       return `@Component({ ... })
 export class PrintRangeComponent {

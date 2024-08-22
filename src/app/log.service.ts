@@ -1,5 +1,4 @@
-import { effect, Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { WindowRefService } from './window-ref.servce';
+import { effect, Injectable } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 
 @Injectable({
@@ -10,25 +9,20 @@ export class LogService {
 
   private PDFViewerApplication!: IPDFViewerApplication;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any, private windowRefService: WindowRefService,
-  notificationService: PDFNotificationService) {
-    if (this.windowRefService.nativeWindow) {
+  constructor(notificationService: PDFNotificationService) {
     effect(() => {
       if (this.PDFViewerApplication = notificationService.onPDFJSInitSignal()) {
         this.init();
       }
     });
   }
-  }
 
-  public init() {
-    if (this.windowRefService.nativeWindow) {
+  public init(): void {
       if (this.PDFViewerApplication?.ngxConsole) {
       this.PDFViewerApplication.ngxConsole.ngxConsoleFilter = (level: string, message: any): boolean => {
         this.logs.push(message);
         return true;
       };
-    }
     }
   }
 }

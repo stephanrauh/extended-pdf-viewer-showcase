@@ -1,52 +1,28 @@
 import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
-import { WindowRefService } from 'src/app/window-ref.servce';
+import { isBrowser } from '../common/utilities';
 
 @Component({
   selector: 'app-zoom',
   templateUrl: './zoom.component.html',
   styleUrls: ['./zoom.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZoomComponent {
-
-  public resolution = "";
+  public resolution = '';
 
   private _zoomSetting: number | string | undefined = 'page-width';
 
-  public isMobile = 'ontouchstart' in document.documentElement;
+  public isMobile!: boolean;
 
   public minZoom = 0.33;
 
   public maxZoom = 15;
 
-  public zoomLevels = [
-    'auto',
-    'page-actual',
-    'page-fit',
-    'page-width',
-    0.2,
-    0.25,
-    0.33,
-    0.5,
-    0.75,
-    1,
-    1.25,
-    1.5,
-    2,
-    2.5,
-    3,
-    3.5,
-    4,
-    7,
-    10,
-    15,
-  ];
+  public zoomLevels = ['auto', 'page-actual', 'page-fit', 'page-width', 0.2, 0.25, 0.33, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 3.5, 4, 7, 10, 15];
 
   public time = 0;
   public currentTime = 0;
-
-
 
   private _fullscreen = false;
 
@@ -56,7 +32,6 @@ export class ZoomComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   private currentStartTime = new Date().getTime();
@@ -85,16 +60,18 @@ export class ZoomComponent {
     }
   }
 
-  constructor(private windowRefService: WindowRefService,
-    notificationService: PDFNotificationService) {
-      if (this.windowRefService.nativeWindow) {
-        effect(() => {
-          const PDFViewerApplication = notificationService.onPDFJSInitSignal();
-          if (PDFViewerApplication) {
-            this.init(PDFViewerApplication);
-          }
-        });
+  constructor(notificationService: PDFNotificationService) {
+    if (isBrowser()) {
+      this.isMobile = 'ontouchstart' in document.documentElement;
+    } else {
+      this.isMobile = false;
+    }
+    effect(() => {
+      const PDFViewerApplication = notificationService.onPDFJSInitSignal();
+      if (PDFViewerApplication) {
+        this.init(PDFViewerApplication);
       }
+    });
   }
 
   public init(PDFViewerApplication: IPDFViewerApplication): void {
@@ -107,8 +84,8 @@ export class ZoomComponent {
         }
         return true;
       };
+    }
   }
-}
 
   public updateZoomFactor(zoom: number): void {
     this.currentZoomFactor = zoom;

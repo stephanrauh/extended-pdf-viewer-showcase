@@ -4,16 +4,25 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-iframe',
   templateUrl: './iframe.component.html',
   styleUrls: ['./iframe.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IFrameComponent {
-  public url = "";
+  public url = '';
 
   constructor() {
-    if (location.pathname.endsWith("cdk")) {
-        this.url="/assets/pdfs/CDK.pdf";
+    if (!this.isBrowser()) {
+      this.url = '/assets/pdfs/CDK.pdf';
+    } else if (location.pathname.endsWith('cdk')) {
+      this.url = '/assets/pdfs/CDK.pdf';
     } else {
-      this.url="/assets/pdfs/GraalVM.pdf";
+      this.url = '/assets/pdfs/GraalVM.pdf';
     }
+  }
+
+  /**
+   * Checks if the code is running in a browser environment.
+   */
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof document !== 'undefined';
   }
 }

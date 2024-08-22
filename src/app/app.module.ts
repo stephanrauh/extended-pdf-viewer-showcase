@@ -8,6 +8,7 @@ import { AppCommonModule } from './app.common.module';
 import { ExtendedPdfViewerMenuComponent } from './nav/extended-pdf-viewer-menu/extended-pdf-viewer-menu.component';
 import { OctocatComponent } from './nav/octocat/octocat.component';
 import { GettingStartedComponent } from './nav/getting-started/getting-started.component';
+import { provideClientHydration } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { GettingStartedComponent } from './nav/getting-started/getting-started.c
     AppCommonModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    provideClientHydration()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -37,25 +37,32 @@ export class NavComponent {
 
   public pdfjsVersion = '';
 
-  constructor(private breakpointObserver: BreakpointObserver, route: ActivatedRoute
+  constructor(private breakpointObserver: BreakpointObserver, route: ActivatedRoute) {
+    if (this.isBrowser()) {
+      route.url.subscribe((url) => {
+        this.hideMenu = location.pathname.includes('iframe');
+      });
 
-  ) {
-    route.url.subscribe((url) => {
-      this.hideMenu = location.pathname.includes('iframe');
-    });
-
-    try {
-      this.activateViewer();
-    } catch (exception) {
-      alert('Error! ' + exception);
+      try {
+        this.activateViewer();
+      } catch (exception) {
+        alert('Error! ' + exception);
+      }
     }
+  }
+
+  /**
+   * Checks if the code is running in a browser environment.
+   */
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof document !== 'undefined';
   }
 
   public switchViewer(): void {
     try {
       if (localStorage) {
         localStorage.setItem('showcase.viewer', this.viewer);
-          location = location; // trigger reload
+        location = location; // trigger reload
       }
     } catch (safariSecurityException) {
       // localStorage is not available on Safari

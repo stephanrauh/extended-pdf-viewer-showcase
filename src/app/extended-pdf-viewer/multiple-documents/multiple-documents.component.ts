@@ -1,6 +1,6 @@
 import { Component, effect, NgZone, OnInit } from '@angular/core';
-import { FileInputChanged, IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { FileInputChanged, IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { isBrowser } from '../common/utilities';
 
 @Component({
   selector: 'app-multiple-documents',
@@ -28,9 +28,15 @@ export class MultipleDocumentsComponent implements OnInit {
 
   }
 
-  public url = new URL(`${location.protocol}//${location.host}/assets/pdfs/GraalVM.pdf`);
+  public url!: URL;
 
   constructor(private ngZone: NgZone, notificationService: PDFNotificationService) {
+    if (isBrowser()) {
+      this.url = new URL(`${location.protocol}//${location.host}/assets/pdfs/GraalVM.pdf`);
+    } else {
+      // use a dummy value for server-side rendering
+      this.url = new URL(`http://localhost:4200/assets/pdfs/GraalVM.pdf`);
+    }
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
     });
