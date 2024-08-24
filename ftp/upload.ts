@@ -6,6 +6,7 @@ require('dotenv').config();
 console.log(process.env.ftphost);
 
 const remoteRootFolder = '/pdfviewer.net';
+// const remoteRootFolder = '/angularfaces';
 
 synchronizeDistFolderWithFtpFolder();
 
