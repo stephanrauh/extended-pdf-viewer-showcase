@@ -25,7 +25,6 @@ import { getCharacterType, getNormalizeWithNFKC } from "./pdf_find_utils.js";
  *
  * `#convertToRegExpString` -> `_convertToRegExpString`
  * `#calculateMatch` -> `_calculateMatch`
- * `#calculateRegExpMatch` -> `_calculateRegExpMatch`
  *
  */
 
@@ -719,38 +718,7 @@ class PDFFindController {
     return true;
   }
 
-  _calculateRegExpMatch(query, entireWord, pageIndex, pageContent) { // #2339 modified by ngx-extended-pdf-viewer
-    const matches = (this._pageMatches[pageIndex] = []);
-    const matchesLength = (this._pageMatchesLength[pageIndex] = []);
-    if (!query) {
-      // The query can be empty because some chars like diacritics could have
-      // been stripped out.
-      return;
-    }
-    const diffs = this._pageDiffs[pageIndex];
-    let match;
-    while ((match = query.exec(pageContent)) !== null) {
-      if (
-        entireWord &&
-        !this.#isEntireWord(pageContent, match.index, match[0].length)
-      ) {
-        continue;
-      }
-
-      const [matchPos, matchLen] = getOriginalIndex(
-        diffs,
-        match.index,
-        match[0].length
-      );
-
-      if (matchLen) {
-        matches.push(matchPos);
-        matchesLength.push(matchLen);
-      }
-    }
-  }
-
-  _convertToRegExpString(query, hasDiacritics) { // #2339 modified by ngx-extended-pdf-viewer
+  _convertToRegExpString(query, hasDiacritics) {
     const { matchDiacritics } = this.#state;
     let isUnicode = false;
     query = query.replaceAll(
@@ -820,17 +788,70 @@ class PDFFindController {
     return [isUnicode, query];
   }
 
-  _calculateMatch(pageIndex) { // #2339 modified by ngx-extended-pdf-viewer
-    let query = this.#query;
+  _calculateMatch(pageIndex) {
+    const query = this.#query;
     if (query.length === 0) {
       return; // Do nothing: the matches should be wiped out already.
     }
-    const { caseSensitive, entireWord, findMultiple, matchRegExp } = this.#state;
     const pageContent = this._pageContents[pageIndex];
+    const matcherResult = this.match(query, pageContent, pageIndex);
+
+    const matches = (this._pageMatches[pageIndex] = []);
+    const matchesLength = (this._pageMatchesLength[pageIndex] = []);
+    const diffs = this._pageDiffs[pageIndex];
+
+    matcherResult?.forEach(({ index, length }) => {
+      const [matchPos, matchLen] = getOriginalIndex(diffs, index, length);
+      if (matchLen) {
+        matches.push(matchPos);
+        matchesLength.push(matchLen);
+      }
+    });
+
+    // When `highlightAll` is set, ensure that the matches on previously
+    // rendered (and still active) pages are correctly highlighted.
+    if (this.#state.highlightAll) {
+      this.#updatePage(pageIndex);
+    }
+    if (this._resumePageIdx === pageIndex) {
+      this._resumePageIdx = null;
+      this.#nextPageMatch();
+    }
+
+    // Update the match count.
+    const pageMatchesCount = matches.length;
+    this._matchesCountTotal += pageMatchesCount;
+    if (this.#updateMatchesCountOnProgress) {
+      if (pageMatchesCount > 0) {
+        this.#updateUIResultsCount(pageIndex);
+      }
+    } else if (++this.#visitedPagesCount === this._linkService.pagesCount) {
+      // For example, in GeckoView we want to have only the final update because
+      // the Java side provides only one object to update the counts.
+      this.#updateUIResultsCount(pageIndex);
+    }
+  }
+
+  /**
+   * @typedef {Object} FindMatch
+   * @property {number} index - The start of the matched text in the page's
+   *   string contents.
+   * @property {number} length - The length of the matched text.
+   */
+
+  /**
+   * @param {string | string[]} query - The search query.
+   * @param {string} pageContent - The text content of the page to search in.
+   * @param {number} pageIndex - The index of the page that is being processed.
+   * @returns {FindMatch[] | undefined} An array of matches in the provided
+   *   page.
+   */
+  match(query, pageContent, pageIndex) {
     const hasDiacritics = this._hasDiacritics[pageIndex];
 
     let isUnicode = false;
     // #2339 modified by ngx-extended-pdf-viewer
+    const { caseSensitive, findMultiple, matchRegExp } = this.#state;
     if (findMultiple && typeof query === "string") {
       query = query.split(/\s+/);
     }
@@ -856,40 +877,28 @@ class PDFFindController {
         })
         .join("|");
     }
+    if (!query) {
+      // The query can be empty because some chars like diacritics could have
+      // been stripped out.
+      return undefined;
+    }
 
+    const { entireWord } = this.#state;
     const flags = `g${isUnicode ? "u" : ""}${caseSensitive ? "" : "i"}`;
-    query = query ? new RegExp(query, flags) : null;
+    query = new RegExp(query, flags);
 
-    this._calculateRegExpMatch(query, entireWord, pageIndex, pageContent); // #2339 modified by ngx-extended-pdf-viewer
-
-    // When `highlightAll` is set, ensure that the matches on previously
-    // rendered (and still active) pages are correctly highlighted.
-    if (this.#state.highlightAll) {
-      this.#updatePage(pageIndex);
-    }
-    if (this._resumePageIdx === pageIndex) {
-      this._resumePageIdx = null;
-      this.#nextPageMatch();
-    }
-
-    // Update the match count.
-    const pageMatchesCount = this._pageMatches[pageIndex].length;
-    this._matchesCountTotal += pageMatchesCount;
-    if (this.#updateMatchesCountOnProgress) {
-      if (pageMatchesCount > 0) {
-        this.#updateUIResultsCount();
+    const matches = [];
+    let match;
+    while ((match = query.exec(pageContent)) !== null) {
+      if (
+        entireWord &&
+        !this.#isEntireWord(pageContent, match.index, match[0].length)
+      ) {
+        continue;
       }
-    } else if (++this.#visitedPagesCount === this._linkService.pagesCount) {
-      // For example, in GeckoView we want to have only the final update because
-      // the Java side provides only one object to update the counts.
-      this.#updateUIResultsCount();
+      matches.push({ index: match.index, length: match[0].length });
     }
-    // #2482 modified by ngx-extended-pdf-viewer
-    if (this._findResultResolvers && this._findResultResolvers[pageIndex]) {
-      this._findResultResolvers[pageIndex](pageMatchesCount);
-      this._findResultResolvers[pageIndex] = null;
-    }
-    // #2482 end of modification by ngx-extended-pdf-viewer
+    return matches;
   }
 
   #extractText() {
@@ -1178,11 +1187,18 @@ class PDFFindController {
     return { current, total };
   }
 
-  #updateUIResultsCount() {
+  #updateUIResultsCount(pageIndex) {
     this._eventBus.dispatch("updatefindmatchescount", {
       source: this,
       matchesCount: this.#requestMatchesCount(),
     });
+    // #2482 modified by ngx-extended-pdf-viewer
+    const pageMatchesCount = this._pageMatches[pageIndex].length;
+    if (this._findResultResolvers && this._findResultResolvers[pageIndex]) {
+      this._findResultResolvers[pageIndex](pageMatchesCount);
+      this._findResultResolvers[pageIndex] = null;
+    }
+    // #2482 end of modification by ngx-extended-pdf-viewer
   }
 
   #updateUIState(state, previous = false) {
