@@ -1,11 +1,8 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BlobService } from './blob.service';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { isBrowser } from '../common/utilities';
 
 @Component({
   selector: 'app-blob',
@@ -46,14 +43,9 @@ export class BlobComponent implements OnInit {
   }
 
   public loadLargeFile(): void {
-    this.http
-      .get(
-        '/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf',
-        { responseType: 'blob' }
-      )
-      .subscribe((res) => {
-        this.src = res;
-      });
+    this.http.get('/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf', { responseType: 'blob' }).subscribe((res) => {
+      this.src = res;
+    });
   }
 
   public async downloadAsBlob(): Promise<void> {

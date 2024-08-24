@@ -1,10 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { pdfData2 } from './secondPdfBase64';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { isBrowser } from '../common/utilities';
 
 @Component({
   selector: 'app-base64',
@@ -20,30 +20,26 @@ export class Base64Component {
 
   private _fullscreen = false;
 
-
-
   public get fullscreen(): boolean {
     return this._fullscreen;
   }
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
-  constructor(private httpClient: HttpClient, private pdfService: NgxExtendedPdfViewerService) {}
+  constructor(private httpClient: HttpClient) {}
 
   public ngOnInit(): void {
-    this.httpClient
-      .get(
-        '/assets/pdfs/Bootstrap-vs-Material-Design-vs-Prime-vs-Tailwind.base64.txt',
-        { responseType: 'text' as 'json' }
-      )
-      .pipe(
-        tap((base64) => (this.tailwindPdf = base64 as string)),
-        tap((base64) => (this.base64.next(base64 as string))),
-      )
-      .subscribe();
+    if (isBrowser()) {
+      this.httpClient
+        .get('/assets/pdfs/Bootstrap-vs-Material-Design-vs-Prime-vs-Tailwind.base64.txt', { responseType: 'text' as 'json' })
+        .pipe(
+          tap((base64) => (this.tailwindPdf = base64 as string)),
+          tap((base64) => this.base64.next(base64 as string))
+        )
+        .subscribe();
+    }
   }
 
   public toggle(): void {
