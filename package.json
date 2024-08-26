@@ -40,7 +40,7 @@
     "basic-ftp": "^5.0.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "ngx-extended-pdf-viewer": "^21.3.4",
+    "ngx-extended-pdf-viewer": "^21.3.5",
     "ngx-markdown": "^18.0.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "perfect-scrollbar": "^1.5.5",
