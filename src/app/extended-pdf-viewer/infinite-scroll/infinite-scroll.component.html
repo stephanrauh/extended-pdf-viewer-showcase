@@ -7,18 +7,15 @@
             <p>
               This option allows you to display the PDF file without scrollbar.
             </p>
-            <p>
-              <mat-checkbox class="margin" [(ngModel)]="showWidgets">show widgets</mat-checkbox> (forces reload)
-            </p>
-            <p>
-              <mat-radio-group aria-label="File selection" [(ngModel)]="file" style="line-height: 1.5;">
-                <mat-radio-button [value]="0">tiny file (1 page, 41 KB)</mat-radio-button>
-                <br />
-                <mat-radio-button [value]="1">small file (4 pages, 700 KB)</mat-radio-button>
-                <br />
-                <mat-radio-button [value]="2">huge file (300+ pages, 2 MB)</mat-radio-button>
-              </mat-radio-group>
-            </p>
+            <mat-checkbox class="margin" [(ngModel)]="showWidgets">show widgets</mat-checkbox> (forces reload)
+            <p></p>
+            <mat-radio-group aria-label="File selection" [(ngModel)]="file" style="line-height: 1.5;">
+              <mat-radio-button [value]="0">tiny file (1 page, 41 KB)</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="1">small file (4 pages, 700 KB)</mat-radio-button>
+              <br />
+              <mat-radio-button [value]="2">huge file (300+ pages, 2 MB)</mat-radio-button>
+            </mat-radio-group>
             @if (file === 2) {
               <p>
                 <mat-radio-group aria-label="Zoom" [(ngModel)]="zoom" style="line-height: 1.5;">
