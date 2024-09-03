@@ -36,7 +36,7 @@
     "@angular/ssr": "^18.2.2",
     "@fontsource/material-icons": "^5.0.19",
     "@fontsource/roboto": "^5.0.14",
-    "angular2-smart-table": "^3.2.0",
+    "angular2-smart-table": "^3.3.0",
     "basic-ftp": "^5.0.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
