@@ -5,16 +5,17 @@
 }
 
 @if (!hideMenu) {
-  <div>
+  <div class="page">
     <mat-toolbar color="primary" class="mat-elevation-z8 toolbar">
-      <mat-toolbar-row>
+      <mat-toolbar-row class="toolbar-row">
         <app-octocat></app-octocat>
-        <div class="first-row">
+        <div class="toolbar-row-content">
           <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
-          <div class="inner-row">
-            <span>Angular PDF viewer showcase. Running on Angular {{ angularVersion }}{{ pdfjsVersion }} and {{ library }} {{ version }}.</span>
+          <div class="toolbar-row-content-inner-row">
+            <span>Angular PDF viewer showcase. Running on Angular {{ angularVersion }}{{ pdfjsVersion }} and {{ library }} {{ version }}
+              .</span>
             <mat-radio-group aria-label="Demo" [(ngModel)]="viewer">
               Choose a version:
               <mat-radio-button class="distance16" value="ngx-extended-pdf-viewer">stable (based on pdf.js 4.5)</mat-radio-button>
@@ -23,19 +24,20 @@
           </div>
         </div>
 
-        </mat-toolbar-row>
-      </mat-toolbar>
-      <mat-sidenav-container class="sidenav-container">
-        <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="'side'" [opened]="true">
-          @if (ngxExtendedPdfViewer) {
-            <app-extended-pdf-viewer-menu [drawer]="drawer"></app-extended-pdf-viewer-menu>
-          }
-        </mat-sidenav>
-        <mat-sidenav-content>
-          <div class="with-border">
-            <router-outlet></router-outlet>
-          </div>
-        </mat-sidenav-content>
-      </mat-sidenav-container>
-    </div>
-  }
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                   [mode]="'side'" [opened]="true">
+        @if (ngxExtendedPdfViewer) {
+          <app-extended-pdf-viewer-menu [drawer]="drawer"></app-extended-pdf-viewer-menu>
+        }
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div class="with-border">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+}

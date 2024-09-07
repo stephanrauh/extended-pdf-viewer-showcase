@@ -1,9 +1,19 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'toolbar' 'content';
+}
+
+.toolbar {
+  grid-area: toolbar;
+}
+
 .sidenav-container {
   height: 100%;
+  grid-area: content;
 }
 
 .sidenav {
-  width: 33vw;
   max-width: 400px;
 }
 
@@ -23,7 +33,6 @@
   height: calc(100vh - 85px);
 }
 
-
 .mat-toolbar.mat-primary {
   z-index: 11;
 }
@@ -37,9 +46,9 @@
   color: blue;
 }
 
-.mat-toolbar-single-row {
-  height: 48px;
-  padding-top: 24px;
+.toolbar-row {
+  height: unset;
+  display: block;
 }
 
 .mat-nav-list a.mat-mdc-list-item.long-text {
@@ -55,26 +64,25 @@
   padding-left: 16px;
 }
 
-.mat-sidenav {
-  padding-top: 48px;
-}
-
 .toolbar {
   padding-block: 0.5rem;
 }
 
-.first-row {
+.toolbar-row-content {
   display: grid;
   grid-template-columns: auto minmax(0,1fr);
   align-items: center;
   gap: 1rem
 }
 
-.inner-row {
+.toolbar-row-content-inner-row {
   display: grid;
-  grid-template-rows: 1fr 1fr;
 }
 
-::ng-deep .inner-row .mat-mdc-radio-button .mdc-form-field {
+.toolbar-row-content-inner-row span {
+  text-wrap: wrap;
+}
+
+::ng-deep .toolbar-row-content-inner-row .mat-mdc-radio-button .mdc-form-field {
   color: white;
 }
