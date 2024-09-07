@@ -59,20 +59,22 @@
   padding-top: 48px;
 }
 
-.second-row {
-  margin-top: -16px;
-  padding-bottom: 8px;
+.toolbar {
+  padding-block: 0.5rem;
 }
 
-.first-row,.second-row {
-  height: 50px;
+.first-row {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  align-items: center;
+  gap: 1rem
 }
 
-.side-nav-toggle {
-  margin-left: -11px;
-  zoom: 133%
+.inner-row {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
 }
 
-::ng-deep .second-row .mat-mdc-radio-button .mdc-form-field {
+::ng-deep .inner-row .mat-mdc-radio-button .mdc-form-field {
   color: white;
 }
