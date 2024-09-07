@@ -1,5 +1,9 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { Component, ChangeDetectionStrategy, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { compareFunction, convertMDToTable } from '../attributes/md-to-table-converter';
+import { HttpClient } from '@angular/common/http';
+import { Settings } from 'angular2-smart-table';
+import { isBrowser } from '../common/utilities';
 
 @Component({
   selector: 'app-default-options',
@@ -7,9 +11,39 @@ import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf
   styleUrls: ['./default-options.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DefaultOptionsComponent {
+export class DefaultOptionsComponent implements OnInit {
+  public tableSettings: Settings = {
+    actions: {
+      edit: false,
+      delete: false,
+      add: false,
+    },
+    attr: {
+      class: 'text',
+    },
+    columns: {
+      attribute: {
+        title: 'Attribute',
+        type: 'html',
+        sortDirection: 'asc',
+        compareFunction,
+      },
+      description: {
+        title: 'Description',
+        type: 'html',
+      },
+    },
+    pager: {
+      display: false,
+      perPage: 5000,
+    },
+  };
 
-    private _fullscreen = false;
+  public availableOptions: Array<object> = [];
+
+  public coveredOptions: Array<object> = [];
+
+  private _fullscreen = false;
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -17,10 +51,24 @@ export class DefaultOptionsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
-  constructor( private pdfService: NgxExtendedPdfViewerService) {
+  constructor(private httpClient: HttpClient, private domElement: ElementRef) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+  }
+
+  public async ngOnInit(): Promise<void> {
+    this.availableOptions = await convertMDToTable('/assets/extended-pdf-viewer/default-options/available-options.md', this.httpClient);
+    this.coveredOptions = await convertMDToTable('/assets/extended-pdf-viewer/default-options/covered-options.md', this.httpClient);
+  }
+
+  public addPlaceHolders(): void {
+    if (isBrowser()) {
+      const html = this.domElement.nativeElement as HTMLElement;
+      const inputFields = html.querySelectorAll<HTMLInputElement>('angular2-smart-table-filter input');
+      inputFields.forEach((field) => {
+        field.placeholder = '(type to filter)';
+      });
+    }
   }
 }

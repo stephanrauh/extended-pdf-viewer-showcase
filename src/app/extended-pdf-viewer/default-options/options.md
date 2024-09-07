@@ -1,8 +1,8 @@
 ```typescript
-export let pdfDefaultOptions = {
-  externalLinkTarget: 0,
-  renderer: 'canvas',
-  assetsFolder: 'assets',
-  workerSrc: () => _isIE11 || isEdge ? './' + pdfDefaultOptions.assetsFolder + '/pdf.worker-es5.js' : './' + pdfDefaultOptions.assetsFolder + '/pdf.worker.js',
-};
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+
+...
+constructor() {
+  pdfDefaultOptions.assetsFolder = 'bleeding-edge';
+}
 ```
