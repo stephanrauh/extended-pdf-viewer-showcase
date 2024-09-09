@@ -72,7 +72,8 @@
   display: grid;
   grid-template-columns: auto minmax(0,1fr);
   align-items: center;
-  gap: 1rem
+  gap: 1rem;
+  max-width: calc(100% - 80px);
 }
 
 .toolbar-row-content-inner-row {
@@ -85,4 +86,10 @@
 
 ::ng-deep .toolbar-row-content-inner-row .mat-mdc-radio-button .mdc-form-field {
   color: white;
+}
+
+@media (max-width: 850px) {
+  .hide-on-small-screen {
+    display: none;
+  }
 }
