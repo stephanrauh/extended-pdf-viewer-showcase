@@ -1,5 +1,5 @@
 ```typescript
-public addDrawing(): void {
+public async addDrawing(): Promise<void> {
   const x = 400*Math.random();
   const y = 350+500*Math.random();
   const drawing: InkEditorAnnotation = {
@@ -17,6 +17,6 @@ public addDrawing(): void {
     rect: [x, y, x+100, y+66],
     rotation: 0,
   };
-  this.pdfViewerService.addEditorAnnotation(drawing);
+  await this.pdfViewerService.addEditorAnnotation(drawing);
 }
 ```

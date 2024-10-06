@@ -38,7 +38,7 @@ export class ExportAnnotationsComponent {
     this.rawAnnotations = this.pdfViewerService.getSerializedAnnotations();
   }
 
-  public addTextEditor(): void {
+  public async addTextEditor(): Promise<void> {
     const x = Math.round(Math.random() * 400);
     const y = Math.round(350 + Math.random() * 500);
     const fontSize = Math.round(Math.random() * 30 + 10);
@@ -60,7 +60,7 @@ export class ExportAnnotationsComponent {
     };
     console.log(textEditorAnnotation);
     console.log('Before update');
-    this.pdfViewerService.addEditorAnnotation(textEditorAnnotation);
+    await this.pdfViewerService.addEditorAnnotation(textEditorAnnotation);
     console.log('After update');
     let anno = this.pdfViewerService.getSerializedAnnotations();
     if (anno) {
@@ -68,7 +68,7 @@ export class ExportAnnotationsComponent {
     }
   }
 
-  public addDrawing(): void {
+  public async addDrawing(): Promise<void> {
     const x = 400 * Math.random();
     const y = 350 + 500 * Math.random();
     const drawing: InkEditorAnnotation = {
@@ -86,7 +86,7 @@ export class ExportAnnotationsComponent {
       rect: [x, y, x + 100, y + 66],
       rotation: 0,
     };
-    this.pdfViewerService.addEditorAnnotation(drawing);
+    await this.pdfViewerService.addEditorAnnotation(drawing);
   }
 
   public removeEditors(): void {
@@ -103,7 +103,7 @@ export class ExportAnnotationsComponent {
     this.pdfViewerService.removeEditorAnnotations(filter);
   }
 
-  public updateAnnotation(index: number, event: Event): void {
+  public async updateAnnotation(index: number, event: Event): Promise<void> {
     const textarea = event.target as HTMLTextAreaElement;
     console.log('Before update');
     let anno = this.pdfViewerService.getSerializedAnnotations();
@@ -116,7 +116,7 @@ export class ExportAnnotationsComponent {
 
       this.removeEditors();
       for (const annotation of this.rawAnnotations) {
-        this.pdfViewerService.addEditorAnnotation(annotation);
+        await this.pdfViewerService.addEditorAnnotation(annotation);
       }
     }
     console.log('After update');
