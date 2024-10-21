@@ -158,7 +158,7 @@
           }
         </mat-tab>
         <mat-tab label="console messages">
-          @for (l of logService.logs; track l) {
+          @for (l of logService.logs; track $index) {
             <div>
               {{ l }}
             </div>

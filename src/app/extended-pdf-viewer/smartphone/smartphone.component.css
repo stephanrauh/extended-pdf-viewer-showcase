@@ -1,5 +1,5 @@
-::ng-deep button#print,
-::ng-deep button#print * {
+::ng-deep button#printButton,
+::ng-deep button#printButton * {
   display: block !important;
 }
 

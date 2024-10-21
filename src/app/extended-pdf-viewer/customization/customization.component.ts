@@ -86,7 +86,7 @@ const TOOLBAR: TreeNode[] = [
             id: 'secondaryPresentationMode'
           },
           { name: '<button title="Open (file)">', id: 'secondaryOpenFile' },
-          { name: '<button title="Print">', id: 'secondaryPrint' },
+          { name: '<button title="Print">', id: 'secondaryPrintButton' },
           { name: '<button title="Download">', id: 'secondaryDownload' },
           { name: '<button title="Go to First Page">', id: 'firstPage' },
           { name: '<button title="Go to Last Page">', id: 'lastPage' },
