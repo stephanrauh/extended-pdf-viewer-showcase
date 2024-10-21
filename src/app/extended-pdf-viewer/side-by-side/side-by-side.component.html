@@ -11,19 +11,25 @@
             <p>Note on the demo: since activating server-side rendering, the embedded PDF viewers initially show the wrong content. That won't
               happen on your machine unless you activate SSR, and I hope to fix it soon.
             </p>
+            <p>The work-around uses a common component, the <code>IFrameComponent</code>. The Angular router maps this
+              component to a path, and the iFrame uses this path to display the PDF file.
+            </p>
           </mat-tab>
         </mat-tab-group>
       </mat-card>
       <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
         <mat-tab-group>
-          <mat-tab label="HTML template 1">
+          <mat-tab label="Using the IFrameComponent">
             <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md"> </app-ie11-markdown>
           </mat-tab>
-          <mat-tab label="HTML template 2">
+          <mat-tab label="iframe.component.html">
             <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html2.md"> </app-ie11-markdown>
           </mat-tab>
-          <mat-tab label="Typescript">
+          <mat-tab label="iframe.component.ts">
             <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="app-routing.module.ts">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/router.md"> </app-ie11-markdown>
           </mat-tab>
         </mat-tab-group>
       </mat-card>
