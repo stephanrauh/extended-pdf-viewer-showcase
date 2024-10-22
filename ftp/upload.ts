@@ -27,7 +27,14 @@ function collectFiles(dir: string, allFiles: Array<string> = [], allFolders: Arr
 }
 
 async function collectRemoteFiles(client: ftp.Client, dir: string, allFiles: any, allFolders: any) {
-  const files = await client.list(dir);
+  console.log("Reading " + dir);
+  let files;
+  try {
+   files = await client.list(dir);
+  } catch (exception) {
+    console.log("Retry...")
+   files = await client.list(dir);
+  }
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     const filePath = dir + '/' + file.name;
@@ -77,7 +84,13 @@ async function synchronizeDistFolderWithFtpFolder() {
       const remoteFolder = folder.replace('../dist/pdf-showcase/browser', remoteRootFolder);
       if (!allRemoteFolders[remoteFolder]) {
         console.log(i++ + ' Creating folder ' + remoteFolder);
+
+        try {
         await client.ensureDir(remoteFolder);
+        } catch (exception) {
+          console.log("Retry...")
+          await client.ensureDir(remoteFolder);
+        }
       }
     }
 
@@ -94,11 +107,21 @@ async function synchronizeDistFolderWithFtpFolder() {
           } else {
             // console.log("Different size");
             console.log(i++ + ' of ' + allFiles.length + ' Uploading (updated)' + remoteFile);
-            await client.uploadFrom(file, remoteFile);
+            try {
+              await client.uploadFrom(file, remoteFile);
+            } catch (exception) {
+              console.log("Retry...")
+              await client.uploadFrom(file, remoteFile);
+            }
           }
         } else {
-          console.log(i++ + ' of ' + allFiles.length + ' Uploading (new)  ' + remoteFile);
-          await client.uploadFrom(file, remoteFile);
+          console.log(i++ + ' of ' + allFiles.length + ' Uploading (new)    ' + remoteFile);
+          try {
+            await client.uploadFrom(file, remoteFile);
+          } catch (exception) {
+            console.log("Retry...")
+            await client.uploadFrom(file, remoteFile);
+          }
         }
       } catch (exception) {
         console.log("Couldn't upload " + file);
@@ -112,7 +135,12 @@ async function synchronizeDistFolderWithFtpFolder() {
           const localFile = remoteFile.replace(remoteRootFolder, '../dist/pdf-showcase/browser');
           if (!allFiles.includes(localFile)) {
             console.log("delete " + remoteFile);
-            await client.remove(remoteFile);
+            try {
+              await client.remove(remoteFile);
+            } catch (exception) {
+              console.log("Retry...")
+              await client.remove(remoteFile);
+            }
           }
         }
       }
@@ -122,7 +150,12 @@ async function synchronizeDistFolderWithFtpFolder() {
         const localFolder = remoteFolder.replace(remoteRootFolder, '../dist/pdf-showcase/browser');
         if (!allFolders.includes(localFolder)) {
           console.log("delete " + remoteFolder);
+          try {
           await client.removeDir(remoteFolder);
+          } catch (exception) {
+            console.log("Retry...")
+            await client.removeDir(remoteFolder);
+          }
         }
       }
     }
