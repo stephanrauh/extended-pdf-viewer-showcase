@@ -4,7 +4,6 @@
   [customFindbarInputArea]="customFindbarInputArea"
   [customFindbarButtons]="customFindbarButtons"
   [src]="'/assets/pdfs/dachstein.pdf'"
-  [textLayer]="true">
 </ngx-extended-pdf-viewer>
 
 <ng-template #customFindbarInputArea>

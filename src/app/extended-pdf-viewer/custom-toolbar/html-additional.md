@@ -3,7 +3,6 @@
   #pdfViewer
   [customToolbar]="additionalButtons"
   [src]="'/assets/pdfs/dachstein.pdf'"
-  [textLayer]="true">
 </ngx-extended-pdf-viewer>
 
 <ng-template #additionalButtons>
@@ -11,7 +10,6 @@
     <div id="toolbarViewerLeft">
       <pdf-toggle-sidebar></pdf-toggle-sidebar>
       <div class="toolbarButtonSpacer"></div>
-      <pdf-find-button [showFindButton]="true" [textLayer]="true"></pdf-find-button>
       <pdf-paging-area></pdf-paging-area>
     </div>
     <pdf-zoom-toolbar ></pdf-zoom-toolbar> <!-- toolbar viewer middle -->

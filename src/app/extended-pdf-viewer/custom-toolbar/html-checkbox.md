@@ -3,7 +3,6 @@
   #pdfViewer
   [customToolbar]="customCheckboxZoomToolbar"
   [src]="'/assets/pdfs/dachstein.pdf'"
-  [textLayer]="true"
   [zoom]="zoom">
 </ngx-extended-pdf-viewer>
 
