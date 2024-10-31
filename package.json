@@ -33,7 +33,7 @@
     "@angular/platform-browser-dynamic": "^18.2.9",
     "@angular/platform-server": "^18.2.9",
     "@angular/router": "^18.2.9",
-    "@angular/ssr": "^18.2.10",
+    "@angular/ssr": "^18.2.11",
     "@fontsource/material-icons": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
     "angular2-smart-table": "^3.4.0",
