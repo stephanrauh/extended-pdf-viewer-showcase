@@ -29,6 +29,16 @@
             <button mat-raised-button color="primary" (click)="removeTextEditors()">Remove text editors from page 1</button>
             <button mat-raised-button color="primary" (click)="removeDrawingEditors()">Remove drawings</button>
           </mat-tab>
+          <mat-tab label="large files">
+            <p>The PDF viewer renders pages lazily. If they aren't going to be used soon, the page is not rendered. If you've got a large file,
+              a major part of the pages are just placeholders.
+            </p>
+            <p>This, in turn, means you can't add an annotation. If you want to add annotations to large files reliably,
+              catch the event <code>(annotationLayerRendered)</code> and add the annotations in the event handler. Not
+              that this event is triggered for every page individually. The event handler should add the annotations
+              that belong to this particular page, but not to other pages.
+            </p>
+          </mat-tab>
         </mat-tab-group>
       </mat-card>
       <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
