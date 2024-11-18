@@ -13,7 +13,7 @@
   [showSecondaryToolbarButton]="showSecondaryToolbarButton"
   [showRotateButton]="showRotateButton"
   [showHandToolButton]="showHandToolButton"
-  [showScrollingButton]="showScrollingButton"
+  [showScrollingButtons]="showScrollingButtons"
   [showSpreadButton]="showSpreadButton"
   [showPropertiesButton]="showPropertiesButton"
   height="250px" zoom="25%">

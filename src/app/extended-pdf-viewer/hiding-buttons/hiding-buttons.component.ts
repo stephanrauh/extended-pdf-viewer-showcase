@@ -26,7 +26,7 @@ export class HidingButtonsComponent {
   public showRotateCwButton = false;
   public showRotateCcwButton = false;
   public showHandToolButton = false;
-  public showScrollingButton = false;
+  public showScrollingButtons = false;
   public showSpreadButton = false;
   public showPropertiesButton = false;
   public propertiesDialogVisible = false;
@@ -89,7 +89,7 @@ export class HidingButtonsComponent {
   [showRotateCwButton]="${this.showRotateCwButton}"
   [showRotateCcwButton]="${this.showRotateCcwButton}"
   [showHandToolButton]="${this.showHandToolButton}"
-  [showScrollingButton]="${this.showScrollingButton}"
+  [showScrollingButtons]="${this.showScrollingButtons}"
   [showSpreadButton]="${this.showSpreadButton}"
   [showPropertiesButton]="${this.showPropertiesButton}">
 </ngx-extended-pdf-viewer>

@@ -22,7 +22,7 @@ export class ResponsiveDesignComponent {
   public showSecondaryToolbarButton: ResponsiveVisibility = 'always-visible';
   public showRotateButton: ResponsiveVisibility = 'xxl';
   public showHandToolButton: ResponsiveVisibility = 'xxl';
-  public showScrollingButton: ResponsiveVisibility = 'xxl';
+  public showScrollingButtons: ResponsiveVisibility = 'xxl';
   public showSpreadButton: ResponsiveVisibility = 'xxl';
   public showPropertiesButton: ResponsiveVisibility = 'xxl' ;
   public downloadFileName = 'user-defined-name.pdf';
@@ -145,7 +145,7 @@ export class ResponsiveDesignComponent {
   [showSecondaryToolbarButton]="${this.showSecondaryToolbarButton}"
   [showRotateButton]="${this.showRotateButton}"
   [showHandToolButton]="${this.showHandToolButton}"
-  [showScrollingButton]="${this.showScrollingButton}"
+  [showScrollingButtons]="${this.showScrollingButtons}"
   [showSpreadButton]="${this.showSpreadButton}"
   [showPropertiesButton]="${this.showPropertiesButton}"
   height="250px" zoom="25%">
