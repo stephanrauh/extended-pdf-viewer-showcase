@@ -7,6 +7,7 @@ interface CustomFindOptions extends FindOptions {
 }
 
 @Component({
+standalone: false,
   selector: 'app-custom-find',
   templateUrl: './custom-find.component.html',
   styleUrls: ['./custom-find.component.scss'],

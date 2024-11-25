@@ -1,5 +1,6 @@
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class FindComponent {
   public highlightAll = false;
   public matchCase = false;

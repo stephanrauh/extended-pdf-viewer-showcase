@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-i18n',
   templateUrl: './i18n.component.html',
   styleUrls: ['./i18n.component.css']

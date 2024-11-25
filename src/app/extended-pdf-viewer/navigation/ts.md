@@ -1,5 +1,6 @@
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class NavigationComponent {
   public _namedDest: string | undefined;
   public page: number | undefined;

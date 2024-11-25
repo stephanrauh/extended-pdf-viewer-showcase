@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges } from '@a
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { isLocalhost } from '../common/utilities';
 @Component({
+standalone: false,
   selector: 'app-forms',
   templateUrl: './theming.component.html',
   styleUrls: ['./theming.component.css'],

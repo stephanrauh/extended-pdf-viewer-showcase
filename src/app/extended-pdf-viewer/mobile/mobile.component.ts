@@ -1,6 +1,7 @@
 import { Component, effect } from '@angular/core';
 
 @Component({
+standalone: false,
   selector: 'app-mobile',
   templateUrl: './mobile.component.html',
   styleUrls: ['./mobile.component.css'],

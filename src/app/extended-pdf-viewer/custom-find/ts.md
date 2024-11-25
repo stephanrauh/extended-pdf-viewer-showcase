@@ -3,7 +3,8 @@ interface CustomFindOptions extends FindOptions {
   matchRegex: boolean;
 }
 
-@Component({...})
+@Component({
+standalone: false, ...})
 export class CustomFindComponent {
   searchtext = '(?<=\\s)([A-z]+ough)';
   findOptions: CustomFindOptions = {

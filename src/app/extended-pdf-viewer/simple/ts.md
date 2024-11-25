@@ -1,5 +1,6 @@
 ```typescript
  @Component({
+standalone: false, 
   selector: 'app-simple',
   templateUrl: './simple.component.html',
   styleUrls: ['./simple.component.css']

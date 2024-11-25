@@ -7,6 +7,7 @@ interface EventBus {
 }
 
 @Component({
+standalone: false, 
   selector: 'app-custom-progress-bar',
   templateUrl: './custom-print-dialog.component.html',
   styleUrls: ['./custom-print-dialog.component.css'],

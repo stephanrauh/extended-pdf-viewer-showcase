@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-export-image',
   templateUrl: './export-image.component.html',
   styleUrls: ['./export-image.component.css'],

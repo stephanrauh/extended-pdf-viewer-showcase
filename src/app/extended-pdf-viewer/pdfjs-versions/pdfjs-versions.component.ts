@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-pdfjs-versions',
   templateUrl: './pdfjs-versions.component.html',
   styleUrls: ['./pdfjs-versions.component.css'],

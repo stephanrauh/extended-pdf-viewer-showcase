@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints } fro
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-responsive-design',
   templateUrl: './responsive-design.component.html',
   styleUrls: ['./responsive-design.component.css']
@@ -155,7 +156,8 @@ export class ResponsiveDesignComponent {
 
   public get breakpoints(): string {
     return `
-    @Component({ ... })
+    @Component({
+standalone: false,  ... })
 export class CustomBreakpointsComponent {
   constructor() {
     // these are the default values

@@ -11,6 +11,7 @@ import { isLocalhost } from '../common/utilities';
 
 
 @Component({
+standalone: false,
   selector: 'app-simple',
   templateUrl: './file-info.component.html',
   styleUrls: ['./file-info.component.css'],

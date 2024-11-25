@@ -4,6 +4,7 @@ import { NgxExtendedPdfViewerComponent } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-modal-dialog',
   templateUrl: './modal-dialog.component.html'
 })

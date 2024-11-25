@@ -3,6 +3,7 @@ import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions }
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-scrolling',
   templateUrl: './scrolling.component.html',
   styleUrls: ['./scrolling.component.css'],

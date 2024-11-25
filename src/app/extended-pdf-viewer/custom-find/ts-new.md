@@ -1,5 +1,6 @@
 ```ts
-@Component({...})
+@Component({
+standalone: false, ...})
 export class CustomFindComponent {
 
   constructor() {

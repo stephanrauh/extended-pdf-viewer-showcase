@@ -1,7 +1,8 @@
 The PDF viewer doesn't restart reliably when you change the theme. So this demo hides the PDF viewer before changing the theme.
 
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class CustomToolbarComponent {
   public _theme = 'findbar';
 

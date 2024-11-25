@@ -1,5 +1,6 @@
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class I18nComponent {
   public hidePdfViewer = false;
 

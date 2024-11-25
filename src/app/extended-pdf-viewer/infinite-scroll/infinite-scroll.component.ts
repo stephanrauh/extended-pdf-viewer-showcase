@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ScrollModeType } from 'ngx-extended-pdf-viewer';
 
 @Component({
+standalone: false,
   selector: 'app-infinite-scroll',
   templateUrl: './infinite-scroll.component.html',
   styleUrls: ['./infinite-scroll.component.css'],

@@ -1,5 +1,6 @@
 ```typescript
- @Component({ ... })
+ @Component({
+standalone: false,  ... })
 export class PrerenderingComponent {
   public spreadMode: 'off' | 'even' | 'odd' = 'off';
 

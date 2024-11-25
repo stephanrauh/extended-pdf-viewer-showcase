@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+standalone: false,
   selector: 'app-open-in-new-tab',
   templateUrl: './open-in-new-tab.component.html',
   styleUrls: ['./open-in-new-tab.component.css']

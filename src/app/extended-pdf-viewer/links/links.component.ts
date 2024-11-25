@@ -7,6 +7,7 @@ import {
 } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 @Component({
+standalone: false,
   selector: 'app-links',
   templateUrl: './links.component.html',
   styleUrls: ['./links.component.css'],

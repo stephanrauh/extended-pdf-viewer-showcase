@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService, PageViewModeType, ScrollModeType, SpreadMo
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-display-options',
   templateUrl: './display-options.component.html',
   styleUrls: ['./display-options.component.css']

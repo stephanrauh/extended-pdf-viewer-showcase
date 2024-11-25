@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
+standalone: false,
   selector: 'app-ie11-markdown',
   templateUrl: './ie11-markdown.component.html',
   styleUrls: ['./ie11-markdown.component.css']

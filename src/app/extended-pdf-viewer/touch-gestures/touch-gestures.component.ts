@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf
 import { isBrowser } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-touch-gestures',
   templateUrl: './touch-gestures.component.html',
   styleUrls: ['./touch-gestures.component.css'],

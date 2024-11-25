@@ -5,6 +5,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { isLocalhost } from '../common/utilities';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 @Component({
+standalone: false,
   selector: 'app-forms',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.css'],

@@ -3,6 +3,7 @@ import { PagesLoadedEvent, NgxExtendedPdfViewerService, ProgressBarEvent } from 
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-custom-progress-bar',
   templateUrl: './custom-print-dialog.component.html',
   styleUrls: ['./custom-print-dialog.component.css'],

@@ -1,5 +1,6 @@
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class KeyboardComponent implements OnInit {
   public ignoreKeyboard = false;
 

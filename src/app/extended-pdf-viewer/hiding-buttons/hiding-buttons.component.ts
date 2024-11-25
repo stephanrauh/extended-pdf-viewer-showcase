@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints } fro
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-hiding-buttons',
   templateUrl: './hiding-buttons.component.html',
   styleUrls: ['./hiding-buttons.component.css']

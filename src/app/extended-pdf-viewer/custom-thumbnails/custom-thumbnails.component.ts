@@ -3,6 +3,7 @@ import { IPDFViewerApplication, PDFNotificationService, PdfThumbnailDrawnEvent }
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-custom-thumbnails',
   templateUrl: './custom-thumbnails.component.html',
   styleUrls: ['./custom-thumbnails.component.css'],

@@ -5,6 +5,7 @@ import {
 } from 'ngx-extended-pdf-viewer';
 
 @Component({
+standalone: false,
   selector: 'app-prerendering',
   templateUrl: './prerendering.component.html',
   styleUrls: ['./prerendering.component.css'],

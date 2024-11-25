@@ -3,6 +3,7 @@ import { AnnotationLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-annotation-layer',
   templateUrl: './annotation-layer.component.html',
   styleUrls: ['./annotation-layer.component.css'],

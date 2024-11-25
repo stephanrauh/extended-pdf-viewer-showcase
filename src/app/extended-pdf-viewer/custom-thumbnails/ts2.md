@@ -1,5 +1,6 @@
 ```typescript
 @Component({
+standalone: false, 
   selector: 'app-custom-thumbnails',
   templateUrl: './custom-thumbnails.component.html',
   styleUrls: ['./custom-thumbnails.component.css'],

@@ -1,5 +1,6 @@
 ```typescript
- @Component({ ... })
+ @Component({
+standalone: false,  ... })
 export class SimpleComponent {
   public set theme(theme: 'dark' || 'light') {
     // this demo stores the theme in the local storage 

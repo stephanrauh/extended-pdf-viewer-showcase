@@ -1,5 +1,6 @@
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class CustomBreakpointsComponent {
   constructor() {
     // these are the default values

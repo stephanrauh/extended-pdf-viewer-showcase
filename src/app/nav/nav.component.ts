@@ -6,6 +6,7 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { versions } from './versions';
 import { ActivatedRoute } from '@angular/router';
 @Component({
+standalone: false,
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],

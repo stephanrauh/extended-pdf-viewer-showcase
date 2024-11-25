@@ -3,6 +3,7 @@ import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerService } from 'ngx-e
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-page-view-mode',
   templateUrl: './page-view-mode.component.html',
   styleUrls: ['./page-view-mode.component.css'],

@@ -1,5 +1,6 @@
 ```typescript
  @Component({
+standalone: false, 
   selector: 'app-iframe',
   templateUrl: './iframe.component.html',
   styleUrls: ['./iframe.component.css']

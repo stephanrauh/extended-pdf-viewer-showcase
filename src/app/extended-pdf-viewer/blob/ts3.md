@@ -1,5 +1,6 @@
 ```typescript
 @Component({
+standalone: false, 
   selector: 'app-blob',
   templateUrl: './blob.component.html',
   styleUrls: ['./blob.component.css'],

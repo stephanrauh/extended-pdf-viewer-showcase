@@ -3,6 +3,7 @@ import { IPDFViewerApplication, PasswordPrompt, pdfDefaultOptions, PDFNotificati
 import { CustomPasswordPrompt } from './custom-password-prompt';
 
 @Component({
+standalone: false,
   selector: 'app-passwords',
   templateUrl: './passwords.component.html',
   styleUrls: ['./passwords.component.css'],

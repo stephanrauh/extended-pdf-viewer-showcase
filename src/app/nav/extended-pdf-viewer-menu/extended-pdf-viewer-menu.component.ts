@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { filter, map, take, tap } from 'rxjs/operators';
 
 @Component({
+standalone: false,
   selector: 'app-extended-pdf-viewer-menu',
   templateUrl: './extended-pdf-viewer-menu.component.html',
   styleUrls: ['./extended-pdf-viewer-menu.component.css'],

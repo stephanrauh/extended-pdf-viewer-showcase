@@ -5,6 +5,7 @@ import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
+standalone: false,
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']

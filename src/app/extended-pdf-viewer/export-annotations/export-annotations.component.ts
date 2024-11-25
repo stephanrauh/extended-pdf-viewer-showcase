@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-export-annotations',
   templateUrl: './export-annotations.component.html',
   styleUrls: ['./export-annotations.component.css'],

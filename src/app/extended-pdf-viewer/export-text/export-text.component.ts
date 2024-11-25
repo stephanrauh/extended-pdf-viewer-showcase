@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-export-text',
   templateUrl: './export-text.component.html',
   styleUrls: ['./export-text.component.css'],

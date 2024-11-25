@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
+standalone: false,
   selector: 'app-signatures',
   templateUrl: './signatures.component.html',
   styleUrls: ['./signatures.component.css'],

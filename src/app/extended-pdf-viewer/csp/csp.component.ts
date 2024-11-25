@@ -3,6 +3,7 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-csp',
   templateUrl: './csp.component.html',
   styleUrls: ['./csp.component.css'],

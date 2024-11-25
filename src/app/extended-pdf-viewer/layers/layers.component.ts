@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService, PdfLayer } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-layers',
   templateUrl: './layers.component.html',
   styleUrls: ['./layers.component.css'],

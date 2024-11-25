@@ -1,6 +1,7 @@
 ```typescript
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class MobileComponent {
 
   public zoomLevels = ['auto', 'page-actual', 'page-fit', 'page-width',

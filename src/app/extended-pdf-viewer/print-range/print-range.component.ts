@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
+standalone: false,
   selector: 'app-print-range',
   templateUrl: './print-range.component.html',
   styleUrls: ['./print-range.component.css'],
@@ -149,7 +150,8 @@ export class PrintRangeComponent implements OnDestroy {
 
   public get sourcecode(): string {
     if (this.activeTab === 0) {
-      return `@Component({ ... })
+      return `@Component({
+standalone: false,  ... })
 export class PrintRangeComponent {
   constructor(private printService: NgxExtendedPdfViewerService) {}
 
@@ -163,7 +165,8 @@ export class PrintRangeComponent {
     this.printService.print(range);
 }`.replaceAll('      \n', '');
     } else if (this.activeTab === 1) {
-      return `@Component({ ... })
+      return `@Component({
+standalone: false,  ... })
 export class PrintRangeComponent {
   constructor(private printService: NgxExtendedPdfViewerService) {}
 
@@ -178,7 +181,8 @@ export class PrintRangeComponent {
   }
 }`;
     } else {
-      return `@Component({ ... })
+      return `@Component({
+standalone: false,  ... })
 export class PrintComponent {
   public replaceBrowserPrint = ${this.replaceBrowserPrint};
   }

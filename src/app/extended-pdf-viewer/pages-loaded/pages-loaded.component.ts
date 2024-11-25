@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService, PagesLoadedEvent } from 'ngx-extended-pdf-
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-pages-loaded',
   templateUrl: './pages-loaded.component.html',
   styleUrls: ['./pages-loaded.component.css'],

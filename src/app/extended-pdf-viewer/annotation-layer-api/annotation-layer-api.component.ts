@@ -3,6 +3,7 @@ import { AnnotationLayerRenderedEvent, IPDFViewerApplication, NgxExtendedPdfView
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-annotation-layer-api',
   templateUrl: './annotation-layer-api.component.html',
   styleUrls: ['./annotation-layer-api.component.css'],

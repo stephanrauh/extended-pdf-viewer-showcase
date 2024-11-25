@@ -3,6 +3,7 @@ import { FileInputChanged, IPDFViewerApplication, PDFNotificationService } from 
 import { isBrowser } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-multiple-documents',
   templateUrl: './multiple-documents.component.html',
   styleUrls: ['./multiple-documents.component.css']

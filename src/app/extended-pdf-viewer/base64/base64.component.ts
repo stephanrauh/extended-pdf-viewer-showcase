@@ -7,6 +7,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-base64',
   templateUrl: './base64.component.html',
   styleUrls: ['./base64.component.css'],

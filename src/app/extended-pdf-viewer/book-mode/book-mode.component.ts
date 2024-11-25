@@ -3,6 +3,7 @@ import { IPDFViewerApplication, PageRenderedEvent, PageRenderEvent, PDFNotificat
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-book-mode',
   templateUrl: './book-mode.component.html',
   styleUrls: ['./book-mode.component.css'],

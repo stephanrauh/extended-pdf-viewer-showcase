@@ -1,5 +1,6 @@
 ```typescript
 @Component({
+standalone: false, 
   selector: 'app-modal-dialog',
   templateUrl: './modal-dialog.component.html'
 })

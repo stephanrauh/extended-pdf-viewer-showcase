@@ -5,6 +5,7 @@ import { isBrowser } from '../common/utilities';
 import { compareFunction, convertMDToTable } from './md-to-table-converter';
 
 @Component({
+standalone: false,
   selector: 'app-attributes',
   templateUrl: './attributes.component.html',
   styleUrls: ['./attributes.component.css'],

@@ -6,6 +6,7 @@ import { Settings } from 'angular2-smart-table';
 import { isBrowser } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-default-options',
   templateUrl: './default-options.component.html',
   styleUrls: ['./default-options.component.css'],

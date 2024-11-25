@@ -2,6 +2,7 @@ import { Component, effect } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 
 @Component({
+standalone: false,
   selector: 'app-filtering-console-log',
   templateUrl: './filtering-console-log.component.html',
   styleUrls: ['./filtering-console-log.component.css'],

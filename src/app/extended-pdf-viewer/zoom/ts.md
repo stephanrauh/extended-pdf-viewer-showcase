@@ -1,5 +1,6 @@
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class ZoomComponent {
   public isMobile = 'ontouchstart' in document.documentElement;
   public minZoom = 0.33;

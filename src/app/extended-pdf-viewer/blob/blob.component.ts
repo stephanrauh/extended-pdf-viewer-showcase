@@ -5,6 +5,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-blob',
   templateUrl: './blob.component.html',
   styleUrls: ['./blob.component.css'],

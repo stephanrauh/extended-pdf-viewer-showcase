@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {  NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
+standalone: false,
   selector: 'app-side-by-side',
   templateUrl: './side-by-side.component.html',
   styleUrls: ['./side-by-side.component.css'],

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
+standalone: false,
   templateUrl: 'custom-render-component.html'
 })
 export class CustomRenderComponent implements OnInit {

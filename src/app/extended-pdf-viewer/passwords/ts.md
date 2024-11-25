@@ -1,5 +1,6 @@
 ```typescript
  @Component({
+standalone: false, 
   selector: 'app-passwords',
   templateUrl: './passwords.component.html',
   styleUrls: ['./passwords.component.css']

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
+standalone: false,
   selector: 'app-server-side-rendering',
   templateUrl: './server-side-rendering.component.html',
   styleUrls: ['./server-side-rendering.component.css']

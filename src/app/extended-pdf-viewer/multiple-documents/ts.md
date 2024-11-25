@@ -1,5 +1,6 @@
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class MultipleDocumentsComponent {
   public src = 'assets/pdfs/pdf-sample.pdf';
 

@@ -3,6 +3,7 @@ import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-
 import { isBrowser } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-zoom',
   templateUrl: './zoom.component.html',
   styleUrls: ['./zoom.component.css'],

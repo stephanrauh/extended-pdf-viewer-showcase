@@ -171,6 +171,7 @@ const TOOLBAR: TreeNode[] = [
 ];
 
 @Component({
+standalone: false,
   selector: 'app-customization',
   templateUrl: './customization.component.html',
   styleUrls: ['./customization.component.css']

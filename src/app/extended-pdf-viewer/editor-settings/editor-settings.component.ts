@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-editor-settings',
   templateUrl: './editor-settings.component.html',
   styleUrls: ['./editor-settings.component.css'],

@@ -4,6 +4,7 @@ import { PdfSidebarView } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-two-way-binding',
   templateUrl: './two-way-binding.component.html',
   styleUrls: ['./two-way-binding.component.css'],

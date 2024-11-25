@@ -4,6 +4,7 @@ import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-textlayer',
   templateUrl: './textlayer.component.html',
   styleUrls: ['./textlayer.component.css'],

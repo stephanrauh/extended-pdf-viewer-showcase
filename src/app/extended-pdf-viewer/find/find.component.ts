@@ -3,6 +3,7 @@ import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions, 
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
 
 @Component({
+standalone: false,
   selector: 'app-find',
   templateUrl: './find.component.html',
   styleUrls: ['./find.component.css'],

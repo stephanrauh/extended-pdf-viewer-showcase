@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-contextmenu',
   templateUrl: './contextmenu.component.html',
   styleUrls: ['./contextmenu.component.css'],

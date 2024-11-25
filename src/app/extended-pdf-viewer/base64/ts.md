@@ -1,5 +1,6 @@
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class Base64Component{
 export class Base64Component {
   public base64 = new Subject<string>();

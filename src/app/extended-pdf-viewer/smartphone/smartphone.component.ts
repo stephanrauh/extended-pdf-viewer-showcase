@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-smartphone',
   templateUrl: './smartphone.component.html',
   styleUrls: ['./smartphone.component.css', './devices.min.css']

@@ -1,5 +1,6 @@
 ```typescript
 @Component({
+standalone: false, 
   selector: 'app-filtering-console-log',
   templateUrl: './filtering-console-log.component.html',
   styleUrls: ['./filtering-console-log.component.css'],

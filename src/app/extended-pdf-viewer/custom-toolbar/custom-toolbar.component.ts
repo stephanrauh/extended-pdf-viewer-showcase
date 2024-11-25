@@ -4,6 +4,7 @@ import { isLocalhost } from '../common/utilities';
 // import { NgxExtendedPdfViewerComponent } from 'ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.component';
 
 @Component({
+standalone: false,
   selector: 'app-custom-toolbar',
   templateUrl: './custom-toolbar.component.html',
   styleUrls: ['./custom-toolbar.component.css']

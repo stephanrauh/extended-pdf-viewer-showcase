@@ -22,18 +22,18 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^19.0.0-rc.3",
-    "@angular/cdk": "^19.0.0-rc.3",
-    "@angular/common": "^19.0.0-rc.3",
-    "@angular/compiler": "^19.0.0-rc.3",
-    "@angular/core": "^19.0.0-rc.3",
-    "@angular/forms": "^19.0.0-rc.3",
-    "@angular/material": "^19.0.0-rc.3",
-    "@angular/platform-browser": "^19.0.0-rc.3",
-    "@angular/platform-browser-dynamic": "^19.0.0-rc.3",
-    "@angular/platform-server": "^19.0.0-rc.3",
-    "@angular/router": "^19.0.0-rc.3",
-    "@angular/ssr": "^19.0.0-rc.3",
+    "@angular/animations": "^19.0.0",
+    "@angular/cdk": "^19.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/compiler": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/forms": "^19.0.0",
+    "@angular/material": "^19.0.0",
+    "@angular/platform-browser": "^19.0.0",
+    "@angular/platform-browser-dynamic": "^19.0.0",
+    "@angular/platform-server": "^19.0.0",
+    "@angular/router": "^19.0.0",
+    "@angular/ssr": "^19.0.2",
     "@fontsource/material-icons": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
     "angular2-smart-table": "^3.4.0",
@@ -51,19 +51,19 @@
     "zone.js": "^0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.0.0-rc.3",
-    "@angular/cli": "^19.0.0-rc.3",
-    "@angular/compiler-cli": "^19.0.0-rc.3",
-    "@angular/language-service": "^19.0.0-rc.3",
+    "@angular-devkit/build-angular": "^19.0.2",
+    "@angular/cli": "^19.0.2",
+    "@angular/compiler-cli": "^19.0.0",
+    "@angular/language-service": "^19.0.0",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.14",
-    "@types/node": "^18.19.64",
+    "@types/node": "^18.19.66",
     "brotli": "^1.3.3",
     "codelyzer": "^6.0.2",
     "express": "^4.21.1",
     "helmet": "^7.2.0",
     "jest": "^29.7.0",
-    "jest-preset-angular": "^14.3.1",
+    "jest-preset-angular": "^14.3.3",
     "node-dir": "^0.1.17",
     "ts-node": "^10.9.2",
     "tslint": "^6.1.3",
@@ -72,9 +72,15 @@
   },
   "overrides": {
     "angular2-smart-table": {
-      "@angular/forms": "^18.0.0",
-      "@angular/core": "^18.0.0",
-      "@angular/common": "^18.0.0"
+      "@angular/forms": "^19.0.0",
+      "@angular/core": "^19.0.0",
+      "@angular/common": "^19.0.0"
+    },
+    "jest-preset-angular": {
+      "@angular/core": "^19.0.0",
+      "@angular/compiler-cli": "^19.0.0",
+      "@angular-devkit/build-angular": "^19.0.0",
+      "@angular/platform-browser-dynamic": "^19.0.0"
     }
   }
 }

@@ -3,6 +3,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { isLocalhost } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-custom-sidebar',
   templateUrl: './custom-sidebar.component.html',
   styleUrls: ['./custom-sidebar.component.css'],

@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { isBrowser } from '../common/utilities';
 
 @Component({
+standalone: false,
   selector: 'app-css',
   templateUrl: './css.component.html',
   styleUrls: ['./css.component.css'],

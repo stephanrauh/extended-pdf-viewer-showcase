@@ -1,5 +1,6 @@
 ```typescript
-@Component({ ... })
+@Component({
+standalone: false,  ... })
 export class PagesLoadedComponent {
   public messages: Array<string> = [];
 
