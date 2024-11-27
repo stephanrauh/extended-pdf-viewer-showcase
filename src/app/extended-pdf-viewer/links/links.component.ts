@@ -17,8 +17,7 @@ export class LinksComponent  {
 
   public hidden = false;
 
-  // tslint:disable-next-line: variable-name
-  private _target: number = LinkTarget.BLANK;;
+   private _target: number = LinkTarget.BLANK;;
 
 
 
@@ -33,8 +32,7 @@ export class LinksComponent  {
 
   }
 
-  // tslint:disable-next-line: variable-name
-  private _selectedTab = 0;
+   private _selectedTab = 0;
 
   public set selectedTab(tab: number) {
     this._selectedTab = tab;

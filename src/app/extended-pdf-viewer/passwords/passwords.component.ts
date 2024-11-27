@@ -10,7 +10,7 @@ standalone: false,
 })
 export class PasswordsComponent {
 
-  public src: string = '/assets/pdfs/GraalVM-password-protected.pdf';
+  public src = '/assets/pdfs/GraalVM-password-protected.pdf';
 
   public password: string | undefined = undefined;
 

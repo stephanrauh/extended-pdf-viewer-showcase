@@ -63,7 +63,7 @@ export class ExportAnnotationsComponent {
     console.log('Before update');
     await this.pdfViewerService.addEditorAnnotation(textEditorAnnotation);
     console.log('After update');
-    let anno = this.pdfViewerService.getSerializedAnnotations();
+    const anno = this.pdfViewerService.getSerializedAnnotations();
     if (anno) {
       console.log(anno[0]);
     }

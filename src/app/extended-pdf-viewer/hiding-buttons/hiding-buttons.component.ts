@@ -59,7 +59,7 @@ export class HidingButtonsComponent {
       this.settingsWidth = "60%";
   }
 
-  public options: Array<ResponsiveVisibility> = [true, false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+  public options: ResponsiveVisibility[] = [true, false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
   public get fullscreen(): boolean {
     return this._fullscreen;

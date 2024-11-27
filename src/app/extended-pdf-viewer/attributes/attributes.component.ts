@@ -11,8 +11,8 @@ standalone: false,
   styleUrls: ['./attributes.component.css'],
 })
 export class AttributesComponent implements OnInit, AfterViewInit {
-  public attributesAndEvents: Array<object> = [];
-  public lowLevelApi: Array<object> = [];
+  public attributesAndEvents: object[] = [];
+  public lowLevelApi: object[] = [];
 
   public attributeTableSettings: Settings = {
     actions: {

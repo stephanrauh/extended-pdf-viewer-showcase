@@ -40,9 +40,9 @@ export class DefaultOptionsComponent implements OnInit {
     },
   };
 
-  public availableOptions: Array<object> = [];
+  public availableOptions: object[] = [];
 
-  public coveredOptions: Array<object> = [];
+  public coveredOptions: object[] = [];
 
   private _fullscreen = false;
 

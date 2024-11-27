@@ -11,8 +11,7 @@ standalone: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TwoWayBindingComponent {
-  // tslint:disable-next-line: variable-name
-  public _selectedTab = 0;
+   public _selectedTab = 0;
 
   public handTool = true;
 

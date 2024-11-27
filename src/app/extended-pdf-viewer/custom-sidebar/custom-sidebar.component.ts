@@ -9,8 +9,7 @@ standalone: false,
   styleUrls: ['./custom-sidebar.component.css'],
 })
 export class CustomSidebarComponent {
-  // tslint:disable-next-line: variable-name
-  public _theme = 'without';
+   public _theme = 'without';
 
   public showPdfViewer = true;
 

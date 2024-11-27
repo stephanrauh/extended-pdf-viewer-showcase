@@ -9,8 +9,7 @@ standalone: false,
   styleUrls: ['./find.component.css'],
 })
 export class FindComponent {
-  // tslint:disable-next-line:variable-name
-  public _searchtext = '';
+   public _searchtext = '';
 
   public highlightAll = false;
   public matchCase = false;
@@ -40,12 +39,12 @@ export class FindComponent {
 
   private _fullscreen = false;
 
-  private _selectedTab: number = 0;
+  private _selectedTab = 0;
   private PDFViewerApplication!: IPDFViewerApplication;
   public dontScrollIntoView: boolean | undefined;
   public dontScrollIntoView2: boolean | undefined;
 
-  public pagesWithResult: Array<number> = [];
+  public pagesWithResult: number[] = [];
 
   public get selectedTab(): number {
     return this._selectedTab;
@@ -56,7 +55,7 @@ export class FindComponent {
     if (tab === 1) {
         this._searchtext = "Brazilian";
         this.highlightAll = true;
-        const promises = this.find() as Array<Promise<number>>;
+        const promises = this.find() as Promise<number>[];
 
         // delay the second search to make sure the first search has scrolled to the first result
         const wrappedPromises = promises.map(p =>
@@ -115,14 +114,14 @@ export class FindComponent {
     this.find2();
   }
 
-  private find(): Array<Promise<number>> | undefined {
+  private find(): Promise<number>[] | undefined {
     this.pagesWithResult = [];
     if (!this._searchtext) {
       this.findState = undefined;
       this.currentMatchNumber = undefined;
       this.totalMatches = undefined;
     }
-    let searchtext = this.multiple ? this._searchtext.split(' ') : this._searchtext;
+    const searchtext = this.multiple ? this._searchtext.split(' ') : this._searchtext;
     const numberOfResultsPromises = this.ngxExtendedPdfViewerService.find(searchtext, {
       highlightAll: this.highlightAll,
       matchCase: this.matchCase,
@@ -142,7 +141,7 @@ export class FindComponent {
     return numberOfResultsPromises;
   }
 
-  private find2(): Array<Promise<number>> | undefined {
+  private find2(): Promise<number>[] | undefined {
     this.pagesWithResult = [];
     if (!this._searchtext2) {
       this.findState = undefined;
@@ -192,7 +191,7 @@ export class FindComponent {
   }
 
   public onCheckboxClicked() {
-    let searchtext = this.multiple ? this._searchtext.split(' ') : this._searchtext;
+    const searchtext = this.multiple ? this._searchtext.split(' ') : this._searchtext;
     this.ngxExtendedPdfViewerService.find(searchtext, {
       highlightAll: this.highlightAll,
       matchCase: this.matchCase,

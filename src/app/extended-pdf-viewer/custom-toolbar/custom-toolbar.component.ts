@@ -10,8 +10,7 @@ standalone: false,
   styleUrls: ['./custom-toolbar.component.css']
 })
 export class CustomToolbarComponent {
-  // tslint:disable-next-line: variable-name
-  public _theme = 'additional';
+   public _theme = 'additional';
 
   public showPdfViewer = true;
 

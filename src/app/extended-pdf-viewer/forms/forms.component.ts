@@ -53,13 +53,9 @@ export class FormsComponent {
 
   public src = '/assets/pdfs/OoPdfFormExample.pdf';
 
-  public formData: {
-    [fieldName: string]: string | string[] | number | boolean;
-  } = {};
+  public formData: Record<string, string | string[] | number | boolean> = {};
 
-  public xfaFormData: {
-    [fieldName: string]: string | string[] | number | boolean;
-  } = {};
+  public xfaFormData: Record<string, string | string[] | number | boolean> = {};
 
 
   public leftTab = 0;
@@ -113,7 +109,7 @@ export class FormsComponent {
     }
   }
 
-  public setFormData(data: { [fieldName: string]: string | string[] | number | boolean } | any) {
+  public setFormData(data: Record<string, string | string[] | number | boolean> | any) {
     if (this.xfa) {
       this.formData = data;
       this.serviceIn = data['ServiceIn'];

@@ -5,7 +5,7 @@ import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-
   providedIn: 'root',
 })
 export class LogService {
-  public logs: Array<string> = [];
+  public logs: string[] = [];
 
   private PDFViewerApplication!: IPDFViewerApplication;
 

@@ -9,7 +9,7 @@ standalone: false,
   styleUrls: ['./pages-loaded.component.css'],
 })
 export class PagesLoadedComponent {
-  public messages: Array<string> = [];
+  public messages: string[] = [];
 
 
 

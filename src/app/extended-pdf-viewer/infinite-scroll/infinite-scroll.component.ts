@@ -16,8 +16,7 @@ export class InfiniteScrollComponent {
 
   public ScrollModeType = ScrollModeType;
 
-  // tslint:disable-next-line: variable-name
-  private _showWidgets = false;
+   private _showWidgets = false;
 
   public zoom = '100%';
 

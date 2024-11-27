@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { pdfData2 } from './secondPdfBase64';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
@@ -12,7 +12,7 @@ standalone: false,
   templateUrl: './base64.component.html',
   styleUrls: ['./base64.component.css'],
 })
-export class Base64Component {
+export class Base64Component implements OnInit {
   public base64 = new Subject<string>();
 
   public tailwindPdf!: string;

@@ -11,7 +11,7 @@ standalone: false,
   styleUrls: ['./print-range.component.css'],
 })
 export class PrintRangeComponent implements OnDestroy {
-  private activeTab: number = 0;
+  private activeTab = 0;
   private PDFViewerApplication?: IPDFViewerApplication;
 
   public get src(): string {
@@ -103,7 +103,7 @@ export class PrintRangeComponent implements OnDestroy {
     }
   }
 
-  private static toArray(list: string): Array<number> | undefined {
+  private static toArray(list: string): number[] | undefined {
     if (!list) {
       return undefined;
     }

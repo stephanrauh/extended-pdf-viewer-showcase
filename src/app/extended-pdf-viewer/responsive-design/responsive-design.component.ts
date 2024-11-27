@@ -29,9 +29,9 @@ export class ResponsiveDesignComponent {
   public downloadFileName = 'user-defined-name.pdf';
 
 
-  public traditionalOptions: Array<ResponsiveVisibility> = [true, false, 'always-visible',  'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+  public traditionalOptions: ResponsiveVisibility[] = [true, false, 'always-visible',  'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
-  public options: Array<ResponsiveVisibility> = [true, false, 'always-visible', 'always-in-secondary-menu', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+  public options: ResponsiveVisibility[] = [true, false, 'always-visible', 'always-in-secondary-menu', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
   public withExplanation(option: ResponsiveVisibility) {
     if (option === true) {

@@ -8,8 +8,7 @@ standalone: false,
   styleUrls: ['./signatures.component.css'],
 })
 export class SignaturesComponent {
-  // tslint:disable-next-line: variable-name
-  private _showSignature = true;
+   private _showSignature = true;
 
   public showPdf = true;
 

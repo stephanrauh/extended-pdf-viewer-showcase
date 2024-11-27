@@ -17,7 +17,7 @@ export class TextlayerComponent {
 
   private _showTextLayer = false;
 
-  private alreadyRendered: Array<HTMLSpanElement> = [];
+  private alreadyRendered: HTMLSpanElement[] = [];
 
 
 

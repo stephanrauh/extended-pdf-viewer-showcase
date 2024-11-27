@@ -11,7 +11,7 @@ standalone: false,
 export class LayersComponent {
   public selectedTab = 0;
 
-  public layers: Array<PdfLayer> = [];
+  public layers: PdfLayer[] = [];
 
 
 

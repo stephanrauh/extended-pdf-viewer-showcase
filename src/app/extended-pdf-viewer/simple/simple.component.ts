@@ -11,8 +11,7 @@ standalone: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleComponent implements OnDestroy {
-  // tslint:disable-next-line: variable-name
-  public _selectedTab = 0;
+   public _selectedTab = 0;
 
   public page = 5;
 
@@ -20,7 +19,7 @@ export class SimpleComponent implements OnDestroy {
 
   public showPdfViewer = true;
 
-  public height: string = 'auto';
+  public height = 'auto';
 
   public time = 0;
   public currentTime = 0;

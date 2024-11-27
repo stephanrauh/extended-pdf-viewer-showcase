@@ -10,8 +10,7 @@ standalone: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CSPComponent implements OnDestroy {
-  // tslint:disable-next-line: variable-name
-  public _useInlineScripts = false;
+   public _useInlineScripts = false;
 
   constructor() {
     if (isBrowser()) {

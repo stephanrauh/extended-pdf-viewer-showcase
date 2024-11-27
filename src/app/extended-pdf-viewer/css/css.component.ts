@@ -11,7 +11,7 @@ standalone: false,
   styleUrls: ['./css.component.css'],
 })
 export class CSSComponent implements OnInit, AfterViewInit {
-  public attributesAndEvents: Array<object> = [];
+  public attributesAndEvents: object[] = [];
 
   private compareFunction = (dir: number, a: string, b: string) => {
     a = a.replace('[', '').replace(']', '').replace('(', '').replace(')', '').replace('<s>', '').replace('</s>', '');
@@ -55,7 +55,7 @@ export class CSSComponent implements OnInit, AfterViewInit {
     this.attributesAndEvents = await this.convertMDToTable('/assets/extended-pdf-viewer/css/css.md');
   }
 
-  private async convertMDToTable(file: string): Promise<Array<any>> {
+  private async convertMDToTable(file: string): Promise<any[]> {
     const source = await firstValueFrom(
       this.httpClient.get(file, {
         responseType: 'text',
@@ -80,7 +80,7 @@ export class CSSComponent implements OnInit, AfterViewInit {
     return parts[parts.length - 1];
   }
 
-  private splitLines(raw: string): Array<string> {
+  private splitLines(raw: string): string[] {
     return raw.trim().split('\n');
   }
 

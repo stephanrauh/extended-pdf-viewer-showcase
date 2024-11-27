@@ -11,7 +11,7 @@ standalone: false,
 export class KeyboardComponent {
   public ignoreKeyboard = false;
 
-  public acceptKeys: Array<string> = [];
+  public acceptKeys: string[] = [];
 
   public ignoreKeys = ['j', 'k', 'F4'];
 
@@ -47,8 +47,7 @@ export class KeyboardComponent {
     }
   }
 
-  // tslint:disable:quotemark
-  public get acceptKeysDisplay(): string {
+   public get acceptKeysDisplay(): string {
     let result = '[';
     this.acceptKeys.forEach((key) => (result += "'" + key + "', "));
     if (result.endsWith(', ')) {

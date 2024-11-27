@@ -16,7 +16,7 @@ class Touch {
   public screenX: number;
   public screenY: number;
 
-  constructor(public target, public identifier, pos, deltaX: number = 0, deltaY: number = 0) {
+  constructor(public target, public identifier, pos, deltaX = 0, deltaY = 0) {
     deltaX = deltaX || 0;
     deltaY = deltaY || 0;
 
@@ -61,8 +61,8 @@ class TouchList extends Array<any> {
  * @returns touchList
  */
 
-function createEmptyTouchList(): TouchList | Array<Touch> {
-  var touchList: Array<Touch> = [];
+function createEmptyTouchList(): TouchList | Touch[] {
+  const touchList: Touch[] = [];
 
   (touchList as any).item = function (index) {
     return this[index] || null;
@@ -84,7 +84,7 @@ export class TouchEmulator {
   private eventTarget: EventTarget | null = null;
 
   // start distance when entering the multitouch mode
-  private multiTouchOffset: number = 75;
+  private multiTouchOffset = 75;
 
   constructor() {
     // polyfills
@@ -110,9 +110,9 @@ export class TouchEmulator {
 
       if (!(document as any).createTouchList) {
         (document as any).createTouchList = function () {
-          var touchList = createEmptyTouchList();
-          for (var i = 0; i < arguments.length; i++) {
-            (touchList as Array<Touch>).push(arguments[i]);
+          const touchList = createEmptyTouchList();
+          for (let i = 0; i < arguments.length; i++) {
+            (touchList as Touch[]).push(arguments[i]);
           }
           return touchList;
         };
@@ -150,11 +150,11 @@ export class TouchEmulator {
    * this is enough for most libraries like Modernizr and Hammer
    */
   private fakeTouchSupport() {
-    var objs = [window, document.documentElement];
-    var props = ['ontouchstart', 'ontouchmove', 'ontouchcancel', 'ontouchend'];
+    const objs = [window, document.documentElement];
+    const props = ['ontouchstart', 'ontouchmove', 'ontouchcancel', 'ontouchend'];
 
-    for (var o = 0; o < objs.length; o++) {
-      for (var p = 0; p < props.length; p++) {
+    for (let o = 0; o < objs.length; o++) {
+      for (let p = 0; p < props.length; p++) {
         if (objs[o] && objs[o][props[p]] == undefined) {
           objs[o][props[p]] = null;
         }
@@ -264,7 +264,7 @@ export class TouchEmulator {
    * @param mouseEv
    */
   private triggerTouch(eventName, mouseEv) {
-    var touchEvent = document.createEvent('Event');
+    const touchEvent = document.createEvent('Event');
     touchEvent.initEvent(eventName, true, true);
 
     (touchEvent as any).altKey = mouseEv.altKey;
@@ -285,17 +285,17 @@ export class TouchEmulator {
    * @returns {TouchList}
    */
   private createTouchList(mouseEv) {
-    var touchList = createEmptyTouchList();
+    const touchList = createEmptyTouchList();
 
     if (this.isMultiTouch) {
-      var f = this.multiTouchOffset;
-      var deltaX = this.multiTouchStartPos.pageX - mouseEv.pageX;
-      var deltaY = this.multiTouchStartPos.pageY - mouseEv.pageY;
+      const f = this.multiTouchOffset;
+      const deltaX = this.multiTouchStartPos.pageX - mouseEv.pageX;
+      const deltaY = this.multiTouchStartPos.pageY - mouseEv.pageY;
 
-      (touchList as Array<Touch>).push(new Touch(this.eventTarget, 1, this.multiTouchStartPos, deltaX * -1 - f, deltaY * -1 + f));
-      (touchList as Array<Touch>).push(new Touch(this.eventTarget, 2, this.multiTouchStartPos, deltaX + f, deltaY - f));
+      (touchList as Touch[]).push(new Touch(this.eventTarget, 1, this.multiTouchStartPos, deltaX * -1 - f, deltaY * -1 + f));
+      (touchList as Touch[]).push(new Touch(this.eventTarget, 2, this.multiTouchStartPos, deltaX + f, deltaY - f));
     } else {
-      (touchList as Array<Touch>).push(new Touch(this.eventTarget, 1, mouseEv, 0, 0));
+      (touchList as Touch[]).push(new Touch(this.eventTarget, 1, mouseEv, 0, 0));
     }
 
     return touchList;
@@ -312,9 +312,9 @@ export class TouchEmulator {
       return createEmptyTouchList();
     }
 
-    var touchList = this.createTouchList(mouseEv);
+    const touchList = this.createTouchList(mouseEv);
     if (this.isMultiTouch && mouseEv.type != 'mouseup' && eventName == 'touchend') {
-      (touchList as Array<Touch>).splice(1, 1);
+      (touchList as Touch[]).splice(1, 1);
     }
     return touchList;
   }
@@ -326,7 +326,7 @@ export class TouchEmulator {
    * @returns {TouchList}
    */
   private getChangedTouches(mouseEv, eventName) {
-    var touchList = this.createTouchList(mouseEv);
+    const touchList = this.createTouchList(mouseEv);
 
     // we only want to return the added/removed item on multitouch
     // which is the second pointer, so remove the first pointer from the touchList
@@ -334,7 +334,7 @@ export class TouchEmulator {
     // but when the mouseEv.type is mouseup, we want to send all touches because then
     // no new input will be possible
     if (this.isMultiTouch && mouseEv.type != 'mouseup' && (eventName == 'touchstart' || eventName == 'touchend')) {
-      (touchList as Array<Touch>).splice(0, 1);
+      (touchList as Touch[]).splice(0, 1);
     }
 
     return touchList;
@@ -344,7 +344,7 @@ export class TouchEmulator {
    * show the touchpoints on the screen
    */
   private showTouches(ev: TouchEvent) {
-    var touch, i, el, styles;
+    let touch, i, el, styles;
 
     // first all visible touches
     for (i = 0; i < ev.touches.length; i++) {
@@ -356,7 +356,7 @@ export class TouchEmulator {
       }
 
       styles = this.template(touch);
-      for (var prop in styles) {
+      for (const prop in styles) {
         el.style[prop] = styles[prop];
       }
     }
@@ -384,8 +384,8 @@ export class TouchEmulator {
    * @returns object
    */
   private template(touch) {
-    var size = 30;
-    var transform = 'translate(' + (touch.clientX - size / 2) + 'px, ' + (touch.clientY - size / 2) + 'px)';
+    const size = 30;
+    const transform = 'translate(' + (touch.clientX - size / 2) + 'px, ' + (touch.clientY - size / 2) + 'px)';
     return {
       position: 'fixed',
       left: 0,

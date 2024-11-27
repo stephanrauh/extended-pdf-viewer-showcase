@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, OnDestroy } from '@angular/core';
 import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { MyCustomFindController } from './my-custom-find-controller';
 
@@ -12,7 +12,7 @@ standalone: false,
   templateUrl: './custom-find.component.html',
   styleUrls: ['./custom-find.component.scss'],
 })
-export class CustomFindComponent {
+export class CustomFindComponent implements OnDestroy {
   public searchtext = '(?<=\\s)([A-z]+ough)';
   findOptions: CustomFindOptions = {
     highlightAll: true,

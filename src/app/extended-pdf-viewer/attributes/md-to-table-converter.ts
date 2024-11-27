@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { firstValueFrom } from "rxjs";
 
-export async function convertMDToTable(file: string, httpClient: HttpClient): Promise<Array<any>> {
+export async function convertMDToTable(file: string, httpClient: HttpClient): Promise<any[]> {
   const source = await firstValueFrom(
     httpClient.get(file, {
       responseType: 'text',
@@ -17,7 +17,7 @@ function removeHeader(raw: string): string {
   return parts[parts.length - 1];
 }
 
-function splitLines(raw: string): Array<string> {
+function splitLines(raw: string): string[] {
   return raw.trim().split('\n');
 }
 

@@ -15,7 +15,7 @@ export class ExportTextComponent {
 
   public extractedText: string | undefined;
 
-  public extractedLines: Array<string> = [];
+  public extractedLines: string[] = [];
 
   public selectedTabIndex = 0;
 

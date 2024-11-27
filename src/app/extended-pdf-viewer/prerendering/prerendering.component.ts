@@ -13,9 +13,9 @@ standalone: false,
 export class PrerenderingComponent {
   public spreadMode: 'off' | 'even' | 'odd' = 'off';
 
-  public page: number = 17;
+  public page = 17;
 
-  public pageLabel: string = '';
+  public pageLabel = '';
 
   public prerenderedPages = '';
 
@@ -51,8 +51,8 @@ export class PrerenderingComponent {
 
     const pagesBefore = this.spreadMode === 'off' ? 2 : 2;
     const pagesAfter = this.spreadMode === 'off' ? 2 : 5;
-    let startPage = Math.max(this.page - pagesBefore, 1);
-    let endPage = Math.min(
+    const startPage = Math.max(this.page - pagesBefore, 1);
+    const endPage = Math.min(
       this.page + pagesAfter,
       this.pdfViewerService.numberOfPages()
     );

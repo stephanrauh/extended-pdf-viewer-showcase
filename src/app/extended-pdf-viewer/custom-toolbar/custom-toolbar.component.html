@@ -36,12 +36,12 @@
           <mat-tab label="HTML template">
             <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-'+ theme+'.md'"> </app-ie11-markdown>
           </mat-tab>
-          @if (theme=='findbar') {
+          @if (theme==='findbar') {
             <mat-tab label="CSS template">
               <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/css-'+ theme+'.md'"> </app-ie11-markdown>
             </mat-tab>
           }
-          @if (theme=='additional') {
+          @if (theme==='additional') {
             <mat-tab label="additional components">
               <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
             </mat-tab>
@@ -68,7 +68,7 @@
         [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : undefined"
         [src]="'/assets/pdfs/dachstein.pdf'"
         [zoom]="zoom"
-        [showZoomButtons]="theme != 'floating'"
+        [showZoomButtons]="theme !== 'floating'"
         [showFreeFloatingBar]="showFreeFloatingBar"
         >
       </ngx-extended-pdf-viewer>
