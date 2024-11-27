@@ -10,8 +10,10 @@ export class CustomPasswordPrompt implements PasswordPrompt {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setUpdateCallback(updateCallback: (password: string) => void, reason: 1 | 2) {
     this.updateCallback = updateCallback;
   }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   public close(): void {}
 }

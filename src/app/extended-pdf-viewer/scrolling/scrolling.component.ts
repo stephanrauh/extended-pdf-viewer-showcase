@@ -1,22 +1,19 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-scrolling',
   templateUrl: './scrolling.component.html',
   styleUrls: ['./scrolling.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollingComponent {
-
-
   private _fullscreen = false;
 
   public selectedTab = 0;
 
-  public zoom="page-width";
+  public zoom = 'page-width';
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -24,7 +21,6 @@ export class ScrollingComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   public get src(): string {
@@ -45,7 +41,9 @@ export class ScrollingComponent {
     this.pdfService.scrollPageIntoView(pageNumber, { left });
   }
 
+  /*
   public scrollRight(pageNumber: number, right: string): void {
     // this.pdfService.scrollPageIntoView(pageNumber, { right });
   }
+  */
 }

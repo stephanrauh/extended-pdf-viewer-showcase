@@ -1,25 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  pdfDefaultOptions,
-  LinkTarget,
-  PageRenderedEvent,
-  NgxExtendedPdfViewerService,
-} from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { Component } from '@angular/core';
+import { LinkTarget, PageRenderedEvent, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-links',
   templateUrl: './links.component.html',
   styleUrls: ['./links.component.css'],
 })
-export class LinksComponent  {
+export class LinksComponent {
   public LinkTarget = LinkTarget;
 
   public hidden = false;
 
-   private _target: number = LinkTarget.BLANK;;
-
-
+  private _target: number = LinkTarget.BLANK;
 
   private _fullscreen = false;
 
@@ -29,10 +21,9 @@ export class LinksComponent  {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
-   private _selectedTab = 0;
+  private _selectedTab = 0;
 
   public set selectedTab(tab: number) {
     this._selectedTab = tab;
@@ -44,7 +35,7 @@ export class LinksComponent  {
     return this._selectedTab;
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
+  constructor() {
     pdfDefaultOptions.externalLinkTarget = this._target;
   }
 

@@ -1,9 +1,8 @@
 import { EditorAnnotation, FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { Component } from '@angular/core';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-export-annotations',
   templateUrl: './export-annotations.component.html',
   styleUrls: ['./export-annotations.component.css'],
@@ -12,8 +11,6 @@ export class ExportAnnotationsComponent {
   public imageDataURL: string | undefined = undefined;
 
   public selectedTabIndex = 0;
-
-
 
   private _fullscreen = false;
 
@@ -27,7 +24,6 @@ export class ExportAnnotationsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   constructor(private pdfViewerService: NgxExtendedPdfViewerService) {
@@ -51,12 +47,7 @@ export class ExportAnnotationsComponent {
       fontSize: fontSize,
       value: 'Hello world!',
       pageIndex: 0,
-      rect: [
-        x,
-        y,
-        x+width,
-        y+height
-      ],
+      rect: [x, y, x + width, y + height],
       rotation: 0,
     };
     console.log(textEditorAnnotation);
@@ -138,7 +129,7 @@ export class ExportAnnotationsComponent {
 
   public changePdfFile(tab: number): void {
     if (tab === 0) {
-      this.src ='/assets/pdfs/pdf-sample.pdf';
+      this.src = '/assets/pdfs/pdf-sample.pdf';
     } else if (tab === 1) {
       this.src = '/assets/pdfs/OoPdfFormExample.pdf';
     }

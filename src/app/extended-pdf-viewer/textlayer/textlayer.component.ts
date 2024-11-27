@@ -1,10 +1,9 @@
-import { NgxExtendedPdfViewerService, PageRenderedEvent, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { PageRenderedEvent, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-textlayer',
   templateUrl: './textlayer.component.html',
   styleUrls: ['./textlayer.component.css'],
@@ -19,8 +18,6 @@ export class TextlayerComponent {
 
   private alreadyRendered: HTMLSpanElement[] = [];
 
-
-
   private _fullscreen = false;
 
   public get fullscreen(): boolean {
@@ -29,10 +26,9 @@ export class TextlayerComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
+  constructor() {
     pdfDefaultOptions.textLayerMode = 1;
   }
 

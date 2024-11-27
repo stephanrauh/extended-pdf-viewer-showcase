@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, AfterViewInit, OnInit } from '@angular/core';
-import { IColumnType, ISortDirection, Settings } from 'angular2-smart-table';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { ISortDirection, Settings } from 'angular2-smart-table';
 import { firstValueFrom } from 'rxjs';
 import { isBrowser } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-css',
   templateUrl: './css.component.html',
   styleUrls: ['./css.component.css'],
@@ -55,7 +55,7 @@ export class CSSComponent implements OnInit, AfterViewInit {
     this.attributesAndEvents = await this.convertMDToTable('/assets/extended-pdf-viewer/css/css.md');
   }
 
-  private async convertMDToTable(file: string): Promise<any[]> {
+  private async convertMDToTable(file: string): Promise<object[]> {
     const source = await firstValueFrom(
       this.httpClient.get(file, {
         responseType: 'text',

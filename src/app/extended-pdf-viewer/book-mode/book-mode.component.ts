@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
 import { IPDFViewerApplication, PageRenderedEvent, PageRenderEvent, PDFNotificationService } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
 standalone: false,

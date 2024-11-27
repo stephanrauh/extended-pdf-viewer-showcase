@@ -1,18 +1,15 @@
 import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-signatures',
   templateUrl: './signatures.component.html',
   styleUrls: ['./signatures.component.css'],
 })
 export class SignaturesComponent {
-   private _showSignature = true;
+  private _showSignature = true;
 
   public showPdf = true;
-
-
 
   private _fullscreen = false;
 
@@ -22,7 +19,6 @@ export class SignaturesComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   public get showSignature(): boolean {
@@ -32,6 +28,6 @@ export class SignaturesComponent {
   public set showSignature(show: boolean) {
     this._showSignature = show;
     this.showPdf = false;
-    setTimeout(() => this.showPdf = true, 100);
+    setTimeout(() => (this.showPdf = true), 100);
   }
 }

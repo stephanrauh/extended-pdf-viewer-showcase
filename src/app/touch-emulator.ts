@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * create an touch point
  * @constructor
@@ -111,8 +112,8 @@ export class TouchEmulator {
       if (!(document as any).createTouchList) {
         (document as any).createTouchList = function () {
           const touchList = createEmptyTouchList();
-          for (let i = 0; i < arguments.length; i++) {
-            (touchList as Touch[]).push(arguments[i]);
+          for (const argument of arguments) {
+            (touchList as Touch[]).push(argument);
           }
           return touchList;
         };
@@ -153,10 +154,10 @@ export class TouchEmulator {
     const objs = [window, document.documentElement];
     const props = ['ontouchstart', 'ontouchmove', 'ontouchcancel', 'ontouchend'];
 
-    for (let o = 0; o < objs.length; o++) {
-      for (let p = 0; p < props.length; p++) {
-        if (objs[o] && objs[o][props[p]] == undefined) {
-          objs[o][props[p]] = null;
+    for (const obj of objs) {
+      for (const prop of props) {
+        if (obj && obj[prop] == undefined) {
+          obj[prop] = null;
         }
       }
     }

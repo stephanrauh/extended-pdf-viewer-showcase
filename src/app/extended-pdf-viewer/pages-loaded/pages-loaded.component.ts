@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-pages-loaded',
   templateUrl: './pages-loaded.component.html',
   styleUrls: ['./pages-loaded.component.css'],
 })
 export class PagesLoadedComponent {
   public messages: string[] = [];
-
-
 
   private _fullscreen = false;
 
@@ -21,7 +18,6 @@ export class PagesLoadedComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}
@@ -35,7 +31,7 @@ export class PagesLoadedComponent {
       }
       try {
         e = 'Event type: ' + event.constructor.name + ' Event: ' + JSON.stringify(event).substring(0, 60);
-      } catch (exception) {
+      } catch {
         e = 'Event type: ' + event.constructor.name + ' Event: ' + event;
       }
     }
@@ -47,7 +43,7 @@ export class PagesLoadedComponent {
     this.messages.push(`${now} Loaded a document with ${pagecount.pagesCount} pages`);
   }
 
-  public onPdfLoadingFailed(error: any): void {
+  public onPdfLoadingFailed(error: Error): void {
     const now = new Date().toLocaleTimeString();
     this.messages.push(`${now} Failed to load a PDF document ${error}`);
   }

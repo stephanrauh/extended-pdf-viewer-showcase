@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ElementRef } from '@angular/core';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { compareFunction, convertMDToTable } from '../attributes/md-to-table-converter';
 import { HttpClient } from '@angular/common/http';
@@ -6,7 +6,7 @@ import { Settings } from 'angular2-smart-table';
 import { isBrowser } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-default-options',
   templateUrl: './default-options.component.html',
   styleUrls: ['./default-options.component.css'],

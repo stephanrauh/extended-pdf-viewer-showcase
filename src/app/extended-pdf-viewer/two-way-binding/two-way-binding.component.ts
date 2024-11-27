@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
 import { PdfSidebarView } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
 standalone: false,
@@ -53,7 +52,7 @@ export class TwoWayBindingComponent {
       if (localStorage) {
         localStorage.setItem('ngx-extended-pdf-viewer.simple.selectedTab', String(index));
       }
-    } catch (safariSecurityException) {
+    } catch /* safariSecurityException */ {
       // localStorage is not available on Safari
     }
   }
@@ -64,7 +63,7 @@ export class TwoWayBindingComponent {
         return Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
       }
       return 0;
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
       return 0;
     }

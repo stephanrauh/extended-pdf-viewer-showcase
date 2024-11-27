@@ -1,18 +1,14 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-scripting',
   templateUrl: './scripting.component.html',
   styleUrls: ['./scripting.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScriptingComponent {
-
-
-
   private _fullscreen = false;
 
   public get fullscreen(): boolean {
@@ -21,7 +17,6 @@ export class ScriptingComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {
@@ -32,7 +27,7 @@ export class ScriptingComponent {
           pdfDefaultOptions.enableScripting = setting === 'true';
         }
       }
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
     }
   }
@@ -46,9 +41,10 @@ export class ScriptingComponent {
     try {
       if (localStorage) {
         localStorage.setItem('ngx-extended-pdf-viewer.enableScripting', String(enable));
+        // eslint-disable-next-line no-self-assign
         document.location = document.location;
       }
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
     }
   }

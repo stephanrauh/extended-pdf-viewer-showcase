@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgxExtendedPdfViewerComponent } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
 standalone: false,
@@ -15,6 +14,7 @@ export class ModalDialogComponent {
 
 
   constructor(public dialogRef: MatDialogRef<ModalDialogComponent>) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     dialogRef.beforeClosed().subscribe((result) => {
       console.log('The dialog is about to be closed');
       this.pdfViewer.ngOnDestroy();

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, PdfLayer } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-layers',
   templateUrl: './layers.component.html',
   styleUrls: ['./layers.component.css'],
@@ -13,8 +12,6 @@ export class LayersComponent {
 
   public layers: PdfLayer[] = [];
 
-
-
   private _fullscreen = false;
 
   public get fullscreen(): boolean {
@@ -23,7 +20,6 @@ export class LayersComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}
@@ -45,4 +41,4 @@ export class LayersComponent {
     await this.pdfService.toggleLayer(layerId);
     await this.listLayers();
   }
- }
+}

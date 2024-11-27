@@ -1,9 +1,8 @@
+import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { Component, OnInit } from '@angular/core';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-export-text',
   templateUrl: './export-text.component.html',
   styleUrls: ['./export-text.component.css'],
@@ -18,8 +17,6 @@ export class ExportTextComponent {
   public extractedLines: string[] = [];
 
   public selectedTabIndex = 0;
-
-
 
   private _fullscreen = false;
 
@@ -45,7 +42,7 @@ export class ExportTextComponent {
     this.selectedTabIndex = 3;
     const lines = await this.pdfViewerService.getPageAsLines(1);
     this.extractedText = undefined;
-    this.extractedLines = lines.map(line => line.text);
+    this.extractedLines = lines.map((line) => line.text);
     console.log(lines);
   }
 }

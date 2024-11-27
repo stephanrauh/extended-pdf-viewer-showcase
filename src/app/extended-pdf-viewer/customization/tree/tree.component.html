@@ -3,22 +3,22 @@
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
     <li class="mat-tree-node">
       <!-- use a disabled button to provide padding for tree leaf -->
-      <button mat-icon-button disabled class="spacer"></button>
+      <button mat-icon-button disabled class="spacer"> </button>
       <span>
         {{ node.prefix }}
         @if (node.id) {
-          <span class="hook" [matTooltipPosition]="'after'"
-            matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
-            id="{{ node.id }}"
-            <app-icon-info class="icon id" ></app-icon-info>
-          </span>
+        <span class="hook" [matTooltipPosition]="'after'"
+          matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+          id="{{ node.id }}"
+          <app-icon-info class="icon id"></app-icon-info>
+        </span>
         }
         @if (node.content) {
-          <span class="customizable" [matTooltipPosition]="'after'"
-            matTooltip="You can use this property to replace the content of this component with your custom content.">
-            custom content: [{{node.content}}]
-            <app-icon-info class="icon"></app-icon-info>
-          </span>
+        <span class="customizable" [matTooltipPosition]="'after'"
+          matTooltip="You can use this property to replace the content of this component with your custom content.">
+          custom content: [{{node.content}}]
+          <app-icon-info class="icon"></app-icon-info>
+        </span>
         }
         {{node.suffix}}
       </span>
@@ -36,18 +36,18 @@
         <span>
           {{ node.prefix }}
           @if (node.id) {
-            <span class="hook" [matTooltipPosition]="'after'"
-              matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
-              id="{{ node.id }}"
-              <app-icon-info class="icon id" ></app-icon-info>
-            </span>
+          <span class="hook" [matTooltipPosition]="'after'"
+            matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+            id="{{ node.id }}"
+            <app-icon-info class="icon id"></app-icon-info>
+          </span>
           }
           @if (node.content) {
-            <span class="customizable"  [matTooltipPosition]="'after'"
-              matTooltip="You can use this property to replace the content of this component with your custom content.">
-              custom content: [{{node.content}}]
-              <app-icon-info class="icon"></app-icon-info>
-            </span>
+          <span class="customizable" [matTooltipPosition]="'after'"
+            matTooltip="You can use this property to replace the content of this component with your custom content.">
+            custom content: [{{node.content}}]
+            <app-icon-info class="icon"></app-icon-info>
+          </span>
           }
           {{node.suffix}}
         </span>

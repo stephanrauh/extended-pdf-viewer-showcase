@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { NgxExtendedPdfViewerService, ResponsiveVisibility } from 'ngx-extended-pdf-viewer';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-hiding-buttons',
   templateUrl: './hiding-buttons.component.html',
-  styleUrls: ['./hiding-buttons.component.css']
+  styleUrls: ['./hiding-buttons.component.css'],
 })
 export class HidingButtonsComponent {
   public showToolbar = true;
@@ -38,13 +37,11 @@ export class HidingButtonsComponent {
     this.showRotateCcwButton = rotate;
   }
 
-
-
   private _fullscreen = false;
 
-  public settingsWidth = "60%";
+  public settingsWidth = '60%';
 
-  public codeWidth = "38%";
+  public codeWidth = '38%';
 
   private _currentTab = 0;
 
@@ -55,8 +52,8 @@ export class HidingButtonsComponent {
   public set currentTab(tab: number) {
     this._currentTab = tab;
 
-      this.codeWidth = "38%";
-      this.settingsWidth = "60%";
+    this.codeWidth = '38%';
+    this.settingsWidth = '60%';
   }
 
   public options: ResponsiveVisibility[] = [true, false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
@@ -67,7 +64,6 @@ export class HidingButtonsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   public get sourcecode() {

@@ -7,7 +7,7 @@ interface CustomFindOptions extends FindOptions {
 }
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-custom-find',
   templateUrl: './custom-find.component.html',
   styleUrls: ['./custom-find.component.scss'],
@@ -25,21 +25,18 @@ export class CustomFindComponent implements OnDestroy {
   public currentMatchNumber: number | undefined;
   public totalMatches: number | undefined;
 
-
-
   private pdfViewerApplication: IPDFViewerApplication | undefined;
 
   private originalConvertToRegExpString: any;
 
-  public currentTab=0;
+  public currentTab = 0;
 
-
-  constructor(private readonly cdr: ChangeDetectorRef,  public notificationService: PDFNotificationService) {
+  constructor(private readonly cdr: ChangeDetectorRef, public notificationService: PDFNotificationService) {
     pdfDefaultOptions.findController = MyCustomFindController;
     effect(() => {
       this.pdfViewerApplication = notificationService.onPDFJSInitSignal();
     });
-   }
+  }
 
   public pdfLoaded(): void {
     this.overideFindFeature();
@@ -69,7 +66,7 @@ export class CustomFindComponent implements OnDestroy {
 
   private overideFindFeature() {
     if (!this.pdfViewerApplication) {
-      console.error("PDF Viewer Application is not initialized");
+      console.error('PDF Viewer Application is not initialized');
       return;
     }
     const findController = this.pdfViewerApplication.findController as any;
@@ -86,8 +83,8 @@ export class CustomFindComponent implements OnDestroy {
   private restoreFindFeature() {
     if (this.originalConvertToRegExpString) {
       if (this.pdfViewerApplication) {
-      const findController = this.pdfViewerApplication.findController as any;
-      findController._convertToRegExpString = this.originalConvertToRegExpString;
+        const findController = this.pdfViewerApplication.findController as any;
+        findController._convertToRegExpString = this.originalConvertToRegExpString;
       }
     }
   }
@@ -98,7 +95,7 @@ export class CustomFindComponent implements OnDestroy {
       query: this.searchtext,
       type,
       findPrevious,
-      source: undefined
+      source: undefined,
     });
   }
 }

@@ -1,9 +1,8 @@
 import { Component, effect, ViewEncapsulation } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-custom-thumbnails',
   templateUrl: './custom-thumbnails.component.html',
   styleUrls: ['./custom-thumbnails.component.css'],
@@ -13,8 +12,6 @@ export class CustomThumbnailsComponent {
   private _fullscreen = false;
 
   public rotation: 0 | 180 = 0;
-
-
 
   public get fullscreen(): boolean {
     return this._fullscreen;

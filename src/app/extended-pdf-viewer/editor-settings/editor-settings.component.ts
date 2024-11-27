@@ -1,9 +1,8 @@
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { Component, OnInit } from '@angular/core';
-import { isLocalhost } from '../common/utilities';
+import { Component } from '@angular/core';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-editor-settings',
   templateUrl: './editor-settings.component.html',
   styleUrls: ['./editor-settings.component.css'],
@@ -13,8 +12,6 @@ export class EditorSettingsComponent {
 
   public selectedTabIndex = 0;
 
-
-
   private _fullscreen = false;
 
   public get fullscreen(): boolean {
@@ -23,7 +20,6 @@ export class EditorSettingsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   constructor(private pdfViewerService: NgxExtendedPdfViewerService) {

@@ -1,21 +1,18 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-custom-sidebar',
   templateUrl: './custom-sidebar.component.html',
   styleUrls: ['./custom-sidebar.component.css'],
 })
 export class CustomSidebarComponent {
-   public _theme = 'without';
+  public _theme = 'without';
 
   public showPdfViewer = true;
 
   public sidebarOpen = true;
-
-
 
   private _fullscreen = false;
 
@@ -25,7 +22,6 @@ export class CustomSidebarComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   constructor(private pdfService: NgxExtendedPdfViewerService) {}

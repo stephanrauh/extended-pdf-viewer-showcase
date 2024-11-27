@@ -1,7 +1,7 @@
-import { Component, effect } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-mobile',
   templateUrl: './mobile.component.html',
   styleUrls: ['./mobile.component.css'],

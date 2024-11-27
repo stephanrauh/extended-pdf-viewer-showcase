@@ -1,11 +1,10 @@
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { countries } from './countries';
-import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { isLocalhost } from '../common/utilities';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-forms',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.css'],
@@ -26,8 +25,8 @@ export class FormsComponent {
   public country = 'Spain';
   public jobExperience = '6';
   // two checkboxes that use the "export value" defined in the PDF:
-  public typeScript = "Yes";
-  public javaScript = "No";
+  public typeScript = 'Yes';
+  public javaScript = 'No';
   // two checkboxes that use boolean values instead of the "export value" defined in the PDF:
   public java = true;
   public cSharp = true;
@@ -57,7 +56,6 @@ export class FormsComponent {
 
   public xfaFormData: Record<string, string | string[] | number | boolean> = {};
 
-
   public leftTab = 0;
 
   public get fullscreen(): boolean {
@@ -66,7 +64,6 @@ export class FormsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   public updateFormData(): void {

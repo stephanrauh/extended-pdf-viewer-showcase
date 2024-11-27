@@ -1,7 +1,5 @@
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { isLocalhost } from '../common/utilities';
 @Component({
 standalone: false,
   selector: 'app-forms',
@@ -12,15 +10,11 @@ standalone: false,
 export class ThemingComponent {
   public _selectedTab = 1;
 
-
-
   private _fullscreen = false;
 
   public theme = 'light';
   public backgroundColor = 'lightgrey';
   public src = '/assets/pdfs/OoPdfFormExample.pdf';
-
-  constructor(private ngxService: NgxExtendedPdfViewerService) {}
 
   public get fullscreen(): boolean {
     return this._fullscreen;

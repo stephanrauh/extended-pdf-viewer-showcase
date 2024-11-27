@@ -22,17 +22,17 @@ const TOOLBAR: TreeNode[] = [
                   { name: '<pdf-page-number>', id: 'pageNumber' },
                   { name: '<pdf-next-page>', id: 'next' },
                   { name: '<pdf-last-page>', id: 'primaryLastPage' },
-                ]
-              }
-            ]
+                ],
+              },
+            ],
           },
           {
             name: '<pdf-zoom-toolbar>',
             children: [
               { name: '<pdf-zoom-out>', id: 'zoomOut' },
               { name: '<pdf-zoom-in>', id: 'zoomIn' },
-              { name: '<pdf-zoom-dropdown>', id: 'scaleSelect' }
-            ]
+              { name: '<pdf-zoom-dropdown>', id: 'scaleSelect' },
+            ],
           },
           {
             name: '<div id="toolbarViewerRight">',
@@ -55,24 +55,27 @@ const TOOLBAR: TreeNode[] = [
               { name: '<pdf-open-file>', id: 'openFile' },
               { name: '<pdf-print>', id: 'print' },
               { name: '<pdf-download>', id: 'download' },
-              { name: '<pdf-editor>', children: [
-                { name: '<pdf-stamp-editor>', id: 'editorStamp' },
-                { name: '<pdf-text-editor>', id: 'editorFreeText' },
-                { name: '<pdf-ink-editor>', id: 'editorInk' },
-              ]},
+              {
+                name: '<pdf-editor>',
+                children: [
+                  { name: '<pdf-stamp-editor>', id: 'editorStamp' },
+                  { name: '<pdf-text-editor>', id: 'editorFreeText' },
+                  { name: '<pdf-ink-editor>', id: 'editorInk' },
+                ],
+              },
               {
                 name: '<pdf-toggle-secondary-toolbar>',
-                id: 'secondaryToolbarToggle'
-              }
-            ]
+                id: 'secondaryToolbarToggle',
+              },
+            ],
           },
-        ]
-      }
-    ]
-  }];
+        ],
+      },
+    ],
+  },
+];
 
-  const SECONDARY_TOOLBAR: TreeNode[] = [
-
+const SECONDARY_TOOLBAR: TreeNode[] = [
   {
     name: '<pdf-secondary-toolbar>',
     content: 'customSecondaryToolbar',
@@ -83,7 +86,7 @@ const TOOLBAR: TreeNode[] = [
         children: [
           {
             name: '<button title="Switch to Presentation Mode">',
-            id: 'secondaryPresentationMode'
+            id: 'secondaryPresentationMode',
           },
           { name: '<button title="Open (file)">', id: 'secondaryOpenFile' },
           { name: '<button title="Print">', id: 'secondaryPrintButton' },
@@ -93,49 +96,48 @@ const TOOLBAR: TreeNode[] = [
           { name: '<button title="Rotate Clockwise">', id: 'pageRotateCw' },
           {
             name: '<button title="Rotate Counterclockwise">',
-            id: 'pageRotateCcw'
+            id: 'pageRotateCcw',
           },
           {
             name: '<button title="Enable Text Selection Tool">',
-            id: 'cursorSelectTool'
+            id: 'cursorSelectTool',
           },
           { name: '<button title="Enable Hand Tool">', id: 'cursorHandTool' },
           {
             name: '<button title="Use Vertical Scrolling">',
-            id: 'scrollVertical'
+            id: 'scrollVertical',
           },
           {
             name: '<button title="Use Horizontal Scrolling">',
-            id: 'scrollHorizontal'
+            id: 'scrollHorizontal',
           },
           {
             name: '<button title="Use Wrapped Scrolling">',
-            id: 'scrollWrapped'
+            id: 'scrollWrapped',
           },
           {
             name: '<button title="Do not join page spreads">',
-            id: 'spreadNone'
+            id: 'spreadNone',
           },
           {
-            name:
-              '<button title="Join page spreads starting with odd-numbered pages">',
-            id: 'spreadOdd'
+            name: '<button title="Join page spreads starting with odd-numbered pages">',
+            id: 'spreadOdd',
           },
           {
-            name:
-              '<button title="Join page spreads starting with even-numbered pages">',
-            id: 'spreadEven'
+            name: '<button title="Join page spreads starting with even-numbered pages">',
+            id: 'spreadEven',
           },
           {
             name: '<button title="Document Properties…">',
-            id: 'documentProperties'
-          }
-        ]
-      }
-    ]
-  }];
+            id: 'documentProperties',
+          },
+        ],
+      },
+    ],
+  },
+];
 
-  const FINDBAR: TreeNode[] = [
+const FINDBAR: TreeNode[] = [
   {
     name: '<pdf-findbar>',
     expanded: true,
@@ -151,30 +153,30 @@ const TOOLBAR: TreeNode[] = [
             children: [
               {
                 name: '<pdf-search-input-field>',
-                id: 'findInput / findInputMultiline'
+                id: 'findInput / findInputMultiline',
               },
               { name: '<pdf-find-previous>', id: 'findPrevious' },
-              { name: '<pdf-find-next>', id: 'findNext' }
-            ]
+              { name: '<pdf-find-next>', id: 'findNext' },
+            ],
           },
-              { name: '<pdf-find-highlight-all>', id: 'findHighlightAll' },
-              { name: '<pdf-find-highlight-all>', id: 'findCurrentPage' },
-              { name: ' <pdf-find-match-case>', id: 'findMatchCase' },
-              { name: '<pdf-find-entire-word>', id: 'findEntireWord' },
-              { name: '<pdf-match-diacritics>', id: 'findMatchDiacritics' },
-              { name: '<pdf-find-results-count>', id: 'findResultsCount' },
-          { name: '<pdf-findbar-message-container>', id: 'findMsg' }
-        ]
-      }
-    ]
-  }
+          { name: '<pdf-find-highlight-all>', id: 'findHighlightAll' },
+          { name: '<pdf-find-highlight-all>', id: 'findCurrentPage' },
+          { name: ' <pdf-find-match-case>', id: 'findMatchCase' },
+          { name: '<pdf-find-entire-word>', id: 'findEntireWord' },
+          { name: '<pdf-match-diacritics>', id: 'findMatchDiacritics' },
+          { name: '<pdf-find-results-count>', id: 'findResultsCount' },
+          { name: '<pdf-findbar-message-container>', id: 'findMsg' },
+        ],
+      },
+    ],
+  },
 ];
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-customization',
   templateUrl: './customization.component.html',
-  styleUrls: ['./customization.component.css']
+  styleUrls: ['./customization.component.css'],
 })
 export class CustomizationComponent {
   public toolbar = TOOLBAR;
@@ -182,7 +184,4 @@ export class CustomizationComponent {
   public secondaryToolbar = SECONDARY_TOOLBAR;
 
   public findbar = FINDBAR;
-
-  constructor() { }
-
 }

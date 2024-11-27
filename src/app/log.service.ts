@@ -11,7 +11,8 @@ export class LogService {
 
   constructor(notificationService: PDFNotificationService) {
     effect(() => {
-      if (this.PDFViewerApplication = notificationService.onPDFJSInitSignal()) {
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+      if (this.PDFViewerApplication) {
         this.init();
       }
     });

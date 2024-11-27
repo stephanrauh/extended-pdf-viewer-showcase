@@ -63,9 +63,10 @@ export class NavComponent {
     try {
       if (localStorage) {
         localStorage.setItem('showcase.viewer', this.viewer);
+        // eslint-disable-next-line no-self-assign
         location = location; // trigger reload
       }
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
     }
   }
@@ -74,7 +75,7 @@ export class NavComponent {
       if (localStorage) {
         this._viewer = localStorage.getItem('showcase.viewer');
       }
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
     }
     if (!this._viewer) {
@@ -91,8 +92,10 @@ export class NavComponent {
 
   private determinePdfJsVersion(): void {
     setTimeout(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if ((window as any).pdfjsLib) {
-        this.pdfjsVersion = ', pdf.js ' + (window as any).pdfjsLib.version + ',';
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.pdfjsVersion = `, pdf.js ${(window as any).pdfjsLib.version}` + ',';
       } else {
         this.pdfjsVersion = ''; // maybe we're currently showing one of the pages without example file
         this.determinePdfJsVersion();

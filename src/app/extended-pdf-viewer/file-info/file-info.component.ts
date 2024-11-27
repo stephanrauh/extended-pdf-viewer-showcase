@@ -1,28 +1,16 @@
 import { Component, effect } from '@angular/core';
-import {
-  AnnotationLayerRenderedEvent,
-  IPDFViewerApplication,
-  NgxExtendedPdfViewerService,
-  PdfDocumentInfo,
-  PdfDocumentPropertiesExtractor,
-  PDFNotificationService
-} from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
-
+import { IPDFViewerApplication, PdfDocumentInfo, PdfDocumentPropertiesExtractor, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-simple',
   templateUrl: './file-info.component.html',
   styleUrls: ['./file-info.component.css'],
 })
 export class FileInfoComponent {
-
   private PDFViewerApplication: IPDFViewerApplication | undefined;
 
   public fileInfo!: PdfDocumentInfo;
-
-
 
   private _fullscreen = false;
 
@@ -32,12 +20,11 @@ export class FileInfoComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   public onPagesLoaded() {
     if (this.PDFViewerApplication) {
-    new PdfDocumentPropertiesExtractor().getDocumentProperties(this.PDFViewerApplication).then((result) => this.fileInfo = result);
+      new PdfDocumentPropertiesExtractor().getDocumentProperties(this.PDFViewerApplication).then((result) => (this.fileInfo = result));
     }
   }
 

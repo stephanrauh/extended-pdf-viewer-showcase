@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, effect } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, pdfDefaultOptions, PDFNotificationService, RenderedTextLayerHighlights } from 'ngx-extended-pdf-viewer';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, RenderedTextLayerHighlights } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
 
 @Component({

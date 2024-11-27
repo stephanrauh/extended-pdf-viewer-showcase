@@ -3,11 +3,10 @@ import { pdfData2 } from './secondPdfBase64';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-base64',
   templateUrl: './base64.component.html',
   styleUrls: ['./base64.component.css'],
@@ -52,7 +51,7 @@ export class Base64Component implements OnInit {
     this.firstPdf = !this.firstPdf;
   }
 
-  public onPdfLoaded(event: any): void {
+  public onPdfLoaded(event: unknown): void {
     console.log('onPdfLoaded', event);
   }
 }

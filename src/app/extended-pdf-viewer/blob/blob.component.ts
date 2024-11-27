@@ -1,25 +1,22 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BlobService } from './blob.service';
+import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { isBrowser } from '../common/utilities';
+import { BlobService } from './blob.service';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-blob',
   templateUrl: './blob.component.html',
   styleUrls: ['./blob.component.css'],
 })
-export class BlobComponent implements OnInit {
+export class BlobComponent {
   public src = this.blobService.src;
 
   public downloaded: string | undefined;
 
   private _fullscreen = false;
 
-  public choice = "preloaded";
-
-
+  public choice = 'preloaded';
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -29,15 +26,7 @@ export class BlobComponent implements OnInit {
     this._fullscreen = full;
   }
 
-  constructor(
-    private http: HttpClient,
-    private blobService: BlobService,
-    private ngxService: NgxExtendedPdfViewerService
-  ) {
-
-  }
-
-  public ngOnInit(): void {}
+  constructor(private http: HttpClient, private blobService: BlobService, private ngxService: NgxExtendedPdfViewerService) {}
 
   public usePreloadedFile(): void {
     this.src = this.blobService.src;

@@ -40,7 +40,7 @@
                   <div>Width: {{ widthDisplay }}</div>
                   <div>Height: {{ heightDisplay }}</div>
                   <div>Data URL: {{ imageDataURL.substring(0, 50) }} Length: {{ imageDataURL.length }} bytes</div>
-                  <img src="{{ imageDataURL }}" />
+                  <img src="{{ imageDataURL }}" alt="screenshot of the PDF"/>
                 </div>
               }
               @if (!imageDataURL) {

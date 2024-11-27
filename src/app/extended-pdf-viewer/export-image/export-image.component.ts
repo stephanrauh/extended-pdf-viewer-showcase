@@ -1,9 +1,8 @@
+import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { Component, OnInit } from '@angular/core';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-export-image',
   templateUrl: './export-image.component.html',
   styleUrls: ['./export-image.component.css'],
@@ -26,8 +25,6 @@ export class ExportImageComponent {
 
   public selectedTabIndex = 0;
 
-
-
   private _fullscreen = false;
 
   public get fullscreen(): boolean {
@@ -36,7 +33,6 @@ export class ExportImageComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   constructor(private pdfViewerService: NgxExtendedPdfViewerService) {
@@ -82,13 +78,13 @@ export class ExportImageComponent {
   public async exportAsLines(): Promise<void> {
     const lines = await this.pdfViewerService.getPageAsLines(1);
     console.log(lines);
-
   }
 
   private showText(text: string): void {
     this.extractedText = text;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private showImage(dataURL: any): void {
     this.imageDataURL = dataURL;
     this.getImageDimensions(dataURL);

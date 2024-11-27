@@ -1,12 +1,10 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { Component } from '@angular/core';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-i18n',
   templateUrl: './i18n.component.html',
-  styleUrls: ['./i18n.component.css']
+  styleUrls: ['./i18n.component.css'],
 })
 export class I18nComponent {
   public hidePdfViewer = false;
@@ -14,8 +12,6 @@ export class I18nComponent {
   public _selectedTab = 0;
 
   private _language: string | undefined = 'nl-BE';
-
-
 
   private _fullscreen = false;
 
@@ -25,7 +21,6 @@ export class I18nComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   public get selectedTab(): number {
@@ -69,6 +64,4 @@ export class I18nComponent {
       this.hidePdfViewer = false;
     });
   }
-
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
 }

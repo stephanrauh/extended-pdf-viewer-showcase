@@ -1,9 +1,8 @@
+import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { Component, OnInit } from '@angular/core';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-export-file',
   templateUrl: './export-file.component.html',
   styleUrls: ['./export-file.component.css'],
@@ -12,8 +11,6 @@ export class ExportFileComponent {
   public imageDataURL: string | undefined = undefined;
 
   public selectedTabIndex = 0;
-
-
 
   private _fullscreen = false;
 
@@ -25,7 +22,6 @@ export class ExportFileComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   constructor(private pdfViewerService: NgxExtendedPdfViewerService) {

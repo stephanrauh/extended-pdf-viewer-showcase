@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
 standalone: false,

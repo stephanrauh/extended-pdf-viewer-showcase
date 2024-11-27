@@ -1,12 +1,11 @@
-import { Component, NgZone } from '@angular/core';
-import { NgxExtendedPdfViewerService, PageViewModeType, ScrollModeType, SpreadModeType } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { Component } from '@angular/core';
+import { PageViewModeType, ScrollModeType } from 'ngx-extended-pdf-viewer';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-display-options',
   templateUrl: './display-options.component.html',
-  styleUrls: ['./display-options.component.css']
+  styleUrls: ['./display-options.component.css'],
 })
 export class DisplayOptionsComponent {
   public showBorders = false;
@@ -17,8 +16,6 @@ export class DisplayOptionsComponent {
 
   public spread: 'off' | 'odd' | 'even' = 'off';
 
-
-
   private _fullscreen = false;
 
   public get fullscreen(): boolean {
@@ -27,8 +24,5 @@ export class DisplayOptionsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
-
-  constructor(private ngZone: NgZone, private pdfService: NgxExtendedPdfViewerService) {}
 }

@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { PagesLoadedEvent, NgxExtendedPdfViewerService, ProgressBarEvent } from 'ngx-extended-pdf-viewer';
-import { isLocalhost } from '../common/utilities';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { NgxExtendedPdfViewerService, ProgressBarEvent } from 'ngx-extended-pdf-viewer';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-custom-progress-bar',
   templateUrl: './custom-print-dialog.component.html',
   styleUrls: ['./custom-print-dialog.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomPrintDialogComponent {
-
   public printPercentage = 0;
   public totalPages = 0;
   public currentPageRendered = 0;
@@ -19,18 +17,15 @@ export class CustomPrintDialogComponent {
   public hideBuiltInProgress = true;
   private _fullscreen = false;
 
-
-
   public get fullscreen(): boolean {
     return this._fullscreen;
   }
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {  }
+  constructor(private pdfService: NgxExtendedPdfViewerService) {}
 
   public onBeforePrint() {
     if (this.hideBuiltInProgress) {

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, effect, OnDestroy } from '@angular/core';
-import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, PagesLoadedEvent, PdfLoadedEvent } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
-import { isLocalhost } from '../common/utilities';
 
 @Component({
 standalone: false,
@@ -47,7 +46,7 @@ export class SimpleComponent implements OnDestroy {
       if (localStorage) {
         return true;
       }
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
     }
     return false;
@@ -58,7 +57,7 @@ export class SimpleComponent implements OnDestroy {
       if (localStorage) {
         localStorage.setItem('ngx-extended-pdf-viewer.simple.selectedTab', String(index));
       }
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
     }
   }
@@ -68,7 +67,7 @@ export class SimpleComponent implements OnDestroy {
       if (localStorage) {
         return Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
       }
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
     }
     return 0;
@@ -78,14 +77,17 @@ export class SimpleComponent implements OnDestroy {
     try {
       if (theme !== this.theme && localStorage) {
         localStorage.setItem('ngx-extended-pdf-viewer.theme', theme);
+        // eslint-disable-next-line no-self-assign
         location = location;
       } else {
         this.themeIfLocalStorageIsUnavailable = theme;
+        // eslint-disable-next-line no-self-assign
         location = location;
       }
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
       this.themeIfLocalStorageIsUnavailable = theme;
+      // eslint-disable-next-line no-self-assign
       location = location;
     }
   }
@@ -97,7 +99,7 @@ export class SimpleComponent implements OnDestroy {
       } else {
         return this.themeIfLocalStorageIsUnavailable;
       }
-    } catch (safariSecurityException) {
+    } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
       return this.themeIfLocalStorageIsUnavailable;
     }
@@ -132,21 +134,22 @@ export class SimpleComponent implements OnDestroy {
     if (!this.PDFViewerApplication.pdfViewer._pages[page].textLayer) {
       await this.PDFViewerApplication.pdfViewer._pages[page].draw();
     } else {
-      const textLayer = this.PDFViewerApplication.pdfViewer._pages[page].textLayer;
-      const divs = textLayer?.textDivs;
-      const textSnippets = textLayer?.textContentItemsStr;
+      // const textLayer = this.PDFViewerApplication.pdfViewer._pages[page].textLayer;
+      // const divs = textLayer?.textDivs;
+      // const textSnippets = textLayer?.textContentItemsStr;
     }
   }
 
-  public onPageRender(event: any): void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public onPageRender(event: PageRenderEvent): void {
     this.currentStartTime = new Date().getTime();
   }
 
-  public onPageLoaded(event: any): void {
+  public onPageLoaded(event: unknown): void {
     console.log("Page Load", event);
   }
 
-  public onPdfLoaded(event: any): void {
+  public onPdfLoaded(event: PdfLoadedEvent): void {
     console.log("Loaded", event);
   }
 
