@@ -3,6 +3,7 @@
 @import "@fontsource/roboto/400.css";
 @import "@fontsource/roboto/500.css";
 @import "@fontsource/material-icons/index.css";
+@import '@material-design-icons/font';
 
 .mat-mdc-radio-button .mdc-radio  {
   --mdc-radio-state-layer-size: 30px !important;
