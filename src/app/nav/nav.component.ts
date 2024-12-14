@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { versions } from './versions';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -38,11 +38,21 @@ export class NavComponent {
 
   public pdfjsVersion = '';
 
-  constructor(private breakpointObserver: BreakpointObserver, route: ActivatedRoute) {
+  constructor(private breakpointObserver: BreakpointObserver, route: ActivatedRoute, private notificationService: PDFNotificationService) {
     if (this.isBrowser()) {
-      route.url.subscribe((url) => {
+      route.url.subscribe(() => {
         this.hideMenu = location.pathname.includes('iframe');
       });
+
+        effect(() => {
+          const PDFViewerApplication = notificationService.onPDFJSInitSignal();
+          if (PDFViewerApplication) {
+            this.pdfjsVersion = `, pdf.js ${this.notificationService.pdfjsVersion},`;
+          } else {
+            this.pdfjsVersion = '';
+          }
+        });
+
 
       try {
         this.activateViewer();
@@ -51,6 +61,7 @@ export class NavComponent {
       }
     }
   }
+
 
   /**
    * Checks if the code is running in a browser environment.
@@ -83,23 +94,8 @@ export class NavComponent {
     }
     if (this._viewer === 'ngx-extended-pdf-viewer') {
       pdfDefaultOptions.assetsFolder = 'assets';
-      this.determinePdfJsVersion();
     } else if (this._viewer === 'bleeding-edge') {
       pdfDefaultOptions.assetsFolder = 'bleeding-edge';
-      this.determinePdfJsVersion();
     }
-  }
-
-  private determinePdfJsVersion(): void {
-    setTimeout(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if ((window as any).pdfjsLib) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        this.pdfjsVersion = `, pdf.js ${(window as any).pdfjsLib.version}` + ',';
-      } else {
-        this.pdfjsVersion = ''; // maybe we're currently showing one of the pages without example file
-        this.determinePdfJsVersion();
-      }
-    }, 100);
   }
 }
