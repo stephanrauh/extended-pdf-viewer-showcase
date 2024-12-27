@@ -11,6 +11,9 @@
               <b>Breaking change between pdf.js 3.5 and 3.9:</b> The coordinates of the serialized drawings have changed. Please keep in mind that this is an
               internal API of pdf.js, so it's subject to change without notice.
             </p>
+            <p>
+              <b>Breaking change between pdf.js 4.7 and 4.9:</b> Serialized drawings now require a <code>points</code> array.
+            </p>
             <button mat-raised-button color="primary" (click)="exportAnnotations()">Export annotations</button>
             <button mat-raised-button color="primary" (click)="addTextEditor()">Add text editor</button>
             <button mat-raised-button color="primary" (click)="addDrawing()">Add drawing</button>
