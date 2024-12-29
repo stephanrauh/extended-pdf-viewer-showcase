@@ -1,4 +1,4 @@
-On a tiny smartphone, all the buttons are pushed to the secondary menu. That's most inconvenient, so chances are you want to put a small selection of buttons into the toolbar. The recommended way to do so is to define a custom toolbar.
+On a tiny smartphone, all the buttons are pushed to the secondary menu. That's most inconvenient, so chances are you want to put a small selection of buttons into the toolbar. The recommended way to do so is to define a <a href="extended-pdf-viewer/custom-toolbar">custom toolbar</a> or to use <a href="/extended-pdf-viewer/responsive-design">responsive design</a>.
 
 However, you can also use CSS rules to do the trick. Don't forget to set <code>ignoreResponsiveCSS="true"</code>. Otherwise, your CSS rules will be overwritten by JavaScript. 
 

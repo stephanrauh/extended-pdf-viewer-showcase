@@ -8,7 +8,7 @@ constructor(notificationService: PDFNotificationService) {
 this.PDFViewerApplication.eventBus.on(
       'fileinputchange', 
       (change: FileInputChanged) => {
-  this.ngZone.run(() => {
+  queueMicrotask(() => {
     console.log(change.clientX);
     console.log(change.clientY);
   });

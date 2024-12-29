@@ -67,6 +67,7 @@ export class FormsComponent {
   }
 
   public updateFormData(): void {
+    setTimeout(() => {})
     if (this.xfa) {
       this.xfaFormData = {
         ...this.xfaFormData,

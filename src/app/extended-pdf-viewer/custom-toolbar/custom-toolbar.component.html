@@ -66,10 +66,11 @@
         [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : undefined"
         [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons : undefined)"
         [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : undefined"
-        [src]="'/assets/pdfs/dachstein.pdf'"
+        [src]="src"
         [zoom]="zoom"
         [showZoomButtons]="theme !== 'floating'"
         [showFreeFloatingBar]="showFreeFloatingBar"
+        [textLayer]="theme === 'findbar'"
         >
       </ngx-extended-pdf-viewer>
     }

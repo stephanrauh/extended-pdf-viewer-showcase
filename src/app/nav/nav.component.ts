@@ -44,15 +44,10 @@ export class NavComponent {
         this.hideMenu = location.pathname.includes('iframe');
       });
 
-        effect(() => {
-          const PDFViewerApplication = notificationService.onPDFJSInitSignal();
-          if (PDFViewerApplication) {
-            this.pdfjsVersion = `, pdf.js ${this.notificationService.pdfjsVersion},`;
-          } else {
-            this.pdfjsVersion = '';
-          }
-        });
-
+      effect(() => {
+        const PDFViewerApplication = notificationService.onPDFJSInitSignal();
+        setTimeout(() => this.pdfjsVersion = PDFViewerApplication ? `, pdf.js ${this.notificationService.pdfjsVersion},` : '');
+      });
 
       try {
         this.activateViewer();

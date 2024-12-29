@@ -15,6 +15,8 @@ export class CustomToolbarComponent {
 
   public showFreeFloatingBar = true;
 
+  public src = '/assets/pdfs/dachstein.pdf';
+
   public zoom = '100%';
 
   private _fullscreen = false;
@@ -31,6 +33,7 @@ export class CustomToolbarComponent {
     if (this._theme !== theme) {
       this.showPdfViewer = false;
       this._theme = theme;
+      this.src = theme === 'findbar' ? '/assets/pdfs/GraalVM Dictionary Bytecode, Interpreters, C1 Compiler, C2 Compiler, CPUs, and More.pdf' : '/assets/pdfs/dachstein.pdf';
       setTimeout(() => (this.showPdfViewer = true), 100);
     } else {
       this._theme = theme;

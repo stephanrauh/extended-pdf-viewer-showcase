@@ -1,9 +1,9 @@
-import { Component, effect, NgZone, OnInit } from '@angular/core';
+import { Component, effect, OnInit } from '@angular/core';
 import { FileInputChanged, IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-multiple-documents',
   templateUrl: './multiple-documents.component.html',
   styleUrls: ['./multiple-documents.component.css']
@@ -12,8 +12,6 @@ export class MultipleDocumentsComponent implements OnInit {
   public src!: string;
 
   public dragAndDrop = true;
-
-
 
   private _fullscreen = false;
 
@@ -31,7 +29,7 @@ export class MultipleDocumentsComponent implements OnInit {
 
   public url!: URL;
 
-  constructor(private ngZone: NgZone, notificationService: PDFNotificationService) {
+  constructor(notificationService: PDFNotificationService) {
     if (isBrowser()) {
       this.url = new URL(`${location.protocol}//${location.host}/assets/pdfs/GraalVM.pdf`);
     } else {
@@ -46,7 +44,7 @@ export class MultipleDocumentsComponent implements OnInit {
   public ngOnInit(): void {
     setTimeout(() => {
       this.PDFViewerApplication?.eventBus.on('fileinputchange', (event: FileInputChanged) => {
-        this.ngZone.run(() => {
+        queueMicrotask(() => {
           if (event.dropEvent) {
             console.log("Drop Event: ", event.dropEvent);
           } else {

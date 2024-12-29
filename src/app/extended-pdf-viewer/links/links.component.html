@@ -12,9 +12,9 @@
               <br />
               <mat-radio-button [value]="LinkTarget.SELF">[target]="LinkTarget.SELF" (same window)</mat-radio-button>
               <br />
-              <mat-radio-button [value]="LinkTarget.PARENT">[target]="LinkTarget.PARENT" (same window)</mat-radio-button>
+              <mat-radio-button [value]="LinkTarget.PARENT">[target]="LinkTarget.PARENT" (opens the PDF in the parent iFrame)</mat-radio-button>
               <br />
-              <mat-radio-button [value]="LinkTarget.TOP">[target]="LinkTarget.TOP" (same window)</mat-radio-button>
+              <mat-radio-button [value]="LinkTarget.TOP">[target]="LinkTarget.TOP" (opens the PDF in the same window, breaking out of any iframe context)</mat-radio-button>
               <br />
               <mat-radio-button [value]="LinkTarget.NONE">[target]="LinkTarget.NONE" (identical to TOP)</mat-radio-button>
             </mat-radio-group>
