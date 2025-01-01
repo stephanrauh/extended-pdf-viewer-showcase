@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
-// import { NgxExtendedPdfViewerComponent } from 'ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.component';
 
 @Component({
   standalone: false,
@@ -44,5 +42,8 @@ export class CustomToolbarComponent {
     return this._theme;
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  public onClick(){
+    // important: this method is called from outside, hence this may be undefined!
+    window.open('assets/pdfs/dachstein.pdf', '#');
+  };
 }

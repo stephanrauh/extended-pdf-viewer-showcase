@@ -16,7 +16,7 @@
               <br />
               <mat-radio-button value="checkbox">radiobutton zoom</mat-radio-button>
               <br />
-              <mat-radio-button value="additional">custom color and additional button ("open PDF in new tab")</mat-radio-button>
+              <mat-radio-button value="additional">custom color and additional buttons ("open PDF in new tab" and an unfinished "export as image" button)</mat-radio-button>
               <br />
               <mat-radio-button value="floating">floating zoombar</mat-radio-button>
               <mat-checkbox class="padding-left" [(ngModel)]="showFreeFloatingBar">show it! (uncheck to hide)</mat-checkbox>
@@ -133,6 +133,24 @@
       <pdf-presentation-mode></pdf-presentation-mode>
       <pdf-print></pdf-print>
       <app-open-in-new-tab></app-open-in-new-tab>
+      <pdf-shy-button
+      [cssClass]="'lg' | responsiveCSSClass"
+      title="export an image"
+      primaryToolbarId="nestedComponent"
+      [order]="1"
+      [closeOnClick]="true"
+      [action]="onClick"
+    >
+      <button #nestedContent
+        id="sidebarToggle"
+        color="primary"
+        class="toolbarButton"
+        matTooltip="export an image"
+        (click)="onClick()"
+      >
+      <mat-icon style="color: #FF0000;">photo_camera</mat-icon>
+      </button>
+    </pdf-shy-button>
       <pdf-download></pdf-download>
       <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
     </div>
