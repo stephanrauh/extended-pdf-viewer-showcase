@@ -10,7 +10,7 @@ const remoteRootFolder = '/pdfviewer.net';
 
 synchronizeDistFolderWithFtpFolder();
 
-function collectFiles(dir: string, allFiles: Array<string> = [], allFolders: Array<string> = []) {
+function collectFiles(dir: string, allFiles: string[] = [], allFolders: string[] = []) {
   const files = fs.readdirSync(dir);
 
   files.forEach((file) => {
@@ -27,22 +27,23 @@ function collectFiles(dir: string, allFiles: Array<string> = [], allFolders: Arr
 }
 
 async function collectRemoteFiles(client: ftp.Client, dir: string, allFiles: any, allFolders: any) {
-  console.log("Reading " + dir);
+  console.log('Reading ' + dir);
   let files;
   try {
-   files = await client.list(dir);
-  } catch (exception) {
-    console.log("Retry...")
-   files = await client.list(dir);
+    files = await client.list(dir);
+  } catch {
+    console.log('Retry...');
+    files = await client.list(dir);
   }
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const filePath = dir + '/' + file.name;
-    if (file.isDirectory) {
-      allFolders[filePath] = file;
-      await collectRemoteFiles(client, filePath, allFiles, allFolders);
-    } else {
-      allFiles[filePath] = file;
+  for (const file of files) {
+    if (file !== 'relaunch') {
+      const filePath = dir + '/' + file.name;
+      if (file.isDirectory) {
+        allFolders[filePath] = file;
+        await collectRemoteFiles(client, filePath, allFiles, allFolders);
+      } else {
+        allFiles[filePath] = file;
+      }
     }
   }
 
@@ -50,8 +51,8 @@ async function collectRemoteFiles(client: ftp.Client, dir: string, allFiles: any
 }
 
 async function synchronizeDistFolderWithFtpFolder() {
-  const allFiles: Array<string> = [];
-  const allFolders: Array<string> = [];
+  const allFiles: string[] = [];
+  const allFolders: string[] = [];
   collectFiles('../dist/pdf-showcase/browser', allFiles, allFolders);
   console.log(allFolders.length + ' folders');
   console.log(allFiles.length + ' files');
@@ -67,7 +68,7 @@ async function synchronizeDistFolderWithFtpFolder() {
 
     const allRemoteFiles = {};
     const allRemoteFolders = {};
-    console.log("Collecting the remote files (this takes 1-2 minutes)");
+    console.log('Collecting the remote files (this takes 1-2 minutes)');
     await collectRemoteFiles(client, remoteRootFolder, allRemoteFiles, allRemoteFolders);
     console.log('--------');
     console.log(Object.keys(allRemoteFolders).length + ' remote folders');
@@ -80,15 +81,15 @@ async function synchronizeDistFolderWithFtpFolder() {
     await client.cd(remoteRootFolder);
     let i = 0;
 
-    for (let folder of allFolders) {
+    for (const folder of allFolders) {
       const remoteFolder = folder.replace('../dist/pdf-showcase/browser', remoteRootFolder);
       if (!allRemoteFolders[remoteFolder]) {
         console.log(i++ + ' Creating folder ' + remoteFolder);
 
         try {
-        await client.ensureDir(remoteFolder);
+          await client.ensureDir(remoteFolder);
         } catch (exception) {
-          console.log("Retry...")
+          console.log('Retry...');
           await client.ensureDir(remoteFolder);
         }
       }
@@ -96,13 +97,13 @@ async function synchronizeDistFolderWithFtpFolder() {
 
     await client.cd(remoteRootFolder);
     i = 0;
-    for (let file of allFiles) {
+    for (const file of allFiles) {
       const remoteFile = file.replace('../dist/pdf-showcase/browser', remoteRootFolder);
       try {
         if (allRemoteFiles[remoteFile]) {
           const info = fs.statSync(file);
           const remoteInfo = allRemoteFiles[remoteFile] as ftp.FileInfo;
-          if (info.size === remoteInfo.size && !file.includes("index.html") && !file.includes(".mjs")) {
+          if (info.size === remoteInfo.size && !file.includes('index.html') && !file.includes('.mjs')) {
             // console.log("Skipping " + remoteFile);
           } else {
             // console.log("Different size");
@@ -110,7 +111,7 @@ async function synchronizeDistFolderWithFtpFolder() {
             try {
               await client.uploadFrom(file, remoteFile);
             } catch (exception) {
-              console.log("Retry...")
+              console.log('Retry...');
               await client.uploadFrom(file, remoteFile);
             }
           }
@@ -119,7 +120,7 @@ async function synchronizeDistFolderWithFtpFolder() {
           try {
             await client.uploadFrom(file, remoteFile);
           } catch (exception) {
-            console.log("Retry...")
+            console.log('Retry...');
             await client.uploadFrom(file, remoteFile);
           }
         }
@@ -129,31 +130,31 @@ async function synchronizeDistFolderWithFtpFolder() {
       }
     }
 
-    for (let remoteFile of Object.keys(allRemoteFiles)) {
+    for (const remoteFile of Object.keys(allRemoteFiles)) {
       if (remoteFile) {
-        if (!remoteFile.includes(".htaccess")) {
+        if (!remoteFile.includes('.htaccess')) {
           const localFile = remoteFile.replace(remoteRootFolder, '../dist/pdf-showcase/browser');
           if (!allFiles.includes(localFile)) {
-            console.log("delete " + remoteFile);
+            console.log('delete ' + remoteFile);
             try {
               await client.remove(remoteFile);
             } catch (exception) {
-              console.log("Retry...")
+              console.log('Retry...');
               await client.remove(remoteFile);
             }
           }
         }
       }
     }
-    for (let remoteFolder of Object.keys(allRemoteFolders)) {
+    for (const remoteFolder of Object.keys(allRemoteFolders)) {
       if (remoteFolder) {
         const localFolder = remoteFolder.replace(remoteRootFolder, '../dist/pdf-showcase/browser');
         if (!allFolders.includes(localFolder)) {
-          console.log("delete " + remoteFolder);
+          console.log('delete ' + remoteFolder);
           try {
-          await client.removeDir(remoteFolder);
+            await client.removeDir(remoteFolder);
           } catch (exception) {
-            console.log("Retry...")
+            console.log('Retry...');
             await client.removeDir(remoteFolder);
           }
         }
