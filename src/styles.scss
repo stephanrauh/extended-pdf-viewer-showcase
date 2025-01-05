@@ -1,9 +1,9 @@
-@import 'perfect-scrollbar/css/perfect-scrollbar.css';
-@import "@fontsource/roboto/300.css";
-@import "@fontsource/roboto/400.css";
-@import "@fontsource/roboto/500.css";
-@import "@fontsource/material-icons/index.css";
-@import '@material-design-icons/font';
+@use 'perfect-scrollbar/css/perfect-scrollbar.css';
+@use "@fontsource/roboto/300.css" as roboto300;
+@use "@fontsource/roboto/400.css" as roboto400;
+@use "@fontsource/roboto/500.css" as roboto500;
+@use "@fontsource/material-icons/index.css" ;
+@use '@material-design-icons/font';
 
 .mat-mdc-radio-button .mdc-radio  {
   --mdc-radio-state-layer-size: 30px !important;
