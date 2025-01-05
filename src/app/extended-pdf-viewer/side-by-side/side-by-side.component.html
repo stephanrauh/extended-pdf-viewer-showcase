@@ -5,14 +5,16 @@
         <mat-tab-group>
           <mat-tab label="Displaying PDF files side-by-side">
             <p>To display multiple PDF files on the same page, you need to put them in an iFrame.
-              This is because pdf.js pollutes the global namespace, and although the Mozilla team
-              are working on it, that's something that's not easy to fix.
+              To display multiple PDF files on the same page, you need to put them in an iFrame.
+
+              In the long run, I plan to fix this, so you can put two instances of ngx-extended-pdf-viewer side-by-side without using an iFrame. Unfortunately, this requires a lot of changes to the library, so it'll take a while. The good news is the base library, pdf.js, already allows it.
+
+
             </p>
             <p>Note on the demo: since activating server-side rendering, the embedded PDF viewers initially show the wrong content. That won't
               happen on your machine unless you activate SSR, and I hope to fix it soon.
             </p>
-            <p>The work-around uses a common component, the <code>IFrameComponent</code>. The Angular router maps this
-              component to a path, and the iFrame uses this path to display the PDF file.
+            <p>The demo shows a work-around using a common component, the <code>IFrameComponent</code>. The Angular router maps this component to a path, and the iFrame uses this path to display the PDF file.
             </p>
           </mat-tab>
         </mat-tab-group>
