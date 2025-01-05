@@ -17,7 +17,7 @@ export class I18nComponent {
     // to free memory
     setTimeout(() => {
       this.hidePdfViewer = false;
-    }, 1000);
+    }, 100);
   }
 }
 ```
