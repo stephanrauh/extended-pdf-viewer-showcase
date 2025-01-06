@@ -5,6 +5,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MarkdownModule } from 'ngx-markdown';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,6 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MarkdownModule,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -63,6 +65,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MarkdownModule,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
