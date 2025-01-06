@@ -6,6 +6,20 @@
 
 @if (!hideMenu) {
   <div class="page">
+    <div class="announcement-banner">
+      <span>Check out our new showcase and let us know your feedback!</span>
+      <mat-chip-listbox>
+        <mat-chip color="primary">
+          <a class="relaunch-link" href="https://pdfviewer.net/relaunch" target="_blank">New Showcase</a>
+        </mat-chip>
+        <mat-chip color="">
+          <a class="relaunch-link" href="https://pdfviewer.net/relaunch" target="_blank">New Showcase</a>
+        </mat-chip>
+        <mat-chip color="primary">
+          <a class="relaunch-link" href="https://pdfviewer.net/relaunch" target="_blank">New Showcase</a>
+        </mat-chip>
+      </mat-chip-listbox>
+    </div>
     <mat-toolbar color="primary" class="mat-elevation-z8 toolbar">
       <mat-toolbar-row class="toolbar-row">
         <app-octocat></app-octocat>
@@ -22,7 +36,6 @@
             </mat-radio-group>
           </div>
         </div>
-
       </mat-toolbar-row>
     </mat-toolbar>
     <mat-sidenav-container class="sidenav-container">

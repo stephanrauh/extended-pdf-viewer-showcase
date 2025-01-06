@@ -1,7 +1,18 @@
 .page {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas: 'toolbar' 'content';
+  grid-template-areas: 'relaunch' 'toolbar' 'content';
+}
+
+.announcement-banner {
+  grid-area: relaunch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.relaunch-link {
+  text-decoration: none;
 }
 
 .toolbar {
