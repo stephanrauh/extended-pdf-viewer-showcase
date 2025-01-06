@@ -136,12 +136,15 @@ async function synchronizeDistFolderWithFtpFolder() {
           const localFile = remoteFile.replace(remoteRootFolder, '../dist/pdf-showcase/browser');
           if (!allFiles.includes(localFile)) {
             console.log('delete ' + remoteFile);
-            try {
-              await client.remove(remoteFile);
-            } catch (exception) {
-              console.log('Retry...');
-              await client.remove(remoteFile);
-            }
+            if (!remoteFile.includes('relaunch')) {
+              try {
+                await client.remove(remoteFile);
+              } catch  {
+                console.log('Retry...');
+                await client.remove(remoteFile);
+              }
+          }
+
           }
         }
       }
@@ -150,12 +153,14 @@ async function synchronizeDistFolderWithFtpFolder() {
       if (remoteFolder) {
         const localFolder = remoteFolder.replace(remoteRootFolder, '../dist/pdf-showcase/browser');
         if (!allFolders.includes(localFolder)) {
-          console.log('delete ' + remoteFolder);
-          try {
-            await client.removeDir(remoteFolder);
-          } catch (exception) {
-            console.log('Retry...');
-            await client.removeDir(remoteFolder);
+          if (!remoteFolder.includes('relaunch')) {
+            console.log('delete ' + remoteFolder);
+            try {
+              await client.removeDir(remoteFolder);
+            } catch {
+              console.log('Retry...');
+              await client.removeDir(remoteFolder);
+            }
           }
         }
       }
