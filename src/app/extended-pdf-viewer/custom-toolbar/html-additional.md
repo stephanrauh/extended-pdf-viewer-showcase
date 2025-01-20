@@ -1,3 +1,4 @@
+Copy the original toolbar into an `<ng-template>` and add your custom buttons:
 ```html
 <ngx-extended-pdf-viewer
   #pdfViewer
@@ -12,12 +13,13 @@
       <div class="toolbarButtonSpacer"></div>
       <pdf-paging-area></pdf-paging-area>
     </div>
-    <pdf-zoom-toolbar ></pdf-zoom-toolbar> <!-- toolbar viewer middle -->
+    <pdf-zoom-toolbar ></pdf-zoom-toolbar> 
     <div id="toolbarViewerRight">
       <pdf-open-file></pdf-open-file>
       <pdf-presentation-mode></pdf-presentation-mode>
       <pdf-print></pdf-print>
-      <app-open-in-new-tab></app-open-in-new-tab>
+
+      <app-open-in-new-tab></app-open-in-new-tab> <!-- your custom component -->
       <pdf-download></pdf-download>
       <div class="verticalToolbarSeparator hiddenSmallView"></div>
       <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>

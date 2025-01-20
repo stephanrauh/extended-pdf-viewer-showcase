@@ -1,3 +1,6 @@
+To add a custom button to a custom toolbar, you can use the `<pdf-shy-button>`:
+
+`// open-in-new-tab.html`
 ```html
 <pdf-shy-button
   [cssClass]="'lg' | responsiveCSSClass"
