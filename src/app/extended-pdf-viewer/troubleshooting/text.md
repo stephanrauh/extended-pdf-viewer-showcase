@@ -1,7 +1,48 @@
-## Modals
-Putting an `<ngx-extended-pdf-viewer>` into a modal often causes timing problems. If the modal doesn't initialize the PDF viewer,
-add a short timeout. The idea is to show the PDF viewer with a short delay, so the modal has enough time to render.
+## Modals and tabs
+Putting an `<ngx-extended-pdf-viewer>` into a modal dialog or in a tab often causes timing problems. That always happens if the pdf viewer is part of the DOM, but invisible, as in these two examples:
 
+PrimeNG modal:
+
+```html
+<p-dialog header="PDF Viewer" [modal]="true" [(visible)]="showDialog">
+  <ngx-extended-pdf-viewer [src]="'assets/Example.pdf'"> </ngx-extended-pdf-viewer
+></p-dialog>
+```
+
+Material Design tab:
+
+```html
+<mat-tab-group>
+  <mat-tab label="whatever">
+    ...
+  </mat-tab>
+  <mat-tab label="PDF">
+    <ngx-extended-pdf-viewer [src]="'assets/Example.pdf'">
+  </mat-tab>
+</mat-tab-group>
+```
+
+Add a short timeout. The idea is to show the PDF viewer with a short delay, so the modal has enough time to become visible before the PDF viewer initializes:
+
+```html
+@if (showViewer) { 
+  <ngx-extended-pdf-viewer [src]="'assets/Example.pdf'"> 
+  </ngx-extended-pdf-viewer>
+} 
+```
+
+```ts
+@Component({...})
+public class PDFTabComponent {
+  public showViewer = false;
+
+  public onActivatePdfTab() {
+    setTimeout(() => this.showViewer = true, 100);
+  }
+}
+```
+
+## Modals - Exceptions on close
 If the PDF viewer prints exceptions in the console log when closing the modal, you may want to call `ngOnDestroy()`
 manually. <a href="/modal">The demo on modals</a> demonstrates this approach.
 
