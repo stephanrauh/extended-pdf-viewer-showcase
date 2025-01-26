@@ -1,4 +1,4 @@
-## Modals and tabs
+## Modals and tabs (before version 22.3.0)
 Putting an `<ngx-extended-pdf-viewer>` into a modal dialog or in a tab often causes timing problems. That always happens if the pdf viewer is part of the DOM, but invisible, as in these two examples:
 
 PrimeNG modal:
@@ -41,6 +41,8 @@ public class PDFTabComponent {
   }
 }
 ```
+
+Most of these problems should be a thing of the past since version 22.3.0. You can drop the timeout, because ngx-extended-pdf-viewer now detects the issue and delays initialization internally. Note that this means it never initializes if the user doesn't open the modal or tab.
 
 ## Modals - Exceptions on close
 If the PDF viewer prints exceptions in the console log when closing the modal, you may want to call `ngOnDestroy()`
