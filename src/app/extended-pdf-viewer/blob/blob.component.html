@@ -64,6 +64,7 @@
       <ngx-extended-pdf-viewer
         [src]="src"
         [height]="'auto'"
+        (pageRendered)="pageRendered($event)"
         >
       </ngx-extended-pdf-viewer>
     </mat-card>

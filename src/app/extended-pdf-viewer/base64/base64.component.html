@@ -36,6 +36,7 @@
     [showHandToolButton]="true"
     [sidebarVisible]="true"
     (pdfLoaded)="onPdfLoaded($event)"
+    (pageRendered)="pageRendered($event)"
     >
   </ngx-extended-pdf-viewer>
 </mat-card>

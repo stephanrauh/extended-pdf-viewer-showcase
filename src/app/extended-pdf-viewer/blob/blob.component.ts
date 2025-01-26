@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, PageRenderedEvent } from 'ngx-extended-pdf-viewer';
 import { BlobService } from './blob.service';
 
 @Component({
@@ -45,5 +45,9 @@ export class BlobComponent {
     } else {
       this.downloaded = 'download failed';
     }
+  }
+
+  public pageRendered($event: PageRenderedEvent) {
+    console.log('pageRendered', $event, "Page", $event.pageNumber, "Scale: ", $event.source.scale);
   }
 }

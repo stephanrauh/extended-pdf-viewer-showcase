@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { isBrowser } from '../common/utilities';
+import { PageRenderedEvent } from 'ngx-extended-pdf-viewer';
 
 @Component({
   standalone: false,
@@ -53,5 +54,9 @@ export class Base64Component implements OnInit {
 
   public onPdfLoaded(event: unknown): void {
     console.log('onPdfLoaded', event);
+  }
+
+  public pageRendered($event: PageRenderedEvent) {
+    console.log('pageRendered', $event, "Page", $event.pageNumber, "Scale: ", $event.source.scale);
   }
 }
