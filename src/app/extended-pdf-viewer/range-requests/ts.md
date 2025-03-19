@@ -63,7 +63,8 @@ http
         "Accept-Ranges": "bytes",
         "Content-Length": size,
         "Content-Type": "application/pdf",
-        "Access-Control-Allow-Origin": "http://localhost:4200"
+        "Access-Control-Allow-Origin": "http://localhost:4200",
+        "Content-Encoding": null, // mandatory header - but it's allowed to be null
       });
 
       if (req.method === "GET") {
