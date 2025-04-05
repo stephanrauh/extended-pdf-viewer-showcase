@@ -20,6 +20,58 @@ export class SimpleComponent implements OnDestroy {
 
   public height = 'auto';
 
+  public get minifiedJSLibraries() {
+    try {
+      if (localStorage) {
+        return localStorage.getItem('ngx-extended-pdf-viewer.simple.minifiedJSLibraries') === 'true' ;
+      }
+    } catch /* (safariSecurityException) */ {
+      // localStorage is not available on Safari
+    }
+    return false;
+  }
+  public set minifiedJSLibraries(value) {
+    try {
+      if (localStorage) {
+        const change = value !== this.minifiedJSLibraries;
+        localStorage.setItem('ngx-extended-pdf-viewer.simple.minifiedJSLibraries', String(value));
+        if (change) {
+          location = location;
+        }
+      }
+    } catch /* (safariSecurityException) */ {
+      // localStorage is not available on Safari
+    }
+  }
+
+
+  public get forceUsingLegacyES5() {
+    if (this.minifiedJSLibraries) {
+      return false;
+    }
+    try {
+      if (localStorage) {
+        return localStorage.getItem('ngx-extended-pdf-viewer.simple.ES5') === 'true'
+      }
+    } catch /* (safariSecurityException) */ {
+      // localStorage is not available on Safari
+    }
+    return false;
+  }
+  public set forceUsingLegacyES5(value) {
+    try {
+      if (localStorage) {
+        const change = value !== this.forceUsingLegacyES5;
+        localStorage.setItem('ngx-extended-pdf-viewer.simple.ES5', String(value));
+        if (change) {
+          location = location;
+        }
+      }
+    } catch /* (safariSecurityException) */ {
+      // localStorage is not available on Safari
+    }
+  }
+
   public time = 0;
   public currentTime = 0;
 

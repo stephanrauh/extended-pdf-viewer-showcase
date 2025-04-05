@@ -43,6 +43,24 @@
               <input matInput [(ngModel)]="pageLabel" />
             </mat-form-field>
           </mat-tab>
+          <mat-tab label="Debugging">
+            <p>
+              This library consists of two parts: the base library, pdf.js, and the TypeScript code. If you run into errors,
+              debugging the TypeScript code is usually straight-forwards. Unfortunately, most errors occur in the base
+              library, and it's difficult to find out what's going on in the minified code.
+            </p>
+            <p>If you run into an error, please activate <code>[minifiedJSLibraries]="false"</code>. The viewer loads
+            a bit slower, but you can see the error message and debug the JavaScript code. If you report a bug
+            on GitHub, please include the error message and the stacktrace of the non-minified code.</p>
+            <p>The setting <code>[forceUsingLegacyES5]="true"</code> is usually set internally in the library.
+              Only use it if you've tried everything else. It allows you to run the viewer on old browsers,
+            at least to a limited extend. Usually compatibility starts deteriorating with browsers that are two years old.
+            Debugging the ES5 code isn't fun - it's partially minified and it's using old syntax.
+           </p>
+            <mat-checkbox class="margin" [(ngModel)]="minifiedJSLibraries">use the minified JS libraries</mat-checkbox>
+            <mat-checkbox class="margin" [(ngModel)]="forceUsingLegacyES5" [disabled]="minifiedJSLibraries">force using ES5 code for old browsers</mat-checkbox>
+          </mat-tab>
+
           <mat-tab label="Color themes">
             <p>
               You can choose between two predefined color themes, or you can provide your own custom color theme. Note that switching the themes doesn't work
@@ -109,6 +127,36 @@
             </mat-tab>
           </mat-tab-group>
         }
+        @if (selectedTab === 2) {
+          <mat-tab-group>
+            <mat-tab label="HTML template">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html3.md"> </app-ie11-markdown>
+            </mat-tab>
+            <mat-tab label="Typescript">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts3.md"> </app-ie11-markdown>
+            </mat-tab>
+          </mat-tab-group>
+        }
+        @if (selectedTab === 2) {
+          <mat-tab-group>
+            <mat-tab label="HTML template">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html3.md"> </app-ie11-markdown>
+            </mat-tab>
+            <mat-tab label="Typescript">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts3.md"> </app-ie11-markdown>
+            </mat-tab>
+          </mat-tab-group>
+        }
+        @if (selectedTab === 3) {
+          <mat-tab-group>
+            <mat-tab label="HTML template">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html4.md"> </app-ie11-markdown>
+            </mat-tab>
+            <mat-tab label="Typescript">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts4.md"> </app-ie11-markdown>
+            </mat-tab>
+          </mat-tab-group>
+        }
       </mat-card>
     </div>
   }
@@ -153,6 +201,8 @@
               (pageRendered)="onPageRendered($event)"
               (pageLoaded)="onPageLoaded($event)"
               [filenameForDownload]="'The Public Domain - Enclosing the Commons of the Mind.pdf'"
+              [minifiedJSLibraries]="minifiedJSLibraries"
+              [forceUsingLegacyES5]="forceUsingLegacyES5"
               >
             </ngx-extended-pdf-viewer>
           }
