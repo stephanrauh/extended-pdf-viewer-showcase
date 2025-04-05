@@ -8,6 +8,12 @@
               ngx-extended-pdf-viewer allows you to define your own custom toolbar, menu, and it even allows you to create
               your own sidebar and your own thumbnails.
             </p>
+            <p>
+              Sometimes your buttons don't show in the toolbar. For example, the find button is shy.
+              You need to pass a responsive design attribute to make it visible, such as <code>[showFindButton]="'always-visible'"</code>.
+              The find button, in particular, only shows if the PDF file has a text layer and if you opted in to show it
+              (<code>[textLayer]="true"</code>).
+            </p>
             <mat-label title="Demo theme"></mat-label>
             <mat-radio-group aria-label="Demo" [(ngModel)]="theme">
               <mat-radio-button value="default">standard layout</mat-radio-button>
