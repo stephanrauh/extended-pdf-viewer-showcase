@@ -63,6 +63,10 @@
   in earlier versions.</p>
   <p><b>Breaking Change in version 22:</b> Some of the ids have changed: <code>#print</code> is now <code>#printButton</code>,
      and <code>#download</code> is now <code>#downloadButton</code>.</p>
+  <p><b>Troubleshooting:</b> If a button doesn't show, try setting <code>[showXYZButton]='"always-visible"'</code> (with XYZ the name of the button).
+  For example, <code>&lt;pdf-find-button></code> needs the attribute <code>[showFindButton]='"always-visible"'</code>. If that works,
+  head over to the <a href="/extended-pdf-viewer/responsive-design">responsive design page</a> to learn about the options you can pass to
+  <code>[showXYZButton]</code>.</p>
   <app-tree [treeData]="toolbar"></app-tree>
 
   <h2>Findbar</h2>
