@@ -34,7 +34,7 @@
     "@material-design-icons/font": "^0.14.15",
     "angular2-smart-table": "^3.6.1",
     "marked": "^15.0.7",
-    "ngx-extended-pdf-viewer": "^23.0.0-alpha.0",
+    "ngx-extended-pdf-viewer": "^23.0.0",
     "ngx-markdown": "^19.1.1",
     "ngx-perfect-scrollbar": "^10.1.1",
     "perfect-scrollbar": "^1.5.6",
