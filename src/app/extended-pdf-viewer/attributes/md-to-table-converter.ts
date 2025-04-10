@@ -8,7 +8,7 @@ export async function convertMDToTable(file: string, httpClient: HttpClient): Pr
     })
   );
   const lines = splitLines(removeHeader(source));
-  return lines.map((line) => parseColumns(line));
+  return lines.filter((line) => line.length > 0).map((line) => parseColumns(line));
 }
 
 
@@ -22,6 +22,7 @@ function splitLines(raw: string): string[] {
 }
 
 function parseColumns(line: string): object {
+  console.log(line);
   const columns = line.split('|');
 
   let description = "";
