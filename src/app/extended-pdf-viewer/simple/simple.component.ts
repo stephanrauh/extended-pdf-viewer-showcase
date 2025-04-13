@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, effect, OnDestroy } from '@angular/core';
-import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, PagesLoadedEvent, PdfLoadedEvent } from 'ngx-extended-pdf-viewer';
+import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, PdfLoadedEvent } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
 
 @Component({
-standalone: false,
+  standalone: false,
   selector: 'app-simple',
   templateUrl: './simple.component.html',
   styleUrls: ['./simple.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleComponent implements OnDestroy {
-   public _selectedTab = 0;
+  public _selectedTab = 0;
 
   public page = 5;
 
@@ -23,7 +23,7 @@ export class SimpleComponent implements OnDestroy {
   public get minifiedJSLibraries() {
     try {
       if (localStorage) {
-        return localStorage.getItem('ngx-extended-pdf-viewer.simple.minifiedJSLibraries') === 'true' ;
+        return localStorage.getItem('ngx-extended-pdf-viewer.simple.minifiedJSLibraries') === 'true';
       }
     } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
@@ -36,6 +36,7 @@ export class SimpleComponent implements OnDestroy {
         const change = value !== this.minifiedJSLibraries;
         localStorage.setItem('ngx-extended-pdf-viewer.simple.minifiedJSLibraries', String(value));
         if (change) {
+          // eslint-disable-next-line no-self-assign
           location = location;
         }
       }
@@ -44,14 +45,13 @@ export class SimpleComponent implements OnDestroy {
     }
   }
 
-
   public get forceUsingLegacyES5() {
     if (this.minifiedJSLibraries) {
       return false;
     }
     try {
       if (localStorage) {
-        return localStorage.getItem('ngx-extended-pdf-viewer.simple.ES5') === 'true'
+        return localStorage.getItem('ngx-extended-pdf-viewer.simple.ES5') === 'true';
       }
     } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
@@ -64,6 +64,7 @@ export class SimpleComponent implements OnDestroy {
         const change = value !== this.forceUsingLegacyES5;
         localStorage.setItem('ngx-extended-pdf-viewer.simple.ES5', String(value));
         if (change) {
+          // eslint-disable-next-line no-self-assign
           location = location;
         }
       }
@@ -90,7 +91,6 @@ export class SimpleComponent implements OnDestroy {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   public localStorageIsSupported() {
@@ -157,17 +157,26 @@ export class SimpleComponent implements OnDestroy {
     }
   }
 
-  constructor(public logService: LogService, notificationService: PDFNotificationService) {
-
+  constructor(
+    public logService: LogService,
+    notificationService: PDFNotificationService,
+  ) {
     this.startTime = new Date().getTime();
 
     // increase the range chunk size for testing purposes
     // In general, that's not a good idea, but if you know what you're doing, you may
     // be able to tweak performance by fine-tuning the range chunk size according to the
     // needs of your application and infrastructure
-    pdfDefaultOptions.rangeChunkSize=1024*256;
+    pdfDefaultOptions.rangeChunkSize = 1024 * 256;
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+      setTimeout(
+        () =>
+          document.querySelector('#primaryZoomIn')?.addEventListener('click', () => {
+            console.log('zoom in ',  (new Date().getTime() - this.currentStartTime), 'ms');
+          }),
+        100,
+      );
     });
   }
 
@@ -194,15 +203,16 @@ export class SimpleComponent implements OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public onPageRender(event: PageRenderEvent): void {
-    this.currentStartTime = new Date().getTime();
+    //   this.currentStartTime = new Date().getTime();
+    console.log('onPageRender', new Date().getTime() - this.currentStartTime, 'ms');
   }
 
   public onPageLoaded(event: unknown): void {
-    console.log("Page Load", event);
+    console.log('Page Load', event);
   }
 
   public onPdfLoaded(event: PdfLoadedEvent): void {
-    console.log("Loaded", event);
+    console.log('Loaded', event);
   }
 
   public onPageRendered(event: PageRenderEvent): void {
@@ -211,9 +221,8 @@ export class SimpleComponent implements OnDestroy {
       this.time = endTime - this.startTime;
     }
     this.currentTime = endTime - this.currentStartTime;
-    console.log("Rendered", event);
+    console.log('Rendered', new Date().getTime() - this.currentStartTime, 'ms');
   }
-
   public ngOnDestroy() {
     pdfDefaultOptions.rangeChunkSize = 64 * 1024; // restore the default value
   }
