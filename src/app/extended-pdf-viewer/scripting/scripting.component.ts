@@ -41,7 +41,6 @@ export class ScriptingComponent {
     try {
       if (localStorage) {
         localStorage.setItem('ngx-extended-pdf-viewer.enableScripting', String(enable));
-        // eslint-disable-next-line no-self-assign
         window.location.reload();
       }
     } catch /* (safariSecurityException) */ {
