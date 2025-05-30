@@ -3,11 +3,11 @@ import { NgxExtendedPdfViewerService, PagesLoadedEvent } from 'ngx-extended-pdf-
 
 @Component({
   standalone: false,
-  selector: 'app-pages-loaded',
-  templateUrl: './pages-loaded.component.html',
-  styleUrls: ['./pages-loaded.component.css'],
+  selector: 'app-editor-events',
+  templateUrl: './editor-events.component.html',
+  styleUrls: ['./editor-events.component.css'],
 })
-export class PagesLoadedComponent {
+export class EditorEventsComponent {
   public messages: string[] = [];
 
   private _fullscreen = false;

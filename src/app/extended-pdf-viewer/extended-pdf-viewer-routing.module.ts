@@ -68,6 +68,7 @@ import { AnnotationLayerApiComponent } from './annotation-layer-api/annotation-l
 import { EditorSettingsComponent } from './editor-settings/editor-settings.component';
 import { CustomFindComponent } from './custom-find/custom-find.component';
 import { CSPComponent } from './csp/csp.component';
+import { EditorEventsComponent } from './editor-events/editor-events.component';
 
 const routes: Routes = [
   {
@@ -118,6 +119,8 @@ const routes: Routes = [
   { path: 'modal', component: ModalComponent },
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'navigation', component: NavigationComponent },
+  { path: 'editor-events', component: EditorEventsComponent },
+  { path: 'events', component: PagesLoadedComponent },
   { path: 'pages-loaded', component: PagesLoadedComponent },
   { path: 'passwords', component: PasswordsComponent },
   { path: 'pdfjs-versions', component: PdfjsVersionsComponent },

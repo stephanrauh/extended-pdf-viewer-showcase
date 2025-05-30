@@ -19,7 +19,7 @@ export class ScriptingComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
+  constructor() {
     try {
       if (localStorage) {
         const setting = localStorage.getItem('ngx-extended-pdf-viewer.enableScripting');

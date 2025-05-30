@@ -4,10 +4,10 @@
       <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
         <mat-tab-group>
           <mat-tab label="HTML template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/pages-loaded/html.md"> </app-ie11-markdown>
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-events/html.md"> </app-ie11-markdown>
           </mat-tab>
           <mat-tab label="TypeScript">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/pages-loaded/ts.md"> </app-ie11-markdown>
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-events/ts.md"> </app-ie11-markdown>
           </mat-tab>
         </mat-tab-group>
       </mat-card>
@@ -44,37 +44,13 @@
       [height]="'90vh'"
       [page]="9"
       [showHandToolButton]="true"
-      [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+      [src]="'/assets/pdfs/Introduction.pdf'"
       [textLayer]="true"
       (afterPrint)="onEvent('afterPrint', $event)"
       (annotationEditorEvent)="onEvent('annotationEditorEvent', $event)"
       (annotationEditorLayerRendered)="onEvent('annotationEditorLayerRendered', $event)"
       (annotationEditorModeChanged)="onEvent('annotationEditorModeChanged', $event)"
       (annotationLayerRendered)="onEvent('annotationLayerRendered', $event)"
-      (attachmentsloaded)="onEvent('attachmentsloaded', $event)"
-      (beforePrint)="onEvent('beforePrint', $event)"
-      (currentZoomFactor)="onEvent('currentZoomFactor', $event)"
-      (findbarVisible)="onEvent('findbarVisible', $event)"
-      (layersloaded)="onEvent('layersloaded', $event)"
-      (outlineLoaded)="onEvent('outlineLoaded', $event)"
-      (pageChange)="onEvent('pageChange', $event)"
-      (pageRender)="onEvent('pageRender', $event)"
-      (pageRendered)="onEvent('pageRendered', $event)"
-      (pagesLoaded)="onPagesLoaded($event)"
-      (pageViewModeChange)="onEvent('pageViewModeChange', $event)"
-      (pdfDownloaded)="onEvent('pdfDownloaded', $event)"
-      (pdfLoaded)="onEvent('pdfLoaded', $event)"
-      (pdfLoadingFailed)="onPdfLoadingFailed($event)"
-      (pdfLoadingStarts)="onEvent('pdfLoadingStarts', $event)"
-      (progress)="onEvent('progress', $event)"
-      (propertiesDialogVisible)="onEvent('propertiesDialogVisible', $event)"
-      (thumbnailDrawn)="onEvent('thumbnailDrawn', $event)"
-      (updateFindMatchesCount)="onEvent('updateFindMatchesCount', $event)"
-      (updateFindState)="onEvent('updateFindState', $event)"
-      (xfaLayerRendered)="onEvent('xfaLayerRendered', $event)"
-      (zoomChange)="onEvent('zoomChange', $event)"
-      (currentZoomFactor)="onEvent('currentZoomFactor', $event)"
-
       >
     </ngx-extended-pdf-viewer>
   </mat-card>

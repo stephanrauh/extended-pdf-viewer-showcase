@@ -1,7 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 @Component({
@@ -22,7 +22,7 @@ export class ExtendedPdfViewerMenuComponent {
   constructor(private router: Router, private cd: ChangeDetectorRef,private breakpointObserver: BreakpointObserver) {}
 
   public async toggleDrawer(): Promise<void> {
-    const mobile = await this.isHandset$.pipe(take(1)).toPromise();
+    const mobile = await firstValueFrom(this.isHandset$);
     if (mobile) {
       this.drawer.toggle();
     }

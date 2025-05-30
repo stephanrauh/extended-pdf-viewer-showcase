@@ -75,6 +75,7 @@ import { EditorSettingsComponent } from './editor-settings/editor-settings.compo
 import { CustomFindComponent } from './custom-find/custom-find.component';
 import { isLocalhost } from './common/utilities';
 import { CSPComponent } from './csp/csp.component';
+import { EditorEventsComponent } from './editor-events/editor-events.component';
 
 
 new TouchEmulator();
@@ -105,6 +106,7 @@ pdfDefaultOptions._internalFilenameSuffix = isLocalhost()? '' : '.min';
     DefaultOptionsComponent,
     DisplayOptionsComponent,
     EditorSettingsComponent,
+    EditorEventsComponent,
     ExportAnnotationsComponent,
     ExportFileComponent,
     ExportImageComponent,
