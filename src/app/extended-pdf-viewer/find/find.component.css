@@ -19,3 +19,25 @@
 .padding-top {
   padding-top: 0.5em;
 }
+
+.compact {
+  height: 30px;
+}
+
+small {
+  font-size: 10px;
+}
+
+.column-header {
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #eff5fa;
+  border-radius: 4px;
+}
+
