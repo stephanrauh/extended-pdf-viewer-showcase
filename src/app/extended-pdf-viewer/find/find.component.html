@@ -6,35 +6,35 @@
           <mat-tab label="Find API">
             <div class="padding-top">
               <section class="section">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="compact-input">
                   <input matInput class="margin" [(ngModel)]="searchtext" placeholder="search term" />
                 </mat-form-field>
               </section>
-              <section class="section">
+              <section class="section compact">
                 <mat-checkbox class="margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()">highlight all</mat-checkbox>
               </section>
-              <section class="section">
+              <section class="section compact">
                 <mat-checkbox class="margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()">match case</mat-checkbox>
               </section>
-              <section class="section">
+              <section class="section compact">
                 <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()" [disabled]="matchRegExp">whole word</mat-checkbox>
               </section>
-              <section class="section">
+              <section class="section compact">
                 <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()" [disabled]="matchRegExp"
                   >match diacritics</mat-checkbox
                 >
                 <small style="margin-left: 1em">try licao to find lição</small>
               </section>
-              <section class="section">
+              <section class="section compact">
                 <mat-checkbox class="margin" [(ngModel)]="multiple" (change)="onCheckboxClicked()" [disabled]="matchRegExp"
                   >multiple words (separated by space)</mat-checkbox
                 >
               </section>
-              <section class="section">
+              <section class="section compact">
                 <mat-checkbox class="margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()">match regular expression</mat-checkbox>
                 <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small>
               </section>
-              <section class="section">
+              <section class="section compact">
                 <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()"
                   >don't scroll the find result into view</mat-checkbox
                 >
