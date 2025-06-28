@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
 
 @Component({
   standalone: false,
@@ -12,6 +12,8 @@ export class EditorEventsComponent {
 
   private _fullscreen = false;
 
+  private changeDetector = inject(ChangeDetectorRef);
+
   public get fullscreen(): boolean {
     return this._fullscreen;
   }
@@ -21,19 +23,20 @@ export class EditorEventsComponent {
   }
 
   public onEvent(type: string, event: any): void {
-    const now = new Date().toLocaleTimeString();
-    let e = '(no parameters)';
-    if (event) {
-      if (event.source) {
-        event.source = undefined;
+      // const now = new Date().toLocaleTimeString();
+      let e = '(no parameters)';
+      if (event) {
+        if (event.source) {
+          event.source = undefined;
+        }
+        try {
+          e = 'Event type: ' + event.constructor.name + ' Event: ' + JSON.stringify(event).substring(0, 60);
+        } catch {
+          e = 'Event type: ' + event.constructor.name + ' Event: ' + event;
+        }
       }
-      try {
-        e = 'Event type: ' + event.constructor.name + ' Event: ' + JSON.stringify(event).substring(0, 60);
-      } catch {
-        e = 'Event type: ' + event.constructor.name + ' Event: ' + event;
-      }
-    }
-    this.messages.push(`${now} ${type} ${e}`);
+      this.messages.push(`${now} ${type} ${e}`);
+      this.changeDetector.detectChanges();
   }
 
   public onPagesLoaded(pagecount: PagesLoadedEvent): void {

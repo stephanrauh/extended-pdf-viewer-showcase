@@ -4,6 +4,8 @@
       <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
         <mat-tab-group>
           <mat-tab label="HTML template">
+            You can listen to the events of the annotation editors (i.e. the highlight tool and adding images, drawing, and text). Note that many
+            events are fired when commiting the annotation.
             <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-events/html.md"> </app-ie11-markdown>
           </mat-tab>
           <mat-tab label="TypeScript">
@@ -48,9 +50,6 @@
       [textLayer]="true"
       (afterPrint)="onEvent('afterPrint', $event)"
       (annotationEditorEvent)="onEvent('annotationEditorEvent', $event)"
-      (annotationEditorLayerRendered)="onEvent('annotationEditorLayerRendered', $event)"
-      (annotationEditorModeChanged)="onEvent('annotationEditorModeChanged', $event)"
-      (annotationLayerRendered)="onEvent('annotationLayerRendered', $event)"
       >
     </ngx-extended-pdf-viewer>
   </mat-card>
