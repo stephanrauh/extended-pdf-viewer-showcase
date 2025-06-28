@@ -23,7 +23,7 @@ export class EditorEventsComponent {
   }
 
   public onEvent(type: string, event: any): void {
-      // const now = new Date().toLocaleTimeString();
+      const now = new Date().toLocaleTimeString();
       let e = '(no parameters)';
       if (event) {
         if (event.source) {
