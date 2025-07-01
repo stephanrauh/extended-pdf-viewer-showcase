@@ -1,0 +1,61 @@
+<div class="flex-container-column fill-container">
+  @if (!fullscreen) {
+    <div class="flex-container-row" >
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <mat-tab-group>
+          <mat-tab label="Custom Loading Indicator">
+            <p>While there is a loading indicator in pdf.js, there's a good reason to implement your own loading indicator. The default
+              indicator is triggered only once (but not when you load a new document), and it only shows the loading phase, excluding the
+              time required to render the PDF file.
+          </p>
+          <p>Luckily, you can easily implement your own loading indicator using the events `(pdfLoading)`, `((pdfLoaded)`, `(pageRender)`,
+            and `(pageRendered)`.
+          </p>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/html.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="Typescript">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/ts.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="CSS">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/css.md"> </app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+  }
+
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
+    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
+    </button>
+    <small
+      >Copyright hint: the PDF file has been published by Manuj Yadav, Jungsoo Kim, Valtteri Hongisto, Densil Cabrera, and Richard de Dear
+      under a Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/). See the full details
+      on page 2 of the document.
+    </small>
+    <div class="pdf-container">
+      <!-- Loading/Error Indicator -->
+      <div *ngIf="showLoadingIndicator() || hasError()" class="loading-overlay">
+        <div *ngIf="!hasError()" class="spinner"></div>
+        <div *ngIf="hasError()" class="error-icon">⚠️</div>
+        <p>{{ loadingMessage() }}</p>
+      </div>
+      <ngx-extended-pdf-viewer
+        [src]="src"
+        (pdfLoaded)="onPdfLoaded()"
+        (pdfLoadingFailed)="onPdfLoadingFailed()"
+        (pdfLoading)="onPdfLoading()"
+        (pageRendered)="onPageRendered()"
+        (pageRender)="onPageRender()">
+      </ngx-extended-pdf-viewer>
+    </div>
+  </mat-card>
+</div>

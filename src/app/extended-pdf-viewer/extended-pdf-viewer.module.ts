@@ -76,6 +76,7 @@ import { CustomFindComponent } from './custom-find/custom-find.component';
 import { isLocalhost } from './common/utilities';
 import { CSPComponent } from './csp/csp.component';
 import { EditorEventsComponent } from './editor-events/editor-events.component';
+import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 
 
 new TouchEmulator();
@@ -125,6 +126,7 @@ pdfDefaultOptions._internalFilenameSuffix = isLocalhost()? '' : '.min';
     KeycloakComponent,
     LayersComponent,
     LinksComponent,
+    LoadingIndicatorComponent,
     MobileComponent,
     ModalComponent,
     ModalDialogComponent,

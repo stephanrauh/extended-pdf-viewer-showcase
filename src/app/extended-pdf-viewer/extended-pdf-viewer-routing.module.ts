@@ -69,6 +69,7 @@ import { EditorSettingsComponent } from './editor-settings/editor-settings.compo
 import { CustomFindComponent } from './custom-find/custom-find.component';
 import { CSPComponent } from './csp/csp.component';
 import { EditorEventsComponent } from './editor-events/editor-events.component';
+import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 
 const routes: Routes = [
   {
@@ -113,6 +114,7 @@ const routes: Routes = [
   { path: 'hiding-buttons', component: HidingButtonsComponent },
   { path: 'responsive-design', component: ResponsiveDesignComponent },
   { path: 'links', component: LinksComponent },
+  { path: 'loading-indicator', component: LoadingIndicatorComponent},
   { path: 'keyboard', component: KeyboardComponent },
   { path: 'keycloak', component: KeycloakComponent },
   { path: 'mobile', component: MobileComponent },
