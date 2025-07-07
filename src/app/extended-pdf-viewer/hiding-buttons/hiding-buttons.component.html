@@ -5,55 +5,55 @@
         <mat-tab-group (selectedTabChange)="currentTab = $event.index">
           <mat-tab label="simple demo">
             <p>You can hide every button of the toolbar and every menu item of the secondary menu.</p>
-            <mat-checkbox class="margin" [(ngModel)]="showToolbar">showToolbar</mat-checkbox> (hiding the toolbar hides every button)
+            <mat-checkbox class="margin compact" [(ngModel)]="showToolbar">showToolbar</mat-checkbox> (hiding the toolbar hides every button)
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox> (only shown
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton</mat-checkbox> (only shown
             if there are menu items)
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showFindButton">showFindButton</mat-checkbox> (requires text layer)
-            <mat-checkbox class="margin" [disabled]="!showToolbar && showFindButton" [(ngModel)]="findbarVisible">findbarVisible</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showFindButton">showFindButton</mat-checkbox> (requires text layer)
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar && showFindButton" [(ngModel)]="findbarVisible">findbarVisible</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDrawEditor">showDrawEditor</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showDrawEditor">showDrawEditor</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHighlightEditor">showHighlightEditor</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showHighlightEditor">showHighlightEditor</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showStampEditor">showStampEditor</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showStampEditor">showStampEditor</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showTextEditor">showTextEditor</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showTextEditor">showTextEditor</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
             @if (showDownloadButton) {
-              <mat-form-field class="margin">
+              <mat-form-field class="margin compact-input"  [appearance]="'fill'">
                 <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
               </mat-form-field>
             }
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateCwButton">showRotateCwButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showRotateCwButton">showRotateCwButton</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showRotateCcwButton">showRotateCcwButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showRotateCcwButton">showRotateCcwButton</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showScrollingButtons">showScrollingButtons</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showScrollingButtons">showScrollingButtons</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
             <br />
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
-            <mat-checkbox class="margin" [disabled]="!showToolbar" [(ngModel)]="propertiesDialogVisible">propertiesDialogVisible</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
+            <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="propertiesDialogVisible">propertiesDialogVisible</mat-checkbox>
           </mat-tab>
           <mat-tab label="responsive design">
             <p>Are you looking for the tabs that used to be here? The reponsive design demos have moved <a href="/responsive-design">to a dedicated page</a>.</p>

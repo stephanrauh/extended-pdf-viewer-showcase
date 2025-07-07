@@ -5,7 +5,7 @@
         <p>The text layer is an optional, invisible layer above the PDF document, which
           is rendered as an image. You need it to
         </p>
-        <ul>
+        <ul style="margin-top: 0px; margin-bottom: 0px">
           <li>mark and copy texts</li>
           <li>find texts</li>
           <li>and - to a limited extend and far from being perfect - to modify how texts are displayed.</li>
@@ -15,10 +15,8 @@
         </p>
         <p><b>Demos:</b></p>
         <mat-checkbox class="margin" [(ngModel)]="markLongWords">mark long words</mat-checkbox>
-        <br>
-          <mat-checkbox class="margin" [(ngModel)]="showBoxes">put each text layer <code>&lt;span&gt;</code> into a box</mat-checkbox>
-          <br>
-            <mat-checkbox class="margin" [(ngModel)]="showTextLayer">show the text layer</mat-checkbox>
+        <mat-checkbox class="margin" [(ngModel)]="showBoxes">put each text layer <code>&lt;span&gt;</code> into a box</mat-checkbox>
+        <mat-checkbox class="margin" [(ngModel)]="showTextLayer">show the text layer</mat-checkbox>
             <p>The demos show that the text layer isn't perfect. The positions are good enough for finding and marking text, but
               they don't match the precise positions. Plus, sometime words are spread among several <code>&lt;span&gt;</code> tags.
             </p>

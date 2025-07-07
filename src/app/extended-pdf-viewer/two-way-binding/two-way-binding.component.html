@@ -7,43 +7,43 @@
             <p>
               Many properties of ngx-extended-pdf-viewer support two-way binding.
             </p>
-            <mat-form-field class="margin">
+            <mat-form-field class="margin compact-input">
               <input matInput  [(ngModel)]="zoom" placeholder="[(zoom)]" />
             </mat-form-field>
             <span>(currentZoomFactor)="{{currentZoomFactor}}"</span>
             <br />
-            <mat-form-field class="margin">
+            <mat-form-field class="margin-top margin compact-input">
               <input matInput  [(ngModel)]="rotation" placeholder="[(rotation)]=0 | 90 | 180 | 270" />
             </mat-form-field>
-            <mat-form-field>
-              <input matInput  [(ngModel)]="spread" placeholder="[(spread)]='off' | 'even' | 'odd'" />
+            <mat-form-field class="margin-top margin compact-input">
+              <input matInput  [(ngModel)]="spread" placeholder="[(spread)]='off' | 'even' | 'odd'"  />
             </mat-form-field>
             <br />
-            <mat-form-field class="full-width">
+            <mat-form-field class="margin-top full-width margin compact-input">
               <input matInput  [(ngModel)]="scrollMode" placeholder="[(scrollMode)]" />
               <mat-hint>0=vertical 1=horizontal 2=block 3=single page</mat-hint>
             </mat-form-field>
             <br />
-            <mat-form-field class="margin-top full-width">
+            <mat-form-field class="margin-top full-width margin compact-input">
               <input matInput  [(ngModel)]="activeSidebarView" placeholder="[(activeSidebarView)]" />
               <mat-hint>1=thumbnails 2=outline 3=attachments 4=layers</mat-hint>
             </mat-form-field>
-            @if (activeSidebarView == 2) {
+            @if (activeSidebarView === 2) {
               <button
-              (click)="load('./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf')">PDF with outline</button>
+              (click)="load('./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf')">load a PDF with outline</button>
             }
-            @if (activeSidebarView == 3) {
+            @if (activeSidebarView === 3) {
               <button
-              (click)="load('./assets/pdfs/annotation-fileattachment.pdf')">PDF with attachments</button>
+              (click)="load('./assets/pdfs/annotation-fileattachment.pdf')">load a PDF with attachments</button>
             }
-            @if (activeSidebarView == 4) {
+            @if (activeSidebarView === 4) {
               <button
-              (click)="load('/assets/pdfs/themes_de_la_Science-fiction.pdf')">PDF with layers</button>
+              (click)="load('/assets/pdfs/themes_de_la_Science-fiction.pdf')">load a PDF with layers</button>
             }
             <br />
-            <mat-checkbox class="margin" [(ngModel)]="sidebarVisible">[(sidebarVisible)]</mat-checkbox>
+            <mat-checkbox class="margin compact-input" [(ngModel)]="sidebarVisible">[(sidebarVisible)]</mat-checkbox>
             <br />
-            <mat-form-field class="full-width margin-top">
+            <mat-form-field class="full-width margin-top margin compact-input">
               <input matInput  [(ngModel)]="src" placeholder="[(src)]" />
             </mat-form-field>
           </mat-tab>
@@ -57,7 +57,7 @@
               If you try to use both `[(page)]` and `[(pageLabel)]` with two-way binding, you'll run into
               `ExpressionChangedAfterItHasBeenCheckedErrors`. To prevent this, you'll want to adopt the `OnPush` change detection strategy.
             </p>
-            <mat-form-field class="margin">
+            <mat-form-field class="margin compact-input">
               <input matInput  [(ngModel)]="page" placeholder="Current page number" />
             </mat-form-field>
             <mat-form-field>

@@ -86,6 +86,7 @@ export class LoadingIndicatorComponent {
   }
 
   onPageRendered() {
+    setTimeout(() =>
     this.pdfState.update(state => {
       if (state.status === 'loaded') {
         return { ...state,
@@ -93,7 +94,8 @@ export class LoadingIndicatorComponent {
           isRendering: false };
       }
       return state;
-    });
+    }),
+    1000);
   }
 
   public loadLargeFile(): void {

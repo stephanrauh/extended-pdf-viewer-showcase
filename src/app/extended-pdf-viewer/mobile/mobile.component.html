@@ -12,12 +12,12 @@
             <mat-radio-group aria-label="Toolbar zoom factor"
               (change)="mobileFriendlyZoomSetting=$event.value"
               [value]="mobileFriendlyZoomSetting">
-              <mat-radio-button value="100%">[mobileFriendlyZoom]="'100%' (default)"</mat-radio-button>
-              <mat-radio-button [value]="'150%'">[mobileFriendlyZoom]="'150%'"</mat-radio-button>
-              <mat-radio-button value="200%">[mobileFriendlyZoom]="'200%'"</mat-radio-button>
-              <mat-radio-button value="1.7">[mobileFriendlyZoom]="1.7"</mat-radio-button>
-              <mat-radio-button value="true">[mobileFriendlyZoom]="true"</mat-radio-button>
-              <mat-radio-button value="false">[mobileFriendlyZoom]="false"</mat-radio-button>
+              <mat-radio-button class="compact" value="100%">[mobileFriendlyZoom]="'100%' (default)"</mat-radio-button>
+              <mat-radio-button class="compact" [value]="'150%'">[mobileFriendlyZoom]="'150%'"</mat-radio-button>
+              <mat-radio-button class="compact" value="200%">[mobileFriendlyZoom]="'200%'"</mat-radio-button>
+              <mat-radio-button class="compact" value="1.7">[mobileFriendlyZoom]="1.7"</mat-radio-button>
+              <mat-radio-button class="compact" value="true">[mobileFriendlyZoom]="true"</mat-radio-button>
+              <mat-radio-button class="compact" value="false">[mobileFriendlyZoom]="false"</mat-radio-button>
             </mat-radio-group>
           </mat-tab>
           <mat-tab label="Responsive design">

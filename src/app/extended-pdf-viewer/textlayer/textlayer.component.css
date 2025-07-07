@@ -12,3 +12,8 @@ ngx-extended-pdf-viewer div.show-text-layer > span > * {
   background-color: rgba(0, 0, 255, 0.555);
   display: inline;
 }
+
+p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

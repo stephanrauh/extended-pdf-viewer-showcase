@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
   standalone: false,
@@ -29,5 +30,9 @@ export class SignaturesComponent {
     this._showSignature = show;
     this.showPdf = false;
     setTimeout(() => (this.showPdf = true), 100);
+  }
+
+  constructor() {
+    pdfDefaultOptions.enableSignatureEditor = true;
   }
 }

@@ -10,14 +10,14 @@
             </app-ie11-markdown>
             <mat-label title="Toolbar zoom factor"></mat-label>
             <mat-radio-group aria-label="Toolbar zoom factor" [(ngModel)]="zoomSetting">
-              <mat-radio-button value="100%">[zoom]="'100%'"</mat-radio-button>
-              <mat-radio-button value="150%">[zoom]="'150%'"</mat-radio-button>
-              <mat-radio-button value="200%">[zoom]="'200%'"</mat-radio-button>
-              <mat-radio-button value="1500%">[zoom]="'1500%'" (slow!)</mat-radio-button>
-              <mat-radio-button value="auto">[zoom]="auto"</mat-radio-button>
-              <mat-radio-button value="page-fit">[zoom]="page-fit"</mat-radio-button>
-              <mat-radio-button value="page-actual">[zoom]="page-actual"</mat-radio-button>
-              <mat-radio-button value="page-width">[zoom]="page-width"</mat-radio-button>
+              <mat-radio-button class="compact" value="100%">[zoom]="'100%'"</mat-radio-button>
+              <mat-radio-button class="compact" value="150%">[zoom]="'150%'"</mat-radio-button>
+              <mat-radio-button class="compact" value="200%">[zoom]="'200%'"</mat-radio-button>
+              <mat-radio-button class="compact" value="1500%">[zoom]="'1500%'" (slow!)</mat-radio-button>
+              <mat-radio-button class="compact" value="auto">[zoom]="auto"</mat-radio-button>
+              <mat-radio-button class="compact" value="page-fit">[zoom]="page-fit"</mat-radio-button>
+              <mat-radio-button class="compact" value="page-actual">[zoom]="page-actual"</mat-radio-button>
+              <mat-radio-button class="compact" value="page-width">[zoom]="page-width"</mat-radio-button>
             </mat-radio-group>
             <div class="distance-top">Selected zoom level: {{ zoomSetting === undefined ? "undefined" : zoomSetting }}; current zoom level: {{ currentZoomFactor | percent }}</div>
             @if (resolution) {

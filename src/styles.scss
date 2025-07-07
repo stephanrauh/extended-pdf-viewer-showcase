@@ -182,3 +182,14 @@ html {
     padding: 8px 0 !important;
   }
 }
+
+.compact.mat-mdc-radio-button .mdc-radio {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.compact .mdc-checkbox {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: -5px;
+}

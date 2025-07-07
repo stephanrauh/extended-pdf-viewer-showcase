@@ -1,13 +1,14 @@
 <div class="flex-container-column fill-container">
   @if (!fullscreen) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
         <mat-tab-group>
           <mat-tab label="Signatures without verification">
             <p><b>Using this feature is dangerous!</b>
           </p>
           <p>
-            PDF forms can bear a digital signature. Such a signature confirms that the PDF that
+            PDF files can contains a digital signature, optionally backed by a cryptographic verification.
+            Such a signature confirms that the PDF that
             it's been created by the author (and not someone else).
           </p>
           <p>
@@ -19,6 +20,19 @@
           <p>To activate signatures, you must set the attribute <code>showUnverifiedSignatures</code>.
         </p>
         <mat-checkbox class="margin" [(ngModel)]="showSignature">show signature</mat-checkbox>
+      </mat-tab>
+      <mat-tab label="Signature Editor">
+        <p>
+          Starting with ngx-extended-pdf-viewer 24, there's a "signature editor". There's a catch: these
+          signatures aren't PDF signatures, they are merely image annotations.
+        </p>
+          <ul>
+            <li>These signatures aren't cryptographic signatures as defined by the PDF standard.</li>
+            <li>They show even if you set <code>showUnverifiedSignatures = false</code>.</li>
+          </ul>
+          <p>By default, the signature editor is disabled. You can enable it with
+            `pdfDefaultOptions.enableSignatureEditor = true;`.
+          </p>
       </mat-tab>
       <mat-tab label="Unverified signatures and security considerations">
         <p>
@@ -42,7 +56,7 @@
       </mat-tab>
     </mat-tab-group>
   </mat-card>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
     <mat-tab-group>
       <mat-tab label="HTML template">
         <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/html.md"> </app-ie11-markdown>

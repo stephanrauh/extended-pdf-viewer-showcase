@@ -10,11 +10,13 @@ export class FilteringConsoleLogComponent {
 
   constructor() {
     globalThis['ngxConsoleFilter'] = (level: string, message: any): boolean => {
-      if (message.includes('running on')) {
-        this.version = message;
-        return false;
-      }
-      return true;
+      if (message?.includes && message?.includes('modified by ngx-extended-pdf-viewer')) {
+          const index = message.indexOf('(PDF.js');
+          this.version = message.substring(index + 1).replace(')', '');
+          return false;
+        }
+        return true;
+      };
     }
   }
 }
