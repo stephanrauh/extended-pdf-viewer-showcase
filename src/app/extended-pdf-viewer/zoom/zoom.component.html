@@ -31,7 +31,8 @@
           <p>The attributes <code>minZoom</code> and <code>maxZoom</code> limit the zoom factor you can get by pinching
             or by hitting the "+" or "-" button.
             The attribute <code>zoomLevels</code> defines the content of the dropdown. It ignores both
-            <code>minZoom</code> and <code>maxZoom</code>.</p>
+            <code>minZoom</code> and <code>maxZoom</code>.
+          </p>
           <section>
             <mat-form-field>
               <input matInput class="margin" [(ngModel)]="minZoom" placeholder="minimum zoom level" />
@@ -56,7 +57,8 @@
             level to 1500%.</p>
           <p>You can trade performance for blurryness by limiting the maximum canvas size by setting
             <code>pdfDefaultOptions.maxCanvasPixels</code>
-            in the constructor.</p>
+            in the constructor.
+          </p>
           <p>Here's a
             <a target="#" href="https://www.npmjs.com/package/canvas-size#test-results">list of the maximum canvas sizes
               on many browsers and devices</a>.
@@ -65,7 +67,8 @@
             <code>pdfDefaultOptions.maxCanvasPixels</code> defines,
             ngx-extended-pdf-viewer limits the canvas size and activates CSS scaling. So you can get higher zoom levels,
             but the
-            text may be blurry.</p>
+            text may be blurry.
+          </p>
           @if (resolution) {
           <p>{{resolution}}</p>
           }
@@ -91,7 +94,7 @@
 
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
-        <small>Copyright hint: the PDF file is my own work.</small>
+        <app-copyright [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"></app-copyright>
         @if (currentTime) {
         <br><small>last rendering time: {{currentTime}} ms</small>
         }

@@ -358,11 +358,7 @@
 <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
-        <small
-    >Copyright hint: the PDF has been published by Stefan Hellweger and Xiaofeng Wang under a
-    <a target="#" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> on
-    <a target="#" href="https://arxiv.org/abs/1503.01850">https://arxiv.org/abs/1503.01850</a></small
-    >
+        <app-copyright [src]="'/assets/pdfs/user-experience.pdf'"></app-copyright>
       </div>
       <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
     </div><ngx-extended-pdf-viewer

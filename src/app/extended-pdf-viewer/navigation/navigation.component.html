@@ -29,13 +29,7 @@
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
-        <small>
-          Copyright hint: the e-book has been published under a
-          <a target="#" href="https://www.latex-project.org/lppl/lppl-1-3c/">LATEX Project Public License, version 1.3c
-            or later.</a> on
-          <a target="#"
-            href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">https://github.com/latex3/hyperref</a>
-        </small>
+        <app-copyright [src]="'/assets/pdfs/latex.pdf'"></app-copyright>
       </div>
       <app-fullscreen-button></app-fullscreen-button>
     </div>

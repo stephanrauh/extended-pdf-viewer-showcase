@@ -101,12 +101,7 @@
     @if (selectedTab===0) {
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
-        <small>Copyright hint: the e-book has been published by James Boyle under a
-          <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
-          <a target="#"
-            href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>
-          <br />
-        </small>
+        <app-copyright [src]="src"></app-copyright>
       </div>
       <app-fullscreen-button></app-fullscreen-button>
     </div>

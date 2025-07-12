@@ -25,11 +25,7 @@
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
-        <small>
-      Copyright hint: the file has been published by Paroliver under a
-      <a target="#" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0 international license</a> on
-      <a target="#" href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">commons.wikimedia.org</a>.
-    </small>
+        <app-copyright [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'"></app-copyright>
       </div>
       <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
     </div>

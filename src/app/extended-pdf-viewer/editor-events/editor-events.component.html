@@ -37,8 +37,7 @@
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
-        <small>Copyright hint: the PDF file has been published on <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">Wikimedia</a> by the anonymous user Paroliver
-    under an <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a> license, as stated <a href="https://commons.wikimedia.org/wiki/File:Organigramme_simplifi%C3%A9_des_th%C3%A8mes_de_la_Science-fiction.pdf">here</a>.</small>
+        <app-copyright [src]="'/assets/pdfs/Introduction.pdf'"></app-copyright>
       </div>
       <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
     </div>
