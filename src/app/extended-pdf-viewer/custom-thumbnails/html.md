@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/stluciadance.com.pdf'"
+    [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
     [customThumbnail]="radiobuttonThumbnail"
     (pageChange)="onPageChange($event)"
     (thumbnailDrawn)="onThumbnailDrawn($event)"

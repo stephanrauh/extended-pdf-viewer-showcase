@@ -31,13 +31,7 @@
   </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-      </svg>
-    </button>
-    <app-copyright [src]="'/assets/pdfs/slow-rendering.pdf'"></app-copyright>
+  <app-demo [src]="'/assets/pdfs/slow-rendering.pdf'">
     <div class="pdf-container">
       <!-- Loading/Error Indicator -->
       <div *ngIf="showLoadingIndicator() || hasError()" class="loading-overlay">
@@ -54,5 +48,5 @@
         (pageRender)="onPageRender()">
       </ngx-extended-pdf-viewer>
     </div>
-  </mat-card>
+  </app-demo>
 </div>

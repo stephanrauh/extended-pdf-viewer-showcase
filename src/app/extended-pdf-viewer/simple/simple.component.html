@@ -158,27 +158,19 @@
   </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height"
-    [class.distance16]="!(fullscreenService.isFullscreen$ | async)" style="position: relative;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-      <div>
-
-        <small>Note there's a bug in the PDF file. See the <a [routerLink]="['/annotation-layer']">annotation layer
-            demo</a> to see the bugfix.</small>
-        <small><app-copyright
-            [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"></app-copyright>
-          <br />
-          @if (time) {
-          <span>Time till page 5 shows: {{ time }} ms; last rendering time: {{ currentTime }} ms</span>
-          }
-          @if (!time) {
-          <span>&nbsp;</span>
-          }
-        </small>
-
-      </div>
-      <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
-    </div>
+  <app-demo [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'" 
+            [showNote]="true" 
+            [additionalNote]="'Note there\'s a bug in the PDF file. See the annotation layer demo to see the bugfix.'">
+    
+    <small slot="additional-info">
+      <br />
+      @if (time) {
+      <span>Time till page 5 shows: {{ time }} ms; last rendering time: {{ currentTime }} ms</span>
+      }
+      @if (!time) {
+      <span>&nbsp;</span>
+      }
+    </small>
 
     <div style="width: 100%">
       <mat-tab-group>
@@ -202,5 +194,5 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-  </mat-card>
+  </app-demo>
 </div>

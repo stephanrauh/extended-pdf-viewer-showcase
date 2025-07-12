@@ -48,21 +48,11 @@
   </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height"
-    [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-
-
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-      <div>
-        <app-copyright [src]="'/assets/pdfs/blind-text-collection.pdf'"></app-copyright>
-      </div>
-      <app-fullscreen-button></app-fullscreen-button>
-    </div>
-
+  <app-demo [src]="'/assets/pdfs/blind-text-collection.pdf'">
     <div style="width: 100%">
       <iframe id="embedded" src="/extended-pdf-viewer/iframe/cdk" style="height: 100vh; width: 47%"></iframe>
       <iframe id="embedded" src="/extended-pdf-viewer/iframe/graalvm"
         style="height: 100vh; width: 47%; float: right"></iframe>
     </div>
-  </mat-card>
+  </app-demo>
 </div>

@@ -78,6 +78,7 @@ import { CSPComponent } from './csp/csp.component';
 import { EditorEventsComponent } from './editor-events/editor-events.component';
 import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 import { CopyrightComponent } from './common/copyright.component';
+import { DemoComponent } from './common/demo.component';
 
 
 new TouchEmulator();
@@ -98,6 +99,7 @@ pdfDefaultOptions._internalFilenameSuffix = isLocalhost()? '' : '.min';
     ContextmenuComponent,
     CopyrightComponent,
     CSPComponent,
+    DemoComponent,
     CSSComponent,
     CustomizationComponent,
     CustomPrintDialogComponent,

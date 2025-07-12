@@ -33,18 +33,11 @@
     </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-      <div>
-        <app-copyright [src]="'/assets/pdfs/160F-2019.pdf'"></app-copyright>
-      </div>
-      <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
-    </div>
+  <app-demo [src]="'/assets/pdfs/160F-2019.pdf'">
     <ngx-extended-pdf-viewer
       [src]="'/assets/pdfs/160F-2019.pdf'"
-
       [height]="'auto'"
       >
     </ngx-extended-pdf-viewer>
-  </mat-card>
+  </app-demo>
 </div>

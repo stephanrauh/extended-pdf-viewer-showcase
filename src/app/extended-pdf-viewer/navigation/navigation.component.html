@@ -26,15 +26,9 @@
   </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-      <div>
-        <app-copyright [src]="'/assets/pdfs/latex.pdf'"></app-copyright>
-      </div>
-      <app-fullscreen-button></app-fullscreen-button>
-    </div>
+  <app-demo [src]="'/assets/pdfs/latex.pdf'">
     <ngx-extended-pdf-viewer [src]="'./assets/pdfs/latex.pdf'" [(page)]="page" [nameddest]="namedDest"
       [height]="'auto'">
     </ngx-extended-pdf-viewer>
-  </mat-card>
+  </app-demo>
 </div>

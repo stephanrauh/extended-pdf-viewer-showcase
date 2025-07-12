@@ -89,22 +89,16 @@
   </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height"
-    [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-      <div>
-        <app-copyright [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"></app-copyright>
-        @if (currentTime) {
-        <br><small>last rendering time: {{currentTime}} ms</small>
-        }
-      </div>
-      <app-fullscreen-button></app-fullscreen-button>
-    </div>
+  <app-demo [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'">
+    <small slot="additional-info">
+      @if (currentTime) {
+      <br>last rendering time: {{currentTime}} ms
+      }
+    </small>
 
     <ngx-extended-pdf-viewer [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
       (currentZoomFactor)="updateZoomFactor($event)" [height]="'90vh'" [(zoom)]="zoomSetting" [minZoom]="minZoom"
       [maxZoom]="maxZoom" [zoomLevels]="zoomLevels" (pageRender)="onPageRender()" (pageRendered)="onPageRendered()">
     </ngx-extended-pdf-viewer>
-  </mat-card>
+  </app-demo>
 </div>

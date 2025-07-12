@@ -1,7 +1,7 @@
 ```html
 <ngx-extended-pdf-viewer
     #pdfViewer
-    [src]="'/assets/pdfs/stluciadance.com.pdf'"
+    [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
     [customSidebar]="theme==='fancy' ? fancySidebar: theme === 'without'? withoutSidebar: null"
     [(sidebarVisible)]="sidebarOpen"
     [textLayer]="true"
