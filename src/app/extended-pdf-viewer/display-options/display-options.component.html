@@ -53,7 +53,12 @@
   }
 
   <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-    <app-fullscreen-button></app-fullscreen-button>
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <div>
+        <small>Copyright hint: Codpaste – Peaching Tack by People Like Us & Ergo Phizmiz is licensed under a Creative Commons Attribution-Noncommercial 2.0 UK: England & Wales License. See https://peoplelikeus.org/2007/codpaste-podcast-on-wfmu/ for details.</small>
+      </div>
+      <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+    </div>
     <ngx-extended-pdf-viewer
       [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
       [showBorders]="showBorders"

@@ -1,53 +1,68 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-        <mat-tab-group>
-          <mat-tab label="Displaying PDF files side-by-side">
-            <p>To display multiple PDF files on the same page, you need to put them in an iFrame.
-              To display multiple PDF files on the same page, you need to put them in an iFrame.
+  <div class="flex-container-row">
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+      style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
+      <mat-tab-group>
+        <mat-tab label="Displaying PDF files side-by-side">
+          <p>To display multiple PDF files on the same page, you need to put them in an iFrame.
+            To display multiple PDF files on the same page, you need to put them in an iFrame.
 
-              In the long run, I plan to fix this, so you can put two instances of ngx-extended-pdf-viewer side-by-side without using an iFrame. Unfortunately, this requires a lot of changes to the library, so it'll take a while. The good news is the base library, pdf.js, already allows it.
+            In the long run, I plan to fix this, so you can put two instances of ngx-extended-pdf-viewer side-by-side
+            without using an iFrame. Unfortunately, this requires a lot of changes to the library, so it'll take a
+            while. The good news is the base library, pdf.js, already allows it.
 
 
-            </p>
-            <p>Note on the demo: since activating server-side rendering, the embedded PDF viewers initially show the wrong content. That won't
-              happen on your machine unless you activate SSR, and I hope to fix it soon.
-            </p>
-            <p>The demo shows a work-around using a common component, the <code>IFrameComponent</code>. The Angular router maps this component to a path, and the iFrame uses this path to display the PDF file.
-            </p>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-        <mat-tab-group>
-          <mat-tab label="Using the IFrameComponent">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="iframe.component.html">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html2.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="iframe.component.ts">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/ts.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="app-routing.module.ts">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/router.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-    </div>
+          </p>
+          <p>Note on the demo: since activating server-side rendering, the embedded PDF viewers initially show the wrong
+            content. That won't
+            happen on your machine unless you activate SSR, and I hope to fix it soon.
+          </p>
+          <p>The demo shows a work-around using a common component, the <code>IFrameComponent</code>. The Angular router
+            maps this component to a path, and the iFrame uses this path to display the PDF file.
+          </p>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress"
+      style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
+      <mat-tab-group>
+        <mat-tab label="Using the IFrameComponent">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md">
+          </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="iframe.component.html">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html2.md">
+          </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="iframe.component.ts">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/ts.md">
+          </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="app-routing.module.ts">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/router.md">
+          </app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-    <app-fullscreen-button></app-fullscreen-button>
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height"
+    [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
 
-    <div>
-      <small>Copyright hint: the PDF files are my own work. </small>
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <div>
+        <small>Copyright hint: the PDF files are my own work. </small>
+      </div>
+      <app-fullscreen-button></app-fullscreen-button>
     </div>
 
     <div style="width: 100%">
       <iframe id="embedded" src="/extended-pdf-viewer/iframe/cdk" style="height: 100vh; width: 47%"></iframe>
-      <iframe id="embedded" src="/extended-pdf-viewer/iframe/graalvm" style="height: 100vh; width: 47%; float: right"></iframe>
+      <iframe id="embedded" src="/extended-pdf-viewer/iframe/graalvm"
+        style="height: 100vh; width: 47%; float: right"></iframe>
     </div>
   </mat-card>
 </div>

@@ -6,16 +6,19 @@ import { FullscreenService } from '../../services/fullscreen.service';
   selector: 'app-fullscreen-button',
   template: `
     <button
-      mat-icon-button
       (click)="toggleFullscreen()"
       [title]="(fullscreenService.isFullscreen$ | async) ? 'Exit fullscreen' : 'Enter fullscreen'"
-      style="height: 36px; width: 36px; color: rgba(0,0,0,0.6);">
-      <mat-icon style="font-size: 20px; height: 20px; width: 20px;">
-        {{ (fullscreenService.isFullscreen$ | async) ? 'fullscreen_exit' : 'fullscreen' }}
-      </mat-icon>
+      >
+      <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
+      </svg>
     </button>
   `,
   styles: [`
+    button {
+      border: none;
+      background: none;
+    }
     button:hover {
       background-color: rgba(0,0,0,0.04);
       color: rgba(0,0,0,0.8);

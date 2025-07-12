@@ -49,6 +49,12 @@
 }
 
 <mat-card appearance="outlined" class="pdf-card distance16 mat-elevation-z8">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+    <div>
+      <small>Copyright hint: the PDF file is published with kind permission by the author.</small>
+    </div>
+    <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+  </div>
   <ngx-extended-pdf-viewer [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'" height="calc(100vh - 435px)" zoom="50%">
   </ngx-extended-pdf-viewer>
 </mat-card>

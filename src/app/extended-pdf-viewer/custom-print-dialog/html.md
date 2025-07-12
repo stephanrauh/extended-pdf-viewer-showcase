@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'/assets/pdfs/A%20COOL%20KID%20LIKE%20ME.pdf'"
+  [src]="'/assets/pdfs/GraalVM.pdf'"
   zoom="50%"
   [showToolbar]="false"
   (beforePrint)="onBeforePrint()"

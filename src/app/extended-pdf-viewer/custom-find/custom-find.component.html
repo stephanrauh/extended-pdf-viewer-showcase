@@ -10,13 +10,17 @@
             pass it to the attribute <code>pdfDefaultOptions.findController</code> before opening the PDF file.
           </p>
           <p>
-            To get started, copy the files <code>pdf_find_controller.js</code>, <code>ui_utils.js</code>, and <code>pdf_find_utils.js</code>
-            from <a href="https://github.com/stephanrauh/extended-pdf-viewer-showcase/tree/main/src/app/extended-pdf-viewer/custom-find">the source code of this showcase</a>
-             to your project and extend your own find controller from the class
+            To get started, copy the files <code>pdf_find_controller.js</code>, <code>ui_utils.js</code>, and
+            <code>pdf_find_utils.js</code>
+            from <a
+              href="https://github.com/stephanrauh/extended-pdf-viewer-showcase/tree/main/src/app/extended-pdf-viewer/custom-find">the
+              source code of this showcase</a>
+            to your project and extend your own find controller from the class
             <code>PDFFindController</code>.
           </p>
           <p>
-            The live demo below doesn't do much. It only prints console messages when the custom find controller is instantiated
+            The live demo below doesn't do much. It only prints console messages when the custom find controller is
+            instantiated
             and when the find algorithm is called.
           </p>
         </mat-tab>
@@ -33,8 +37,9 @@
               (deliberately) ignored by the demo. So <code>(?<=\s)([A-i]+ough)</code> doesn't work as you might expect.
               Instead, use <code>(?<=\s)([a-i]+ough)</code>.
             </p>
-            <p><b>Note:</b> Since version 21.3.0, you can pass regular expressions to the find controller without having to customize it.
-            See <a href="/extended-pdf-viewer/find">the programmatic API page</a> for details.</p>
+            <p><b>Note:</b> Since version 21.3.0, you can pass regular expressions to the find controller without having
+              to customize it.
+              See <a href="/extended-pdf-viewer/find">the programmatic API page</a> for details.</p>
 
             <mat-form-field>
               <input matInput class="margin" [(ngModel)]="searchtext" placeholder="Regex Search Term" />
@@ -78,6 +83,14 @@
   </div>
 
   <mat-card appearance="outlined" class="pdf-card distance16 mat-elevation-z8 use-available-space">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <div>
+        <small>The example PDF has been published under a <a
+            href="https://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons (CC BY-NC-SA 3.0) license</a> at
+          <a href="https://wisc.pb.unizin.org/portuguese/">https://wisc.pb.unizin.org/portuguese/</a>.</small>
+      </div>
+      <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+    </div>
     <ngx-extended-pdf-viewer src="/assets/pdfs/Portugues-para-principiantes-1538054164.pdf" [textLayer]="true"
       [showFindButton]="false" (updateFindMatchesCount)="onUpdateFindMatchesCount($event)" (pdfLoaded)="pdfLoaded()"
       [showFindButton]="currentTab===0">

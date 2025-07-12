@@ -1,247 +1,257 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row">
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width: 55%">
-        <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event">
-          <mat-tab label="Find API">
-            <div class="padding-top">
-              <section class="section">
-                <mat-form-field appearance="outline" class="compact-input">
+  <div class="flex-container-row">
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8"
+      style="flex: 1 1 100%; box-sizing: border-box; max-width: 55%">
+      <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event">
+        <mat-tab label="Find API">
+          <div class="padding-top">
+            <section class="section">
+              <mat-form-field appearance="outline" class="compact-input">
+                <input matInput class="margin" [(ngModel)]="searchtext" placeholder="search term" />
+              </mat-form-field>
+            </section>
+            <section class="section compact">
+              <mat-checkbox class="margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()">highlight
+                all</mat-checkbox>
+            </section>
+            <section class="section compact">
+              <mat-checkbox class="margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()">match
+                case</mat-checkbox>
+            </section>
+            <section class="section compact">
+              <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()"
+                [disabled]="matchRegExp">whole word</mat-checkbox>
+            </section>
+            <section class="section compact">
+              <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()"
+                [disabled]="matchRegExp">match diacritics</mat-checkbox>
+              <small style="margin-left: 1em">try licao to find lição</small>
+            </section>
+            <section class="section compact">
+              <mat-checkbox class="margin" [(ngModel)]="multiple" (change)="onCheckboxClicked()"
+                [disabled]="matchRegExp">multiple words (separated by space)</mat-checkbox>
+            </section>
+            <section class="section compact">
+              <mat-checkbox class="margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()">match regular
+                expression></mat-checkbox>
+              <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small>
+            </section>
+            <section class="section compact">
+              <mat-checkbox class="mrgin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()">don't scroll
+                the find result into view</mat-checkbox>
+            </section>
+            <section class="section" style="margin-top: 5px; margin-bottom: 10px">
+              <button mat-raised-button color="primary" (click)="findNext(false)">next</button>
+              <button mat-raised-button color="primary" (click)="findPrevious(false)"
+                style="margin-left: 10px">previous</button>
+            </section>
+          </div>
+          <section>
+            <div style="width: 20px"></div>
+            <div style="flex: auto">
+              @if (findState !== undefined) {
+              <small>{{ findStateText }}
+                <br />
+                @if (pagesWithResult.length > 0) {
+                <span><span style="text-overflow: ellipsis; white-space: nowrap">on page {{ pagesWithResult.join(', ')
+                    }}</span>
+                </span>
+                }
+                <br />
+                @if (totalMatches && totalMatches > 0) {
+                <span> selected: result {{ currentMatchNumber }} of {{ totalMatches }} </span>
+                }
+              </small>
+              }
+            </div>
+          </section>
+        </mat-tab>
+        <mat-tab label="User FindController vs. API FindController">
+          <div class="padding-top">
+            You can use two find controllers. The first one is the user find controller, which is part of the UI. The
+            second one is the API find controller.
+            The API find controller can be used by programmers, and it has the advantage that the user still can use the
+            find functionality without
+            interfering with the API find controller.
+          </div>
+          <div style="display: flex; gap: 20px">
+            <div style="flex: 1">
+              <div class="column-header">
+                <b>User find controller</b>
+                <small>(using the API influences the UI, as you can see in the find bar)</small>
+              </div>
+              <section class="section compact-input">
+                <mat-form-field appearance="outline">
                   <input matInput class="margin" [(ngModel)]="searchtext" placeholder="search term" />
                 </mat-form-field>
               </section>
               <section class="section compact">
-                <mat-checkbox class="margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()">highlight all</mat-checkbox>
+                <mat-checkbox class="margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()">highlight
+                  all</mat-checkbox>
               </section>
               <section class="section compact">
-                <mat-checkbox class="margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()">match case</mat-checkbox>
+                <mat-checkbox class="margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()">match
+                  case</mat-checkbox>
               </section>
               <section class="section compact">
-                <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()" [disabled]="matchRegExp">whole word</mat-checkbox>
+                <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()"
+                  [disabled]="matchRegExp">whole word</mat-checkbox>
               </section>
               <section class="section compact">
-                <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()" [disabled]="matchRegExp"
-                  >match diacritics</mat-checkbox
-                >
-                <small style="margin-left: 1em">try licao to find lição</small>
+                <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()"
+                  [disabled]="matchRegExp">match diacritics <small style="margin-left: 1em">try licao to find
+                    lição</small></mat-checkbox>
               </section>
               <section class="section compact">
-                <mat-checkbox class="margin" [(ngModel)]="multiple" (change)="onCheckboxClicked()" [disabled]="matchRegExp"
-                  >multiple words (separated by space)</mat-checkbox
-                >
+                <mat-checkbox class="margin" [(ngModel)]="multiple" (change)="onCheckboxClicked()"
+                  [disabled]="matchRegExp">multiple words (separated by space)</mat-checkbox>
               </section>
               <section class="section compact">
-                <mat-checkbox class="margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()">match regular expression</mat-checkbox>
-                <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small>
+                <mat-checkbox class="margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()">match regular
+                  expression <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small></mat-checkbox>
               </section>
               <section class="section compact">
-                <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()"
-                  >don't scroll the find result into view</mat-checkbox
-                >
+                <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()">don't
+                  scroll the find result into view</mat-checkbox>
               </section>
               <section class="section" style="margin-top: 5px; margin-bottom: 10px">
                 <button mat-raised-button color="primary" (click)="findNext(false)">next</button>
-                <button mat-raised-button color="primary" (click)="findPrevious(false)" style="margin-left: 10px">previous</button>
+                <button mat-raised-button color="primary" (click)="findPrevious(false)"
+                  style="margin-left: 10px">previous</button>
               </section>
             </div>
-            <section>
-              <div style="width: 20px"></div>
-              <div style="flex: auto">
-                @if (findState !== undefined) {
-                  <small
-                    >{{ findStateText }}
-                    <br />
-                    @if (pagesWithResult.length > 0) {
-                      <span
-                        ><span style="text-overflow: ellipsis; white-space: nowrap">on page {{ pagesWithResult.join(', ') }}</span>
-                      </span>
-                    }
-                    <br />
-                    @if (totalMatches && totalMatches > 0) {
-                      <span> selected: result {{ currentMatchNumber }} of {{ totalMatches }} </span>
-                    }
-                  </small>
-                }
+            <div style="flex: 1">
+              <!-- Right column -->
+              <div class="column-header">
+                <b>Secondary find controller</b>
+                <small>(only available in the API)</small>
               </div>
-            </section>
-          </mat-tab>
-          <mat-tab label="User FindController vs. API FindController">
-            <div class="padding-top">
-              You can use two find controllers. The first one is the user find controller, which is part of the UI. The second one is the API find controller.
-              The API find controller can be used by programmers, and it has the advantage that the user still can use the find functionality without
-              interfering with the API find controller.
+              <section class="section">
+                <mat-form-field appearance="outline" class="compact-input">
+                  <input matInput class="margin" [(ngModel)]="searchtext2" placeholder="search term" />
+                </mat-form-field>
+              </section>
+              <section class="section compact">
+                <mat-checkbox class="margin" [(ngModel)]="highlightAll2" (change)="onCheckboxClicked2()">highlight
+                  all</mat-checkbox>
+              </section>
+              <section class="section compact">
+                <mat-checkbox class="margin" [(ngModel)]="matchCase2" (change)="onCheckboxClicked2()">match
+                  case</mat-checkbox>
+              </section>
+              <section class="section compact">
+                <mat-checkbox class="margin" [(ngModel)]="wholeWord2" (change)="onCheckboxClicked2()"
+                  [disabled]="matchRegExp2">whole word</mat-checkbox>
+              </section>
+              <section class="section compact">
+                <mat-checkbox class="margin" [(ngModel)]="matchDiacritics2" (change)="onCheckboxClicked2()"
+                  [disabled]="matchRegExp2">match diacritics</mat-checkbox>
+                <small style="margin-left: 1em">try licao to find lição</small>
+              </section>
+              <section class="section compact">
+                <mat-checkbox class="margin" [(ngModel)]="multiple2" (change)="onCheckboxClicked()"
+                  [disabled]="matchRegExp2">multiple words (separated by space)</mat-checkbox>
+              </section>
+              <section class="section compact">
+                <mat-checkbox class="margin" [(ngModel)]="matchRegExp2" (change)="onCheckboxClicked()">match regular
+                  expression <small style="margin-left: 1em">try nasalized|nasalization</small></mat-checkbox>
+              </section>
+              <section class="section compact">
+                <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView2" (change)="onCheckboxClicked()">don't
+                  scroll the find result into view</mat-checkbox>
+              </section>
+              <section class="section" style="margin-top: 5px; margin-bottom: 10px">
+                <button mat-raised-button color="primary" (click)="findNext(true)">next</button>
+                <button mat-raised-button color="primary" (click)="findPrevious(true)"
+                  style="margin-left: 10px">previous</button>
+              </section>
             </div>
-            <div style="display: flex; gap: 20px">
-              <div style="flex: 1">
-                <div class="column-header">
-                  <b>User find controller</b>
-                  <small>(using the API influences the UI, as you can see in the find bar)</small>
-                </div>
-                <section class="section compact-input">
-                  <mat-form-field appearance="outline">
-                    <input matInput class="margin" [(ngModel)]="searchtext" placeholder="search term" />
-                  </mat-form-field>
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()">highlight all</mat-checkbox>
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()">match case</mat-checkbox>
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()" [disabled]="matchRegExp">whole word</mat-checkbox>
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()" [disabled]="matchRegExp"
-                    >match diacritics <small style="margin-left: 1em">try licao to find lição</small></mat-checkbox
-                  >
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="multiple" (change)="onCheckboxClicked()" [disabled]="matchRegExp"
-                    >multiple words (separated by space)</mat-checkbox
-                  >
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()"
-                    >match regular expression <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small></mat-checkbox
-                  >
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()"
-                    >don't scroll the find result into view</mat-checkbox
-                  >
-                </section>
-                <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-                  <button mat-raised-button color="primary" (click)="findNext(false)">next</button>
-                  <button mat-raised-button color="primary" (click)="findPrevious(false)" style="margin-left: 10px">previous</button>
-                </section>
-              </div>
-              <div style="flex: 1">
-                <!-- Right column -->
-                <div class="column-header">
-                  <b>Secondary find controller</b>
-                  <small>(only available in the API)</small>
-                </div>
-                <section class="section">
-                  <mat-form-field appearance="outline" class="compact-input">
-                    <input matInput class="margin" [(ngModel)]="searchtext2" placeholder="search term" />
-                  </mat-form-field>
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="highlightAll2" (change)="onCheckboxClicked2()">highlight all</mat-checkbox>
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="matchCase2" (change)="onCheckboxClicked2()">match case</mat-checkbox>
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="wholeWord2" (change)="onCheckboxClicked2()" [disabled]="matchRegExp2">whole word</mat-checkbox>
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="matchDiacritics2" (change)="onCheckboxClicked2()" [disabled]="matchRegExp2"
-                    >match diacritics</mat-checkbox
-                  >
-                  <small style="margin-left: 1em">try licao to find lição</small>
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="multiple2" (change)="onCheckboxClicked()" [disabled]="matchRegExp2"
-                    >multiple words (separated by space)</mat-checkbox
-                  >
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="matchRegExp2" (change)="onCheckboxClicked()"
-                    >match regular expression <small style="margin-left: 1em">try nasalized|nasalization</small></mat-checkbox
-                  >
-                </section>
-                <section class="section compact">
-                  <mat-checkbox class="margin" [(ngModel)]="dontScrollIntoView2" (change)="onCheckboxClicked()"
-                    >don't scroll the find result into view</mat-checkbox
-                  >
-                </section>
-                <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-                  <button mat-raised-button color="primary" (click)="findNext(true)">next</button>
-                  <button mat-raised-button color="primary" (click)="findPrevious(true)" style="margin-left: 10px">previous</button>
-                </section>
-              </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Find results">
+          <p>The event <code>(updateFindMatchesCount)</code> contains three attributes telling you about the search
+            result:</p>
+          <ul>
+            <li>
+              <code>matches</code> is an array of arrays of numbers. The first dimension is the page index. If there's a
+              find result on a page, the inner
+              array is a list of find positions. Basically, such a position the number of characters before the hit.
+            </li>
+            <li><code>matchesLength</code> is a similar array of arrays of numbers. In a nutshell, it tells you how long
+              your search term is.</li>
+          </ul>
+          You can get the text of each page by calling <code>ngxPdfViewerService.getPageAsText()</code>. If you want to
+          find out which part of the DOM shows
+          the find result, you need to catch the event <code>renderedtextlayerhighlights</code>. This demo uses this
+          event to add a black border to the find
+          results.
+        </mat-tab>
+        <mat-tab label="Notes on the demo">
+          <ul>
+            <li>
+              The demo is a bit slow because the example document is huge. This, in turn, allows you to watch the find
+              result events, demonstrating the
+              asynchronous nature of the find API.
+            </li>
+            <li>I've chosen a portuguese text because this language has many special characters (such as ã, ç, and ê).
+            </li>
+          </ul>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height"
+      style="flex: 1 1 100%; box-sizing: border-box; max-width: 43%">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/find/html.md"> </app-ie11-markdown>
+          <section>CSS class of the search results: <code>hightlight</code>.</section>
+          <section>CSS class of the search results: <code>customHightlight</code>.</section>
+          <section>
+            <div style="flex: auto">
+              @if (findState !== undefined) {
+              {{ findStateText }}
+              <br />
+              @if (pagesWithResult.length > 0) {
+              <span><span style="text-overflow: ellipsis; white-space: nowrap">on page {{ pagesWithResult.join(', ')
+                  }}</span>
+              </span>
+              }
+              <br />
+              @if (totalMatches && totalMatches > 0) {
+              <span> selected: result {{ currentMatchNumber }} of {{ totalMatches }} </span>
+              }
+              }
             </div>
-          </mat-tab>
-          <mat-tab label="Find results">
-            <p>The event <code>(updateFindMatchesCount)</code> contains three attributes telling you about the search result:</p>
-            <ul>
-              <li>
-                <code>matches</code> is an array of arrays of numbers. The first dimension is the page index. If there's a find result on a page, the inner
-                array is a list of find positions. Basically, such a position the number of characters before the hit.
-              </li>
-              <li><code>matchesLength</code> is a similar array of arrays of numbers. In a nutshell, it tells you how long your search term is.</li>
-            </ul>
-            You can get the text of each page by calling <code>ngxPdfViewerService.getPageAsText()</code>. If you want to find out which part of the DOM shows
-            the find result, you need to catch the event <code>renderedtextlayerhighlights</code>. This demo uses this event to add a black border to the find
-            results.
-          </mat-tab>
-          <mat-tab label="Notes on the demo">
-            <ul>
-              <li>
-                The demo is a bit slow because the example document is huge. This, in turn, allows you to watch the find result events, demonstrating the
-                asynchronous nature of the find API.
-              </li>
-              <li>I've chosen a portuguese text because this language has many special characters (such as ã, ç, and ê).</li>
-            </ul>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width: 43%">
-        <mat-tab-group>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/find/html.md"> </app-ie11-markdown>
-            <section>CSS class of the search results: <code>hightlight</code>.</section>
-            <section>CSS class of the search results: <code>customHightlight</code>.</section>
-            <section>
-              <div style="flex: auto">
-                @if (findState !== undefined) {
-                  {{ findStateText }}
-                  <br />
-                  @if (pagesWithResult.length > 0) {
-                    <span
-                      ><span style="text-overflow: ellipsis; white-space: nowrap">on page {{ pagesWithResult.join(', ') }}</span>
-                    </span>
-                  }
-                  <br />
-                  @if (totalMatches && totalMatches > 0) {
-                    <span> selected: result {{ currentMatchNumber }} of {{ totalMatches }} </span>
-                  }
-                }
-              </div>
-            </section>
-          </mat-tab>
-          @if (selectedTab === 0) {
-            <mat-tab label="TypeScript">
-              <app-ie11-markdown src="/assets/extended-pdf-viewer/find/ts.md"> </app-ie11-markdown>
-            </mat-tab>
-          }
-          <mat-tab label="TS - results demo">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/find/ts2.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-    </div>
+          </section>
+        </mat-tab>
+        @if (selectedTab === 0) {
+        <mat-tab label="TypeScript">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/find/ts.md"> </app-ie11-markdown>
+        </mat-tab>
+        }
+        <mat-tab label="TS - results demo">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/find/ts2.md"> </app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-    <app-fullscreen-button></app-fullscreen-button>
-    <small
-      >The example PDF has been published under a <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons (CC BY-NC-SA 3.0) license</a> at
-      <a href="https://wisc.pb.unizin.org/portuguese/">https://wisc.pb.unizin.org/portuguese/</a>.</small
-    >
-    <ngx-extended-pdf-viewer
-      [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
-      (updateFindMatchesCount)="updateFindMatchesCount($event)"
-      (updateFindState)="updateFindState($event)"
-      backgroundColor="#ffffff"
-      [height]="'90vh'"
-      [handTool]="false"
-      [showHandToolButton]="true"
-      [page]="1"
-      [showFindRegexp]="true"
-    >
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height"
+    [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <div>
+        <small>The example PDF has been published under a <a
+            href="https://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons (CC BY-NC-SA 3.0) license</a> at
+          <a href="https://wisc.pb.unizin.org/portuguese/">https://wisc.pb.unizin.org/portuguese/</a>.</small>
+        </div>
+        <app-fullscreen-button></app-fullscreen-button>
+    </div>
+    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+      (updateFindMatchesCount)="updateFindMatchesCount($event)" (updateFindState)="updateFindState($event)"
+      backgroundColor="#ffffff" [height]="'90vh'" [handTool]="false" [showHandToolButton]="true" [page]="1"
+      [showFindRegexp]="true">
     </ngx-extended-pdf-viewer>
   </mat-card>
 </div>

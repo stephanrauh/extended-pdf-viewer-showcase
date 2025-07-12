@@ -1,4 +1,5 @@
 .messages {
     max-height: 75vh;
     overflow-y: auto;
+    font-size: 66%;
 }

@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'/assets/pdfs/A COOL KID LIKE ME.pdf.pdf'"
+  [src]="'/assets/pdfs/GraalVM.pdf'"
   [height]="'667px'"
   backgroundColor="#ffffff"
   [mobileFriendlyZoom]="'150%'"

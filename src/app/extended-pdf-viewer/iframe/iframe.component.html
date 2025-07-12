@@ -1,8 +1,12 @@
 
-
-    <ngx-extended-pdf-viewer
-      [src]="url"
-      [zoom]="'auto'"
-    >
-    </ngx-extended-pdf-viewer>
-
+<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+  <div>
+    <small>Copyright hint: the PDF file is published with kind permission by the author.</small>
+  </div>
+  <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+</div>
+<ngx-extended-pdf-viewer
+  [src]="url"
+  [zoom]="'auto'"
+>
+</ngx-extended-pdf-viewer>

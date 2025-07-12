@@ -1,101 +1,117 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
-        <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event">
-          <mat-tab label="Regular PDF files">
-            <p>The recommended approaches to scrolling are using <code>[page]</code> and <code>[namedDest]</code>.
+  <div class="flex-container-row">
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+      style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
+      <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event">
+        <mat-tab label="Regular PDF files">
+          <p>The recommended approaches to scrolling are using <code>[page]</code> and <code>[namedDest]</code>.
             If you want to scroll within a page, there's a third option. <code>NgxExtendedPdfViewerService</code>
-          offers a programmatic API:</p>
+            offers a programmatic API:</p>
           <ul>
             <li><code>scrollPageIntoView(42)</code> is equivalent to <code>[page]="42"</code>.</li>
             <li><code>scrollPageIntoView(42, {{ '{' }}top: '100%'&#125;)</code> scrolls to the bottom of page 42.</li>
             <li><code>scrollPageIntoView(42, {{ '{' }}top: '50%'&#125;)</code> scrolls to the middle of page 42.</li>
-            <li><code>scrollPageIntoView(42, {{ '{' }}top: 500 &#125;)</code> scrolls to page 42, and then 500 pixels down.</li>
-            <li><code>scrollPageIntoView(42, {{ '{' }}left: '100%' &#125;)</code> scrolls to the right hand side of the page.</li>
+            <li><code>scrollPageIntoView(42, {{ '{' }}top: 500 &#125;)</code> scrolls to page 42, and then 500 pixels
+              down.</li>
+            <li><code>scrollPageIntoView(42, {{ '{' }}left: '100%' &#125;)</code> scrolls to the right hand side of the
+              page.</li>
           </ul>
-          <p>Note that numerical values refer to pixels, so which part of the page become visible depends on the zoom level. Better use percentages.</p>
-          <button class="button" mat-raised-button color="primary" (click)="scroll(10, '100%')">scroll(page=10, top="100%")</button>
-          <button class="button" mat-raised-button color="primary" (click)="scroll(10, '50%')">scroll(page=10, top="50%")</button>
-          <button class="button" mat-raised-button color="primary" (click)="scroll(10, '0%')">scroll(page=10, top="0%")</button>
-          <button class="button" mat-raised-button color="primary" (click)="scroll(9, 0)" style="margin-left: 10px">[nameDest]="scroll(page=9)"</button>
+          <p>Note that numerical values refer to pixels, so which part of the page become visible depends on the zoom
+            level. Better use percentages.</p>
+          <button class="button" mat-raised-button color="primary" (click)="scroll(10, '100%')">scroll(page=10,
+            top="100%")</button>
+          <button class="button" mat-raised-button color="primary" (click)="scroll(10, '50%')">scroll(page=10,
+            top="50%")</button>
+          <button class="button" mat-raised-button color="primary" (click)="scroll(10, '0%')">scroll(page=10,
+            top="0%")</button>
+          <button class="button" mat-raised-button color="primary" (click)="scroll(9, 0)"
+            style="margin-left: 10px">[nameDest]="scroll(page=9)"</button>
         </mat-tab>
         <mat-tab label="Corner cases">
           <p>The <code>left</code> parameter can be confusing, especially if your PDF document features bot
-          landscape and portrait pages. In theory, the <code>left</code> parameters causes the page
-          to scroll to the left by a given percentage. However, that's not always possible because the
-          horizontal scrollbar doesn't allow for arbitrary scrolling. In particular, 100% would indicate
-          the page scrolls out of the visible area, but the scrollbar doesn't allow that. You can see this in the
-          demo by setting the zoom level to different settings and by clicking the <code>left="90%"</code> buttons.
-        </p>
-        <table style="background-color: transparent">
-          <tr>
-            <td>
-              <button class="button" mat-raised-button color="primary" (click)="zoom='page-width'">[zoom]="'page-width'"</button>
-            </td>
-            <td>
-              <button class="button" mat-raised-button color="primary" (click)="zoom='500%'">[zoom]="'500%'"</button>
-            </td>
-            <td>
-              <button class="button" mat-raised-button color="primary" (click)="zoom='page-fit'">[zoom]="'page-fit'"</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button class="button" mat-raised-button color="primary" (click)="scrollLeft(1, '0%')">scroll(1, {{'{left: "0%"}'}})</button>
-            </td>
-            <td>
-              <button class="button" mat-raised-button color="primary" (click)="scrollLeft(1,  '60%')">scroll(1, {{'{left: "60%"}'}})</button>
-            </td>
-            <td>
-              <button class="button" mat-raised-button color="primary" (click)="scrollLeft(1, '90%')">scroll(1, {{'{left: "90%"}'}})</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button class="button" mat-raised-button color="primary" (click)="scrollLeft(2, '0%')">scroll(2, {{'{left: "0%"}'}})</button>
-            </td>
-            <td>
-              <button class="button" mat-raised-button color="primary" (click)="scrollLeft(2,  '60%')">scroll(2, {{'{left: "60%"}'}})</button>
-            </td>
-            <td>
-              <button class="button" mat-raised-button color="primary" (click)="scrollLeft(2, '90%')">scroll(2, {{'{left: "90%"}'}})</button>
-            </td>
-          </tr>
-        </table>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/scrolling/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="TypeScript">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/scrolling/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-}
-
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-  <app-fullscreen-button></app-fullscreen-button>
-  @if (selectedTab===0) {
-    <div>
-      <small
-        >Copyright hint: the e-book has been published by James Boyle under a
-        <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
-        <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>
-        <br />
-      </small>
-    </div>
+            landscape and portrait pages. In theory, the <code>left</code> parameters causes the page
+            to scroll to the left by a given percentage. However, that's not always possible because the
+            horizontal scrollbar doesn't allow for arbitrary scrolling. In particular, 100% would indicate
+            the page scrolls out of the visible area, but the scrollbar doesn't allow that. You can see this in the
+            demo by setting the zoom level to different settings and by clicking the <code>left="90%"</code> buttons.
+          </p>
+          <table style="background-color: transparent">
+            <tr>
+              <td>
+                <button class="button" mat-raised-button color="primary"
+                  (click)="zoom='page-width'">[zoom]="'page-width'"</button>
+              </td>
+              <td>
+                <button class="button" mat-raised-button color="primary" (click)="zoom='500%'">[zoom]="'500%'"</button>
+              </td>
+              <td>
+                <button class="button" mat-raised-button color="primary"
+                  (click)="zoom='page-fit'">[zoom]="'page-fit'"</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(1, '0%')">scroll(1,
+                  {{'{left: "0%"}'}})</button>
+              </td>
+              <td>
+                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(1,  '60%')">scroll(1,
+                  {{'{left: "60%"}'}})</button>
+              </td>
+              <td>
+                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(1, '90%')">scroll(1,
+                  {{'{left: "90%"}'}})</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(2, '0%')">scroll(2,
+                  {{'{left: "0%"}'}})</button>
+              </td>
+              <td>
+                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(2,  '60%')">scroll(2,
+                  {{'{left: "60%"}'}})</button>
+              </td>
+              <td>
+                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(2, '90%')">scroll(2,
+                  {{'{left: "90%"}'}})</button>
+              </td>
+            </tr>
+          </table>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height"
+      style="flex: 1 1 100%; box-sizing: border-box; max-width:38%;">
+      <mat-tab-group>
+        <mat-tab label="HTML template">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/scrolling/html.md"> </app-ie11-markdown>
+        </mat-tab>
+        <mat-tab label="TypeScript">
+          <app-ie11-markdown src="/assets/extended-pdf-viewer/scrolling/ts.md"> </app-ie11-markdown>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
   }
-  <ngx-extended-pdf-viewer
-    [src]="src"
 
-    [zoom]="zoom"
-    [height]="'auto'">
-  </ngx-extended-pdf-viewer>
-</mat-card>
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height"
+    [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
+    @if (selectedTab===0) {
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <div>
+        <small>Copyright hint: the e-book has been published by James Boyle under a
+          <a target="#" href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> on
+          <a target="#"
+            href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>
+          <br />
+        </small>
+      </div>
+      <app-fullscreen-button></app-fullscreen-button>
+    </div>
+    }
+    <ngx-extended-pdf-viewer [src]="src" [zoom]="zoom" [height]="'auto'">
+    </ngx-extended-pdf-viewer>
+  </mat-card>
 </div>
