@@ -1,5 +1,5 @@
 <div class="flex-container-column fill-container">
-  @if (!fullscreen) {
+  @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row distance-bottom16" >
       <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
         <p><a target="#" href="https://github.com/mdbootstrap/perfect-scrollbar">Perfect Scrollbar</a> is a nice library

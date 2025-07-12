@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, effect } from '@angular/core';
 import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, RenderedTextLayerHighlights } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
 standalone: false,
@@ -169,7 +170,7 @@ export class FindComponent {
 
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService, private cdr: ChangeDetectorRef,
     notificationService: PDFNotificationService
-  ) {
+  , public fullscreenService: FullscreenService) {
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
       this.PDFViewerApplication?.eventBus?.on('renderedtextlayerhighlights', (event: RenderedTextLayerHighlights) => {

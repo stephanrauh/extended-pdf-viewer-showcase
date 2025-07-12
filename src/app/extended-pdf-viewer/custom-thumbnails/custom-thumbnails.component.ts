@@ -1,5 +1,6 @@
 import { Component, effect, ViewEncapsulation } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -23,7 +24,7 @@ export class CustomThumbnailsComponent {
 
   private PDFViewerApplication!: IPDFViewerApplication;
 
-  constructor(notificationService: PDFNotificationService) {
+  constructor(notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
     });

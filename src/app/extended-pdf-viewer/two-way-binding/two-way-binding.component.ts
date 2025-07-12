@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
 import { PdfSidebarView } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
 standalone: false,
@@ -76,5 +77,5 @@ export class TwoWayBindingComponent {
     setTimeout(() => this.activeSidebarView = view, 150);
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 }

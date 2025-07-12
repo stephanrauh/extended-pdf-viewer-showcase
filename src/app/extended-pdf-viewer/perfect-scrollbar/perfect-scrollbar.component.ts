@@ -3,6 +3,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { isBrowser } from '../common/utilities';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -35,8 +36,8 @@ export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
   }
 
   constructor(
-    @Inject(PERFECT_SCROLLBAR_CONFIG)
-    public config: PerfectScrollbarConfigInterface
+    @Inject(PERFECT_SCROLLBAR_CONFIG) public config: PerfectScrollbarConfigInterface,
+    public fullscreenService: FullscreenService
   ) {}
 
   public ngAfterViewInit(): void {

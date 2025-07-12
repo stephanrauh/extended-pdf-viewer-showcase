@@ -1,6 +1,7 @@
 import { Component, effect, OnInit } from '@angular/core';
 import { FileInputChanged, IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -29,7 +30,7 @@ export class MultipleDocumentsComponent implements OnInit {
 
   public url!: URL;
 
-  constructor(notificationService: PDFNotificationService) {
+  constructor(notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
     if (isBrowser()) {
       this.url = new URL(`${location.protocol}//${location.host}/assets/pdfs/GraalVM.pdf`);
     } else {

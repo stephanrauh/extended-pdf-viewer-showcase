@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { versions } from './versions';
 import { ActivatedRoute } from '@angular/router';
+import { FullscreenService } from '../services/fullscreen.service';
 @Component({
 standalone: false,
   selector: 'app-nav',
@@ -38,10 +39,22 @@ export class NavComponent {
 
   public pdfjsVersion = '';
 
-  constructor(private breakpointObserver: BreakpointObserver, route: ActivatedRoute, private notificationService: PDFNotificationService) {
+  constructor(
+    private breakpointObserver: BreakpointObserver, 
+    route: ActivatedRoute, 
+    private notificationService: PDFNotificationService,
+    private fullscreenService: FullscreenService
+  ) {
     if (this.isBrowser()) {
       route.url.subscribe(() => {
         this.hideMenu = location.pathname.includes('iframe');
+      });
+
+      // Subscribe to fullscreen changes to hide/show menu
+      this.fullscreenService.isFullscreen$.subscribe(isFullscreen => {
+        if (!location.pathname.includes('iframe')) {
+          this.hideMenu = isFullscreen;
+        }
       });
 
       effect(() => {

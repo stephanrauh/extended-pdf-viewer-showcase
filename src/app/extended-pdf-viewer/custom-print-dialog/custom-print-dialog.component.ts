@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NgxExtendedPdfViewerService, ProgressBarEvent } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -25,7 +26,7 @@ export class CustomPrintDialogComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 
   public onBeforePrint() {
     if (this.hideBuiltInProgress) {

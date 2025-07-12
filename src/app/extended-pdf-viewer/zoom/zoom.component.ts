@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
 standalone: false,
@@ -61,7 +62,7 @@ export class ZoomComponent {
     }
   }
 
-  constructor(notificationService: PDFNotificationService) {
+  constructor(notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
     if (isBrowser()) {
       this.isMobile = 'ontouchstart' in document.documentElement;
     } else {

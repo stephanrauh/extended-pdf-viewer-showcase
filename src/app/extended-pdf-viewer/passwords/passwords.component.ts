@@ -1,6 +1,7 @@
 import { Component, effect } from '@angular/core';
 import { IPDFViewerApplication, PasswordPrompt, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { CustomPasswordPrompt } from './custom-password-prompt';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
 standalone: false,
@@ -60,7 +61,7 @@ export class PasswordsComponent {
 
   }
 
-  constructor(notificationService: PDFNotificationService) {
+  constructor(notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
     this.choice = "graalvm-rocks!";
 
     effect(() => {

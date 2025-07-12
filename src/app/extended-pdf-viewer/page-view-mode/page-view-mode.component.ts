@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./page-view-mode.component.css'],
 })
 export class PageViewModeComponent {
+  public fullscreenService = inject(FullscreenService);
+
   public page = 5;
 
   public spreadMode: 'off' | 'even' | 'odd' = 'off';

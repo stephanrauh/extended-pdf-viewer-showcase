@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, PageRenderedEvent } from 'ngx-extended-pdf-viewer';
 import { BlobService } from './blob.service';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -26,7 +27,7 @@ export class BlobComponent {
     this._fullscreen = full;
   }
 
-  constructor(private http: HttpClient, private blobService: BlobService, private ngxService: NgxExtendedPdfViewerService) {}
+  constructor(private http: HttpClient, private blobService: BlobService, private ngxService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 
   public usePreloadedFile(): void {
     this.src = this.blobService.src;

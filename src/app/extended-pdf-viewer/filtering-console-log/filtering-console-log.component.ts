@@ -1,5 +1,6 @@
 import { Component, effect } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
 standalone: false,
@@ -22,7 +23,7 @@ export class FilteringConsoleLogComponent {
     this._fullscreen = full;
   }
 
-  constructor(notificationService: PDFNotificationService) {
+  constructor(notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
     effect(() => {
       if ((this.PDFViewerApplication = notificationService.onPDFJSInitSignal())) {
         this.init();

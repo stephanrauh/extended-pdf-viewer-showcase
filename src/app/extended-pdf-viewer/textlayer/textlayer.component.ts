@@ -1,6 +1,7 @@
 import { PageRenderedEvent, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -28,7 +29,7 @@ export class TextlayerComponent {
     this._fullscreen = full;
   }
 
-  constructor() {
+  constructor(public fullscreenService: FullscreenService) {
     pdfDefaultOptions.textLayerMode = 1;
   }
 

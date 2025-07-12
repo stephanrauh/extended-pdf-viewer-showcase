@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LinkTarget, PageRenderedEvent, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from 'src/app/services/fullscreen.service';
 @Component({
   standalone: false,
   selector: 'app-links',
@@ -35,7 +36,7 @@ export class LinksComponent {
     return this._selectedTab;
   }
 
-  constructor() {
+  constructor(public fullscreenService: FullscreenService) {
     pdfDefaultOptions.externalLinkTarget = this._target;
   }
 
@@ -86,6 +87,7 @@ export class LinksComponent {
 
     return `import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer/default-options';
 import { LinkTarget } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 ...
 ngOnInit(): void {
   pdfDefaultOptions.externalLinkTarget = LinkTarget.${this.target};

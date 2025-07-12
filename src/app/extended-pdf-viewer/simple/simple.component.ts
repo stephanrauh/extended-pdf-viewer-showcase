@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, OnDestroy } from '@angular/core';
 import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, PdfLoadedEvent } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -160,7 +161,7 @@ export class SimpleComponent implements OnDestroy {
   constructor(
     public logService: LogService,
     notificationService: PDFNotificationService,
-  ) {
+    public fullscreenService: FullscreenService) {
     this.startTime = new Date().getTime();
 
     // increase the range chunk size for testing purposes

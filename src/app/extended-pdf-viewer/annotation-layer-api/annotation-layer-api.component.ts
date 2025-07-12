@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -18,7 +19,7 @@ export class AnnotationLayerApiComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onAnnotationEditorEvent(event: any): void {

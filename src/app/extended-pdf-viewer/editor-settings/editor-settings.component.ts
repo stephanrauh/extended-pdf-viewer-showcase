@@ -1,5 +1,6 @@
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { Component } from '@angular/core';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -22,7 +23,7 @@ export class EditorSettingsComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService) {
+  constructor(private pdfViewerService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
     pdfDefaultOptions.textLayerMode = 1;
   }
 

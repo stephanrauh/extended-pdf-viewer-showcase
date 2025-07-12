@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -7,21 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./keyboard.component.css'],
 })
 export class KeyboardComponent {
+  public fullscreenService = inject(FullscreenService);
+
   public ignoreKeyboard = false;
 
   public acceptKeys: string[] = [];
 
   public ignoreKeys = ['j', 'k', 'F4'];
-
-  private _fullscreen = false;
-
-  public get fullscreen(): boolean {
-    return this._fullscreen;
-  }
-
-  public set fullscreen(full: boolean) {
-    this._fullscreen = full;
-  }
 
   private accept(key: string, add: boolean): void {
     if (add) {

@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { isBrowser } from '../common/utilities';
 import { PageRenderedEvent } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -29,7 +30,7 @@ export class Base64Component implements OnInit {
     this._fullscreen = full;
   }
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, public fullscreenService: FullscreenService) {}
 
   public ngOnInit(): void {
     if (isBrowser()) {

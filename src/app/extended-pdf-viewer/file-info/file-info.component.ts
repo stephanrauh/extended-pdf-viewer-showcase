@@ -1,5 +1,6 @@
 import { Component, effect } from '@angular/core';
 import { IPDFViewerApplication, PdfDocumentInfo, PdfDocumentPropertiesExtractor, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -28,7 +29,7 @@ export class FileInfoComponent {
     }
   }
 
-  constructor(public notificationService: PDFNotificationService) {
+  constructor(public notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
     });

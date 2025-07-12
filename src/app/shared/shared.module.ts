@@ -27,9 +27,10 @@ import { CommonModule } from '@angular/common';
 import { Angular2SmartTableModule } from 'angular2-smart-table';
 import { CopyrightBoxComponent } from './copyright-box/copyright-box.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FullscreenButtonComponent } from '../components/fullscreen-button/fullscreen-button.component';
 
 @NgModule({
-  declarations: [Ie11MarkdownComponent, DefaultRoutesComponent, AlternativesComponent, CopyrightBoxComponent],
+  declarations: [Ie11MarkdownComponent, DefaultRoutesComponent, AlternativesComponent, CopyrightBoxComponent, FullscreenButtonComponent],
   exports: [
     CommonModule,
     AlternativesComponent,
@@ -57,6 +58,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTreeModule,
     Angular2SmartTableModule,
     CopyrightBoxComponent,
+    FullscreenButtonComponent,
   ],
   imports: [
     CommonModule,

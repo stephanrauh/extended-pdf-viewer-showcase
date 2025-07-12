@@ -1,5 +1,5 @@
 <div class="flex-container-column fill-container">
-  @if (!fullscreen) {
+  @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
       <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
         <p>The PDF viewer accepts different types of input: URLs, BLOBS, <code>UInt8Array</code>,
@@ -23,12 +23,13 @@
 </div>
 }
 
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-  <button mat-button (click)="fullscreen=!fullscreen" style="float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-    </svg>
-  </button>
+<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+    <div>
+        <small>Copyright hint: this presentation is my own work.</small>
+    </div>
+    <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+  </div>
   <ngx-extended-pdf-viewer
     [base64Src]="base64 | async"
     backgroundColor="#ffffff"

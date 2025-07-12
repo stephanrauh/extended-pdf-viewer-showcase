@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FullscreenService } from '../../services/fullscreen.service';
 import {
   NgxExtendedPdfViewerService,
   pdfDefaultOptions,
@@ -39,7 +40,7 @@ export class PrerenderingComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService) {
+  constructor(private pdfViewerService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
     pdfDefaultOptions.ignoreDestinationZoom = true;
   }
 

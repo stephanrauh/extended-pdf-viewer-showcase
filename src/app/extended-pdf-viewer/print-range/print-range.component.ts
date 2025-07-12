@@ -3,6 +3,7 @@ import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationServ
 import { PDFPrintRange } from 'ngx-extended-pdf-viewer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
 standalone: false,
@@ -81,7 +82,7 @@ export class PrintRangeComponent implements OnDestroy {
 
   public includedAsArray = PrintRangeComponent.toArray(this.included);
 
-  constructor(private printService: NgxExtendedPdfViewerService, private snackBar: MatSnackBar, notificationService: PDFNotificationService) {
+  constructor(private printService: NgxExtendedPdfViewerService, private snackBar: MatSnackBar, notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
       if (this.PDFViewerApplication) {

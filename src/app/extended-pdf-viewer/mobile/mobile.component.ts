@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -7,15 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./mobile.component.css'],
 })
 export class MobileComponent {
+  public fullscreenService = inject(FullscreenService);
+
   public mobileFriendlyZoomSetting = '150%';
 
-  private _fullscreen = false;
-
-  public get fullscreen(): boolean {
-    return this._fullscreen;
-  }
-
-  public set fullscreen(full: boolean) {
-    this._fullscreen = full;
-  }
 }

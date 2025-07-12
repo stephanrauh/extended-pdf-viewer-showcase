@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -18,7 +19,7 @@ export class PdfjsVersionsComponent {
     this._fullscreen = full;
   }
 
-  constructor() {
+  constructor(public fullscreenService: FullscreenService) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 }

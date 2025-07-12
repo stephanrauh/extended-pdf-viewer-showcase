@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -32,7 +33,7 @@ export class SignaturesComponent {
     setTimeout(() => (this.showPdf = true), 100);
   }
 
-  constructor() {
+  constructor(public fullscreenService: FullscreenService) {
     pdfDefaultOptions.enableSignatureEditor = true;
   }
 }

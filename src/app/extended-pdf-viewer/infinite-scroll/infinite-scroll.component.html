@@ -1,5 +1,5 @@
 <div class="flex-container-column fill-container">
-  @if (!fullscreen) {
+  @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
       <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
         <mat-tab-group>
@@ -42,13 +42,10 @@
     </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!fullscreen">
-    <button mat-button (click)="fullscreen=!fullscreen" style="display:none;float:right;height: 24px;line-height: 24px;min-width:24px;padding:0;margin-top:-4px">
-      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-      </svg>
-    </button>
-    @if (file===1) {
+  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <div>
+        @if (file===1) {
       <small
         >Copyright hint: the PDF has been published by Stefan Hellweger and Xiaofeng Wang under a
         <a target="#" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> on
@@ -62,8 +59,12 @@
           <a target="#" href="https://www.thepublicdomain.org/enclosing-the-commons-of-the-mind/">www.thepublicdomain.org</a>.</small
           >
         }
-        @if (showPdfViewer) {
-          <ngx-extended-pdf-viewer
+
+      </div>
+      <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+    </div>
+    @if (showPdfViewer) {
+      <ngx-extended-pdf-viewer
             [src]="filenames[file]"
             [textLayer]="showWidgets"
             [showHandToolButton]="showWidgets"

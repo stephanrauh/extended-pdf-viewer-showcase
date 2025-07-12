@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { FullscreenService } from '../../services/fullscreen.service';
 @Component({
 standalone: false,
   selector: 'app-forms',
@@ -8,22 +9,13 @@ standalone: false,
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ThemingComponent {
-  public _selectedTab = 1;
 
-  private _fullscreen = false;
+  public fullscreenService = inject(FullscreenService);
+  public _selectedTab = 1;
 
   public theme = 'light';
   public backgroundColor = 'lightgrey';
   public src = '/assets/pdfs/OoPdfFormExample.pdf';
-
-  public get fullscreen(): boolean {
-    return this._fullscreen;
-  }
-
-  public set fullscreen(full: boolean) {
-    this._fullscreen = full;
-
-  }
 
   public get selectedTab() {
     return this._selectedTab;

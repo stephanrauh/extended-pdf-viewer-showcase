@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -8,19 +9,10 @@ import { PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./editor-events.component.css'],
 })
 export class EditorEventsComponent {
+  public fullscreenService = inject(FullscreenService);
   public messages: string[] = [];
 
-  private _fullscreen = false;
-
   private changeDetector = inject(ChangeDetectorRef);
-
-  public get fullscreen(): boolean {
-    return this._fullscreen;
-  }
-
-  public set fullscreen(full: boolean) {
-    this._fullscreen = full;
-  }
 
   public onEvent(type: string, event: any): void {
       const now = new Date().toLocaleTimeString();

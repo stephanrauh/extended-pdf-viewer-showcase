@@ -3,6 +3,7 @@ import { countries } from './countries';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { FullscreenService } from '../../services/fullscreen.service';
 @Component({
   standalone: false,
   selector: 'app-forms',
@@ -133,7 +134,7 @@ export class FormsComponent {
     }
   }
 
-  constructor(private ngxService: NgxExtendedPdfViewerService) {
+  constructor(private ngxService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
     this.onSelectTab({ index: 0 } as MatTabChangeEvent);
     this.updateFormData();
   }

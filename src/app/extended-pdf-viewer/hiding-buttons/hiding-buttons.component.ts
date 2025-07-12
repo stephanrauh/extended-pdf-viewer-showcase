@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxExtendedPdfViewerService, ResponsiveVisibility } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -93,5 +94,5 @@ export class HidingButtonsComponent {
 `;
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 }

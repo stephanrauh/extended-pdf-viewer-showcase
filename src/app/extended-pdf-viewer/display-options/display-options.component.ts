@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PageViewModeType, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -8,6 +9,8 @@ import { PageViewModeType, ScrollModeType } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./display-options.component.css'],
 })
 export class DisplayOptionsComponent {
+  public fullscreenService = inject(FullscreenService);
+
   public showBorders = false;
 
   public scrollMode = ScrollModeType.horizontal;
@@ -16,13 +19,4 @@ export class DisplayOptionsComponent {
 
   public spread: 'off' | 'odd' | 'even' = 'off';
 
-  private _fullscreen = false;
-
-  public get fullscreen(): boolean {
-    return this._fullscreen;
-  }
-
-  public set fullscreen(full: boolean) {
-    this._fullscreen = full;
-  }
 }

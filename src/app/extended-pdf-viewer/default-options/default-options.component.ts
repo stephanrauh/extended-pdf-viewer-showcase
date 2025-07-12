@@ -4,6 +4,7 @@ import { compareFunction, convertMDToTable } from '../attributes/md-to-table-con
 import { HttpClient } from '@angular/common/http';
 import { Settings } from 'angular2-smart-table';
 import { isBrowser } from '../common/utilities';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -54,7 +55,7 @@ export class DefaultOptionsComponent implements OnInit {
     this._fullscreen = full;
   }
 
-  constructor(private httpClient: HttpClient, private domElement: ElementRef) {
+  constructor(private httpClient: HttpClient, private domElement: ElementRef, public fullscreenService: FullscreenService) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
 standalone: false,
@@ -19,5 +20,5 @@ export class ServerSideRenderingComponent {
 
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 }

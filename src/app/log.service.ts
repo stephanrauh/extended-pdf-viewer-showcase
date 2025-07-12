@@ -20,7 +20,7 @@ export class LogService {
 
   public init(): void {
       if (this.PDFViewerApplication?.ngxConsole) {
-      this.PDFViewerApplication.ngxConsole.ngxConsoleFilter = (level: string, message: any): boolean => {
+      this.PDFViewerApplication.ngxConsole.ngxConsoleFilter = (level: string, message: string): boolean => {
         this.logs.push(message);
         return true;
       };

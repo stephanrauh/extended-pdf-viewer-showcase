@@ -1,4 +1,4 @@
-@if (!fullscreen) {
+@if (!(fullscreenService.isFullscreen$ | async)) {
 <div class="flex-container-row">
   <mat-card appearance="outlined" class="overflow-none distance16 mat-elevation-z8 margin-right"
     style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">

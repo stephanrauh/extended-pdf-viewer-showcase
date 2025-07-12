@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
 standalone: false,
@@ -8,6 +9,8 @@ standalone: false,
   styleUrls: ['./responsive-design.component.css']
 })
 export class ResponsiveDesignComponent {
+
+  public fullscreenService = inject(FullscreenService);
   public showToolbar = true;
   public showSidebarButton: ResponsiveVisibility = 'xxl';
   public showFindButton: ResponsiveVisibility = 'xxl';
@@ -92,10 +95,6 @@ export class ResponsiveDesignComponent {
     PdfBreakpoints.xxl = value;
   }
 
-
-
-  private _fullscreen = false;
-
   public settingsWidth = "60%";
 
   public codeWidth = "38%";
@@ -117,15 +116,6 @@ export class ResponsiveDesignComponent {
       this.codeWidth = "38%";
       this.settingsWidth = "60%";
     }
-  }
-
-  public get fullscreen(): boolean {
-    return this._fullscreen;
-  }
-
-  public set fullscreen(full: boolean) {
-    this._fullscreen = full;
-
   }
 
   public get sourcecode() {
@@ -158,7 +148,7 @@ export class ResponsiveDesignComponent {
     @Component({
 standalone: false,  ... })
 export class CustomBreakpointsComponent {
-  constructor() {
+  constructor(public fullscreenService: FullscreenService) {
     // these are the default values
     PdfBreakpoints.xs = ${this.xs}; // unit: pixels
     PdfBreakpoints.sm = ${this.sm};

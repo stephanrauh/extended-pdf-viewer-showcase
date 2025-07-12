@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   standalone: false,
@@ -8,6 +9,8 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
   styleUrls: ['./custom-toolbar.component.css'],
 })
 export class CustomToolbarComponent {
+  public fullscreenService = inject(FullscreenService);
+
   public _theme = 'additional';
 
   public showPdfViewer = true;
@@ -19,16 +22,6 @@ export class CustomToolbarComponent {
   public zoom = '100%';
 
   private pdfViewerService = inject(NgxExtendedPdfViewerService);
-
-  private _fullscreen = false;
-
-  public get fullscreen(): boolean {
-    return this._fullscreen;
-  }
-
-  public set fullscreen(full: boolean) {
-    this._fullscreen = full;
-  }
 
   public set theme(theme: string) {
     if (this._theme !== theme) {
