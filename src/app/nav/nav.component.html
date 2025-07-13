@@ -1,51 +1,43 @@
-@if (hideMenu) {
-  <div>
-    <router-outlet></router-outlet>
+<div class="page">
+  <!-- temporarily removed
+  <div class="announcement-banner">
+    <span>Check out our new showcase and let us know your feedback!</span>
+    <mat-chip-listbox>
+      <mat-chip color="primary">
+        <a class="relaunch-link" href="https://pdfviewer.net/relaunch" target="_blank">New Showcase</a>
+      </mat-chip>
+    </mat-chip-listbox>
   </div>
-}
-
-@if (!hideMenu) {
-  <div class="page">
-    <!-- temporarily removed
-    <div class="announcement-banner">
-      <span>Check out our new showcase and let us know your feedback!</span>
-      <mat-chip-listbox>
-        <mat-chip color="primary">
-          <a class="relaunch-link" href="https://pdfviewer.net/relaunch" target="_blank">New Showcase</a>
-        </mat-chip>
-      </mat-chip-listbox>
-    </div>
-    -->
-    <mat-toolbar color="primary" class="mat-elevation-z8 toolbar">
-      <mat-toolbar-row class="toolbar-row">
-        <app-octocat></app-octocat>
-        <div class="toolbar-row-content">
-          <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-          </button>
-          <div class="toolbar-row-content-inner-row">
-            <span>Angular PDF viewer showcase. Running on Angular {{ angularVersion }}{{ pdfjsVersion }} and {{ library }} {{ version }}.</span>
-            <mat-radio-group aria-label="Demo" [(ngModel)]="viewer" ngClass="hide-on-small-screen">
-              Choose a version:
-              <mat-radio-button class="distance16" value="ngx-extended-pdf-viewer">stable (based on pdf.js 5.3)</mat-radio-button>
-              <mat-radio-button class="distance16" value="bleeding-edge">bleeding edge (sneak preview of pdf.js 5.3++)</mat-radio-button>
-            </mat-radio-group>
-          </div>
+  -->
+  <mat-toolbar [hidden]="hideMenu" color="primary" class="mat-elevation-z8 toolbar">
+    <mat-toolbar-row class="toolbar-row">
+      <app-octocat></app-octocat>
+      <div class="toolbar-row-content">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <div class="toolbar-row-content-inner-row">
+          <span>Angular PDF viewer showcase. Running on Angular {{ angularVersion }}{{ pdfjsVersion }} and {{ library }} {{ version }}.</span>
+          <mat-radio-group aria-label="Demo" [(ngModel)]="viewer" ngClass="hide-on-small-screen">
+            Choose a version:
+            <mat-radio-button class="distance16" value="ngx-extended-pdf-viewer">stable (based on pdf.js 5.3)</mat-radio-button>
+            <mat-radio-button class="distance16" value="bleeding-edge">bleeding edge (sneak preview of pdf.js 5.3++)</mat-radio-button>
+          </mat-radio-group>
         </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <mat-sidenav-container class="sidenav-container">
-      <mat-sidenav #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-                   [mode]="'side'" [opened]="true">
-        @if (ngxExtendedPdfViewer) {
-          <app-extended-pdf-viewer-menu [drawer]="drawer"></app-extended-pdf-viewer-menu>
-        }
-      </mat-sidenav>
-      <mat-sidenav-content>
-        <div class="with-border">
-          <router-outlet></router-outlet>
-        </div>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
-}
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="hideMenu ? 'over' : 'side'" [opened]="!hideMenu">
+      @if (ngxExtendedPdfViewer) {
+        <app-extended-pdf-viewer-menu [drawer]="drawer"></app-extended-pdf-viewer-menu>
+      }
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="with-border">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

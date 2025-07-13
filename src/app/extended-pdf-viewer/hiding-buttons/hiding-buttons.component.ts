@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, ResponsiveVisibility } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions, ResponsiveVisibility } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
@@ -11,18 +11,20 @@ import { FullscreenService } from '../../services/fullscreen.service';
 export class HidingButtonsComponent {
   public showToolbar = true;
   public showSidebarButton = false;
-  public showFindButton = true;
+  public showFindButton = false;
   public findbarVisible = false;
   public showDrawEditor = false;
   public showHighlightEditor = false;
   public showTextEditor = false;
+  public showMovePageButton = false;
+  public showSignatureEditor = false;
   public showStampEditor = false;
   public showPagingButtons = false;
   public showZoomButtons = false;
   public showPresentationModeButton = false;
   public showOpenFileButton = false;
   public showPrintButton = false;
-  public showDownloadButton = true;
+  public showDownloadButton = false;
   public showSecondaryToolbarButton = true;
   public showRotateCwButton = false;
   public showRotateCcwButton = false;
@@ -74,6 +76,8 @@ export class HidingButtonsComponent {
   [showSidebarButton]="${this.showSidebarButton}"
   [showFindButton]="${this.showFindButton}"
   [showPagingButtons]="${this.showPagingButtons}"
+  [showSignatureEditor]="${this.showSignatureEditor}"
+  [showHighlightEditor]="${this.showHighlightEditor}"
   [showDrawEditor]="${this.showDrawEditor}"
   [showStampEditor]="${this.showStampEditor}"
   [showTextEditor]="${this.showTextEditor}"
@@ -82,7 +86,8 @@ export class HidingButtonsComponent {
   [showOpenFileButton]="${this.showOpenFileButton}"
   [showPrintButton]="${this.showPrintButton}"
   [showDownloadButton]="${this.showDownloadButton}"
-  [showSecondaryToolbarButton]="${this.showSecondaryToolbarButton}"
+  [show=SecondaryToolbarButton]="${this.showSecondaryToolbarButton}"
+  [showMovePageButton]="${this.showMovePageButton}"
   [showRotateButton]="${this.showRotateButton}"
   [showRotateCwButton]="${this.showRotateCwButton}"
   [showRotateCcwButton]="${this.showRotateCcwButton}"
@@ -94,5 +99,7 @@ export class HidingButtonsComponent {
 `;
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
+  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
+    pdfDefaultOptions.enableSignatureEditor = true;
+  }
 }

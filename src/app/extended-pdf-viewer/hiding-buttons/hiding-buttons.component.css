@@ -2,3 +2,29 @@
     margin-left: 20px;
 }
 
+.large-margin {
+    margin-left: 53px;
+}
+
+.checkbox-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.checkbox-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-item mat-checkbox {
+    margin-bottom: 8px;
+}
+
+.source-code-container {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+
