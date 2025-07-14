@@ -1,15 +1,33 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatButton } from '@angular/material/button';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-scrolling',
-  templateUrl: './scrolling.component.html',
-  styleUrls: ['./scrolling.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-scrolling',
+    templateUrl: './scrolling.component.html',
+    styleUrls: ['./scrolling.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatButton,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class ScrollingComponent {
+  private pdfService = inject(NgxExtendedPdfViewerService);
+  fullscreenService = inject(FullscreenService);
+
   private _fullscreen = false;
 
   public selectedTab = 0;
@@ -31,8 +49,6 @@ export class ScrollingComponent {
       return './assets/pdfs/issue1707-with-rulers.pdf';
     }
   }
-
-  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 
   public scroll(pageNumber: number, top: number | string): void {
     this.pdfService.scrollPageIntoView(pageNumber, { top });

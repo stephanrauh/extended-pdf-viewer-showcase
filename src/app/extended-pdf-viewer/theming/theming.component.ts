@@ -1,12 +1,25 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatTabChangeEvent, MatTabGroup, MatTab } from '@angular/material/tabs';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { AsyncPipe } from '@angular/common';
 @Component({
-standalone: false,
-  selector: 'app-forms',
-  templateUrl: './theming.component.html',
-  styleUrls: ['./theming.component.css'],
-  changeDetection: ChangeDetectionStrategy.Default,
+    selector: 'app-forms',
+    templateUrl: './theming.component.html',
+    styleUrls: ['./theming.component.css'],
+    changeDetection: ChangeDetectionStrategy.Default,
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class ThemingComponent {
 

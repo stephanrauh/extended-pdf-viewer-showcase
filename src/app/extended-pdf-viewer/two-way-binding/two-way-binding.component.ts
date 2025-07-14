@@ -1,16 +1,43 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { NgxExtendedPdfViewerService, ScrollModeType, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfSidebarView } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatFormField, MatHint } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { RouterLink } from '@angular/router';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-standalone: false,
-  selector: 'app-two-way-binding',
-  templateUrl: './two-way-binding.component.html',
-  styleUrls: ['./two-way-binding.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-two-way-binding',
+    templateUrl: './two-way-binding.component.html',
+    styleUrls: ['./two-way-binding.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatFormField,
+        MatInput,
+        FormsModule,
+        MatHint,
+        MatCheckbox,
+        RouterLink,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class TwoWayBindingComponent {
+   private pdfService = inject(NgxExtendedPdfViewerService);
+   fullscreenService = inject(FullscreenService);
+
    public _selectedTab = 0;
 
   public handTool = true;
@@ -76,6 +103,4 @@ export class TwoWayBindingComponent {
     // loading a file resets the default view
     setTimeout(() => this.activeSidebarView = view, 150);
   }
-
-  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 }

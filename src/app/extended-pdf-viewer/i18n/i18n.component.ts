@@ -1,11 +1,31 @@
 import { Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-i18n',
-  templateUrl: './i18n.component.html',
-  styleUrls: ['./i18n.component.css'],
+    selector: 'app-i18n',
+    templateUrl: './i18n.component.html',
+    styleUrls: ['./i18n.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        MatOption,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class I18nComponent {
   public fullscreenService = inject(FullscreenService);

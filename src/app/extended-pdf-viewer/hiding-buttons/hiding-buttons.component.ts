@@ -1,14 +1,40 @@
-import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, pdfDefaultOptions, ResponsiveVisibility } from 'ngx-extended-pdf-viewer';
+import { Component, inject } from '@angular/core';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions, ResponsiveVisibility, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
+import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
-  standalone: false,
-  selector: 'app-hiding-buttons',
-  templateUrl: './hiding-buttons.component.html',
-  styleUrls: ['./hiding-buttons.component.css'],
+    selector: 'app-hiding-buttons',
+    templateUrl: './hiding-buttons.component.html',
+    styleUrls: ['./hiding-buttons.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatCheckbox,
+        FormsModule,
+        MatFormField,
+        MatInput,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+        LanguagePipe,
+    ],
 })
 export class HidingButtonsComponent {
+  private pdfService = inject(NgxExtendedPdfViewerService);
+  fullscreenService = inject(FullscreenService);
+
   public showToolbar = true;
   public showSidebarButton = false;
   public showFindButton = false;
@@ -99,7 +125,7 @@ export class HidingButtonsComponent {
 `;
   }
 
-  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
+  constructor() {
     pdfDefaultOptions.enableSignatureEditor = true;
     pdfDefaultOptions.enablePageReordering = true;
   }

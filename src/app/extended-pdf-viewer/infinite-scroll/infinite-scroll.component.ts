@@ -1,14 +1,36 @@
-import { Component } from '@angular/core';
-import { ScrollModeType } from 'ngx-extended-pdf-viewer';
+import { Component, inject } from '@angular/core';
+import { ScrollModeType, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-standalone: false,
-  selector: 'app-infinite-scroll',
-  templateUrl: './infinite-scroll.component.html',
-  styleUrls: ['./infinite-scroll.component.css'],
+    selector: 'app-infinite-scroll',
+    templateUrl: './infinite-scroll.component.html',
+    styleUrls: ['./infinite-scroll.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatCheckbox,
+        FormsModule,
+        MatRadioGroup,
+        MatRadioButton,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class InfiniteScrollComponent {
+  fullscreenService = inject(FullscreenService);
+
   public filenames = [
     '/assets/pdfs/PdfFormExample.pdf',
     '/assets/pdfs/user-experience.pdf',
@@ -34,8 +56,6 @@ export class InfiniteScrollComponent {
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
   }
-
-  constructor(public fullscreenService: FullscreenService) {  }
 
   public get showWidgets(): boolean {
     return this._showWidgets;

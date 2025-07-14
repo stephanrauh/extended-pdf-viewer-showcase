@@ -1,18 +1,40 @@
-import { ChangeDetectorRef, Component, effect, OnDestroy } from '@angular/core';
-import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { ChangeDetectorRef, Component, effect, OnDestroy, inject } from '@angular/core';
+import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { MyCustomFindController } from './my-custom-find-controller';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
 
 interface CustomFindOptions extends FindOptions {
   matchRegex: boolean;
 }
 
 @Component({
-  standalone: false,
-  selector: 'app-custom-find',
-  templateUrl: './custom-find.component.html',
-  styleUrls: ['./custom-find.component.scss'],
+    selector: 'app-custom-find',
+    templateUrl: './custom-find.component.html',
+    styleUrls: ['./custom-find.component.scss'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatFormField,
+        MatInput,
+        FormsModule,
+        MatButton,
+        Ie11MarkdownComponent,
+        FullscreenButtonComponent,
+        NgxExtendedPdfViewerModule,
+    ],
 })
 export class CustomFindComponent implements OnDestroy {
+  private readonly cdr = inject(ChangeDetectorRef);
+  notificationService = inject(PDFNotificationService);
+
   public searchtext = '(?<=\\s)([A-z]+ough)';
   findOptions: CustomFindOptions = {
     highlightAll: true,
@@ -31,7 +53,9 @@ export class CustomFindComponent implements OnDestroy {
 
   public currentTab = 0;
 
-  constructor(private readonly cdr: ChangeDetectorRef, public notificationService: PDFNotificationService) {
+  constructor() {
+    const notificationService = this.notificationService;
+
     pdfDefaultOptions.findController = MyCustomFindController;
     effect(() => {
       this.pdfViewerApplication = notificationService.onPDFJSInitSignal();

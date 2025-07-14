@@ -1,9 +1,15 @@
-import { Component, Inject, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, inject } from '@angular/core';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { AsyncPipe } from '@angular/common';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -11,18 +17,29 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @Component({
-standalone: false,
-  selector: 'app-perfect-scrollbar',
-  templateUrl: './perfect-scrollbar.component.html',
-  styleUrls: ['./perfect-scrollbar.component.css'],
-  providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
-  ],
+    selector: 'app-perfect-scrollbar',
+    templateUrl: './perfect-scrollbar.component.html',
+    styleUrls: ['./perfect-scrollbar.component.css'],
+    providers: [
+        {
+            provide: PERFECT_SCROLLBAR_CONFIG,
+            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+        },
+    ],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
+  config = inject<PerfectScrollbarConfigInterface>(PERFECT_SCROLLBAR_CONFIG);
+  fullscreenService = inject(FullscreenService);
+
   public scrollbar: PerfectScrollbar | undefined = undefined;
 
   private _fullscreen = false;
@@ -34,11 +51,6 @@ export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
   }
-
-  constructor(
-    @Inject(PERFECT_SCROLLBAR_CONFIG) public config: PerfectScrollbarConfigInterface,
-    public fullscreenService: FullscreenService
-  ) {}
 
   public ngAfterViewInit(): void {
     if (isBrowser()) {

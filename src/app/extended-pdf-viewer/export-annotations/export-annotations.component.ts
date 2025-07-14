@@ -1,14 +1,33 @@
-import { EditorAnnotation, FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { Component } from '@angular/core';
+import { EditorAnnotation, FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatButton } from '@angular/material/button';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-export-annotations',
-  templateUrl: './export-annotations.component.html',
-  styleUrls: ['./export-annotations.component.css'],
+    selector: 'app-export-annotations',
+    templateUrl: './export-annotations.component.html',
+    styleUrls: ['./export-annotations.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatButton,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+        JsonPipe,
+    ],
 })
 export class ExportAnnotationsComponent {
+  private pdfViewerService = inject(NgxExtendedPdfViewerService);
+  fullscreenService = inject(FullscreenService);
+
   public imageDataURL: string | undefined = undefined;
 
   public selectedTabIndex = 0;
@@ -27,7 +46,7 @@ export class ExportAnnotationsComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
+  constructor() {
     pdfDefaultOptions.textLayerMode = 1;
   }
 

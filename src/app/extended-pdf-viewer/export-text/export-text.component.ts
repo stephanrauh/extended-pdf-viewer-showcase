@@ -1,14 +1,32 @@
-import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { Component, inject } from '@angular/core';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-export-text',
-  templateUrl: './export-text.component.html',
-  styleUrls: ['./export-text.component.css'],
+    selector: 'app-export-text',
+    templateUrl: './export-text.component.html',
+    styleUrls: ['./export-text.component.css'],
+    imports: [
+        MatCard,
+        MatButton,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class ExportTextComponent {
+  private pdfViewerService = inject(NgxExtendedPdfViewerService);
+  fullscreenService = inject(FullscreenService);
+
   public imageDataURL: string | undefined = undefined;
 
   public background: string | undefined;
@@ -29,7 +47,7 @@ export class ExportTextComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
+  constructor() {
     pdfDefaultOptions.textLayerMode = 1;
   }
 

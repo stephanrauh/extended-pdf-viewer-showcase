@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-fullscreen-button',
-  template: `
+    selector: 'app-fullscreen-button',
+    template: `
     <button
       (click)="toggleFullscreen()"
       [title]="(fullscreenService.isFullscreen$ | async) ? 'Exit fullscreen' : 'Enter fullscreen'"
@@ -14,7 +14,7 @@ import { FullscreenService } from '../../services/fullscreen.service';
       </svg>
     </button>
   `,
-  styles: [`
+    styles: [`
     button {
       border: none;
       background: none;
@@ -23,10 +23,12 @@ import { FullscreenService } from '../../services/fullscreen.service';
       background-color: rgba(0,0,0,0.04);
       color: rgba(0,0,0,0.8);
     }
-  `]
+  `],
+    imports: [AsyncPipe]
 })
 export class FullscreenButtonComponent {
-  constructor(public fullscreenService: FullscreenService) {}
+  fullscreenService = inject(FullscreenService);
+
 
   toggleFullscreen(): void {
     this.fullscreenService.toggleFullscreen();

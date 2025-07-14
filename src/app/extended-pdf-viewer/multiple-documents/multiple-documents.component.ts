@@ -1,15 +1,26 @@
-import { Component, effect, OnInit } from '@angular/core';
-import { FileInputChanged, IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { Component, effect, OnInit, inject } from '@angular/core';
+import { FileInputChanged, IPDFViewerApplication, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-multiple-documents',
-  templateUrl: './multiple-documents.component.html',
-  styleUrls: ['./multiple-documents.component.css']
+    selector: 'app-multiple-documents',
+    templateUrl: './multiple-documents.component.html',
+    styleUrls: ['./multiple-documents.component.css'],
+    imports: [MatCard, MatFormField, MatLabel, MatSelect, MatOption, MatCheckbox, FormsModule, MatTabGroup, MatTab, Ie11MarkdownComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, AsyncPipe]
 })
 export class MultipleDocumentsComponent implements OnInit {
+  fullscreenService = inject(FullscreenService);
+
   public src!: string;
 
   public dragAndDrop = true;
@@ -30,7 +41,9 @@ export class MultipleDocumentsComponent implements OnInit {
 
   public url!: URL;
 
-  constructor(notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
+  constructor() {
+    const notificationService = inject(PDFNotificationService);
+
     if (isBrowser()) {
       this.url = new URL(`${location.protocol}//${location.host}/assets/pdfs/GraalVM.pdf`);
     } else {

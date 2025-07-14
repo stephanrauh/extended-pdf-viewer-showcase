@@ -1,11 +1,18 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CopyrightComponent } from '../common/copyright.component';
+import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
-standalone: false,
-  selector: 'app-iframe',
-  templateUrl: './iframe.component.html',
-  styleUrls: ['./iframe.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-iframe',
+    templateUrl: './iframe.component.html',
+    styleUrls: ['./iframe.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CopyrightComponent,
+        FullscreenButtonComponent,
+        NgxExtendedPdfViewerModule,
+    ],
 })
 export class IFrameComponent {
   public url = '';

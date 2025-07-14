@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
-  standalone: false,
-  selector: 'app-open-in-new-tab',
-  templateUrl: './open-in-new-tab.component.html',
-  styleUrls: ['./open-in-new-tab.component.css']
+    selector: 'app-open-in-new-tab',
+    templateUrl: './open-in-new-tab.component.html',
+    styleUrls: ['./open-in-new-tab.component.css'],
+    imports: [NgxExtendedPdfViewerModule]
 })
 export class OpenInNewTabComponent {
 

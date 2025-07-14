@@ -1,14 +1,26 @@
 import { Component, inject } from '@angular/core';
-import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
+import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
-standalone: false,
-  selector: 'app-responsive-design',
-  templateUrl: './responsive-design.component.html',
-  styleUrls: ['./responsive-design.component.css']
+    selector: 'app-responsive-design',
+    templateUrl: './responsive-design.component.html',
+    styleUrls: ['./responsive-design.component.css'],
+    imports: [MatCard, MatTabGroup, MatTab, MatFormField, MatLabel, MatSelect, MatOption, MatInput, FormsModule, MatError, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe, LanguagePipe]
 })
 export class ResponsiveDesignComponent {
+  private pdfService = inject(NgxExtendedPdfViewerService);
+
 
   public fullscreenService = inject(FullscreenService);
   public showToolbar = true;
@@ -159,6 +171,4 @@ export class CustomBreakpointsComponent {
   }
 }`;
   }
-
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
 }

@@ -1,16 +1,26 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, AfterViewInit, OnInit } from '@angular/core';
-import { Settings } from 'angular2-smart-table';
+import { Component, ElementRef, AfterViewInit, OnInit, inject } from '@angular/core';
+import { Settings, Angular2SmartTableModule } from 'angular2-smart-table';
 import { isBrowser } from '../common/utilities';
 import { compareFunction, convertMDToTable } from './md-to-table-converter';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
 
 @Component({
-standalone: false,
-  selector: 'app-attributes',
-  templateUrl: './attributes.component.html',
-  styleUrls: ['./attributes.component.css'],
+    selector: 'app-attributes',
+    templateUrl: './attributes.component.html',
+    styleUrls: ['./attributes.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        Angular2SmartTableModule,
+    ],
 })
 export class AttributesComponent implements OnInit, AfterViewInit {
+  private httpClient = inject(HttpClient);
+  private domElement = inject(ElementRef);
+
   public attributesAndEvents: object[] = [];
   public lowLevelApi: object[] = [];
 
@@ -74,8 +84,6 @@ export class AttributesComponent implements OnInit, AfterViewInit {
       display: false,
     },
   };
-
-  constructor(private httpClient: HttpClient, private domElement: ElementRef) {}
 
   public async ngOnInit(): Promise<void> {
     this.attributesAndEvents = await convertMDToTable('/assets/extended-pdf-viewer/attributes/attributes.md', this.httpClient);

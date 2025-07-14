@@ -1,14 +1,32 @@
-import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { Component, inject } from '@angular/core';
+import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatButton } from '@angular/material/button';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-annotation-layer-api',
-  templateUrl: './annotation-layer-api.component.html',
-  styleUrls: ['./annotation-layer-api.component.css'],
+    selector: 'app-annotation-layer-api',
+    templateUrl: './annotation-layer-api.component.html',
+    styleUrls: ['./annotation-layer-api.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatButton,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class AnnotationLayerApiComponent {
+  private pdfService = inject(NgxExtendedPdfViewerService);
+  fullscreenService = inject(FullscreenService);
+
   private _fullscreen = false;
 
   public get fullscreen(): boolean {
@@ -18,8 +36,6 @@ export class AnnotationLayerApiComponent {
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
   }
-
-  constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onAnnotationEditorEvent(event: any): void {

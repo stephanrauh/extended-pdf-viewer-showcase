@@ -1,16 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CopyrightService } from './copyright.service';
 
 @Component({
-  standalone: false,
-  selector: 'app-copyright',
-  templateUrl: './copyright.component.html',
-  styleUrls: ['./copyright.component.css']
+    selector: 'app-copyright',
+    templateUrl: './copyright.component.html',
+    styleUrls: ['./copyright.component.css']
 })
 export class CopyrightComponent {
-  @Input() src!: string;
+  private copyrightService = inject(CopyrightService);
 
-  constructor(private copyrightService: CopyrightService) {}
+  @Input() src!: string;
 
   get copyrightHint(): string {
     const hint = this.copyrightService.getCopyrightHint(this.src);

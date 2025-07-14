@@ -7,38 +7,44 @@
             <p>While there is a loading indicator in pdf.js, there's a good reason to implement your own loading indicator. The default
               indicator is triggered only once (but not when you load a new document), and it only shows the loading phase, excluding the
               time required to render the PDF file.
-          </p>
-          <p>Luckily, you can easily implement your own loading indicator using the events `(pdfLoading)`, `((pdfLoaded)`, `(pageRender)`,
-            and `(pageRendered)`.
-          </p>
-          <p>Note on the demo: I've delayed both loading and rendering, otherwise you'd miss the loading indicator.</p>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="Typescript">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="CSS">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/css.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+            </p>
+            <p>Luckily, you can easily implement your own loading indicator using the events `(pdfLoading)`, `((pdfLoaded)`, `(pageRender)`,
+              and `(pageRendered)`.
+            </p>
+            <p>Note on the demo: I've delayed both loading and rendering, otherwise you'd miss the loading indicator.</p>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="HTML template">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/html.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="Typescript">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/ts.md"> </app-ie11-markdown>
+          </mat-tab>
+          <mat-tab label="CSS">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/css.md"> </app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
   }
 
   <app-demo [src]="'/assets/pdfs/slow-rendering.pdf'">
     <div class="pdf-container">
       <!-- Loading/Error Indicator -->
-      <div *ngIf="showLoadingIndicator() || hasError()" class="loading-overlay">
-        <div *ngIf="!hasError()" class="spinner"></div>
-        <div *ngIf="hasError()" class="error-icon">⚠️</div>
-        <p>{{ loadingMessage() }}</p>
-      </div>
+      @if (showLoadingIndicator() || hasError()) {
+        <div class="loading-overlay">
+          @if (!hasError()) {
+            <div class="spinner"></div>
+          }
+          @if (hasError()) {
+            <div class="error-icon">⚠️</div>
+          }
+          <p>{{ loadingMessage() }}</p>
+        </div>
+      }
       <ngx-extended-pdf-viewer
         [src]="src"
         (pdfLoaded)="onPdfLoaded()"

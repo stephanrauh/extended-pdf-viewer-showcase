@@ -2,6 +2,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, signal, computed, inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 interface PdfState {
   status: 'idle' | 'loading' | 'loaded' | 'loaded and rendered' | 'error';
@@ -9,10 +15,17 @@ interface PdfState {
   error?: string;
 }
 @Component({
-  standalone: false,
-  selector: 'app-signatures',
-  templateUrl: './loading-indicator.component.html',
-  styleUrls: ['./loading-indicator.component.css'],
+    selector: 'app-signatures',
+    templateUrl: './loading-indicator.component.html',
+    styleUrls: ['./loading-indicator.component.css'],
+    imports: [
+    MatCard,
+    MatTabGroup,
+    MatTab,
+    Ie11MarkdownComponent,
+    DemoComponent,
+    NgxExtendedPdfViewerModule
+],
 })
 export class LoadingIndicatorComponent {
 

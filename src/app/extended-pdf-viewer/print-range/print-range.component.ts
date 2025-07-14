@@ -1,17 +1,48 @@
-import { Component, effect, OnDestroy } from '@angular/core';
-import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { Component, effect, OnDestroy, inject } from '@angular/core';
+import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PDFPrintRange } from 'ngx-extended-pdf-viewer';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatTabChangeEvent, MatTabGroup, MatTab } from '@angular/material/tabs';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
+import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
-standalone: false,
-  selector: 'app-print-range',
-  templateUrl: './print-range.component.html',
-  styleUrls: ['./print-range.component.css'],
+    selector: 'app-print-range',
+    templateUrl: './print-range.component.html',
+    styleUrls: ['./print-range.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatFormField,
+        MatInput,
+        FormsModule,
+        MatButton,
+        MatCheckbox,
+        MatRadioGroup,
+        MatRadioButton,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+        LanguagePipe,
+    ],
 })
 export class PrintRangeComponent implements OnDestroy {
+  private printService = inject(NgxExtendedPdfViewerService);
+  private snackBar = inject(MatSnackBar);
+  fullscreenService = inject(FullscreenService);
+
   private activeTab = 0;
   private PDFViewerApplication?: IPDFViewerApplication;
 
@@ -82,7 +113,9 @@ export class PrintRangeComponent implements OnDestroy {
 
   public includedAsArray = PrintRangeComponent.toArray(this.included);
 
-  constructor(private printService: NgxExtendedPdfViewerService, private snackBar: MatSnackBar, notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
+  constructor() {
+    const notificationService = inject(PDFNotificationService);
+
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
       if (this.PDFViewerApplication) {

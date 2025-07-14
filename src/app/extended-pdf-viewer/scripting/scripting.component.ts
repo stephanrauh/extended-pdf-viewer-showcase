@@ -1,15 +1,34 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-scripting',
-  templateUrl: './scripting.component.html',
-  styleUrls: ['./scripting.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-scripting',
+    templateUrl: './scripting.component.html',
+    styleUrls: ['./scripting.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        MatCard,
+        MatCheckbox,
+        FormsModule,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class ScriptingComponent {
+  fullscreenService = inject(FullscreenService);
+
   private _fullscreen = false;
 
   public get fullscreen(): boolean {
@@ -20,7 +39,7 @@ export class ScriptingComponent {
     this._fullscreen = full;
   }
 
-  constructor(public fullscreenService: FullscreenService) {
+  constructor() {
     try {
       if (localStorage) {
         const setting = localStorage.getItem('ngx-extended-pdf-viewer.enableScripting');

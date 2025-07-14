@@ -1,14 +1,35 @@
-import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { Component } from '@angular/core';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-editor-settings',
-  templateUrl: './editor-settings.component.html',
-  styleUrls: ['./editor-settings.component.css'],
+    selector: 'app-editor-settings',
+    templateUrl: './editor-settings.component.html',
+    styleUrls: ['./editor-settings.component.css'],
+    imports: [
+        MatCard,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class EditorSettingsComponent {
+  private pdfViewerService = inject(NgxExtendedPdfViewerService);
+  fullscreenService = inject(FullscreenService);
+
   public imageDataURL: string | undefined = undefined;
 
   public selectedTabIndex = 0;
@@ -23,7 +44,7 @@ export class EditorSettingsComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
+  constructor() {
     pdfDefaultOptions.textLayerMode = 1;
   }
 

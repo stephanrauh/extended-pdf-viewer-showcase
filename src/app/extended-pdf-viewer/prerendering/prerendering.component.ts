@@ -1,17 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
-import {
-  NgxExtendedPdfViewerService,
-  pdfDefaultOptions,
-} from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { RouterLink } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-standalone: false,
-  selector: 'app-prerendering',
-  templateUrl: './prerendering.component.html',
-  styleUrls: ['./prerendering.component.css'],
+    selector: 'app-prerendering',
+    templateUrl: './prerendering.component.html',
+    styleUrls: ['./prerendering.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        RouterLink,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class PrerenderingComponent {
+  private pdfViewerService = inject(NgxExtendedPdfViewerService);
+  fullscreenService = inject(FullscreenService);
+
   public spreadMode: 'off' | 'even' | 'odd' = 'off';
 
   public page = 17;
@@ -40,7 +55,7 @@ export class PrerenderingComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
+  constructor() {
     pdfDefaultOptions.ignoreDestinationZoom = true;
   }
 

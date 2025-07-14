@@ -1,16 +1,41 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, PageRenderedEvent } from 'ngx-extended-pdf-viewer';
+import { Component, inject } from '@angular/core';
+import { NgxExtendedPdfViewerService, PageRenderedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { BlobService } from './blob.service';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-blob',
-  templateUrl: './blob.component.html',
-  styleUrls: ['./blob.component.css'],
+    selector: 'app-blob',
+    templateUrl: './blob.component.html',
+    styleUrls: ['./blob.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatRadioGroup,
+        FormsModule,
+        MatRadioButton,
+        MatButton,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class BlobComponent {
+  private http = inject(HttpClient);
+  private blobService = inject(BlobService);
+  private ngxService = inject(NgxExtendedPdfViewerService);
+  fullscreenService = inject(FullscreenService);
+
   public src = this.blobService.src;
 
   public downloaded: string | undefined;
@@ -26,8 +51,6 @@ export class BlobComponent {
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
   }
-
-  constructor(private http: HttpClient, private blobService: BlobService, private ngxService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {}
 
   public usePreloadedFile(): void {
     this.src = this.blobService.src;

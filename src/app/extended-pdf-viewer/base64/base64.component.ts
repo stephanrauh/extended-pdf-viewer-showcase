@@ -1,19 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { pdfData2 } from './secondPdfBase64';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { isBrowser } from '../common/utilities';
-import { PageRenderedEvent } from 'ngx-extended-pdf-viewer';
+import { PageRenderedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-base64',
-  templateUrl: './base64.component.html',
-  styleUrls: ['./base64.component.css'],
+    selector: 'app-base64',
+    templateUrl: './base64.component.html',
+    styleUrls: ['./base64.component.css'],
+    imports: [
+        MatCard,
+        MatButton,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class Base64Component implements OnInit {
+  private httpClient = inject(HttpClient);
+  fullscreenService = inject(FullscreenService);
+
   public base64 = new Subject<string>();
 
   public tailwindPdf!: string;
@@ -29,8 +47,6 @@ export class Base64Component implements OnInit {
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
   }
-
-  constructor(private httpClient: HttpClient, public fullscreenService: FullscreenService) {}
 
   public ngOnInit(): void {
     if (isBrowser()) {

@@ -1,14 +1,40 @@
-import { Component } from '@angular/core';
-import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { Component, inject } from '@angular/core';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-export-image',
-  templateUrl: './export-image.component.html',
-  styleUrls: ['./export-image.component.css'],
+    selector: 'app-export-image',
+    templateUrl: './export-image.component.html',
+    styleUrls: ['./export-image.component.css'],
+    imports: [
+        MatCard,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        FormsModule,
+        MatError,
+        MatButton,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class ExportImageComponent {
+  private pdfViewerService = inject(NgxExtendedPdfViewerService);
+  fullscreenService = inject(FullscreenService);
+
   public imageDataURL: string | undefined = undefined;
 
   public background: string | undefined;
@@ -36,7 +62,7 @@ export class ExportImageComponent {
     this._fullscreen = full;
   }
 
-  constructor(private pdfViewerService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
+  constructor() {
     pdfDefaultOptions.textLayerMode = 1;
   }
 

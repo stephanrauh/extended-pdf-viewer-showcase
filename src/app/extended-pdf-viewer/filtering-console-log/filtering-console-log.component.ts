@@ -1,14 +1,29 @@
-import { Component, effect } from '@angular/core';
-import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { Component, effect, inject } from '@angular/core';
+import { IPDFViewerApplication, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-standalone: false,
-  selector: 'app-filtering-console-log',
-  templateUrl: './filtering-console-log.component.html',
-  styleUrls: ['./filtering-console-log.component.css'],
+    selector: 'app-filtering-console-log',
+    templateUrl: './filtering-console-log.component.html',
+    styleUrls: ['./filtering-console-log.component.css'],
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class FilteringConsoleLogComponent {
+  fullscreenService = inject(FullscreenService);
+
   public version = '';
 
   private PDFViewerApplication!: IPDFViewerApplication;
@@ -23,7 +38,9 @@ export class FilteringConsoleLogComponent {
     this._fullscreen = full;
   }
 
-  constructor(notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
+  constructor() {
+    const notificationService = inject(PDFNotificationService);
+
     effect(() => {
       if ((this.PDFViewerApplication = notificationService.onPDFJSInitSignal())) {
         this.init();

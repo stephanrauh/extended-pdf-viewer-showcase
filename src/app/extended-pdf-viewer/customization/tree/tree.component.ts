@@ -1,13 +1,28 @@
 import { TreeNode } from '../tree-node';
 import { Component, Input } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { MatTreeNestedDataSource, MatTree, MatTreeNodeDef, MatTreeNode, MatTreeNodeToggle, MatNestedTreeNode, MatTreeNodeOutlet } from '@angular/material/tree';
+import { MatIconButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { IconInfoComponent } from '../../icons/icon-info/icon-info.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  standalone: false,
-  selector: 'app-tree',
-  templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.css'],
+    selector: 'app-tree',
+    templateUrl: './tree.component.html',
+    styleUrls: ['./tree.component.css'],
+    imports: [
+        MatTree,
+        MatTreeNodeDef,
+        MatTreeNode,
+        MatTreeNodeToggle,
+        MatIconButton,
+        MatTooltip,
+        IconInfoComponent,
+        MatNestedTreeNode,
+        MatIcon,
+        MatTreeNodeOutlet,
+    ],
 })
 export class TreeComponent {
   public _treeData!: TreeNode[];

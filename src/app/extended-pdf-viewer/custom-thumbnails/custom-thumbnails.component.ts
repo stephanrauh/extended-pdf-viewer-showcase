@@ -1,15 +1,30 @@
-import { Component, effect, ViewEncapsulation } from '@angular/core';
-import { IPDFViewerApplication, PDFNotificationService, PdfThumbnailDrawnEvent } from 'ngx-extended-pdf-viewer';
+import { Component, effect, ViewEncapsulation, inject } from '@angular/core';
+import { IPDFViewerApplication, PDFNotificationService, PdfThumbnailDrawnEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-custom-thumbnails',
-  templateUrl: './custom-thumbnails.component.html',
-  styleUrls: ['./custom-thumbnails.component.css'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-custom-thumbnails',
+    templateUrl: './custom-thumbnails.component.html',
+    styleUrls: ['./custom-thumbnails.component.css'],
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class CustomThumbnailsComponent {
+  fullscreenService = inject(FullscreenService);
+
   private _fullscreen = false;
 
   public rotation: 0 | 180 = 0;
@@ -24,7 +39,9 @@ export class CustomThumbnailsComponent {
 
   private PDFViewerApplication!: IPDFViewerApplication;
 
-  constructor(notificationService: PDFNotificationService, public fullscreenService: FullscreenService) {
+  constructor() {
+    const notificationService = inject(PDFNotificationService);
+
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
     });

@@ -1,4 +1,4 @@
-import { effect, Injectable } from '@angular/core';
+import { effect, Injectable, inject } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 
 @Injectable({
@@ -9,7 +9,9 @@ export class LogService {
 
   private PDFViewerApplication!: IPDFViewerApplication;
 
-  constructor(notificationService: PDFNotificationService) {
+  constructor() {
+    const notificationService = inject(PDFNotificationService);
+
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
       if (this.PDFViewerApplication) {

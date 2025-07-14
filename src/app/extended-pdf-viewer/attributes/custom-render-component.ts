@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 
 @Component({
-standalone: false,
-  templateUrl: 'custom-render-component.html'
+    templateUrl: 'custom-render-component.html',
+    imports: [Ie11MarkdownComponent]
 })
 export class CustomRenderComponent implements OnInit {
   public file!: string;

@@ -1,13 +1,28 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
 
 @Component({
-standalone: false,
-  selector: 'app-csp',
-  templateUrl: './csp.component.html',
-  styleUrls: ['./csp.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-csp',
+    templateUrl: './csp.component.html',
+    styleUrls: ['./csp.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatCheckbox,
+        FormsModule,
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+    ],
 })
 export class CSPComponent implements OnDestroy {
    public _useInlineScripts = false;

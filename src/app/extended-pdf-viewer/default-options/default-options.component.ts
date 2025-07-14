@@ -1,19 +1,37 @@
-import { Component, ChangeDetectionStrategy, OnInit, ElementRef } from '@angular/core';
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { Component, ChangeDetectionStrategy, OnInit, ElementRef, inject } from '@angular/core';
+import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { compareFunction, convertMDToTable } from '../attributes/md-to-table-converter';
 import { HttpClient } from '@angular/common/http';
-import { Settings } from 'angular2-smart-table';
+import { Settings, Angular2SmartTableModule } from 'angular2-smart-table';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: false,
-  selector: 'app-default-options',
-  templateUrl: './default-options.component.html',
-  styleUrls: ['./default-options.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-default-options',
+    templateUrl: './default-options.component.html',
+    styleUrls: ['./default-options.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        Ie11MarkdownComponent,
+        Angular2SmartTableModule,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+        AsyncPipe,
+    ],
 })
 export class DefaultOptionsComponent implements OnInit {
+  private httpClient = inject(HttpClient);
+  private domElement = inject(ElementRef);
+  fullscreenService = inject(FullscreenService);
+
   public tableSettings: Settings = {
     actions: {
       edit: false,
@@ -55,7 +73,7 @@ export class DefaultOptionsComponent implements OnInit {
     this._fullscreen = full;
   }
 
-  constructor(private httpClient: HttpClient, private domElement: ElementRef, public fullscreenService: FullscreenService) {
+  constructor() {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 

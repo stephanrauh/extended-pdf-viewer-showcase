@@ -1,16 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
-import { ISortDirection, Settings } from 'angular2-smart-table';
+import { AfterViewInit, Component, ElementRef, OnInit, inject } from '@angular/core';
+import { ISortDirection, Settings, Angular2SmartTableModule } from 'angular2-smart-table';
 import { firstValueFrom } from 'rxjs';
 import { isBrowser } from '../common/utilities';
+import { MatCard } from '@angular/material/card';
 
 @Component({
-  standalone: false,
-  selector: 'app-css',
-  templateUrl: './css.component.html',
-  styleUrls: ['./css.component.css'],
+    selector: 'app-css',
+    templateUrl: './css.component.html',
+    styleUrls: ['./css.component.css'],
+    imports: [MatCard, Angular2SmartTableModule],
 })
 export class CSSComponent implements OnInit, AfterViewInit {
+  private httpClient = inject(HttpClient);
+  private element = inject(ElementRef);
+
   public attributesAndEvents: object[] = [];
 
   private compareFunction = (dir: number, a: string, b: string) => {
@@ -48,8 +52,6 @@ export class CSSComponent implements OnInit, AfterViewInit {
       perPage: 5000,
     },
   };
-
-  constructor(private httpClient: HttpClient, private element: ElementRef) {}
 
   public async ngOnInit(): Promise<void> {
     this.attributesAndEvents = await this.convertMDToTable('/assets/extended-pdf-viewer/css/css.md');

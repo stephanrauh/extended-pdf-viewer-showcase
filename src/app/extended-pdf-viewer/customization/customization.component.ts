@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { TreeNode } from './tree-node';
+import { MatCard } from '@angular/material/card';
+import { TreeComponent } from './tree/tree.component';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 
 const TOOLBAR: TreeNode[] = [
   {
@@ -173,10 +176,14 @@ const FINDBAR: TreeNode[] = [
 ];
 
 @Component({
-  standalone: false,
-  selector: 'app-customization',
-  templateUrl: './customization.component.html',
-  styleUrls: ['./customization.component.css'],
+    selector: 'app-customization',
+    templateUrl: './customization.component.html',
+    styleUrls: ['./customization.component.css'],
+    imports: [
+        MatCard,
+        TreeComponent,
+        Ie11MarkdownComponent,
+    ],
 })
 export class CustomizationComponent {
   public toolbar = TOOLBAR;

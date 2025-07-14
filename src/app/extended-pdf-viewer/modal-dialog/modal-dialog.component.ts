@@ -1,19 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { NgxExtendedPdfViewerComponent } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerComponent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { CopyrightComponent } from '../common/copyright.component';
+import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-standalone: false,
-  selector: 'app-modal-dialog',
-  templateUrl: './modal-dialog.component.html'
+    selector: 'app-modal-dialog',
+    templateUrl: './modal-dialog.component.html',
+    imports: [CopyrightComponent, FullscreenButtonComponent, MatButton, NgxExtendedPdfViewerModule]
 })
 export class ModalDialogComponent {
+  dialogRef = inject<MatDialogRef<ModalDialogComponent>>(MatDialogRef);
+
   @ViewChild(NgxExtendedPdfViewerComponent, {static: false})
   private pdfViewer!: NgxExtendedPdfViewerComponent;
 
 
 
-  constructor(public dialogRef: MatDialogRef<ModalDialogComponent>) {
+  constructor() {
+    const dialogRef = this.dialogRef;
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     dialogRef.beforeClosed().subscribe((result) => {
       console.log('The dialog is about to be closed');

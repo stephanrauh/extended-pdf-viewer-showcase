@@ -8,8 +8,8 @@ describe('ServerSideRenderingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ServerSideRenderingComponent ]
-    })
+    imports: [ServerSideRenderingComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(ServerSideRenderingComponent);

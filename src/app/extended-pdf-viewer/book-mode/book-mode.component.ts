@@ -1,12 +1,17 @@
-import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
-import { IPDFViewerApplication, PageRenderedEvent, PageRenderEvent, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { IPDFViewerApplication, PageRenderedEvent, PageRenderEvent, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { MatCard } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
-standalone: false,
-  selector: 'app-book-mode',
-  templateUrl: './book-mode.component.html',
-  styleUrls: ['./book-mode.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-book-mode',
+    templateUrl: './book-mode.component.html',
+    styleUrls: ['./book-mode.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [MatCard, MatTabGroup, MatTab, Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule]
 })
 export class BookModeComponent {
 
@@ -18,7 +23,9 @@ export class BookModeComponent {
 
   private PDFViewerApplication!: IPDFViewerApplication;
 
-  constructor(notificationService: PDFNotificationService) {
+  constructor() {
+    const notificationService = inject(PDFNotificationService);
+
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
     });
