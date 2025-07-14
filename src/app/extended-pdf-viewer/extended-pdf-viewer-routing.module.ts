@@ -70,6 +70,7 @@ import { CustomFindComponent } from './custom-find/custom-find.component';
 import { CSPComponent } from './csp/csp.component';
 import { EditorEventsComponent } from './editor-events/editor-events.component';
 import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
+import { ModifyingPageOrderComponent } from './modifying-page-order/modifying-page-order.component';
 
 const routes: Routes = [
   {
@@ -119,6 +120,7 @@ const routes: Routes = [
   { path: 'keycloak', component: KeycloakComponent },
   { path: 'mobile', component: MobileComponent },
   { path: 'modal', component: ModalComponent },
+  { path: 'modify-page-order', component: ModifyingPageOrderComponent},
   { path: 'multiple-documents', component: MultipleDocumentsComponent },
   { path: 'navigation', component: NavigationComponent },
   { path: 'editor-events', component: EditorEventsComponent },

@@ -101,5 +101,6 @@ export class HidingButtonsComponent {
 
   constructor(private pdfService: NgxExtendedPdfViewerService, public fullscreenService: FullscreenService) {
     pdfDefaultOptions.enableSignatureEditor = true;
+    pdfDefaultOptions.enablePageReordering = true;
   }
 }

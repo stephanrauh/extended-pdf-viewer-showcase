@@ -79,6 +79,7 @@ import { EditorEventsComponent } from './editor-events/editor-events.component';
 import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 import { CopyrightComponent } from './common/copyright.component';
 import { DemoComponent } from './common/demo.component';
+import { ModifyingPageOrderComponent } from './modifying-page-order/modifying-page-order.component';
 
 
 new TouchEmulator();
@@ -134,6 +135,7 @@ pdfDefaultOptions._internalFilenameSuffix = isLocalhost()? '' : '.min';
     MobileComponent,
     ModalComponent,
     ModalDialogComponent,
+    ModifyingPageOrderComponent,
     MultipleDocumentsComponent,
     NavigationComponent,
     OpenInNewTabComponent,
