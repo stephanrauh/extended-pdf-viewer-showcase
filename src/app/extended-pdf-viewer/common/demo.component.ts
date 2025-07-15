@@ -6,6 +6,7 @@ import { FullscreenButtonComponent } from '../../components/fullscreen-button/fu
 import { AsyncPipe } from '@angular/common';
 
 @Component({
+  standalone: true,
     selector: 'app-demo',
     templateUrl: './demo.component.html',
     styleUrls: ['./demo.component.css'],

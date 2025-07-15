@@ -105,6 +105,13 @@ export const routes: Routes = [
       { path: 'export-text', component: ExportTextComponent },
       { path: 'export-annotations', component: ExportAnnotationsComponent },
       { path: 'editor-setting', component: EditorSettingsComponent},
+      {
+        path: 'ngx-pdf-viewer-service',
+        loadComponent: () =>
+          import('./extended-pdf-viewer/ngx-pdf-viewer-service/ngx-pdf-viewer-service.component').then(
+            (m) => m.NgxPdfViewerServiceComponent
+          ),
+      },
       { path: 'file-info', component: FileInfoComponent },
       { path: 'filtering-console-log', component: FilteringConsoleLogComponent },
       { path: 'forms', component: FormsComponent },

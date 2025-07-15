@@ -7,18 +7,11 @@ import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
-    selector: 'app-navigation',
-    templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.css'],
-    imports: [
-        MatCard,
-        MatButton,
-        MatTabGroup,
-        MatTab,
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-    ],
+  standalone: true,
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.css'],
+  imports: [MatCard, MatButton, MatTabGroup, MatTab, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule],
 })
 export class NavigationComponent {
   public _namedDest: string | undefined;

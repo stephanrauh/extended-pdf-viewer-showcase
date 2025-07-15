@@ -1,0 +1,43 @@
+<div class="flex-container-column fill-container">
+  @if (!(fullscreenService.isFullscreen$ | async)) {
+    <div class="flex-container-row">
+      <div class="distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+        <h2>NgxExtendedPdfViewerService API</h2>
+        <p>The <code>NgxExtendedPdfViewerService</code> provides programmatic control over the PDF viewer. This service allows you to interact with the viewer, manipulate pages, control editors, and perform various operations on the PDF document.</p>
+        
+        <h4>Quick Start</h4>
+        <p>Inject the service into your component and use it after the view has initialized:</p>
+        <pre><code>import &#123; NgxExtendedPdfViewerService &#125; from 'ngx-extended-pdf-viewer';
+
+constructor(private pdfService: NgxExtendedPdfViewerService) &#123;&#125;
+
+ngAfterViewInit() &#123;
+  // Service is ready to use
+&#125;</code></pre>
+      </div>
+      
+      <div class="distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <mat-tab-group>
+          <mat-tab label="Page Operations">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/page-operations.md"></app-ie11-markdown>
+          </mat-tab>
+          
+          <mat-tab label="Document Operations">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/document-operations.md"></app-ie11-markdown>
+          </mat-tab>
+          
+          <mat-tab label="Examples">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/examples.md"></app-ie11-markdown>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  }
+
+  <app-demo [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'">
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
+      [showMovePageButton]="true">
+    </ngx-extended-pdf-viewer>
+  </app-demo>
+</div>
