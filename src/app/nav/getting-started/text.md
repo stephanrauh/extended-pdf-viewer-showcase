@@ -1,8 +1,10 @@
+## Prequisites
 
+You can get the PDF viewer up and running in roughly two minutes. You need node.js, npm and a current version of Angular. Plus, you need to configure your server to support \*.mjs files with the correct MIME type. See the <a href="/extended-pdf-viewer/troubleshooting">troubleshooting</a> page to learn how to configure your server.
 
-## Prequisites and announcement
+## Which Angular version do you need?
 
-You can get the PDF viewer up and running in roughly two minutes. You need node.js, npm and a current version of Angular. This library aims to be compatible to the last four versions of Angular, which gives you two years time to update.
+There are no promises - but this library aims to be compatible to the last four versions of Angular, which gives you two years time to update. Most of the time, this works. Version 25 may be one of the version that break this goal: I want to support signals, migrate to stand-alone components, and - maybe - even support zone-less Angular. It's unlikely that this works with older versions of Angular, so that might raise the bar to Angular 18, 19 or even 20.
 
 With very few exceptions, I only maintain the most current version of the viewer. As much as I'd like to provide bug fixes to older versions, I don't have enough time to spare.
 

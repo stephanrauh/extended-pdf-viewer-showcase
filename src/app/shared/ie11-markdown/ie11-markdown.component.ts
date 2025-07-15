@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
+    standalone: true,
     selector: 'app-ie11-markdown',
     templateUrl: './ie11-markdown.component.html',
     styleUrls: ['./ie11-markdown.component.css'],

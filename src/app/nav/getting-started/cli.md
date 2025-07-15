@@ -63,5 +63,5 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 Now you can display the PDF file like so:
 
 ```html
-"tr<ngx-extended-pdf-viewer [src]="'assets/example.pdf'"></ngx-extended-pdf-viewer>
+<ngx-extended-pdf-viewer [src]="'assets/example.pdf'"></ngx-extended-pdf-viewer>
 ```
