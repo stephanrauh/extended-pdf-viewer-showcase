@@ -1,4 +1,4 @@
-import { EditorAnnotation, FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { EditorAnnotation, FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule, HighlightEditorAnnotation } from 'ngx-extended-pdf-viewer';
 import { Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { MatCard } from '@angular/material/card';
@@ -69,6 +69,7 @@ export class ExportAnnotationsComponent {
       pageIndex: 0,
       rect: [x, y, x + width, y + height],
       rotation: 0,
+      isCopy: true,
     };
     console.log(textEditorAnnotation);
     console.log('Before update');
@@ -79,6 +80,61 @@ export class ExportAnnotationsComponent {
       console.log(anno[0]);
     }
   }
+
+  public async addHighlight(): Promise<void> {
+    // Create a highlight at a random position
+    const x = 200 + Math.random() * 200; // Left edge
+    const y = 400 + Math.random() * 200; // Bottom edge
+    const width = 100 + Math.random() * 100; // Width of highlight
+    const height = 15 + Math.random() * 10; // Height of highlight (text line height)
+
+    // Calculate coordinates for highlight
+    const left = x;
+    const bottom = y;
+    const right = x + width;
+    const top = y + height;
+
+    // Create quadPoints object with numeric keys (like the export format)
+    const quadPoints: any = {};
+    quadPoints[0] = left;   // x1 - left edge start
+    quadPoints[1] = top;    // y1 - top edge start
+    quadPoints[2] = right;  // x2 - right edge end
+    quadPoints[3] = top;    // y2 - top edge end
+    quadPoints[4] = left;   // x3 - left edge start (bottom)
+    quadPoints[5] = bottom; // y3 - bottom edge start
+    quadPoints[6] = right;  // x4 - right edge end (bottom)
+    quadPoints[7] = bottom; // y4 - bottom edge end
+
+    const highlightAnnotation: HighlightEditorAnnotation = {
+      annotationType: 9 as const,
+      color: [255, 255, 0], // Yellow highlight
+      opacity: 0.5,
+      thickness: 12,
+      quadPoints: quadPoints,
+      outlines: [[ // Single outline rectangle
+        left, bottom,   // Bottom-left
+        left, top,      // Top-left
+        right, top,     // Top-right
+        right, bottom   // Bottom-right
+      ]],
+      pageIndex: 0,
+      rect: [left, bottom, right, top], // Bounding box
+      rotation: 0 as const,
+      isCopy: true,
+    };
+
+    console.log(highlightAnnotation);
+    console.log('Before adding highlight');
+    await this.pdfViewerService.addEditorAnnotation(highlightAnnotation);
+    console.log('After adding highlight');
+    const anno = this.pdfViewerService.getSerializedAnnotations();
+    if (anno) {
+      console.log(anno[anno.length - 1]);
+    }
+  }
+
+
+
 
 
   public removeEditors(): void {

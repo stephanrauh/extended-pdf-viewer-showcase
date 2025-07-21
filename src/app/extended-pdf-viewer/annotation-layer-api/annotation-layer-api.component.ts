@@ -4,6 +4,7 @@ import { FullscreenService } from '../../services/fullscreen.service';
 import { MatCard } from '@angular/material/card';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { MatButton } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -17,6 +18,7 @@ import { AsyncPipe } from '@angular/common';
         MatTabGroup,
         MatTab,
         MatButton,
+        MatTooltipModule,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -54,5 +56,21 @@ export class AnnotationLayerApiComponent {
       top,
       rotation,
     });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public async addHighlight(parameters: any): Promise<void> {
+    const { color, left, bottom, right, top, thickness, rotation, opacity } = parameters;
+    await this.pdfService.addHighlightToAnnotationLayer(
+      color,
+      11,
+      left,
+      bottom,
+      right,
+      top,
+      thickness,
+      rotation,
+      opacity
+    );
   }
 }

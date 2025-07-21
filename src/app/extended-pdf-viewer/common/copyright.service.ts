@@ -39,7 +39,6 @@ export class CopyrightService {
     if (index >= 0) {
       key = src.substring(index+1);
     }
-    console.log("SRC: " + src + " Key: " + key);
     return this.copyrightHints[key];
   }
 

@@ -4,23 +4,20 @@
       <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
         <mat-tab-group (selectedIndexChange)="changePdfFile($event)">
           <mat-tab label="live demo">
-            <p>You can export text, drawings, images, and highlight you've added to a PDF file. You can also add texts programmatically.
-              However, the PDF viewer doesn't support adding highlights programmatically.
+            <p>You can export text, drawings, images, and highlight you've added to a PDF file. You can also add texts and highlights programmatically.
+              However, the PDF viewer doesn't support adding drawings programmatically.
               As for images, that's supported, but using the <a href="./annotation-layer-api">high-level different API</a>.
-              Drawings used to be supported, but the API has changed, so I don't know how to add them anymore.
             </p>
             <p>
               <b>Breaking change between pdf.js 3.5 and 3.9:</b> The coordinates of the serialized drawings have changed. Please keep in mind that this is an
               internal API of pdf.js, so it's subject to change without notice.
             </p>
-            <p>
-              <b>Breaking change in version 23 and above: the API to add drawing has changed. I don't know which parameters need to be passed. I suspect
-                it's no longer possible to add drawings. If anybody knows how to do it, please let me know.</b>
-            </p>
             <button mat-raised-button color="primary" (click)="exportAnnotations()">Export annotations</button>
             <button mat-raised-button color="primary" (click)="addTextEditor()">Add text editor</button>
+            <button mat-raised-button color="primary" (click)="addHighlight()">Add highlight</button>
             <button mat-raised-button color="primary" (click)="removeEditors()">Remove editors</button>
             <button mat-raised-button color="primary" (click)="removeTextEditors()">Remove text editors from page 1</button>
+            <button mat-raised-button color="primary" (click)="removeDrawingEditors()">Remove drawings from page 1</button>
           </mat-tab>
           <mat-tab label="forms">
             <p>Both forms and editor annotations are PDF annotation, so it might happen the APIs get in the way of each other. Until version 19.6.6,
@@ -28,8 +25,10 @@
             </p>
             <button mat-raised-button color="primary" (click)="exportAnnotations()">Export annotations</button>
             <button mat-raised-button color="primary" (click)="addTextEditor()">Add text editor</button>
+            <button mat-raised-button color="primary" (click)="addHighlight()">Add highlight</button>
             <button mat-raised-button color="primary" (click)="removeEditors()">Remove editors</button>
             <button mat-raised-button color="primary" (click)="removeTextEditors()">Remove text editors from page 1</button>
+            <button mat-raised-button color="primary" (click)="removeDrawingEditors()">Remove drawings from page 1</button>
           </mat-tab>
           <mat-tab label="large files">
             <p>The PDF viewer renders pages lazily. If they aren't going to be used soon, the page is not rendered. If you've got a large file,
