@@ -3,7 +3,7 @@
 ## Page Reordering Example
 
 ```typescript
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, inject, AfterViewInit } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
@@ -21,8 +21,9 @@ import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf
   `
 })
 export class MyComponent implements AfterViewInit {
+  private pdfService = inject(NgxExtendedPdfViewerService);
   
-  constructor(private pdfService: NgxExtendedPdfViewerService) {
+  constructor() {
     pdfDefaultOptions.enablePageReordering = true;
   }
   
@@ -58,7 +59,7 @@ export class MyComponent implements AfterViewInit {
 ## Search Example
 
 ```typescript
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, inject, AfterViewInit } from '@angular/core';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 
 @Component({
@@ -73,8 +74,7 @@ import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
   `
 })
 export class SearchComponent implements AfterViewInit {
-  
-  constructor(private pdfService: NgxExtendedPdfViewerService) {}
+  private pdfService = inject(NgxExtendedPdfViewerService);
   
   ngAfterViewInit() {
     // Service is ready to use

@@ -1,36 +1,47 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
-      <div class="distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-        <h2>NgxExtendedPdfViewerService API</h2>
-        <p>The <code>NgxExtendedPdfViewerService</code> provides programmatic control over the PDF viewer. This service allows you to interact with the viewer, manipulate pages, control editors, and perform various operations on the PDF document.</p>
-        
-        <h4>Quick Start</h4>
-        <p>Inject the service into your component and use it after the view has initialized:</p>
-        <pre><code>import &#123; NgxExtendedPdfViewerService &#125; from 'ngx-extended-pdf-viewer';
-
-constructor(private pdfService: NgxExtendedPdfViewerService) &#123;&#125;
-
-ngAfterViewInit() &#123;
-  // Service is ready to use
-&#125;</code></pre>
-      </div>
-      
-      <div class="distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
         <mat-tab-group>
+          <mat-tab label="Overview">
+            <h2>NgxExtendedPdfViewerService API (Preview)</h2>
+            <p><b>Caveat:</b> This is an AI generated documentation page. It's urgently needs improvement. The documentation may or may not be correct - probably it is - but take it with a grain of salt. It's an experiment that worked less well than expected. It's just I don't want to revert it because it's a good starting point for the real documentation that's coming soon!</p>
+            <p>The <code>NgxExtendedPdfViewerService</code> provides programmatic control over the PDF viewer. This service allows you to interact with the viewer, manipulate pages, control editors, and perform various operations on the PDF document.</p>
+
+            <h4>Quick Start</h4>
+            <p>Inject the service into your component and use it after the view has initialized:</p>
+            <pre><code>import &#123; Component, inject, AfterViewInit &#125; from '&#64;angular/core';
+import &#123; NgxExtendedPdfViewerService &#125; from 'ngx-extended-pdf-viewer';
+
+&#64;Component(&#123;
+  // component configuration
+&#125;)
+export class MyComponent implements AfterViewInit &#123;
+  private pdfService = inject(NgxExtendedPdfViewerService);
+
+  ngAfterViewInit() &#123;
+    // Service is ready to use
+  &#125;
+&#125;</code></pre>
+          </mat-tab>
+
           <mat-tab label="Page Operations">
             <app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/page-operations.md"></app-ie11-markdown>
           </mat-tab>
-          
+
           <mat-tab label="Document Operations">
             <app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/document-operations.md"></app-ie11-markdown>
           </mat-tab>
-          
+        </mat-tab-group>
+      </mat-card>
+
+      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
+        <mat-tab-group>
           <mat-tab label="Examples">
             <app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/examples.md"></app-ie11-markdown>
           </mat-tab>
         </mat-tab-group>
-      </div>
+      </mat-card>
     </div>
   }
 
