@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-pdfjs-versions',
+    
+    standalone: true,
     templateUrl: './pdfjs-versions.component.html',
     styleUrls: ['./pdfjs-versions.component.css'],
     imports: [

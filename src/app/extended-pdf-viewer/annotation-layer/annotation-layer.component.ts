@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-annotation-layer',
+    
+    standalone: true,
     templateUrl: './annotation-layer.component.html',
     styleUrls: ['./annotation-layer.component.css'],
     imports: [

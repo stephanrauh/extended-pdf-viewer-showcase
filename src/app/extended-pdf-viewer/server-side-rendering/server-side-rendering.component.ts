@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-server-side-rendering',
+    
+    standalone: true,
     templateUrl: './server-side-rendering.component.html',
     styleUrls: ['./server-side-rendering.component.css'],
     imports: [MatCard, MatTabGroup, MatTab, Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule, AsyncPipe]

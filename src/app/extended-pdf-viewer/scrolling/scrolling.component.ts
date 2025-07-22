@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-scrolling',
+    
+    standalone: true,
     templateUrl: './scrolling.component.html',
     styleUrls: ['./scrolling.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

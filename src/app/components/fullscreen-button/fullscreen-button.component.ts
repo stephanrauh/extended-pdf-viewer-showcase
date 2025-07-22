@@ -3,8 +3,8 @@ import { FullscreenService } from '../../services/fullscreen.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: true,
-  selector: 'app-fullscreen-button',
+    selector: 'app-fullscreen-button',
+    standalone: true,
   template: `
     <button (click)="toggleFullscreen()" [title]="(fullscreenService.isFullscreen$ | async) ? 'Exit fullscreen' : 'Enter fullscreen'">
       <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">

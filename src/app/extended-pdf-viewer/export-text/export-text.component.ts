@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-export-text',
+    
+    standalone: true,
     templateUrl: './export-text.component.html',
     styleUrls: ['./export-text.component.css'],
     imports: [

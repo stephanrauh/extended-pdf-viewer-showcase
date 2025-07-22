@@ -14,6 +14,8 @@ import { AsyncPipe, PercentPipe } from '@angular/common';
 
 @Component({
     selector: 'app-zoom',
+    
+    standalone: true,
     templateUrl: './zoom.component.html',
     styleUrls: ['./zoom.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

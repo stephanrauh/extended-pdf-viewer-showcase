@@ -7,9 +7,10 @@ import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
-  standalone: true,
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
+    selector: 'app-navigation',
+  
+    standalone: true,
+    templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css'],
   imports: [MatCard, MatButton, MatTabGroup, MatTab, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule],
 })

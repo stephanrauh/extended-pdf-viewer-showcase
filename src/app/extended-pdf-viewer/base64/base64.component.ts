@@ -15,6 +15,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-base64',
+    
+    standalone: true,
     templateUrl: './base64.component.html',
     styleUrls: ['./base64.component.css'],
     imports: [

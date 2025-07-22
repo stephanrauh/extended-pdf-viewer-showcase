@@ -8,6 +8,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'app-forms',
+    
+    standalone: true,
     templateUrl: './theming.component.html',
     styleUrls: ['./theming.component.css'],
     changeDetection: ChangeDetectionStrategy.Default,

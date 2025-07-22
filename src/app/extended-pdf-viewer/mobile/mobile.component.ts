@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-mobile',
+    
+    standalone: true,
     templateUrl: './mobile.component.html',
     styleUrls: ['./mobile.component.css'],
     imports: [

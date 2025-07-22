@@ -9,6 +9,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-presentations',
+    
+    standalone: true,
     templateUrl: './presentations.component.html',
     styleUrls: ['./presentations.component.css'],
     imports: [

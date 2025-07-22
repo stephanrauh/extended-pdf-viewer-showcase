@@ -8,6 +8,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-side-by-side',
+    
+    standalone: true,
     templateUrl: './side-by-side.component.html',
     styleUrls: ['./side-by-side.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

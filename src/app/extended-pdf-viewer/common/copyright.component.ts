@@ -2,9 +2,10 @@ import { Component, Input, inject } from '@angular/core';
 import { CopyrightService } from './copyright.service';
 
 @Component({
-  standalone: true,
-  selector: 'app-copyright',
-  templateUrl: './copyright.component.html',
+    selector: 'app-copyright',
+  
+    standalone: true,
+    templateUrl: './copyright.component.html',
   styleUrls: ['./copyright.component.css'],
 })
 export class CopyrightComponent {

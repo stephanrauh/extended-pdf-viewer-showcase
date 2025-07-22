@@ -8,6 +8,8 @@ import { MatNavList, MatListItem } from '@angular/material/list';
 
 @Component({
     selector: 'app-extended-pdf-viewer-menu',
+    
+    standalone: true,
     templateUrl: './extended-pdf-viewer-menu.component.html',
     styleUrls: ['./extended-pdf-viewer-menu.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

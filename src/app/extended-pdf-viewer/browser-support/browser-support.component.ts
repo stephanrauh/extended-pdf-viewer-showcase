@@ -3,6 +3,8 @@ import { MatCard } from '@angular/material/card';
 
 @Component({
     selector: 'app-browser-support',
+    
+    standalone: true,
     templateUrl: './browser-support.component.html',
     styleUrls: ['./browser-support.component.css'],
     imports: [MatCard],

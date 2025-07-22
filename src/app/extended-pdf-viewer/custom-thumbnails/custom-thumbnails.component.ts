@@ -9,6 +9,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-custom-thumbnails',
+    
+    standalone: true,
     templateUrl: './custom-thumbnails.component.html',
     styleUrls: ['./custom-thumbnails.component.css'],
     encapsulation: ViewEncapsulation.None,

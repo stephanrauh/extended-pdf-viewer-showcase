@@ -16,6 +16,8 @@ import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 @Component({
     selector: 'app-forms',
+    
+    standalone: true,
     templateUrl: './forms.component.html',
     styleUrls: ['./forms.component.css'],
     changeDetection: ChangeDetectionStrategy.Default,

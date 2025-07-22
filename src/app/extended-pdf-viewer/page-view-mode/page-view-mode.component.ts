@@ -14,6 +14,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-page-view-mode',
+    
+    standalone: true,
     templateUrl: './page-view-mode.component.html',
     styleUrls: ['./page-view-mode.component.css'],
     imports: [

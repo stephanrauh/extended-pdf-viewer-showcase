@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-scripting',
+    
+    standalone: true,
     templateUrl: './scripting.component.html',
     styleUrls: ['./scripting.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

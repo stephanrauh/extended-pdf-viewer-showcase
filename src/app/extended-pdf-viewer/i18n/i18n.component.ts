@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-i18n',
+    
+    standalone: true,
     templateUrl: './i18n.component.html',
     styleUrls: ['./i18n.component.css'],
     imports: [

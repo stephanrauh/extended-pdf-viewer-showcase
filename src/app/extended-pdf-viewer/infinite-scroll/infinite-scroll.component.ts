@@ -12,6 +12,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-infinite-scroll',
+    
+    standalone: true,
     templateUrl: './infinite-scroll.component.html',
     styleUrls: ['./infinite-scroll.component.css'],
     imports: [

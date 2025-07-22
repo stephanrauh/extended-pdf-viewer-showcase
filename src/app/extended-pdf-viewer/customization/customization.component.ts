@@ -177,6 +177,8 @@ const FINDBAR: TreeNode[] = [
 
 @Component({
     selector: 'app-customization',
+    
+    standalone: true,
     templateUrl: './customization.component.html',
     styleUrls: ['./customization.component.css'],
     imports: [

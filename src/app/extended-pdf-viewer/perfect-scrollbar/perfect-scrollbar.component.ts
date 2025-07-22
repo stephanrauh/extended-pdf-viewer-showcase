@@ -18,6 +18,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 @Component({
     selector: 'app-perfect-scrollbar',
+    standalone: true,
     templateUrl: './perfect-scrollbar.component.html',
     styleUrls: ['./perfect-scrollbar.component.css'],
     providers: [

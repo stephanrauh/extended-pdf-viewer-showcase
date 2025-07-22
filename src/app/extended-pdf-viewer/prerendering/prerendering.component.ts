@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-prerendering',
+    
+    standalone: true,
     templateUrl: './prerendering.component.html',
     styleUrls: ['./prerendering.component.css'],
     imports: [

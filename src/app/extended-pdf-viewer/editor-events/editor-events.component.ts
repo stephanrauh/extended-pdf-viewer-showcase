@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-editor-events',
+    
+    standalone: true,
     templateUrl: './editor-events.component.html',
     styleUrls: ['./editor-events.component.css'],
     imports: [

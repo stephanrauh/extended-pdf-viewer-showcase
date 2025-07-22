@@ -8,6 +8,8 @@ import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-book-mode',
+    
+    standalone: true,
     templateUrl: './book-mode.component.html',
     styleUrls: ['./book-mode.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

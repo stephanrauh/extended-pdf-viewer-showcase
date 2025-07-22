@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-pages-loaded',
+    
+    standalone: true,
     templateUrl: './pages-loaded.component.html',
     styleUrls: ['./pages-loaded.component.css'],
     imports: [

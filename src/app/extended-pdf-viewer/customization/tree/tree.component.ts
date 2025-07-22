@@ -9,6 +9,8 @@ import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'app-tree',
+    
+    standalone: true,
     templateUrl: './tree.component.html',
     styleUrls: ['./tree.component.css'],
     imports: [

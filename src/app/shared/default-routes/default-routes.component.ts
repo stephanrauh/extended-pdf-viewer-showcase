@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-default-routes',
+    
+    standalone: true,
     templateUrl: './default-routes.component.html',
     styleUrls: ['./default-routes.component.css']
 })

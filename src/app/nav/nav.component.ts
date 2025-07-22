@@ -17,6 +17,7 @@ import { MatSidenavContainer, MatSidenav, MatSidenavContent } from '@angular/mat
 import { ExtendedPdfViewerMenuComponent } from './extended-pdf-viewer-menu/extended-pdf-viewer-menu.component';
 @Component({
     selector: 'app-nav',
+    standalone: true,
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css'],
     imports: [

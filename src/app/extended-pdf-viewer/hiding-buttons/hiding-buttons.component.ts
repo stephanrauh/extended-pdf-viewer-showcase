@@ -14,6 +14,8 @@ import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
     selector: 'app-hiding-buttons',
+    
+    standalone: true,
     templateUrl: './hiding-buttons.component.html',
     styleUrls: ['./hiding-buttons.component.css'],
     imports: [

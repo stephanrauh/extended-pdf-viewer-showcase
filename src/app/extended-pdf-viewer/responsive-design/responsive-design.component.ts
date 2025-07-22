@@ -14,6 +14,8 @@ import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
     selector: 'app-responsive-design',
+    
+    standalone: true,
     templateUrl: './responsive-design.component.html',
     styleUrls: ['./responsive-design.component.css'],
     imports: [MatCard, MatTabGroup, MatTab, MatFormField, MatLabel, MatSelect, MatOption, MatInput, FormsModule, MatError, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe, LanguagePipe]

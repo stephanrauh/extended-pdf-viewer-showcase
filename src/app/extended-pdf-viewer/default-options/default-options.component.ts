@@ -13,6 +13,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-default-options',
+    
+    standalone: true,
     templateUrl: './default-options.component.html',
     styleUrls: ['./default-options.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

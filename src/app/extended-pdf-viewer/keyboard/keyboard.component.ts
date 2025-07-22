@@ -13,6 +13,8 @@ import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
     selector: 'app-keyboard',
+    
+    standalone: true,
     templateUrl: './keyboard.component.html',
     styleUrls: ['./keyboard.component.css'],
     imports: [

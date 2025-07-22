@@ -14,6 +14,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-blob',
+    
+    standalone: true,
     templateUrl: './blob.component.html',
     styleUrls: ['./blob.component.css'],
     imports: [

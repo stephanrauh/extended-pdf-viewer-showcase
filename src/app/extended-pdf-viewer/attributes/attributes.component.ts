@@ -8,6 +8,8 @@ import { MatTabGroup, MatTab } from '@angular/material/tabs';
 
 @Component({
     selector: 'app-attributes',
+    
+    standalone: true,
     templateUrl: './attributes.component.html',
     styleUrls: ['./attributes.component.css'],
     imports: [

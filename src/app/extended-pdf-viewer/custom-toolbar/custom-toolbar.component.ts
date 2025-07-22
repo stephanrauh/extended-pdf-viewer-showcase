@@ -16,6 +16,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-custom-toolbar',
+    
+    standalone: true,
     templateUrl: './custom-toolbar.component.html',
     styleUrls: ['./custom-toolbar.component.css'],
     imports: [

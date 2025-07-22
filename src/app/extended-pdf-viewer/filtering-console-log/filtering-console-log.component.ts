@@ -9,6 +9,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-filtering-console-log',
+    
+    standalone: true,
     templateUrl: './filtering-console-log.component.html',
     styleUrls: ['./filtering-console-log.component.css'],
     imports: [

@@ -8,9 +8,10 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  standalone: true,
-  selector: 'app-ngx-pdf-viewer-service',
-  templateUrl: './ngx-pdf-viewer-service.component.html',
+    selector: 'app-ngx-pdf-viewer-service',
+  
+    standalone: true,
+    templateUrl: './ngx-pdf-viewer-service.component.html',
   styleUrls: ['./ngx-pdf-viewer-service.component.css'],
   imports: [
     MatCard,

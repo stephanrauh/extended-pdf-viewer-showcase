@@ -16,6 +16,8 @@ interface PdfState {
 }
 @Component({
     selector: 'app-signatures',
+    
+    standalone: true,
     templateUrl: './loading-indicator.component.html',
     styleUrls: ['./loading-indicator.component.css'],
     imports: [

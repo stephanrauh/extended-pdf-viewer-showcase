@@ -4,8 +4,9 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
 
 @Component({
+        selector: 'app-getting-started',
+    
     standalone: true,
-    selector: 'app-getting-started',
     templateUrl: './getting-started.component.html',
     styleUrls: ['./getting-started.component.css'],
     imports: [MatCard, Ie11MarkdownComponent, MatTabGroup, MatTab]

@@ -13,6 +13,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-export-image',
+    
+    standalone: true,
     templateUrl: './export-image.component.html',
     styleUrls: ['./export-image.component.css'],
     imports: [

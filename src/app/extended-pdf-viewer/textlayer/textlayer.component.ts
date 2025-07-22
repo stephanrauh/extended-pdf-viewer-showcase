@@ -12,6 +12,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-textlayer',
+    
+    standalone: true,
     templateUrl: './textlayer.component.html',
     styleUrls: ['./textlayer.component.css'],
     encapsulation: ViewEncapsulation.None,

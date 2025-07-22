@@ -4,6 +4,8 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 
 @Component({
     selector: 'app-keycloak',
+    
+    standalone: true,
     templateUrl: './keycloak.component.html',
     styleUrls: ['./keycloak.component.css'],
     imports: [MatCard, Ie11MarkdownComponent],

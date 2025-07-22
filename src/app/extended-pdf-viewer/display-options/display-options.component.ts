@@ -12,6 +12,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-display-options',
+    
+    standalone: true,
     templateUrl: './display-options.component.html',
     styleUrls: ['./display-options.component.css'],
     imports: [

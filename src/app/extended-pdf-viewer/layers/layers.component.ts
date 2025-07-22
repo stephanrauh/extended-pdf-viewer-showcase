@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-layers',
+    
+    standalone: true,
     templateUrl: './layers.component.html',
     styleUrls: ['./layers.component.css'],
     imports: [

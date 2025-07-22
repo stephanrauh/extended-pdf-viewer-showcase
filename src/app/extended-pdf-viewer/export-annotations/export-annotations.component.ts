@@ -10,6 +10,8 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 
 @Component({
     selector: 'app-export-annotations',
+    
+    standalone: true,
     templateUrl: './export-annotations.component.html',
     styleUrls: ['./export-annotations.component.css'],
     imports: [

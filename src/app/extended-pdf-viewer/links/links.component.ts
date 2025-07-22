@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 import { LanguagePipe } from 'ngx-markdown';
 @Component({
     selector: 'app-links',
+    
+    standalone: true,
     templateUrl: './links.component.html',
     styleUrls: ['./links.component.css'],
     imports: [

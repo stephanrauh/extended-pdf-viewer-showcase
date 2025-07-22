@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-copyright-box',
+    
+    standalone: true,
     templateUrl: './copyright-box.component.html',
     styleUrls: ['./copyright-box.component.css'],
 })

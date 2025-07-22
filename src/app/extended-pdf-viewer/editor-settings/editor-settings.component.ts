@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-editor-settings',
+    
+    standalone: true,
     templateUrl: './editor-settings.component.html',
     styleUrls: ['./editor-settings.component.css'],
     imports: [

@@ -4,6 +4,8 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 
 @Component({
     selector: 'app-changelog',
+    
+    standalone: true,
     templateUrl: './changelog.component.html',
     styleUrls: ['./changelog.component.css'],
     imports: [MatCard, Ie11MarkdownComponent]

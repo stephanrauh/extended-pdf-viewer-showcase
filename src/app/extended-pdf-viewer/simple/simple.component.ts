@@ -15,6 +15,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-simple',
+    
+    standalone: true,
     templateUrl: './simple.component.html',
     styleUrls: ['./simple.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

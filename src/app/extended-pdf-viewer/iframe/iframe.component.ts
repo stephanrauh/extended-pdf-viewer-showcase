@@ -5,6 +5,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
     selector: 'app-iframe',
+    
+    standalone: true,
     templateUrl: './iframe.component.html',
     styleUrls: ['./iframe.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

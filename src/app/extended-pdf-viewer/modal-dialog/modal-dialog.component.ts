@@ -7,6 +7,8 @@ import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-modal-dialog',
+    
+    standalone: true,
     templateUrl: './modal-dialog.component.html',
     imports: [CopyrightComponent, FullscreenButtonComponent, MatButton, NgxExtendedPdfViewerModule]
 })

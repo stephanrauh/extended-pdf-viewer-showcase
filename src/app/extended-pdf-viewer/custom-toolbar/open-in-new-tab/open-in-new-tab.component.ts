@@ -3,6 +3,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
     selector: 'app-open-in-new-tab',
+    
+    standalone: true,
     templateUrl: './open-in-new-tab.component.html',
     styleUrls: ['./open-in-new-tab.component.css'],
     imports: [NgxExtendedPdfViewerModule]

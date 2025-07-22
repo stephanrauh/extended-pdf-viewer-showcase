@@ -9,6 +9,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-smartphone',
+    
+    standalone: true,
     templateUrl: './smartphone.component.html',
     styleUrls: ['./smartphone.component.css', './devices.min.css'],
     imports: [

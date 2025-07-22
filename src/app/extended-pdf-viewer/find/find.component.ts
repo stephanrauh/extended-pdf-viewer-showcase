@@ -15,6 +15,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-find',
+    
+    standalone: true,
     templateUrl: './find.component.html',
     styleUrls: ['./find.component.css'],
     imports: [

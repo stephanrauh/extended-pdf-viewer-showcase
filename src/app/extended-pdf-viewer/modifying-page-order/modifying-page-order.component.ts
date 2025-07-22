@@ -9,6 +9,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-modifying-page-order',
+    
+    standalone: true,
     templateUrl: './modifying-page-order.component.html',
     styleUrls: ['./modifying-page-order.component.css'],
     imports: [

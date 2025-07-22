@@ -12,6 +12,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-passwords',
+    
+    standalone: true,
     templateUrl: './passwords.component.html',
     styleUrls: ['./passwords.component.css'],
     imports: [

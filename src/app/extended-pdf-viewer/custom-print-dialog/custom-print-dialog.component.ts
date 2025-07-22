@@ -13,6 +13,8 @@ import { FullscreenButtonComponent } from '../../components/fullscreen-button/fu
 
 @Component({
     selector: 'app-custom-progress-bar',
+    
+    standalone: true,
     templateUrl: './custom-print-dialog.component.html',
     styleUrls: ['./custom-print-dialog.component.css'],
     encapsulation: ViewEncapsulation.None,

@@ -18,6 +18,8 @@ import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
     selector: 'app-print-range',
+    
+    standalone: true,
     templateUrl: './print-range.component.html',
     styleUrls: ['./print-range.component.css'],
     imports: [

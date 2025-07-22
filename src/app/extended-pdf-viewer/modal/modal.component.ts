@@ -8,6 +8,8 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 
 @Component({
     selector: 'app-modal',
+    
+    standalone: true,
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.component.css'],
     imports: [

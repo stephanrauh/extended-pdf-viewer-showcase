@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-signatures',
+    
+    standalone: true,
     templateUrl: './signatures.component.html',
     styleUrls: ['./signatures.component.css'],
     imports: [

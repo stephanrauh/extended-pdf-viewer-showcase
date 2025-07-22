@@ -7,6 +7,8 @@ import { MatCard } from '@angular/material/card';
 
 @Component({
     selector: 'app-css',
+    
+    standalone: true,
     templateUrl: './css.component.html',
     styleUrls: ['./css.component.css'],
     imports: [MatCard, Angular2SmartTableModule],

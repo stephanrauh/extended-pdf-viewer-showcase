@@ -14,6 +14,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-multiple-documents',
+    
+    standalone: true,
     templateUrl: './multiple-documents.component.html',
     styleUrls: ['./multiple-documents.component.css'],
     imports: [MatCard, MatFormField, MatLabel, MatSelect, MatOption, MatCheckbox, FormsModule, MatTabGroup, MatTab, Ie11MarkdownComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, AsyncPipe]

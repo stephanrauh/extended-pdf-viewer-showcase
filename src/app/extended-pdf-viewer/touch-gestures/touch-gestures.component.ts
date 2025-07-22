@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-touch-gestures',
+    
+    standalone: true,
     templateUrl: './touch-gestures.component.html',
     styleUrls: ['./touch-gestures.component.css'],
     imports: [

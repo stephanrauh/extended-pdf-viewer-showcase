@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-annotation-layer-api',
+    
+    standalone: true,
     templateUrl: './annotation-layer-api.component.html',
     styleUrls: ['./annotation-layer-api.component.css'],
     imports: [

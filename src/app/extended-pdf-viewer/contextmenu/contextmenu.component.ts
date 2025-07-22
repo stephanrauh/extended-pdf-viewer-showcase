@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-contextmenu',
+    
+    standalone: true,
     templateUrl: './contextmenu.component.html',
     styleUrls: ['./contextmenu.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

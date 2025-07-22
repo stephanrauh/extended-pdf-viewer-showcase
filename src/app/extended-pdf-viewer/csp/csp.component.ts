@@ -10,6 +10,8 @@ import { DemoComponent } from '../common/demo.component';
 
 @Component({
     selector: 'app-csp',
+    
+    standalone: true,
     templateUrl: './csp.component.html',
     styleUrls: ['./csp.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,

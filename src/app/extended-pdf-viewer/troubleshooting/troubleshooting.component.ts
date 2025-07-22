@@ -4,6 +4,8 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 
 @Component({
     selector: 'app-troubleshooting',
+    
+    standalone: true,
     templateUrl: './troubleshooting.component.html',
     styleUrls: ['./troubleshooting.component.css'],
     imports: [MatCard, Ie11MarkdownComponent]
