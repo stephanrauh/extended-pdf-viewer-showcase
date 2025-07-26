@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
         <p>You can override the default function <code>globalThis.ngxConsoleFilter(logLevel, message)</code> to filter the log messages.</p>
         <p>
           This live demo re-defines <code>ngxConsolefilter()</code> to grab the version number from the console messages and to store it in a variable so it can
@@ -26,17 +26,46 @@
         </p>
         <p>The live demo shows that, too: when you open the console window, you'll see every message with the exception of the version info.</p>
         <p><b>Breaking change: </b>Before version 17, you have to register the filter function with the<code>Window</code> object instead of <code>globalThis</code>.</p>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-        <mat-tab-group>
-          <mat-tab label="Typescript">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/filtering-console-log/ts.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/filtering-console-log/html.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+      </div>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
+        <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'typescript'"
+            [class.border-primary-600]="activeTab === 'typescript'"
+            [class.text-gray-500]="activeTab !== 'typescript'"
+            [class.border-transparent]="activeTab !== 'typescript'"
+            (click)="activeTab = 'typescript'">
+            Typescript
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'html'"
+            [class.border-primary-600]="activeTab === 'html'"
+            [class.text-gray-500]="activeTab !== 'html'"
+            [class.border-transparent]="activeTab !== 'html'"
+            (click)="activeTab = 'html'">
+            HTML template
+          </button>
+        </div>
+          </div>
+
+        <!-- Tab content -->
+        @if (activeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/filtering-console-log/ts.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'html') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/filtering-console-log/html.md"> </app-ie11-markdown>
+        </div>
+          }
+      </div>
+      </div>
     </div>
   }
 

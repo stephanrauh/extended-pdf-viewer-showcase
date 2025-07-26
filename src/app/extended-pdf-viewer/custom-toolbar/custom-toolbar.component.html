@@ -1,69 +1,206 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;" style="margin-bottom:20px">
-        <mat-tab-group>
-          <mat-tab label="live demo">
-            <p>
-              ngx-extended-pdf-viewer allows you to define your own custom toolbar, menu, and it even allows you to create
-              your own sidebar and your own thumbnails.
-            </p>
-            <p>
-              Sometimes your buttons don't show in the toolbar. For example, the find button is shy.
-              You need to pass a responsive design attribute to make it visible, such as <code>[showFindButton]="'always-visible'"</code>.
-              The find button, in particular, only shows if the PDF file has a text layer and if you opted in to show it
-              (<code>[textLayer]="true"</code>).
-            </p>
-            <mat-label title="Demo theme"></mat-label>
-            <mat-radio-group aria-label="Demo" [(ngModel)]="theme">
-              <mat-radio-button value="default">standard layout</mat-radio-button>
-              <br />
-              <mat-radio-button value="findbar">custom findbar (large input field in a dedicated line)</mat-radio-button>
-              <br />
-              <mat-radio-button value="checkbox">radiobutton zoom</mat-radio-button>
-              <br />
-              <mat-radio-button value="additional">custom color and additional buttons ("open PDF in new tab" and "export as image" button)</mat-radio-button>
-              <br />
-              <mat-radio-button value="floating">floating zoombar</mat-radio-button>
-              <mat-checkbox class="padding-left" [(ngModel)]="showFreeFloatingBar">show it! (uncheck to hide)</mat-checkbox>
-            </mat-radio-group>
-          </mat-tab>
-          <mat-tab label="responsive custom buttons">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-      <p></p>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-        <mat-tab-group>
-          <mat-tab label="TypeScript">
-            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-'+ theme+'.md'"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-'+ theme+'.md'"> </app-ie11-markdown>
-          </mat-tab>
-          @if (theme==='findbar') {
-            <mat-tab label="CSS template">
-              <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/css-'+ theme+'.md'"> </app-ie11-markdown>
-            </mat-tab>
-          }
-          @if (theme==='additional') {
-            <mat-tab label="additional buttons">
-              <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
-            </mat-tab>
-            <mat-tab label="additional nested buttons">
-              <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-additional-mat-design.md'"> </app-ie11-markdown>
-            </mat-tab>
-            <mat-tab label="additional nested buttons (TS)">
-              <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-additional-mat-design.md'"> </app-ie11-markdown>
-            </mat-tab>
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+        style="margin-bottom: 20px"
+      >
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="customtoolbarcomponentTab === 'livedemo'"
+                [class.border-primary-600]="customtoolbarcomponentTab === 'livedemo'"
+                [class.text-gray-500]="customtoolbarcomponentTab !== 'livedemo'"
+                [class.border-transparent]="customtoolbarcomponentTab !== 'livedemo'"
+                (click)="customtoolbarcomponentTab = 'livedemo'"
+              >
+                live demo
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="customtoolbarcomponentTab === 'responsivecustombuttons'"
+                [class.border-primary-600]="customtoolbarcomponentTab === 'responsivecustombuttons'"
+                [class.text-gray-500]="customtoolbarcomponentTab !== 'responsivecustombuttons'"
+                [class.border-transparent]="customtoolbarcomponentTab !== 'responsivecustombuttons'"
+                (click)="customtoolbarcomponentTab = 'responsivecustombuttons'"
+              >
+                responsive custom buttons
+              </button>
+            </div>
+          </div>
+        </div>
 
-          }
-          <mat-tab label="changing the toolbars dynamically">
+        <!-- Tab content -->
+        @if (customtoolbarcomponentTab === 'livedemo') {
+          <div class="tab-content">
+            <p>
+              ngx-extended-pdf-viewer allows you to define your own custom toolbar, menu, and it even allows you to create your own sidebar and your own
+              thumbnails.
+            </p>
+            <p>
+              Sometimes your buttons don't show in the toolbar. For example, the find button is shy. You need to pass a responsive design attribute to make it
+              visible, such as <code>[showFindButton]="'always-visible'"</code>. The find button, in particular, only shows if the PDF file has a text layer and
+              if you opted in to show it (<code>[textLayer]="true"</code>).
+            </p>
+            <label class="block text-sm font-medium text-gray-700"></label>
+            <div class="space-y-1">
+              <label class="flex items-center space-x-1 text-sm">
+                <input type="radio" class="form-radio text-primary-600" value="default" aria-label="Demo" [(ngModel)]="theme" />
+                <span>standard layout</span>
+              </label>
+              <br />
+              <label class="flex items-center space-x-1 text-sm">
+                <input type="radio" class="form-radio text-primary-600" value="findbar" aria-label="Demo" [(ngModel)]="theme" />
+                <span>custom findbar (large input field in a dedicated line)</span>
+              </label>
+              <br />
+              <label class="flex items-center space-x-1 text-sm">
+                <input type="radio" class="form-radio text-primary-600" value="checkbox" aria-label="Demo" [(ngModel)]="theme" />
+                <span>radiobutton zoom</span>
+              </label>
+              <br />
+              <label class="flex items-center space-x-1 text-sm">
+                <input type="radio" class="form-radio text-primary-600" value="additional" aria-label="Demo" [(ngModel)]="theme" />
+                <span>custom color and additional buttons ("open PDF in new tab" and "export as image" button)</span>
+              </label>
+              <br />
+              <label class="flex items-center space-x-1 text-sm">
+                <input type="radio" class="form-radio text-primary-600" value="floating" aria-label="Demo" [(ngModel)]="theme" />
+                <span>floating zoombar</span>
+              </label>
+              <label class="flex items-center space-x-1 text-sm">
+                <input type="checkbox" class="form-checkbox text-primary-600 padding-left" [(ngModel)]="showFreeFloatingBar" />
+                <span>show it! (uncheck to hide)</span>
+              </label>
+            </div>
+          </div>
+        }
+        @if (customtoolbarcomponentTab === 'responsivecustombuttons') {
+          <div class="tab-content">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
+          </div>
+        }
+      </div>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="customtoolbarcomponentTab === 'typescript'"
+                [class.border-primary-600]="customtoolbarcomponentTab === 'typescript'"
+                [class.text-gray-500]="customtoolbarcomponentTab !== 'typescript'"
+                [class.border-transparent]="customtoolbarcomponentTab !== 'typescript'"
+                (click)="customtoolbarcomponentTab = 'typescript'"
+              >
+                TypeScript
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'htmltemplate'"
+                [class.border-primary-600]="codeTab === 'htmltemplate'"
+                [class.text-gray-500]="codeTab !== 'htmltemplate'"
+                [class.border-transparent]="codeTab !== 'htmltemplate'"
+                (click)="codeTab = 'htmltemplate'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'csstemplate'"
+                [class.border-primary-600]="codeTab === 'csstemplate'"
+                [class.text-gray-500]="codeTab !== 'csstemplate'"
+                [class.border-transparent]="codeTab !== 'csstemplate'"
+                (click)="codeTab = 'csstemplate'"
+              >
+                CSS template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'additionalbuttons'"
+                [class.border-primary-600]="codeTab === 'additionalbuttons'"
+                [class.text-gray-500]="codeTab !== 'additionalbuttons'"
+                [class.border-transparent]="codeTab !== 'additionalbuttons'"
+                (click)="codeTab = 'additionalbuttons'"
+              >
+                additional buttons
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'additionalnestedbuttons'"
+                [class.border-primary-600]="codeTab === 'additionalnestedbuttons'"
+                [class.text-gray-500]="codeTab !== 'additionalnestedbuttons'"
+                [class.border-transparent]="codeTab !== 'additionalnestedbuttons'"
+                (click)="codeTab = 'additionalnestedbuttons'"
+              >
+                additional nested buttons
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'additionalnestedbuttonsts'"
+                [class.border-primary-600]="codeTab === 'additionalnestedbuttonsts'"
+                [class.text-gray-500]="codeTab !== 'additionalnestedbuttonsts'"
+                [class.border-transparent]="codeTab !== 'additionalnestedbuttonsts'"
+                (click)="codeTab = 'additionalnestedbuttonsts'"
+              >
+                additional nested buttons (TS)
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'changingthetoolbarsdynamically'"
+                [class.border-primary-600]="codeTab === 'changingthetoolbarsdynamically'"
+                [class.text-gray-500]="codeTab !== 'changingthetoolbarsdynamically'"
+                [class.border-transparent]="codeTab !== 'changingthetoolbarsdynamically'"
+                (click)="codeTab = 'changingthetoolbarsdynamically'"
+              >
+                changing the toolbars dynamically
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab content -->
+        @if (customtoolbarcomponentTab === 'typescript') {
+          <div class="tab-content">
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-' + theme + '.md'"> </app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'htmltemplate') {
+          <div class="tab-content">
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-' + theme + '.md'"> </app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'csstemplate') {
+          <div class="tab-content">
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/css-' + theme + '.md'"> </app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'additionalbuttons') {
+          <div class="tab-content">
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/component-new-tab.md'"> </app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'additionalnestedbuttons') {
+          <div class="tab-content">
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-additional-mat-design.md'"> </app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'additionalnestedbuttonsts') {
+          <div class="tab-content">
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-additional-mat-design.md'"> </app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'changingthetoolbarsdynamically') {
+          <div class="tab-content">
             <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-reinitialization.md'"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+          </div>
+        }
+      </div>
     </div>
   }
 
@@ -72,14 +209,14 @@
       <ngx-extended-pdf-viewer
         [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : undefined"
         [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : undefined"
-        [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : (theme === 'additional' ? additionalButtons : undefined)"
+        [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : theme === 'additional' ? additionalButtons : undefined"
         [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : undefined"
         [src]="src"
         [zoom]="zoom"
         [showZoomButtons]="theme !== 'floating'"
         [showFreeFloatingBar]="showFreeFloatingBar"
         [textLayer]="theme === 'findbar'"
-        >
+      >
       </ngx-extended-pdf-viewer>
     }
   </app-demo>
@@ -104,7 +241,6 @@
     <pdf-find-previous></pdf-find-previous>
     <pdf-find-next></pdf-find-next>
   </div>
-
 </ng-template>
 
 <ng-template #customCheckboxZoomToolbar>
@@ -112,24 +248,23 @@
     <div id="toolbarViewerMiddle">
       <pdf-zoom-dropdown class="invisible"></pdf-zoom-dropdown>
 
-      <input type="radio" id="zoom50" class="toolbarField radio" tabindex="94" (click)="zoom = '50%'" name="zoom" [checked]="zoom==='50%'" />
+      <input type="radio" id="zoom50" class="toolbarField radio" tabindex="94" (click)="zoom = '50%'" name="zoom" [checked]="zoom === '50%'" />
       <label for="zoom50" class="toolbarLabel">50%</label>
 
-      <input type="radio" id="zoom100" class="toolbarField radio" tabindex="95" (click)="zoom = '100%'" name="zoom" [checked]="zoom==='100%'"/>
+      <input type="radio" id="zoom100" class="toolbarField radio" tabindex="95" (click)="zoom = '100%'" name="zoom" [checked]="zoom === '100%'" />
       <label for="zoom100" class="toolbarLabel">100%</label>
 
-      <input type="radio" id="zoom200" class="toolbarField radio" tabindex="96" (click)="zoom = '200%'" name="zoom" [checked]="zoom==='200%'"/>
+      <input type="radio" id="zoom200" class="toolbarField radio" tabindex="96" (click)="zoom = '200%'" name="zoom" [checked]="zoom === '200%'" />
       <label for="zoom200" class="toolbarLabel">200%</label>
 
-      <input type="radio" id="zoom-auto" class="toolbarField radio" tabindex="97" (click)="zoom = 'auto'" name="zoom" [checked]="zoom==='auto'"/>
+      <input type="radio" id="zoom-auto" class="toolbarField radio" tabindex="97" (click)="zoom = 'auto'" name="zoom" [checked]="zoom === 'auto'" />
       <label for="zoom-auto" class="toolbarLabel">auto</label>
     </div>
   </div>
 </ng-template>
 
-
 <ng-template #additionalButtons>
-  <div id="toolbarViewer" style="background-color:rgb(232 246 255)">
+  <div id="toolbarViewer" style="background-color: rgb(232 246 255)">
     <div id="toolbarViewerLeft">
       <pdf-toggle-sidebar></pdf-toggle-sidebar>
       <div class="toolbarButtonSpacer"></div>
@@ -141,23 +276,11 @@
       <pdf-presentation-mode></pdf-presentation-mode>
       <pdf-print></pdf-print>
       <app-open-in-new-tab></app-open-in-new-tab>
-      <pdf-shy-button
-        [cssClass]="'lg' | responsiveCSSClass"
-        title="export an image"
-        primaryToolbarId="nestedComponent"
-        [order]="1"
-        [closeOnClick]="true"
-      >
-        <button #nestedContent
-          id="sidebarToggle"
-          color="primary"
-          class="toolbarButton"
-          matTooltip="export an image"
-          (click)="exportAsImage()"
-        >
-        <mat-icon style="color: #FF0000;">photo_camera</mat-icon>
-      </button>
-    </pdf-shy-button>
+      <pdf-shy-button [cssClass]="'lg' | responsiveCSSClass" title="export an image" primaryToolbarId="nestedComponent" [order]="1" [closeOnClick]="true">
+        <button #nestedContent id="sidebarToggle" color="primary" class="toolbarButton" title="export an image" (click)="exportAsImage()">
+          <span class="material-icons" style="color: #ff0000">photo_camera</span>
+        </button>
+      </pdf-shy-button>
       <pdf-download></pdf-download>
       <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
     </div>
@@ -165,20 +288,22 @@
 </ng-template>
 
 <ng-template #floatingZoombar>
-  <div style="position: absolute;bottom:20px;left:41%;z-index:1;background-color:#dbe5e9;padding:4px;padding-bottom: 8px;border:1px solid darkgray">
+  <div
+    style="position: absolute; bottom: 20px; left: 41%; z-index: 1; background-color: #dbe5e9; padding: 4px; padding-bottom: 8px; border: 1px solid darkgray"
+  >
     <div>
       <pdf-zoom-dropdown class="invisible"></pdf-zoom-dropdown>
 
-      <input type="radio" id="zoom50" class="toolbarField radio" tabindex="94" (click)="zoom = '50%'" name="zoom" [checked]="zoom==='50%'" />
+      <input type="radio" id="zoom50" class="toolbarField radio" tabindex="94" (click)="zoom = '50%'" name="zoom" [checked]="zoom === '50%'" />
       <label for="zoom50" class="toolbarLabel">50%</label>
 
-      <input type="radio" id="zoom100" class="toolbarField radio" tabindex="95" (click)="zoom = '100%'" name="zoom" [checked]="zoom==='100%'"/>
+      <input type="radio" id="zoom100" class="toolbarField radio" tabindex="95" (click)="zoom = '100%'" name="zoom" [checked]="zoom === '100%'" />
       <label for="zoom100" class="toolbarLabel">100%</label>
 
-      <input type="radio" id="zoom200" class="toolbarField radio" tabindex="96" (click)="zoom = '200%'" name="zoom" [checked]="zoom==='200%'"/>
+      <input type="radio" id="zoom200" class="toolbarField radio" tabindex="96" (click)="zoom = '200%'" name="zoom" [checked]="zoom === '200%'" />
       <label for="zoom200" class="toolbarLabel">200%</label>
 
-      <input type="radio" id="zoom-auto" class="toolbarField radio" tabindex="97" (click)="zoom = 'auto'" name="zoom" [checked]="zoom==='auto'"/>
+      <input type="radio" id="zoom-auto" class="toolbarField radio" tabindex="97" (click)="zoom = 'auto'" name="zoom" [checked]="zoom === 'auto'" />
       <label for="zoom-auto" class="toolbarLabel">auto</label>
     </div>
   </div>

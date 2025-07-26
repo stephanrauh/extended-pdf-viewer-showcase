@@ -1,9 +1,6 @@
 import { EditorAnnotation, FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule, HighlightEditorAnnotation } from 'ngx-extended-pdf-viewer';
 import { Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatButton } from '@angular/material/button';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe, JsonPipe } from '@angular/common';
@@ -15,10 +12,6 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
     templateUrl: './export-annotations.component.html',
     styleUrls: ['./export-annotations.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatButton,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -39,6 +32,8 @@ export class ExportAnnotationsComponent {
   public rawAnnotations: EditorAnnotation[] | null | undefined = null;
 
   public src = '/assets/pdfs/pdf-sample.pdf';
+  public exportannotationscomponentTab: string = 'livedemo';
+  public codeTab: string = 'htmltemplate';
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -109,15 +104,6 @@ export class ExportAnnotationsComponent {
     const highlightAnnotation: HighlightEditorAnnotation = {
       annotationType: 9 as const,
       color: [255, 255, 0], // Yellow highlight
-      opacity: 0.5,
-      thickness: 12,
-      quadPoints: quadPoints,
-      outlines: [[ // Single outline rectangle
-        left, bottom,   // Bottom-left
-        left, top,      // Top-left
-        right, top,     // Top-right
-        right, bottom   // Bottom-right
-      ]],
       pageIndex: 0,
       rect: [left, bottom, right, top], // Bounding box
       rotation: 0 as const,

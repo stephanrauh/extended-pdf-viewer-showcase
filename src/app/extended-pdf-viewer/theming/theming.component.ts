@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatTabChangeEvent, MatTabGroup, MatTab } from '@angular/material/tabs';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
@@ -14,9 +12,6 @@ import { AsyncPipe } from '@angular/common';
     styleUrls: ['./theming.component.css'],
     changeDetection: ChangeDetectionStrategy.Default,
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -31,6 +26,8 @@ export class ThemingComponent {
   public theme = 'light';
   public backgroundColor = 'lightgrey';
   public src = '/assets/pdfs/OoPdfFormExample.pdf';
+  public themingcomponentTab: string = 'lighttheme';
+  public codeTab: string = 'typescript';
 
   public get selectedTab() {
     return this._selectedTab;
@@ -50,7 +47,7 @@ export class ThemingComponent {
     }
   }
 
-  public onSelectTab(event: MatTabChangeEvent): void {
+  public onSelectTab(event: any): void {
     this.selectedTab = event.index + 1;
   }
 }

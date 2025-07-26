@@ -2,35 +2,24 @@ import { PageRenderedEvent, pdfDefaultOptions, NgxExtendedPdfViewerModule } from
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-textlayer',
-    
-    standalone: true,
-    templateUrl: './textlayer.component.html',
-    styleUrls: ['./textlayer.component.css'],
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        MatCard,
-        MatCheckbox,
-        FormsModule,
-        MatTabGroup,
-        MatTab,
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-textlayer',
+
+  standalone: true,
+  templateUrl: './textlayer.component.html',
+  styleUrls: ['./textlayer.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  imports: [FormsModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class TextlayerComponent {
   fullscreenService = inject(FullscreenService);
+
+  public activeTab = 'html';
 
   public _markLongWords = false;
 

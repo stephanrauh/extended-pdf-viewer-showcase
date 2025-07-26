@@ -1,11 +1,7 @@
 import { TreeNode } from '../tree-node';
 import { Component, Input } from '@angular/core';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource, MatTree, MatTreeNodeDef, MatTreeNode, MatTreeNodeToggle, MatNestedTreeNode, MatTreeNodeOutlet } from '@angular/material/tree';
-import { MatIconButton } from '@angular/material/button';
-import { MatTooltip } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
 import { IconInfoComponent } from '../../icons/icon-info/icon-info.component';
-import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'app-tree',
@@ -14,32 +10,47 @@ import { MatIcon } from '@angular/material/icon';
     templateUrl: './tree.component.html',
     styleUrls: ['./tree.component.css'],
     imports: [
-        MatTree,
-        MatTreeNodeDef,
-        MatTreeNode,
-        MatTreeNodeToggle,
-        MatIconButton,
-        MatTooltip,
+        CommonModule,
         IconInfoComponent,
-        MatNestedTreeNode,
-        MatIcon,
-        MatTreeNodeOutlet,
     ],
 })
 export class TreeComponent {
   public _treeData!: TreeNode[];
-
-  public treeControl = new NestedTreeControl<TreeNode>((node) => node.children);
-  public dataSource = new MatTreeNestedDataSource<TreeNode>();
+  public expandedNodes = new Set<TreeNode>();
 
   @Input()
   public set treeData(treeData: TreeNode[]) {
-    this.dataSource.data = this.enrichTreeData(treeData);
-    this.treeControl.dataNodes = this.dataSource.data;
-    this.treeControl.expandAll();
+    this._treeData = this.enrichTreeData(treeData);
+    // Auto-expand all nodes initially
+    this.expandAllNodes(this._treeData);
+  }
+
+  public get treeData(): TreeNode[] {
+    return this._treeData || [];
   }
 
   hasChild = (_: number, node: TreeNode) => !!node.children && node.children.length > 0;
+
+  isExpanded(node: TreeNode): boolean {
+    return this.expandedNodes.has(node);
+  }
+
+  toggle(node: TreeNode): void {
+    if (this.expandedNodes.has(node)) {
+      this.expandedNodes.delete(node);
+    } else {
+      this.expandedNodes.add(node);
+    }
+  }
+
+  private expandAllNodes(nodes: TreeNode[]): void {
+    nodes.forEach(node => {
+      if (this.hasChild(0, node)) {
+        this.expandedNodes.add(node);
+        this.expandAllNodes(node.children!);
+      }
+    });
+  }
 
   private enrichTreeData(nodes: TreeNode[] | undefined): TreeNode[] {
     if (!nodes) {

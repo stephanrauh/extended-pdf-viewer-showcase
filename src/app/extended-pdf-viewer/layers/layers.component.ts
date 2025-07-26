@@ -1,9 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, PdfLayer, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatButton } from '@angular/material/button';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -15,10 +12,6 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './layers.component.html',
     styleUrls: ['./layers.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatButton,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -32,6 +25,8 @@ export class LayersComponent {
   public selectedTab = 0;
 
   public layers: PdfLayer[] = [];
+  public layerscomponentTab: string = 'ui';
+  public codeTab: string = 'htmltemplate';
 
   private _fullscreen = false;
 

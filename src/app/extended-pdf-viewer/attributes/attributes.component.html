@@ -1,8 +1,33 @@
-<mat-card appearance="outlined" class="distance16 mat-elevation-z8">
-  <mat-tab-group>
-    <mat-tab label="Attributes">
-
-      <h1>Attributes, events, and attributes with two-way-binding</h1>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16">
+  <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'attributes'"
+            [class.border-primary-600]="activeTab === 'attributes'"
+            [class.text-gray-500]="activeTab !== 'attributes'"
+            [class.border-transparent]="activeTab !== 'attributes'"
+            (click)="activeTab = 'attributes'">
+            Attributes
+          </button>
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'low-level-api'"
+            [class.border-primary-600]="activeTab === 'low-level-api'"
+            [class.text-gray-500]="activeTab !== 'low-level-api'"
+            [class.border-transparent]="activeTab !== 'low-level-api'"
+            (click)="activeTab = 'low-level-api'">
+            Low-level API
+          </button>
+        </div>
+          </div>
+        
+        <!-- Tab content -->
+        @if (activeTab === 'attributes') {
+          <div class="tab-content">
+<h1>Attributes, events, and attributes with two-way-binding</h1>
       <h2>Legend:</h2>
       <ul>
         <li>[(attribute)] describes an attribute with two-way-binding</li>
@@ -13,9 +38,11 @@
       </ul>
 
       <angular2-smart-table [settings]="attributeTableSettings" [source]="attributesAndEvents"></angular2-smart-table>
-    </mat-tab>
-    <mat-tab label="Low-level API">
-      <h1>Accessing the base library directly</h1>
+        </div>
+          }
+        @if (activeTab === 'low-level-api') {
+          <div class="tab-content">
+<h1>Accessing the base library directly</h1>
       <p>
         The PDF viewer is based on a Mozilla project, pdf.js, which offers many options and features I didn't expose as
         an API of ngx-extended-pdf-viewer. Nonetheless, it's there, so you can use it as long as you know what you're
@@ -26,8 +53,8 @@
         impossible with such an active project.
       </p>
       <angular2-smart-table [settings]="lowLevelApiTableSettings" [source]="lowLevelApi"></angular2-smart-table>
+        </div>
+          }
+      </div>
 
-    </mat-tab>
-  </mat-tab-group>
-
-</mat-card>
+</div>

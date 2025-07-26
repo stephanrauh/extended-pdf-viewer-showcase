@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -14,9 +12,6 @@ import { AsyncPipe } from '@angular/common';
     styleUrls: ['./side-by-side.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
         Ie11MarkdownComponent,
         DemoComponent,
         AsyncPipe,
@@ -24,4 +19,6 @@ import { AsyncPipe } from '@angular/common';
 })
 export class SideBySideComponent {
   public fullscreenService = inject(FullscreenService);
+  public sidebysidecomponentTab: string = 'displayingpdffilessidebyside';
+  public codeTab: string = 'typescript';
 }

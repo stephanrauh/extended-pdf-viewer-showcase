@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { MatCard } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 
 @Component({
         selector: 'app-getting-started',
@@ -9,7 +8,8 @@ import { MatTabGroup, MatTab } from '@angular/material/tabs';
     standalone: true,
     templateUrl: './getting-started.component.html',
     styleUrls: ['./getting-started.component.css'],
-    imports: [MatCard, Ie11MarkdownComponent, MatTabGroup, MatTab]
+    imports: [CommonModule, Ie11MarkdownComponent]
 })
 export class GettingStartedComponent  {
+  activeTab: string = 'recommended';
 }

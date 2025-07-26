@@ -1,10 +1,36 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
-        <mat-tab-group>
-          <mat-tab label="HTML template">
-            <p>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="customthumbnailscomponentTab === 'htmltemplate'"
+              [class.border-primary-600]="customthumbnailscomponentTab === 'htmltemplate'"
+              [class.text-gray-500]="customthumbnailscomponentTab !== 'htmltemplate'"
+              [class.border-transparent]="customthumbnailscomponentTab !== 'htmltemplate'"
+              (click)="customthumbnailscomponentTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'callangularcode'"
+              [class.border-primary-600]="codeTab === 'callangularcode'"
+              [class.text-gray-500]="codeTab !== 'callangularcode'"
+              [class.border-transparent]="codeTab !== 'callangularcode'"
+              (click)="codeTab = 'callangularcode'">
+              Call Angular code
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (customthumbnailscomponentTab === 'htmltemplate') {
+          <div class="tab-content">
+<p>
               You can customize the thumbnails. To do so you need to define something that looks like an Angular template, but isn't an Angular template. It's not
               part of the Angular interpolation and lifecycle, so there are several restrictions. This demo shows over to circumvent them.
             </p>
@@ -13,34 +39,88 @@
             <p>If you need more fine-grained control, modify the thumbnail in an event listener of `(thumbnailDrawn)`. The demo
               uses this option to color the thumbnails differently and to add the diagonal text.
             </p>
-          </mat-tab>
-          <mat-tab label="Call Angular code">
-            <p>
+          </div>
+          }
+          @if (codeTab === 'callangularcode') {
+          <div class="tab-content">
+<p>
               If you want to call Angular code from the template, implement `(thumbnailDrawn)` and use it to register the event listener.
               If you're not using ngZone, you need to call
               `ChangeDetectorRef.detectChanges()` or `ChangeDetectorRef.markForCheck()`.
             </p>
             <p>The demo set the initial state of the radio buttons in `(thumbnailDrawn)`.
             It also adds an event listener to rotate the pages on double-click.</p>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
-        <mat-tab-group>
-          <mat-tab label="HTML template (1/2)">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/html.md"></app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="HTML template (2/2)">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/template37.md"></app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="(thumbnailDrawn)">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts.md"></app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="Call Angular code">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts2.md"></app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+          </div>
+          }
+        </div>
+      </div>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="customthumbnailscomponentTab === 'htmltemplate12'"
+              [class.border-primary-600]="customthumbnailscomponentTab === 'htmltemplate12'"
+              [class.text-gray-500]="customthumbnailscomponentTab !== 'htmltemplate12'"
+              [class.border-transparent]="customthumbnailscomponentTab !== 'htmltemplate12'"
+              (click)="customthumbnailscomponentTab = 'htmltemplate12'">
+              HTML template (1/2)
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'htmltemplate22'"
+              [class.border-primary-600]="codeTab === 'htmltemplate22'"
+              [class.text-gray-500]="codeTab !== 'htmltemplate22'"
+              [class.border-transparent]="codeTab !== 'htmltemplate22'"
+              (click)="codeTab = 'htmltemplate22'">
+              HTML template (2/2)
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'thumbnaildrawn'"
+              [class.border-primary-600]="codeTab === 'thumbnaildrawn'"
+              [class.text-gray-500]="codeTab !== 'thumbnaildrawn'"
+              [class.border-transparent]="codeTab !== 'thumbnaildrawn'"
+              (click)="codeTab = 'thumbnaildrawn'">
+              (thumbnailDrawn)
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'callangularcode'"
+              [class.border-primary-600]="codeTab === 'callangularcode'"
+              [class.text-gray-500]="codeTab !== 'callangularcode'"
+              [class.border-transparent]="codeTab !== 'callangularcode'"
+              (click)="codeTab = 'callangularcode'">
+              Call Angular code
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (customthumbnailscomponentTab === 'htmltemplate12') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/html.md"></app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'htmltemplate22') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/template37.md"></app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'thumbnaildrawn') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts.md"></app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'callangularcode') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-thumbnails/ts2.md"></app-ie11-markdown>
+          </div>
+          }
+        </div>
+      </div>
     </div>
   }
 

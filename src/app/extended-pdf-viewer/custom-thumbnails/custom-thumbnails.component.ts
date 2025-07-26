@@ -1,8 +1,6 @@
 import { Component, effect, ViewEncapsulation, inject } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService, PdfThumbnailDrawnEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -15,9 +13,6 @@ import { AsyncPipe } from '@angular/common';
     styleUrls: ['./custom-thumbnails.component.css'],
     encapsulation: ViewEncapsulation.None,
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -30,6 +25,8 @@ export class CustomThumbnailsComponent {
   private _fullscreen = false;
 
   public rotation: 0 | 180 = 0;
+  public customthumbnailscomponentTab: string = 'htmltemplate';
+  public codeTab: string = 'typescript';
 
   public get fullscreen(): boolean {
     return this._fullscreen;

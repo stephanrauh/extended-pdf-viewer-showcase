@@ -4,8 +4,6 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
@@ -17,29 +15,23 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @Component({
-    selector: 'app-perfect-scrollbar',
-    standalone: true,
-    templateUrl: './perfect-scrollbar.component.html',
-    styleUrls: ['./perfect-scrollbar.component.css'],
-    providers: [
-        {
-            provide: PERFECT_SCROLLBAR_CONFIG,
-            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-        },
-    ],
-    imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-perfect-scrollbar',
+  standalone: true,
+  templateUrl: './perfect-scrollbar.component.html',
+  styleUrls: ['./perfect-scrollbar.component.css'],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+  ],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
   config = inject<PerfectScrollbarConfigInterface>(PERFECT_SCROLLBAR_CONFIG);
   fullscreenService = inject(FullscreenService);
+
+  public activeTab = 'html';
 
   public scrollbar: PerfectScrollbar | undefined = undefined;
 

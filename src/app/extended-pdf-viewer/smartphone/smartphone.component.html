@@ -1,22 +1,62 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/smartphone/text.md"> </app-ie11-markdown>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-        <mat-tab-group>
-          <mat-tab label="CSS template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/smartphone/css.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/smartphone/html.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="TypeScript">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/smartphone/ts.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+      </div>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'css-template'"
+            [class.border-primary-600]="activeTab === 'css-template'"
+            [class.text-gray-500]="activeTab !== 'css-template'"
+            [class.border-transparent]="activeTab !== 'css-template'"
+            (click)="activeTab = 'css-template'">
+            CSS template
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'html'"
+            [class.border-primary-600]="activeTab === 'html'"
+            [class.text-gray-500]="activeTab !== 'html'"
+            [class.border-transparent]="activeTab !== 'html'"
+            (click)="activeTab = 'html'">
+            HTML template
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'typescript'"
+            [class.border-primary-600]="activeTab === 'typescript'"
+            [class.text-gray-500]="activeTab !== 'typescript'"
+            [class.border-transparent]="activeTab !== 'typescript'"
+            (click)="activeTab = 'typescript'">
+            TypeScript
+          </button>
+        </div>
+          </div>
+
+        <!-- Tab content -->
+        @if (activeTab === 'css-template') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/smartphone/css.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'html') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/smartphone/html.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/smartphone/ts.md"> </app-ie11-markdown>
+        </div>
+          }
+      </div>
+      </div>
     </div>
   }
 

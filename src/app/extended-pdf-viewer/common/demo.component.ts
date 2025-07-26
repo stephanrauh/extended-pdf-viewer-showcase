@@ -1,6 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
 import { CopyrightComponent } from './copyright.component';
 import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
 import { AsyncPipe } from '@angular/common';
@@ -11,7 +10,7 @@ import { AsyncPipe } from '@angular/common';
     standalone: true,
     templateUrl: './demo.component.html',
     styleUrls: ['./demo.component.css'],
-    imports: [MatCard, CopyrightComponent, FullscreenButtonComponent, AsyncPipe]
+    imports: [CopyrightComponent, FullscreenButtonComponent, AsyncPipe]
 })
 export class DemoComponent {
   public fullscreenService = inject(FullscreenService);

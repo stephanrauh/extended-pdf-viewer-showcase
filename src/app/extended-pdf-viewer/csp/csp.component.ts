@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
@@ -16,10 +13,6 @@ import { DemoComponent } from '../common/demo.component';
     styleUrls: ['./csp.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatCheckbox,
         FormsModule,
         Ie11MarkdownComponent,
         DemoComponent,
@@ -28,6 +21,8 @@ import { DemoComponent } from '../common/demo.component';
 })
 export class CSPComponent implements OnDestroy {
    public _useInlineScripts = false;
+  public cspcomponentTab: string = 'gettingstarted';
+  public codeTab: string = 'htmltemplate';
 
   constructor() {
     if (isBrowser()) {

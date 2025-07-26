@@ -1,359 +1,579 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+settingsWidth">
-        <mat-tab-group (selectedTabChange)="currentTab = $event.index">
-          <mat-tab label="breakpoints">
-            <p>
-              The PDF viewer uses responsive design to display nicely on devices of all sizes. On large screens, the toolbar shows many buttons. On smaller screens,
-              some of these buttons are shifted to the secondary menu. A few actions are only available in the secondary menu: the scroll mode, the spread modes, and the document properties.
-              In a future version, I might add toolbar icons for these icons, so the corresponding attributes are also called <code>showXXXButton</code>, ignoring the fact that currently,
-              these actions are currently only available in the secondary menu.
-            </p>
-            <p>I've breakpoints to the buttons to show as many buttons as possible on any screen. However, if you don't need every button, you've got more available screen estate.
-              So you can override my choice of breakpoint by setting, for example, <code>showXXXButton="xs"</code>. <code>xs</code> means the button shows if the PDF viewer is at least
-              490 pixel wide. <code>sm</code> means the button is visible if the PDF viewer is at least 560 pixels wide, and so on until <code>xxl</code>, which hides
-              buttons if the PDF viewer is less than 830 pixels wide.
-            </p>
-            <p>Note that these width don't refer to the width of the screen. That's a difference to the definition of reponsive breakpoints in Tailwind, Bootstrap or Material Design.
-              The PDF viewer frequently is smaller than the screen, so I went the extra mile to define breakpoints relative to the component width.
-            </p>
-            <p>You can modify the breakpoints themselves if my default selection of 490, 560, 610, 660, 740, and 830 doesn't match your requirements. Do do so, set the static attributes
-              of the class <code>PdfBreakpoints</code>. You can experiment with these settings on the third tab of this demo.
-            </p>
-          </mat-tab>
-          <mat-tab label="responsive design">
-            <p id="outerContainer">The PDF viewer hides rarely used buttons on small screens, pushing them to the secondary menu. However, if you're showing only a subset of the buttons, the default are an ill match. So you can tweak this to fit your needs.
-              Setting <code>showXXXButton="xs"</code> means it's visible on very small screens, <code>showXXXButton="sm"</code> means it's shown on small but hidden on tiny screens, and so on.
-              <br style="margin-bottom:0.5em">
-              Currently active breakpoints:
-              <span><span class="visibleTinyView">none </span></span>
-              <span class="hiddenTinyView">xs </span>
-              <span class="hiddenSmallView">sm </span>
-              <span class="hiddenMediumView">md </span>
-              <span class="hiddenLargeView">lg </span>
-              <span class="hiddenXLView">xl </span>
-              <span class="hiddenXXLView">xxl </span>
-              <span>(resize the window to see the effect)</span>
-            </p>
-            <br />
-            <mat-form-field class="margin">
-              <mat-label>showSidebarButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showSidebarButton">
-                @for (option of traditionalOptions; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showFindButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showFindButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showPagingButtons </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showPagingButtons">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showZoomButtons </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showZoomButtons">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showDrawEditor </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showDrawEditor">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showTextEditor </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showTextEditor">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showPresentationModeButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showPresentationModeButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showOpenFileButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showOpenFileButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showPrintButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showPrintButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showDownloadButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showDownloadButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showRotateButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showRotateButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showHandToolButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showHandToolButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showScrollingButtons </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showScrollingButtons">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showSpreadButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showSpreadButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showPropertiesButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showPropertiesButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-          </mat-tab>
-          <mat-tab label="custom breakpoints demo">
-            <p id="outerContainer">
-              You can fine-tune when a breakpoint triggers. You have to resize the window after modifying the numbers to see the effect. There's no automatic update.
-            </p>
-            <p id="outerContainer">
-              Currently active breakpoints:
-              <span><span class="visibleTinyView">none </span></span>
-              <span class="hiddenTinyView">xs </span>
-              <span class="hiddenSmallView">sm </span>
-              <span class="hiddenMediumView">md </span>
-              <span class="hiddenLargeView">lg </span>
-              <span class="hiddenXLView">xl </span>
-              <span class="hiddenXXLView">xxl </span>
-            </p>
-            <p>
-              <mat-form-field class="margin">
-                <mat-label>xs</mat-label>
-                <input matInput [(ngModel)]="xs" placeholder="490" />
-                <mat-error>Please enter a number</mat-error>
-              </mat-form-field>
-              <mat-form-field class="margin" >
-                <mat-label>sm</mat-label>
-                <input matInput  [(ngModel)]="sm" placeholder="560" />
-                <mat-error>Please enter a number</mat-error>
-              </mat-form-field>
-              <mat-form-field class="margin" >
-                <mat-label>md</mat-label>
-                <input matInput [(ngModel)]="md" placeholder="610" />
-                <mat-error>Please enter a number</mat-error>
-              </mat-form-field>
-              <mat-form-field class="margin" >
-                <mat-label>lg</mat-label>
-                <input matInput [(ngModel)]="lg" placeholder="660" />
-                <mat-error>Please enter a number</mat-error>
-              </mat-form-field>
-              <mat-form-field class="margin" >
-                <mat-label>xl</mat-label>
-                <input matInput [(ngModel)]="xl" placeholder="740" />
-                <mat-error>Please enter a number</mat-error>
-              </mat-form-field>
-              <mat-form-field class="margin" >
-                <mat-label>xxl</mat-label>
-                <input matInput [(ngModel)]="xxl" placeholder="830" />
-                <mat-error>Please enter a number</mat-error>
-              </mat-form-field>
-            </p>
-            <mat-form-field class="margin">
-              <mat-label>showSidebarButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showSidebarButton">
-                @for (option of traditionalOptions; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showFindButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showFindButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showPagingButtons </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showPagingButtons">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showZoomButtons </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showZoomButtons">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showDrawEditor </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showDrawEditor">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showTextEditor </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showTextEditor">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showPresentationModeButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showPresentationModeButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showOpenFileButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showOpenFileButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showPrintButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showPrintButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showDownloadButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showDownloadButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showRotateButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showRotateButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showHandToolButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showHandToolButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showScrollingButtons </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showScrollingButtons">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showSpreadButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showSpreadButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin">
-              <mat-label>showPropertiesButton </mat-label>
-              <mat-select [disabled]="!showToolbar" [(value)]="showPropertiesButton">
-                @for (option of options; track option) {
-                  <mat-option [value]="option">{{withExplanation(option)}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+        [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + settingsWidth"
+      >
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="responsivedesigncomponentTab === 'breakpoints'"
+                [class.border-primary-600]="responsivedesigncomponentTab === 'breakpoints'"
+                [class.text-gray-500]="responsivedesigncomponentTab !== 'breakpoints'"
+                [class.border-transparent]="responsivedesigncomponentTab !== 'breakpoints'"
+                (click)="responsivedesigncomponentTab = 'breakpoints'"
+              >
+                breakpoints
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="responsivedesigncomponentTab === 'responsivedesign'"
+                [class.border-primary-600]="responsivedesigncomponentTab === 'responsivedesign'"
+                [class.text-gray-500]="responsivedesigncomponentTab !== 'responsivedesign'"
+                [class.border-transparent]="responsivedesigncomponentTab !== 'responsivedesign'"
+                (click)="responsivedesigncomponentTab = 'responsivedesign'"
+              >
+                responsive design
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="responsivedesigncomponentTab === 'custombreakpointsdemo'"
+                [class.border-primary-600]="responsivedesigncomponentTab === 'custombreakpointsdemo'"
+                [class.text-gray-500]="responsivedesigncomponentTab !== 'custombreakpointsdemo'"
+                [class.border-transparent]="responsivedesigncomponentTab !== 'custombreakpointsdemo'"
+                (click)="responsivedesigncomponentTab = 'custombreakpointsdemo'"
+              >
+                custom breakpoints demo
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (responsivedesigncomponentTab === 'breakpoints') {
+            <div class="tab-content">
+              <p>
+                The PDF viewer uses responsive design to display nicely on devices of all sizes. On large screens, the toolbar shows many buttons. On smaller
+                screens, some of these buttons are shifted to the secondary menu. A few actions are only available in the secondary menu: the scroll mode, the
+                spread modes, and the document properties. In a future version, I might add toolbar icons for these icons, so the corresponding attributes are
+                also called <code>showXXXButton</code>, ignoring the fact that currently, these actions are currently only available in the secondary menu.
+              </p>
+              <p>
+                I've breakpoints to the buttons to show as many buttons as possible on any screen. However, if you don't need every button, you've got more
+                available screen estate. So you can override my choice of breakpoint by setting, for example, <code>showXXXButton="xs"</code>.
+                <code>xs</code> means the button shows if the PDF viewer is at least 490 pixel wide. <code>sm</code> means the button is visible if the PDF
+                viewer is at least 560 pixels wide, and so on until <code>xxl</code>, which hides buttons if the PDF viewer is less than 830 pixels wide.
+              </p>
+              <p>
+                Note that these width don't refer to the width of the screen. That's a difference to the definition of reponsive breakpoints in Tailwind,
+                Bootstrap or Material Design. The PDF viewer frequently is smaller than the screen, so I went the extra mile to define breakpoints relative to
+                the component width.
+              </p>
+              <p>
+                You can modify the breakpoints themselves if my default selection of 490, 560, 610, 660, 740, and 830 doesn't match your requirements. Do do so,
+                set the static attributes of the class <code>PdfBreakpoints</code>. You can experiment with these settings on the third tab of this demo.
+              </p>
+            </div>
+          }
+          @if (responsivedesigncomponentTab === 'responsivedesign') {
+            <div class="tab-content">
+              <p id="outerContainer">
+                The PDF viewer hides rarely used buttons on small screens, pushing them to the secondary menu. However, if you're showing only a subset of the
+                buttons, the default are an ill match. So you can tweak this to fit your needs. Setting <code>showXXXButton="xs"</code> means it's visible on
+                very small screens, <code>showXXXButton="sm"</code> means it's shown on small but hidden on tiny screens, and so on.
+                <br style="margin-bottom: 0.5em" />
+                Currently active breakpoints:
+                <span><span class="visibleTinyView">none </span></span>
+                <span class="hiddenTinyView">xs </span>
+                <span class="hiddenSmallView">sm </span>
+                <span class="hiddenMediumView">md </span>
+                <span class="hiddenLargeView">lg </span>
+                <span class="hiddenXLView">xl </span>
+                <span class="hiddenXXLView">xxl </span>
+                <span>(resize the window to see the effect)</span>
+              </p>
+              <br />
+              <!-- Compact form grid -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showSidebarButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showSidebarButton"
+                  >
+                    @for (option of traditionalOptions; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showFindButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showFindButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showPagingButtons </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showPagingButtons"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showZoomButtons </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showZoomButtons"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showDrawEditor </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showDrawEditor"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showTextEditor </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showTextEditor"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showPresentationModeButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showPresentationModeButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showOpenFileButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showOpenFileButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showPrintButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showPrintButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showDownloadButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showDownloadButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showRotateButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showRotateButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showHandToolButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showHandToolButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showScrollingButtons </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showScrollingButtons"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showSpreadButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showSpreadButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showPropertiesButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showPropertiesButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+          }
+          @if (responsivedesigncomponentTab === 'custombreakpointsdemo') {
+            <div class="tab-content">
+              <p id="outerContainer">
+                You can fine-tune when a breakpoint triggers. You have to resize the window after modifying the numbers to see the effect. There's no automatic
+                update.
+              </p>
+              <p id="outerContainer">
+                Currently active breakpoints:
+                <span><span class="visibleTinyView">none </span></span>
+                <span class="hiddenTinyView">xs </span>
+                <span class="hiddenSmallView">sm </span>
+                <span class="hiddenMediumView">md </span>
+                <span class="hiddenLargeView">lg </span>
+                <span class="hiddenXLView">xl </span>
+                <span class="hiddenXXLView">xxl </span>
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">xs</label>
+                  <input type="number" placeholder="490" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="xs" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">sm</label>
+                  <input type="number" placeholder="560" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">md</label>
+                  <input type="number" placeholder="610" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="md" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">lg</label>
+                  <input type="number" placeholder="660" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="lg" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">xl</label>
+                  <input type="number" placeholder="740" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="xl" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">xxl</label>
+                  <input type="number" placeholder="830" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="xxl" />
+                </div>
+              </div>
+              <!-- Compact form grid for the custom breakpoints demo tab -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showSidebarButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showSidebarButton"
+                  >
+                    @for (option of traditionalOptions; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showFindButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showFindButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showPagingButtons </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showPagingButtons"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showZoomButtons </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showZoomButtons"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showDrawEditor </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showDrawEditor"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showTextEditor </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showTextEditor"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showPresentationModeButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showPresentationModeButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showOpenFileButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showOpenFileButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showPrintButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showPrintButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showDownloadButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showDownloadButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showRotateButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showRotateButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showHandToolButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showHandToolButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showScrollingButtons </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showScrollingButtons"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showSpreadButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showSpreadButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">showPropertiesButton </label>
+                  <select
+                    class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [disabled]="!showToolbar"
+                    [(value)]="showPropertiesButton"
+                  >
+                    @for (option of options; track option) {
+                      <option [value]="option">{{ withExplanation(option) }}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
       @if (currentTab === 0) {
-        <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
+        <div
+          class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+          [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
+        >
           <app-ie11-markdown src="/assets/extended-pdf-viewer/hiding-buttons/ts.md"> </app-ie11-markdown>
-        </mat-card>
+        </div>
       }
       @if (currentTab === 1) {
-        <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
-          <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
-        </mat-card>
+        <div
+          class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+          [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
+        >
+          <app-ie11-markdown [data]="sourcecode | language: 'html'"> </app-ie11-markdown>
+        </div>
       }
       @if (currentTab === 2) {
-        <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
-          <mat-tab-group  class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
-            <mat-tab label="Defining breakpoints">
-              <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
-                <app-ie11-markdown [data]="breakpoints | language : 'typescript'"> </app-ie11-markdown>
-              </mat-card>
-            </mat-tab>      <mat-tab label="Button visibility">
-            <mat-card appearance="outlined" class="distance16 mat-elevation-z8" [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
-              <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
-            </mat-card>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-    }
-  </div>
-}
+        <div
+          class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+          [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
+        >
+          <div class="w-full">
+            <!-- Tab buttons -->
+            <div class="overflow-x-auto">
+              <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+                <button
+                  class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                  [class.text-primary-600]="codeTab === 'definingbreakpoints'"
+                  [class.border-primary-600]="codeTab === 'definingbreakpoints'"
+                  [class.text-gray-500]="codeTab !== 'definingbreakpoints'"
+                  [class.border-transparent]="codeTab !== 'definingbreakpoints'"
+                  (click)="codeTab = 'definingbreakpoints'"
+                >
+                  Defining breakpoints
+                </button>
+                <button
+                  class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                  [class.text-primary-600]="codeTab === 'buttonvisibility'"
+                  [class.border-primary-600]="codeTab === 'buttonvisibility'"
+                  [class.text-gray-500]="codeTab !== 'buttonvisibility'"
+                  [class.border-transparent]="codeTab !== 'buttonvisibility'"
+                  (click)="codeTab = 'buttonvisibility'"
+                >
+                  Button visibility
+                </button>
+              </div>
+            </div>
+
+            <!-- Tab content -->
+            @if (codeTab === 'definingbreakpoints') {
+              <div class="tab-content">
+                <div
+                  class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+                  [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
+                >
+                  <app-ie11-markdown [data]="breakpoints | language: 'typescript'"> </app-ie11-markdown>
+                </div>
+              </div>
+            }
+            @if (codeTab === 'buttonvisibility') {
+              <div class="tab-content">
+                <div
+                  class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+                  [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
+                >
+                  <app-ie11-markdown [data]="sourcecode | language: 'html'"> </app-ie11-markdown>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
 
   <app-demo [src]="'/assets/pdfs/user-experience.pdf'">
     <ngx-extended-pdf-viewer
@@ -378,7 +598,7 @@
       [showScrollingButtons]="showScrollingButtons"
       [showSpreadButton]="showSpreadButton"
       [showPropertiesButton]="showPropertiesButton"
-      >
+    >
     </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

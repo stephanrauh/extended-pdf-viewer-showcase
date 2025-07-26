@@ -1,10 +1,27 @@
 <div class="flex-container-column fill-container">
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-      <mat-tab-group>
-        <mat-tab label="Getting started">
-          <p>
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="cspcomponentTab === 'gettingstarted'"
+              [class.border-primary-600]="cspcomponentTab === 'gettingstarted'"
+              [class.text-gray-500]="cspcomponentTab !== 'gettingstarted'"
+              [class.border-transparent]="cspcomponentTab !== 'gettingstarted'"
+              (click)="cspcomponentTab = 'gettingstarted'">
+              Getting started
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (cspcomponentTab === 'gettingstarted') {
+          <div class="tab-content">
+<p>
             The PDF viewer supports Content Security Policy (CSP) by default.
             However, if you don't need CSP, the PDF viewer can load the PDF file faster if you disable CSP. To be hones,
             at the moment the
@@ -16,23 +33,45 @@
             <code>op-chaining-support.js</code> is not loaded from the server. If "use inline scripts" is unchecked, the
             file is loaded.
           </p>
-          <mat-checkbox class="margin" [(ngModel)]="useInlineScripts">use inline scripts</mat-checkbox>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress"
+          <label class="flex items-center space-x-2">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="useInlineScripts" />
+        <span>use inline scripts</span>
+      </label>
+          </div>
+          }
+        </div>
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          @if (useInlineScripts) {
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'htmltemplate'"
+              [class.border-primary-600]="codeTab === 'htmltemplate'"
+              [class.text-gray-500]="codeTab !== 'htmltemplate'"
+              [class.border-transparent]="codeTab !== 'htmltemplate'"
+              (click)="codeTab = 'htmltemplate'">
+              HTML template
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (codeTab === 'htmltemplate') {
+          <div class="tab-content">
+@if (useInlineScripts) {
           <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/csp/html.md"> </app-ie11-markdown>
           }
           @if (!useInlineScripts) {
           <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/csp/html2.md"> </app-ie11-markdown>
           }
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+          </div>
+          }
+        </div>
+    </div>
   </div>
 
   <app-demo [src]="'/assets/pdfs/2404.00465v1.pdf'">

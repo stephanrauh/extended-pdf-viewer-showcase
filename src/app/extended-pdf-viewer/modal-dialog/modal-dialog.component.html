@@ -4,7 +4,13 @@
   </div>
   <div>
     <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
-    <button mat-button mat-raised-button color="primary" (click)="onCloseClick()" style="margin-left: 8px;">Close</button>
+    <button 
+      class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500" 
+      (click)="onCloseClick()" 
+      style="margin-left: 8px;"
+    >
+      Close
+    </button>
   </div>
 </div>
 <ngx-extended-pdf-viewer

@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { RouterLink } from '@angular/router';
@@ -15,9 +13,6 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './prerendering.component.html',
     styleUrls: ['./prerendering.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
         Ie11MarkdownComponent,
         DemoComponent,
         RouterLink,
@@ -44,6 +39,8 @@ export class PrerenderingComponent {
   public pagesToRender = '(none)';
 
   public visiblePages = '';
+  public prerenderingcomponentTab: string = 'prerenderingstrategy';
+  public codeTab: string = 'typescript';
 
 
 

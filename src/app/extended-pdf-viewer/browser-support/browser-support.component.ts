@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatCard } from '@angular/material/card';
 
 @Component({
     selector: 'app-browser-support',
@@ -7,6 +6,6 @@ import { MatCard } from '@angular/material/card';
     standalone: true,
     templateUrl: './browser-support.component.html',
     styleUrls: ['./browser-support.component.css'],
-    imports: [MatCard],
+    imports: [],
 })
 export class BrowserSupportComponent {}

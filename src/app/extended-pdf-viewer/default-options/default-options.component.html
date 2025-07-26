@@ -1,10 +1,45 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
-        <mat-tab-group (selectedTabChange)="addPlaceHolders()">
-          <mat-tab label="Overview">
-            <p>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="defaultoptionscomponentTab === 'overview'"
+              [class.border-primary-600]="defaultoptionscomponentTab === 'overview'"
+              [class.text-gray-500]="defaultoptionscomponentTab !== 'overview'"
+              [class.border-transparent]="defaultoptionscomponentTab !== 'overview'"
+              (click)="defaultoptionscomponentTab = 'overview'">
+              Overview
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="defaultoptionscomponentTab === 'availableoptions'"
+              [class.border-primary-600]="defaultoptionscomponentTab === 'availableoptions'"
+              [class.text-gray-500]="defaultoptionscomponentTab !== 'availableoptions'"
+              [class.border-transparent]="defaultoptionscomponentTab !== 'availableoptions'"
+              (click)="defaultoptionscomponentTab = 'availableoptions'">
+              Available options
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'optionscoveredbyattributes'"
+              [class.border-primary-600]="codeTab === 'optionscoveredbyattributes'"
+              [class.text-gray-500]="codeTab !== 'optionscoveredbyattributes'"
+              [class.border-transparent]="codeTab !== 'optionscoveredbyattributes'"
+              (click)="codeTab = 'optionscoveredbyattributes'">
+              Options covered by attributes
+            </button>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (defaultoptionscomponentTab === 'overview') {
+          <div class="tab-content">
+<p>
               You can fine-tune the behavior of the PDF viewer by modifying the default options. The full list of
               the options is available
               <a target="#" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/master/projects/ngx-extended-pdf-viewer/src/lib/options/pdf-default-options.ts">here</a>.
@@ -17,26 +52,59 @@
               You can see that in the blue bar of this page and in the console window of the developer tools.
             </p>
             <app-ie11-markdown src="/assets/extended-pdf-viewer/default-options/options.md"></app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="Available options">
-            <angular2-smart-table [settings]="tableSettings" [source]="availableOptions"></angular2-smart-table>
-                </mat-tab>
-                <mat-tab label="Options covered by attributes">
-                  <angular2-smart-table [settings]="tableSettings" [source]="coveredOptions"></angular2-smart-table>
+          </div>
+          }
+          @if (defaultoptionscomponentTab === 'availableoptions') {
+          <div class="tab-content">
+<angular2-smart-table [settings]="tableSettings" [source]="availableOptions"></angular2-smart-table>
+          </div>
+          }
+          @if (codeTab === 'optionscoveredbyattributes') {
+          <div class="tab-content">
+<angular2-smart-table [settings]="tableSettings" [source]="coveredOptions"></angular2-smart-table>
+          </div>
+          }
+        </div>
+            </div>
+        <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
+                      <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'htmltemplate'"
+              [class.border-primary-600]="codeTab === 'htmltemplate'"
+              [class.text-gray-500]="codeTab !== 'htmltemplate'"
+              [class.border-transparent]="codeTab !== 'htmltemplate'"
+              (click)="codeTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              TypeScript
+            </button>
+          </div>
+          </div>
 
-              </mat-tab>
-              </mat-tab-group>
-            </mat-card>
-            <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
-              <mat-tab-group>
-                <mat-tab label="HTML template">
-                  <app-ie11-markdown src="/assets/extended-pdf-viewer/default-options/html.md"> </app-ie11-markdown>
-                </mat-tab>
-                <mat-tab label="TypeScript">
-                  <app-ie11-markdown src="/assets/extended-pdf-viewer/default-options/ts.md"> </app-ie11-markdown>
-                </mat-tab>
-              </mat-tab-group>
-            </mat-card>
+          <!-- Tab content -->
+          @if (codeTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/default-options/html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/default-options/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+        </div>
+            </div>
           </div>
         }
 

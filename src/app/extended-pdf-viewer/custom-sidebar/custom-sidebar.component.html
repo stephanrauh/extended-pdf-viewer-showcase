@@ -1,35 +1,89 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
         <p>You can customize both the sidebar. The only disadvantage is you have to set the
           `top` position yourself. If you're offering an optional mobile-frieny large toolbar,
           the `top` position of custom sidebars is not adjusted automatically.
         </p>
-        <mat-radio-group aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;">
-          <mat-radio-button value="default">sidebar with standard layout</mat-radio-button>
+        <div class="space-y-2">
+
+          <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="default" aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;" />
+          <span>sidebar with standard layout</span>
+        </label>
           <br />
-          <mat-radio-button value="without">sidebar without toolbar</mat-radio-button>
+          <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="without" aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;" />
+          <span>sidebar without toolbar</span>
+        </label>
           <br />
-          <mat-radio-button value="fancy">fancy layout</mat-radio-button>
-        </mat-radio-group>
+          <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="fancy" aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;" />
+          <span>fancy layout</span>
+        </label>
+
+      </div>
         <br />
         <p>The attribute <code>[(sidebarVisible)]</code> supports two-way binding. It's updated when the user opens or hide the sidebar.</p>
-        <mat-checkbox [(ngModel)]="sidebarOpen">show sidebar</mat-checkbox>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-        <mat-tab-group>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/html.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="no toolbar">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/without-toolbar.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="fancy sidebar">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/fancy-sidebar.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+        <label class="flex items-center space-x-2">
+        <input type="checkbox" class="form-checkbox text-primary-600" [(ngModel)]="sidebarOpen" />
+        <span>show sidebar</span>
+      </label>
+      </div>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+        <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'html'"
+            [class.border-primary-600]="activeTab === 'html'"
+            [class.text-gray-500]="activeTab !== 'html'"
+            [class.border-transparent]="activeTab !== 'html'"
+            (click)="activeTab = 'html'">
+            HTML template
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'no-toolbar'"
+            [class.border-primary-600]="activeTab === 'no-toolbar'"
+            [class.text-gray-500]="activeTab !== 'no-toolbar'"
+            [class.border-transparent]="activeTab !== 'no-toolbar'"
+            (click)="activeTab = 'no-toolbar'">
+            no toolbar
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'fancy-sidebar'"
+            [class.border-primary-600]="activeTab === 'fancy-sidebar'"
+            [class.text-gray-500]="activeTab !== 'fancy-sidebar'"
+            [class.border-transparent]="activeTab !== 'fancy-sidebar'"
+            (click)="activeTab = 'fancy-sidebar'">
+            fancy sidebar
+          </button>
+        </div>
+          </div>
+
+        <!-- Tab content -->
+        @if (activeTab === 'html') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/html.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'no-toolbar') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/without-toolbar.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'fancy-sidebar') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/fancy-sidebar.md"> </app-ie11-markdown>
+        </div>
+          }
+      </div>
+      </div>
     </div>
   }
 

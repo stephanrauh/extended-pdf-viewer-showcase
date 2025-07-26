@@ -1,17 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatLabel } from '@angular/material/form-field';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { OpenInNewTabComponent } from './open-in-new-tab/open-in-new-tab.component';
-import { MatTooltip } from '@angular/material/tooltip';
-import { MatIcon } from '@angular/material/icon';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -21,20 +14,11 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './custom-toolbar.component.html',
     styleUrls: ['./custom-toolbar.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatLabel,
-        MatRadioGroup,
         FormsModule,
-        MatRadioButton,
-        MatCheckbox,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
         OpenInNewTabComponent,
-        MatTooltip,
-        MatIcon,
         AsyncPipe,
     ],
 })
@@ -50,6 +34,8 @@ export class CustomToolbarComponent {
   public src = '/assets/pdfs/dachstein.pdf';
 
   public zoom = '100%';
+  public customtoolbarcomponentTab: string = 'livedemo';
+  public codeTab: string = 'htmltemplate';
 
   private pdfViewerService = inject(NgxExtendedPdfViewerService);
 

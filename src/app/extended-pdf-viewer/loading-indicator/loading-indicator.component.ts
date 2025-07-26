@@ -2,8 +2,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, signal, computed, inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 
@@ -21,13 +19,10 @@ interface PdfState {
     templateUrl: './loading-indicator.component.html',
     styleUrls: ['./loading-indicator.component.css'],
     imports: [
-    MatCard,
-    MatTabGroup,
-    MatTab,
-    Ie11MarkdownComponent,
-    DemoComponent,
-    NgxExtendedPdfViewerModule
-],
+        Ie11MarkdownComponent,
+        DemoComponent,
+        NgxExtendedPdfViewerModule,
+    ],
 })
 export class LoadingIndicatorComponent {
 
@@ -36,6 +31,8 @@ export class LoadingIndicatorComponent {
   public src: Blob | undefined = undefined;
 
   public fullscreen = false;
+  public loadingindicatorcomponentTab: string = 'customloadingindicator';
+  public codeTab: string = 'typescript';
 
   private pdfState = signal<PdfState>({
     status: 'idle',

@@ -1,10 +1,45 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
-        <mat-tab-group>
-          <mat-tab label="Overview">
-            <h2>NgxExtendedPdfViewerService API (Preview)</h2>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="ngxpdfviewerservicecomponentTab === 'overview'"
+              [class.border-primary-600]="ngxpdfviewerservicecomponentTab === 'overview'"
+              [class.text-gray-500]="ngxpdfviewerservicecomponentTab !== 'overview'"
+              [class.border-transparent]="ngxpdfviewerservicecomponentTab !== 'overview'"
+              (click)="ngxpdfviewerservicecomponentTab = 'overview'">
+              Overview
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="ngxpdfviewerservicecomponentTab === 'pageoperations'"
+              [class.border-primary-600]="ngxpdfviewerservicecomponentTab === 'pageoperations'"
+              [class.text-gray-500]="ngxpdfviewerservicecomponentTab !== 'pageoperations'"
+              [class.border-transparent]="ngxpdfviewerservicecomponentTab !== 'pageoperations'"
+              (click)="ngxpdfviewerservicecomponentTab = 'pageoperations'">
+              Page Operations
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'documentoperations'"
+              [class.border-primary-600]="codeTab === 'documentoperations'"
+              [class.text-gray-500]="codeTab !== 'documentoperations'"
+              [class.border-transparent]="codeTab !== 'documentoperations'"
+              (click)="codeTab = 'documentoperations'">
+              Document Operations
+            </button>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (ngxpdfviewerservicecomponentTab === 'overview') {
+          <div class="tab-content">
+<h2>NgxExtendedPdfViewerService API (Preview)</h2>
             <p><b>Caveat:</b> This is an AI generated documentation page. It's urgently needs improvement. The documentation may or may not be correct - probably it is - but take it with a grain of salt. It's an experiment that worked less well than expected. It's just I don't want to revert it because it's a good starting point for the real documentation that's coming soon!</p>
             <p>The <code>NgxExtendedPdfViewerService</code> provides programmatic control over the PDF viewer. This service allows you to interact with the viewer, manipulate pages, control editors, and perform various operations on the PDF document.</p>
 
@@ -23,25 +58,46 @@ export class MyComponent implements AfterViewInit &#123;
     // Service is ready to use
   &#125;
 &#125;</code></pre>
-          </mat-tab>
+          </div>
+          }
+          @if (ngxpdfviewerservicecomponentTab === 'pageoperations') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/page-operations.md"></app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'documentoperations') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/document-operations.md"></app-ie11-markdown>
+          </div>
+          }
+        </div>
+      </div>
 
-          <mat-tab label="Page Operations">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/page-operations.md"></app-ie11-markdown>
-          </mat-tab>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'examples'"
+              [class.border-primary-600]="codeTab === 'examples'"
+              [class.text-gray-500]="codeTab !== 'examples'"
+              [class.border-transparent]="codeTab !== 'examples'"
+              (click)="codeTab = 'examples'">
+              Examples
+            </button>
+          </div>
+          </div>
 
-          <mat-tab label="Document Operations">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/document-operations.md"></app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
-        <mat-tab-group>
-          <mat-tab label="Examples">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/examples.md"></app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+          <!-- Tab content -->
+          @if (codeTab === 'examples') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/ngx-pdf-viewer-service/examples.md"></app-ie11-markdown>
+          </div>
+          }
+        </div>
+      </div>
     </div>
   }
 

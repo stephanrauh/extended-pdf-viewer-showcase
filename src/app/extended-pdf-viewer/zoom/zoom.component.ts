@@ -1,16 +1,11 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { CommonModule, AsyncPipe, PercentPipe } from '@angular/common';
 import { IPDFViewerApplication, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
-import { MatLabel, MatFormField } from '@angular/material/form-field';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
 import { DemoComponent } from '../common/demo.component';
-import { AsyncPipe, PercentPipe } from '@angular/common';
 
 @Component({
     selector: 'app-zoom',
@@ -20,16 +15,9 @@ import { AsyncPipe, PercentPipe } from '@angular/common';
     styleUrls: ['./zoom.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
+        CommonModule,
         Ie11MarkdownComponent,
-        MatLabel,
-        MatRadioGroup,
         FormsModule,
-        MatRadioButton,
-        MatFormField,
-        MatInput,
         DemoComponent,
         NgxExtendedPdfViewerModule,
         AsyncPipe,
@@ -39,6 +27,8 @@ import { AsyncPipe, PercentPipe } from '@angular/common';
 export class ZoomComponent {
   fullscreenService = inject(FullscreenService);
 
+  public activeTab: string = 'zoom';
+  public codeTab: string = 'html';
   public resolution = '';
 
   private _zoomSetting: number | string | undefined = 'page-width';

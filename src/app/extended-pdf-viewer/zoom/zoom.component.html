@@ -1,104 +1,223 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-  <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:55%">
-      <mat-tab-group>
-        <mat-tab label="[(zoom)] and (currentZoomFactor)">
-          <app-ie11-markdown>
-            The attribute `[(zoom)]` controls the zoom level of the PDF document. If you're using two-way binding, the
-            variable is updated
-            when the user zooms in or out.
-          </app-ie11-markdown>
-          <mat-label title="Toolbar zoom factor"></mat-label>
-          <mat-radio-group aria-label="Toolbar zoom factor" [(ngModel)]="zoomSetting">
-            <mat-radio-button class="compact" value="100%">[zoom]="'100%'"</mat-radio-button>
-            <mat-radio-button class="compact" value="150%">[zoom]="'150%'"</mat-radio-button>
-            <mat-radio-button class="compact" value="200%">[zoom]="'200%'"</mat-radio-button>
-            <mat-radio-button class="compact" value="1500%">[zoom]="'1500%'" (slow!)</mat-radio-button>
-            <mat-radio-button class="compact" value="auto">[zoom]="auto"</mat-radio-button>
-            <mat-radio-button class="compact" value="page-fit">[zoom]="page-fit"</mat-radio-button>
-            <mat-radio-button class="compact" value="page-actual">[zoom]="page-actual"</mat-radio-button>
-            <mat-radio-button class="compact" value="page-width">[zoom]="page-width"</mat-radio-button>
-          </mat-radio-group>
-          <div class="distance-top">Selected zoom level: {{ zoomSetting === undefined ? "undefined" : zoomSetting }};
-            current zoom level: {{ currentZoomFactor | percent }}</div>
-          @if (resolution) {
-          <p>{{resolution}}</p>
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 55%"
+      >
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'zoom'"
+                [class.border-primary-600]="activeTab === 'zoom'"
+                [class.text-gray-500]="activeTab !== 'zoom'"
+                [class.border-transparent]="activeTab !== 'zoom'"
+                (click)="activeTab = 'zoom'"
+              >
+                [(zoom)] and (currentZoomFactor)
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'zoom-levels'"
+                [class.border-primary-600]="activeTab === 'zoom-levels'"
+                [class.text-gray-500]="activeTab !== 'zoom-levels'"
+                [class.border-transparent]="activeTab !== 'zoom-levels'"
+                (click)="activeTab = 'zoom-levels'"
+              >
+                zoom levels
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'huge-zoom'"
+                [class.border-primary-600]="activeTab === 'huge-zoom'"
+                [class.text-gray-500]="activeTab !== 'huge-zoom'"
+                [class.border-transparent]="activeTab !== 'huge-zoom'"
+                (click)="activeTab = 'huge-zoom'"
+              >
+                huge zoom levels
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (activeTab === 'zoom') {
+            <div class="tab-content">
+              <app-ie11-markdown>
+                The attribute `[(zoom)]` controls the zoom level of the PDF document. If you're using two-way binding, the variable is updated when the user
+                zooms in or out.
+              </app-ie11-markdown>
+              <label class="block text-xs font-medium text-gray-700 mb-1">Toolbar zoom factor</label>
+              <div class="grid grid-cols-2 gap-2">
+                <label class="flex items-center text-sm">
+                  <input type="radio" class="form-radio text-primary-600 w-3 h-3" name="zoomSetting" value="100%" [(ngModel)]="zoomSetting" />
+                  <span class="ml-2 text-sm">[zoom]="'100%'"</span>
+                </label>
+                <label class="flex items-center text-sm">
+                  <input type="radio" class="form-radio text-primary-600" name="zoomSetting" value="150%" [(ngModel)]="zoomSetting" />
+                  <span class="ml-2">[zoom]="'150%'"</span>
+                </label>
+                <label class="flex items-center text-sm">
+                  <input type="radio" class="form-radio text-primary-600" name="zoomSetting" value="200%" [(ngModel)]="zoomSetting" />
+                  <span class="ml-2">[zoom]="'200%'"</span>
+                </label>
+                <label class="flex items-center text-sm">
+                  <input type="radio" class="form-radio text-primary-600" name="zoomSetting" value="1500%" [(ngModel)]="zoomSetting" />
+                  <span class="ml-2">[zoom]="'1500%'" (slow!)</span>
+                </label>
+                <label class="flex items-center text-sm">
+                  <input type="radio" class="form-radio text-primary-600" name="zoomSetting" value="auto" [(ngModel)]="zoomSetting" />
+                  <span class="ml-2">[zoom]="auto"</span>
+                </label>
+                <label class="flex items-center text-sm">
+                  <input type="radio" class="form-radio text-primary-600" name="zoomSetting" value="page-fit" [(ngModel)]="zoomSetting" />
+                  <span class="ml-2">[zoom]="page-fit"</span>
+                </label>
+                <label class="flex items-center text-sm">
+                  <input type="radio" class="form-radio text-primary-600" name="zoomSetting" value="page-actual" [(ngModel)]="zoomSetting" />
+                  <span class="ml-2">[zoom]="page-actual"</span>
+                </label>
+                <label class="flex items-center text-sm">
+                  <input type="radio" class="form-radio text-primary-600" name="zoomSetting" value="page-width" [(ngModel)]="zoomSetting" />
+                  <span class="ml-2">[zoom]="page-width"</span>
+                </label>
+              </div>
+              <div class="distance-top">
+                Selected zoom level: {{ zoomSetting === undefined ? 'undefined' : zoomSetting }}; current zoom level: {{ currentZoomFactor | percent }}
+              </div>
+              @if (resolution) {
+                <p>{{ resolution }}</p>
+              }
+            </div>
           }
-        </mat-tab>
-        <mat-tab label="zoom levels">
-          <p>The attributes <code>minZoom</code> and <code>maxZoom</code> limit the zoom factor you can get by pinching
-            or by hitting the "+" or "-" button.
-            The attribute <code>zoomLevels</code> defines the content of the dropdown. It ignores both
-            <code>minZoom</code> and <code>maxZoom</code>.
-          </p>
-          <section>
-            <mat-form-field>
-              <input matInput class="margin" [(ngModel)]="minZoom" placeholder="minimum zoom level" />
-            </mat-form-field>
-            <mat-form-field style="padding-left: 10px;">
-              <input matInput class="margin" [(ngModel)]="maxZoom" placeholder="maximum zoom level" />
-            </mat-form-field>
-          </section>
-          <section>
-            <mat-form-field style="padding-left: 10px; width: 90%;">
-              <input matInput class="margin" [(ngModel)]="zoomLevelsDisplay"
-                placeholder="zoom levels of the drop-down menu" />
-            </mat-form-field>
-          </section>
-        </mat-tab>
-        <mat-tab label="huge zoom levels">
-          <p>If the resolution of the PDF is very high, the PDF viewer calculates the maximum canvas size. If the canvas
-            size exceeds the
-            maximum canvas size, ngx-extended-pdf-viewer reduces the resolution and activates CSS scaling. On most
-            devices and with most
-            PDF documents, this probably never happens. The demo exceeds the maximum canvas size by setting the zoom
-            level to 1500%.</p>
-          <p>You can trade performance for blurryness by limiting the maximum canvas size by setting
-            <code>pdfDefaultOptions.maxCanvasPixels</code>
-            in the constructor.
-          </p>
-          <p>Here's a
-            <a target="#" href="https://www.npmjs.com/package/canvas-size#test-results">list of the maximum canvas sizes
-              on many browsers and devices</a>.
-          </p>
-          <p>If you exceed this setting, or if the necessary canvas size is larger than
-            <code>pdfDefaultOptions.maxCanvasPixels</code> defines,
-            ngx-extended-pdf-viewer limits the canvas size and activates CSS scaling. So you can get higher zoom levels,
-            but the
-            text may be blurry.
-          </p>
-          @if (resolution) {
-          <p>{{resolution}}</p>
+          @if (activeTab === 'zoom-levels') {
+            <div class="tab-content">
+              <p>
+                The attributes <code>minZoom</code> and <code>maxZoom</code> limit the zoom factor you can get by pinching or by hitting the "+" or "-" button.
+                The attribute <code>zoomLevels</code> defines the content of the dropdown. It ignores both <code>minZoom</code> and <code>maxZoom</code>.
+              </p>
+              <section class="space-y-2">
+                <div>
+                  <input
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="minZoom"
+                    placeholder="minimum zoom level"
+                  />
+                </div>
+                <div>
+                  <input
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="maxZoom"
+                    placeholder="maximum zoom level"
+                  />
+                </div>
+              </section>
+              <section class="mt-2">
+                <div>
+                  <input
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="zoomLevelsDisplay"
+                    placeholder="zoom levels of the drop-down menu"
+                  />
+                </div>
+              </section>
+            </div>
           }
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:43%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/zoom/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/zoom/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+
+          @if (activeTab === 'huge-zoom') {
+            <div class="tab-content">
+              <p>
+                If the resolution of the PDF is very high, the PDF viewer calculates the maximum canvas size. If the canvas size exceeds the maximum canvas
+                size, ngx-extended-pdf-viewer reduces the resolution and activates CSS scaling. On most devices and with most PDF documents, this probably never
+                happens. The demo exceeds the maximum canvas size by setting the zoom level to 1500%.
+              </p>
+              <p>
+                You can trade performance for blurryness by limiting the maximum canvas size by setting
+                <code>pdfDefaultOptions.maxCanvasPixels</code>
+                in the constructor.
+              </p>
+              <p>
+                Here's a
+                <a target="#" href="https://www.npmjs.com/package/canvas-size#test-results">list of the maximum canvas sizes on many browsers and devices</a>.
+              </p>
+              <p>
+                If you exceed this setting, or if the necessary canvas size is larger than <code>pdfDefaultOptions.maxCanvasPixels</code> defines,
+                ngx-extended-pdf-viewer limits the canvas size and activates CSS scaling. So you can get higher zoom levels, but the text may be blurry.
+              </p>
+              @if (resolution) {
+                <p>{{ resolution }}</p>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 use-available-height"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 43%"
+      >
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'html'"
+                [class.border-primary-600]="codeTab === 'html'"
+                [class.text-gray-500]="codeTab !== 'html'"
+                [class.border-transparent]="codeTab !== 'html'"
+                (click)="codeTab = 'html'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'typescript'"
+                [class.border-primary-600]="codeTab === 'typescript'"
+                [class.text-gray-500]="codeTab !== 'typescript'"
+                [class.border-transparent]="codeTab !== 'typescript'"
+                (click)="codeTab = 'typescript'"
+              >
+                TypeScript
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (codeTab === 'html') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/zoom/html.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (codeTab === 'typescript') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/zoom/ts.md"> </app-ie11-markdown>
+            </div>
+          }
+        </div>
+      </div>
   }
 
   <app-demo [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'">
     <small slot="additional-info">
       @if (currentTime) {
-      <br>last rendering time: {{currentTime}} ms
+        <br />last rendering time: {{ currentTime }} ms
       }
     </small>
 
-    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
-      (currentZoomFactor)="updateZoomFactor($event)" [height]="'90vh'" [(zoom)]="zoomSetting" [minZoom]="minZoom"
-      [maxZoom]="maxZoom" [zoomLevels]="zoomLevels" (pageRender)="onPageRender()" (pageRendered)="onPageRendered()">
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
+      (currentZoomFactor)="updateZoomFactor($event)"
+      [height]="'90vh'"
+      [(zoom)]="zoomSetting"
+      [minZoom]="minZoom"
+      [maxZoom]="maxZoom"
+      [zoomLevels]="zoomLevels"
+      (pageRender)="onPageRender()"
+      (pageRendered)="onPageRendered()"
+    >
     </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

@@ -1,11 +1,46 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-      <mat-tab-group>
-        <mat-tab label="Pre-rendering strategy">
-          <p>
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="prerenderingcomponentTab === 'prerenderingstrategy'"
+              [class.border-primary-600]="prerenderingcomponentTab === 'prerenderingstrategy'"
+              [class.text-gray-500]="prerenderingcomponentTab !== 'prerenderingstrategy'"
+              [class.border-transparent]="prerenderingcomponentTab !== 'prerenderingstrategy'"
+              (click)="prerenderingcomponentTab = 'prerenderingstrategy'">
+              Pre-rendering strategy
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="prerenderingcomponentTab === 'livedemo'"
+              [class.border-primary-600]="prerenderingcomponentTab === 'livedemo'"
+              [class.text-gray-500]="prerenderingcomponentTab !== 'livedemo'"
+              [class.border-transparent]="prerenderingcomponentTab !== 'livedemo'"
+              (click)="prerenderingcomponentTab = 'livedemo'">
+              Live demo
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'bufferforrenderedpages'"
+              [class.border-primary-600]="codeTab === 'bufferforrenderedpages'"
+              [class.text-gray-500]="codeTab !== 'bufferforrenderedpages'"
+              [class.border-transparent]="codeTab !== 'bufferforrenderedpages'"
+              (click)="codeTab = 'bufferforrenderedpages'">
+              Buffer for rendered pages
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (prerenderingcomponentTab === 'prerenderingstrategy') {
+          <div class="tab-content">
+<p>
             Rendering a PDF page takes some time. When you browse quickly through the pages
             of a complex document,
             you'll frequently see the loading indicator instead of the page. That's an
@@ -21,9 +56,11 @@
           <p>Note that rendering too many pages in advance may have the opposite effect.
             Keeping your CPU busy results in a slow UI and a bad user experience.
           </p>
-        </mat-tab>
-        <mat-tab label="Live demo">
-          <p>The algorithm on the right-hand side increases the number of pre-rendered pages
+          </div>
+          }
+          @if (prerenderingcomponentTab === 'livedemo') {
+          <div class="tab-content">
+<p>The algorithm on the right-hand side increases the number of pre-rendered pages
             to two pages backward and up to five pages in advance.
           </p>
           <p>Hint: Zoom in or out to start with a fresh pre-rendering buffer.
@@ -43,30 +80,62 @@
             <dt>Page requested:</dt>
             <dd>{{currentlyRequestedPage}}</dd>
           </dl>
-        </mat-tab>
-        <mat-tab label="Buffer for rendered pages">
-          <p>
+          </div>
+          }
+          @if (codeTab === 'bufferforrenderedpages') {
+          <div class="tab-content">
+<p>
             If you're running on tight memory constraints, you can reduce the size of the
             number of pre-rendered pages. By default, ngx-extended-pdf-viewer keeps
             up to 50 pages in memory. To reduce or increase this setting,
             set <code>pdfDefaultOptions.defaultCacheSize</code> to a different number.
           </p>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress"
+          </div>
+          }
+        </div>
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/prerendering/html.md">
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'htmltemplate'"
+              [class.border-primary-600]="codeTab === 'htmltemplate'"
+              [class.text-gray-500]="codeTab !== 'htmltemplate'"
+              [class.border-transparent]="codeTab !== 'htmltemplate'"
+              (click)="codeTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              Typescript
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (codeTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/prerendering/html.md">
           </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="Typescript">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/prerendering/ts.md">
+          </div>
+          }
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/prerendering/ts.md">
           </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+          </div>
+          }
+        </div>
+    </div>
   </div>
   }
 

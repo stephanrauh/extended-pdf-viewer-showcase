@@ -6,29 +6,17 @@ import { Subject } from 'rxjs';
 import { isBrowser } from '../common/utilities';
 import { PageRenderedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-base64',
-    
-    standalone: true,
-    templateUrl: './base64.component.html',
-    styleUrls: ['./base64.component.css'],
-    imports: [
-        MatCard,
-        MatButton,
-        MatTabGroup,
-        MatTab,
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-base64',
+
+  standalone: true,
+  templateUrl: './base64.component.html',
+  styleUrls: ['./base64.component.css'],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class Base64Component implements OnInit {
   private httpClient = inject(HttpClient);
@@ -39,6 +27,7 @@ export class Base64Component implements OnInit {
   public tailwindPdf!: string;
 
   public firstPdf = true;
+  public activeTab: string = 'html';
 
   private _fullscreen = false;
 
@@ -56,7 +45,7 @@ export class Base64Component implements OnInit {
         .get('/assets/pdfs/Bootstrap-vs-Material-Design-vs-Prime-vs-Tailwind.base64.txt', { responseType: 'text' as 'json' })
         .pipe(
           tap((base64) => (this.tailwindPdf = base64 as string)),
-          tap((base64) => this.base64.next(base64 as string))
+          tap((base64) => this.base64.next(base64 as string)),
         )
         .subscribe();
     }
@@ -76,6 +65,6 @@ export class Base64Component implements OnInit {
   }
 
   public pageRendered($event: PageRenderedEvent) {
-    console.log('pageRendered', $event, "Page", $event.pageNumber, "Scale: ", $event.source.scale);
+    console.log('pageRendered', $event, 'Page', $event.pageNumber, 'Scale: ', $event.source.scale);
   }
 }

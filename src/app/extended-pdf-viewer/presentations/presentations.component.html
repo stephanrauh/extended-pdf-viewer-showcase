@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
       <p>
         The full-screen mode of pdf.js (and, by extension, ngx-extended-pdf-viewer)
@@ -11,19 +11,48 @@
       <p>You can't activate the full-screen mode programmatically. It must be triggered
         by the user.
       </p>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress"
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html.md">
+      <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'html'"
+            [class.border-primary-600]="activeTab === 'html'"
+            [class.text-gray-500]="activeTab !== 'html'"
+            [class.border-transparent]="activeTab !== 'html'"
+            (click)="activeTab = 'html'">
+            HTML template
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'typescript'"
+            [class.border-primary-600]="activeTab === 'typescript'"
+            [class.text-gray-500]="activeTab !== 'typescript'"
+            [class.border-transparent]="activeTab !== 'typescript'"
+            (click)="activeTab = 'typescript'">
+            Typescript
+          </button>
+        </div>
+          </div>
+
+        <!-- Tab content -->
+        @if (activeTab === 'html') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/html.md">
           </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="Typescript">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+        </div>
+          }
+        @if (activeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/simple/ts.md"> </app-ie11-markdown>
+        </div>
+          }
+      </div>
+    </div>
   </div>
   }
 

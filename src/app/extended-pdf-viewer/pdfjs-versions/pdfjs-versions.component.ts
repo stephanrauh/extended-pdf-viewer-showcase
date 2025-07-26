@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { CopyrightComponent } from '../common/copyright.component';
 import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
@@ -15,9 +13,6 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './pdfjs-versions.component.html',
     styleUrls: ['./pdfjs-versions.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
         Ie11MarkdownComponent,
         CopyrightComponent,
         FullscreenButtonComponent,
@@ -26,7 +21,9 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class PdfjsVersionsComponent {
-  fullscreenService = inject(FullscreenService);
+    public pdfjsversionscomponentTab: string = 'aboutthebleedingedgebranch';
+  public codeTab: string = 'typescript';
+fullscreenService = inject(FullscreenService);
 
   private _fullscreen = false;
 

@@ -2,26 +2,23 @@ import { Component, effect, OnInit, inject } from '@angular/core';
 import { FileInputChanged, IPDFViewerApplication, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatSelect, MatOption } from '@angular/material/select';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-multiple-documents',
-    
-    standalone: true,
-    templateUrl: './multiple-documents.component.html',
-    styleUrls: ['./multiple-documents.component.css'],
-    imports: [MatCard, MatFormField, MatLabel, MatSelect, MatOption, MatCheckbox, FormsModule, MatTabGroup, MatTab, Ie11MarkdownComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, AsyncPipe]
+  selector: 'app-multiple-documents',
+
+  standalone: true,
+  templateUrl: './multiple-documents.component.html',
+  styleUrls: ['./multiple-documents.component.css'],
+  imports: [FormsModule, Ie11MarkdownComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class MultipleDocumentsComponent implements OnInit {
   fullscreenService = inject(FullscreenService);
+
+  public activeTab = 'html';
 
   public src!: string;
 
@@ -38,7 +35,6 @@ export class MultipleDocumentsComponent implements OnInit {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   public url!: URL;
@@ -62,9 +58,9 @@ export class MultipleDocumentsComponent implements OnInit {
       this.PDFViewerApplication?.eventBus.on('fileinputchange', (event: FileInputChanged) => {
         queueMicrotask(() => {
           if (event.dropEvent) {
-            console.log("Drop Event: ", event.dropEvent);
+            console.log('Drop Event: ', event.dropEvent);
           } else {
-            console.log("The file has changed without using drag and drop", event.fileInput);
+            console.log('The file has changed without using drag and drop', event.fileInput);
           }
         });
       });

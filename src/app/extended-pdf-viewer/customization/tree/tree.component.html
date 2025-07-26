@@ -1,60 +1,139 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" #treeWidget>
-  <!-- This is the tree node template for leaf nodes -->
-  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-    <li class="mat-tree-node">
-      <!-- use a disabled button to provide padding for tree leaf -->
-      <button mat-icon-button disabled class="spacer"> </button>
-      <span>
-        {{ node.prefix }}
-        @if (node.id) {
-        <span class="hook" [matTooltipPosition]="'after'"
-          matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
-          id="{{ node.id }}"
-          <app-icon-info class="icon id"></app-icon-info>
-        </span>
-        }
-        @if (node.content) {
-        <span class="customizable" [matTooltipPosition]="'after'"
-          matTooltip="You can use this property to replace the content of this component with your custom content.">
-          custom content: [{{node.content}}]
-          <app-icon-info class="icon"></app-icon-info>
-        </span>
-        }
-        {{node.suffix}}
-      </span>
-    </li>
-  </mat-tree-node>
-  <!-- This is the tree node template for expandable nodes -->
-  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-    <li>
-      <div class="mat-tree-node">
-        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
-          <mat-icon class="mat-icon-rtl-mirror">
-            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
-          </mat-icon>
-        </button>
-        <span>
-          {{ node.prefix }}
-          @if (node.id) {
-          <span class="hook" [matTooltipPosition]="'after'"
-            matTooltip="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
-            id="{{ node.id }}"
-            <app-icon-info class="icon id"></app-icon-info>
-          </span>
+<div class="tree-container">
+  <ul class="tree-list">
+    <ng-container *ngFor="let node of treeData">
+      <!-- Leaf node -->
+      @if (!hasChild(0, node)) {
+        <li class="tree-node">
+          <div class="tree-node-content">
+            <button class="tree-spacer bg-transparent border-none cursor-default w-8 h-8" disabled> </button>
+            <span class="tree-label">
+              {{ node.prefix }}
+              <span *ngIf="node.id" class="hook text-blue-600"
+                    title="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+                id="{{ node.id }}"
+                <app-icon-info class="icon id"></app-icon-info>
+              </span>
+              <span *ngIf="node.content" class="customizable text-green-600"
+                    title="You can use this property to replace the content of this component with your custom content.">
+                custom content: [{{node.content}}]
+                <app-icon-info class="icon"></app-icon-info>
+              </span>
+              {{node.suffix}}
+            </span>
+          </div>
+        </li>
+      }
+
+      <!-- Parent node -->
+      @if (hasChild(0, node)) {
+        <li class="tree-node">
+          <div class="tree-node-content">
+            <button class="tree-toggle bg-transparent border-none cursor-pointer w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded"
+                    (click)="toggle(node)"
+                    [attr.aria-label]="'toggle ' + node.name">
+              <span class="tree-icon text-sm">
+                {{ isExpanded(node) ? "▼" : "▶" }}
+              </span>
+            </button>
+            <span class="tree-label">
+              {{ node.prefix }}
+              <span *ngIf="node.id" class="hook text-blue-600"
+                    title="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+                id="{{ node.id }}"
+                <app-icon-info class="icon id"></app-icon-info>
+              </span>
+              <span *ngIf="node.content" class="customizable text-green-600"
+                    title="You can use this property to replace the content of this component with your custom content.">
+                custom content: [{{node.content}}]
+                <app-icon-info class="icon"></app-icon-info>
+              </span>
+              {{node.suffix}}
+            </span>
+          </div>
+          @if (node.children && isExpanded(node)) {
+            <ul class="tree-children ml-6">
+              <ng-container *ngFor="let child of node.children">
+                <!-- Child leaf node -->
+                @if (!hasChild(0, child)) {
+                  <li class="tree-node">
+                    <div class="tree-node-content">
+                      <button class="tree-spacer bg-transparent border-none cursor-default w-8 h-8" disabled> </button>
+                      <span class="tree-label">
+                        {{ child.prefix }}
+                        <span *ngIf="child.id" class="hook text-blue-600"
+                              title="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+                          id="{{ child.id }}"
+                          <app-icon-info class="icon id"></app-icon-info>
+                        </span>
+                        <span *ngIf="child.content" class="customizable text-green-600"
+                              title="You can use this property to replace the content of this component with your custom content.">
+                          custom content: [{{child.content}}]
+                          <app-icon-info class="icon"></app-icon-info>
+                        </span>
+                        {{child.suffix}}
+                      </span>
+                    </div>
+                  </li>
+                }
+
+                <!-- Child parent node -->
+                @if (hasChild(0, child)) {
+                  <li class="tree-node">
+                    <div class="tree-node-content">
+                      <button class="tree-toggle bg-transparent border-none cursor-pointer w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded"
+                              (click)="toggle(child)"
+                              [attr.aria-label]="'toggle ' + child.name">
+                        <span class="tree-icon text-sm">
+                          {{ isExpanded(child) ? "▼" : "▶" }}
+                        </span>
+                      </button>
+                      <span class="tree-label">
+                        {{ child.prefix }}
+                        <span *ngIf="child.id" class="hook text-blue-600"
+                              title="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+                          id="{{ child.id }}"
+                          <app-icon-info class="icon id"></app-icon-info>
+                        </span>
+                        <span *ngIf="child.content" class="customizable text-green-600"
+                              title="You can use this property to replace the content of this component with your custom content.">
+                          custom content: [{{child.content}}]
+                          <app-icon-info class="icon"></app-icon-info>
+                        </span>
+                        {{child.suffix}}
+                      </span>
+                    </div>
+                    @if (child.children && isExpanded(child)) {
+                      <ul class="tree-children ml-6">
+                        <ng-container *ngFor="let grandchild of child.children">
+                          <li class="tree-node">
+                            <div class="tree-node-content">
+                              <button class="tree-spacer bg-transparent border-none cursor-default w-8 h-8" disabled> </button>
+                              <span class="tree-label">
+                                {{ grandchild.prefix }}
+                                <span *ngIf="grandchild.id" class="hook text-blue-600"
+                                      title="The PDF viewer uses this id to register an action listener. You can replace this widget with your own custom widget. Using the correct id is all you need to call the original behavior.">
+                                  id="{{ grandchild.id }}"
+                                  <app-icon-info class="icon id"></app-icon-info>
+                                </span>
+                                <span *ngIf="grandchild.content" class="customizable text-green-600"
+                                      title="You can use this property to replace the content of this component with your custom content.">
+                                  custom content: [{{grandchild.content}}]
+                                  <app-icon-info class="icon"></app-icon-info>
+                                </span>
+                                {{grandchild.suffix}}
+                              </span>
+                            </div>
+                          </li>
+                        </ng-container>
+                      </ul>
+                    }
+                  </li>
+                }
+              </ng-container>
+            </ul>
           }
-          @if (node.content) {
-          <span class="customizable" [matTooltipPosition]="'after'"
-            matTooltip="You can use this property to replace the content of this component with your custom content.">
-            custom content: [{{node.content}}]
-            <app-icon-info class="icon"></app-icon-info>
-          </span>
-          }
-          {{node.suffix}}
-        </span>
-      </div>
-      <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
-        <ng-container matTreeNodeOutlet></ng-container>
-      </ul>
-    </li>
-  </mat-nested-tree-node>
-</mat-tree>
+        </li>
+      }
+    </ng-container>
+  </ul>
+</div>

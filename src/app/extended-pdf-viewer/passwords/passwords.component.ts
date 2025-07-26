@@ -2,36 +2,23 @@ import { Component, effect, inject } from '@angular/core';
 import { IPDFViewerApplication, PasswordPrompt, pdfDefaultOptions, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { CustomPasswordPrompt } from './custom-password-prompt';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-passwords',
-    
-    standalone: true,
-    templateUrl: './passwords.component.html',
-    styleUrls: ['./passwords.component.css'],
-    imports: [
-        MatCard,
-        MatRadioGroup,
-        FormsModule,
-        MatRadioButton,
-        MatTabGroup,
-        MatTab,
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-passwords',
+
+  standalone: true,
+  templateUrl: './passwords.component.html',
+  styleUrls: ['./passwords.component.css'],
+  imports: [FormsModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class PasswordsComponent {
   fullscreenService = inject(FullscreenService);
 
+  public activeTab = 'html';
 
   public src = '/assets/pdfs/GraalVM-password-protected.pdf';
 
@@ -40,7 +27,6 @@ export class PasswordsComponent {
   private _choice: string | undefined = undefined;
 
   private originalPasswordPrompt!: PasswordPrompt;
-
 
   private PDFViewerApplication?: IPDFViewerApplication;
 
@@ -80,13 +66,12 @@ export class PasswordsComponent {
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 
   constructor() {
     const notificationService = inject(PDFNotificationService);
 
-    this.choice = "graalvm-rocks!";
+    this.choice = 'graalvm-rocks!';
 
     effect(() => {
       this.PDFViewerApplication = notificationService.onPDFJSInitSignal();

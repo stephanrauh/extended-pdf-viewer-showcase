@@ -1,12 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, ResponsiveVisibility, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -14,18 +9,12 @@ import { LanguagePipe } from 'ngx-markdown';
 
 @Component({
     selector: 'app-hiding-buttons',
-    
+
     standalone: true,
     templateUrl: './hiding-buttons.component.html',
     styleUrls: ['./hiding-buttons.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatCheckbox,
         FormsModule,
-        MatFormField,
-        MatInput,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -88,6 +77,7 @@ export class HidingButtonsComponent {
   }
 
   public options: ResponsiveVisibility[] = [true, false, 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+  public hidingbuttonscomponentTab: string = 'simpledemo';
 
   public get fullscreen(): boolean {
     return this._fullscreen;

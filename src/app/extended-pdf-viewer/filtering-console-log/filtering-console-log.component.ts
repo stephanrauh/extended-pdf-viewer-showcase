@@ -1,8 +1,6 @@
 import { Component, effect, inject } from '@angular/core';
 import { IPDFViewerApplication, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -14,9 +12,6 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './filtering-console-log.component.html',
     styleUrls: ['./filtering-console-log.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -27,6 +22,7 @@ export class FilteringConsoleLogComponent {
   fullscreenService = inject(FullscreenService);
 
   public version = '';
+  public activeTab: string = 'typescript';
 
   private PDFViewerApplication!: IPDFViewerApplication;
 

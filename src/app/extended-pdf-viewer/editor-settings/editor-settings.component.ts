@@ -1,10 +1,6 @@
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -16,12 +12,6 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './editor-settings.component.html',
     styleUrls: ['./editor-settings.component.css'],
     imports: [
-        MatCard,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatTabGroup,
-        MatTab,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -35,6 +25,7 @@ export class EditorSettingsComponent {
   public imageDataURL: string | undefined = undefined;
 
   public selectedTabIndex = 0;
+  public editorsettingscomponentTab: string = 'htmltemplate';
 
   private _fullscreen = false;
 

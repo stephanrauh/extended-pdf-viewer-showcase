@@ -1,10 +1,36 @@
 <article class="custom-find-wrapper pdf-wrapper flex-container-column fill-container">
   <div class="pdf-code-wrapper flex-container-row">
-    <mat-card appearance="outlined" class="overflow-none distance16 mat-elevation-z8 margin-right"
+    <div class="overflow-none distance16 mat-elevation-z8 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined" 
       style="flex: 1 1 100%; box-sizing: border-box; max-width:40%">
-      <mat-tab-group (selectedTabChange)="currentTab=$event.index">
-        <mat-tab label="since version 21.3.0">
-          <p>This is a very advanced usecase.</p>
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="customfindcomponentTab === 'sinceversion2130'"
+              [class.border-primary-600]="customfindcomponentTab === 'sinceversion2130'"
+              [class.text-gray-500]="customfindcomponentTab !== 'sinceversion2130'"
+              [class.border-transparent]="customfindcomponentTab !== 'sinceversion2130'"
+              (click)="customfindcomponentTab = 'sinceversion2130'">
+              since version 21.3.0
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="customfindcomponentTab === 'beforeversion2130'"
+              [class.border-primary-600]="customfindcomponentTab === 'beforeversion2130'"
+              [class.text-gray-500]="customfindcomponentTab !== 'beforeversion2130'"
+              [class.border-transparent]="customfindcomponentTab !== 'beforeversion2130'"
+              (click)="customfindcomponentTab = 'beforeversion2130'">
+              before version 21.3.0
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (customfindcomponentTab === 'sinceversion2130') {
+          <div class="tab-content">
+<p>This is a very advanced usecase.</p>
           <p>
             If you want to implement your own find algorithm, define a class implementing the find controller and
             pass it to the attribute <code>pdfDefaultOptions.findController</code> before opening the PDF file.
@@ -23,9 +49,11 @@
             instantiated
             and when the find algorithm is called.
           </p>
-        </mat-tab>
-        <mat-tab label="before version 21.3.0">
-          <div class="flex-container-column">
+          </div>
+          }
+          @if (customfindcomponentTab === 'beforeversion2130') {
+          <div class="tab-content">
+<div class="flex-container-column">
             <p>
               Demonstration of customizing the find functionality.
               This works by overriding the default find functionality of the pdf.js viewer, adding support for regex
@@ -41,13 +69,13 @@
               to customize it.
               See <a href="/extended-pdf-viewer/find">the programmatic API page</a> for details.</p>
 
-            <mat-form-field>
-              <input matInput class="margin" [(ngModel)]="searchtext" placeholder="Regex Search Term" />
-            </mat-form-field>
+            <div class="space-y-2">
+              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext" placeholder="Regex Search Term" />
+            </div>
             <div class="row">
-              <button mat-raised-button color="primary" (click)="findRegex()">Find</button>
-              <button mat-raised-button color="primary" (click)="findNext()">Next</button>
-              <button mat-raised-button color="primary" (click)="findPrevious()">Previous</button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findRegex()">Find</button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext()">Next</button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findPrevious()">Previous</button>
             </div>
             <small class="row">
               @if (totalMatches && totalMatches > 0) {
@@ -55,34 +83,82 @@
               }
             </small>
           </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+          </div>
+          }
+        </div>
+    </div>
 
-    <mat-card appearance="outlined" class="overflow-y-scroll distance16 mat-elevation-z8 progress"
+    <div class="overflow-y-scroll distance16 mat-elevation-z8 progress bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined" 
       style="flex: 1 1 100%; box-sizing: border-box; max-width:59%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        @if (currentTab===0) {
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts-new.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts-find-controller.md"> </app-ie11-markdown>
-        </mat-tab>
-        }
-        @if (currentTab===1) {
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        }
-      </mat-tab-group>
-    </mat-card>
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="customfindcomponentTab === 'htmltemplate'"
+              [class.border-primary-600]="customfindcomponentTab === 'htmltemplate'"
+              [class.text-gray-500]="customfindcomponentTab !== 'htmltemplate'"
+              [class.border-transparent]="customfindcomponentTab !== 'htmltemplate'"
+              (click)="customfindcomponentTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              TypeScript
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              TypeScript
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              TypeScript
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (customfindcomponentTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts-new.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts-find-controller.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+        </div>
+    </div>
   </div>
 
-  <mat-card appearance="outlined" class="pdf-card distance16 mat-elevation-z8 use-available-space">
+  <div class="pdf-card distance16 mat-elevation-z8 use-available-space bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
         <small>The example PDF has been published under a <a
@@ -95,5 +171,5 @@
       [showFindButton]="false" (updateFindMatchesCount)="onUpdateFindMatchesCount($event)" (pdfLoaded)="pdfLoaded()"
       [showFindButton]="currentTab===0">
     </ngx-extended-pdf-viewer>
-  </mat-card>
+  </div>
 </article>

@@ -1,16 +1,44 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
-        <mat-tab-group (selectedTabChange)="onSelectTab($event)">
-          <mat-tab label="Light theme">
-            <p>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="themingcomponentTab === 'lighttheme'"
+              [class.border-primary-600]="themingcomponentTab === 'lighttheme'"
+              [class.text-gray-500]="themingcomponentTab !== 'lighttheme'"
+              [class.border-transparent]="themingcomponentTab !== 'lighttheme'"
+              (click)="themingcomponentTab = 'lighttheme'">
+              Light theme
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="themingcomponentTab === 'darktheme'"
+              [class.border-primary-600]="themingcomponentTab === 'darktheme'"
+              [class.text-gray-500]="themingcomponentTab !== 'darktheme'"
+              [class.border-transparent]="themingcomponentTab !== 'darktheme'"
+              (click)="themingcomponentTab = 'darktheme'">
+              Dark theme
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (themingcomponentTab === 'lighttheme') {
+          <div class="tab-content">
+<p>
               You can theme the PDF viewer and - to a limited extent - also the how forms are displayed in a PDF files. However, most PDF documents define how the
               form is displayed. ngx-extended-pdf-viewer does not overwrite the CSS rules defined by the PDF author.
             </p>
-          </mat-tab>
-          <mat-tab label="Dark theme">
-            <p>
+          </div>
+          }
+          @if (themingcomponentTab === 'darktheme') {
+          <div class="tab-content">
+<p>
               ngx-extended-pdf-viewer ships with a light theme and a dark theme. Plus, you can define a custom theme.
             </p>
             <p>
@@ -19,19 +47,49 @@
               color theme. For the same reason, the input fields have a light background. Theming only changes
               the appearance of the PDF viewer. It does not change the way PDF files are rendered.
             </p>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
-        <mat-tab-group>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/theming/html.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="Typescript">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/theming/ts.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+          </div>
+          }
+        </div>
+      </div>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'htmltemplate'"
+              [class.border-primary-600]="codeTab === 'htmltemplate'"
+              [class.text-gray-500]="codeTab !== 'htmltemplate'"
+              [class.border-transparent]="codeTab !== 'htmltemplate'"
+              (click)="codeTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              Typescript
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (codeTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/theming/html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/theming/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+        </div>
+      </div>
     </div>
   }
 

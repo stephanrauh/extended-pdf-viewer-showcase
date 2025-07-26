@@ -1,9 +1,6 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatButton } from '@angular/material/button';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -16,10 +13,6 @@ import { AsyncPipe } from '@angular/common';
     styleUrls: ['./scrolling.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatButton,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -35,6 +28,8 @@ export class ScrollingComponent {
   public selectedTab = 0;
 
   public zoom = 'page-width';
+  public scrollingcomponentTab: string = 'regularpdffiles';
+  public codeTab: string = 'typescript';
 
   public get fullscreen(): boolean {
     return this._fullscreen;

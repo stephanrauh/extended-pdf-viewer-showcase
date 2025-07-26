@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row distance-bottom16" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
         <p><a target="#" href="https://github.com/mdbootstrap/perfect-scrollbar">Perfect Scrollbar</a> is a nice library
         showing a customizable scrollbar on every browser, on every operating system.
         You can add it to ngx-extended-pdf-viewer with a few lines of code.
@@ -10,23 +10,74 @@
       <p>In this demo, the distinguishing feature of the perfect scrollbar is that it gets a bit wider when the
         mouse hovers over it. If the mouse is outside the PDF file, the scrollbar vanishes completely.
       </p>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/perfect-scrollbar/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="Typescript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/perfect-scrollbar/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="(global) styles.css">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/perfect-scrollbar/styles.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="package.json">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/perfect-scrollbar/package-json.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+      <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'html'"
+            [class.border-primary-600]="activeTab === 'html'"
+            [class.text-gray-500]="activeTab !== 'html'"
+            [class.border-transparent]="activeTab !== 'html'"
+            (click)="activeTab = 'html'">
+            HTML template
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'typescript'"
+            [class.border-primary-600]="activeTab === 'typescript'"
+            [class.text-gray-500]="activeTab !== 'typescript'"
+            [class.border-transparent]="activeTab !== 'typescript'"
+            (click)="activeTab = 'typescript'">
+            Typescript
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'global-styles-css'"
+            [class.border-primary-600]="activeTab === 'global-styles-css'"
+            [class.text-gray-500]="activeTab !== 'global-styles-css'"
+            [class.border-transparent]="activeTab !== 'global-styles-css'"
+            (click)="activeTab = 'global-styles-css'">
+            (global) styles.css
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'package-json'"
+            [class.border-primary-600]="activeTab === 'package-json'"
+            [class.text-gray-500]="activeTab !== 'package-json'"
+            [class.border-transparent]="activeTab !== 'package-json'"
+            (click)="activeTab = 'package-json'">
+            package.json
+          </button>
+        </div>
+          </div>
+
+        <!-- Tab content -->
+        @if (activeTab === 'html') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/perfect-scrollbar/html.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/perfect-scrollbar/ts.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'global-styles-css') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/perfect-scrollbar/styles.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'package-json') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/perfect-scrollbar/package-json.md"> </app-ie11-markdown>
+        </div>
+          }
+      </div>
+    </div>
   </div>
 }
 

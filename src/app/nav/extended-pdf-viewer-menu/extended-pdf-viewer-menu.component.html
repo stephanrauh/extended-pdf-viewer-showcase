@@ -1,82 +1,433 @@
-<mat-toolbar>About</mat-toolbar>
-<mat-nav-list>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/intro'" routerLinkActive="active">What is ngx-extended-pdf-viewer?</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/alternatives'" routerLinkActive="active">Alternatives</a>
-</mat-nav-list>
+<div class="bg-gray-100 px-4 py-3 border-b border-gray-200">
+  <h3 class="text-sm font-medium text-gray-900 uppercase tracking-wide">About</h3>
+</div>
+<nav class="py-2">
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/intro'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" 
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/intro', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/intro', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/intro', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/intro', false)">What is ngx-extended-pdf-viewer?</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/alternatives'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/alternatives', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/alternatives', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/alternatives', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/alternatives', false)">Alternatives</a>
+</nav>
 
-<mat-toolbar>Documentation</mat-toolbar>
-<mat-nav-list>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/getting-started'" routerLinkActive="active">Getting started</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/security'" routerLinkActive="active">Security</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/browser-support'" routerLinkActive="active">Browser support</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/attributes'" routerLinkActive="active">Attributes and events</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/css'" routerLinkActive="active">Useful CSS rules</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/options'" routerLinkActive="active">Default options</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/customization'" routerLinkActive="active">Customizing the menus</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/keycloak'" routerLinkActive="active">Keycloak</a>
-  <a mat-list-item [href]="'pdfjs-versions'">Sneak preview pdf.js</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/range-requests'" routerLinkActive="active">Range requests</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/troubleshooting'" routerLinkActive="active">Troubleshooting</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/changelog'" routerLinkActive="active">Changelog</a>
-</mat-nav-list>
+<div class="bg-gray-100 px-4 py-3 border-b border-gray-200">
+  <h3 class="text-sm font-medium text-gray-900 uppercase tracking-wide">Documentation</h3>
+</div>
+<nav class="py-2">
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/getting-started'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/getting-started', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/getting-started', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/getting-started', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/getting-started', false)">Getting started</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/security'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/security', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/security', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/security', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/security', false)">Security</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/browser-support'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/browser-support', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/browser-support', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/browser-support', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/browser-support', false)">Browser support</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/attributes'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/attributes', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/attributes', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/attributes', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/attributes', false)">Attributes and events</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/css'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/css', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/css', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/css', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/css', false)">Useful CSS rules</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/options'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/options', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/options', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/options', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/options', false)">Default options</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/customization'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/customization', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/customization', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/customization', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/customization', false)">Customizing the menus</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/keycloak'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/keycloak', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/keycloak', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/keycloak', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/keycloak', false)">Keycloak</a>
+  <a [href]="'pdfjs-versions'" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">Sneak preview pdf.js</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/range-requests'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/range-requests', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/range-requests', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/range-requests', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/range-requests', false)">Range requests</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/troubleshooting'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/troubleshooting', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/troubleshooting', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/troubleshooting', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/troubleshooting', false)">Troubleshooting</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/changelog'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/changelog', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/changelog', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/changelog', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/changelog', false)">Changelog</a>
+</nav>
 
-<mat-toolbar>Demos and manual</mat-toolbar>
-<mat-nav-list>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/simple'" routerLinkActive="active">Simple demo</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/csp'" routerLinkActive="active">Content Security Policy (CSP)</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/prerendering'" routerLinkActive="active">Pre-rendering</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/two-way-binding'" routerLinkActive="active">Two-way binding</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/base64'" routerLinkActive="active">Base64 encoded files</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/blob'" routerLinkActive="active">BLOBs</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/book-mode'" routerLinkActive="active">Book mode</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/contextmenu'" routerLinkActive="active">Context menu</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-print-dialog'" routerLinkActive="active">Custom print progress</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/print-range'" routerLinkActive="active">Print API / print range</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/hiding-buttons'" routerLinkActive="active">Customizing buttons</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/responsive-design'" routerLinkActive="active">Responsive design</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-sidebar'" routerLinkActive="active">Custom sidebar</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-thumbnails'" routerLinkActive="active">Custom thumbnails</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-toolbar'" routerLinkActive="active">Custom toolbars</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/display-options'" routerLinkActive="active">Display options</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/scripting'" routerLinkActive="active">enable / disable JavaScript</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-file'" routerLinkActive="active">Export PDF as a BLOB</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-image'" routerLinkActive="active">Export as image</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-text'" routerLinkActive="active">Export as text</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-annotations'" routerLinkActive="active">Editor API (low level)</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/annotation-layer-api'" routerLinkActive="active">Editor API (high level)</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/editor-setting'" routerLinkActive="active">Editor API (settings)</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/ngx-pdf-viewer-service'" routerLinkActive="active">NgxPdfViewerService API</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/editor-events'" routerLinkActive="active">EditorEvents</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/pages-loaded'" routerLinkActive="active">Events</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/filtering-console-log'" routerLinkActive="active">Filtering console log</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-find'" routerLinkActive="active">Custom find algorithm</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/find'" routerLinkActive="active">Find programmatically</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/forms'" routerLinkActive="active">Forms</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/infinite-scroll'" routerLinkActive="active">Infinite scroll</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/i18n'" routerLinkActive="active">Internationalization</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/keyboard'" routerLinkActive="active">Keyboard</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/annotation-layer'" routerLinkActive="active">Layers above the PDF</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/layers'" routerLinkActive="active">Layered PDF files</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/links'" routerLinkActive="active">Links</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/loading-indicator'" routerLinkActive="active">Loading indicator</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/multiple-documents'" routerLinkActive="active">Loading & unloading PDFs + drag'n'drop</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/navigation'" routerLinkActive="active">Navigation API</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/scrolling'" routerLinkActive="active">Scrolling API</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/mobile'" routerLinkActive="active">Mobile devices</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/modal'" routerLinkActive="active">Modal dialogs</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/modify-page-order'" routerLinkActive="active">Modify Page Order</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/passwords'" routerLinkActive="active">Passwords</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/perfect-scrollbar'" routerLinkActive="active">Perfect scrollbar</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/presentations'" routerLinkActive="active">Presentations</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/file-info'" routerLinkActive="active">Reading metadata</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/server-side-rendering'" routerLinkActive="active">Server-side rendering</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/page-view-mode'" routerLinkActive="active">Single-page mode</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/smartphone'" routerLinkActive="active">Smartphones</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/textlayer'" routerLinkActive="active">Text layer</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/theming'" routerLinkActive="active">Theming</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/touch-gestures'" routerLinkActive="active">Touch gestures: Double-tap</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/side-by-side'" routerLinkActive="active">Two PDFs side-by-side</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/signatures'" routerLinkActive="active">Unverified signatures</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/zoom'" routerLinkActive="active">Zoom</a>
-  <p style="height: 5em">&nbsp;</p>
-</mat-nav-list>
+<div class="bg-gray-100 px-4 py-3 border-b border-gray-200">
+  <h3 class="text-sm font-medium text-gray-900 uppercase tracking-wide">Demos and manual</h3>
+</div>
+<nav class="py-2">
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/simple'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/simple', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/simple', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/simple', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/simple', false)">Simple demo</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/csp'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/csp', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/csp', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/csp', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/csp', false)">Content Security Policy (CSP)</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/prerendering'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/prerendering', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/prerendering', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/prerendering', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/prerendering', false)">Pre-rendering</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/two-way-binding'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/two-way-binding', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/two-way-binding', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/two-way-binding', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/two-way-binding', false)">Two-way binding</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/base64'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/base64', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/base64', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/base64', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/base64', false)">Base64 encoded files</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/blob'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/blob', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/blob', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/blob', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/blob', false)">BLOBs</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/book-mode'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/book-mode', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/book-mode', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/book-mode', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/book-mode', false)">Book mode</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/contextmenu'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/contextmenu', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/contextmenu', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/contextmenu', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/contextmenu', false)">Context menu</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-print-dialog'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/custom-print-dialog', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/custom-print-dialog', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/custom-print-dialog', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/custom-print-dialog', false)">Custom print progress</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/print-range'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/print-range', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/print-range', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/print-range', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/print-range', false)">Print API / print range</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/hiding-buttons'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/hiding-buttons', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/hiding-buttons', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/hiding-buttons', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/hiding-buttons', false)">Customizing buttons</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/responsive-design'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/responsive-design', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/responsive-design', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/responsive-design', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/responsive-design', false)">Responsive design</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-sidebar'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/custom-sidebar', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/custom-sidebar', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/custom-sidebar', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/custom-sidebar', false)">Custom sidebar</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-thumbnails'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/custom-thumbnails', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/custom-thumbnails', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/custom-thumbnails', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/custom-thumbnails', false)">Custom thumbnails</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-toolbar'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/custom-toolbar', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/custom-toolbar', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/custom-toolbar', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/custom-toolbar', false)">Custom toolbars</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/display-options'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/display-options', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/display-options', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/display-options', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/display-options', false)">Display options</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/scripting'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/scripting', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/scripting', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/scripting', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/scripting', false)">enable / disable JavaScript</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-file'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/export-file', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/export-file', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/export-file', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/export-file', false)">Export PDF as a BLOB</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-image'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/export-image', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/export-image', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/export-image', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/export-image', false)">Export as image</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-text'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/export-text', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/export-text', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/export-text', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/export-text', false)">Export as text</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-annotations'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/export-annotations', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/export-annotations', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/export-annotations', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/export-annotations', false)">Editor API (low level)</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/annotation-layer-api'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/annotation-layer-api', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/annotation-layer-api', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/annotation-layer-api', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/annotation-layer-api', false)">Editor API (high level)</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/editor-setting'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/editor-setting', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/editor-setting', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/editor-setting', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/editor-setting', false)">Editor API (settings)</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/ngx-pdf-viewer-service'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/ngx-pdf-viewer-service', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/ngx-pdf-viewer-service', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/ngx-pdf-viewer-service', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/ngx-pdf-viewer-service', false)">NgxPdfViewerService API</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/editor-events'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/editor-events', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/editor-events', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/editor-events', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/editor-events', false)">EditorEvents</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/pages-loaded'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/pages-loaded', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/pages-loaded', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/pages-loaded', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/pages-loaded', false)">Events</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/filtering-console-log'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/filtering-console-log', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/filtering-console-log', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/filtering-console-log', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/filtering-console-log', false)">Filtering console log</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-find'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/custom-find', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/custom-find', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/custom-find', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/custom-find', false)">Custom find algorithm</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/find'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/find', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/find', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/find', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/find', false)">Find programmatically</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/forms'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/forms', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/forms', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/forms', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/forms', false)">Forms</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/infinite-scroll'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/infinite-scroll', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/infinite-scroll', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/infinite-scroll', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/infinite-scroll', false)">Infinite scroll</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/i18n'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/i18n', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/i18n', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/i18n', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/i18n', false)">Internationalization</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/keyboard'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/keyboard', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/keyboard', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/keyboard', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/keyboard', false)">Keyboard</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/annotation-layer'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/annotation-layer', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/annotation-layer', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/annotation-layer', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/annotation-layer', false)">Layers above the PDF</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/layers'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/layers', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/layers', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/layers', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/layers', false)">Layered PDF files</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/links'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/links', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/links', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/links', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/links', false)">Links</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/loading-indicator'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/loading-indicator', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/loading-indicator', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/loading-indicator', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/loading-indicator', false)">Loading indicator</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/multiple-documents'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/multiple-documents', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/multiple-documents', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/multiple-documents', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/multiple-documents', false)">Loading & unloading PDFs + drag'n'drop</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/navigation'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/navigation', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/navigation', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/navigation', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/navigation', false)">Navigation API</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/scrolling'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/scrolling', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/scrolling', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/scrolling', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/scrolling', false)">Scrolling API</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/mobile'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/mobile', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/mobile', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/mobile', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/mobile', false)">Mobile devices</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/modal'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/modal', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/modal', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/modal', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/modal', false)">Modal dialogs</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/modify-page-order'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/modify-page-order', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/modify-page-order', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/modify-page-order', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/modify-page-order', false)">Modify Page Order</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/passwords'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/passwords', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/passwords', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/passwords', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/passwords', false)">Passwords</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/perfect-scrollbar'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/perfect-scrollbar', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/perfect-scrollbar', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/perfect-scrollbar', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/perfect-scrollbar', false)">Perfect scrollbar</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/presentations'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/presentations', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/presentations', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/presentations', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/presentations', false)">Presentations</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/file-info'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/file-info', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/file-info', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/file-info', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/file-info', false)">Reading metadata</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/server-side-rendering'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/server-side-rendering', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/server-side-rendering', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/server-side-rendering', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/server-side-rendering', false)">Server-side rendering</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/page-view-mode'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/page-view-mode', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/page-view-mode', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/page-view-mode', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/page-view-mode', false)">Single-page mode</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/smartphone'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/smartphone', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/smartphone', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/smartphone', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/smartphone', false)">Smartphones</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/textlayer'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/textlayer', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/textlayer', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/textlayer', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/textlayer', false)">Text layer</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/theming'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/theming', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/theming', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/theming', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/theming', false)">Theming</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/touch-gestures'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/touch-gestures', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/touch-gestures', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/touch-gestures', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/touch-gestures', false)">Touch gestures: Double-tap</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/side-by-side'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/side-by-side', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/side-by-side', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/side-by-side', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/side-by-side', false)">Two PDFs side-by-side</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/signatures'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/signatures', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/signatures', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/signatures', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/signatures', false)">Unverified signatures</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/zoom'" routerLinkActive="active" 
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+     [class.bg-primary-50]="router.isActive('/extended-pdf-viewer/zoom', false)" 
+     [class.text-primary-700]="router.isActive('/extended-pdf-viewer/zoom', false)" 
+     [class.border-r-2]="router.isActive('/extended-pdf-viewer/zoom', false)" 
+     [class.border-primary-500]="router.isActive('/extended-pdf-viewer/zoom', false)">Zoom</a>
+  <div class="h-20"></div>
+</nav>

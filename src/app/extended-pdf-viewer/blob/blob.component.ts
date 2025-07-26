@@ -3,11 +3,7 @@ import { Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, PageRenderedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { BlobService } from './blob.service';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -19,13 +15,7 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './blob.component.html',
     styleUrls: ['./blob.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatRadioGroup,
         FormsModule,
-        MatRadioButton,
-        MatButton,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -45,6 +35,8 @@ export class BlobComponent {
   private _fullscreen = false;
 
   public choice = 'preloaded';
+  public blobcomponentTab: string = 'displayingblobs';
+  public codeTab: string = 'typescript';
 
   public get fullscreen(): boolean {
     return this._fullscreen;

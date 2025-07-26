@@ -1,81 +1,192 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8"
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16"
       [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+settingsWidth">
-      <mat-tab-group (selectedTabChange)="currentTab = $event.index">
-        <mat-tab label="simple demo">
-          <p>You can hide every button of the toolbar and every menu item of the secondary menu.</p>
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="hidingbuttonscomponentTab === 'simpledemo'"
+                [class.border-primary-600]="hidingbuttonscomponentTab === 'simpledemo'"
+                [class.text-gray-500]="hidingbuttonscomponentTab !== 'simpledemo'"
+                [class.border-transparent]="hidingbuttonscomponentTab !== 'simpledemo'"
+                (click)="hidingbuttonscomponentTab = 'simpledemo'">
+                simple demo
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="hidingbuttonscomponentTab === 'responsivedesign'"
+                [class.border-primary-600]="hidingbuttonscomponentTab === 'responsivedesign'"
+                [class.text-gray-500]="hidingbuttonscomponentTab !== 'responsivedesign'"
+                [class.border-transparent]="hidingbuttonscomponentTab !== 'responsivedesign'"
+                (click)="hidingbuttonscomponentTab = 'responsivedesign'">
+                responsive design
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="hidingbuttonscomponentTab === 'responsivecustombuttons'"
+                [class.border-primary-600]="hidingbuttonscomponentTab === 'responsivecustombuttons'"
+                [class.text-gray-500]="hidingbuttonscomponentTab !== 'responsivecustombuttons'"
+                [class.border-transparent]="hidingbuttonscomponentTab !== 'responsivecustombuttons'"
+                (click)="hidingbuttonscomponentTab = 'responsivecustombuttons'">
+                responsive custom buttons
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (hidingbuttonscomponentTab === 'simpledemo') {
+          <div class="tab-content">
+<p>You can hide every button of the toolbar and every menu item of the secondary menu.</p>
 
           <!-- Main toolbar toggle -->
-          <mat-checkbox class="margin compact" [(ngModel)]="showToolbar">showToolbar (hiding the toolbar hides every
-            button)</mat-checkbox>
-          <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-            [(ngModel)]="showSecondaryToolbarButton">showSecondaryToolbarButton (only shown if there are menu
-            items)</mat-checkbox>
+          <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [(ngModel)]="showToolbar" />
+        <span>showToolbar (hiding the toolbar hides every
+            button)</span>
+      </label>
+          <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+            [(ngModel)]="showSecondaryToolbarButton" />
+        <span>showSecondaryToolbarButton (only shown if there are menu
+            items)</span>
+      </label>
 
           <div class="checkbox-columns">
             <!-- Column 1: Core UI Elements -->
             <div class="checkbox-item">
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showSidebarButton">showSidebarButton</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showFindButton">showFindButton
-                (requires text layer)</mat-checkbox>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showSidebarButton" />
+        <span>showSidebarButton</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showFindButton" />
+        <span>showFindButton
+                (requires text layer)</span>
+      </label>
               @if (showFindButton) {
-              <mat-checkbox class="large-margin compact" [disabled]="!showToolbar && showFindButton"
-                [(ngModel)]="findbarVisible">findbarVisible</mat-checkbox>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="large-margin compact" [disabled]="!showToolbar && showFindButton"
+                [(ngModel)]="findbarVisible" />
+        <span>findbarVisible</span>
+      </label>
               }
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showPagingButtons">showPagingButtons</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showZoomButtons">showZoomButtons</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showPresentationModeButton">showPresentationModeButton</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showOpenFileButton">showOpenFileButton</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showMovePageButton">showMovePageButton</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showHandToolButton">showHandToolButton</mat-checkbox>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showPagingButtons" />
+        <span>showPagingButtons</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showZoomButtons" />
+        <span>showZoomButtons</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showPresentationModeButton" />
+        <span>showPresentationModeButton</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showOpenFileButton" />
+        <span>showOpenFileButton</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showMovePageButton" />
+        <span>showMovePageButton</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showHandToolButton" />
+        <span>showHandToolButton</span>
+      </label>
 
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showPrintButton">showPrintButton</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showDownloadButton">showDownloadButton</mat-checkbox>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showPrintButton" />
+        <span>showPrintButton</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showDownloadButton" />
+        <span>showDownloadButton</span>
+      </label>
               @if (showDownloadButton) {
-              <mat-form-field class="large-margin compact-input" [appearance]="'fill'" style="margin-left: 16px;">
-                <input matInput [(ngModel)]="downloadFileName" placeholder="filename for download" />
-              </mat-form-field>
+              <div class="space-y-2">
+                <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="downloadFileName" placeholder="filename for download" />
+              </div>
               }
             </div>
 
             <!-- Column 2: Editor Tools & Actions -->
             <div class="checkbox-item">
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showSignatureEditor">showSignatureEditor</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showDrawEditor">showDrawEditor</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showHighlightEditor">showHighlightEditor</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showStampEditor">showStampEditor</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showTextEditor">showTextEditor</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showRotateButton">showRotateButton</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showRotateCwButton">showRotateCwButton</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showRotateCcwButton">showRotateCcwButton</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showScrollingButtons">showScrollingButtons</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showSpreadButton">showSpreadButton</mat-checkbox>
-              <mat-checkbox class="margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="showPropertiesButton">showPropertiesButton</mat-checkbox>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showSignatureEditor" />
+        <span>showSignatureEditor</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showDrawEditor" />
+        <span>showDrawEditor</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showHighlightEditor" />
+        <span>showHighlightEditor</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showStampEditor" />
+        <span>showStampEditor</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showTextEditor" />
+        <span>showTextEditor</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showRotateButton" />
+        <span>showRotateButton</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showRotateCwButton" />
+        <span>showRotateCwButton</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showRotateCcwButton" />
+        <span>showRotateCcwButton</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showScrollingButtons" />
+        <span>showScrollingButtons</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showSpreadButton" />
+        <span>showSpreadButton</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showPropertiesButton" />
+        <span>showPropertiesButton</span>
+      </label>
               @if (showPropertiesButton) {
-              <mat-checkbox class="large-margin compact" [disabled]="!showToolbar"
-                [(ngModel)]="propertiesDialogVisible">propertiesDialogVisible</mat-checkbox>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="large-margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="propertiesDialogVisible" />
+        <span>propertiesDialogVisible</span>
+      </label>
               }
 
             </div>
@@ -88,34 +199,39 @@
 
           <div style="margin-top: 8px;">
           </div>
-        </mat-tab>
-        <mat-tab label="responsive design">
-          <p>Are you looking for the tabs that used to be here? The responsive design demos have moved <a
+          </div>
+          }
+          @if (hidingbuttonscomponentTab === 'responsivedesign') {
+          <div class="tab-content">
+<p>Are you looking for the tabs that used to be here? The responsive design demos have moved <a
               href="/responsive-design">to a dedicated page</a>.</p>
-        </mat-tab>
-        <mat-tab label="responsive custom buttons">
-          <p>The live demo is on <a href="/extended-pdf-viewer/custom-toolbar">the custom toolbar page.</a></p>
+          </div>
+          }
+          @if (hidingbuttonscomponentTab === 'responsivecustombuttons') {
+          <div class="tab-content">
+<p>The live demo is on <a href="/extended-pdf-viewer/custom-toolbar">the custom toolbar page.</a></p>
           <app-ie11-markdown src="/assets/extended-pdf-viewer/responsive-design/custom-buttons.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+          </div>
+          }
+        </div>
     @if (currentTab === 0) {
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8"
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16"
       [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
       <div class="source-code-container">
         <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
       </div>
-    </mat-card>
+    </div>
     }
     @if (currentTab === 1) {
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8"
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16"
       [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
       <div class="source-code-container">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/hiding-buttons/ts.md"> </app-ie11-markdown>
       </div>
-    </mat-card>
+    </div>
     }
-  </div>
+        </div>
+
   }
 
   <app-demo [src]="'/assets/pdfs/user-experience.pdf'">

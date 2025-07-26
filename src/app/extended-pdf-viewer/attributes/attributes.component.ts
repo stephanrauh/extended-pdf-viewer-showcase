@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, AfterViewInit, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Settings, Angular2SmartTableModule } from 'angular2-smart-table';
 import { isBrowser } from '../common/utilities';
 import { compareFunction, convertMDToTable } from './md-to-table-converter';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 
 @Component({
     selector: 'app-attributes',
@@ -13,9 +12,7 @@ import { MatTabGroup, MatTab } from '@angular/material/tabs';
     templateUrl: './attributes.component.html',
     styleUrls: ['./attributes.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
+        CommonModule,
         Angular2SmartTableModule,
     ],
 })
@@ -23,6 +20,7 @@ export class AttributesComponent implements OnInit, AfterViewInit {
   private httpClient = inject(HttpClient);
   private domElement = inject(ElementRef);
 
+  public activeTab: string = 'attributes';
   public attributesAndEvents: object[] = [];
   public lowLevelApi: object[] = [];
 

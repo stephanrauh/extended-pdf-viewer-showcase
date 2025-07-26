@@ -1,36 +1,22 @@
-import { Component, inject } from '@angular/core';
-import { NgxExtendedPdfViewerService, PagesLoadedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard, MatCardHeader, MatCardContent } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
-import { MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { NgxExtendedPdfViewerModule, PagesLoadedEvent } from 'ngx-extended-pdf-viewer';
+import { FullscreenService } from '../../services/fullscreen.service';
+import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { DemoComponent } from '../common/demo.component';
 
 @Component({
-    selector: 'app-pages-loaded',
-    
-    standalone: true,
-    templateUrl: './pages-loaded.component.html',
-    styleUrls: ['./pages-loaded.component.css'],
-    imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        Ie11MarkdownComponent,
-        MatCardHeader,
-        MatIconButton,
-        MatIcon,
-        MatCardContent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-pages-loaded',
+
+  standalone: true,
+  templateUrl: './pages-loaded.component.html',
+  styleUrls: ['./pages-loaded.component.css'],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class PagesLoadedComponent {
   public fullscreenService = inject(FullscreenService);
+
+  public activeTab = 'html';
 
   public messages: string[] = [];
 

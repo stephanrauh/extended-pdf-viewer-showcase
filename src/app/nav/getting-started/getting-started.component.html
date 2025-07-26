@@ -1,20 +1,83 @@
-<mat-card appearance="outlined" class="distance16 mat-elevation-z8">
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16">
   <app-ie11-markdown src="/assets/nav/getting-started/text.md"> </app-ie11-markdown>
-  <mat-tab-group>
-    <mat-tab label="Recommended way">
+  
+  <div class="w-full">
+    <!-- Tab buttons -->
+    <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+      <button 
+        class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+        [class.text-primary-600]="activeTab === 'recommended'"
+        [class.border-primary-600]="activeTab === 'recommended'"
+        [class.text-gray-500]="activeTab !== 'recommended'"
+        [class.border-transparent]="activeTab !== 'recommended'"
+        (click)="activeTab = 'recommended'">
+        Recommended way
+      </button>
+      <button 
+        class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+        [class.text-primary-600]="activeTab === 'cli'"
+        [class.border-primary-600]="activeTab === 'cli'"
+        [class.text-gray-500]="activeTab !== 'cli'"
+        [class.border-transparent]="activeTab !== 'cli'"
+        (click)="activeTab = 'cli'">
+        Angular CLI
+      </button>
+      <button 
+        class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+        [class.text-primary-600]="activeTab === 'jhipster'"
+        [class.border-primary-600]="activeTab === 'jhipster'"
+        [class.text-gray-500]="activeTab !== 'jhipster'"
+        [class.border-transparent]="activeTab !== 'jhipster'"
+        (click)="activeTab = 'jhipster'">
+        JHipster 6.6 + ngx-extended-pdf-viewer 2.0.0+
+      </button>
+      <button 
+        class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+        [class.text-primary-600]="activeTab === 'difficulties'"
+        [class.border-primary-600]="activeTab === 'difficulties'"
+        [class.text-gray-500]="activeTab !== 'difficulties'"
+        [class.border-transparent]="activeTab !== 'difficulties'"
+        (click)="activeTab = 'difficulties'">
+        Still got difficulties?
+      </button>
+      <button 
+        class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+        [class.text-primary-600]="activeTab === 'complaints'"
+        [class.border-primary-600]="activeTab === 'complaints'"
+        [class.text-gray-500]="activeTab !== 'complaints'"
+        [class.border-transparent]="activeTab !== 'complaints'"
+        (click)="activeTab = 'complaints'">
+        Complaints and bug reports
+      </button>
+    </div>
+          </div>
+    
+    <!-- Tab content -->
+    @if (activeTab === 'recommended') {
+          <div class="tab-content">
       <app-ie11-markdown src="/assets/nav/getting-started/schematics.md"> </app-ie11-markdown>
-    </mat-tab>
-    <mat-tab label="Angular CLI">
+    </div>
+          }
+    @if (activeTab === 'cli') {
+          <div class="tab-content">
       <app-ie11-markdown src="/assets/nav/getting-started/cli.md"> </app-ie11-markdown>
-    </mat-tab>
-    <mat-tab label="JHipster 6.6 + ngx-extended-pdf-viewer 2.0.0+">
+    </div>
+          }
+    @if (activeTab === 'jhipster') {
+          <div class="tab-content">
       <app-ie11-markdown src="/assets/nav/getting-started/jhipster6.6.md"> </app-ie11-markdown>
-    </mat-tab>
-    <mat-tab label="Still got difficulties?">
+    </div>
+          }
+    @if (activeTab === 'difficulties') {
+          <div class="tab-content">
       <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/text.md"> </app-ie11-markdown>
-    </mat-tab>
-    <mat-tab label="Complaints and bug reports">
+    </div>
+          }
+    @if (activeTab === 'complaints') {
+          <div class="tab-content">
       <app-ie11-markdown src="/assets/nav/getting-started/complaints.md"> </app-ie11-markdown>
-    </mat-tab>
-  </mat-tab-group>
-</mat-card>
+    </div>
+          }
+  </div>
+</div>

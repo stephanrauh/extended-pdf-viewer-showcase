@@ -1,11 +1,28 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
-      <mat-tab-group>
-        <mat-tab label="Doubleclick">
-          <p>The double-tap (or double-click) gesture enlarges the PDF file. By default, the target zoom is
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="touchgesturescomponentTab === 'doubleclick'"
+              [class.border-primary-600]="touchgesturescomponentTab === 'doubleclick'"
+              [class.text-gray-500]="touchgesturescomponentTab !== 'doubleclick'"
+              [class.border-transparent]="touchgesturescomponentTab !== 'doubleclick'"
+              (click)="touchgesturescomponentTab = 'doubleclick'">
+              Doubleclick
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (touchgesturescomponentTab === 'doubleclick') {
+          <div class="tab-content">
+<p>The double-tap (or double-click) gesture enlarges the PDF file. By default, the target zoom is
             "page-width". You can define a
             different target zoom by setting <code>pdfDefaultOptions.doubleTapZoomFactor</code>. In this demo, that's
             125%.
@@ -19,20 +36,50 @@
             <li><code>pdfDefaultOptions.doubleTapResetsZoomOnSecondDoubleTap</code> Allows you to reset the zoom on a
               second double-tap. False by default (but true in this demo).</li>
           </ul>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8"
+          </div>
+          }
+        </div>
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/touch-gestures/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/touch-gestures/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="touchgesturescomponentTab === 'htmltemplate'"
+              [class.border-primary-600]="touchgesturescomponentTab === 'htmltemplate'"
+              [class.text-gray-500]="touchgesturescomponentTab !== 'htmltemplate'"
+              [class.border-transparent]="touchgesturescomponentTab !== 'htmltemplate'"
+              (click)="touchgesturescomponentTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="touchgesturescomponentTab === 'typescript'"
+              [class.border-primary-600]="touchgesturescomponentTab === 'typescript'"
+              [class.text-gray-500]="touchgesturescomponentTab !== 'typescript'"
+              [class.border-transparent]="touchgesturescomponentTab !== 'typescript'"
+              (click)="touchgesturescomponentTab = 'typescript'">
+              TypeScript
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (touchgesturescomponentTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/touch-gestures/html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (touchgesturescomponentTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/touch-gestures/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+        </div>
+    </div>
   </div>
   }
 

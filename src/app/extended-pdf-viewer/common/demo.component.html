@@ -1,4 +1,4 @@
-<mat-card appearance="outlined" class="mat-elevation-z8 use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
+<div class="card use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
   <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
     <div>
       @if (showNote && additionalNote) {
@@ -11,4 +11,4 @@
   </div>
   
   <ng-content></ng-content>
-</mat-card>
+</div>

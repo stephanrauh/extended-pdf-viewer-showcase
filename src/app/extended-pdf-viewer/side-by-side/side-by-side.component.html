@@ -1,11 +1,28 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-      <mat-tab-group>
-        <mat-tab label="Displaying PDF files side-by-side">
-          <p>To display multiple PDF files on the same page, you need to put them in an iFrame.
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="sidebysidecomponentTab === 'displayingpdffilessidebyside'"
+              [class.border-primary-600]="sidebysidecomponentTab === 'displayingpdffilessidebyside'"
+              [class.text-gray-500]="sidebysidecomponentTab !== 'displayingpdffilessidebyside'"
+              [class.border-transparent]="sidebysidecomponentTab !== 'displayingpdffilessidebyside'"
+              (click)="sidebysidecomponentTab = 'displayingpdffilessidebyside'">
+              Displaying PDF files side-by-side
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (sidebysidecomponentTab === 'displayingpdffilessidebyside') {
+          <div class="tab-content">
+<p>To display multiple PDF files on the same page, you need to put them in an iFrame.
             To display multiple PDF files on the same page, you need to put them in an iFrame.
 
             In the long run, I plan to fix this, so you can put two instances of ngx-extended-pdf-viewer side-by-side
@@ -21,30 +38,82 @@
           <p>The demo shows a work-around using a common component, the <code>IFrameComponent</code>. The Angular router
             maps this component to a path, and the iFrame uses this path to display the PDF file.
           </p>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress"
+          </div>
+          }
+        </div>
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <mat-tab-group>
-        <mat-tab label="Using the IFrameComponent">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md">
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="sidebysidecomponentTab === 'usingtheiframecomponent'"
+              [class.border-primary-600]="sidebysidecomponentTab === 'usingtheiframecomponent'"
+              [class.text-gray-500]="sidebysidecomponentTab !== 'usingtheiframecomponent'"
+              [class.border-transparent]="sidebysidecomponentTab !== 'usingtheiframecomponent'"
+              (click)="sidebysidecomponentTab = 'usingtheiframecomponent'">
+              Using the IFrameComponent
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'iframecomponenthtml'"
+              [class.border-primary-600]="codeTab === 'iframecomponenthtml'"
+              [class.text-gray-500]="codeTab !== 'iframecomponenthtml'"
+              [class.border-transparent]="codeTab !== 'iframecomponenthtml'"
+              (click)="codeTab = 'iframecomponenthtml'">
+              iframe.component.html
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'iframecomponentts'"
+              [class.border-primary-600]="codeTab === 'iframecomponentts'"
+              [class.text-gray-500]="codeTab !== 'iframecomponentts'"
+              [class.border-transparent]="codeTab !== 'iframecomponentts'"
+              (click)="codeTab = 'iframecomponentts'">
+              iframe.component.ts
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'approutingmodulets'"
+              [class.border-primary-600]="codeTab === 'approutingmodulets'"
+              [class.text-gray-500]="codeTab !== 'approutingmodulets'"
+              [class.border-transparent]="codeTab !== 'approutingmodulets'"
+              (click)="codeTab = 'approutingmodulets'">
+              app-routing.module.ts
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (sidebysidecomponentTab === 'usingtheiframecomponent') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md">
           </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="iframe.component.html">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html2.md">
+          </div>
+          }
+          @if (codeTab === 'iframecomponenthtml') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html2.md">
           </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="iframe.component.ts">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/ts.md">
+          </div>
+          }
+          @if (codeTab === 'iframecomponentts') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/ts.md">
           </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="app-routing.module.ts">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/router.md">
+          </div>
+          }
+          @if (codeTab === 'approutingmodulets') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/router.md">
           </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+          </div>
+          }
+        </div>
+    </div>
   </div>
   }
 

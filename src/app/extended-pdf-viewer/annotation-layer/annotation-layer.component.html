@@ -1,10 +1,36 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:100%; box-sizing: border-box; max-width:60%;">
-      <mat-tab-group>
-        <mat-tab label="Types of layers">
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
+      style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
+      <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'types'"
+            [class.border-primary-600]="activeTab === 'types'"
+            [class.text-gray-500]="activeTab !== 'types'"
+            [class.border-transparent]="activeTab !== 'types'"
+            (click)="activeTab = 'types'">
+            Types of layers
+          </button>
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'manipulating'"
+            [class.border-primary-600]="activeTab === 'manipulating'"
+            [class.text-gray-500]="activeTab !== 'manipulating'"
+            [class.border-transparent]="activeTab !== 'manipulating'"
+            (click)="activeTab = 'manipulating'">
+            Manipulating the annotation layer
+          </button>
+        </div>
+          </div>
+        
+        <!-- Tab content -->
+        @if (activeTab === 'types') {
+          <div class="tab-content">
           <p>
             The PDF viewer always renders the PDF file as a canvas. Often, it also generates additional layers on top of
             the canvas:
@@ -20,8 +46,10 @@
             You don't have to think much about these layers most of the time. However, these layers are HTML divs, and
             you can
             manipulate them. </p>
-        </mat-tab>
-        <mat-tab label="Manipulating the annotation layer">
+        </div>
+          }
+        @if (activeTab === 'manipulating') {
+          <div class="tab-content">
           <p>
             This demo uses the event listener
             <code>(annotationLayerRendered)</code> to fix a layout error in the document itself. The author has added a
@@ -40,25 +68,66 @@
           <p>
             There's a catch: the <code>(annotationLayerRendered)</code> trick does not work in the thumbnail view.
           </p>
-          <button mat-button mat-raised-button color="primary" (click)="toggleEveryPopup()">Toggle popup
+          <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500" (click)="toggleEveryPopup()">Toggle popup
             programmatically</button>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8"
+        </div>
+          }
+      </div>
+    </div>
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
+      <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="codeTab === 'html'"
+            [class.border-primary-600]="codeTab === 'html'"
+            [class.text-gray-500]="codeTab !== 'html'"
+            [class.border-transparent]="codeTab !== 'html'"
+            (click)="codeTab = 'html'">
+            HTML template
+          </button>
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="codeTab === 'typescript'"
+            [class.border-primary-600]="codeTab === 'typescript'"
+            [class.text-gray-500]="codeTab !== 'typescript'"
+            [class.border-transparent]="codeTab !== 'typescript'"
+            (click)="codeTab = 'typescript'">
+            TypeScript
+          </button>
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="codeTab === 'popups'"
+            [class.border-primary-600]="codeTab === 'popups'"
+            [class.text-gray-500]="codeTab !== 'popups'"
+            [class.border-transparent]="codeTab !== 'popups'"
+            (click)="codeTab = 'popups'">
+            Open popups programmatically
+          </button>
+        </div>
+          </div>
+        
+        <!-- Tab content -->
+        @if (codeTab === 'html') {
+          <div class="tab-content">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/annotation-layer/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
+        </div>
+          }
+        @if (codeTab === 'typescript') {
+          <div class="tab-content">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/annotation-layer/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="Open popups programmatically">
+        </div>
+          }
+        @if (codeTab === 'popups') {
+          <div class="tab-content">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/annotation-layer/ts2.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+        </div>
+          }
+      </div>
+    </div>
   </div>
   }
 

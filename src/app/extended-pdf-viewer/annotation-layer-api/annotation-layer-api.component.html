@@ -1,10 +1,54 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
       style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%; box-sizing: border-box; max-width: 60%">
-      <mat-tab-group>
-        <mat-tab [label]="'Images'">
+      <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'images'"
+            [class.border-primary-600]="activeTab === 'images'"
+            [class.text-gray-500]="activeTab !== 'images'"
+            [class.border-transparent]="activeTab !== 'images'"
+            (click)="activeTab = 'images'">
+            Images
+          </button>
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'highlights'"
+            [class.border-primary-600]="activeTab === 'highlights'"
+            [class.text-gray-500]="activeTab !== 'highlights'"
+            [class.border-transparent]="activeTab !== 'highlights'"
+            (click)="activeTab = 'highlights'">
+            Highlights
+          </button>
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'coordinates'"
+            [class.border-primary-600]="activeTab === 'coordinates'"
+            [class.text-gray-500]="activeTab !== 'coordinates'"
+            [class.border-transparent]="activeTab !== 'coordinates'"
+            (click)="activeTab = 'coordinates'">
+            Coordinates
+          </button>
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'caveat'"
+            [class.border-primary-600]="activeTab === 'caveat'"
+            [class.text-gray-500]="activeTab !== 'caveat'"
+            [class.border-transparent]="activeTab !== 'caveat'"
+            (click)="activeTab = 'caveat'">
+            Caveat: large files
+          </button>
+        </div>
+          </div>
+        
+        <!-- Tab content -->
+        @if (activeTab === 'images') {
+          <div class="tab-content">
           <p>
             Adding images to a PDF file is a popular feature. While this is not possible with this library - it is a
             viewer, not an editor - you can do
@@ -14,15 +58,15 @@
             <tbody>
               <tr>
                 <td>
-                  <button mat-raised-button color="primary" style="margin-right: 10px; height: 4em"
-                    matTooltip="Add image at bottom-right corner (50% from bottom and right edges)"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mr-2 h-16"
+                    title="Add image at bottom-right corner (50% from bottom and right edges)"
                     (click)="addImage({ bottom: '50%', right: '50%' })">
                     addImage({{ 'bottom: 50%; right: 50%' }})
                   </button>
                 </td>
                 <td>
-                  <button mat-raised-button color="primary" style="height: 4em"
-                    matTooltip="Add image at bottom-left corner rotated 90 degrees clockwise"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow h-16"
+                    title="Add image at bottom-left corner rotated 90 degrees clockwise"
                     (click)="addImage({ left: '50%', bottom: '50%', rotation: 90 })">
                     addImage({{ 'left: 50%, bottom: 50%; rotation: 90' }})
                   </button>
@@ -30,15 +74,15 @@
               </tr>
               <tr>
                 <td>
-                  <button mat-raised-button color="primary" style="margin-right: 10px; height: 4em"
-                    matTooltip="Add image at top-right corner rotated 180 degrees"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mr-2 h-16"
+                    title="Add image at top-right corner rotated 180 degrees"
                     (click)="addImage({ right: '50%', top: '50%', rotation: 180 })">
                     addImage({{ 'right: 50%; top: 50%; rotation: 180' }})
                   </button>
                 </td>
                 <td>
-                  <button mat-raised-button color="primary" style="height: 4em"
-                    matTooltip="Add image at top-left corner with no rotation"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow h-16"
+                    title="Add image at top-left corner with no rotation"
                     (click)="addImage({ left: '50%', top: '50%', rotation: 0 })">
                     addImage({{ 'left: 50%, top: 50%; rotation: 0' }})
                   </button>
@@ -46,15 +90,15 @@
               </tr>
               <tr>
                 <td>
-                  <button mat-raised-button color="primary" style="margin-right: 10px; height: 4em"
-                    matTooltip="Add image using pixel coordinates (50px from right edge, 100px from top). Zoom and click again to see the effect - pixel coordinates do not scale with the document, they are screen coordinates!"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mr-2 h-16"
+                    title="Add image using pixel coordinates (50px from right edge, 100px from top). Zoom and click again to see the effect - pixel coordinates do not scale with the document, they are screen coordinates!"
                     (click)="addImage({ right: '50px', top: '100px'})">
-                    addImage({{ 'right: 50px, top: 100px }})
+                    addImage({{ 'right: 50px, top: 100px' }})
                   </button>
                 </td>
                 <td>
-                  <button mat-raised-button color="primary" style="height: 4em"
-                    matTooltip="Add image using pixel coordinates (250px from left edge, 350px from bottom)"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow h-16"
+                    title="Add image using pixel coordinates (250px from left edge, 350px from bottom)"
                     (click)="addImage({ left: '250px', bottom: '350px' })">
                     addImage({{ 'left: 250px, bottom: 350px'}})
                   </button>
@@ -62,8 +106,10 @@
               </tr>
             </tbody>
           </table>
-        </mat-tab>
-        <mat-tab [label]="'Highlights'">
+        </div>
+          }
+        @if (activeTab === 'highlights') {
+          <div class="tab-content">
           <p>
             Adding highlight annotations programmatically allows you to mark important text sections in the PDF.
             This demonstrates the <code>addHighlightToAnnotationLayer()</code> method with different positioning options.
@@ -72,15 +118,15 @@
             <tbody>
               <tr>
                 <td>
-                  <button mat-raised-button color="primary" style="margin-right: 10px; height: 4em"
-                    matTooltip="Add yellow highlight covering 60% width (20%-80%) and 10% height (60%-70%) using percentage coordinates"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mr-2 h-16"
+                    title="Add yellow highlight covering 60% width (20%-80%) and 10% height (60%-70%) using percentage coordinates"
                     (click)="addHighlight({ color: [255, 255, 0], left: '20%', bottom: '60%', right: '80%', top: '70%' })">
                     addHighlight({{ 'yellow, 20%-80% width, 60%-70% height' }})
                   </button>
                 </td>
                 <td>
-                  <button mat-raised-button color="primary" style="height: 4em"
-                    matTooltip="Add magenta highlight using pixel coordinates (100-400px horizontal, 200-230px vertical).  Zoom and click again to see the effect - pixel coordinates do not scale with the document, they are screen coordinates!"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow h-16"
+                    title="Add magenta highlight using pixel coordinates (100-400px horizontal, 200-230px vertical).  Zoom and click again to see the effect - pixel coordinates do not scale with the document, they are screen coordinates!"
                     (click)="addHighlight({ color: [255, 0, 255], left: '100px', bottom: '200px', right: '400px', top: '230px' })">
                     addHighlight({{ 'magenta, 100px-400px, 200px-230px' }})
                   </button>
@@ -88,16 +134,15 @@
               </tr>
               <tr>
                 <td>
-                  <button mat-raised-button color="primary" style="margin-right: 10px; height: 4em"
-                    matTooltip="Add semi-transparent green highlight (opacity 0.3) covering 40% width and 10% height using percentages"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mr-2 h-16"
+                    title="Add semi-transparent green highlight (opacity 0.3) covering 40% width and 10% height using percentages"
                     (click)="addHighlight({ color: [0, 255, 0], left: '10%', bottom: '40%', right: '50%', top: '50%', opacity: 0.3 })">
                     addHighlight({{ 'green, 10%-50% width, 40%-50% height, opacity 0.3' }})
                   </button>
                 </td>
                 <td>
-                  <button mat-raised-button color="primary" style="height: 4em"
-                    matTooltipPosition="above"
-                    matTooltip="Add thick orange highlight (thickness 20) using PDF coordinates (250-500 horizontal, 350-380 vertical)"
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow h-16"
+                    title="Add thick orange highlight (thickness 20) using PDF coordinates (250-500 horizontal, 350-380 vertical)"
                     (click)="addHighlight({ color: [255, 128, 0], left: 250, bottom: 350, right: 450, top: 380, thickness: 20 })">
                     addHighlight({{ 'orange, 250-450, 350-380, thickness 20' }})
                   </button>
@@ -105,8 +150,10 @@
               </tr>
             </tbody>
           </table>
-        </mat-tab>
-        <mat-tab [label]="'Coordinates'">
+        </div>
+          }
+        @if (activeTab === 'coordinates') {
+          <div class="tab-content">
           <p>The parameters <code>left</code>, <code>bottom</code>, <code>right</code>, and <code>top</code> can be:</p>
           <ul>
             <li>percentages (e.g. <code>left: '50%'</code>)</li>
@@ -125,8 +172,10 @@
             than
             expected (at least in my demo documents). The bug also shows in the title page. This issue does not occur in
             Firefox.</p>
-        </mat-tab>
-        <mat-tab label="Caveat: large files">
+        </div>
+          }
+        @if (activeTab === 'caveat') {
+          <div class="tab-content">
           <p>The PDF viewer renders pages lazily. If they aren't going to be used soon, the page is not rendered. If
             you've got a large file,
             a major part of the pages are just placeholders.
@@ -136,24 +185,64 @@
             that this event is triggered for every page individually. The event handler should add the annotations
             that belong to this particular page, but not to other pages.
           </p>
-        </mat-tab>
-
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8"
+        </div>
+          }
+      </div>
+    </div>
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
       style="flex: 1 1 100%; box-sizing: border-box; max-width: 38%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
+      <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab2 === 'html'"
+            [class.border-primary-600]="activeTab2 === 'html'"
+            [class.text-gray-500]="activeTab2 !== 'html'"
+            [class.border-transparent]="activeTab2 !== 'html'"
+            (click)="activeTab2 = 'html'">
+            HTML template
+          </button>
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab2 === 'ts-images'"
+            [class.border-primary-600]="activeTab2 === 'ts-images'"
+            [class.text-gray-500]="activeTab2 !== 'ts-images'"
+            [class.border-transparent]="activeTab2 !== 'ts-images'"
+            (click)="activeTab2 = 'ts-images'">
+            TS (images)
+          </button>
+          <button 
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab2 === 'ts-highlight'"
+            [class.border-primary-600]="activeTab2 === 'ts-highlight'"
+            [class.text-gray-500]="activeTab2 !== 'ts-highlight'"
+            [class.border-transparent]="activeTab2 !== 'ts-highlight'"
+            (click)="activeTab2 = 'ts-highlight'">
+            TS (highlight)
+          </button>
+        </div>
+          </div>
+        
+        <!-- Tab content -->
+        @if (activeTab2 === 'html') {
+          <div class="tab-content">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/annotation-layer-api/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TS (images)">
+        </div>
+          }
+        @if (activeTab2 === 'ts-images') {
+          <div class="tab-content">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/annotation-layer-api/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TS (highlight)">
+        </div>
+          }
+        @if (activeTab2 === 'ts-highlight') {
+          <div class="tab-content">
           <app-ie11-markdown src="/assets/extended-pdf-viewer/annotation-layer-api/ts-hightlight.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+        </div>
+          }
+      </div>
+    </div>
   </div>
   }
 

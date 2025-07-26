@@ -1,102 +1,247 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
-        <mat-tab-group (selectedIndexChange)="changePdfFile($event)">
-          <mat-tab label="live demo">
-            <p>You can export text, drawings, images, and highlight you've added to a PDF file. You can also add texts and highlights programmatically.
-              However, the PDF viewer doesn't support adding drawings programmatically.
-              As for images, that's supported, but using the <a href="./annotation-layer-api">high-level different API</a>.
-            </p>
-            <p>
-              <b>Breaking change between pdf.js 3.5 and 3.9:</b> The coordinates of the serialized drawings have changed. Please keep in mind that this is an
-              internal API of pdf.js, so it's subject to change without notice.
-            </p>
-            <button mat-raised-button color="primary" (click)="exportAnnotations()">Export annotations</button>
-            <button mat-raised-button color="primary" (click)="addTextEditor()">Add text editor</button>
-            <button mat-raised-button color="primary" (click)="addHighlight()">Add highlight</button>
-            <button mat-raised-button color="primary" (click)="removeEditors()">Remove editors</button>
-            <button mat-raised-button color="primary" (click)="removeTextEditors()">Remove text editors from page 1</button>
-            <button mat-raised-button color="primary" (click)="removeDrawingEditors()">Remove drawings from page 1</button>
-          </mat-tab>
-          <mat-tab label="forms">
-            <p>Both forms and editor annotations are PDF annotation, so it might happen the APIs get in the way of each other. Until version 19.6.6,
-              clicking "remove editors" would also remove the form fields. This has been fixed in version 19.6.7.
-            </p>
-            <button mat-raised-button color="primary" (click)="exportAnnotations()">Export annotations</button>
-            <button mat-raised-button color="primary" (click)="addTextEditor()">Add text editor</button>
-            <button mat-raised-button color="primary" (click)="addHighlight()">Add highlight</button>
-            <button mat-raised-button color="primary" (click)="removeEditors()">Remove editors</button>
-            <button mat-raised-button color="primary" (click)="removeTextEditors()">Remove text editors from page 1</button>
-            <button mat-raised-button color="primary" (click)="removeDrawingEditors()">Remove drawings from page 1</button>
-          </mat-tab>
-          <mat-tab label="large files">
-            <p>The PDF viewer renders pages lazily. If they aren't going to be used soon, the page is not rendered. If you've got a large file,
-              a major part of the pages are just placeholders.
-            </p>
-            <p>This, in turn, means you can't add an annotation. If you want to add annotations to large files reliably,
-              catch the event <code>(annotationLayerRendered)</code> and add the annotations in the event handler. Not
-              that this event is triggered for every page individually. The event handler should add the annotations
-              that belong to this particular page, but not to other pages.
-            </p>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
-        <mat-tab-group [selectedIndex]="selectedTabIndex">
-          <mat-tab label="HTML template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/html.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="TS - text">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - add text.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="TS - drawing">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - add drawing.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="TS - removing editors">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - removing.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="TS - exporting">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - export.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="live demo">
-            <div class="distance16">
-              @if (rawAnnotations) {
-                <div>
-                  <p>You can edit the annotations. Click outside the text areas to trigger rendering.</p>
-                  @for (anno of rawAnnotations; track anno; let i = $index) {
-                    <ol>
-                      <li>
-                        <textarea
-                          [value]="rawAnnotations[i] | json"
-                          (change)="updateAnnotation(i, $event)"
-                          (input)="adjustSize($event)"
-                          rows="{{ countRows(rawAnnotations[i] | json) }}"
-                          cols="60"
-                        ></textarea>
-                      </li>
-                    </ol>
-                  }
-                </div>
-              }
-              @if (!rawAnnotations) {
-                <div>No annotations. Use the editor or the buttons to add text or drawings to the PDF file.</div>
-              }
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="exportannotationscomponentTab === 'livedemo'"
+                [class.border-primary-600]="exportannotationscomponentTab === 'livedemo'"
+                [class.text-gray-500]="exportannotationscomponentTab !== 'livedemo'"
+                [class.border-transparent]="exportannotationscomponentTab !== 'livedemo'"
+                (click)="exportannotationscomponentTab = 'livedemo'"
+              >
+                live demo
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="exportannotationscomponentTab === 'forms'"
+                [class.border-primary-600]="exportannotationscomponentTab === 'forms'"
+                [class.text-gray-500]="exportannotationscomponentTab !== 'forms'"
+                [class.border-transparent]="exportannotationscomponentTab !== 'forms'"
+                (click)="exportannotationscomponentTab = 'forms'"
+              >
+                forms
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="exportannotationscomponentTab === 'largefiles'"
+                [class.border-primary-600]="exportannotationscomponentTab === 'largefiles'"
+                [class.text-gray-500]="exportannotationscomponentTab !== 'largefiles'"
+                [class.border-transparent]="exportannotationscomponentTab !== 'largefiles'"
+                (click)="exportannotationscomponentTab = 'largefiles'"
+              >
+                large files
+              </button>
             </div>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+          </div>
+
+          <!-- Tab content -->
+          @if (exportannotationscomponentTab === 'livedemo') {
+            <div class="tab-content">
+              <p>
+                You can export text, drawings, images, and highlight you've added to a PDF file. You can also add texts and highlights programmatically.
+                However, the PDF viewer doesn't support adding drawings programmatically. As for images, that's supported, but using the
+                <a href="./annotation-layer-api">high-level different API</a>.
+              </p>
+              <p>
+                <b>Breaking change between pdf.js 3.5 and 3.9:</b> The coordinates of the serialized drawings have changed. Please keep in mind that this is an
+                internal API of pdf.js, so it's subject to change without notice.
+              </p>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="exportAnnotations()">
+                Export annotations
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="addTextEditor()">
+                Add text editor
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="addHighlight()">
+                Add highlight
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="removeEditors()">
+                Remove editors
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="removeTextEditors()">
+                Remove text editors from page 1
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="removeDrawingEditors()">
+                Remove drawings from page 1
+              </button>
+            </div>
+          }
+          @if (exportannotationscomponentTab === 'forms') {
+            <div class="tab-content">
+              <p>
+                Both forms and editor annotations are PDF annotation, so it might happen the APIs get in the way of each other. Until version 19.6.6, clicking
+                "remove editors" would also remove the form fields. This has been fixed in version 19.6.7.
+              </p>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="exportAnnotations()">
+                Export annotations
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="addTextEditor()">
+                Add text editor
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="addHighlight()">
+                Add highlight
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="removeEditors()">
+                Remove editors
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="removeTextEditors()">
+                Remove text editors from page 1
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="removeDrawingEditors()">
+                Remove drawings from page 1
+              </button>
+            </div>
+          }
+          @if (exportannotationscomponentTab === 'largefiles') {
+            <div class="tab-content">
+              <p>
+                The PDF viewer renders pages lazily. If they aren't going to be used soon, the page is not rendered. If you've got a large file, a major part of
+                the pages are just placeholders.
+              </p>
+              <p>
+                This, in turn, means you can't add an annotation. If you want to add annotations to large files reliably, catch the event
+                <code>(annotationLayerRendered)</code> and add the annotations in the event handler. Not that this event is triggered for every page
+                individually. The event handler should add the annotations that belong to this particular page, but not to other pages.
+              </p>
+            </div>
+          }
+        </div>
+      </div>
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+      >
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'htmltemplate'"
+                [class.border-primary-600]="codeTab === 'htmltemplate'"
+                [class.text-gray-500]="codeTab !== 'htmltemplate'"
+                [class.border-transparent]="codeTab !== 'htmltemplate'"
+                (click)="codeTab = 'htmltemplate'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'tstext'"
+                [class.border-primary-600]="codeTab === 'tstext'"
+                [class.text-gray-500]="codeTab !== 'tstext'"
+                [class.border-transparent]="codeTab !== 'tstext'"
+                (click)="codeTab = 'tstext'"
+              >
+                TS - text
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'tsdrawing'"
+                [class.border-primary-600]="codeTab === 'tsdrawing'"
+                [class.text-gray-500]="codeTab !== 'tsdrawing'"
+                [class.border-transparent]="codeTab !== 'tsdrawing'"
+                (click)="codeTab = 'tsdrawing'"
+              >
+                TS - drawing
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'tsremovingeditors'"
+                [class.border-primary-600]="codeTab === 'tsremovingeditors'"
+                [class.text-gray-500]="codeTab !== 'tsremovingeditors'"
+                [class.border-transparent]="codeTab !== 'tsremovingeditors'"
+                (click)="codeTab = 'tsremovingeditors'"
+              >
+                TS - removing editors
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'tsexporting'"
+                [class.border-primary-600]="codeTab === 'tsexporting'"
+                [class.text-gray-500]="codeTab !== 'tsexporting'"
+                [class.border-transparent]="codeTab !== 'tsexporting'"
+                (click)="codeTab = 'tsexporting'"
+              >
+                TS - exporting
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'livedemo'"
+                [class.border-primary-600]="codeTab === 'livedemo'"
+                [class.text-gray-500]="codeTab !== 'livedemo'"
+                [class.border-transparent]="codeTab !== 'livedemo'"
+                (click)="codeTab = 'livedemo'"
+              >
+                live demo
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (codeTab === 'htmltemplate') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/html.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (codeTab === 'tstext') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - add text.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (codeTab === 'tsdrawing') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - add drawing.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (codeTab === 'tsremovingeditors') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - removing.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (codeTab === 'tsexporting') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - export.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (codeTab === 'livedemo') {
+            <div class="tab-content">
+              <div class="distance16">
+                @if (rawAnnotations) {
+                  <div>
+                    <p>You can edit the annotations. Click outside the text areas to trigger rendering.</p>
+                    @for (anno of rawAnnotations; track anno; let i = $index) {
+                      <ol>
+                        <li>
+                          <textarea
+                            [value]="rawAnnotations[i] | json"
+                            (change)="updateAnnotation(i, $event)"
+                            (input)="adjustSize($event)"
+                            rows="{{ countRows(rawAnnotations[i] | json) }}"
+                            cols="60"
+                          ></textarea>
+                        </li>
+                      </ol>
+                    }
+                  </div>
+                }
+                @if (!rawAnnotations) {
+                  <div>No annotations. Use the editor or the buttons to add text or drawings to the PDF file.</div>
+                }
+              </div>
+            </div>
+          }
+        </div>
     </div>
   }
 
   <app-demo [src]="src">
-    <ngx-extended-pdf-viewer
-      [src]="src"
-      [textLayer]="true"
-      [showHandToolButton]="true"
-      [handTool]="false"
-
-      >
-    </ngx-extended-pdf-viewer>
+    <ngx-extended-pdf-viewer [src]="src" [textLayer]="true" [showHandToolButton]="true" [handTool]="false"> </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

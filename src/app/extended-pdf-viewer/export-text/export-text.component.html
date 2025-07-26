@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
         <p>You can extract text from the PDF file that's currently displayed.</p>
         <p>You can get the text either as plain text or as text with metadata. The second option,
           <code>NgxExtendedPdfViewerService::getPageAsLines</code>,
@@ -10,19 +10,58 @@
           the metadata open the console window of the demo. The Angular live demo only shows the lines without
           metadata.
         </p>
-        <button mat-raised-button color="primary" (click)="exportAsText()" style="margin-left: 16px">Export as text</button>
-        <button mat-raised-button color="primary" (click)="exportAsLines()" style="margin-left: 16px;margin-top:8px">Export as lines</button>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-        <mat-tab-group [selectedIndex]="selectedTabIndex">
-          <mat-tab label="HTML template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-text/html.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="TypeScript">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-text/ts.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="extracted text">
-            @if (extractedText) {
+        <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="exportAsText()" style="margin-left: 16px">Export as text</button>
+        <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="exportAsLines()" style="margin-left: 16px;margin-top:8px">Export as lines</button>
+      </div>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="exporttextcomponentTab === 'htmltemplate'"
+              [class.border-primary-600]="exporttextcomponentTab === 'htmltemplate'"
+              [class.text-gray-500]="exporttextcomponentTab !== 'htmltemplate'"
+              [class.border-transparent]="exporttextcomponentTab !== 'htmltemplate'"
+              (click)="exporttextcomponentTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="exporttextcomponentTab === 'typescript'"
+              [class.border-primary-600]="exporttextcomponentTab === 'typescript'"
+              [class.text-gray-500]="exporttextcomponentTab !== 'typescript'"
+              [class.border-transparent]="exporttextcomponentTab !== 'typescript'"
+              (click)="exporttextcomponentTab = 'typescript'">
+              TypeScript
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="exporttextcomponentTab === 'extractedtext'"
+              [class.border-primary-600]="exporttextcomponentTab === 'extractedtext'"
+              [class.text-gray-500]="exporttextcomponentTab !== 'extractedtext'"
+              [class.border-transparent]="exporttextcomponentTab !== 'extractedtext'"
+              (click)="exporttextcomponentTab = 'extractedtext'">
+              extracted text
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (exporttextcomponentTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/export-text/html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (exporttextcomponentTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/export-text/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (exporttextcomponentTab === 'extractedtext') {
+          <div class="tab-content">
+@if (extractedText) {
               <div class="distance16">
                 {{ extractedText }}
               </div>
@@ -32,9 +71,10 @@
                 {{line}}
               </div>
             }
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+          </div>
+          }
+        </div>
+      </div>
     </div>
   }
 

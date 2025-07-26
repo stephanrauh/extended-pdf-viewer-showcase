@@ -1,40 +1,25 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, ProgressBarEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { MatProgressBar } from '@angular/material/progress-bar';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { CopyrightComponent } from '../common/copyright.component';
 import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
 
 @Component({
-    selector: 'app-custom-progress-bar',
-    
-    standalone: true,
-    templateUrl: './custom-print-dialog.component.html',
-    styleUrls: ['./custom-print-dialog.component.css'],
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        MatCard,
-        MatButton,
-        MatCheckbox,
-        FormsModule,
-        MatProgressBar,
-        MatTabGroup,
-        MatTab,
-        Ie11MarkdownComponent,
-        CopyrightComponent,
-        FullscreenButtonComponent,
-        NgxExtendedPdfViewerModule,
-    ],
+  selector: 'app-custom-progress-bar',
+
+  standalone: true,
+  templateUrl: './custom-print-dialog.component.html',
+  styleUrls: ['./custom-print-dialog.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  imports: [FormsModule, Ie11MarkdownComponent, CopyrightComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule],
 })
 export class CustomPrintDialogComponent {
   private pdfService = inject(NgxExtendedPdfViewerService);
   fullscreenService = inject(FullscreenService);
+
+  public activeTab = 'html';
 
   public printPercentage = 0;
   public totalPages = 0;

@@ -1,9 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -15,10 +12,6 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './export-text.component.html',
     styleUrls: ['./export-text.component.css'],
     imports: [
-        MatCard,
-        MatButton,
-        MatTabGroup,
-        MatTab,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -38,6 +31,7 @@ export class ExportTextComponent {
   public extractedLines: string[] = [];
 
   public selectedTabIndex = 0;
+  public exporttextcomponentTab: string = 'htmltemplate';
 
   private _fullscreen = false;
 

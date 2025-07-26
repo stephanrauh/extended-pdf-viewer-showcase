@@ -1,44 +1,105 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-      <mat-tab-group>
-        <mat-tab label="Getting started">
-          <p>
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="pageviewmodecomponentTab === 'gettingstarted'"
+                [class.border-primary-600]="pageviewmodecomponentTab === 'gettingstarted'"
+                [class.text-gray-500]="pageviewmodecomponentTab !== 'gettingstarted'"
+                [class.border-transparent]="pageviewmodecomponentTab !== 'gettingstarted'"
+                (click)="pageviewmodecomponentTab = 'gettingstarted'">
+                Getting started
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (pageviewmodecomponentTab === 'gettingstarted') {
+          <div class="tab-content">
+<p>
             The PDF viewer supports the single-page mode. In this mode, you can scroll from page to page. Instead,
             you can only navigate to a new page by setting the page number or clicking a chapter in the sidebar.
           </p>
-          <mat-radio-group aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5;">
-            <mat-radio-button value="off">no spread</mat-radio-button>
+          <div class="space-y-1">
+
+            <label class="flex items-center space-x-1 text-sm">
+          <input type="radio" class="form-radio text-primary-600" value="off" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5;" />
+          <span>no spread</span>
+        </label>
             <br />
-            <mat-radio-button value="odd">odd spread</mat-radio-button>
+            <label class="flex items-center space-x-1 text-sm">
+          <input type="radio" class="form-radio text-primary-600" value="odd" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5;" />
+          <span>odd spread</span>
+        </label>
             <br />
-            <mat-radio-button value="even">even spread</mat-radio-button>
-          </mat-radio-group>
+            <label class="flex items-center space-x-1 text-sm">
+          <input type="radio" class="form-radio text-primary-600" value="even" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5;" />
+          <span>even spread</span>
+        </label>
+
+      </div>
           <p>
-            <mat-checkbox class="margin" [(ngModel)]="showBorders">show borders around the pages</mat-checkbox>
+            <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="showBorders" />
+        <span>show borders around the pages</span>
+      </label>
           </p>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress"
+          </div>
+          }
+        </div>
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/html.md">
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="pageviewmodecomponentTab === 'htmltemplate'"
+                [class.border-primary-600]="pageviewmodecomponentTab === 'htmltemplate'"
+                [class.text-gray-500]="pageviewmodecomponentTab !== 'htmltemplate'"
+                [class.border-transparent]="pageviewmodecomponentTab !== 'htmltemplate'"
+                (click)="pageviewmodecomponentTab = 'htmltemplate'">
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="pageviewmodecomponentTab === 'typescript'"
+                [class.border-primary-600]="pageviewmodecomponentTab === 'typescript'"
+                [class.text-gray-500]="pageviewmodecomponentTab !== 'typescript'"
+                [class.border-transparent]="pageviewmodecomponentTab !== 'typescript'"
+                (click)="pageviewmodecomponentTab = 'typescript'">
+                Typescript
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (pageviewmodecomponentTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/html.md">
           </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="Typescript">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/ts.md">
+          </div>
+          }
+          @if (pageviewmodecomponentTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/ts.md">
           </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
+          </div>
+          }
+        </div>
+        </div>
   }
 
-  <mat-card appearance="outlined" class="mat-elevation-z8 use-available-height"
+  <div class="mat-elevation-z8 use-available-height bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"
     [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
@@ -54,5 +115,5 @@
       [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'" [(page)]="page"
       pageViewMode="single" [spread]="spreadMode" [showBorders]="showBorders" [height]="'auto'">
     </ngx-extended-pdf-viewer>
-  </mat-card>
+  </div>
 </div>

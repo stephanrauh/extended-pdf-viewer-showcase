@@ -1,11 +1,37 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
-      <mat-tab-group>
-        <mat-tab label="Server-side rendering">
-          <p>
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="serversiderenderingcomponentTab === 'serversiderendering'"
+              [class.border-primary-600]="serversiderenderingcomponentTab === 'serversiderendering'"
+              [class.text-gray-500]="serversiderenderingcomponentTab !== 'serversiderendering'"
+              [class.border-transparent]="serversiderenderingcomponentTab !== 'serversiderendering'"
+              (click)="serversiderenderingcomponentTab = 'serversiderendering'">
+              Server-side rendering
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="serversiderenderingcomponentTab === 'olderversions'"
+              [class.border-primary-600]="serversiderenderingcomponentTab === 'olderversions'"
+              [class.text-gray-500]="serversiderenderingcomponentTab !== 'olderversions'"
+              [class.border-transparent]="serversiderenderingcomponentTab !== 'olderversions'"
+              (click)="serversiderenderingcomponentTab = 'olderversions'">
+              Older versions
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (serversiderenderingcomponentTab === 'serversiderendering') {
+          <div class="tab-content">
+<p>
             Starting with version 16.2.14, ngx-extended-pdf-viewer supports server-side rendering out-of-the-box.
           </p>
           <p>
@@ -23,25 +49,46 @@
             (All right, ASAP is stretching it a bit - at the moment, I'm running short of leisure time, so it's slow
             going. Bear with me.)
           </p>
-        </mat-tab>
-        <mat-tab label="Older versions">
-          <p>
+          </div>
+          }
+          @if (serversiderenderingcomponentTab === 'olderversions') {
+          <div class="tab-content">
+<p>
             Before version 16.2, ngx-extended-pdf-viewer used a special module to support server-side rendering.
             If you're still using it, update to ngx-extended-pdf-viewer 17+ and abandon
             <code>NgxExtededPdfViewerServerModule</code> in favor of the new, unified approach.
           </p>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress"
+          </div>
+          }
+        </div>
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/server-side-rendering/html.md">
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="serversiderenderingcomponentTab === 'htmltemplate'"
+              [class.border-primary-600]="serversiderenderingcomponentTab === 'htmltemplate'"
+              [class.text-gray-500]="serversiderenderingcomponentTab !== 'htmltemplate'"
+              [class.border-transparent]="serversiderenderingcomponentTab !== 'htmltemplate'"
+              (click)="serversiderenderingcomponentTab = 'htmltemplate'">
+              HTML template
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (serversiderenderingcomponentTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/server-side-rendering/html.md">
           </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+          </div>
+          }
+        </div>
+    </div>
   </div>
   }
   <app-demo [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'">

@@ -1,9 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { LinkTarget, PageRenderedEvent, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from 'src/app/services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -15,11 +12,6 @@ import { LanguagePipe } from 'ngx-markdown';
     templateUrl: './links.component.html',
     styleUrls: ['./links.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatRadioGroup,
-        MatRadioButton,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -33,6 +25,8 @@ export class LinksComponent {
   public LinkTarget = LinkTarget;
 
   public hidden = false;
+  public linkscomponentTab: string = 'defaultlinktargets';
+  public codeTab: string = 'typescript';
 
   private _target: number = LinkTarget.BLANK;
 

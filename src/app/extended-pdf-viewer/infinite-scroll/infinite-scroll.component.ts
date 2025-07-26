@@ -1,11 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ScrollModeType, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -17,13 +13,7 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './infinite-scroll.component.html',
     styleUrls: ['./infinite-scroll.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatCheckbox,
         FormsModule,
-        MatRadioGroup,
-        MatRadioButton,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -48,6 +38,7 @@ export class InfiniteScrollComponent {
   public file = 1;
 
   public showPdfViewer = true;
+  public infinitescrollcomponentTab: string = 'gettingstarted';
 
   private _fullscreen = false;
 

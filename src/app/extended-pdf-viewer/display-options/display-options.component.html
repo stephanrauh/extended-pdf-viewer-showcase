@@ -1,54 +1,125 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%;">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%;">
         <p>
           A few options allow you to influence the way the PDF file is rendered.
         </p>
-          <mat-checkbox class="margin" [(ngModel)]="showBorders">[showBorders]="true"</mat-checkbox>
+          <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="showBorders" />
+        <span>[showBorders]="true"</span>
+      </label>
         <div>
           <div style="flex: 1 1 100%; box-sizing: border-box; margin-top:1em">
             Scroll mode:<br>
-            <mat-radio-group aria-label="ScrollMode" [(ngModel)]="scrollMode" style="line-height: 1.5;">
-              <mat-radio-button [value]="0">0 (vertical) (default)</mat-radio-button>
-              <mat-radio-button [value]="1">1 (horizontal)</mat-radio-button>
-              <mat-radio-button [value]="2">2 (wrapped)</mat-radio-button>
-              <mat-radio-button [value]="3">3 (single-page view)</mat-radio-button>
-            </mat-radio-group>
+            <div class="space-y-1">
+
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="0" />
+        <span>0 (vertical) (default)</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="1" />
+        <span>1 (horizontal)</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="2" />
+        <span>2 (wrapped)</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="3" />
+        <span>3 (single-page view)</span>
+      </label>
+
+      </div>
           </div>
           <div style="flex: 1 1 100%; box-sizing: border-box; margin-top:1em">
             Spread:<br>
-            <mat-radio-group aria-label="Spread" [(ngModel)]="spread" [disabled]="scrollMode===1 || scrollMode===2 || pageViewMode==='book'" style="line-height: 1.5;">
-              <mat-radio-button [value]="'off'">off (default)</mat-radio-button>
-              <mat-radio-button [value]="'odd'">odd</mat-radio-button>
-              <mat-radio-button [value]="'even'">even</mat-radio-button>
-            </mat-radio-group>
+            <div class="space-y-1">
+
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="'off'" />
+        <span>off (default)</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="'odd'" />
+        <span>odd</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="'even'" />
+        <span>even</span>
+      </label>
+
+      </div>
           </div>
           <div style="flex: 1 1 100%; box-sizing: border-box; margin-top:1em">
             PageViewMode:<br>
-            <mat-radio-group aria-label="PageViewMode" [(ngModel)]="pageViewMode" style="line-height: 1.5;">
-              <mat-radio-button [value]="'single'">single</mat-radio-button>
-              <mat-radio-button [value]="'book'">book</mat-radio-button>
-              <mat-radio-button [value]="'multiple'">multiple (default)</mat-radio-button>
-              <mat-radio-button [value]="'infinite-scroll'">infinite scroll</mat-radio-button>
-            </mat-radio-group>
+            <div class="space-y-1">
+
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="'single'" />
+        <span>single</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="'book'" />
+        <span>book</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="'multiple'" />
+        <span>multiple (default)</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="radio" class="form-radio text-primary-600" [value]="'infinite-scroll'" />
+        <span>infinite scroll</span>
+      </label>
+
+      </div>
           </div>
         </div>
         <div style="padding-top:20px">
           Book mode and single-page mode don't look too impressive with the default zoom setting of 30%. However, this zoom setting enables you to see the effect of <code>scrollMode="2"</code>
           (i.e. wrapped).
         </div>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
-        <mat-tab-group>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/display-options/html.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="TypeScript">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/display-options/ts.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+      </div>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
+        <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+          <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="activeTab === 'html'"
+              [class.border-primary-600]="activeTab === 'html'"
+              [class.text-gray-500]="activeTab !== 'html'"
+              [class.border-transparent]="activeTab !== 'html'"
+              (click)="activeTab = 'html'">
+              HTML template
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="activeTab === 'typescript'"
+              [class.border-primary-600]="activeTab === 'typescript'"
+              [class.text-gray-500]="activeTab !== 'typescript'"
+              [class.border-transparent]="activeTab !== 'typescript'"
+              (click)="activeTab = 'typescript'">
+              TypeScript
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab content -->
+        @if (activeTab === 'html') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/display-options/html.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/display-options/ts.md"> </app-ie11-markdown>
+        </div>
+          }
+      </div>
+      </div>
     </div>
   }
 

@@ -1,113 +1,230 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="overflow-none distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+      <div class="overflow-none distance16 mat-elevation-z8 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
         <div class="flex-container-column">
-          <mat-tab-group (selectedTabChange)="tabChanged($event)">
-            <mat-tab label="printService.print()">
-              <p>You can print the PDF file by calling <code>NgxExtendedPdfViewerService.print()</code>.
+                  <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="printrangecomponentTab === 'printserviceprint'"
+                [class.border-primary-600]="printrangecomponentTab === 'printserviceprint'"
+                [class.text-gray-500]="printrangecomponentTab !== 'printserviceprint'"
+                [class.border-transparent]="printrangecomponentTab !== 'printserviceprint'"
+                (click)="printrangecomponentTab = 'printserviceprint'">
+                printService.print()
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="printrangecomponentTab === 'setprintrange'"
+                [class.border-primary-600]="printrangecomponentTab === 'setprintrange'"
+                [class.text-gray-500]="printrangecomponentTab !== 'setprintrange'"
+                [class.border-transparent]="printrangecomponentTab !== 'setprintrange'"
+                (click)="printrangecomponentTab = 'setprintrange'">
+                setPrintRange()
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="printrangecomponentTab === 'overridebrowserprint'"
+                [class.border-primary-600]="printrangecomponentTab === 'overridebrowserprint'"
+                [class.text-gray-500]="printrangecomponentTab !== 'overridebrowserprint'"
+                [class.border-transparent]="printrangecomponentTab !== 'overridebrowserprint'"
+                (click)="printrangecomponentTab = 'overridebrowserprint'">
+                Override browser print
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="printrangecomponentTab === 'autorotation'"
+                [class.border-primary-600]="printrangecomponentTab === 'autorotation'"
+                [class.text-gray-500]="printrangecomponentTab !== 'autorotation'"
+                [class.border-transparent]="printrangecomponentTab !== 'autorotation'"
+                (click)="printrangecomponentTab = 'autorotation'">
+                Auto rotation
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="printrangecomponentTab === 'printresolution'"
+                [class.border-primary-600]="printrangecomponentTab === 'printresolution'"
+                [class.text-gray-500]="printrangecomponentTab !== 'printresolution'"
+                [class.border-transparent]="printrangecomponentTab !== 'printresolution'"
+                (click)="printrangecomponentTab = 'printresolution'">
+                Print resolution
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (printrangecomponentTab === 'printserviceprint') {
+          <div class="tab-content">
+<p>You can print the PDF file by calling <code>NgxExtendedPdfViewerService.print()</code>.
               The (optional) parameter defines the print range. Limiting the print range is
               useful for very large documents that'd crash your browser - such as trying
             to print documents containing several hundred pages with Internet Explorer 11.</p>
             <section class="section">
-              <mat-form-field>
-                <input matInput class="margin" [(ngModel)]="from" placeholder="from page number" />
-              </mat-form-field>
-              <mat-form-field style="padding-left:10px;">
-                <input matInput class="margin" [(ngModel)]="to" placeholder="to page number"/>
-              </mat-form-field>
+              <div class="space-y-1">
+                <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="from" placeholder="from page number" />
+              </div>
+              <div class="space-y-2">
+                <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="to" placeholder="to page number" />
+              </div>
             </section>
             <section class="section">
-              <mat-form-field style="width:90%">
-                <input matInput class="margin" [(ngModel)]="included" placeholder="including (comma separatated list of page numbers)"/>
-              </mat-form-field>
+              <div class="space-y-2">
+                <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="included" placeholder="including (comma separatated list of page numbers)" />
+              </div>
             </section>
             <section class="section">
-              <mat-form-field style="width:90%">
-                <input matInput class="margin" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)"/>
-              </mat-form-field>
+              <div class="space-y-2">
+                <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)" />
+              </div>
             </section>
-            <button mat-raised-button color="primary" (click)="print()">NgxExtendedPdfViewerService.print()</button>
-          </mat-tab>
-          <mat-tab label="setPrintRange()">
-            <p>Calling <code>NgxExtendedPdfViewerService.setPrintRange()</code> limits
+            <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1.5 px-3 text-sm rounded shadow mt-2" (click)="print()">NgxExtendedPdfViewerService.print()</button>
+          </div>
+          }
+          @if (printrangecomponentTab === 'setprintrange') {
+          <div class="tab-content">
+<p>Calling <code>NgxExtendedPdfViewerService.setPrintRange()</code> limits
             the print range of the print button and CTRL+P. This also includes the
             programmatic API <code>print()</code> if the parameter is omitted.</p>
             <p>To prevent nasty surprises, implement an <code>ngDestroy()</code> callback and use it
             to call <code>NgxExtendedPdfViewerService.removePrintRange()</code>.
           </p>
           <section class="section">
-            <mat-form-field>
-              <input matInput class="margin" [(ngModel)]="from" placeholder="from page number" />
-            </mat-form-field>
-            <mat-form-field style="padding-left:10px;">
-              <input matInput class="margin" [(ngModel)]="to" placeholder="to page number"/>
-            </mat-form-field>
+            <div class="space-y-2">
+              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="from" placeholder="from page number" />
+            </div>
+            <div class="space-y-2">
+              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="to" placeholder="to page number" />
+            </div>
           </section>
           <section class="section">
-            <mat-form-field style="width:90%">
-              <input matInput class="margin" [(ngModel)]="included" placeholder="including (comma separatated list of page numbers)"/>
-            </mat-form-field>
+            <div class="space-y-2">
+              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="included" placeholder="including (comma separatated list of page numbers)" />
+            </div>
           </section>
           <section class="section">
-            <mat-form-field style="width:90%">
-              <input matInput class="margin" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)"/>
-            </mat-form-field>
+            <div class="space-y-2">
+              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)" />
+            </div>
           </section>
-          <button mat-raised-button color="primary" (click)="setPrintRange()">NgxExtendedPdfViewerService.setPrintRange()</button>
-        </mat-tab>
-        <mat-tab label="Override browser print">
-          <p>Setting the attribute `replaceBrowserPrint` allows you to replace the browser default print functionality
+          <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="setPrintRange()">NgxExtendedPdfViewerService.setPrintRange()</button>
+          </div>
+          }
+          @if (printrangecomponentTab === 'overridebrowserprint') {
+          <div class="tab-content">
+<p>Setting the attribute `replaceBrowserPrint` allows you to replace the browser default print functionality
             by printing the PDF file. No matter what your web page looks like, if `replaceBrowserPrint` is true, both
             the keys <code>CTRL+P</code> and the print menu of the browser print the PDF file. If you set `replaceBrowserPrint="false"`,
             both CTRL+P and the print menu print the web page.
           </p>
           <p>Caveat: starting with version 16.0.0, the `replaceBrowserPrint` is active by default.</p>
-          <mat-checkbox class="margin" [(ngModel)]="replaceBrowserPrint">replaceBrowserPrint="true"</mat-checkbox>
-        </mat-tab>
-        <mat-tab label="Auto rotation">
-          <p>By default, the PDF viewer rotates landscape pages when printing. You can switch this off by setting
+          <label class="flex items-center space-x-2">
+        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="replaceBrowserPrint" />
+        <span>replaceBrowserPrint="true"</span>
+      </label>
+          </div>
+          }
+          @if (printrangecomponentTab === 'autorotation') {
+          <div class="tab-content">
+<p>By default, the PDF viewer rotates landscape pages when printing. You can switch this off by setting
             <code>enablePrintAutoRotate</code> to false. This is useful if you want to print a PDF file with a mix of
             portrait and landscape pages and you want to keep the orientation of the pages as they are in the PDF file.
           </p>
-          <mat-checkbox class="margin" [(ngModel)]="enablePrintAutoRotate">enablePrintAutoRotate="true"</mat-checkbox>
-        </mat-tab>
-        <mat-tab label="Print resolution">
-          <p>The attribute <code>printResolution</code> specifies the print resolution, with a default value of 150 dpi. If the specified resolution exceeds the browser's capabilities, it is adjusted downward, including a 5% margin for safety.</p>
-          <mat-radio-group aria-label="Print resolution" [(ngModel)]="printResolution">
-            <mat-radio-button value="10">[printResolution]="10"</mat-radio-button>
-            <mat-radio-button value="75">[printResolution]="75"</mat-radio-button>
-            <mat-radio-button value="150">[printResolution]="150"</mat-radio-button>
-            <mat-radio-button value="300">[printResolution]="300"</mat-radio-button>
-            <mat-radio-button value="600">[printResolution]="600"</mat-radio-button>
-            <mat-radio-button value="1200">[printResolution]="1200"</mat-radio-button>
-            <mat-radio-button value="2400">[printResolution]="2400"</mat-radio-button>
-            <mat-radio-button value="3600">[printResolution]="3600"</mat-radio-button>
-          </mat-radio-group>
-        </mat-tab>
-      </mat-tab-group>
+          <label class="flex items-center space-x-2">
+        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enablePrintAutoRotate" />
+        <span>enablePrintAutoRotate="true"</span>
+      </label>
+          </div>
+          }
+          @if (printrangecomponentTab === 'printresolution') {
+          <div class="tab-content">
+<p>The attribute <code>printResolution</code> specifies the print resolution, with a default value of 150 dpi. If the specified resolution exceeds the browser's capabilities, it is adjusted downward, including a 5% margin for safety.</p>
+          <div class="space-y-2">
+
+            <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="10" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <span>[printResolution]="10"</span>
+        </label>
+            <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="75" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <span>[printResolution]="75"</span>
+        </label>
+            <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="150" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <span>[printResolution]="150"</span>
+        </label>
+            <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="300" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <span>[printResolution]="300"</span>
+        </label>
+            <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="600" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <span>[printResolution]="600"</span>
+        </label>
+            <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="1200" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <span>[printResolution]="1200"</span>
+        </label>
+            <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="2400" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <span>[printResolution]="2400"</span>
+        </label>
+            <label class="flex items-center space-x-2">
+          <input type="radio" class="form-radio text-primary-600" value="3600" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <span>[printResolution]="3600"</span>
+        </label>
+
+      </div>
+          </div>
+          }
+        </div>
       @if (resolution) {
         <p>Your browser supports a maximum resolution of {{resolution}}</p>
       }
     </div>
-  </mat-card>
-  <mat-card appearance="outlined" class="overflow-y-scroll distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:49%">
-    <mat-tab-group>
-      <mat-tab label="TypeScript">
-        <app-ie11-markdown [data]="sourcecode | language : 'typescript'"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="auto rotation">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html3.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="print resolution">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html2.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
+  </div>
+  <div class="overflow-y-scroll distance16 mat-elevation-z8 progress bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:49%">
+            <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'typescript'"
+                [class.border-primary-600]="codeTab === 'typescript'"
+                [class.text-gray-500]="codeTab !== 'typescript'"
+                [class.border-transparent]="codeTab !== 'typescript'"
+                (click)="codeTab = 'typescript'">
+                TypeScript
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'htmltemplate'"
+                [class.border-primary-600]="codeTab === 'htmltemplate'"
+                [class.text-gray-500]="codeTab !== 'htmltemplate'"
+                [class.border-transparent]="codeTab !== 'htmltemplate'"
+                (click)="codeTab = 'htmltemplate'">
+                HTML template
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown [data]="sourcecode | language : 'typescript'"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/print-range/html.md"> </app-ie11-markdown>
+          </div>
+          }
+        </div>
+  </div>
 }
 
 <app-demo [src]="src">

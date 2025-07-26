@@ -1,13 +1,16 @@
-<article class="pdf-wrapper" class="flex-container-column fill-container">
-  <div class="pdf-code-wrapper" class="flex-container-row" >
-    <mat-card appearance="outlined" class="overflow-none distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:30%">
+<article class="pdf-wrapper flex-container-column fill-container">
+  <div class="pdf-code-wrapper flex-container-row" >
+    <div class="overflow-none distance16 mat-elevation-z8 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:30%">
       <div class="flex-container-column">
         <p><b>Caveat:</b> Currently, the cancel button of the demo doesn't work because pdf.js opens a modal dialog.</p>
-        <button mat-raised-button color="primary" (click)="print()">Print</button>
+        <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="print()">Print</button>
         @if (showProgress) {
           <p>Hit the escape key to cancel printing</p>
         }
-        <mat-checkbox [(ngModel)]="hideBuiltInProgress">Hide PDFJS Progress Dialog</mat-checkbox>
+        <label class="flex items-center space-x-2">
+        <input type="checkbox" class="form-checkbox text-primary-600" [(ngModel)]="hideBuiltInProgress" />
+        <span>Hide PDFJS Progress Dialog</span>
+      </label>
 
         @if (showProgress) {
           <div style="padding-bottom:10px; padding-top:10px">
@@ -16,12 +19,7 @@
         }
 
         @if (showProgress) {
-          <mat-progress-bar
-            class="print__progress"
-            color="primary"
-            mode="determinate"
-            value="{{ printPercentage }}"
-          ></mat-progress-bar>
+          <div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-primary-600 h-2 rounded-full" style="width: 45%"></div></div>
         }
 
         @if (showCompleted) {
@@ -35,21 +33,50 @@
           </div>
         }
       </div>
-    </mat-card>
+    </div>
 
-    <mat-card appearance="outlined" class="overflow-y-scroll distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:69%">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-print-dialog/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-print-dialog/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+    <div class="overflow-y-scroll distance16 mat-elevation-z8 progress bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:69%">
+      <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'html'"
+            [class.border-primary-600]="activeTab === 'html'"
+            [class.text-gray-500]="activeTab !== 'html'"
+            [class.border-transparent]="activeTab !== 'html'"
+            (click)="activeTab = 'html'">
+            HTML template
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'typescript'"
+            [class.border-primary-600]="activeTab === 'typescript'"
+            [class.text-gray-500]="activeTab !== 'typescript'"
+            [class.border-transparent]="activeTab !== 'typescript'"
+            (click)="activeTab = 'typescript'">
+            TypeScript
+          </button>
+        </div>
+          </div>
+
+        <!-- Tab content -->
+        @if (activeTab === 'html') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-print-dialog/html.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-print-dialog/ts.md"> </app-ie11-markdown>
+        </div>
+          }
+      </div>
+    </div>
   </div>
 
-  <mat-card appearance="outlined" class="pdf-card distance16 mat-elevation-z8 use-available-space">
+  <div class="pdf-card distance16 mat-elevation-z8 use-available-space bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
         <app-copyright [src]="'/assets/pdfs/GraalVM.pdf'"></app-copyright>
@@ -66,5 +93,5 @@
 
       >
     </ngx-extended-pdf-viewer>
-  </mat-card>
+  </div>
 </article>

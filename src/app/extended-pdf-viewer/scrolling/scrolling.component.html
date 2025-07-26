@@ -1,11 +1,37 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right"
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
-      <mat-tab-group [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event">
-        <mat-tab label="Regular PDF files">
-          <p>The recommended approaches to scrolling are using <code>[page]</code> and <code>[namedDest]</code>.
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="scrollingcomponentTab === 'regularpdffiles'"
+              [class.border-primary-600]="scrollingcomponentTab === 'regularpdffiles'"
+              [class.text-gray-500]="scrollingcomponentTab !== 'regularpdffiles'"
+              [class.border-transparent]="scrollingcomponentTab !== 'regularpdffiles'"
+              (click)="scrollingcomponentTab = 'regularpdffiles'">
+              Regular PDF files
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="scrollingcomponentTab === 'cornercases'"
+              [class.border-primary-600]="scrollingcomponentTab === 'cornercases'"
+              [class.text-gray-500]="scrollingcomponentTab !== 'cornercases'"
+              [class.border-transparent]="scrollingcomponentTab !== 'cornercases'"
+              (click)="scrollingcomponentTab = 'cornercases'">
+              Corner cases
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (scrollingcomponentTab === 'regularpdffiles') {
+          <div class="tab-content">
+<p>The recommended approaches to scrolling are using <code>[page]</code> and <code>[namedDest]</code>.
             If you want to scroll within a page, there's a third option. <code>NgxExtendedPdfViewerService</code>
             offers a programmatic API:</p>
           <ul>
@@ -19,17 +45,19 @@
           </ul>
           <p>Note that numerical values refer to pixels, so which part of the page become visible depends on the zoom
             level. Better use percentages.</p>
-          <button class="button" mat-raised-button color="primary" (click)="scroll(10, '100%')">scroll(page=10,
+          <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scroll(10, '100%')">scroll(page=10,
             top="100%")</button>
-          <button class="button" mat-raised-button color="primary" (click)="scroll(10, '50%')">scroll(page=10,
+          <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scroll(10, '50%')">scroll(page=10,
             top="50%")</button>
-          <button class="button" mat-raised-button color="primary" (click)="scroll(10, '0%')">scroll(page=10,
+          <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scroll(10, '0%')">scroll(page=10,
             top="0%")</button>
-          <button class="button" mat-raised-button color="primary" (click)="scroll(9, 0)"
+          <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scroll(9, 0)"
             style="margin-left: 10px">[nameDest]="scroll(page=9)"</button>
-        </mat-tab>
-        <mat-tab label="Corner cases">
-          <p>The <code>left</code> parameter can be confusing, especially if your PDF document features bot
+          </div>
+          }
+          @if (scrollingcomponentTab === 'cornercases') {
+          <div class="tab-content">
+<p>The <code>left</code> parameter can be confusing, especially if your PDF document features bot
             landscape and portrait pages. In theory, the <code>left</code> parameters causes the page
             to scroll to the left by a given percentage. However, that's not always possible because the
             horizontal scrollbar doesn't allow for arbitrary scrolling. In particular, 100% would indicate
@@ -39,60 +67,90 @@
           <table style="background-color: transparent">
             <tr>
               <td>
-                <button class="button" mat-raised-button color="primary"
+                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary"
                   (click)="zoom='page-width'">[zoom]="'page-width'"</button>
               </td>
               <td>
-                <button class="button" mat-raised-button color="primary" (click)="zoom='500%'">[zoom]="'500%'"</button>
+                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="zoom='500%'">[zoom]="'500%'"</button>
               </td>
               <td>
-                <button class="button" mat-raised-button color="primary"
+                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary"
                   (click)="zoom='page-fit'">[zoom]="'page-fit'"</button>
               </td>
             </tr>
             <tr>
               <td>
-                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(1, '0%')">scroll(1,
+                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scrollLeft(1, '0%')">scroll(1,
                   {{'{left: "0%"}'}})</button>
               </td>
               <td>
-                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(1,  '60%')">scroll(1,
+                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scrollLeft(1,  '60%')">scroll(1,
                   {{'{left: "60%"}'}})</button>
               </td>
               <td>
-                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(1, '90%')">scroll(1,
+                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scrollLeft(1, '90%')">scroll(1,
                   {{'{left: "90%"}'}})</button>
               </td>
             </tr>
             <tr>
               <td>
-                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(2, '0%')">scroll(2,
+                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scrollLeft(2, '0%')">scroll(2,
                   {{'{left: "0%"}'}})</button>
               </td>
               <td>
-                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(2,  '60%')">scroll(2,
+                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scrollLeft(2,  '60%')">scroll(2,
                   {{'{left: "60%"}'}})</button>
               </td>
               <td>
-                <button class="button" mat-raised-button color="primary" (click)="scrollLeft(2, '90%')">scroll(2,
+                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="button"  color="primary" (click)="scrollLeft(2, '90%')">scroll(2,
                   {{'{left: "90%"}'}})</button>
               </td>
             </tr>
           </table>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-    <mat-card appearance="outlined" class="distance16 mat-elevation-z8 use-available-height"
+          </div>
+          }
+        </div>
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 use-available-height"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:38%;">
-      <mat-tab-group>
-        <mat-tab label="HTML template">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/scrolling/html.md"> </app-ie11-markdown>
-        </mat-tab>
-        <mat-tab label="TypeScript">
-          <app-ie11-markdown src="/assets/extended-pdf-viewer/scrolling/ts.md"> </app-ie11-markdown>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
+              <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'htmltemplate'"
+              [class.border-primary-600]="codeTab === 'htmltemplate'"
+              [class.text-gray-500]="codeTab !== 'htmltemplate'"
+              [class.border-transparent]="codeTab !== 'htmltemplate'"
+              (click)="codeTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              TypeScript
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (codeTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/scrolling/html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/scrolling/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+        </div>
+    </div>
   </div>
   }
 

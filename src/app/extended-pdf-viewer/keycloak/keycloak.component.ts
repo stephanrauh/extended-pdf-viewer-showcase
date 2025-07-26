@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatCard } from '@angular/material/card';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 
 @Component({
@@ -8,6 +7,8 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
     standalone: true,
     templateUrl: './keycloak.component.html',
     styleUrls: ['./keycloak.component.css'],
-    imports: [MatCard, Ie11MarkdownComponent],
+    imports: [
+        Ie11MarkdownComponent,
+    ],
 })
 export class KeycloakComponent {}

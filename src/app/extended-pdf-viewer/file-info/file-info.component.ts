@@ -1,31 +1,29 @@
 import { Component, effect, inject } from '@angular/core';
-import { IPDFViewerApplication, PdfDocumentInfo, PdfDocumentPropertiesExtractor, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import {
+  IPDFViewerApplication,
+  PdfDocumentInfo,
+  PdfDocumentPropertiesExtractor,
+  PDFNotificationService,
+  NgxExtendedPdfViewerModule,
+} from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-simple',
-    
-    standalone: true,
-    templateUrl: './file-info.component.html',
-    styleUrls: ['./file-info.component.css'],
-    imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-simple',
+
+  standalone: true,
+  templateUrl: './file-info.component.html',
+  styleUrls: ['./file-info.component.css'],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class FileInfoComponent {
   notificationService = inject(PDFNotificationService);
   fullscreenService = inject(FullscreenService);
+
+  public activeTab = 'html';
 
   private PDFViewerApplication: IPDFViewerApplication | undefined;
 

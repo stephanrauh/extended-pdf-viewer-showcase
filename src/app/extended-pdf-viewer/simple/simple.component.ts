@@ -2,35 +2,20 @@ import { ChangeDetectionStrategy, Component, effect, OnDestroy, inject } from '@
 import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, PdfLoadedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-simple',
-    
+
     standalone: true,
     templateUrl: './simple.component.html',
     styleUrls: ['./simple.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatFormField,
-        MatLabel,
-        MatInput,
         FormsModule,
-        MatCheckbox,
-        MatRadioGroup,
-        MatRadioButton,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -106,6 +91,8 @@ export class SimpleComponent implements OnDestroy {
 
   public time = 0;
   public currentTime = 0;
+  public bottomTab: string = 'livedemo';
+  public codeTab: string = 'htmltemplate';
 
   private startTime = new Date().getTime();
   private currentStartTime = new Date().getTime();

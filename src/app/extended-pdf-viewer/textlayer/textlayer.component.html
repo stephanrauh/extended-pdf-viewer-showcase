@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
         <p>The text layer is an optional, invisible layer above the PDF document, which
           is rendered as an image. You need it to
         </p>
@@ -14,29 +14,89 @@
           is that both the find menu and the select tool are disabled until you activate the text layer.
         </p>
         <p><b>Demos:</b></p>
-        <mat-checkbox class="margin" [(ngModel)]="markLongWords">mark long words</mat-checkbox>
-        <mat-checkbox class="margin" [(ngModel)]="showBoxes">put each text layer <code>&lt;span&gt;</code> into a box</mat-checkbox>
-        <mat-checkbox class="margin" [(ngModel)]="showTextLayer">show the text layer</mat-checkbox>
+        <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="markLongWords" />
+        <span>mark long words</span>
+      </label>
+        <label class="flex items-center space-x-1 text-sm">
+          <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="showBoxes" />
+          <span>put each text layer <code>&lt;span&gt;</code> into a box</span>
+        </label>
+        <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="showTextLayer" />
+        <span>show the text layer</span>
+      </label>
             <p>The demos show that the text layer isn't perfect. The positions are good enough for finding and marking text, but
               they don't match the precise positions. Plus, sometime words are spread among several <code>&lt;span&gt;</code> tags.
             </p>
-          </mat-card>
-          <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
-            <mat-tab-group>
-              <mat-tab label="HTML">
-                <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/html.md"> </app-ie11-markdown>
-              </mat-tab>
-              <mat-tab label="show text layer">
-                <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts.md"> </app-ie11-markdown>
-              </mat-tab>
-              <mat-tab label="highlight words">
-                <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts2.md"> </app-ie11-markdown>
-              </mat-tab>
-              <mat-tab label="mark long words">
-                <app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts3.md"> </app-ie11-markdown>
-              </mat-tab>
-            </mat-tab-group>
-          </mat-card>
+          </div>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
+            <div class="w-full">
+        <!-- Tab buttons -->
+        <div class="overflow-x-auto">
+          <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="activeTab === 'html'"
+              [class.border-primary-600]="activeTab === 'html'"
+              [class.text-gray-500]="activeTab !== 'html'"
+              [class.border-transparent]="activeTab !== 'html'"
+              (click)="activeTab = 'html'">
+              HTML
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="activeTab === 'show-text-layer'"
+              [class.border-primary-600]="activeTab === 'show-text-layer'"
+              [class.text-gray-500]="activeTab !== 'show-text-layer'"
+              [class.border-transparent]="activeTab !== 'show-text-layer'"
+              (click)="activeTab = 'show-text-layer'">
+              show text layer
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="activeTab === 'highlight-words'"
+              [class.border-primary-600]="activeTab === 'highlight-words'"
+              [class.text-gray-500]="activeTab !== 'highlight-words'"
+              [class.border-transparent]="activeTab !== 'highlight-words'"
+              (click)="activeTab = 'highlight-words'">
+              highlight words
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="activeTab === 'mark-long-words'"
+              [class.border-primary-600]="activeTab === 'mark-long-words'"
+              [class.text-gray-500]="activeTab !== 'mark-long-words'"
+              [class.border-transparent]="activeTab !== 'mark-long-words'"
+              (click)="activeTab = 'mark-long-words'">
+              mark long words
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab content -->
+        @if (activeTab === 'html') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/html.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'show-text-layer') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'highlight-words') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts2.md"> </app-ie11-markdown>
+        </div>
+          }
+        @if (activeTab === 'mark-long-words') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/textlayer/ts3.md"> </app-ie11-markdown>
+        </div>
+          }
+      </div>
+          </div>
         </div>
       }
 

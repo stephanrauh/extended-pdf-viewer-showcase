@@ -1,88 +1,187 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
-        <mat-tab-group [selectedIndex]="leftTab" (selectedTabChange)="onSelectTab($event)">
-          <mat-tab label="Displaying Forms">
-            <p>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="leftTab === 0"
+                [class.border-primary-600]="leftTab === 0"
+                [class.text-gray-500]="leftTab !== 0"
+                [class.border-transparent]="leftTab !== 0"
+                (click)="onSelectTab({index: 0})">
+                Displaying Forms
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="leftTab === 1"
+                [class.border-primary-600]="leftTab === 1"
+                [class.text-gray-500]="leftTab !== 1"
+                [class.border-transparent]="leftTab !== 1"
+                (click)="onSelectTab({index: 1})">
+                Checkboxes and radiobuttons
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="leftTab === 2"
+                [class.border-primary-600]="leftTab === 2"
+                [class.text-gray-500]="leftTab !== 2"
+                [class.border-transparent]="leftTab !== 2"
+                (click)="onSelectTab({index: 2})">
+                Corner cases
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="leftTab === 3"
+                [class.border-primary-600]="leftTab === 3"
+                [class.text-gray-500]="leftTab !== 3"
+                [class.border-transparent]="leftTab !== 3"
+                (click)="onSelectTab({index: 3})">
+                Forms raw data (under construction)
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="leftTab === 4"
+                [class.border-primary-600]="leftTab === 4"
+                [class.text-gray-500]="leftTab !== 4"
+                [class.border-transparent]="leftTab !== 4"
+                (click)="onSelectTab({index: 4})">
+                Downloading form data in a BLOB
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="leftTab === 5"
+                [class.border-primary-600]="leftTab === 5"
+                [class.text-gray-500]="leftTab !== 5"
+                [class.border-transparent]="leftTab !== 5"
+                (click)="onSelectTab({index: 5})">
+                XFA Forms
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (leftTab === 0) {
+          <div class="tab-content">
+<p class="text-sm mb-3">
               <b>Configuration:</b><br />
               If you're using the default options, you don't have to do anything to activate the feature. If you're using custom options, make sure to activate
               the setting <code>renderInteractiveForms: true</code>. Caveat. starting with pdf.js 2.11, the parameter has been renamed to
               <code>renderForms</code>.
             </p>
-            <p>
+            <p class="text-sm mb-3">
               `[(formData)]` links the fields in the PDF form with your Angular component. Note that `(formDataChange)` reports every filled input field of the
               PDF file, including fields you didn't send with `[formData]`.
             </p>
-            <mat-form-field class="margin-right">
-              <input
-                matInput
-                class="margin"
-                [(ngModel)]="firstName"
-                (ngModelChange)="this.delayedUpdateFormData()"
-                placeholder="first name"
-                />
-            </mat-form-field>
-            <mat-form-field class="margin-right">
-              <input
-                matInput
-                class="margin"
-                (ngModelChange)="this.delayedUpdateFormData()"
-                [(ngModel)]="lastName"
-                placeholder="last name"
-                />
-            </mat-form-field>
-            <mat-form-field class="margin-right">
-              <mat-label>Country</mat-label>
-              <mat-select (selectionChange)="this.updateFormData()" [(ngModel)]="country">
-                @for (country of countries; track country) {
-                  <mat-option [value]="country">{{ country }}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin-right">
-              <input
-                matInput
-                class="margin"
-                (ngModelChange)="this.delayedUpdateFormData()"
-                [(ngModel)]="jobExperience"
-                placeholder="job experience (corner case!)"
-                />
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="margin-right">
-              <mat-label>Databases</mat-label>
-              <mat-select (selectionChange)="this.updateFormData()" [(ngModel)]="databases" multiple>
-                <mat-option value="oracle">Oracle</mat-option>
-                <mat-option value="sqlServer">SQL Server</mat-option>
-                <mat-option value="db2">DB2</mat-option>
-                <mat-option value="postgreSQL">PostgreSQL</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="margin-right">
-              <textarea
-                matInput
-                class="margin"
-                rows="3"
-                (ngModelChange)="this.delayedUpdateFormData()"
-                [(ngModel)]="otherJobExperience"
-                placeholder="Other Job Experience"
-              ></textarea>
-            </mat-form-field>
-            <br />
-            <mat-checkbox [checked]="typeScript==='Yes'" (change)="typeScript = $event.checked ? 'Yes': 'No'; this.updateFormData()" class="margin-right"> TypeScript </mat-checkbox>
-            <mat-checkbox [checked]="javaScript==='Yes'" (change)="javaScript = $event.checked ? 'Yes': 'No'; this.updateFormData()" class="margin-right"> JavaScript </mat-checkbox>
-            <mat-checkbox [checked]="java" (change)="java = $event.checked; this.updateFormData()" class="margin-right"> Java </mat-checkbox>
-            <mat-checkbox [checked]="cSharp" (change)="cSharp = $event.checked; this.updateFormData()" class="margin-right"> C# </mat-checkbox>
-            <br />
-            <mat-radio-group (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level">
-              <mat-radio-button value="highSchool" style="margin-right:20px">High School Diploma</mat-radio-button>
-              <mat-radio-button value="associateDegree" style="margin-right:20px">Associate's Degree</mat-radio-button>
-              <mat-radio-button value="bachelorDegree" style="margin-right:20px">Bachelor's Degree</mat-radio-button>
-              <mat-radio-button value="masterDegree">Master's Degree</mat-radio-button>
-            </mat-radio-group>
-          </mat-tab>
-          <mat-tab label="Checkboxes and radiobuttons">
-            <p>
+            
+            <!-- Multi-column form layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Left Column -->
+              <div class="space-y-3">
+                <div>
+                  <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="firstName"
+                    (ngModelChange)="this.delayedUpdateFormData()"
+                    placeholder="first name" />
+                </div>
+                <div>
+                  <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    (ngModelChange)="this.delayedUpdateFormData()"
+                    [(ngModel)]="lastName"
+                    placeholder="last name" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">Country</label>
+                  <select class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" (selectionChange)="this.updateFormData()" [(ngModel)]="country">
+                    @for (country of countries; track country) {
+                      <option [value]="country">{{ country }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    (ngModelChange)="this.delayedUpdateFormData()"
+                    [(ngModel)]="jobExperience"
+                    placeholder="job experience (corner case!)" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-1">Databases</label>
+                  <select class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" (selectionChange)="this.updateFormData()" [(ngModel)]="databases" multiple>
+                    <option value="oracle">Oracle</option>
+                    <option value="sqlServer">SQL Server</option>
+                    <option value="db2">DB2</option>
+                    <option value="postgreSQL">PostgreSQL</option>
+                  </select>
+                </div>
+              </div>
+              
+              <!-- Right Column -->
+              <div class="space-y-3">
+                <div>
+                  <textarea
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    rows="3"
+                    (ngModelChange)="this.delayedUpdateFormData()"
+                    [(ngModel)]="otherJobExperience"
+                    placeholder="Other Job Experience"
+                  ></textarea>
+                </div>
+                
+                <!-- Programming Languages -->
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-2">Programming Languages</label>
+                  <div class="grid grid-cols-2 gap-1">
+                    <label class="flex items-center space-x-1 text-sm">
+                      <input type="checkbox" class="form-checkbox text-primary-600 w-3 h-3" [checked]="typeScript==='Yes'" (change)="onTypeScriptChange($event)" />
+                      <span class="text-xs">TypeScript</span>
+                    </label>
+                    <label class="flex items-center space-x-1 text-sm">
+                      <input type="checkbox" class="form-checkbox text-primary-600 w-3 h-3" [checked]="javaScript==='Yes'" (change)="onJavaScriptChange($event)" />
+                      <span class="text-xs">JavaScript</span>
+                    </label>
+                    <label class="flex items-center space-x-1 text-sm">
+                      <input type="checkbox" class="form-checkbox text-primary-600 w-3 h-3" [checked]="java" (change)="onJavaChange($event)" />
+                      <span class="text-xs">Java</span>
+                    </label>
+                    <label class="flex items-center space-x-1 text-sm">
+                      <input type="checkbox" class="form-checkbox text-primary-600 w-3 h-3" [checked]="cSharp" (change)="onCSharpChange($event)" />
+                      <span class="text-xs">C#</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <!-- Education Level -->
+                <div>
+                  <label class="block text-xs font-medium text-gray-700 mb-2">Education Level</label>
+                  <div class="space-y-1">
+                    <label class="flex items-center space-x-1 text-sm">
+                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="highSchool" (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" />
+                      <span class="text-xs">High School Diploma</span>
+                    </label>
+                    <label class="flex items-center space-x-1 text-sm">
+                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="associateDegree" (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" />
+                      <span class="text-xs">Associate's Degree</span>
+                    </label>
+                    <label class="flex items-center space-x-1 text-sm">
+                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="bachelorDegree" (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" />
+                      <span class="text-xs">Bachelor's Degree</span>
+                    </label>
+                    <label class="flex items-center space-x-1 text-sm">
+                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="masterDegree" (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" />
+                      <span class="text-xs">Master's Degree</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+          @if (leftTab === 1) {
+          <div class="tab-content">
+<p>
               Checkboxes and radiobuttons are remarkable flexible in PDF forms:
             </p>
             <ul>
@@ -98,9 +197,11 @@
               <a target="_blank"
               href="https://github.com/stephanrauh/extended-pdf-viewer-showcase/tree/main/src/app/extended-pdf-viewer/forms">https://github.com/stephanrauh/extended-pdf-viewer-showcase/tree/main/src/app/extended-pdf-viewer/forms</a>.
             </p>
-          </mat-tab>
-          <mat-tab label="Corner cases">
-            <p>
+          </div>
+          }
+          @if (leftTab === 2) {
+          <div class="tab-content">
+<p>
               The "job experience" field of the live demo shows a corner case. The Angular application shows a different value than the form when loading the
               page.
             </p>
@@ -112,15 +213,17 @@
               The sourcecodes in the "corner case" tab show how to let the values in the Angular application win. The basic idea is to delay populating
               <code>[formData]</code> until the page has been rendered.
             </p>
-          </mat-tab>
-          <mat-tab label="Forms raw data (under construction)">
-            <p>You can access low-level form data using <code>NgxExtendedPdfViewerService.getFormData().</code></p>
+          </div>
+          }
+          @if (leftTab === 3) {
+          <div class="tab-content">
+<p>You can access low-level form data using <code>NgxExtendedPdfViewerService.getFormData().</code></p>
             <p>You can use this demo to find out the names of the fields in the PDF file.</p>
             <p><b>Caveat:</b> The API is subject to change.</p>
             <p>Also note that radiobuttons (and checkboxes which are used as radiobuttons) have a very peculiar representation.
             This is a low-level API, so it displays all the internal complexity.</p>
             <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-              <button mat-raised-button color="primary" (click)="readRawFormDescription()" style="margin-left: 10px">read low-level form description</button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1.5 px-3 text-sm rounded shadow" (click)="readRawFormDescription()" style="margin-left: 10px">read low-level form description</button>
             </section>
             @if (rawFormData) {
               <table>
@@ -140,20 +243,24 @@
                 }
               </table>
             }
-          </mat-tab>
-          <mat-tab label="Downloading form data in a BLOB">
-            <p>You can download the PDF file as a BLOB. The user can fill the PDF form, and you can download the file containing the user's input.</p>
+          </div>
+          }
+          @if (leftTab === 4) {
+          <div class="tab-content">
+<p>You can download the PDF file as a BLOB. The user can fill the PDF form, and you can download the file containing the user's input.</p>
             <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-              <button mat-raised-button color="primary" (click)="downloadAsBlob()" style="margin-left: 10px">
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1.5 px-3 text-sm rounded shadow" (click)="downloadAsBlob()" style="margin-left: 10px">
                 download the file as BLOB and open it in a new tab
               </button>
             </section>
             @if (downloaded) {
               <p>{{ downloaded }}</p>
             }
-          </mat-tab>
-          <mat-tab label="XFA Forms">
-            <p>ngx-extended-pdf-viewer supports XFA forms. These forms are organizing their fields in a tree structure. This
+          </div>
+          }
+          @if (leftTab === 5) {
+          <div class="tab-content">
+<p>ngx-extended-pdf-viewer supports XFA forms. These forms are organizing their fields in a tree structure. This
               tree structure shows in the field names reported by <code>(formData)</code>. The field names are
               inspired by the field names the Java library iText uses, but without the array indexes.
             </p>
@@ -168,70 +275,155 @@
           in the PDF viewer. I apologize for the inconvenience - until now, I've failed to find or create
         a demo file with a liberal license.</p>
         <!--
-        <mat-checkbox [checked]="disableForms" (change)="disableForms=$event.checked" class="margin-right">[disableForms]="true" </mat-checkbox>
+        <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" [checked]="disableForms" (change)="disableForms=$event.checked" class="margin-right" />
+        <span>[disableForms]="true" </span>
+      </label>
         <br />
         -->
-        <mat-form-field appearance="fill" class="margin-right">
-          <mat-label>Service in</mat-label>
-          <mat-select (selectionChange)="this.updateFormData()" [(ngModel)]="serviceIn">
-            <mat-option value=""></mat-option>
-            <mat-option value="01">English</mat-option>
-            <mat-option value="02">French</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="margin-right">
-          <input
-            matInput
-            class="margin"
+        <div class="space-y-1">
+        <label class="block text-sm font-medium text-gray-700">Service in</label>
+        <select class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" (selectionChange)="this.updateFormData()" [(ngModel)]="serviceIn">
+
+            <option value=""></option>
+            <option value="01">English</option>
+            <option value="02">French</option>
+
+        </select>
+      </div>
+        <div class="space-y-1">
+          <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin"
             (ngModelChange)="this.delayedUpdateFormData()"
             [(ngModel)]="familyName"
-            placeholder="Family name"
-            />
-        </mat-form-field>
-        <mat-form-field class="margin-right">
-          <input
-            matInput
-            class="margin"
+            placeholder="Family name" />
+        </div>
+        <div class="space-y-1">
+          <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin"
             (ngModelChange)="this.delayedUpdateFormData()"
             [(ngModel)]="dateOfBirthYear"
-            placeholder="Date of birth (year)"
-            />
-        </mat-form-field>
+            placeholder="Date of birth (year)" />
+        </div>
         <br />
-        <mat-checkbox [checked]="canadaUS==='1'" (change)="this.setCanadaUs($event)" class="margin-right"> Is your telephone number a number in Canada or the USA? </mat-checkbox>
+        <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600" [checked]="canadaUS==='1'" (change)="this.setCanadaUs($event)" class="margin-right" />
+        <span> Is your telephone number a number in Canada or the USA? </span>
+      </label>
         <br />
         <span>Have you ever used a nickname? </span>
-        <mat-radio-group (change)="this.updateFormData()" [(ngModel)]="aliasNameIndicator" aria-label="Nickname">
-          <mat-radio-button value="Y" style="margin-right:20px">Yes</mat-radio-button>
-          <mat-radio-button value="N">No</mat-radio-button>
-        </mat-radio-group>
+        <div class="space-y-1">
+
+          <label class="flex items-center space-x-1 text-sm">
+          <input type="radio" class="form-radio text-primary-600" value="Y" (change)="this.updateFormData()" [(ngModel)]="aliasNameIndicator" aria-label="Nickname" />
+          <span>Yes</span>
+        </label>
+          <label class="flex items-center space-x-1 text-sm">
+          <input type="radio" class="form-radio text-primary-600" value="N" (change)="this.updateFormData()" [(ngModel)]="aliasNameIndicator" aria-label="Nickname" />
+          <span>No</span>
+        </label>
+
+      </div>
         <span style="font-size:70%"> (this field is on page 2, near the bottom)</span>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
-    <mat-tab-group [(selectedIndex)]="selectedTab">
-      <mat-tab label="HTML template">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/forms/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Typescript">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/forms/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="HTML (corner case)">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/forms/html-corner.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Typescript (corner case)">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/forms/ts-corner.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Reading raw forms data (prototype)">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/forms/ts2.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Download as BLOB">
-        <app-ie11-markdown src="/assets/extended-pdf-viewer/forms/ts3.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
+          </div>
+          }
+        </div>
+  </div>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%">
+            <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="selectedTab === 0"
+                [class.border-primary-600]="selectedTab === 0"
+                [class.text-gray-500]="selectedTab !== 0"
+                [class.border-transparent]="selectedTab !== 0"
+                (click)="selectedTab = 0">
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="selectedTab === 1"
+                [class.border-primary-600]="selectedTab === 1"
+                [class.text-gray-500]="selectedTab !== 1"
+                [class.border-transparent]="selectedTab !== 1"
+                (click)="selectedTab = 1">
+                Typescript
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="selectedTab === 2"
+                [class.border-primary-600]="selectedTab === 2"
+                [class.text-gray-500]="selectedTab !== 2"
+                [class.border-transparent]="selectedTab !== 2"
+                (click)="selectedTab = 2">
+                HTML (corner case)
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="selectedTab === 3"
+                [class.border-primary-600]="selectedTab === 3"
+                [class.text-gray-500]="selectedTab !== 3"
+                [class.border-transparent]="selectedTab !== 3"
+                (click)="selectedTab = 3">
+                Typescript (corner case)
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="selectedTab === 4"
+                [class.border-primary-600]="selectedTab === 4"
+                [class.text-gray-500]="selectedTab !== 4"
+                [class.border-transparent]="selectedTab !== 4"
+                (click)="selectedTab = 4">
+                Reading raw forms data (prototype)
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="selectedTab === 5"
+                [class.border-primary-600]="selectedTab === 5"
+                [class.text-gray-500]="selectedTab !== 5"
+                [class.border-transparent]="selectedTab !== 5"
+                (click)="selectedTab = 5">
+                Download as BLOB
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (selectedTab === 0) {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/forms/html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (selectedTab === 1) {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/forms/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (selectedTab === 2) {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/forms/html-corner.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (selectedTab === 3) {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/forms/ts-corner.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (selectedTab === 4) {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/forms/ts2.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (selectedTab === 5) {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/forms/ts3.md"> </app-ie11-markdown>
+          </div>
+          }
+        </div>
 </div>
+
 }
 
 <app-demo [src]="src">

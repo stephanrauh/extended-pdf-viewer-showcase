@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatCard } from '@angular/material/card';
 
 @Component({
     selector: 'app-security',
@@ -7,6 +6,6 @@ import { MatCard } from '@angular/material/card';
     standalone: true,
     templateUrl: './security.component.html',
     styleUrls: ['./security.component.css'],
-    imports: [MatCard],
+    imports: [],
 })
 export class SecurityComponent {}

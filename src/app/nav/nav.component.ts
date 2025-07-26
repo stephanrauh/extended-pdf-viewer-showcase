@@ -1,19 +1,10 @@
 import { Component, effect, inject } from '@angular/core';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { versions } from './versions';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { FullscreenService } from '../services/fullscreen.service';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 import { OctocatComponent } from './octocat/octocat.component';
-import { MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
-import { NgClass, AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatSidenavContainer, MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { ExtendedPdfViewerMenuComponent } from './extended-pdf-viewer-menu/extended-pdf-viewer-menu.component';
 @Component({
     selector: 'app-nav',
@@ -21,29 +12,15 @@ import { ExtendedPdfViewerMenuComponent } from './extended-pdf-viewer-menu/exten
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css'],
     imports: [
-        MatToolbar,
-        MatToolbarRow,
         OctocatComponent,
-        MatIconButton,
-        MatIcon,
-        MatRadioGroup,
-        NgClass,
         FormsModule,
-        MatRadioButton,
-        MatSidenavContainer,
-        MatSidenav,
         ExtendedPdfViewerMenuComponent,
-        MatSidenavContent,
         RouterOutlet,
-        AsyncPipe,
     ],
 })
 export class NavComponent {
-  private breakpointObserver = inject(BreakpointObserver);
   private notificationService = inject(PDFNotificationService);
   private fullscreenService = inject(FullscreenService);
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 1023px)').pipe(map((result) => result.matches));
 
   public version = versions.extendedPdfViewer;
   public library = 'ngx-extended-pdf-viewer';
@@ -55,6 +32,14 @@ export class NavComponent {
   public ngxExtendedPdfViewer = true;
 
   public hideMenu = false;
+
+  public get drawer() {
+    return {
+      toggle: () => {
+        this.hideMenu = !this.hideMenu;
+      }
+    };
+  }
 
   public set viewer(v: string) {
     if (this._viewer !== v) {

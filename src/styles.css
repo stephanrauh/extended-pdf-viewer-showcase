@@ -1,0 +1,522 @@
+@import 'perfect-scrollbar/css/perfect-scrollbar.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  height: calc(100% - 112px);
+}
+
+/* Layout Classes */
+.use-available-height {
+  flex: auto;
+  margin-bottom: 8px;
+}
+
+.distance16 {
+  margin-top: 16px !important;
+}
+
+.messages {
+  margin-left: 32px;
+}
+
+.fill-container {
+  width: 100%;
+  height: 100%;
+}
+
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.margin-right {
+  margin-right: 10px;
+}
+
+.margin {
+  margin: 8px;
+}
+
+/* Component specific styles */
+.compact {
+  margin-bottom: 8px;
+}
+
+.compact input[type="radio"],
+.compact input[type="checkbox"] {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.compact-input input {
+  height: 40px !important;
+  padding: 0px 12px !important;
+}
+
+.section {
+  margin-bottom: 16px;
+}
+
+.section.compact {
+  margin-bottom: 8px;
+}
+
+/* Table styles */
+table {
+  background-color: #d8d8d8;
+}
+
+td,
+th {
+  background-color: white;
+}
+
+/* Code styles */
+code {
+  font-size: 16px;
+}
+
+/* Definition list styles */
+dt,
+dd {
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+dd ~ dt,
+dd ~ dd {
+  border-top: 1px solid #bdc8ca;
+}
+
+dt {
+  float: left;
+  width: 35%;
+  padding-bottom: 0;
+  font-size: 110%;
+}
+
+dd {
+  margin-left: 35%;
+  border-left: 1px dotted #bdc8ca;
+  background-color: #fff;
+}
+
+dd:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* Sidenav styles */
+.sidenav {
+  position: fixed;
+  height: 100%;
+  z-index: 1000;
+}
+
+/* Tab content */
+.tab-content {
+  padding: 16px 0;
+}
+
+/* Tree component styles */
+.tree-container {
+  padding: 8px 0;
+}
+
+.tree-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tree-node {
+  margin: 2px 0;
+}
+
+.tree-node-content {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.tree-label {
+  flex: 1;
+  margin-left: 8px;
+}
+
+.tree-children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tree-toggle {
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.tree-spacer {
+  min-width: 32px;
+  min-height: 32px;
+}
+
+/* Icon styles */
+.icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+}
+
+.hook {
+  color: #2563eb;
+}
+
+.customizable {
+  color: #16a34a;
+}
+
+/* Column headers */
+.column-header {
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Progress bar area */
+.progress {
+  min-height: 400px;
+}
+
+/* Custom component styles to replace Material Design */
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+/* Form styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Button styles */
+button {
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Shadow utilities */
+.shadow-mat-8 {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+/* Prevent touch move for PDF viewer */
+.ngx-extended-pdf-viewer-prevent-touch-move .drawer-content {
+  touch-action: none;
+}
+
+/* Hidden utility */
+.hidden {
+  display: none !important;
+}
+
+/* Overflow utilities */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+/* Height utilities */
+.h-screen {
+  height: 100vh;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/* Flex utilities */
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Width utilities */
+.w-0 {
+  width: 0;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* Padding utilities */
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Margin utilities */
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
+}
+
+.ml-6 {
+  margin-left: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+/* Border utilities */
+.border {
+  border-width: 1px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
+.border-l {
+  border-left-width: 1px;
+}
+
+.border-gray-200 {
+  border-color: #e5e7eb;
+}
+
+.border-gray-300 {
+  border-color: #d1d5db;
+}
+
+.border-transparent {
+  border-color: transparent;
+}
+
+.border-primary-600 {
+  border-color: #2563eb;
+}
+
+/* Background utilities */
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-primary-500 {
+  background-color: #3b82f6;
+}
+
+.bg-primary-600 {
+  background-color: #2563eb;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6;
+}
+
+/* Text utilities */
+.text-white {
+  color: #ffffff;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-primary-600 {
+  color: #2563eb;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+/* Rounded utilities */
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+/* Shadow utilities */
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Transition utilities */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover utilities */
+.hover\:bg-primary-600:hover {
+  background-color: #2563eb;
+}
+
+.hover\:bg-gray-100:hover {
+  background-color: #f3f4f6;
+}
+
+/* Focus utilities */
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus\:ring-2:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+.focus\:ring-primary-500:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+.focus\:border-primary-500:focus {
+  border-color: #3b82f6;
+}

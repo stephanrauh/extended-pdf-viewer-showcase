@@ -3,7 +3,6 @@ import { AfterViewInit, Component, ElementRef, OnInit, inject } from '@angular/c
 import { ISortDirection, Settings, Angular2SmartTableModule } from 'angular2-smart-table';
 import { firstValueFrom } from 'rxjs';
 import { isBrowser } from '../common/utilities';
-import { MatCard } from '@angular/material/card';
 
 @Component({
     selector: 'app-css',
@@ -11,7 +10,9 @@ import { MatCard } from '@angular/material/card';
     standalone: true,
     templateUrl: './css.component.html',
     styleUrls: ['./css.component.css'],
-    imports: [MatCard, Angular2SmartTableModule],
+    imports: [
+        Angular2SmartTableModule,
+    ],
 })
 export class CSSComponent implements OnInit, AfterViewInit {
   private httpClient = inject(HttpClient);

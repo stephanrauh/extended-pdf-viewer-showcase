@@ -1,10 +1,27 @@
 <div class="flex-container-column fill-container">
   @if (!fullscreen) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-        <mat-tab-group>
-          <mat-tab label="Custom Loading Indicator">
-            <p>While there is a loading indicator in pdf.js, there's a good reason to implement your own loading indicator. The default
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="loadingindicatorcomponentTab === 'customloadingindicator'"
+              [class.border-primary-600]="loadingindicatorcomponentTab === 'customloadingindicator'"
+              [class.text-gray-500]="loadingindicatorcomponentTab !== 'customloadingindicator'"
+              [class.border-transparent]="loadingindicatorcomponentTab !== 'customloadingindicator'"
+              (click)="loadingindicatorcomponentTab = 'customloadingindicator'">
+              Custom Loading Indicator
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (loadingindicatorcomponentTab === 'customloadingindicator') {
+          <div class="tab-content">
+<p>While there is a loading indicator in pdf.js, there's a good reason to implement your own loading indicator. The default
               indicator is triggered only once (but not when you load a new document), and it only shows the loading phase, excluding the
               time required to render the PDF file.
             </p>
@@ -12,22 +29,63 @@
               and `(pageRendered)`.
             </p>
             <p>Note on the demo: I've delayed both loading and rendering, otherwise you'd miss the loading indicator.</p>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-        <mat-tab-group>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/html.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="Typescript">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/ts.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="CSS">
-            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/css.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+          </div>
+          }
+        </div>
+      </div>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="loadingindicatorcomponentTab === 'htmltemplate'"
+              [class.border-primary-600]="loadingindicatorcomponentTab === 'htmltemplate'"
+              [class.text-gray-500]="loadingindicatorcomponentTab !== 'htmltemplate'"
+              [class.border-transparent]="loadingindicatorcomponentTab !== 'htmltemplate'"
+              (click)="loadingindicatorcomponentTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              Typescript
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'css'"
+              [class.border-primary-600]="codeTab === 'css'"
+              [class.text-gray-500]="codeTab !== 'css'"
+              [class.border-transparent]="codeTab !== 'css'"
+              (click)="codeTab = 'css'">
+              CSS
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (loadingindicatorcomponentTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'css') {
+          <div class="tab-content">
+<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/loading-indicator/css.md"> </app-ie11-markdown>
+          </div>
+          }
+        </div>
+      </div>
     </div>
   }
 

@@ -1,16 +1,8 @@
 import { Component, effect, OnDestroy, inject } from '@angular/core';
 import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PDFPrintRange } from 'ngx-extended-pdf-viewer';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTabChangeEvent, MatTabGroup, MatTab } from '@angular/material/tabs';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatFormField } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -23,16 +15,7 @@ import { LanguagePipe } from 'ngx-markdown';
     templateUrl: './print-range.component.html',
     styleUrls: ['./print-range.component.css'],
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatFormField,
-        MatInput,
         FormsModule,
-        MatButton,
-        MatCheckbox,
-        MatRadioGroup,
-        MatRadioButton,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -42,9 +25,10 @@ import { LanguagePipe } from 'ngx-markdown';
 })
 export class PrintRangeComponent implements OnDestroy {
   private printService = inject(NgxExtendedPdfViewerService);
-  private snackBar = inject(MatSnackBar);
   fullscreenService = inject(FullscreenService);
 
+  public printrangecomponentTab: string = 'printserviceprint';
+  public codeTab: string = 'typescript';
   private activeTab = 0;
   private PDFViewerApplication?: IPDFViewerApplication;
 
@@ -172,12 +156,11 @@ export class PrintRangeComponent implements OnDestroy {
       included: this.includedAsArray,
     } as PDFPrintRange;
     this.printService.setPrintRange(range);
-    this.snackBar.open(message ?? 'Click the print button or hit CTRL+P to see the effect. If you are using a Mac, the key binding is CMD+P.', 'OK', {
-      duration: 5000,
-    });
+    // Note: Snackbar functionality removed due to Material dependency removal
+    console.log(message ?? 'Click the print button or hit CTRL+P to see the effect. If you are using a Mac, the key binding is CMD+P.');
   }
 
-  public tabChanged(index: MatTabChangeEvent) {
+  public tabChanged(index: any) {
     this.activeTab = index.index;
     if (this.activeTab === 3) {
       this.printService.removePrintRange();
@@ -220,7 +203,6 @@ export class PrintRangeComponent {
       return `@Component({
 standalone: false,  ... })
 export class PrintComponent {
-  public replaceBrowserPrint = ${this.replaceBrowserPrint};
   }
 }`;
     }

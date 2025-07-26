@@ -1,27 +1,73 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
-        <mat-tab-group>
-          <mat-tab label="Mobile mode">
-            <app-ie11-markdown>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="mobilecomponentTab === 'mobilemode'"
+              [class.border-primary-600]="mobilecomponentTab === 'mobilemode'"
+              [class.text-gray-500]="mobilecomponentTab !== 'mobilemode'"
+              [class.border-transparent]="mobilecomponentTab !== 'mobilemode'"
+              (click)="mobilecomponentTab = 'mobilemode'">
+              Mobile mode
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="mobilecomponentTab === 'responsivedesign'"
+              [class.border-primary-600]="mobilecomponentTab === 'responsivedesign'"
+              [class.text-gray-500]="mobilecomponentTab !== 'responsivedesign'"
+              [class.border-transparent]="mobilecomponentTab !== 'responsivedesign'"
+              (click)="mobilecomponentTab = 'responsivedesign'">
+              Responsive design
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (mobilecomponentTab === 'mobilemode') {
+          <div class="tab-content">
+<app-ie11-markdown>
               The attribute `mobileFriendlyZoom` makes the toolbar larger, making it easier to use the PDF viewer on smartphones and tablet PCs.
               Usually it's enough to set it to 150%. Larger values are only useful if you reduce the number of buttons in the toolbar.
             </app-ie11-markdown>
-            <mat-label title="Toolbar zoom factor"></mat-label>
-            <mat-radio-group aria-label="Toolbar zoom factor"
-              (change)="mobileFriendlyZoomSetting=$event.value"
-              [value]="mobileFriendlyZoomSetting">
-              <mat-radio-button class="compact" value="100%">[mobileFriendlyZoom]="'100%' (default)"</mat-radio-button>
-              <mat-radio-button class="compact" [value]="'150%'">[mobileFriendlyZoom]="'150%'"</mat-radio-button>
-              <mat-radio-button class="compact" value="200%">[mobileFriendlyZoom]="'200%'"</mat-radio-button>
-              <mat-radio-button class="compact" value="1.7">[mobileFriendlyZoom]="1.7"</mat-radio-button>
-              <mat-radio-button class="compact" value="true">[mobileFriendlyZoom]="true"</mat-radio-button>
-              <mat-radio-button class="compact" value="false">[mobileFriendlyZoom]="false"</mat-radio-button>
-            </mat-radio-group>
-          </mat-tab>
-          <mat-tab label="Responsive design">
-            <p>
+            <label class="block text-sm font-medium text-gray-700"></label>
+            <div class="space-y-2">
+        
+              <label class="flex items-center space-x-2">
+        <input type="radio" class="form-radio text-primary-600" class="compact" value="100%" />
+        <span>[mobileFriendlyZoom]="'100%' (default)"</span>
+      </label>
+              <label class="flex items-center space-x-2">
+        <input type="radio" class="form-radio text-primary-600" class="compact" [value]="'150%'" />
+        <span>[mobileFriendlyZoom]="'150%'"</span>
+      </label>
+              <label class="flex items-center space-x-2">
+        <input type="radio" class="form-radio text-primary-600" class="compact" value="200%" />
+        <span>[mobileFriendlyZoom]="'200%'"</span>
+      </label>
+              <label class="flex items-center space-x-2">
+        <input type="radio" class="form-radio text-primary-600" class="compact" value="1.7" />
+        <span>[mobileFriendlyZoom]="1.7"</span>
+      </label>
+              <label class="flex items-center space-x-2">
+        <input type="radio" class="form-radio text-primary-600" class="compact" value="true" />
+        <span>[mobileFriendlyZoom]="true"</span>
+      </label>
+              <label class="flex items-center space-x-2">
+        <input type="radio" class="form-radio text-primary-600" class="compact" value="false" />
+        <span>[mobileFriendlyZoom]="false"</span>
+      </label>
+            
+      </div>
+          </div>
+          }
+          @if (mobilecomponentTab === 'responsivedesign') {
+          <div class="tab-content">
+<p>
               ngx-extended-pdf-viewer uses dynamic CSS rules to show as many buttons as possible in the toolbar.
               If there are too many buttons, they are shifted into the kebab menu on the right-hand side.
             </p>
@@ -36,19 +82,49 @@
               appear again in the toolbar. When reducing the window size even further, the toolbar buttons
               start vanishing again.
             </p>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
-        <mat-tab-group>
-          <mat-tab label="HTML template">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/mobile/html.md"> </app-ie11-markdown>
-          </mat-tab>
-          <mat-tab label="TypeScript">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/mobile/ts.md"> </app-ie11-markdown>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+          </div>
+          }
+        </div>
+      </div>
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
+                <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'htmltemplate'"
+              [class.border-primary-600]="codeTab === 'htmltemplate'"
+              [class.text-gray-500]="codeTab !== 'htmltemplate'"
+              [class.border-transparent]="codeTab !== 'htmltemplate'"
+              (click)="codeTab = 'htmltemplate'">
+              HTML template
+            </button>
+            <button 
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              TypeScript
+            </button>
+          </div>
+          </div>
+          
+          <!-- Tab content -->
+          @if (codeTab === 'htmltemplate') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/mobile/html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'typescript') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/mobile/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+        </div>
+      </div>
     </div>
   }
 

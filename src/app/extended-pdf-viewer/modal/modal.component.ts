@@ -1,32 +1,32 @@
 import { Component, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
-import { MatCard } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-modal',
-    
-    standalone: true,
-    templateUrl: './modal.component.html',
-    styleUrls: ['./modal.component.css'],
-    imports: [
-        MatCard,
-        MatButton,
-        MatTabGroup,
-        MatTab,
-        Ie11MarkdownComponent,
-    ],
+  selector: 'app-modal',
+
+  standalone: true,
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.css'],
+  imports: [Ie11MarkdownComponent, ModalDialogComponent, CommonModule],
 })
 export class ModalComponent {
-  private dialog = inject(MatDialog);
-
+  public activeTab = 'typescript';
+  public isModalOpen = false;
 
   public openDialog() {
-    this.dialog.open(ModalDialogComponent, {
-      width: '400px',
-    });
+    this.isModalOpen = true;
+  }
+
+  public closeDialog() {
+    this.isModalOpen = false;
+  }
+
+  public onBackdropClick(event: Event) {
+    // Close modal when clicking the backdrop (not the content)
+    if (event.target === event.currentTarget) {
+      this.closeDialog();
+    }
   }
 }

@@ -1,32 +1,23 @@
 import { Component, inject } from '@angular/core';
 import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatButton } from '@angular/material/button';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-annotation-layer',
-    
-    standalone: true,
-    templateUrl: './annotation-layer.component.html',
-    styleUrls: ['./annotation-layer.component.css'],
-    imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatButton,
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-annotation-layer',
+
+  standalone: true,
+  templateUrl: './annotation-layer.component.html',
+  styleUrls: ['./annotation-layer.component.css'],
+  imports: [CommonModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class AnnotationLayerComponent {
   public fullscreenService = inject(FullscreenService);
+
+  public activeTab: string = 'types';
+  public codeTab: string = 'html';
 
   public onAnnotationLayerRendered(event: AnnotationLayerRenderedEvent): void {
     const copyrightHint = event.source.div.querySelector('.freeTextAnnotation');

@@ -1,27 +1,24 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { IPDFViewerApplication, PageRenderedEvent, PageRenderEvent, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-book-mode',
-    
-    standalone: true,
-    templateUrl: './book-mode.component.html',
-    styleUrls: ['./book-mode.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [MatCard, MatTabGroup, MatTab, Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule]
+  selector: 'app-book-mode',
+
+  standalone: true,
+  templateUrl: './book-mode.component.html',
+  styleUrls: ['./book-mode.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule],
 })
 export class BookModeComponent {
-
   public page = 1;
 
   public fullscreen = false;
 
-
+  public activeTab: string = 'html';
 
   private PDFViewerApplication!: IPDFViewerApplication;
 
@@ -34,7 +31,7 @@ export class BookModeComponent {
   }
 
   public onPageRender(event: PageRenderEvent): void {
-    console.log("Going to render page " + event.pageNumber);
+    console.log('Going to render page ' + event.pageNumber);
   }
 
   public onPageRendered(event: PageRenderedEvent): void {

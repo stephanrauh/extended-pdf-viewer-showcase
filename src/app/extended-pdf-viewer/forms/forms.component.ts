@@ -1,16 +1,8 @@
 import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { countries } from './countries';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatTabChangeEvent, MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatCheckboxChange, MatCheckbox } from '@angular/material/checkbox';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { MatSelect, MatOption } from '@angular/material/select';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
-import { MatButton } from '@angular/material/button';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe, JsonPipe } from '@angular/common';
@@ -22,19 +14,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
     styleUrls: ['./forms.component.css'],
     changeDetection: ChangeDetectionStrategy.Default,
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
-        MatFormField,
-        MatInput,
         FormsModule,
-        MatLabel,
-        MatSelect,
-        MatOption,
-        MatCheckbox,
-        MatRadioGroup,
-        MatRadioButton,
-        MatButton,
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule,
@@ -92,6 +72,7 @@ export class FormsComponent {
   public xfaFormData: Record<string, string | string[] | number | boolean> = {};
 
   public leftTab = 0;
+  public formscomponentTab: string = 'displayingforms';
 
   public get fullscreen(): boolean {
     return this._fullscreen;
@@ -169,11 +150,11 @@ export class FormsComponent {
   }
 
   constructor() {
-    this.onSelectTab({ index: 0 } as MatTabChangeEvent);
+    this.onSelectTab({ index: 0 });
     this.updateFormData();
   }
 
-  public setCanadaUs(event: MatCheckboxChange): void {
+  public setCanadaUs(event: any): void {
     this.canadaUS = event.checked ? '1' : '0';
     this.updateFormData();
   }
@@ -182,6 +163,30 @@ export class FormsComponent {
     setTimeout(() => {
       this.updateFormData();
     });
+  }
+
+  public onTypeScriptChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.typeScript = target.checked ? 'Yes' : 'No';
+    this.updateFormData();
+  }
+
+  public onJavaScriptChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.javaScript = target.checked ? 'Yes' : 'No';
+    this.updateFormData();
+  }
+
+  public onJavaChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.java = target.checked;
+    this.updateFormData();
+  }
+
+  public onCSharpChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.cSharp = target.checked;
+    this.updateFormData();
   }
 
   public async downloadAsBlob(): Promise<void> {
@@ -214,7 +219,7 @@ export class FormsComponent {
     }));
   }
 
-  public onSelectTab(event: MatTabChangeEvent): void {
+  public onSelectTab(event: any): void {
     this.leftTab = event.index;
     if (event.index === 2) {
       this.selectedTab = 2;

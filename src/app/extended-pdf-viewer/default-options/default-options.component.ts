@@ -5,8 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Settings, Angular2SmartTableModule } from 'angular2-smart-table';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { MatCard } from '@angular/material/card';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
@@ -19,9 +17,6 @@ import { AsyncPipe } from '@angular/common';
     styleUrls: ['./default-options.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        MatCard,
-        MatTabGroup,
-        MatTab,
         Ie11MarkdownComponent,
         Angular2SmartTableModule,
         DemoComponent,
@@ -64,6 +59,8 @@ export class DefaultOptionsComponent implements OnInit {
   public availableOptions: object[] = [];
 
   public coveredOptions: object[] = [];
+  public defaultoptionscomponentTab: string = 'overview';
+  public codeTab: string = 'typescript';
 
   private _fullscreen = false;
 

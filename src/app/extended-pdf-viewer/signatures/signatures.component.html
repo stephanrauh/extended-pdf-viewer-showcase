@@ -1,81 +1,150 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <mat-card appearance="outlined" class="distance16 mat-elevation-z8 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
-        <mat-tab-group>
-          <mat-tab label="Signatures without verification">
-            <p><b>Using this feature is dangerous!</b>
-          </p>
-          <p>
-            PDF files can contains a digital signature, optionally backed by a cryptographic verification.
-            Such a signature confirms that the PDF that
-            it's been created by the author (and not someone else).
-          </p>
-          <p>
-            However, ngx-extended-pdf-viewer <b>does not verify the validity</b> of the signature.
-            One of the test files has an invalid signature. The signature is displayed without
-            any hint it's faulty. So use this feature carefully! Do not show the
-            signature unless you're 100% sure it's valid. Otherwise, users may draw wrong conclusions.
-          </p>
-          <p>To activate signatures, you must set the attribute <code>showUnverifiedSignatures</code>.
-        </p>
-        <mat-checkbox class="margin" [(ngModel)]="showSignature">show signature</mat-checkbox>
-      </mat-tab>
-      <mat-tab label="Signature Editor">
-        <p>
-          Starting with ngx-extended-pdf-viewer 24, there's a "signature editor". There's a catch: these
-          signatures aren't PDF signatures, they are merely image annotations.
-        </p>
-          <ul>
-            <li>These signatures aren't cryptographic signatures as defined by the PDF standard.</li>
-            <li>They show even if you set <code>showUnverifiedSignatures = false</code>.</li>
-          </ul>
-          <p>By default, the signature editor is disabled. You can enable it with
-            `pdfDefaultOptions.enableSignatureEditor = true;`.
-          </p>
-      </mat-tab>
-      <mat-tab label="Unverified signatures and security considerations">
-        <p>
-          The base library, pdf.js, has only recently activated support for signatures.
-          The team had a long-standing policy not to support signature because it's difficult
-          to verify signatures.
-        </p>
-        <p>
-          ngx-extended-pdf-viewer prefers to err on the safe side. By default, signatures are
-          <b>not</b> shown. You can activate them, but then your users see a red bar containing
-          a warning. I hope that's fine for you. If you're really sure what you're doing,
-          you can hide the red bar with a CSS rule.
-        </p>
-        <p>
-          But I ask you not to do so. It's better to
-          play it safe. Show the signature, but also inform your users you can't guarantee them
-          it's not a fake. The warning also tells your users how to verify the signature: most
-          desktop PDF viewer applications check this. In particular, just open the file in
-          Acrobat Reader to see if the signature is valid or fraud.
-        </p>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-  <mat-card appearance="outlined" class="distance16 mat-elevation-z8 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
-    <mat-tab-group>
-      <mat-tab label="HTML template">
-        <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/html.md"> </app-ie11-markdown>
-      </mat-tab>
-      <mat-tab label="Typescript">
-        <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/ts.md"> </app-ie11-markdown>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
-}
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 60%"
+      >
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="signaturescomponentTab === 'signatureswithoutverification'"
+              [class.border-primary-600]="signaturescomponentTab === 'signatureswithoutverification'"
+              [class.text-gray-500]="signaturescomponentTab !== 'signatureswithoutverification'"
+              [class.border-transparent]="signaturescomponentTab !== 'signatureswithoutverification'"
+              (click)="signaturescomponentTab = 'signatureswithoutverification'"
+            >
+              Signatures without verification
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="signaturescomponentTab === 'signatureeditor'"
+              [class.border-primary-600]="signaturescomponentTab === 'signatureeditor'"
+              [class.text-gray-500]="signaturescomponentTab !== 'signatureeditor'"
+              [class.border-transparent]="signaturescomponentTab !== 'signatureeditor'"
+              (click)="signaturescomponentTab = 'signatureeditor'"
+            >
+              Signature Editor
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'unverifiedsignaturesandsecurityconsiderations'"
+              [class.border-primary-600]="codeTab === 'unverifiedsignaturesandsecurityconsiderations'"
+              [class.text-gray-500]="codeTab !== 'unverifiedsignaturesandsecurityconsiderations'"
+              [class.border-transparent]="codeTab !== 'unverifiedsignaturesandsecurityconsiderations'"
+              (click)="codeTab = 'unverifiedsignaturesandsecurityconsiderations'"
+            >
+              Unverified signatures and security considerations
+            </button>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (signaturescomponentTab === 'signatureswithoutverification') {
+            <div class="tab-content">
+              <p><b>Using this feature is dangerous!</b></p>
+              <p>
+                PDF files can contains a digital signature, optionally backed by a cryptographic verification. Such a signature confirms that the PDF that it's
+                been created by the author (and not someone else).
+              </p>
+              <p>
+                However, ngx-extended-pdf-viewer <b>does not verify the validity</b> of the signature. One of the test files has an invalid signature. The
+                signature is displayed without any hint it's faulty. So use this feature carefully! Do not show the signature unless you're 100% sure it's
+                valid. Otherwise, users may draw wrong conclusions.
+              </p>
+              <p>To activate signatures, you must set the attribute <code>showUnverifiedSignatures</code>.</p>
+              <label class="flex items-center space-x-2">
+        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="showSignature" />
+        <span>show signature</span>
+      </label>
+            </div>
+          }
+          @if (signaturescomponentTab === 'signatureeditor') {
+            <div class="tab-content">
+              <p>
+                Starting with ngx-extended-pdf-viewer 24, there's a "signature editor". There's a catch: these signatures aren't PDF signatures, they are merely
+                image annotations.
+              </p>
+              <ul>
+                <li>These signatures aren't cryptographic signatures as defined by the PDF standard.</li>
+                <li>They show even if you set <code>showUnverifiedSignatures = false</code>.</li>
+              </ul>
+              <p>By default, the signature editor is disabled. You can enable it with `pdfDefaultOptions.enableSignatureEditor = true;`.</p>
+            </div>
+          }
+          @if (codeTab === 'unverifiedsignaturesandsecurityconsiderations') {
+            <div class="tab-content">
+              <p>
+                The base library, pdf.js, has only recently activated support for signatures. The team had a long-standing policy not to support signature
+                because it's difficult to verify signatures.
+              </p>
+              <p>
+                ngx-extended-pdf-viewer prefers to err on the safe side. By default, signatures are
+                <b>not</b> shown. You can activate them, but then your users see a red bar containing a warning. I hope that's fine for you. If you're really
+                sure what you're doing, you can hide the red bar with a CSS rule.
+              </p>
+              <p>
+                But I ask you not to do so. It's better to play it safe. Show the signature, but also inform your users you can't guarantee them it's not a
+                fake. The warning also tells your users how to verify the signature: most desktop PDF viewer applications check this. In particular, just open
+                the file in Acrobat Reader to see if the signature is valid or fraud.
+              </p>
+            </div>
+          }
+        </div>
+      </div>
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 48%"
+      >
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'htmltemplate'"
+              [class.border-primary-600]="codeTab === 'htmltemplate'"
+              [class.text-gray-500]="codeTab !== 'htmltemplate'"
+              [class.border-transparent]="codeTab !== 'htmltemplate'"
+              (click)="codeTab = 'htmltemplate'"
+            >
+              HTML template
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'"
+            >
+              Typescript
+            </button>
+          </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (codeTab === 'htmltemplate') {
+            <div class="tab-content">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/html.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (codeTab === 'typescript') {
+            <div class="tab-content">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/signatures/ts.md"> </app-ie11-markdown>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
 
   <app-demo [src]="'/assets/pdfs/unverified-signature.pdf'">
     @if (showPdf) {
-      <ngx-extended-pdf-viewer
-        [src]="'/assets/pdfs/unverified-signature.pdf'"
-        [height]="'90vh'"
-        [showUnverifiedSignatures]="showSignature"
-        >
+      <ngx-extended-pdf-viewer [src]="'/assets/pdfs/unverified-signature.pdf'" [height]="'90vh'" [showUnverifiedSignatures]="showSignature">
       </ngx-extended-pdf-viewer>
     }
   </app-demo>
