@@ -10,7 +10,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 
 @Component({
     selector: 'app-export-annotations',
-    
+
     standalone: true,
     templateUrl: './export-annotations.component.html',
     styleUrls: ['./export-annotations.component.css'],
@@ -71,7 +71,6 @@ export class ExportAnnotationsComponent {
       pageIndex: 0,
       rect: [x, y, x + width, y + height],
       rotation: 0,
-      isCopy: true,
     };
     console.log(textEditorAnnotation);
     console.log('Before update');
@@ -122,7 +121,6 @@ export class ExportAnnotationsComponent {
       pageIndex: 0,
       rect: [left, bottom, right, top], // Bounding box
       rotation: 0 as const,
-      isCopy: true,
     };
 
     console.log(highlightAnnotation);
