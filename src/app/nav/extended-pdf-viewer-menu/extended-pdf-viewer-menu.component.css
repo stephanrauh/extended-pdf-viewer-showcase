@@ -1,5 +1,7 @@
 ::ng-deep .mat-mdc-list-base .mat-mdc-list-item.active {
-  color: blue;
+  color: #1976d2;
+  background-color: rgba(25, 118, 210, 0.1);
+  font-weight: 500;
 }
 
 .mat-mdc-list-base a.mat-mdc-list-item {

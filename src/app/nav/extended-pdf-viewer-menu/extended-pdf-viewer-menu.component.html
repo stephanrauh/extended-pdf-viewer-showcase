@@ -1,82 +1,82 @@
 <mat-toolbar>About</mat-toolbar>
 <mat-nav-list>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'intro'">What is ngx-extended-pdf-viewer?</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'alternatives'">Alternatives</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/intro'" routerLinkActive="active">What is ngx-extended-pdf-viewer?</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/alternatives'" routerLinkActive="active">Alternatives</a>
 </mat-nav-list>
 
 <mat-toolbar>Documentation</mat-toolbar>
 <mat-nav-list>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'getting-started'">Getting started</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'security'">Security</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'browser-support'">Browser support</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'attributes'">Attributes and events</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'css'">Useful CSS rules</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'options'">Default options</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'customization'">Customizing the menus</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'keycloak'">Keycloak</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/getting-started'" routerLinkActive="active">Getting started</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/security'" routerLinkActive="active">Security</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/browser-support'" routerLinkActive="active">Browser support</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/attributes'" routerLinkActive="active">Attributes and events</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/css'" routerLinkActive="active">Useful CSS rules</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/options'" routerLinkActive="active">Default options</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/customization'" routerLinkActive="active">Customizing the menus</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/keycloak'" routerLinkActive="active">Keycloak</a>
   <a mat-list-item [href]="'pdfjs-versions'">Sneak preview pdf.js</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'range-requests'">Range requests</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'troubleshooting'">Troubleshooting</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'changelog'">Changelog</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/range-requests'" routerLinkActive="active">Range requests</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/troubleshooting'" routerLinkActive="active">Troubleshooting</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/changelog'" routerLinkActive="active">Changelog</a>
 </mat-nav-list>
 
 <mat-toolbar>Demos and manual</mat-toolbar>
 <mat-nav-list>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'simple'">Simple demo</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'csp'">Content Security Policy (CSP)</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'prerendering'">Pre-rendering</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'two-way-binding'">Two-way binding</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'base64'">Base64 encoded files</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'blob'">BLOBs</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'book-mode'">Book mode</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'contextmenu'">Context menu</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'custom-print-dialog'">Custom print progress</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'print-range'">Print API / print range</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'hiding-buttons'">Customizing buttons</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'responsive-design'">Responsive design</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'custom-sidebar'">Custom sidebar</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'custom-thumbnails'">Custom thumbnails</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'custom-toolbar'">Custom toolbars</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'display-options'">Display options</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'scripting'">enable / disable JavaScript</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'export-file'">Export PDF as a BLOB</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'export-image'">Export as image</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'export-text'">Export as text</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'export-annotations'">Editor API (low level)</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'annotation-layer-api'">Editor API (high level)</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'editor-setting'">Editor API (settings)</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'ngx-pdf-viewer-service'">NgxPdfViewerService API</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'editor-events'">EditorEvents</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'pages-loaded'">Events</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'filtering-console-log'">Filtering console log</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'custom-find'">Custom find algorithm</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'find'">Find programmatically</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'forms'">Forms</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'infinite-scroll'">Infinite scroll</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'i18n'">Internationalization</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'keyboard'">Keyboard</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'annotation-layer'">Layers above the PDF</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'layers'">Layered PDF files</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'links'">Links</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'loading-indicator'">Loading indicator</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'multiple-documents'">Loading & unloading PDFs + drag'n'drop</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'navigation'">Navigation API</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'scrolling'">Scrolling API</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'mobile'">Mobile devices</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'modal'">Modal dialogs</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'modify-page-order'">Modify Page Order</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'passwords'">Passwords</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'perfect-scrollbar'">Perfect scrollbar</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'presentations'">Presentations</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'file-info'">Reading metadata</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'server-side-rendering'">Server-side rendering</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'page-view-mode'">Single-page mode</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'smartphone'">Smartphones</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'textlayer'">Text layer</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'theming'">Theming</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'touch-gestures'">Touch gestures: Double-tap</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'side-by-side'">Two PDFs side-by-side</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'signatures'">Unverified signatures</a>
-  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'zoom'">Zoom</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/simple'" routerLinkActive="active">Simple demo</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/csp'" routerLinkActive="active">Content Security Policy (CSP)</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/prerendering'" routerLinkActive="active">Pre-rendering</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/two-way-binding'" routerLinkActive="active">Two-way binding</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/base64'" routerLinkActive="active">Base64 encoded files</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/blob'" routerLinkActive="active">BLOBs</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/book-mode'" routerLinkActive="active">Book mode</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/contextmenu'" routerLinkActive="active">Context menu</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-print-dialog'" routerLinkActive="active">Custom print progress</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/print-range'" routerLinkActive="active">Print API / print range</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/hiding-buttons'" routerLinkActive="active">Customizing buttons</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/responsive-design'" routerLinkActive="active">Responsive design</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-sidebar'" routerLinkActive="active">Custom sidebar</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-thumbnails'" routerLinkActive="active">Custom thumbnails</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-toolbar'" routerLinkActive="active">Custom toolbars</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/display-options'" routerLinkActive="active">Display options</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/scripting'" routerLinkActive="active">enable / disable JavaScript</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-file'" routerLinkActive="active">Export PDF as a BLOB</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-image'" routerLinkActive="active">Export as image</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-text'" routerLinkActive="active">Export as text</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/export-annotations'" routerLinkActive="active">Editor API (low level)</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/annotation-layer-api'" routerLinkActive="active">Editor API (high level)</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/editor-setting'" routerLinkActive="active">Editor API (settings)</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/ngx-pdf-viewer-service'" routerLinkActive="active">NgxPdfViewerService API</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/editor-events'" routerLinkActive="active">EditorEvents</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/pages-loaded'" routerLinkActive="active">Events</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/filtering-console-log'" routerLinkActive="active">Filtering console log</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/custom-find'" routerLinkActive="active">Custom find algorithm</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/find'" routerLinkActive="active">Find programmatically</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/forms'" routerLinkActive="active">Forms</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/infinite-scroll'" routerLinkActive="active">Infinite scroll</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/i18n'" routerLinkActive="active">Internationalization</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/keyboard'" routerLinkActive="active">Keyboard</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/annotation-layer'" routerLinkActive="active">Layers above the PDF</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/layers'" routerLinkActive="active">Layered PDF files</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/links'" routerLinkActive="active">Links</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/loading-indicator'" routerLinkActive="active">Loading indicator</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/multiple-documents'" routerLinkActive="active">Loading & unloading PDFs + drag'n'drop</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/navigation'" routerLinkActive="active">Navigation API</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/scrolling'" routerLinkActive="active">Scrolling API</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/mobile'" routerLinkActive="active">Mobile devices</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/modal'" routerLinkActive="active">Modal dialogs</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/modify-page-order'" routerLinkActive="active">Modify Page Order</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/passwords'" routerLinkActive="active">Passwords</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/perfect-scrollbar'" routerLinkActive="active">Perfect scrollbar</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/presentations'" routerLinkActive="active">Presentations</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/file-info'" routerLinkActive="active">Reading metadata</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/server-side-rendering'" routerLinkActive="active">Server-side rendering</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/page-view-mode'" routerLinkActive="active">Single-page mode</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/smartphone'" routerLinkActive="active">Smartphones</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/textlayer'" routerLinkActive="active">Text layer</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/theming'" routerLinkActive="active">Theming</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/touch-gestures'" routerLinkActive="active">Touch gestures: Double-tap</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/side-by-side'" routerLinkActive="active">Two PDFs side-by-side</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/signatures'" routerLinkActive="active">Unverified signatures</a>
+  <a mat-list-item (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/zoom'" routerLinkActive="active">Zoom</a>
   <p style="height: 5em">&nbsp;</p>
 </mat-nav-list>

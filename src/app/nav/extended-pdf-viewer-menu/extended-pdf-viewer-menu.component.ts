@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { firstValueFrom, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -13,7 +13,7 @@ import { MatNavList, MatListItem } from '@angular/material/list';
     templateUrl: './extended-pdf-viewer-menu.component.html',
     styleUrls: ['./extended-pdf-viewer-menu.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [MatToolbar, MatNavList, MatListItem, RouterLink]
+    imports: [MatToolbar, MatNavList, MatListItem, RouterLink, RouterLinkActive]
 })
 export class ExtendedPdfViewerMenuComponent {
   private router = inject(Router);
