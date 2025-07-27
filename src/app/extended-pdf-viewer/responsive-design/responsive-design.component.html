@@ -46,25 +46,28 @@
           @if (responsivedesigncomponentTab === 'breakpoints') {
             <div class="tab-content">
               <p>
-                The PDF viewer uses responsive design to display nicely on devices of all sizes. On large screens, the toolbar shows many buttons. On smaller
-                screens, some of these buttons are shifted to the secondary menu. A few actions are only available in the secondary menu: the scroll mode, the
-                spread modes, and the document properties. In a future version, I might add toolbar icons for these icons, so the corresponding attributes are
-                also called <code>showXXXButton</code>, ignoring the fact that currently, these actions are currently only available in the secondary menu.
+                The PDF viewer uses responsive design to adapt to different screen sizes. On large screens, the toolbar displays many buttons. On smaller
+                screens, some buttons move to a secondary menu. A few actions (scroll mode, spread modes, and document properties) are currently only available
+                in the secondary menu, though future versions may add toolbar icons for these.
               </p>
+
+              <b>Button Visibility Control</b>
+
               <p>
-                I've breakpoints to the buttons to show as many buttons as possible on any screen. However, if you don't need every button, you've got more
-                available screen estate. So you can override my choice of breakpoint by setting, for example, <code>showXXXButton="xs"</code>.
-                <code>xs</code> means the button shows if the PDF viewer is at least 490 pixel wide. <code>sm</code> means the button is visible if the PDF
-                viewer is at least 560 pixels wide, and so on until <code>xxl</code>, which hides buttons if the PDF viewer is less than 830 pixels wide.
+                You can control when buttons appear by setting breakpoints. For example, <code>showXXXButton="xs"</code> makes a button visible when the PDF
+                viewer is at least 490px wide. The available breakpoints are <code>xs</code>: 490px, <code>sm</code>: 560px, <code>md</code>: 610px, <code>lg</code>: 660px, <code>xl</code>: 740px, <code>xxl</code>: 830px.
               </p>
+
               <p>
-                Note that these width don't refer to the width of the screen. That's a difference to the definition of reponsive breakpoints in Tailwind,
-                Bootstrap or Material Design. The PDF viewer frequently is smaller than the screen, so I went the extra mile to define breakpoints relative to
-                the component width.
+                <strong>Note:</strong> These widths refer to the PDF viewer component itself, not the screen width—unlike standard responsive frameworks like
+                Tailwind or Bootstrap.
               </p>
+
+              <h2>Custom Breakpoints</h2>
+
               <p>
-                You can modify the breakpoints themselves if my default selection of 490, 560, 610, 660, 740, and 830 doesn't match your requirements. Do do so,
-                set the static attributes of the class <code>PdfBreakpoints</code>. You can experiment with these settings on the third tab of this demo.
+                You can modify the default breakpoint values by setting the static attributes of the <code>PdfBreakpoints</code> class. Experiment with these
+                settings on the third tab of the demo.
               </p>
             </div>
           }
@@ -290,27 +293,57 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
                 <div>
                   <label class="block text-xs font-medium text-gray-700 mb-1">xs</label>
-                  <input type="number" placeholder="490" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="xs" />
+                  <input
+                    type="number"
+                    placeholder="490"
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="xs"
+                  />
                 </div>
                 <div>
                   <label class="block text-xs font-medium text-gray-700 mb-1">sm</label>
-                  <input type="number" placeholder="560" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="sm" />
+                  <input
+                    type="number"
+                    placeholder="560"
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="sm"
+                  />
                 </div>
                 <div>
                   <label class="block text-xs font-medium text-gray-700 mb-1">md</label>
-                  <input type="number" placeholder="610" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="md" />
+                  <input
+                    type="number"
+                    placeholder="610"
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="md"
+                  />
                 </div>
                 <div>
                   <label class="block text-xs font-medium text-gray-700 mb-1">lg</label>
-                  <input type="number" placeholder="660" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="lg" />
+                  <input
+                    type="number"
+                    placeholder="660"
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="lg"
+                  />
                 </div>
                 <div>
                   <label class="block text-xs font-medium text-gray-700 mb-1">xl</label>
-                  <input type="number" placeholder="740" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="xl" />
+                  <input
+                    type="number"
+                    placeholder="740"
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="xl"
+                  />
                 </div>
                 <div>
                   <label class="block text-xs font-medium text-gray-700 mb-1">xxl</label>
-                  <input type="number" placeholder="830" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="xxl" />
+                  <input
+                    type="number"
+                    placeholder="830"
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="xxl"
+                  />
                 </div>
               </div>
               <!-- Compact form grid for the custom breakpoints demo tab -->
