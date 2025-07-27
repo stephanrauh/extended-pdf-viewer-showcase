@@ -102,6 +102,8 @@ export class ExportAnnotationsComponent {
     quadPoints[7] = bottom; // y4 - bottom edge end
 
     const highlightAnnotation: HighlightEditorAnnotation = {
+      opacity: 0.5,
+      thickness: 10,
       annotationType: 9 as const,
       color: [255, 255, 0], // Yellow highlight
       pageIndex: 0,
