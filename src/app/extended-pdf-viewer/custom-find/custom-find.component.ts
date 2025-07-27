@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, effect, OnDestroy, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { MyCustomFindController } from './my-custom-find-controller';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +24,11 @@ interface CustomFindOptions extends FindOptions {
     ],
 })
 export class CustomFindComponent implements OnDestroy {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private readonly cdr = inject(ChangeDetectorRef);
   notificationService = inject(PDFNotificationService);
 
@@ -44,7 +50,7 @@ export class CustomFindComponent implements OnDestroy {
 
   public currentTab = 0;
   public customfindcomponentTab: string = 'sinceversion2130';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   constructor() {
     const notificationService = this.notificationService;

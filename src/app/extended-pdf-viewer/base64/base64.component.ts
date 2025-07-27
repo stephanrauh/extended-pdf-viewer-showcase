@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { pdfData2 } from './secondPdfBase64';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
@@ -19,6 +20,11 @@ import { AsyncPipe } from '@angular/common';
   imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class Base64Component implements OnInit {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private httpClient = inject(HttpClient);
   fullscreenService = inject(FullscreenService);
 

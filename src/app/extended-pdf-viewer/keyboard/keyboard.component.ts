@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -23,6 +24,11 @@ import { LanguagePipe } from 'ngx-markdown';
     ],
 })
 export class KeyboardComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   public fullscreenService = inject(FullscreenService);
 
   public ignoreKeyboard = false;
@@ -31,7 +37,7 @@ export class KeyboardComponent {
 
   public ignoreKeys = ['j', 'k', 'F4'];
   public keyboardcomponentTab: string = 'documentation';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   private accept(key: string, add: boolean): void {
     if (add) {

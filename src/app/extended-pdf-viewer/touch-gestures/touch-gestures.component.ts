@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -20,6 +21,11 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class TouchGesturesComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private pdfService = inject(NgxExtendedPdfViewerService);
   fullscreenService = inject(FullscreenService);
 

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { ThemeService } from '../../services/theme.service';
 import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
@@ -24,8 +25,13 @@ import { AsyncPipe } from '@angular/common';
 })
 export class CustomToolbarComponent {
   public fullscreenService = inject(FullscreenService);
+  private themeService = inject(ThemeService);
 
-  public _theme = 'additional';
+  public get theme(): string {
+    return this.themeService.theme();
+  }
+
+  public _toolbarVariant = 'additional';
 
   public showPdfViewer = true;
 
@@ -39,22 +45,22 @@ export class CustomToolbarComponent {
 
   private pdfViewerService = inject(NgxExtendedPdfViewerService);
 
-  public set theme(theme: string) {
-    if (this._theme !== theme) {
+  public set toolbarVariant(variant: string) {
+    if (this._toolbarVariant !== variant) {
       this.showPdfViewer = false;
-      this._theme = theme;
+      this._toolbarVariant = variant;
       this.src =
-        theme === 'findbar'
+        variant === 'findbar'
           ? '/assets/pdfs/GraalVM Dictionary Bytecode, Interpreters, C1 Compiler, C2 Compiler, CPUs, and More.pdf'
           : '/assets/pdfs/dachstein.pdf';
       setTimeout(() => (this.showPdfViewer = true), 100);
     } else {
-      this._theme = theme;
+      this._toolbarVariant = variant;
     }
   }
 
-  public get theme(): string {
-    return this._theme;
+  public get toolbarVariant(): string {
+    return this._toolbarVariant;
   }
 
   public onClick() {

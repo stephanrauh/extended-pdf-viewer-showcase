@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { NgxExtendedPdfViewerService, ScrollModeType, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfSidebarView } from 'ngx-extended-pdf-viewer';
@@ -26,6 +27,11 @@ import { DemoComponent } from '../common/demo.component';
     ],
 })
 export class TwoWayBindingComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
    private pdfService = inject(NgxExtendedPdfViewerService);
    fullscreenService = inject(FullscreenService);
 
@@ -53,8 +59,6 @@ export class TwoWayBindingComponent {
   public zoom: number | string = 'auto';
 
   public currentZoomFactor!: number;
-
-
 
   private _fullscreen = false;
 

@@ -1,12 +1,12 @@
 @if (!(fullscreenService.isFullscreen$ | async)) {
 <div class="flex-container-row">
-  <div class="overflow-none distance16 mat-elevation-z8 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined" 
+  <div class="overflow-none distance16 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"
     style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
             <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="pdfjsversionscomponentTab === 'aboutthebleedingedgebranch'"
               [class.border-primary-600]="pdfjsversionscomponentTab === 'aboutthebleedingedgebranch'"
@@ -15,7 +15,7 @@
               (click)="pdfjsversionscomponentTab = 'aboutthebleedingedgebranch'">
               About the bleeding edge branch
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="pdfjsversionscomponentTab === 'nonstandardfolderlayouts'"
               [class.border-primary-600]="pdfjsversionscomponentTab === 'nonstandardfolderlayouts'"
@@ -24,7 +24,7 @@
               (click)="pdfjsversionscomponentTab = 'nonstandardfolderlayouts'">
               Non-standard folder layouts
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="pdfjsversionscomponentTab === 'liveupdatenotsupported'"
               [class.border-primary-600]="pdfjsversionscomponentTab === 'liveupdatenotsupported'"
@@ -35,7 +35,7 @@
             </button>
           </div>
           </div>
-          
+
           <!-- Tab content -->
           @if (pdfjsversionscomponentTab === 'aboutthebleedingedgebranch') {
           <div class="tab-content">
@@ -71,13 +71,13 @@
 
 
   </div>
-  <div class="overflow-y-scroll distance16 mat-elevation-z8 progress bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined" 
+  <div class="overflow-y-scroll distance16 progress bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"
     style="flex: 1 1 100%; box-sizing: border-box; max-width:49%">
             <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'typescript'"
               [class.border-primary-600]="codeTab === 'typescript'"
@@ -86,7 +86,7 @@
               (click)="codeTab = 'typescript'">
               TypeScript
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'htmltemplate'"
               [class.border-primary-600]="codeTab === 'htmltemplate'"
@@ -95,7 +95,7 @@
               (click)="codeTab = 'htmltemplate'">
               HTML template
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'angularjson'"
               [class.border-primary-600]="codeTab === 'angularjson'"
@@ -106,7 +106,7 @@
             </button>
           </div>
           </div>
-          
+
           <!-- Tab content -->
           @if (codeTab === 'typescript') {
           <div class="tab-content">
@@ -128,13 +128,14 @@
 </div>
 }
 
-<div class="pdf-card distance16 mat-elevation-z8 bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
+<div class="pdf-card distance16 bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
   <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
     <div>
       <app-copyright [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"></app-copyright>
     </div>
     <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
   </div>
-  <ngx-extended-pdf-viewer [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'" height="calc(100vh - 435px)" zoom="50%">
+  <ngx-extended-pdf-viewer [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'" height="calc(100vh - 435px)" zoom="50%"
+      [theme]="theme">
   </ngx-extended-pdf-viewer>
 </div>

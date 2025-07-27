@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, ElementRef, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { compareFunction, convertMDToTable } from '../attributes/md-to-table-converter';
 import { HttpClient } from '@angular/common/http';
@@ -25,6 +26,11 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class DefaultOptionsComponent implements OnInit {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private httpClient = inject(HttpClient);
   private domElement = inject(ElementRef);
   fullscreenService = inject(FullscreenService);
@@ -60,7 +66,7 @@ export class DefaultOptionsComponent implements OnInit {
 
   public coveredOptions: object[] = [];
   public defaultoptionscomponentTab: string = 'overview';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   private _fullscreen = false;
 

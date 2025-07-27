@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { CommonModule, AsyncPipe, PercentPipe } from '@angular/common';
 import { IPDFViewerApplication, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
@@ -25,6 +26,11 @@ import { DemoComponent } from '../common/demo.component';
     ],
 })
 export class ZoomComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   fullscreenService = inject(FullscreenService);
 
   public activeTab: string = 'zoom';

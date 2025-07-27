@@ -1,4 +1,5 @@
 import { Component, effect, ViewEncapsulation, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, PDFNotificationService, PdfThumbnailDrawnEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -7,7 +8,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-custom-thumbnails',
-    
+
     standalone: true,
     templateUrl: './custom-thumbnails.component.html',
     styleUrls: ['./custom-thumbnails.component.css'],
@@ -20,13 +21,18 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class CustomThumbnailsComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   fullscreenService = inject(FullscreenService);
 
   private _fullscreen = false;
 
   public rotation: 0 | 180 = 0;
   public customthumbnailscomponentTab: string = 'htmltemplate';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate12';
 
   public get fullscreen(): boolean {
     return this._fullscreen;

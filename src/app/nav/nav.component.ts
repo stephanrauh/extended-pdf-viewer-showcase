@@ -6,6 +6,7 @@ import { FullscreenService } from '../services/fullscreen.service';
 import { OctocatComponent } from './octocat/octocat.component';
 import { FormsModule } from '@angular/forms';
 import { ExtendedPdfViewerMenuComponent } from './extended-pdf-viewer-menu/extended-pdf-viewer-menu.component';
+import { ThemeToggleComponent } from '../components/theme-toggle/theme-toggle.component';
 @Component({
     selector: 'app-nav',
     standalone: true,
@@ -16,6 +17,7 @@ import { ExtendedPdfViewerMenuComponent } from './extended-pdf-viewer-menu/exten
         FormsModule,
         ExtendedPdfViewerMenuComponent,
         RouterOutlet,
+        ThemeToggleComponent,
     ],
 })
 export class NavComponent {
@@ -32,6 +34,7 @@ export class NavComponent {
   public ngxExtendedPdfViewer = true;
 
   public hideMenu = false;
+  public hideHeader = false;
 
   public get drawer() {
     return {
@@ -60,7 +63,9 @@ export class NavComponent {
 
     if (this.isBrowser()) {
       route.url.subscribe(() => {
-        this.hideMenu = location.pathname.includes('iframe');
+        const isIframe = location.pathname.includes('iframe');
+        this.hideMenu = isIframe;
+        this.hideHeader = isIframe;
       });
 
       // Subscribe to fullscreen changes to hide/show menu

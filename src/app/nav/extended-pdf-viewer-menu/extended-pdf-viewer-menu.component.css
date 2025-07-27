@@ -7,3 +7,52 @@
 .mat-mdc-list-base a.mat-mdc-list-item {
   height: 30px;
 }
+
+.menu-item {
+  @apply block px-4 py-2 text-sm transition-colors;
+  color: var(--menu-text-color, rgb(31 41 55)); /* text-gray-800 - better contrast on white */
+  background-color: var(--menu-bg-color, transparent);
+}
+
+.menu-item:hover {
+  color: var(--menu-hover-text-color, rgb(31 41 55)); /* text-gray-800 */
+  background-color: var(--menu-hover-bg-color, rgb(229 231 235)); /* bg-gray-200 - better contrast */
+}
+
+/* Dark mode - try every possible selector pattern */
+:host-context(.dark),
+:host-context([data-theme="dark"]),
+:host-context(.theme-dark),
+.dark :host,
+html.dark :host,
+body.dark :host,
+[data-theme="dark"] :host {
+  --menu-text-color: rgb(229 231 235); /* text-gray-200 - better contrast on dark backgrounds */
+  --menu-bg-color: transparent;
+  --menu-hover-text-color: rgb(255 255 255); /* white for maximum contrast */
+  --menu-hover-bg-color: rgb(55 65 81); /* bg-gray-700 - better contrast than gray-800 */
+}
+
+/* Active menu item styling */
+.menu-item-active {
+  @apply bg-primary-50 text-primary-700 border-r-2 border-primary-500;
+}
+
+/* Dark mode support for active menu items */
+:host-context(.dark) .menu-item-active {
+  @apply bg-primary-900/20 text-primary-300 border-primary-400;
+}
+
+
+/* Dark mode for section headers */
+:host-context(.dark) .bg-gray-100 {
+  @apply bg-gray-800;
+}
+
+:host-context(.dark) .text-gray-900 {
+  @apply text-gray-100;
+}
+
+:host-context(.dark) .border-gray-200 {
+  @apply border-gray-700;
+}

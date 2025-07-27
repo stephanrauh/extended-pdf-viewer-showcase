@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
@@ -21,13 +22,18 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class SignaturesComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   fullscreenService = inject(FullscreenService);
 
   private _showSignature = true;
 
   public showPdf = true;
   public signaturescomponentTab: string = 'signatureswithoutverification';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   private _fullscreen = false;
 

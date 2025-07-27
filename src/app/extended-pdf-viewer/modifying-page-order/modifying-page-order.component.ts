@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -14,6 +15,11 @@ import { AsyncPipe } from '@angular/common';
   imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class ModifyingPageOrderComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   fullscreenService = inject(FullscreenService);
 
   public activeTab = 'html';

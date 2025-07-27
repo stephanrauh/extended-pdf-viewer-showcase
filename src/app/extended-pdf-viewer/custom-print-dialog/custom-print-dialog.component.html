@@ -1,6 +1,6 @@
 <article class="pdf-wrapper flex-container-column fill-container">
   <div class="pdf-code-wrapper flex-container-row" >
-    <div class="overflow-none distance16 mat-elevation-z8 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:30%">
+    <div class="overflow-none distance16 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:30%">
       <div class="flex-container-column">
         <p><b>Caveat:</b> Currently, the cancel button of the demo doesn't work because pdf.js opens a modal dialog.</p>
         <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="print()">Print</button>
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="overflow-y-scroll distance16 mat-elevation-z8 progress bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:69%">
+    <div class="overflow-y-scroll distance16 progress bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:69%">
       <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">
@@ -76,7 +76,7 @@
     </div>
   </div>
 
-  <div class="pdf-card distance16 mat-elevation-z8 use-available-space bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
+  <div class="pdf-card distance16 use-available-space bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
         <app-copyright [src]="'/assets/pdfs/GraalVM.pdf'"></app-copyright>
@@ -91,7 +91,8 @@
       (afterPrint)="onAfterPrint()"
       (progress)="onProgress($event)"
 
-      >
+
+      [theme]="theme">
     </ngx-extended-pdf-viewer>
   </div>
 </article>

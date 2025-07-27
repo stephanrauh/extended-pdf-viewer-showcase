@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -8,7 +9,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-prerendering',
-    
+
     standalone: true,
     templateUrl: './prerendering.component.html',
     styleUrls: ['./prerendering.component.css'],
@@ -21,6 +22,11 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class PrerenderingComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private pdfViewerService = inject(NgxExtendedPdfViewerService);
   fullscreenService = inject(FullscreenService);
 
@@ -40,9 +46,7 @@ export class PrerenderingComponent {
 
   public visiblePages = '';
   public prerenderingcomponentTab: string = 'prerenderingstrategy';
-  public codeTab: string = 'typescript';
-
-
+  public codeTab: string = 'htmltemplate';
 
   private _fullscreen = false;
 

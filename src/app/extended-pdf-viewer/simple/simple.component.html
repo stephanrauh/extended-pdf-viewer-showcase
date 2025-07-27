@@ -108,15 +108,17 @@
                 prevent this, you'll want to adopt the `OnPush` change detection strategy.
               </p>
               <div class="space-y-2">
-                <label class="block text-sm font-medium text-gray-700">Current page number</label>
+                <label for="page-number-input" class="block text-sm font-medium text-gray-700">Current page number</label>
                 <input
+                  id="page-number-input"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   [(ngModel)]="page"
                 />
               </div>
               <div class="space-y-2">
-                <label class="block text-sm font-medium text-gray-700">Current page label</label>
+                <label for="page-label-input" class="block text-sm font-medium text-gray-700">Current page label</label>
                 <input
+                  id="page-label-input"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   [(ngModel)]="pageLabel"
                 />
@@ -163,27 +165,26 @@
                 reliably without a full reload (i.e. hitting the F5 or CMD+R key). This demo reloads the page programmatically each time you change the theme.
               </p>
               @if (localStorageIsSupported()) {
-                <div class="space-y-2">
-                  <label class="flex items-center space-x-2">
+                <div class="radio-group">
+                  <label>
                     <input
                       type="radio"
                       class="form-radio text-primary-600"
                       value="dark"
+                      name="theme"
                       aria-label="Color themes"
                       [(ngModel)]="theme"
-                      style="line-height: 1.5"
                     />
                     <span>dark theme</span>
                   </label>
-                  <br />
-                  <label class="flex items-center space-x-2">
+                  <label>
                     <input
                       type="radio"
                       class="form-radio text-primary-600"
                       value="light"
+                      name="theme"
                       aria-label="Color themes"
                       [(ngModel)]="theme"
-                      style="line-height: 1.5"
                     />
                     <span>light theme</span>
                   </label>
@@ -201,29 +202,25 @@
                 surrounding container is large enough to contain the PDF viewer. By default, many CSS frameworks set the height of an empty container to zero
                 pixels. You can use the <code>height</code> attribute to work around this limitation or to fine-tune the amount of screen estate you need.
               </p>
-              <div class="space-y-2">
-                <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" [value]="undefined" />
+              <div class="radio-group">
+                <label>
+                  <input type="radio" class="form-radio text-primary-600" name="height" [value]="undefined" [(ngModel)]="height" />
                   <span>default (i.e. [height]="undefined")</span>
                 </label>
-                <br />
-                <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" value="100%" aria-label="Height" [(ngModel)]="height" style="line-height: 1.5" />
+                <label>
+                  <input type="radio" class="form-radio text-primary-600" name="height" value="100%" aria-label="Height" [(ngModel)]="height" />
                   <span>[height]="'100%'"</span>
                 </label>
-                <br />
-                <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" value="95%" aria-label="Height" [(ngModel)]="height" style="line-height: 1.5" />
+                <label>
+                  <input type="radio" class="form-radio text-primary-600" name="height" value="95%" aria-label="Height" [(ngModel)]="height" />
                   <span>[height]="'95%'"</span>
                 </label>
-                <br />
-                <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" value="90vh" aria-label="Height" [(ngModel)]="height" style="line-height: 1.5" />
+                <label>
+                  <input type="radio" class="form-radio text-primary-600" name="height" value="90vh" aria-label="Height" [(ngModel)]="height" />
                   <span>[height]="'90vh'"</span>
                 </label>
-                <br />
-                <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" value="200px" aria-label="Height" [(ngModel)]="height" style="line-height: 1.5" />
+                <label>
+                  <input type="radio" class="form-radio text-primary-600" name="height" value="200px" aria-label="Height" [(ngModel)]="height" />
                   <span>[height]="'200px'"</span>
                 </label>
               </div>

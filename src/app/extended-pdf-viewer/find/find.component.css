@@ -41,3 +41,9 @@ small {
   border-radius: 4px;
 }
 
+/* Dark mode support for column header */
+[data-theme="dark"] .column-header {
+  background: #374151;
+  color: #f9fafb;
+}
+

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { TreeNode } from './tree-node';
 import { TreeComponent } from './tree/tree.component';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -186,6 +187,11 @@ const FINDBAR: TreeNode[] = [
     ],
 })
 export class CustomizationComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   public toolbar = TOOLBAR;
 
   public secondaryToolbar = SECONDARY_TOOLBAR;

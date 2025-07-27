@@ -1,4 +1,5 @@
 import { Component, effect, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import {
   IPDFViewerApplication,
   PdfDocumentInfo,
@@ -20,6 +21,11 @@ import { AsyncPipe } from '@angular/common';
   imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class FileInfoComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   notificationService = inject(PDFNotificationService);
   fullscreenService = inject(FullscreenService);
 

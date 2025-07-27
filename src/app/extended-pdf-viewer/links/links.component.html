@@ -155,7 +155,8 @@
       [src]="'/assets/pdfs/blind-text-collection.pdf'"
       [height]="'90vh'"
       (pageRendered)="afterPageRendered($event)"
-      >
+      
+      [theme]="theme">
     </ngx-extended-pdf-viewer>
   }
 </app-demo>

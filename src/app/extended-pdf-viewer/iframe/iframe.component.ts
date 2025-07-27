@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { CopyrightComponent } from '../common/copyright.component';
 import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
@@ -17,6 +18,11 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     ],
 })
 export class IFrameComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   public url = '';
 
   constructor() {

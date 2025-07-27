@@ -1,4 +1,5 @@
-import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerComponent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { CopyrightComponent } from '../common/copyright.component';
 import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
@@ -15,6 +16,11 @@ import { FullscreenButtonComponent } from '../../components/fullscreen-button/fu
     ]
 })
 export class ModalDialogComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   @ViewChild(NgxExtendedPdfViewerComponent, {static: false})
   private pdfViewer!: NgxExtendedPdfViewerComponent;
 

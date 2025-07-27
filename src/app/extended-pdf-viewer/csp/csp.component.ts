@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +21,11 @@ import { DemoComponent } from '../common/demo.component';
     ],
 })
 export class CSPComponent implements OnDestroy {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
    public _useInlineScripts = false;
   public cspcomponentTab: string = 'gettingstarted';
   public codeTab: string = 'htmltemplate';

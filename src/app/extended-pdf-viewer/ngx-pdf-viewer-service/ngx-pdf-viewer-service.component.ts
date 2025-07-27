@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { DemoComponent } from '../common/demo.component';
@@ -19,8 +20,13 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class NgxPdfViewerServiceComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
     public ngxpdfviewerservicecomponentTab: string = 'overview';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 fullscreenService = inject(FullscreenService);
 
   constructor() {

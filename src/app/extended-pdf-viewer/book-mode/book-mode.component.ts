@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, PageRenderedEvent, PageRenderEvent, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
@@ -14,6 +15,11 @@ import { RouterLink } from '@angular/router';
   imports: [Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule],
 })
 export class BookModeComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   public page = 1;
 
   public fullscreen = false;

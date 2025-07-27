@@ -135,7 +135,8 @@
 
   <app-demo [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'">
     <ngx-extended-pdf-viewer [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'" [height]="'90vh'"
-      (pagesLoaded)="listLayers()">
+      (pagesLoaded)="listLayers()"
+      [theme]="theme">
     </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

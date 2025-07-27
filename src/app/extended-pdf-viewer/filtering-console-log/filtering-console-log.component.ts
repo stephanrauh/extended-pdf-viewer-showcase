@@ -1,4 +1,5 @@
 import { Component, effect, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -19,6 +20,11 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class FilteringConsoleLogComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   fullscreenService = inject(FullscreenService);
 
   public version = '';

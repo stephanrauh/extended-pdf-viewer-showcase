@@ -50,7 +50,11 @@
       <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 50%">
         <div class="bg-white border border-gray-300 rounded-lg shadow-md p-6">
           <b>Messages sent by the PDF</b>
-          <button mat-icon-button (click)="messages = []" style="margin-top: -13px"><span class="material-icons">delete_forever</span></button>
+          <button (click)="messages = []" style="margin-top: -13px; background: none; border: none; cursor: pointer; padding: 8px; border-radius: 4px; color: #666;" title="Clear messages">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+            </svg>
+          </button>
         </div>
 
         <div class="messages distance16">
@@ -74,7 +78,8 @@
       [textLayer]="true"
       (afterPrint)="onEvent('afterPrint', $event)"
       (annotationEditorEvent)="onEvent('annotationEditorEvent', $event)"
-    >
+    
+      [theme]="theme">
     </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

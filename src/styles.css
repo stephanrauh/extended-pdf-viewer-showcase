@@ -4,6 +4,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme Variables */
+:root {
+  /* Light theme colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --bg-tertiary: #e5e7eb;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --accent-primary: #3b82f6;
+  --accent-secondary: #2563eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-strong: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] {
+  /* Dark theme colors */
+  --bg-primary: #1f2937;
+  --bg-secondary: #374151;
+  --bg-tertiary: #4b5563;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --border-primary: #4b5563;
+  --border-secondary: #6b7280;
+  --accent-primary: #60a5fa;
+  --accent-secondary: #3b82f6;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-color-strong: rgba(0, 0, 0, 0.5);
+}
+
 html {
   height: 100%;
 }
@@ -12,6 +45,9 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   height: calc(100% - 112px);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Layout Classes */
@@ -78,12 +114,13 @@ body {
 
 /* Table styles */
 table {
-  background-color: #d8d8d8;
+  background-color: var(--bg-tertiary);
 }
 
 td,
 th {
-  background-color: white;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 /* Code styles */
@@ -100,7 +137,7 @@ dd {
 
 dd ~ dt,
 dd ~ dd {
-  border-top: 1px solid #bdc8ca;
+  border-top: 1px solid var(--border-secondary);
 }
 
 dt {
@@ -112,8 +149,9 @@ dt {
 
 dd {
   margin-left: 35%;
-  border-left: 1px dotted #bdc8ca;
-  background-color: #fff;
+  border-left: 1px dotted var(--border-secondary);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 dd:after {
@@ -209,22 +247,64 @@ dd:after {
   margin-top: 0.5rem;
 }
 
+/* Radio button group spacing - compact design prioritizing desktop */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem; /* 2px - very compact for desktop */
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem; /* 6px between radio and text */
+  padding: 0.125rem 0; /* 2px top/bottom - minimal padding */
+  min-height: 1.5rem; /* 24px - compact but clickable */
+  cursor: pointer;
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.25rem;
+}
+
+.radio-group input[type="radio"] {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Mobile gets slightly more space but still compact */
+@media (max-width: 768px) {
+  .radio-group {
+    gap: 0.25rem; /* 4px - still compact on mobile */
+  }
+  
+  .radio-group label {
+    padding: 0.25rem 0; /* 4px - minimal touch padding */
+    min-height: 2rem; /* 32px - minimum for mobile touch */
+  }
+}
+
 /* Form styles */
 input[type="text"],
 input[type="email"],
 input[type="password"],
+input[type="number"],
+input,
 select,
 textarea {
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.3s ease, color 0.3s ease;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
+input[type="number"]:focus,
+input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -243,7 +323,7 @@ button:active {
 
 /* Shadow utilities */
 .shadow-mat-8 {
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 5px 5px -3px var(--shadow-color-strong), 0 8px 10px 1px var(--shadow-color), 0 3px 14px 2px var(--shadow-color);
 }
 
 /* Prevent touch move for PDF viewer */
@@ -369,6 +449,7 @@ button:active {
 /* Border utilities */
 .border {
   border-width: 1px;
+  border-color: var(--border-primary);
 }
 
 .border-b {
@@ -384,11 +465,11 @@ button:active {
 }
 
 .border-gray-200 {
-  border-color: #e5e7eb;
+  border-color: var(--border-primary);
 }
 
 .border-gray-300 {
-  border-color: #d1d5db;
+  border-color: var(--border-secondary);
 }
 
 .border-transparent {
@@ -396,24 +477,24 @@ button:active {
 }
 
 .border-primary-600 {
-  border-color: #2563eb;
+  border-color: var(--accent-secondary);
 }
 
 /* Background utilities */
 .bg-white {
-  background-color: #ffffff;
+  background-color: var(--bg-primary);
 }
 
 .bg-primary-500 {
-  background-color: #3b82f6;
+  background-color: var(--accent-primary);
 }
 
 .bg-primary-600 {
-  background-color: #2563eb;
+  background-color: var(--accent-secondary);
 }
 
 .bg-gray-100 {
-  background-color: #f3f4f6;
+  background-color: var(--bg-secondary);
 }
 
 /* Text utilities */
@@ -432,15 +513,19 @@ button:active {
 }
 
 .text-primary-600 {
-  color: #2563eb;
+  color: var(--accent-secondary);
 }
 
 .text-gray-500 {
-  color: #6b7280;
+  color: var(--text-secondary);
 }
 
 .text-gray-700 {
-  color: #374151;
+  color: var(--text-primary);
+}
+
+.text-gray-900 {
+  color: var(--text-primary);
 }
 
 .font-medium {
@@ -462,15 +547,15 @@ button:active {
 
 /* Shadow utilities */
 .shadow-lg {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
 }
 
 .shadow-md {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
 }
 
 .shadow-sm {
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 var(--shadow-color);
 }
 
 /* Transition utilities */

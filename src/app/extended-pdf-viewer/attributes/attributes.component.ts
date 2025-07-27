@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, AfterViewInit, OnInit, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { CommonModule } from '@angular/common';
 import { Settings, Angular2SmartTableModule } from 'angular2-smart-table';
 import { isBrowser } from '../common/utilities';
@@ -17,6 +18,11 @@ import { compareFunction, convertMDToTable } from './md-to-table-converter';
     ],
 })
 export class AttributesComponent implements OnInit, AfterViewInit {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private httpClient = inject(HttpClient);
   private domElement = inject(ElementRef);
 

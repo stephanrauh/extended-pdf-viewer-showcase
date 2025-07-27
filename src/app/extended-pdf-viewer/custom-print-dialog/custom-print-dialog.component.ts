@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, ProgressBarEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,11 @@ import { FullscreenButtonComponent } from '../../components/fullscreen-button/fu
   imports: [FormsModule, Ie11MarkdownComponent, CopyrightComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule],
 })
 export class CustomPrintDialogComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private pdfService = inject(NgxExtendedPdfViewerService);
   fullscreenService = inject(FullscreenService);
 

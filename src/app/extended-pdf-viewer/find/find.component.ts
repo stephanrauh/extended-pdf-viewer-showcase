@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, RenderedTextLayerHighlights, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -22,6 +23,11 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class FindComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
    private ngxExtendedPdfViewerService = inject(NgxExtendedPdfViewerService);
    private cdr = inject(ChangeDetectorRef);
    fullscreenService = inject(FullscreenService);
@@ -63,7 +69,7 @@ export class FindComponent {
 
   public pagesWithResult: number[] = [];
   public findcomponentTab: string = 'findapi';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   public get selectedTab(): number {
     return this._selectedTab;
@@ -235,8 +241,6 @@ export class FindComponent {
       useSecondaryFindcontroller: true
     });
   }
-
-
   public findNext(useSecondaryFindcontroller: boolean): void {
     this.ngxExtendedPdfViewerService.findNext(useSecondaryFindcontroller);
   }

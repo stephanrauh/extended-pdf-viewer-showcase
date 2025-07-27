@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, effect, OnDestroy, inject } from '@
 import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, PdfLoadedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { ThemeService } from '../../services/theme.service';
 import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
@@ -25,6 +26,7 @@ import { AsyncPipe } from '@angular/common';
 export class SimpleComponent implements OnDestroy {
   logService = inject(LogService);
   fullscreenService = inject(FullscreenService);
+  private themeService = inject(ThemeService);
 
   public _selectedTab = 0;
 
@@ -97,8 +99,6 @@ export class SimpleComponent implements OnDestroy {
   private startTime = new Date().getTime();
   private currentStartTime = new Date().getTime();
 
-  /** This attribute is only used on browser without localStorage (e.g. Brave on iOS) */
-  private themeIfLocalStorageIsUnavailable = 'light';
 
   private _fullscreen = false;
   private PDFViewerApplication?: IPDFViewerApplication;
@@ -144,35 +144,15 @@ export class SimpleComponent implements OnDestroy {
   }
 
   public set theme(theme: string) {
-    try {
-      if (theme !== this.theme && localStorage) {
-        localStorage.setItem('ngx-extended-pdf-viewer.theme', theme);
-        // eslint-disable-next-line no-self-assign
-        location = location;
-      } else {
-        this.themeIfLocalStorageIsUnavailable = theme;
-        // eslint-disable-next-line no-self-assign
-        location = location;
-      }
-    } catch /* (safariSecurityException) */ {
-      // localStorage is not available on Safari
-      this.themeIfLocalStorageIsUnavailable = theme;
-      // eslint-disable-next-line no-self-assign
-      location = location;
+    // Update our centralized theme service instead of local storage directly
+    if (theme === 'dark' || theme === 'light') {
+      this.themeService.setTheme(theme);
     }
   }
 
   public get theme(): string {
-    try {
-      if (localStorage) {
-        return localStorage.getItem('ngx-extended-pdf-viewer.theme') || 'light';
-      } else {
-        return this.themeIfLocalStorageIsUnavailable;
-      }
-    } catch /* (safariSecurityException) */ {
-      // localStorage is not available on Safari
-      return this.themeIfLocalStorageIsUnavailable;
-    }
+    // Get theme from our centralized theme service
+    return this.themeService.theme();
   }
 
   constructor() {

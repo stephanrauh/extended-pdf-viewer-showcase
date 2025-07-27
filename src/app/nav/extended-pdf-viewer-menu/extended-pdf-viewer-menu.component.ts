@@ -3,7 +3,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-extended-pdf-viewer-menu',
-    
+
     standalone: true,
     templateUrl: './extended-pdf-viewer-menu.component.html',
     styleUrls: ['./extended-pdf-viewer-menu.component.css'],
@@ -21,7 +21,7 @@ export class ExtendedPdfViewerMenuComponent {
     // Note: BreakpointObserver functionality removed due to CDK dependency removal
     // Simplified to always toggle for mobile-like behavior
     if (this.drawer) {
-      this.drawer.toggle();
+      // this.drawer.toggle();
     }
   }
 }

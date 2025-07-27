@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <div class="overflow-none distance16 mat-elevation-z8 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+      <div class="overflow-none distance16 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
         <div class="flex-container-column">
                   <div class="w-full">
           <!-- Tab buttons -->
@@ -64,20 +64,44 @@
             to print documents containing several hundred pages with Internet Explorer 11.</p>
             <section class="section">
               <div class="space-y-1">
-                <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="from" placeholder="from page number" />
+                <label for="print-from-input" class="block text-sm font-medium text-gray-700 mb-1">From Page</label>
+                <input id="print-from-input"
+                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                       [(ngModel)]="from"
+                       placeholder="from page number"
+                       aria-describedby="print-from-help" />
+                <small id="print-from-help" class="block text-gray-500 text-xs">Starting page number for printing</small>
               </div>
               <div class="space-y-2">
-                <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="to" placeholder="to page number" />
+                <label for="print-to-input" class="block text-sm font-medium text-gray-700 mb-1">To Page</label>
+                <input id="print-to-input"
+                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                       [(ngModel)]="to"
+                       placeholder="to page number"
+                       aria-describedby="print-to-help" />
+                <small id="print-to-help" class="block text-gray-500 text-xs">Ending page number for printing</small>
               </div>
             </section>
             <section class="section">
               <div class="space-y-2">
-                <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="included" placeholder="including (comma separatated list of page numbers)" />
+                <label for="print-included-input" class="block text-sm font-medium text-gray-700 mb-1">Include Pages</label>
+                <input id="print-included-input"
+                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                       [(ngModel)]="included"
+                       placeholder="including (comma separatated list of page numbers)"
+                       aria-describedby="print-included-help" />
+                <small id="print-included-help" class="block text-gray-500 text-xs">Comma-separated list of additional pages to include</small>
               </div>
             </section>
             <section class="section">
               <div class="space-y-2">
-                <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)" />
+                <label for="print-excluded-input" class="block text-sm font-medium text-gray-700 mb-1">Exclude Pages</label>
+                <input id="print-excluded-input"
+                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                       [(ngModel)]="excluded"
+                       placeholder="excluding (comma separatated list of page numbers)"
+                       aria-describedby="print-excluded-help" />
+                <small id="print-excluded-help" class="block text-gray-500 text-xs">Comma-separated list of pages to exclude from printing</small>
               </div>
             </section>
             <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1.5 px-3 text-sm rounded shadow mt-2" (click)="print()">NgxExtendedPdfViewerService.print()</button>
@@ -93,20 +117,44 @@
           </p>
           <section class="section">
             <div class="space-y-2">
-              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="from" placeholder="from page number" />
+              <label for="range-from-input" class="block text-sm font-medium text-gray-700 mb-1">From Page</label>
+              <input id="range-from-input"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                     [(ngModel)]="from"
+                     placeholder="from page number"
+                     aria-describedby="range-from-help" />
+              <small id="range-from-help" class="block text-gray-500 text-xs">Starting page number for print range</small>
             </div>
             <div class="space-y-2">
-              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="to" placeholder="to page number" />
+              <label for="range-to-input" class="block text-sm font-medium text-gray-700 mb-1">To Page</label>
+              <input id="range-to-input"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                     [(ngModel)]="to"
+                     placeholder="to page number"
+                     aria-describedby="range-to-help" />
+              <small id="range-to-help" class="block text-gray-500 text-xs">Ending page number for print range</small>
             </div>
           </section>
           <section class="section">
             <div class="space-y-2">
-              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="included" placeholder="including (comma separatated list of page numbers)" />
+              <label for="range-included-input" class="block text-sm font-medium text-gray-700 mb-1">Include Pages</label>
+              <input id="range-included-input"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                     [(ngModel)]="included"
+                     placeholder="including (comma separatated list of page numbers)"
+                     aria-describedby="range-included-help" />
+              <small id="range-included-help" class="block text-gray-500 text-xs">Comma-separated list of additional pages to include</small>
             </div>
           </section>
           <section class="section">
             <div class="space-y-2">
-              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="excluded" placeholder="excluding (comma separatated list of page numbers)" />
+              <label for="range-excluded-input" class="block text-sm font-medium text-gray-700 mb-1">Exclude Pages</label>
+              <input id="range-excluded-input"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                     [(ngModel)]="excluded"
+                     placeholder="excluding (comma separatated list of page numbers)"
+                     aria-describedby="range-excluded-help" />
+              <small id="range-excluded-help" class="block text-gray-500 text-xs">Comma-separated list of pages to exclude from printing</small>
             </div>
           </section>
           <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="setPrintRange()">NgxExtendedPdfViewerService.setPrintRange()</button>
@@ -121,7 +169,7 @@
           </p>
           <p>Caveat: starting with version 16.0.0, the `replaceBrowserPrint` is active by default.</p>
           <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="replaceBrowserPrint" />
+        <input type="checkbox" id="replace-browser-print-checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="replaceBrowserPrint" />
         <span>replaceBrowserPrint="true"</span>
       </label>
           </div>
@@ -133,7 +181,7 @@
             portrait and landscape pages and you want to keep the orientation of the pages as they are in the PDF file.
           </p>
           <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enablePrintAutoRotate" />
+        <input type="checkbox" id="enable-print-auto-rotate-checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enablePrintAutoRotate" />
         <span>enablePrintAutoRotate="true"</span>
       </label>
           </div>
@@ -185,7 +233,7 @@
       }
     </div>
   </div>
-  <div class="overflow-y-scroll distance16 mat-elevation-z8 progress bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:49%">
+  <div class="overflow-y-scroll distance16 progress bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:49%">
             <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -233,7 +281,8 @@
     [replaceBrowserPrint]="replaceBrowserPrint"
     zoom="50%"
     [printResolution]="printResolution"
-    [enablePrintAutoRotate]="enablePrintAutoRotate">
+    [enablePrintAutoRotate]="enablePrintAutoRotate"
+      [theme]="theme">
   </ngx-extended-pdf-viewer>
 </app-demo>
 </div>

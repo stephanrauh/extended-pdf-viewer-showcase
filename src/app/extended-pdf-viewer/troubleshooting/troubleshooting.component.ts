@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 
 @Component({
@@ -10,4 +11,9 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
     imports: [Ie11MarkdownComponent]
 })
 export class TroubleshootingComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
 }

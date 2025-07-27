@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
     selector: 'app-browser-support',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
     styleUrls: ['./browser-support.component.css'],
     imports: [],
 })
-export class BrowserSupportComponent {}
+export class BrowserSupportComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
+}

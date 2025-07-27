@@ -31,11 +31,11 @@
             </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'unverifiedsignaturesandsecurityconsiderations'"
-              [class.border-primary-600]="codeTab === 'unverifiedsignaturesandsecurityconsiderations'"
-              [class.text-gray-500]="codeTab !== 'unverifiedsignaturesandsecurityconsiderations'"
-              [class.border-transparent]="codeTab !== 'unverifiedsignaturesandsecurityconsiderations'"
-              (click)="codeTab = 'unverifiedsignaturesandsecurityconsiderations'"
+              [class.text-primary-600]="signaturescomponentTab === 'unverifiedsignaturesandsecurityconsiderations'"
+              [class.border-primary-600]="signaturescomponentTab === 'unverifiedsignaturesandsecurityconsiderations'"
+              [class.text-gray-500]="signaturescomponentTab !== 'unverifiedsignaturesandsecurityconsiderations'"
+              [class.border-transparent]="signaturescomponentTab !== 'unverifiedsignaturesandsecurityconsiderations'"
+              (click)="signaturescomponentTab = 'unverifiedsignaturesandsecurityconsiderations'"
             >
               Unverified signatures and security considerations
             </button>
@@ -75,7 +75,7 @@
               <p>By default, the signature editor is disabled. You can enable it with `pdfDefaultOptions.enableSignatureEditor = true;`.</p>
             </div>
           }
-          @if (codeTab === 'unverifiedsignaturesandsecurityconsiderations') {
+          @if (signaturescomponentTab === 'unverifiedsignaturesandsecurityconsiderations') {
             <div class="tab-content">
               <p>
                 The base library, pdf.js, has only recently activated support for signatures. The team had a long-standing policy not to support signature
@@ -144,7 +144,8 @@
 
   <app-demo [src]="'/assets/pdfs/unverified-signature.pdf'">
     @if (showPdf) {
-      <ngx-extended-pdf-viewer [src]="'/assets/pdfs/unverified-signature.pdf'" [height]="'90vh'" [showUnverifiedSignatures]="showSignature">
+      <ngx-extended-pdf-viewer [src]="'/assets/pdfs/unverified-signature.pdf'" [height]="'90vh'" [showUnverifiedSignatures]="showSignature"
+      [theme]="theme">
       </ngx-extended-pdf-viewer>
     }
   </app-demo>

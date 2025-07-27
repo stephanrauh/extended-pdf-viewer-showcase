@@ -50,11 +50,11 @@
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
             <button 
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="sidebysidecomponentTab === 'usingtheiframecomponent'"
-              [class.border-primary-600]="sidebysidecomponentTab === 'usingtheiframecomponent'"
-              [class.text-gray-500]="sidebysidecomponentTab !== 'usingtheiframecomponent'"
-              [class.border-transparent]="sidebysidecomponentTab !== 'usingtheiframecomponent'"
-              (click)="sidebysidecomponentTab = 'usingtheiframecomponent'">
+              [class.text-primary-600]="codeTab === 'usingtheiframecomponent'"
+              [class.border-primary-600]="codeTab === 'usingtheiframecomponent'"
+              [class.text-gray-500]="codeTab !== 'usingtheiframecomponent'"
+              [class.border-transparent]="codeTab !== 'usingtheiframecomponent'"
+              (click)="codeTab = 'usingtheiframecomponent'">
               Using the IFrameComponent
             </button>
             <button 
@@ -88,7 +88,7 @@
           </div>
           
           <!-- Tab content -->
-          @if (sidebysidecomponentTab === 'usingtheiframecomponent') {
+          @if (codeTab === 'usingtheiframecomponent') {
           <div class="tab-content">
 <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/side-by-side/html.md">
           </app-ie11-markdown>
@@ -117,11 +117,8 @@
   </div>
   }
 
-  <app-demo [src]="'/assets/pdfs/blind-text-collection.pdf'">
-    <div style="width: 100%">
-      <iframe id="embedded" src="/extended-pdf-viewer/iframe/cdk" style="height: 100vh; width: 47%"></iframe>
-      <iframe id="embedded" src="/extended-pdf-viewer/iframe/graalvm"
-        style="height: 100vh; width: 47%; float: right"></iframe>
-    </div>
-  </app-demo>
+  <div class="flex gap-2 w-full h-screen mt-4">
+    <iframe id="iframe-left" class="flex-1 min-w-0" src="/extended-pdf-viewer/iframe/cdk" style="height: 100vh; border: none;" title="PDF Viewer - CDK"></iframe>
+    <iframe id="iframe-right" class="flex-1 min-w-0" src="/extended-pdf-viewer/iframe/graalvm" style="height: 100vh; border: none;" title="PDF Viewer - GraalVM"></iframe>
+  </div>
 </div>

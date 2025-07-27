@@ -1,6 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Component, signal, computed, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { firstValueFrom } from 'rxjs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
@@ -25,6 +26,11 @@ interface PdfState {
     ],
 })
 export class LoadingIndicatorComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
 
   private http = inject(HttpClient);
 
@@ -32,7 +38,7 @@ export class LoadingIndicatorComponent {
 
   public fullscreen = false;
   public loadingindicatorcomponentTab: string = 'customloadingindicator';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   private pdfState = signal<PdfState>({
     status: 'idle',

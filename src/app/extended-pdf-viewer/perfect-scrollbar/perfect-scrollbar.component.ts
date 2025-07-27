@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, OnDestroy, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import PerfectScrollbar from 'perfect-scrollbar';
@@ -28,6 +29,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class PerfectScrollbarComponent implements AfterViewInit, OnDestroy {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   config = inject<PerfectScrollbarConfigInterface>(PERFECT_SCROLLBAR_CONFIG);
   fullscreenService = inject(FullscreenService);
 

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
+import { ThemeService } from '../../services/theme.service';
 import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
@@ -24,6 +25,11 @@ import { LanguagePipe } from 'ngx-markdown';
 })
 export class ResponsiveDesignComponent {
   private pdfService = inject(NgxExtendedPdfViewerService);
+  private themeService = inject(ThemeService);
+  
+  public get theme(): string {
+    return this.themeService.theme();
+  }
 
 
   public fullscreenService = inject(FullscreenService);
@@ -115,7 +121,7 @@ export class ResponsiveDesignComponent {
 
   public codeWidth = "38%";
   public responsivedesigncomponentTab: string = 'breakpoints';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   private _currentTab = 0;
 

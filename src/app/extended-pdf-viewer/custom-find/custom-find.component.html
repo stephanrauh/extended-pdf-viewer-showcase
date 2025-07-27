@@ -1,12 +1,12 @@
 <article class="custom-find-wrapper pdf-wrapper flex-container-column fill-container">
   <div class="pdf-code-wrapper flex-container-row">
-    <div class="overflow-none distance16 mat-elevation-z8 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined" 
+    <div class="overflow-none distance16 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:40%">
               <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="customfindcomponentTab === 'sinceversion2130'"
               [class.border-primary-600]="customfindcomponentTab === 'sinceversion2130'"
@@ -15,7 +15,7 @@
               (click)="customfindcomponentTab = 'sinceversion2130'">
               since version 21.3.0
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="customfindcomponentTab === 'beforeversion2130'"
               [class.border-primary-600]="customfindcomponentTab === 'beforeversion2130'"
@@ -26,7 +26,7 @@
             </button>
           </div>
           </div>
-          
+
           <!-- Tab content -->
           @if (customfindcomponentTab === 'sinceversion2130') {
           <div class="tab-content">
@@ -70,7 +70,8 @@
               See <a href="/extended-pdf-viewer/find">the programmatic API page</a> for details.</p>
 
             <div class="space-y-2">
-              <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext" placeholder="Regex Search Term" />
+              <label for="regex-search-input" class="block text-sm font-medium text-gray-700 mb-1">Regex Search Term</label>
+              <input id="regex-search-input" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext" placeholder="Regex Search Term" />
             </div>
             <div class="row">
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findRegex()">Find</button>
@@ -88,13 +89,13 @@
         </div>
     </div>
 
-    <div class="overflow-y-scroll distance16 mat-elevation-z8 progress bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined" 
+    <div class="overflow-y-scroll distance16 progress bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"
       style="flex: 1 1 100%; box-sizing: border-box; max-width:59%">
               <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="customfindcomponentTab === 'htmltemplate'"
               [class.border-primary-600]="customfindcomponentTab === 'htmltemplate'"
@@ -103,53 +104,53 @@
               (click)="customfindcomponentTab = 'htmltemplate'">
               HTML template
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'typescript'"
-              [class.border-primary-600]="codeTab === 'typescript'"
-              [class.text-gray-500]="codeTab !== 'typescript'"
-              [class.border-transparent]="codeTab !== 'typescript'"
-              (click)="codeTab = 'typescript'">
-              TypeScript
+              [class.text-primary-600]="codeTab === 'typescript-new'"
+              [class.border-primary-600]="codeTab === 'typescript-new'"
+              [class.text-gray-500]="codeTab !== 'typescript-new'"
+              [class.border-transparent]="codeTab !== 'typescript-new'"
+              (click)="codeTab = 'typescript-new'">
+              TypeScript (New)
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'typescript'"
-              [class.border-primary-600]="codeTab === 'typescript'"
-              [class.text-gray-500]="codeTab !== 'typescript'"
-              [class.border-transparent]="codeTab !== 'typescript'"
-              (click)="codeTab = 'typescript'">
-              TypeScript
+              [class.text-primary-600]="codeTab === 'typescript-controller'"
+              [class.border-primary-600]="codeTab === 'typescript-controller'"
+              [class.text-gray-500]="codeTab !== 'typescript-controller'"
+              [class.border-transparent]="codeTab !== 'typescript-controller'"
+              (click)="codeTab = 'typescript-controller'">
+              Find Controller
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'typescript'"
-              [class.border-primary-600]="codeTab === 'typescript'"
-              [class.text-gray-500]="codeTab !== 'typescript'"
-              [class.border-transparent]="codeTab !== 'typescript'"
-              (click)="codeTab = 'typescript'">
-              TypeScript
+              [class.text-primary-600]="codeTab === 'typescript-legacy'"
+              [class.border-primary-600]="codeTab === 'typescript-legacy'"
+              [class.text-gray-500]="codeTab !== 'typescript-legacy'"
+              [class.border-transparent]="codeTab !== 'typescript-legacy'"
+              (click)="codeTab = 'typescript-legacy'">
+              TypeScript (Legacy)
             </button>
           </div>
           </div>
-          
+
           <!-- Tab content -->
           @if (customfindcomponentTab === 'htmltemplate') {
           <div class="tab-content">
 <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/html.md"> </app-ie11-markdown>
           </div>
           }
-          @if (codeTab === 'typescript') {
+          @if (codeTab === 'typescript-new') {
           <div class="tab-content">
 <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts-new.md"> </app-ie11-markdown>
           </div>
           }
-          @if (codeTab === 'typescript') {
+          @if (codeTab === 'typescript-controller') {
           <div class="tab-content">
 <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts-find-controller.md"> </app-ie11-markdown>
           </div>
           }
-          @if (codeTab === 'typescript') {
+          @if (codeTab === 'typescript-legacy') {
           <div class="tab-content">
 <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-find/ts.md"> </app-ie11-markdown>
           </div>
@@ -158,7 +159,7 @@
     </div>
   </div>
 
-  <div class="pdf-card distance16 mat-elevation-z8 use-available-space bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
+  <div class="pdf-card distance16 use-available-space bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
       <div>
         <small>The example PDF has been published under a <a
@@ -169,7 +170,8 @@
     </div>
     <ngx-extended-pdf-viewer src="/assets/pdfs/Portugues-para-principiantes-1538054164.pdf" [textLayer]="true"
       [showFindButton]="false" (updateFindMatchesCount)="onUpdateFindMatchesCount($event)" (pdfLoaded)="pdfLoaded()"
-      [showFindButton]="currentTab===0">
+      [showFindButton]="currentTab===0"
+      [theme]="theme">
     </ngx-extended-pdf-viewer>
   </div>
 </article>

@@ -1,4 +1,5 @@
 import { Component, effect, OnDestroy, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PDFPrintRange } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -24,18 +25,19 @@ import { LanguagePipe } from 'ngx-markdown';
     ],
 })
 export class PrintRangeComponent implements OnDestroy {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private printService = inject(NgxExtendedPdfViewerService);
   fullscreenService = inject(FullscreenService);
 
   public printrangecomponentTab: string = 'printserviceprint';
-  public codeTab: string = 'typescript';
-  private activeTab = 0;
+  public codeTab: string = 'htmltemplate';
   private PDFViewerApplication?: IPDFViewerApplication;
 
   public get src(): string {
-    if (this.activeTab === 3) {
-      return 'assets/pdfs/fancy.pdf';
-    }
     return '/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf';
   }
 
@@ -160,18 +162,17 @@ export class PrintRangeComponent implements OnDestroy {
     console.log(message ?? 'Click the print button or hit CTRL+P to see the effect. If you are using a Mac, the key binding is CMD+P.');
   }
 
-  public tabChanged(index: any) {
-    this.activeTab = index.index;
-    if (this.activeTab === 3) {
-      this.printService.removePrintRange();
-    }
-  }
 
   public get sourcecode(): string {
-    if (this.activeTab === 0) {
+    if (this.printrangecomponentTab === 'printserviceprint') {
       return `@Component({
 standalone: false,  ... })
 export class PrintRangeComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   constructor(private printService: NgxExtendedPdfViewerService) {}
 
   public print(): void {
@@ -183,10 +184,15 @@ export class PrintRangeComponent {
     } as PDFPrintRange;
     this.printService.print(range);
 }`.replaceAll('      \n', '');
-    } else if (this.activeTab === 1) {
+    } else if (this.printrangecomponentTab === 'setprintrange') {
       return `@Component({
 standalone: false,  ... })
 export class PrintRangeComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   constructor(private printService: NgxExtendedPdfViewerService) {}
 
   public setPrintRange(): void {
@@ -199,10 +205,50 @@ export class PrintRangeComponent {
   this.printService.setPrintRange(range);
   }
 }`;
+    } else if (this.printrangecomponentTab === 'overridebrowserprint') {
+      return `@Component({
+standalone: false,  ... })
+export class PrintRangeComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
+  
+  public replaceBrowserPrint = ${this.replaceBrowserPrint};
+}`;
+    } else if (this.printrangecomponentTab === 'autorotation') {
+      return `@Component({
+standalone: false,  ... })
+export class PrintRangeComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
+  
+  public enablePrintAutoRotate = ${this.enablePrintAutoRotate};
+}`;
+    } else if (this.printrangecomponentTab === 'printresolution') {
+      return `@Component({
+standalone: false,  ... })
+export class PrintRangeComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
+  
+  public printResolution = ${this.printResolution};
+}`;
     } else {
       return `@Component({
 standalone: false,  ... })
-export class PrintComponent {
+export class PrintRangeComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
   }
 }`;
     }

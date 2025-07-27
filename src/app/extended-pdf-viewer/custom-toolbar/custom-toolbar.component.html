@@ -49,27 +49,27 @@
             <label class="block text-sm font-medium text-gray-700"></label>
             <div class="space-y-1">
               <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" value="default" aria-label="Demo" [(ngModel)]="theme" />
+                <input type="radio" class="form-radio text-primary-600" value="default" aria-label="Demo" [(ngModel)]="toolbarVariant" />
                 <span>standard layout</span>
               </label>
               <br />
               <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" value="findbar" aria-label="Demo" [(ngModel)]="theme" />
+                <input type="radio" class="form-radio text-primary-600" value="findbar" aria-label="Demo" [(ngModel)]="toolbarVariant" />
                 <span>custom findbar (large input field in a dedicated line)</span>
               </label>
               <br />
               <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" value="checkbox" aria-label="Demo" [(ngModel)]="theme" />
+                <input type="radio" class="form-radio text-primary-600" value="checkbox" aria-label="Demo" [(ngModel)]="toolbarVariant" />
                 <span>radiobutton zoom</span>
               </label>
               <br />
               <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" value="additional" aria-label="Demo" [(ngModel)]="theme" />
+                <input type="radio" class="form-radio text-primary-600" value="additional" aria-label="Demo" [(ngModel)]="toolbarVariant" />
                 <span>custom color and additional buttons ("open PDF in new tab" and "export as image" button)</span>
               </label>
               <br />
               <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" value="floating" aria-label="Demo" [(ngModel)]="theme" />
+                <input type="radio" class="form-radio text-primary-600" value="floating" aria-label="Demo" [(ngModel)]="toolbarVariant" />
                 <span>floating zoombar</span>
               </label>
               <label class="flex items-center space-x-1 text-sm">
@@ -92,11 +92,11 @@
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
               <button
                 class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-                [class.text-primary-600]="customtoolbarcomponentTab === 'typescript'"
-                [class.border-primary-600]="customtoolbarcomponentTab === 'typescript'"
-                [class.text-gray-500]="customtoolbarcomponentTab !== 'typescript'"
-                [class.border-transparent]="customtoolbarcomponentTab !== 'typescript'"
-                (click)="customtoolbarcomponentTab = 'typescript'"
+                [class.text-primary-600]="codeTab === 'typescript'"
+                [class.border-primary-600]="codeTab === 'typescript'"
+                [class.text-gray-500]="codeTab !== 'typescript'"
+                [class.border-transparent]="codeTab !== 'typescript'"
+                (click)="codeTab = 'typescript'"
               >
                 TypeScript
               </button>
@@ -165,19 +165,19 @@
         </div>
 
         <!-- Tab content -->
-        @if (customtoolbarcomponentTab === 'typescript') {
+        @if (codeTab === 'typescript') {
           <div class="tab-content">
-            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-' + theme + '.md'"> </app-ie11-markdown>
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/ts-' + toolbarVariant + '.md'"> </app-ie11-markdown>
           </div>
         }
         @if (codeTab === 'htmltemplate') {
           <div class="tab-content">
-            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-' + theme + '.md'"> </app-ie11-markdown>
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/html-' + toolbarVariant + '.md'"> </app-ie11-markdown>
           </div>
         }
         @if (codeTab === 'csstemplate') {
           <div class="tab-content">
-            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/css-' + theme + '.md'"> </app-ie11-markdown>
+            <app-ie11-markdown [src]="'/assets/extended-pdf-viewer/custom-toolbar/css-' + toolbarVariant + '.md'"> </app-ie11-markdown>
           </div>
         }
         @if (codeTab === 'additionalbuttons') {
@@ -207,16 +207,17 @@
   <app-demo [src]="src">
     @if (showPdfViewer) {
       <ngx-extended-pdf-viewer
-        [customFindbarInputArea]="theme === 'findbar' ? customFindbarInputArea : undefined"
-        [customFindbarButtons]="theme === 'findbar' ? customFindbarButtons : undefined"
-        [customToolbar]="theme === 'checkbox' ? customCheckboxZoomToolbar : theme === 'additional' ? additionalButtons : undefined"
-        [customFreeFloatingBar]="theme === 'floating' ? floatingZoombar : undefined"
+        [customFindbarInputArea]="toolbarVariant === 'findbar' ? customFindbarInputArea : undefined"
+        [customFindbarButtons]="toolbarVariant === 'findbar' ? customFindbarButtons : undefined"
+        [customToolbar]="toolbarVariant === 'checkbox' ? customCheckboxZoomToolbar : toolbarVariant === 'additional' ? additionalButtons : undefined"
+        [customFreeFloatingBar]="toolbarVariant === 'floating' ? floatingZoombar : undefined"
         [src]="src"
         [zoom]="zoom"
-        [showZoomButtons]="theme !== 'floating'"
+        [showZoomButtons]="toolbarVariant !== 'floating'"
         [showFreeFloatingBar]="showFreeFloatingBar"
-        [textLayer]="theme === 'findbar'"
-      >
+        [textLayer]="toolbarVariant === 'findbar'"
+      
+      [theme]="theme">
       </ngx-extended-pdf-viewer>
     }
   </app-demo>

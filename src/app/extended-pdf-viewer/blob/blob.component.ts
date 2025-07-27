@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, PageRenderedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { BlobService } from './blob.service';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -10,7 +11,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-blob',
-    
+
     standalone: true,
     templateUrl: './blob.component.html',
     styleUrls: ['./blob.component.css'],
@@ -23,6 +24,11 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class BlobComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private http = inject(HttpClient);
   private blobService = inject(BlobService);
   private ngxService = inject(NgxExtendedPdfViewerService);
@@ -36,7 +42,7 @@ export class BlobComponent {
 
   public choice = 'preloaded';
   public blobcomponentTab: string = 'displayingblobs';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   public get fullscreen(): boolean {
     return this._fullscreen;

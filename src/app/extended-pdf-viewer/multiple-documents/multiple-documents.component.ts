@@ -1,4 +1,5 @@
 import { Component, effect, OnInit, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { FileInputChanged, IPDFViewerApplication, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -16,6 +17,11 @@ import { AsyncPipe } from '@angular/common';
   imports: [FormsModule, Ie11MarkdownComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class MultipleDocumentsComponent implements OnInit {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   fullscreenService = inject(FullscreenService);
 
   public activeTab = 'html';

@@ -52,7 +52,8 @@
 <div class="padding-top">
             <section class="section">
               <div class="space-y-2">
-                <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext" placeholder="search term" />
+                <label for="search-input" class="block text-sm font-medium text-gray-700 mb-1">Search Term</label>
+                <input id="search-input" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext" placeholder="search term" />
               </div>
             </section>
             <section class="section compact">
@@ -150,7 +151,8 @@
               </div>
               <section class="section compact-input">
                 <div class="space-y-2">
-                  <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext" placeholder="search term" />
+                  <label for="user-search-input" class="block text-sm font-medium text-gray-700 mb-1">User Search Term</label>
+                  <input id="user-search-input" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext" placeholder="search term" />
                 </div>
               </section>
               <section class="section compact">
@@ -215,7 +217,8 @@
               </div>
               <section class="section">
                 <div class="space-y-2">
-                  <input class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext2" placeholder="search term" />
+                  <label for="api-search-input" class="block text-sm font-medium text-gray-700 mb-1">API Search Term</label>
+                  <input id="api-search-input" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext2" placeholder="search term" />
                 </div>
               </section>
               <section class="section compact">
@@ -400,7 +403,8 @@
     <ngx-extended-pdf-viewer [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
       (updateFindMatchesCount)="updateFindMatchesCount($event)" (updateFindState)="updateFindState($event)"
       backgroundColor="#ffffff" [height]="'90vh'" [handTool]="false" [showHandToolButton]="true" [page]="1"
-      [showFindRegexp]="true">
+      [showFindRegexp]="true"
+      [theme]="theme">
     </ngx-extended-pdf-viewer>
   </div>
 </div>

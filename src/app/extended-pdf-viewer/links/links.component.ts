@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { LinkTarget, PageRenderedEvent, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from 'src/app/services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -20,13 +21,18 @@ import { LanguagePipe } from 'ngx-markdown';
     ],
 })
 export class LinksComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   fullscreenService = inject(FullscreenService);
 
   public LinkTarget = LinkTarget;
 
   public hidden = false;
   public linkscomponentTab: string = 'defaultlinktargets';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   private _target: number = LinkTarget.BLANK;
 

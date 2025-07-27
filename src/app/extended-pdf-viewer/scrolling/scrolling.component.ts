@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -20,6 +21,11 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class ScrollingComponent {
+  private themeService = inject(ThemeService);
+
+  public get theme(): string {
+    return this.themeService.theme();
+  }
   private pdfService = inject(NgxExtendedPdfViewerService);
   fullscreenService = inject(FullscreenService);
 
@@ -29,7 +35,7 @@ export class ScrollingComponent {
 
   public zoom = 'page-width';
   public scrollingcomponentTab: string = 'regularpdffiles';
-  public codeTab: string = 'typescript';
+  public codeTab: string = 'htmltemplate';
 
   public get fullscreen(): boolean {
     return this._fullscreen;

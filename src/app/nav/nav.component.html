@@ -9,6 +9,7 @@
     </div>
   </div>
   -->
+  @if (!hideHeader) {
   <header class="bg-primary-500 text-white shadow-mat-8 h-16 flex-shrink-0">
     <div class="flex items-center h-full px-4">
       <app-octocat></app-octocat>
@@ -27,11 +28,13 @@
                 <option value="bleeding-edge">bleeding edge (sneak preview)</option>
               </select>
             </label>
+            <app-theme-toggle></app-theme-toggle>
           </div>
         </div>
       </div>
     </div>
   </header>
+  }
   <div class="flex flex-1 overflow-hidden">
     <nav #drawer class="sidenav bg-white shadow-lg overflow-y-auto transition-all duration-300 ease-in-out"
          role="navigation"

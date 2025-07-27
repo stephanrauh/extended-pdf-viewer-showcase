@@ -143,7 +143,8 @@
       backgroundColor="#ffffff"
       [language]="language"
       [textLayer]="true"
-      >
+      
+      [theme]="theme">
     </ngx-extended-pdf-viewer>
   }
   @if (selectedTab === 1  && !hidePdfViewer) {
@@ -152,7 +153,8 @@
       backgroundColor="#ffffff"
       [textLayer]="true"
       [language]="'fr'"
-      >
+      
+      [theme]="theme">
     </ngx-extended-pdf-viewer>
   }
 </app-demo>
