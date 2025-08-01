@@ -1,4 +1,4 @@
-import { EditorAnnotation, FreeTextEditorAnnotation, InkEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule, HighlightEditorAnnotation } from 'ngx-extended-pdf-viewer';
+import { EditorAnnotation, FreeTextEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule, HighlightEditorAnnotation } from 'ngx-extended-pdf-viewer';
 import { Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';

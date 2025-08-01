@@ -73,6 +73,7 @@ import { CSPComponent } from './extended-pdf-viewer/csp/csp.component';
 import { EditorEventsComponent } from './extended-pdf-viewer/editor-events/editor-events.component';
 import { LoadingIndicatorComponent } from './extended-pdf-viewer/loading-indicator/loading-indicator.component';
 import { ModifyingPageOrderComponent } from './extended-pdf-viewer/modifying-page-order/modifying-page-order.component';
+import { AddingArbitraryAnnotationsComponent } from './extended-pdf-viewer/adding-arbitrary-annotations/adding-arbitrary-annotations.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/extended-pdf-viewer/simple', pathMatch: 'full' },
@@ -81,6 +82,7 @@ export const routes: Routes = [
     path: 'extended-pdf-viewer',
     children: [
       { path: 'simple', component: SimpleComponent },
+      { path: 'adding-arbitrary-annotations', component: AddingArbitraryAnnotationsComponent},
       { path: 'alternatives', component: AlternativesComponent },
       { path: 'annotation-layer', component: AnnotationLayerComponent },
       { path: 'annotation-layer-api', component: AnnotationLayerApiComponent },
