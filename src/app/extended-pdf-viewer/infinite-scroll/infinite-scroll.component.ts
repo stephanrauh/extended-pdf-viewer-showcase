@@ -9,7 +9,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-infinite-scroll',
-    
+
     standalone: true,
     templateUrl: './infinite-scroll.component.html',
     styleUrls: ['./infinite-scroll.component.css'],
@@ -45,6 +45,8 @@ export class InfiniteScrollComponent {
 
   public showPdfViewer = true;
   public infinitescrollcomponentTab: string = 'gettingstarted';
+
+  public codetab = "htmltemplate";
 
   private _fullscreen = false;
 

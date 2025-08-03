@@ -8,18 +8,12 @@ import { RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-server-side-rendering',
-    
-    standalone: true,
-    templateUrl: './server-side-rendering.component.html',
-    styleUrls: ['./server-side-rendering.component.css'],
-    imports: [
-        Ie11MarkdownComponent,
-        DemoComponent,
-        RouterLink,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ]
+  selector: 'app-server-side-rendering',
+
+  standalone: true,
+  templateUrl: './server-side-rendering.component.html',
+  styleUrls: ['./server-side-rendering.component.css'],
+  imports: [Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class ServerSideRenderingComponent {
   private themeService = inject(ThemeService);
@@ -27,9 +21,11 @@ export class ServerSideRenderingComponent {
   public get theme(): string {
     return this.themeService.theme();
   }
-    public serversiderenderingcomponentTab: string = 'serversiderendering';
-private pdfService = inject(NgxExtendedPdfViewerService);
-  fullscreenService = inject(FullscreenService);
+  public serversiderenderingcomponentTab: string = 'serversiderendering';
+
+  public codeTab = "htmltemplate";
+
+  public fullscreenService = inject(FullscreenService);
 
   private _fullscreen = false;
 
@@ -39,6 +35,5 @@ private pdfService = inject(NgxExtendedPdfViewerService);
 
   public set fullscreen(full: boolean) {
     this._fullscreen = full;
-
   }
 }

@@ -1,3 +1,5 @@
+# JHipster 6.6 Integration
+
 **Caveat**: I don't support non-standard installations. This includes JHipster. Nonetheless, I've collected some hint that might help you get the PDF viewer up and running.
 
 **Hint**: There's a demo repository featuring JHipster 6.6 and ngx-extended-pdf-viewer 2.0.0-alpha.0 at

@@ -10,20 +10,12 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-page-view-mode',
-    
-    standalone: true,
-    templateUrl: './page-view-mode.component.html',
-    styleUrls: ['./page-view-mode.component.css'],
-    imports: [
-        FormsModule,
-        Ie11MarkdownComponent,
-        RouterLink,
-        CopyrightComponent,
-        FullscreenButtonComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-page-view-mode',
+
+  standalone: true,
+  templateUrl: './page-view-mode.component.html',
+  styleUrls: ['./page-view-mode.component.css'],
+  imports: [FormsModule, Ie11MarkdownComponent, RouterLink, CopyrightComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class PageViewModeComponent {
   private themeService = inject(ThemeService);
@@ -38,6 +30,8 @@ export class PageViewModeComponent {
   public spreadMode: 'off' | 'even' | 'odd' = 'off';
 
   public showBorders = true;
+
+  public codetab = 'htmltemplate';
   public pageviewmodecomponentTab: string = 'gettingstarted';
 
   private _fullscreen = false;

@@ -9,7 +9,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-export-image',
-    
+
     standalone: true,
     templateUrl: './export-image.component.html',
     styleUrls: ['./export-image.component.css'],
@@ -88,7 +88,7 @@ export class ExportImageComponent {
   }
 
   public exportAsImage(): void {
-    this.selectedTabIndex = 2;
+    this.exportimagecomponentTab = 'extractedimage';
     const scale = { width: this.width, height: this.height, scale: this.scale };
     (async () => this.showImage(await this.pdfViewerService.getPageAsImage(1, scale, this.background)))();
   }

@@ -20,7 +20,9 @@ export class CustomSidebarComponent {
 
   public activeTab = 'html';
 
-  public _theme = 'without';
+  public theme = "light";
+
+  public _sidebarType = 'without';
 
   public showPdfViewer = true;
 
@@ -36,17 +38,17 @@ export class CustomSidebarComponent {
     this._fullscreen = full;
   }
 
-  public set theme(theme: string) {
-    if (this._theme !== theme) {
+  public set sidebarType(sidebarType: string) {
+    if (this._sidebarType !== sidebarType) {
       this.showPdfViewer = false;
-      this._theme = theme;
+      this._sidebarType = sidebarType;
       setTimeout(() => (this.showPdfViewer = true), 500);
     } else {
-      this._theme = theme;
+      this._sidebarType = sidebarType;
     }
   }
 
-  public get theme(): string {
-    return this._theme;
+  public get sidebarType(): string {
+    return this._sidebarType;
   }
 }

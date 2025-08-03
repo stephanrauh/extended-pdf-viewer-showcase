@@ -1,9 +1,11 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-  <div class="flex-container-row">
-    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-              <div class="w-full">
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
@@ -13,7 +15,8 @@
                 [class.border-primary-600]="pageviewmodecomponentTab === 'gettingstarted'"
                 [class.text-gray-500]="pageviewmodecomponentTab !== 'gettingstarted'"
                 [class.border-transparent]="pageviewmodecomponentTab !== 'gettingstarted'"
-                (click)="pageviewmodecomponentTab = 'gettingstarted'">
+                (click)="pageviewmodecomponentTab = 'gettingstarted'"
+              >
                 Getting started
               </button>
             </div>
@@ -21,100 +24,104 @@
 
           <!-- Tab content -->
           @if (pageviewmodecomponentTab === 'gettingstarted') {
-          <div class="tab-content">
-<p>
-            The PDF viewer supports the single-page mode. In this mode, you can scroll from page to page. Instead,
-            you can only navigate to a new page by setting the page number or clicking a chapter in the sidebar.
-          </p>
-          <div class="space-y-1">
-
-            <label class="flex items-center space-x-1 text-sm">
-          <input type="radio" class="form-radio text-primary-600" value="off" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5;" />
-          <span>no spread</span>
-        </label>
-            <br />
-            <label class="flex items-center space-x-1 text-sm">
-          <input type="radio" class="form-radio text-primary-600" value="odd" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5;" />
-          <span>odd spread</span>
-        </label>
-            <br />
-            <label class="flex items-center space-x-1 text-sm">
-          <input type="radio" class="form-radio text-primary-600" value="even" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5;" />
-          <span>even spread</span>
-        </label>
-
-      </div>
-          <p>
-            <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="showBorders" />
-        <span>show borders around the pages</span>
-      </label>
-          </p>
-          </div>
+            <div class="tab-content">
+              <p>
+                The PDF viewer supports the single-page mode. In this mode, you can scroll from page to page. Instead, you can only navigate to a new page by
+                setting the page number or clicking a chapter in the sidebar.
+              </p>
+              <div class="space-y-0.5">
+                <label class="flex items-center space-x-1 text-sm">
+                  <input type="radio" class="form-radio text-primary-600" value="off" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5" />
+                  <span>no spread</span>
+                </label>
+                <label class="flex items-center space-x-1 text-sm">
+                  <input type="radio" class="form-radio text-primary-600" value="odd" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5" />
+                  <span>odd spread</span>
+                </label>
+                <label class="flex items-center space-x-1 text-sm">
+                  <input type="radio" class="form-radio text-primary-600" value="even" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5" />
+                  <span>even spread</span>
+                </label>
+              </div>
+              <label class="flex items-center space-x-1 text-sm">
+                <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="showBorders" />
+                <span>show borders around the pages</span>
+              </label>
+            </div>
           }
         </div>
-    </div>
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-              <div class="w-full">
+      </div>
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
               <button
                 class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-                [class.text-primary-600]="pageviewmodecomponentTab === 'htmltemplate'"
-                [class.border-primary-600]="pageviewmodecomponentTab === 'htmltemplate'"
-                [class.text-gray-500]="pageviewmodecomponentTab !== 'htmltemplate'"
-                [class.border-transparent]="pageviewmodecomponentTab !== 'htmltemplate'"
-                (click)="pageviewmodecomponentTab = 'htmltemplate'">
+                [class.text-primary-600]="codetab === 'htmltemplate'"
+                [class.border-primary-600]="codetab === 'htmltemplate'"
+                [class.text-gray-500]="codetab !== 'htmltemplate'"
+                [class.border-transparent]="codetab !== 'htmltemplate'"
+                (click)="codetab = 'htmltemplate'"
+              >
                 HTML template
               </button>
               <button
                 class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-                [class.text-primary-600]="pageviewmodecomponentTab === 'typescript'"
-                [class.border-primary-600]="pageviewmodecomponentTab === 'typescript'"
-                [class.text-gray-500]="pageviewmodecomponentTab !== 'typescript'"
-                [class.border-transparent]="pageviewmodecomponentTab !== 'typescript'"
-                (click)="pageviewmodecomponentTab = 'typescript'">
+                [class.text-primary-600]="codetab === 'typescript'"
+                [class.border-primary-600]="codetab === 'typescript'"
+                [class.text-gray-500]="codetab !== 'typescript'"
+                [class.border-transparent]="codetab !== 'typescript'"
+                (click)="codetab = 'typescript'"
+              >
                 Typescript
               </button>
             </div>
           </div>
-          </div>
+        </div>
 
-          <!-- Tab content -->
-          @if (pageviewmodecomponentTab === 'htmltemplate') {
+        <!-- Tab content -->
+        @if (codetab === 'htmltemplate') {
           <div class="tab-content">
-<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/html.md">
-          </app-ie11-markdown>
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/html.md"> </app-ie11-markdown>
           </div>
-          }
-          @if (pageviewmodecomponentTab === 'typescript') {
+        }
+        @if (codetab === 'typescript') {
           <div class="tab-content">
-<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/ts.md">
-          </app-ie11-markdown>
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/page-view-mode/ts.md"> </app-ie11-markdown>
           </div>
-          }
-        </div>
-        </div>
+        }
+      </div>
+    </div>
   }
 
-  <div class="use-available-height bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"
-    [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+  <div
+    class="use-available-height bg-white border border-gray-300 rounded-lg shadow-md p-3"
+    appearance="outlined"
+    [class.distance16]="!(fullscreenService.isFullscreen$ | async)"
+  >
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px">
       <div>
-        <small>Note there's a bug in the PDF file. See the <a [routerLink]="['/annotation-layer']">annotation layer
-            demo</a> to see the bugfix.</small>
+        <small>Note there's a bug in the PDF file. See the <a [routerLink]="['/annotation-layer']">annotation layer demo</a> to see the bugfix.</small>
         <app-copyright [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"></app-copyright>
-        <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+        <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px"></app-fullscreen-button>
       </div>
-      <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+      <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px"></app-fullscreen-button>
     </div>
 
-    <ngx-extended-pdf-viewer class="use-available-height"
-      [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'" [(page)]="page"
-      pageViewMode="single" [spread]="spreadMode" [showBorders]="showBorders" [height]="'auto'"
-      [theme]="theme">
+    <ngx-extended-pdf-viewer
+      class="use-available-height"
+      [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
+      [(page)]="page"
+      pageViewMode="single"
+      [spread]="spreadMode"
+      [showBorders]="showBorders"
+      [height]="'auto'"
+      [theme]="theme"
+    >
     </ngx-extended-pdf-viewer>
   </div>
 </div>

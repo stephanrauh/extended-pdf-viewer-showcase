@@ -1,94 +1,105 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-  <div class="flex-container-row">
-    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
-              <div class="w-full">
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 50%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="touchgesturescomponentTab === 'doubleclick'"
-              [class.border-primary-600]="touchgesturescomponentTab === 'doubleclick'"
-              [class.text-gray-500]="touchgesturescomponentTab !== 'doubleclick'"
-              [class.border-transparent]="touchgesturescomponentTab !== 'doubleclick'"
-              (click)="touchgesturescomponentTab = 'doubleclick'">
-              Doubleclick
-            </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="touchgesturescomponentTab === 'doubleclick'"
+                [class.border-primary-600]="touchgesturescomponentTab === 'doubleclick'"
+                [class.text-gray-500]="touchgesturescomponentTab !== 'doubleclick'"
+                [class.border-transparent]="touchgesturescomponentTab !== 'doubleclick'"
+                (click)="touchgesturescomponentTab = 'doubleclick'"
+              >
+                Doubleclick
+              </button>
+            </div>
           </div>
-          </div>
-          
+
           <!-- Tab content -->
           @if (touchgesturescomponentTab === 'doubleclick') {
-          <div class="tab-content">
-<p>The double-tap (or double-click) gesture enlarges the PDF file. By default, the target zoom is
-            "page-width". You can define a
-            different target zoom by setting <code>pdfDefaultOptions.doubleTapZoomFactor</code>. In this demo, that's
-            125%.
-          </p>
-          <p>There are three additional settings:</p>
-          <ul>
-            <li><code>pdfDefaultOptions.doubleTapZoomsInHandMode</code> Activates the double-tap gesture when the hand
-              mode is active. True by default. </li>
-            <li><code>pdfDefaultOptions.doubleTapZoomsInTextSelectionMode</code> Activates the double-tap gesture when
-              the select mode is active. False by default.</li>
-            <li><code>pdfDefaultOptions.doubleTapResetsZoomOnSecondDoubleTap</code> Allows you to reset the zoom on a
-              second double-tap. False by default (but true in this demo).</li>
-          </ul>
-          </div>
+            <div class="tab-content">
+              <p>
+                The double-tap (or double-click) gesture enlarges the PDF file. By default, the target zoom is "page-width". You can define a different target
+                zoom by setting <code>pdfDefaultOptions.doubleTapZoomFactor</code>. In this demo, that's 125%.
+              </p>
+              <p>There are three additional settings:</p>
+              <ul>
+                <li><code>pdfDefaultOptions.doubleTapZoomsInHandMode</code> Activates the double-tap gesture when the hand mode is active. True by default.</li>
+                <li>
+                  <code>pdfDefaultOptions.doubleTapZoomsInTextSelectionMode</code> Activates the double-tap gesture when the select mode is active. False by
+                  default.
+                </li>
+                <li>
+                  <code>pdfDefaultOptions.doubleTapResetsZoomOnSecondDoubleTap</code> Allows you to reset the zoom on a second double-tap. False by default (but
+                  true in this demo).
+                </li>
+              </ul>
+            </div>
           }
         </div>
-    </div>
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
-              <div class="w-full">
+      </div>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 48%">
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="touchgesturescomponentTab === 'htmltemplate'"
-              [class.border-primary-600]="touchgesturescomponentTab === 'htmltemplate'"
-              [class.text-gray-500]="touchgesturescomponentTab !== 'htmltemplate'"
-              [class.border-transparent]="touchgesturescomponentTab !== 'htmltemplate'"
-              (click)="touchgesturescomponentTab = 'htmltemplate'">
-              HTML template
-            </button>
-            <button 
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="touchgesturescomponentTab === 'typescript'"
-              [class.border-primary-600]="touchgesturescomponentTab === 'typescript'"
-              [class.text-gray-500]="touchgesturescomponentTab !== 'typescript'"
-              [class.border-transparent]="touchgesturescomponentTab !== 'typescript'"
-              (click)="touchgesturescomponentTab = 'typescript'">
-              TypeScript
-            </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codetab === 'htmltemplate'"
+                [class.border-primary-600]="codetab === 'htmltemplate'"
+                [class.text-gray-500]="codetab !== 'htmltemplate'"
+                [class.border-transparent]="codetab !== 'htmltemplate'"
+                (click)="codetab = 'htmltemplate'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codetab === 'typescript'"
+                [class.border-primary-600]="codetab === 'typescript'"
+                [class.text-gray-500]="codetab !== 'typescript'"
+                [class.border-transparent]="codetab !== 'typescript'"
+                (click)="codetab = 'typescript'"
+              >
+                TypeScript
+              </button>
+            </div>
           </div>
-          </div>
-          
+
           <!-- Tab content -->
-          @if (touchgesturescomponentTab === 'htmltemplate') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/touch-gestures/html.md"> </app-ie11-markdown>
-          </div>
+          @if (codetab === 'htmltemplate') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/touch-gestures/html.md"> </app-ie11-markdown>
+            </div>
           }
-          @if (touchgesturescomponentTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/touch-gestures/ts.md"> </app-ie11-markdown>
-          </div>
+          @if (codetab === 'typescript') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/touch-gestures/ts.md"> </app-ie11-markdown>
+            </div>
           }
         </div>
+      </div>
     </div>
-  </div>
   }
 
   <app-demo [src]="'/assets/pdfs/GraalVM.pdf'">
-    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/GraalVM.pdf'" [mobileFriendlyZoom]="'150%'" [zoomLevels]="zoomLevels"
-      [minZoom]="0.5" [maxZoom]="1.5"
-      [theme]="theme">
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/GraalVM.pdf'"
+      [mobileFriendlyZoom]="'150%'"
+      [zoomLevels]="zoomLevels"
+      [minZoom]="0.5"
+      [maxZoom]="1.5"
+      [theme]="theme"
+    >
     </ngx-extended-pdf-viewer>
     <div id="debug-info"></div>
-    <p style="height:600px">&nbsp;</p>
+    <p style="height: 600px">&nbsp;</p>
   </app-demo>
 </div>

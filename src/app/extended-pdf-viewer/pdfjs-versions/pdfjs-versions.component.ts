@@ -9,7 +9,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-pdfjs-versions',
-    
+
     standalone: true,
     templateUrl: './pdfjs-versions.component.html',
     styleUrls: ['./pdfjs-versions.component.css'],
@@ -28,7 +28,7 @@ export class PdfjsVersionsComponent {
     return this.themeService.theme();
   }
     public pdfjsversionscomponentTab: string = 'aboutthebleedingedgebranch';
-  public codeTab: string = 'htmltemplate';
+  public codeTab: string = 'typescript';
 fullscreenService = inject(FullscreenService);
 
   private _fullscreen = false;

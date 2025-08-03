@@ -1,49 +1,102 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-        <p>
-          You can set some of the properties of the editors.
-        </p>
+    <div class="flex-container-row">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
+        <p>You can set some of the properties of the editors.</p>
+        <div class="grid grid-cols-2 gap-4">
+
         <div class="space-y-1">
-        <label class="block text-sm font-medium text-gray-700">text editor font size</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin" (change)="editorFontSize=$event" (input)="editorFontSize=$event" placeholder="10 (1-100)" type="number" />
-      </div>
+          <label class="block text-sm font-medium text-gray-700">text editor font size</label>
+          <input
+            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            (change)="editorFontSize = $event"
+            (input)="editorFontSize = $event"
+            placeholder="10 (1-100)"
+            type="number"
+          />
+        </div>
         <div class="space-y-1">
-        <label class="block text-sm font-medium text-gray-700">text editor font color</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin" (change)="editorFontColor=$event" (input)="editorFontColor=$event" placeholder="#FF0000" />
-      </div>
+          <label class="block text-sm font-medium text-gray-700">text editor font color</label>
+          <input
+            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            (change)="editorFontColor = $event"
+            (input)="editorFontColor = $event"
+            placeholder="#FF0000"
+          />
+        </div>
         <div class="space-y-1">
-        <label class="block text-sm font-medium text-gray-700">ink editor color</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin" (change)="editorInkColor=$event" (input)="editorInkColor=$event" placeholder="#FF0000" />
-      </div>
+          <label class="block text-sm font-medium text-gray-700">ink editor color</label>
+          <input
+            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            (change)="editorInkColor = $event"
+            (input)="editorInkColor = $event"
+            placeholder="#FF0000"
+          />
+        </div>
         <div class="space-y-1">
-        <label class="block text-sm font-medium text-gray-700">ink editor opacity</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin" (change)="editorInkOpacity=$event" (input)="editorInkOpacity=$event" placeholder="10 (0-100)" type="number" />
-      </div>
+          <label class="block text-sm font-medium text-gray-700">ink editor opacity</label>
+          <input
+            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            (change)="editorInkOpacity = $event"
+            (input)="editorInkOpacity = $event"
+            placeholder="10 (0-100)"
+            type="number"
+          />
+        </div>
         <div class="space-y-1">
-        <label class="block text-sm font-medium text-gray-700">ink editor thickness</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin" (change)="editorInkThickness=$event" (input)="editorInkThickness=$event" placeholder="10 (1-20)" type="number" />
-      </div>
+          <label class="block text-sm font-medium text-gray-700">ink editor thickness</label>
+          <input
+            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            (change)="editorInkThickness = $event"
+            (input)="editorInkThickness = $event"
+            placeholder="10 (1-20)"
+            type="number"
+          />
+        </div>
         <div class="space-y-1">
-        <label class="block text-sm font-medium text-gray-700">highlight editor color</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin" (change)="editorHighlightColor=$event" (input)="editorHighlightColor=$event" placeholder="#FF0000" />
-      </div>
+          <label class="block text-sm font-medium text-gray-700">highlight editor color</label>
+          <input
+            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            (change)="editorHighlightColor = $event"
+            (input)="editorHighlightColor = $event"
+            placeholder="#FF0000"
+          />
+        </div>
         <div class="space-y-1">
-        <label class="block text-sm font-medium text-gray-700">highlight editor default color</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin" (change)="editorHighlightDefaultColor=$event" (input)="editorHighlightDefaultColor=$event" placeholder="#FF0000" />
-      </div>
+          <label class="block text-sm font-medium text-gray-700">highlight editor default color</label>
+          <input
+            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            (change)="editorHighlightDefaultColor = $event"
+            (input)="editorHighlightDefaultColor = $event"
+            placeholder="#FF0000"
+          />
+        </div>
         <div class="space-y-1">
-        <label class="block text-sm font-medium text-gray-700">highlight editor thickness</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin" (change)="editorHighlightThickness=$event" (input)="editorHighlightThickness=$event" placeholder="10 (1-24)" type="number" />
-      </div>
+          <label class="block text-sm font-medium text-gray-700">highlight editor thickness</label>
+          <input
+            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            (change)="editorHighlightThickness = $event"
+            (input)="editorHighlightThickness = $event"
+            placeholder="10 (1-24)"
+            type="number"
+          />
+        </div>
         <div class="space-y-1">
-        <label class="block text-sm font-medium text-gray-700">highlight editor - show all</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" class="margin" (change)="editorHighlightShowAll=$event" (input)="editorHighlightShowAll=$event" placeholder="true" />
+          <label class="block text-sm font-medium text-gray-700">highlight editor - show all</label>
+          <input
+            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            (change)="editorHighlightShowAll = $event"
+            (input)="editorHighlightShowAll = $event"
+            placeholder="true"
+          />
+        </div>
       </div>
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-                <div class="w-full">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
@@ -53,7 +106,8 @@
                 [class.border-primary-600]="editorsettingscomponentTab === 'htmltemplate'"
                 [class.text-gray-500]="editorsettingscomponentTab !== 'htmltemplate'"
                 [class.border-transparent]="editorsettingscomponentTab !== 'htmltemplate'"
-                (click)="editorsettingscomponentTab = 'htmltemplate'">
+                (click)="editorsettingscomponentTab = 'htmltemplate'"
+              >
                 HTML template
               </button>
               <button
@@ -62,26 +116,27 @@
                 [class.border-primary-600]="editorsettingscomponentTab === 'typescript'"
                 [class.text-gray-500]="editorsettingscomponentTab !== 'typescript'"
                 [class.border-transparent]="editorsettingscomponentTab !== 'typescript'"
-                (click)="editorsettingscomponentTab = 'typescript'">
+                (click)="editorsettingscomponentTab = 'typescript'"
+              >
                 TypeScript
               </button>
             </div>
           </div>
-          </div>
-
-          <!-- Tab content -->
-          @if (editorsettingscomponentTab === 'htmltemplate') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/editor-settings/ts1.md"> </app-ie11-markdown>
-          </div>
-          }
-          @if (editorsettingscomponentTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/editor-settings/ts2.md"> </app-ie11-markdown>
-          </div>
-          }
         </div>
+
+        <!-- Tab content -->
+        @if (editorsettingscomponentTab === 'htmltemplate') {
+          <div class="tab-content">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-settings/ts1.md"> </app-ie11-markdown>
+          </div>
+        }
+        @if (editorsettingscomponentTab === 'typescript') {
+          <div class="tab-content">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-settings/ts2.md"> </app-ie11-markdown>
+          </div>
+        }
       </div>
+    </div>
   }
 
   <app-demo [src]="'/assets/pdfs/simple-demo-document.pdf'">
@@ -91,9 +146,8 @@
       [textLayer]="true"
       [showHandToolButton]="true"
       [handTool]="false"
-
-      
-      [theme]="theme">
+      [theme]="theme"
+    >
     </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

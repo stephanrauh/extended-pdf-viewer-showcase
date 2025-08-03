@@ -1,8 +1,11 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-                <div class="w-full">
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
@@ -12,7 +15,8 @@
                 [class.border-primary-600]="linkscomponentTab === 'defaultlinktargets'"
                 [class.text-gray-500]="linkscomponentTab !== 'defaultlinktargets'"
                 [class.border-transparent]="linkscomponentTab !== 'defaultlinktargets'"
-                (click)="linkscomponentTab = 'defaultlinktargets'">
+                (click)="linkscomponentTab = 'defaultlinktargets'"
+              >
                 Default link targets
               </button>
               <button
@@ -21,16 +25,18 @@
                 [class.border-primary-600]="linkscomponentTab === 'description'"
                 [class.text-gray-500]="linkscomponentTab !== 'description'"
                 [class.border-transparent]="linkscomponentTab !== 'description'"
-                (click)="linkscomponentTab = 'description'">
+                (click)="linkscomponentTab = 'description'"
+              >
                 Description
               </button>
               <button
                 class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-                [class.text-primary-600]="codeTab === 'deactivatinglinks'"
-                [class.border-primary-600]="codeTab === 'deactivatinglinks'"
-                [class.text-gray-500]="codeTab !== 'deactivatinglinks'"
-                [class.border-transparent]="codeTab !== 'deactivatinglinks'"
-                (click)="codeTab = 'deactivatinglinks'">
+                [class.text-primary-600]="linkscomponentTab === 'deactivatinglinks'"
+                [class.border-primary-600]="linkscomponentTab === 'deactivatinglinks'"
+                [class.text-gray-500]="linkscomponentTab !== 'deactivatinglinks'"
+                [class.border-transparent]="linkscomponentTab !== 'deactivatinglinks'"
+                (click)="linkscomponentTab = 'deactivatinglinks'"
+              >
                 Deactivating links
               </button>
             </div>
@@ -38,67 +44,66 @@
 
           <!-- Tab content -->
           @if (linkscomponentTab === 'defaultlinktargets') {
-          <div class="tab-content">
-<p>Chose a link target:</p>
-            <div class="space-y-1">
-              <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.BLANK" />
-                <span>[target]="LinkTarget.BLANK" (opens a new window)</span>
-              </label>
-              <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.SELF" />
-                <span>[target]="LinkTarget.SELF" (same window)</span>
-              </label>
-              <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.PARENT" />
-                <span>[target]="LinkTarget.PARENT" (opens the PDF in the parent iFrame)</span>
-              </label>
-              <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.TOP" />
-                <span>[target]="LinkTarget.TOP" (opens the PDF in the same window, breaking out of any iframe context)</span>
-              </label>
-              <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.NONE" />
-                <span>[target]="LinkTarget.NONE" (identical to TOP)</span>
-              </label>
+            <div class="tab-content">
+              <p>Chose a link target:</p>
+              <div class="space-y-1">
+                <label class="flex items-center space-x-1 text-sm">
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.BLANK" />
+                  <span>[target]="LinkTarget.BLANK" (opens a new window)</span>
+                </label>
+                <label class="flex items-center space-x-1 text-sm">
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.SELF" />
+                  <span>[target]="LinkTarget.SELF" (same window)</span>
+                </label>
+                <label class="flex items-center space-x-1 text-sm">
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.PARENT" />
+                  <span>[target]="LinkTarget.PARENT" (opens the PDF in the parent iFrame)</span>
+                </label>
+                <label class="flex items-center space-x-1 text-sm">
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.TOP" />
+                  <span>[target]="LinkTarget.TOP" (opens the PDF in the same window, breaking out of any iframe context)</span>
+                </label>
+                <label class="flex items-center space-x-1 text-sm">
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.NONE" />
+                  <span>[target]="LinkTarget.NONE" (identical to TOP)</span>
+                </label>
+              </div>
+              <p>The link target is only considered at render time. So this demo forces a reload when you chose a different option.</p>
             </div>
-            <p>The link target is only considered at render time. So this demo forces a reload when you chose
-              a different option.
-            </p>
-          </div>
           }
           @if (linkscomponentTab === 'description') {
-          <div class="tab-content">
-<p>
-              There are several kinds of links:
-            </p>
-            <ul>
-              <li>Internal links within the PDF files.</li>
-              <li>External links on web server (usually with an https URL).</li>
-              <li>Links to file on the local PC or the local network. The PDF viewer doesn't support such links.</li>
-            </ul>
-            <p>By default, external links are opened in the same window. In other words, clicking the link
-              amounts to leaving the Angular application. To prevent this, you have two options:
-            </p>
-            <ul>
-              <li>Add the target when you're creating the PDF file. That's generally the best solution.</li>
-              <li>
-                Use the <code>defaultOptions</code> to override the default for <code>externalLinkTarget</code>.
-              </li>
-            </ul>
-          </div>
+            <div class="tab-content">
+              <p>There are several kinds of links:</p>
+              <ul>
+                <li>Internal links within the PDF files.</li>
+                <li>External links on web server (usually with an https URL).</li>
+                <li>Links to file on the local PC or the local network. The PDF viewer doesn't support such links.</li>
+              </ul>
+              <p>
+                By default, external links are opened in the same window. In other words, clicking the link amounts to leaving the Angular application. To
+                prevent this, you have two options:
+              </p>
+              <ul>
+                <li>Add the target when you're creating the PDF file. That's generally the best solution.</li>
+                <li>Use the <code>defaultOptions</code> to override the default for <code>externalLinkTarget</code>.</li>
+              </ul>
+            </div>
           }
-          @if (codeTab === 'deactivatinglinks') {
-          <div class="tab-content">
-<p>You can manipulate links using the <code>pageRendered</code> event. This demo deactivates
-            the links. Note you can't modify the appearance of the links. They are part of the PDF file,
-          so they can't be displayed differently. But you can modify the invisible annotation layer.</p>
-          </div>
+          @if (linkscomponentTab === 'deactivatinglinks') {
+            <div class="tab-content">
+              <p>
+                You can manipulate links using the <code>pageRendered</code> event. This demo deactivates the links. Note you can't modify the appearance of the
+                links. They are part of the PDF file, so they can't be displayed differently. But you can modify the invisible annotation layer.
+              </p>
+            </div>
           }
         </div>
-    </div>
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-              <div class="w-full">
+      </div>
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 use-available-height"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
@@ -108,7 +113,8 @@
                 [class.border-primary-600]="codeTab === 'typescript'"
                 [class.text-gray-500]="codeTab !== 'typescript'"
                 [class.border-transparent]="codeTab !== 'typescript'"
-                (click)="codeTab = 'typescript'">
+                (click)="codeTab = 'typescript'"
+              >
                 TypeScript
               </button>
               <button
@@ -117,47 +123,43 @@
                 [class.border-primary-600]="codeTab === 'html'"
                 [class.text-gray-500]="codeTab !== 'html'"
                 [class.border-transparent]="codeTab !== 'html'"
-                (click)="codeTab = 'html'">
+                (click)="codeTab = 'html'"
+              >
                 HTML
               </button>
             </div>
           </div>
-          </div>
-
-          <!-- Tab content -->
-          @if (codeTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown [data]="sourcecode | language : 'typescript'"></app-ie11-markdown>
-          </div>
-          }
-          @if (codeTab === 'html') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/links/html.md"></app-ie11-markdown>
-          </div>
-          }
-          @if (codeTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/links/ts2.md"></app-ie11-markdown>
-          </div>
-          }
-          @if (codeTab === 'html') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/links/html2.md"></app-ie11-markdown>
-          </div>
-          }
         </div>
-  </div>
-}
 
-<app-demo [src]="'/assets/pdfs/blind-text-collection.pdf'">
-  @if (!hidden) {
-    <ngx-extended-pdf-viewer
-      [src]="'/assets/pdfs/blind-text-collection.pdf'"
-      [height]="'90vh'"
-      (pageRendered)="afterPageRendered($event)"
-      
-      [theme]="theme">
-    </ngx-extended-pdf-viewer>
+        <!-- Tab content -->
+        @if (codeTab === 'typescript' && linkscomponentTab !== 'defaultlinktargets') {
+          <div class="tab-content">
+            <app-ie11-markdown [data]="sourcecode | language: 'typescript'"></app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'html'  && linkscomponentTab !== 'defaultlinktargets') {
+          <div class="tab-content">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html.md"></app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'typescript'  && linkscomponentTab === 'defaultlinktargets') {
+          <div class="tab-content">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/links/ts2.md"></app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'html' && linkscomponentTab === 'defaultlinktargets') {
+          <div class="tab-content">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html2.md"></app-ie11-markdown>
+          </div>
+        }
+      </div>
+    </div>
   }
-</app-demo>
+
+  <app-demo [src]="'/assets/pdfs/blind-text-collection.pdf'">
+    @if (!hidden) {
+      <ngx-extended-pdf-viewer [src]="'/assets/pdfs/blind-text-collection.pdf'" [height]="'90vh'" (pageRendered)="afterPageRendered($event)" [theme]="theme">
+      </ngx-extended-pdf-viewer>
+    }
+  </app-demo>
 </div>

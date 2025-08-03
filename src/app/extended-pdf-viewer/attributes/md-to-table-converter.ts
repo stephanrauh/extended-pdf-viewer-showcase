@@ -7,7 +7,6 @@ export async function convertMDToTable(file: string, httpClient: HttpClient): Pr
       responseType: 'text',
     })
   );
-  debugger;
   const lines = splitLines(removeHeader(source));
   return lines.filter((line) => line.length > 0).map((line) => parseColumns(line));
 }

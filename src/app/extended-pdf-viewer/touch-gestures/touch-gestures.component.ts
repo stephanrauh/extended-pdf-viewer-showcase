@@ -8,17 +8,12 @@ import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-touch-gestures',
-    
-    standalone: true,
-    templateUrl: './touch-gestures.component.html',
-    styleUrls: ['./touch-gestures.component.css'],
-    imports: [
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-touch-gestures',
+
+  standalone: true,
+  templateUrl: './touch-gestures.component.html',
+  styleUrls: ['./touch-gestures.component.css'],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class TouchGesturesComponent {
   private themeService = inject(ThemeService);
@@ -26,9 +21,9 @@ export class TouchGesturesComponent {
   public get theme(): string {
     return this.themeService.theme();
   }
-  private pdfService = inject(NgxExtendedPdfViewerService);
   fullscreenService = inject(FullscreenService);
 
+  public codetab = 'htmltemplate';
   public touchgesturescomponentTab: string = 'doubleclick';
   public isMobile!: boolean;
 

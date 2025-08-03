@@ -1,88 +1,92 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-        <p>You can customize both the sidebar. The only disadvantage is you have to set the
-          `top` position yourself. If you're offering an optional mobile-frieny large toolbar,
-          the `top` position of custom sidebars is not adjusted automatically.
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+      >
+        <p>
+          You can customize both the sidebar. The only disadvantage is you have to set the `top` position yourself. If you're offering an optional mobile-frieny
+          large toolbar, the `top` position of custom sidebars is not adjusted automatically.
         </p>
         <div class="space-y-2">
-
           <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="default" aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;" />
-          <span>sidebar with standard layout</span>
-        </label>
-          <br />
+            <input type="radio" class="form-radio text-primary-600" value="default" aria-label="Demo" [(ngModel)]="sidebarType" style="line-height: 1.5" />
+            <span>sidebar with standard layout</span>
+          </label>
           <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="without" aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;" />
-          <span>sidebar without toolbar</span>
-        </label>
-          <br />
+            <input type="radio" class="form-radio text-primary-600" value="without" aria-label="Demo" [(ngModel)]="sidebarType" style="line-height: 1.5" />
+            <span>sidebar without toolbar</span>
+          </label>
           <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="fancy" aria-label="Demo" [(ngModel)]="theme" style="line-height: 1.5;" />
-          <span>fancy layout</span>
-        </label>
-
-      </div>
-        <br />
+            <input type="radio" class="form-radio text-primary-600" value="fancy" aria-label="Demo" [(ngModel)]="sidebarType" style="line-height: 1.5" />
+            <span>fancy layout</span>
+          </label>
+        </div>
         <p>The attribute <code>[(sidebarVisible)]</code> supports two-way binding. It's updated when the user opens or hide the sidebar.</p>
         <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600" [(ngModel)]="sidebarOpen" />
-        <span>show sidebar</span>
-      </label>
+          <input type="checkbox" class="form-checkbox text-primary-600" [(ngModel)]="sidebarOpen" />
+          <span>show sidebar</span>
+        </label>
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+      >
         <div class="w-full">
-        <!-- Tab buttons -->
-        <div class="overflow-x-auto">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-          <button
-            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-            [class.text-primary-600]="activeTab === 'html'"
-            [class.border-primary-600]="activeTab === 'html'"
-            [class.text-gray-500]="activeTab !== 'html'"
-            [class.border-transparent]="activeTab !== 'html'"
-            (click)="activeTab = 'html'">
-            HTML template
-          </button>
-          <button
-            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-            [class.text-primary-600]="activeTab === 'no-toolbar'"
-            [class.border-primary-600]="activeTab === 'no-toolbar'"
-            [class.text-gray-500]="activeTab !== 'no-toolbar'"
-            [class.border-transparent]="activeTab !== 'no-toolbar'"
-            (click)="activeTab = 'no-toolbar'">
-            no toolbar
-          </button>
-          <button
-            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-            [class.text-primary-600]="activeTab === 'fancy-sidebar'"
-            [class.border-primary-600]="activeTab === 'fancy-sidebar'"
-            [class.text-gray-500]="activeTab !== 'fancy-sidebar'"
-            [class.border-transparent]="activeTab !== 'fancy-sidebar'"
-            (click)="activeTab = 'fancy-sidebar'">
-            fancy sidebar
-          </button>
-        </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'html'"
+                [class.border-primary-600]="activeTab === 'html'"
+                [class.text-gray-500]="activeTab !== 'html'"
+                [class.border-transparent]="activeTab !== 'html'"
+                (click)="activeTab = 'html'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'no-toolbar'"
+                [class.border-primary-600]="activeTab === 'no-toolbar'"
+                [class.text-gray-500]="activeTab !== 'no-toolbar'"
+                [class.border-transparent]="activeTab !== 'no-toolbar'"
+                (click)="activeTab = 'no-toolbar'"
+              >
+                no toolbar
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'fancy-sidebar'"
+                [class.border-primary-600]="activeTab === 'fancy-sidebar'"
+                [class.text-gray-500]="activeTab !== 'fancy-sidebar'"
+                [class.border-transparent]="activeTab !== 'fancy-sidebar'"
+                (click)="activeTab = 'fancy-sidebar'"
+              >
+                fancy sidebar
+              </button>
+            </div>
           </div>
 
-        <!-- Tab content -->
-        @if (activeTab === 'html') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/html.md"> </app-ie11-markdown>
-        </div>
+          <!-- Tab content -->
+          @if (activeTab === 'html') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/html.md"> </app-ie11-markdown>
+            </div>
           }
-        @if (activeTab === 'no-toolbar') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/without-toolbar.md"> </app-ie11-markdown>
-        </div>
+          @if (activeTab === 'no-toolbar') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/without-toolbar.md"> </app-ie11-markdown>
+            </div>
           }
-        @if (activeTab === 'fancy-sidebar') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/fancy-sidebar.md"> </app-ie11-markdown>
-        </div>
+          @if (activeTab === 'fancy-sidebar') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/fancy-sidebar.md"> </app-ie11-markdown>
+            </div>
           }
-      </div>
+        </div>
       </div>
     </div>
   }
@@ -91,48 +95,53 @@
     @if (showPdfViewer) {
       <ngx-extended-pdf-viewer
         [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
-        [customSidebar]="theme==='fancy' ? fancySidebar: theme === 'without'? withoutSidebar: undefined"
+        [customSidebar]="sidebarType === 'fancy' ? fancySidebar : sidebarType === 'without' ? withoutSidebar : undefined"
         [(sidebarVisible)]="sidebarOpen"
         [textLayer]="true"
         [showHandToolButton]="true"
-        
-      [theme]="theme">
+        [theme]="theme"
+      >
       </ngx-extended-pdf-viewer>
     }
   </app-demo>
 </div>
 
 <ng-template #withoutSidebar>
-  <div id="sidebarContainer" style="top:-1px">
+  <div id="sidebarContainer" style="top: -1px">
     <pdf-sidebar-content></pdf-sidebar-content>
     <div id="sidebarResizer" class="hidden"></div>
   </div>
 </ng-template>
 
 <ng-template #fancySidebar>
-  <div id="sidebarContainer" style="top:31px;background-color:goldenrod">
+  <div id="sidebarContainer" style="top: 31px; background-color: goldenrod">
     <div id="additionalSidebarContainer">
       <div id="toolbarSidebar">
-        <button style="background-color: red; height:100%;width: 34%;border:0;margin:0;padding:0"
-          type="button" id="viewThumbnail"
+        <button
+          style="background-color: red; height: 100%; width: 34%; border: 0; margin: 0; padding: 0"
+          type="button"
+          id="viewThumbnail"
           class="toolbarButton"
-          data-l10n-id="thumbs">
+          data-l10n-id="thumbs"
+        >
           <span data-l10n-id="thumbs_label">Thumbnails</span>
         </button>
         <button
-          style="background-color: green; height:100%;width: 35%;border:0;margin:0;padding:0"
+          style="background-color: green; height: 100%; width: 35%; border: 0; margin: 0; padding: 0"
           type="button"
           id="viewOutline"
           class="toolbarButton"
-          data-l10n-id="document_outline">
+          data-l10n-id="document_outline"
+        >
           <span data-l10n-id="document_outline_label">Document Outline</span>
         </button>
         <button
-          style="background-color: blue; height:100%;width: 34%;border:0;margin:0;padding:0"
+          style="background-color: blue; height: 100%; width: 34%; border: 0; margin: 0; padding: 0"
           type="button"
           id="viewAttachments"
           class="toolbarButton"
-          data-l10n-id="attachments">
+          data-l10n-id="attachments"
+        >
           <span data-l10n-id="attachments_label">Attachments</span>
         </button>
       </div>

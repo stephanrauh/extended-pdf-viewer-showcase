@@ -1,32 +1,60 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+    <div class="flex-container-row">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
         <p>
-          You can export the PDF file as an image. Note that the text of the PDF usually scales smoothlessly; you can print it with high
-          resolution. However, the images embedded in the PDF file usually don't scale as gracefully, as you can see in the example document.
+          You can export the PDF file as an image. Note that the text of the PDF usually scales smoothlessly; you can print it with high resolution. However,
+          the images embedded in the PDF file usually don't scale as gracefully, as you can see in the example document.
         </p>
         <div class="space-y-1">
-        <label class="block text-xs font-medium text-gray-700">desired width (pixels)</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="width" placeholder="1000" [disabled]="!!height || !!scale" />
-      </div>
-        <div class="space-y-1 mt-2">
-          <label class="block text-xs font-medium text-gray-700">desired height (pixels)</label>
-          <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="height" placeholder="1500" [disabled]="!!width || !!scale" />
-          <div class="text-red-600 text-xs">Please fill only one of the input fields</div>
+          <label class="block text-xs font-medium text-gray-700">desired width (pixels)</label>
+          <input
+            class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            [(ngModel)]="width"
+            placeholder="1000"
+            [disabled]="!!height || !!scale"
+          />
         </div>
         <div class="space-y-1 mt-2">
-        <label class="block text-xs font-medium text-gray-700">zoom factor (numeric, not percentage) (values above 5 are slow!)</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="scale" placeholder="0.5" [disabled]="!!width || !!height" />
-      </div>
+          <label class="block text-xs font-medium text-gray-700">desired height (pixels)</label>
+          <input
+            class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            [(ngModel)]="height"
+            placeholder="1500"
+            [disabled]="!!width || !!scale"
+          />
+          <div class="text-red-600 text-xs">Please fill only one (and only one) of the height and width fields</div>
+        </div>
         <div class="space-y-1 mt-2">
-        <label class="block text-xs font-medium text-gray-700">background color and transparency</label>
-        <input class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="background" placeholder="rgba(255,0,0,0.3)" />
+          <label class="block text-xs font-medium text-gray-700">zoom factor (numeric, not percentage) (values above 5 are slow!)</label>
+          <input
+            class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            [(ngModel)]="scale"
+            placeholder="0.5"
+            [disabled]="!!width || !!height"
+          />
+        </div>
+        <div class="space-y-1 mt-2">
+          <label class="block text-xs font-medium text-gray-700">background color and transparency</label>
+          <input
+            class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+            [(ngModel)]="background"
+            placeholder="rgba(255,0,0,0.3)"
+          />
+        </div>
+        <button
+          class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1.5 px-3 text-sm rounded shadow mt-3"
+          (click)="exportAsImage()"
+          [disabled]="!height && !width && !scale"
+        >
+          Export as image
+        </button>
       </div>
-        <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1.5 px-3 text-sm rounded shadow mt-3" (click)="exportAsImage()" [disabled]="!height && !width && !scale">Export as image</button>
-      </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-                <div class="w-full">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
@@ -36,7 +64,8 @@
                 [class.border-primary-600]="exportimagecomponentTab === 'htmltemplate'"
                 [class.text-gray-500]="exportimagecomponentTab !== 'htmltemplate'"
                 [class.border-transparent]="exportimagecomponentTab !== 'htmltemplate'"
-                (click)="exportimagecomponentTab = 'htmltemplate'">
+                (click)="exportimagecomponentTab = 'htmltemplate'"
+              >
                 HTML template
               </button>
               <button
@@ -45,7 +74,8 @@
                 [class.border-primary-600]="exportimagecomponentTab === 'typescript'"
                 [class.text-gray-500]="exportimagecomponentTab !== 'typescript'"
                 [class.border-transparent]="exportimagecomponentTab !== 'typescript'"
-                (click)="exportimagecomponentTab = 'typescript'">
+                (click)="exportimagecomponentTab = 'typescript'"
+              >
                 TypeScript
               </button>
               <button
@@ -54,33 +84,34 @@
                 [class.border-primary-600]="exportimagecomponentTab === 'extractedimage'"
                 [class.text-gray-500]="exportimagecomponentTab !== 'extractedimage'"
                 [class.border-transparent]="exportimagecomponentTab !== 'extractedimage'"
-                (click)="exportimagecomponentTab = 'extractedimage'">
+                (click)="exportimagecomponentTab = 'extractedimage'"
+              >
                 extracted image
               </button>
             </div>
           </div>
-          </div>
+        </div>
 
-          <!-- Tab content -->
-          @if (exportimagecomponentTab === 'htmltemplate') {
+        <!-- Tab content -->
+        @if (exportimagecomponentTab === 'htmltemplate') {
           <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/html.md"> </app-ie11-markdown>
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/html.md"> </app-ie11-markdown>
           </div>
-          }
-          @if (exportimagecomponentTab === 'typescript') {
+        }
+        @if (exportimagecomponentTab === 'typescript') {
           <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/ts.md"> </app-ie11-markdown>
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/export-image/ts.md"> </app-ie11-markdown>
           </div>
-          }
-          @if (exportimagecomponentTab === 'extractedimage') {
+        }
+        @if (exportimagecomponentTab === 'extractedimage') {
           <div class="tab-content">
-<div class="distance16">
+            <div class="distance16">
               @if (imageDataURL) {
                 <div>
                   <div>Width: {{ widthDisplay }}</div>
                   <div>Height: {{ heightDisplay }}</div>
                   <div>Data URL: {{ imageDataURL.substring(0, 50) }} Length: {{ imageDataURL.length }} bytes</div>
-                  <img src="{{ imageDataURL }}" alt="screenshot of the PDF"/>
+                  <img src="{{ imageDataURL }}" alt="screenshot of the PDF" />
                 </div>
               }
               @if (!imageDataURL) {
@@ -88,9 +119,9 @@
               }
             </div>
           </div>
-          }
-        </div>
+        }
       </div>
+    </div>
   }
 
   <app-demo [src]="'/assets/pdfs/blind-text-collection.pdf'">
@@ -100,9 +131,8 @@
       [textLayer]="true"
       [showHandToolButton]="true"
       [handTool]="false"
-
-      
-      [theme]="theme">
+      [theme]="theme"
+    >
     </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

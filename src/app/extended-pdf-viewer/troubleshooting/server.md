@@ -1,3 +1,5 @@
+# Server Configuration Issues
+
 ## "Failed to load module script: Expected a JavaScript module script but the server responds with a MIME type of "text/plain"
 
 Update your server configuration. Many servers don't recognize `*.mjs` files as JavaScript. To fix this, you have to configure the server so it sends the file with the proper MIME type (`text/javascript`). You also have to configure the new i18n files. They've got the file ending `.ftl` and need the MIME type `text/plain`.

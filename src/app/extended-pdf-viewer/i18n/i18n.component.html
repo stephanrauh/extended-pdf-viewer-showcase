@@ -1,161 +1,181 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-                <div class="w-full">
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 use-available-height"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="i18ncomponentTab === 'usingaspecificlanguage'"
-              [class.border-primary-600]="i18ncomponentTab === 'usingaspecificlanguage'"
-              [class.text-gray-500]="i18ncomponentTab !== 'usingaspecificlanguage'"
-              [class.border-transparent]="i18ncomponentTab !== 'usingaspecificlanguage'"
-              (click)="i18ncomponentTab = 'usingaspecificlanguage'">
-              Using a specific language
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="i18ncomponentTab === 'customtranslations'"
-              [class.border-primary-600]="i18ncomponentTab === 'customtranslations'"
-              [class.text-gray-500]="i18ncomponentTab !== 'customtranslations'"
-              [class.border-transparent]="i18ncomponentTab !== 'customtranslations'"
-              (click)="i18ncomponentTab = 'customtranslations'">
-              custom translations
-            </button>
-          </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="i18ncomponentTab === 'usingaspecificlanguage'"
+                [class.border-primary-600]="i18ncomponentTab === 'usingaspecificlanguage'"
+                [class.text-gray-500]="i18ncomponentTab !== 'usingaspecificlanguage'"
+                [class.border-transparent]="i18ncomponentTab !== 'usingaspecificlanguage'"
+                (click)="i18ncomponentTab = 'usingaspecificlanguage'"
+              >
+                Using a specific language
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="i18ncomponentTab === 'customtranslations'"
+                [class.border-primary-600]="i18ncomponentTab === 'customtranslations'"
+                [class.text-gray-500]="i18ncomponentTab !== 'customtranslations'"
+                [class.border-transparent]="i18ncomponentTab !== 'customtranslations'"
+                (click)="i18ncomponentTab = 'customtranslations'"
+              >
+                custom translations
+              </button>
+            </div>
           </div>
 
           <!-- Tab content -->
           @if (i18ncomponentTab === 'usingaspecificlanguage') {
-          <div class="tab-content">
-<p>ngx-extended-pdf-viewer ships with translation for more than 100 languages and dialects. When you copy the
-              <code>node_modules/ngx-extended-pdf-viewer/assets/locale</code> folder to the <code>assets/locale</code>
-              folder of your application, you can select your language by setting the <code>[language]</code> attribute.
-              If you omit this attribute, the default locale of the browser is used.
-            </p>
-            <div class="space-y-2">
-              <label class="block text-sm font-medium text-gray-700">language</label>
-              <select class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(value)]="language">
-                <option [value]="undefined">default (usually English)</option>
-                <option value="es-ES">es-ES (Spanish)</option>
-                <option value="de-DE">de-DE (German)</option>
-                <option value="fr-FR">fr-FR (French / custom translations)</option>
-                <option value="pt-PT">pt-PT (Portuguese)</option>
-                <option value="en-GB">en-GB (English)</option>
-                <option value="el">el (Greek)</option>
-                <option value="nl-BE">nl-BE (Belgian)</option>
-                <option value="ar">ar (arab)</option>
-              </select>
+            <div class="tab-content">
+              <p>
+                ngx-extended-pdf-viewer ships with translation for more than 100 languages and dialects. When you copy the
+                <code>node_modules/ngx-extended-pdf-viewer/assets/locale</code> folder to the <code>assets/locale</code> folder of your application, you can
+                select your language by setting the <code>[language]</code> attribute. If you omit this attribute, the default locale of the browser is used.
+              </p>
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">language</label>
+                <select
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                  [(value)]="language"
+                >
+                  <option [value]="undefined">default (usually English)</option>
+                  <option value="es-ES">es-ES (Spanish)</option>
+                  <option value="de-DE">de-DE (German)</option>
+                  <option value="fr-FR">fr-FR (French / custom translations)</option>
+                  <option value="pt-PT">pt-PT (Portuguese)</option>
+                  <option value="en-GB">en-GB (English)</option>
+                  <option value="el">el (Greek)</option>
+                  <option value="nl-BE">nl-BE (Belgian)</option>
+                  <option value="ar">ar (arab)</option>
+                </select>
+              </div>
+              <p>
+                <b>Caveat:</b> The attribute "language" is only read when the component is drawn initially. So this demo hides the PDF viewer for a second when
+                you're switching from one language to another.
+              </p>
             </div>
-            <p><b>Caveat:</b> The attribute "language" is only read when the component is drawn initially.
-          So this demo hides the PDF viewer for a second when you're switching from one language to another.</p>
-          </div>
           }
           @if (i18ncomponentTab === 'customtranslations') {
-          <div class="tab-content">
-<p>
-          The french translation of this demo has a twist. It shows a custom translation. The zoom factor - by default displayed as "100%"" - is displayed as "100 per cent".</p>
-          <p>To achieve this, copy the <code>viewer.ftl</code> file you want to modify from the <code>node_module/ngx-extended-pdf-viewer</code> folder into your
-          project, modify it, add add a rule to your <code>angular.json</code> ensuring the original file is overwritten each time your compile your application.
-        </p>
-        <p><b>Caveat:</b> Every once in a while, the team at Mozilla or - less frequently - I add a translation. When you modify the default translation, please
-      check the new changes with each major version of pdf.js.</p>
-          </div>
+            <div class="tab-content">
+              <p>
+                The french translation of this demo has a twist. It shows a custom translation. The zoom factor - by default displayed as "100%"" - is displayed
+                as "100 per cent".
+              </p>
+              <p>
+                To achieve this, copy the <code>viewer.ftl</code> file you want to modify from the <code>node_module/ngx-extended-pdf-viewer</code> folder into
+                your project, modify it, add add a rule to your <code>angular.json</code> ensuring the original file is overwritten each time your compile your
+                application.
+              </p>
+              <p>
+                <b>Caveat:</b> Every once in a while, the team at Mozilla or - less frequently - I add a translation. When you modify the default translation,
+                please check the new changes with each major version of pdf.js.
+              </p>
+            </div>
           }
         </div>
-</div>
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-          <div class="w-full">
+      </div>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="i18ncomponentTab === 'htmltemplate'"
-              [class.border-primary-600]="i18ncomponentTab === 'htmltemplate'"
-              [class.text-gray-500]="i18ncomponentTab !== 'htmltemplate'"
-              [class.border-transparent]="i18ncomponentTab !== 'htmltemplate'"
-              (click)="i18ncomponentTab = 'htmltemplate'">
-              HTML template
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'typescript'"
-              [class.border-primary-600]="codeTab === 'typescript'"
-              [class.text-gray-500]="codeTab !== 'typescript'"
-              [class.border-transparent]="codeTab !== 'typescript'"
-              (click)="codeTab = 'typescript'">
-              TypeScript
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'angularjson'"
-              [class.border-primary-600]="codeTab === 'angularjson'"
-              [class.text-gray-500]="codeTab !== 'angularjson'"
-              [class.border-transparent]="codeTab !== 'angularjson'"
-              (click)="codeTab = 'angularjson'">
-              angular.json
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'assetsi18nfrviewerftl'"
-              [class.border-primary-600]="codeTab === 'assetsi18nfrviewerftl'"
-              [class.text-gray-500]="codeTab !== 'assetsi18nfrviewerftl'"
-              [class.border-transparent]="codeTab !== 'assetsi18nfrviewerftl'"
-              (click)="codeTab = 'assetsi18nfrviewerftl'">
-              assets/i18n/fr/viewer.ftl
-            </button>
-          </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'htmltemplate'"
+                [class.border-primary-600]="codeTab === 'htmltemplate'"
+                [class.text-gray-500]="codeTab !== 'htmltemplate'"
+                [class.border-transparent]="codeTab !== 'htmltemplate'"
+                (click)="codeTab = 'htmltemplate'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'typescript'"
+                [class.border-primary-600]="codeTab === 'typescript'"
+                [class.text-gray-500]="codeTab !== 'typescript'"
+                [class.border-transparent]="codeTab !== 'typescript'"
+                (click)="codeTab = 'typescript'"
+              >
+                TypeScript
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'angularjson'"
+                [class.border-primary-600]="codeTab === 'angularjson'"
+                [class.text-gray-500]="codeTab !== 'angularjson'"
+                [class.border-transparent]="codeTab !== 'angularjson'"
+                (click)="codeTab = 'angularjson'"
+              >
+                angular.json
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'assetsi18nfrviewerftl'"
+                [class.border-primary-600]="codeTab === 'assetsi18nfrviewerftl'"
+                [class.text-gray-500]="codeTab !== 'assetsi18nfrviewerftl'"
+                [class.border-transparent]="codeTab !== 'assetsi18nfrviewerftl'"
+                (click)="codeTab = 'assetsi18nfrviewerftl'"
+              >
+                assets/i18n/fr/viewer.ftl
+              </button>
+            </div>
           </div>
 
           <!-- Tab content -->
-          @if (i18ncomponentTab === 'htmltemplate') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/i18n/html.md"> </app-ie11-markdown>
-          </div>
+          @if (codeTab === 'htmltemplate') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/i18n/html.md"> </app-ie11-markdown>
+            </div>
           }
           @if (codeTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/i18n/ts.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/i18n/ts.md"> </app-ie11-markdown>
+            </div>
           }
           @if (codeTab === 'angularjson') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/i18n/angular.json.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/i18n/angular.json.md"> </app-ie11-markdown>
+            </div>
           }
           @if (codeTab === 'assetsi18nfrviewerftl') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/i18n/viewer.ftl.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/i18n/viewer.ftl.md"> </app-ie11-markdown>
+            </div>
           }
         </div>
-</div>
-</div>
-}
+      </div>
+    </div>
+  }
 
-<app-demo [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'">
-  @if (selectedTab === 0 && !hidePdfViewer) {
-    <ngx-extended-pdf-viewer
-      [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
-      backgroundColor="#ffffff"
-      [language]="language"
-      [textLayer]="true"
-      
-      [theme]="theme">
-    </ngx-extended-pdf-viewer>
-  }
-  @if (selectedTab === 1  && !hidePdfViewer) {
-    <ngx-extended-pdf-viewer
-      [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
-      backgroundColor="#ffffff"
-      [textLayer]="true"
-      [language]="'fr'"
-      
-      [theme]="theme">
-    </ngx-extended-pdf-viewer>
-  }
-</app-demo>
+  <app-demo [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'">
+    @if (selectedTab === 0 && !hidePdfViewer) {
+      <ngx-extended-pdf-viewer
+        [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
+        backgroundColor="#ffffff"
+        [language]="language"
+        [textLayer]="true"
+        [theme]="theme"
+      >
+      </ngx-extended-pdf-viewer>
+    }
+    @if (selectedTab === 1 && !hidePdfViewer) {
+      <ngx-extended-pdf-viewer
+        [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
+        backgroundColor="#ffffff"
+        [textLayer]="true"
+        [language]="'fr'"
+        [theme]="theme"
+      >
+      </ngx-extended-pdf-viewer>
+    }
+  </app-demo>
 </div>

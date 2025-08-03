@@ -1,13 +1,8 @@
-# Attributes, events, and attributes with two-way-binding
+# CSS Classes and Styling
 
-## Legend:
+## Available CSS Classes
 
-- [(attribute)] describes an attribute with two-way-binding
-- [attribute] means that PDF-viewer reacts when the attribute changes
-- (attribute) means an event is raised when the user changes a setting
-- attribute (without special characters) means the attribute is used at load time only. Subsequent changes are ignored.
-
-If you're missing an attribute, also have a look at the <a [routerLink]="'/extended-pdf-viewer/default-options'">default options</a>.
+The ngx-extended-pdf-viewer provides several CSS classes that you can use to customize the appearance and behavior of the PDF viewer.
 
 | _CSS rule_                                 |                                                   _description_                                                    |
 | :----------------------------------------- | :------------------------------------------------------------------------------------------------------------------ |

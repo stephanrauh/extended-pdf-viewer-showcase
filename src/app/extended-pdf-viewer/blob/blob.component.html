@@ -1,150 +1,162 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-                <div class="w-full">
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="blobcomponentTab === 'displayingblobs'"
-              [class.border-primary-600]="blobcomponentTab === 'displayingblobs'"
-              [class.text-gray-500]="blobcomponentTab !== 'displayingblobs'"
-              [class.border-transparent]="blobcomponentTab !== 'displayingblobs'"
-              (click)="blobcomponentTab = 'displayingblobs'">
-              Displaying BLOBs
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="blobcomponentTab === 'downloadingblobs'"
-              [class.border-primary-600]="blobcomponentTab === 'downloadingblobs'"
-              [class.text-gray-500]="blobcomponentTab !== 'downloadingblobs'"
-              [class.border-transparent]="blobcomponentTab !== 'downloadingblobs'"
-              (click)="blobcomponentTab = 'downloadingblobs'">
-              Downloading BLOBs
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="blobcomponentTab === 'troubleshooting'"
-              [class.border-primary-600]="blobcomponentTab === 'troubleshooting'"
-              [class.text-gray-500]="blobcomponentTab !== 'troubleshooting'"
-              [class.border-transparent]="blobcomponentTab !== 'troubleshooting'"
-              (click)="blobcomponentTab = 'troubleshooting'">
-              Troubleshooting
-            </button>
-          </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="blobcomponentTab === 'displayingblobs'"
+                [class.border-primary-600]="blobcomponentTab === 'displayingblobs'"
+                [class.text-gray-500]="blobcomponentTab !== 'displayingblobs'"
+                [class.border-transparent]="blobcomponentTab !== 'displayingblobs'"
+                (click)="blobcomponentTab = 'displayingblobs'"
+              >
+                Displaying BLOBs
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="blobcomponentTab === 'downloadingblobs'"
+                [class.border-primary-600]="blobcomponentTab === 'downloadingblobs'"
+                [class.text-gray-500]="blobcomponentTab !== 'downloadingblobs'"
+                [class.border-transparent]="blobcomponentTab !== 'downloadingblobs'"
+                (click)="blobcomponentTab = 'downloadingblobs'"
+              >
+                Downloading BLOBs
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="blobcomponentTab === 'troubleshooting'"
+                [class.border-primary-600]="blobcomponentTab === 'troubleshooting'"
+                [class.text-gray-500]="blobcomponentTab !== 'troubleshooting'"
+                [class.border-transparent]="blobcomponentTab !== 'troubleshooting'"
+                (click)="blobcomponentTab = 'troubleshooting'"
+              >
+                Troubleshooting
+              </button>
+            </div>
           </div>
 
           <!-- Tab content -->
           @if (blobcomponentTab === 'displayingblobs') {
-          <div class="tab-content">
-<p>To display a BLOB, just pass it to the <code>src</code> attribute.</p>
-            <p>Chose a document:</p>
-            <div class="space-y-2">
-
-              <label class="flex items-center space-x-2">
-        <input type="radio" class="form-radio text-primary-600" [value]="'preloaded'" (click)="usePreloadedFile()" />
-        <span>show a Blob that's already in memory</span>
-      </label>
-              <br />
-              <label class="flex items-center space-x-2">
-        <input type="radio" class="form-radio text-primary-600" [value]="'from-disk'" (click)="loadLargeFile()" />
-        <span>load a large Blob via REST</span>
-      </label>
-
-      </div>
-          </div>
+            <div class="tab-content">
+              <p>To display a BLOB, just pass it to the <code>src</code> attribute.</p>
+              <p>Choose a document:</p>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" class="form-radio text-primary-600" name="documentChoice" [(ngModel)]="choice" [value]="'preloaded'" (click)="usePreloadedFile()" />
+                  <span>show a Blob that's already in memory</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" class="form-radio text-primary-600" name="documentChoice" [(ngModel)]="choice" [value]="'from-disk'" (click)="loadLargeFile()" />
+                  <span>load a large Blob via REST</span>
+                </label>
+            </div>
           }
           @if (blobcomponentTab === 'downloadingblobs') {
-          <div class="tab-content">
-<p>You can also download the PDF file as a BLOB. For instance, the user can upload a file, and you can use the method
-              <code>NgxExtendedPdfViewerService.getCurrentDocumentAsBlob()</code> to send the file to your server. Or the user
-              can fill a form embedded in the PDF file, and you can download the file containing the user's input.
-            </p>
-            <section class="section" style="margin-top:5px; margin-bottom:10px">
-              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="downloadAsBlob()" style="margin-left:10px">download the file as a BLOB</button>
-            </section>
-            @if (downloaded) {
-              <p>{{downloaded}}</p>
-            }
-          </div>
+            <div class="tab-content">
+              <p>
+                You can also download the PDF file as a BLOB. For instance, the user can upload a file, and you can use the method
+                <code>NgxExtendedPdfViewerService.getCurrentDocumentAsBlob()</code> to send the file to your server. Or the user can fill a form embedded in the
+                PDF file, and you can download the file containing the user's input.
+              </p>
+              <section class="section" style="margin-top: 5px; margin-bottom: 10px">
+                <button
+                  class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow"
+                  (click)="downloadAsBlob()"
+                  style="margin-left: 10px"
+                >
+                  download the file as a BLOB
+                </button>
+              </section>
+              @if (downloaded) {
+                <p>{{ downloaded }}</p>
+              }
+            </div>
           }
           @if (blobcomponentTab === 'troubleshooting') {
-          <div class="tab-content">
-<p>In rare cases, developers report they can't open the BLOB, but managed to open the same file as a Base64 file using
-              the attribute <code>[base64Src]</code>.
-              You can use this code snippets to convert a BLOB to a Base64 file:
-            </p>
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/workaround.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <p>
+                In rare cases, developers report they can't open the BLOB, but managed to open the same file as a Base64 file using the attribute
+                <code>[base64Src]</code>. You can use this code snippets to convert a BLOB to a Base64 file:
+              </p>
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/workaround.md"> </app-ie11-markdown>
+            </div>
           }
         </div>
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-                <div class="w-full">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'htmltemplate'"
-              [class.border-primary-600]="codeTab === 'htmltemplate'"
-              [class.text-gray-500]="codeTab !== 'htmltemplate'"
-              [class.border-transparent]="codeTab !== 'htmltemplate'"
-              (click)="codeTab = 'htmltemplate'">
-              HTML template
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'typescript'"
-              [class.border-primary-600]="codeTab === 'typescript'"
-              [class.text-gray-500]="codeTab !== 'typescript'"
-              [class.border-transparent]="codeTab !== 'typescript'"
-              (click)="codeTab = 'typescript'">
-              TypeScript
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'preloadguardandservice'"
-              [class.border-primary-600]="codeTab === 'preloadguardandservice'"
-              [class.text-gray-500]="codeTab !== 'preloadguardandservice'"
-              [class.border-transparent]="codeTab !== 'preloadguardandservice'"
-              (click)="codeTab = 'preloadguardandservice'">
-              Preload-Guard and service
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'downloadpdfasablob'"
-              [class.border-primary-600]="codeTab === 'downloadpdfasablob'"
-              [class.text-gray-500]="codeTab !== 'downloadpdfasablob'"
-              [class.border-transparent]="codeTab !== 'downloadpdfasablob'"
-              (click)="codeTab = 'downloadpdfasablob'">
-              Download PDF as a BLOB
-            </button>
-          </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'htmltemplate'"
+                [class.border-primary-600]="codeTab === 'htmltemplate'"
+                [class.text-gray-500]="codeTab !== 'htmltemplate'"
+                [class.border-transparent]="codeTab !== 'htmltemplate'"
+                (click)="codeTab = 'htmltemplate'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'typescript'"
+                [class.border-primary-600]="codeTab === 'typescript'"
+                [class.text-gray-500]="codeTab !== 'typescript'"
+                [class.border-transparent]="codeTab !== 'typescript'"
+                (click)="codeTab = 'typescript'"
+              >
+                TypeScript
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'preloadguardandservice'"
+                [class.border-primary-600]="codeTab === 'preloadguardandservice'"
+                [class.text-gray-500]="codeTab !== 'preloadguardandservice'"
+                [class.border-transparent]="codeTab !== 'preloadguardandservice'"
+                (click)="codeTab = 'preloadguardandservice'"
+              >
+                Preload-Guard and service
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'downloadpdfasablob'"
+                [class.border-primary-600]="codeTab === 'downloadpdfasablob'"
+                [class.text-gray-500]="codeTab !== 'downloadpdfasablob'"
+                [class.border-transparent]="codeTab !== 'downloadpdfasablob'"
+                (click)="codeTab = 'downloadpdfasablob'"
+              >
+                Download PDF as a BLOB
+              </button>
+            </div>
           </div>
 
           <!-- Tab content -->
           @if (codeTab === 'htmltemplate') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/blob/html.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/html.md"> </app-ie11-markdown>
+            </div>
           }
           @if (codeTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts.md"> </app-ie11-markdown>
+            </div>
           }
           @if (codeTab === 'preloadguardandservice') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts2.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts2.md"> </app-ie11-markdown>
+            </div>
           }
           @if (codeTab === 'downloadpdfasablob') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts3.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/blob/ts3.md"> </app-ie11-markdown>
+            </div>
           }
         </div>
       </div>
@@ -152,12 +164,6 @@
   }
 
   <app-demo [src]="'/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'">
-      <ngx-extended-pdf-viewer
-        [src]="src"
-        [height]="'auto'"
-        (pageRendered)="pageRendered($event)"
-
-      [theme]="theme">
-      </ngx-extended-pdf-viewer>
-    </app-demo>
-  </div>
+    <ngx-extended-pdf-viewer [src]="src" [height]="'auto'" (pageRendered)="pageRendered($event)" [theme]="theme"> </ngx-extended-pdf-viewer>
+  </app-demo>
+</div>

@@ -8,7 +8,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-export-text',
-    
+
     standalone: true,
     templateUrl: './export-text.component.html',
     styleUrls: ['./export-text.component.css'],
@@ -26,7 +26,7 @@ export class ExportTextComponent {
     return this.themeService.theme();
   }
   private pdfViewerService = inject(NgxExtendedPdfViewerService);
-  fullscreenService = inject(FullscreenService);
+  public fullscreenService = inject(FullscreenService);
 
   public imageDataURL: string | undefined = undefined;
 
@@ -36,7 +36,6 @@ export class ExportTextComponent {
 
   public extractedLines: string[] = [];
 
-  public selectedTabIndex = 0;
   public exporttextcomponentTab: string = 'htmltemplate';
 
   private _fullscreen = false;
@@ -54,13 +53,13 @@ export class ExportTextComponent {
   }
 
   public async exportAsText(): Promise<void> {
-    this.selectedTabIndex = 3;
+    this.exporttextcomponentTab = "extractedtext";
     this.extractedLines = [];
     this.extractedText = await this.pdfViewerService.getPageAsText(1);
   }
 
   public async exportAsLines(): Promise<void> {
-    this.selectedTabIndex = 3;
+    this.exporttextcomponentTab = "extractedtext";
     const lines = await this.pdfViewerService.getPageAsLines(1);
     this.extractedText = undefined;
     this.extractedLines = lines.map((line) => line.text);

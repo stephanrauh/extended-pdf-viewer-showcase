@@ -1,410 +1,483 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-  <div class="flex-container-row">
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width: 55%">
-              <div class="w-full">
+    <div class="flex-container-row">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 55%">
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="findcomponentTab === 'findapi'"
-              [class.border-primary-600]="findcomponentTab === 'findapi'"
-              [class.text-gray-500]="findcomponentTab !== 'findapi'"
-              [class.border-transparent]="findcomponentTab !== 'findapi'"
-              (click)="findcomponentTab = 'findapi'">
-              Find API
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="findcomponentTab === 'userfindcontrollervsapifindcontroller'"
-              [class.border-primary-600]="findcomponentTab === 'userfindcontrollervsapifindcontroller'"
-              [class.text-gray-500]="findcomponentTab !== 'userfindcontrollervsapifindcontroller'"
-              [class.border-transparent]="findcomponentTab !== 'userfindcontrollervsapifindcontroller'"
-              (click)="findcomponentTab = 'userfindcontrollervsapifindcontroller'">
-              User FindController vs. API FindController
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="findcomponentTab === 'findresults'"
-              [class.border-primary-600]="findcomponentTab === 'findresults'"
-              [class.text-gray-500]="findcomponentTab !== 'findresults'"
-              [class.border-transparent]="findcomponentTab !== 'findresults'"
-              (click)="findcomponentTab = 'findresults'">
-              Find results
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'notesonthedemo'"
-              [class.border-primary-600]="codeTab === 'notesonthedemo'"
-              [class.text-gray-500]="codeTab !== 'notesonthedemo'"
-              [class.border-transparent]="codeTab !== 'notesonthedemo'"
-              (click)="codeTab = 'notesonthedemo'">
-              Notes on the demo
-            </button>
-          </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="findcomponentTab === 'findapi'"
+                [class.border-primary-600]="findcomponentTab === 'findapi'"
+                [class.text-gray-500]="findcomponentTab !== 'findapi'"
+                [class.border-transparent]="findcomponentTab !== 'findapi'"
+                (click)="findcomponentTab = 'findapi'"
+              >
+                Find API
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="findcomponentTab === 'userfindcontrollervsapifindcontroller'"
+                [class.border-primary-600]="findcomponentTab === 'userfindcontrollervsapifindcontroller'"
+                [class.text-gray-500]="findcomponentTab !== 'userfindcontrollervsapifindcontroller'"
+                [class.border-transparent]="findcomponentTab !== 'userfindcontrollervsapifindcontroller'"
+                (click)="findcomponentTab = 'userfindcontrollervsapifindcontroller'"
+              >
+                User FindController vs. API FindController
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="findcomponentTab === 'findresults'"
+                [class.border-primary-600]="findcomponentTab === 'findresults'"
+                [class.text-gray-500]="findcomponentTab !== 'findresults'"
+                [class.border-transparent]="findcomponentTab !== 'findresults'"
+                (click)="findcomponentTab = 'findresults'"
+              >
+                Find results
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="findcomponentTab === 'notesonthedemo'"
+                [class.border-primary-600]="findcomponentTab === 'notesonthedemo'"
+                [class.text-gray-500]="findcomponentTab !== 'notesonthedemo'"
+                [class.border-transparent]="findcomponentTab !== 'notesonthedemo'"
+                (click)="findcomponentTab = 'notesonthedemo'"
+              >
+                Notes on the demo
+              </button>
+            </div>
           </div>
 
           <!-- Tab content -->
           @if (findcomponentTab === 'findapi') {
-          <div class="tab-content">
-<div class="padding-top">
-            <section class="section">
-              <div class="space-y-2">
-                <label for="search-input" class="block text-sm font-medium text-gray-700 mb-1">Search Term</label>
-                <input id="search-input" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext" placeholder="search term" />
+            <div class="tab-content">
+              <div class="padding-top">
+                <section class="section">
+                  <div class="space-y-2">
+                    <label for="search-input" class="block text-sm font-medium text-gray-700 mb-1">Search Term</label>
+                    <input
+                      id="search-input"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                      [(ngModel)]="searchtext"
+                      placeholder="search term"
+                    />
+                  </div>
+                </section>
+                <section class="section compact">
+                  <label class="flex items-center space-x-2">
+                    <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()" />
+                    <span>highlight all</span>
+                  </label>
+                </section>
+                <section class="section compact">
+                  <label class="flex items-center space-x-2">
+                    <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()" />
+                    <span>match case</span>
+                  </label>
+                </section>
+                <section class="section compact">
+                  <label class="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      class="form-checkbox text-primary-600 margin"
+                      [(ngModel)]="wholeWord"
+                      (change)="onCheckboxClicked()"
+                      [disabled]="matchRegExp"
+                    />
+                    <span>whole word</span>
+                  </label>
+                </section>
+                <section class="section compact">
+                  <label class="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      class="form-checkbox text-primary-600 margin"
+                      [(ngModel)]="matchDiacritics"
+                      (change)="onCheckboxClicked()"
+                      [disabled]="matchRegExp"
+                    />
+                    <span>match diacritics</span>
+                  </label>
+                  <small style="margin-left: 1em">try licao to find lição</small>
+                </section>
+                <section class="section compact">
+                  <label class="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      class="form-checkbox text-primary-600 margin"
+                      [(ngModel)]="multiple"
+                      (change)="onCheckboxClicked()"
+                      [disabled]="matchRegExp"
+                    />
+                    <span>multiple words (separated by space)</span>
+                  </label>
+                </section>
+                <section class="section compact">
+                  <label class="flex items-center space-x-2">
+                    <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()" />
+                    <span>match regular expression></span>
+                  </label>
+                  <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small>
+                </section>
+                <section class="section compact">
+                  <label class="flex items-center space-x-2">
+                    <input type="checkbox" class="form-checkbox text-primary-600 mrgin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()" />
+                    <span>don't scroll the find result into view</span>
+                  </label>
+                </section>
+                <section class="section" style="margin-top: 5px; margin-bottom: 10px">
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext(false)">next</button>
+                  <button
+                    class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow"
+                    (click)="findPrevious(false)"
+                    style="margin-left: 10px"
+                  >
+                    previous
+                  </button>
+                </section>
               </div>
-            </section>
-            <section class="section compact">
-              <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()" />
-        <span>highlight
-                all</span>
-      </label>
-            </section>
-            <section class="section compact">
-              <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()" />
-        <span>match
-                case</span>
-      </label>
-            </section>
-            <section class="section compact">
-              <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()"
-                [disabled]="matchRegExp" />
-        <span>whole word</span>
-      </label>
-            </section>
-            <section class="section compact">
-              <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()"
-                [disabled]="matchRegExp" />
-        <span>match diacritics</span>
-      </label>
-              <small style="margin-left: 1em">try licao to find lição</small>
-            </section>
-            <section class="section compact">
-              <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="multiple" (change)="onCheckboxClicked()"
-                [disabled]="matchRegExp" />
-        <span>multiple words (separated by space)</span>
-      </label>
-            </section>
-            <section class="section compact">
-              <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()" />
-        <span>match regular
-                expression></span>
-      </label>
-              <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small>
-            </section>
-            <section class="section compact">
-              <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 mrgin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()" />
-        <span>don't scroll
-                the find result into view</span>
-      </label>
-            </section>
-            <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext(false)">next</button>
-              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findPrevious(false)"
-                style="margin-left: 10px">previous</button>
-            </section>
-          </div>
-          <section>
-            <div style="width: 20px"></div>
-            <div style="flex: auto">
-              @if (findState !== undefined) {
-              <small>{{ findStateText }}
-                <br />
-                @if (pagesWithResult.length > 0) {
-                <span><span style="text-overflow: ellipsis; white-space: nowrap">on page {{ pagesWithResult.join(', ')
-                    }}</span>
-                </span>
-                }
-                <br />
-                @if (totalMatches && totalMatches > 0) {
-                <span> selected: result {{ currentMatchNumber }} of {{ totalMatches }} </span>
-                }
-              </small>
-              }
+              <section>
+                <div style="width: 20px"></div>
+                <div style="flex: auto">
+                  @if (findState !== undefined) {
+                    <small
+                      >{{ findStateText }}
+                      <br />
+                      @if (pagesWithResult.length > 0) {
+                        <span
+                          ><span style="text-overflow: ellipsis; white-space: nowrap">on page {{ pagesWithResult.join(', ') }}</span>
+                        </span>
+                      }
+                      <br />
+                      @if (totalMatches && totalMatches > 0) {
+                        <span> selected: result {{ currentMatchNumber }} of {{ totalMatches }} </span>
+                      }
+                    </small>
+                  }
+                </div>
+              </section>
             </div>
-          </section>
-          </div>
           }
           @if (findcomponentTab === 'userfindcontrollervsapifindcontroller') {
-          <div class="tab-content">
-<div class="padding-top">
-            You can use two find controllers. The first one is the user find controller, which is part of the UI. The
-            second one is the API find controller.
-            The API find controller can be used by programmers, and it has the advantage that the user still can use the
-            find functionality without
-            interfering with the API find controller.
-          </div>
-          <div style="display: flex; gap: 20px">
-            <div style="flex: 1">
-              <div class="column-header">
-                <b>User find controller</b>
-                <small>(using the API influences the UI, as you can see in the find bar)</small>
+            <div class="tab-content">
+              <div class="padding-top">
+                You can use two find controllers. The first one is the user find controller, which is part of the UI. The second one is the API find controller.
+                The API find controller can be used by programmers, and it has the advantage that the user still can use the find functionality without
+                interfering with the API find controller.
               </div>
-              <section class="section compact-input">
-                <div class="space-y-2">
-                  <label for="user-search-input" class="block text-sm font-medium text-gray-700 mb-1">User Search Term</label>
-                  <input id="user-search-input" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext" placeholder="search term" />
+              <div style="display: flex; gap: 20px">
+                <div style="flex: 1">
+                  <div class="column-header">
+                    <b>User find controller</b>
+                    <small>(using the API influences the UI, as you can see in the find bar)</small>
+                  </div>
+                  <section class="section compact-input">
+                    <div class="space-y-2">
+                      <label for="user-search-input" class="block text-sm font-medium text-gray-700 mb-1">User Search Term</label>
+                      <input
+                        id="user-search-input"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                        [(ngModel)]="searchtext"
+                        placeholder="search term"
+                      />
+                    </div>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()" />
+                      <span>highlight all</span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()" />
+                      <span>match case</span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        class="form-checkbox text-primary-600 margin"
+                        [(ngModel)]="wholeWord"
+                        (change)="onCheckboxClicked()"
+                        [disabled]="matchRegExp"
+                      />
+                      <span>whole word</span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        class="form-checkbox text-primary-600 margin"
+                        [(ngModel)]="matchDiacritics"
+                        (change)="onCheckboxClicked()"
+                        [disabled]="matchRegExp"
+                      />
+                      <span>match diacritics <small style="margin-left: 1em">try licao to find lição</small></span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        class="form-checkbox text-primary-600 margin"
+                        [(ngModel)]="multiple"
+                        (change)="onCheckboxClicked()"
+                        [disabled]="matchRegExp"
+                      />
+                      <span>multiple words (separated by space)</span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()" />
+                      <span>match regular expression <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small></span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()" />
+                      <span>don't scroll the find result into view</span>
+                    </label>
+                  </section>
+                  <section class="section" style="margin-top: 5px; margin-bottom: 10px">
+                    <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext(false)">next</button>
+                    <button
+                      class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow"
+                      (click)="findPrevious(false)"
+                      style="margin-left: 10px"
+                    >
+                      previous
+                    </button>
+                  </section>
                 </div>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()" />
-        <span>highlight
-                  all</span>
-      </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchCase" (change)="onCheckboxClicked()" />
-        <span>match
-                  case</span>
-      </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="wholeWord" (change)="onCheckboxClicked()"
-                  [disabled]="matchRegExp" />
-        <span>whole word</span>
-      </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchDiacritics" (change)="onCheckboxClicked()"
-                    [disabled]="matchRegExp" />
-                  <span>match diacritics <small style="margin-left: 1em">try licao to find lição</small></span>
-                </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="multiple" (change)="onCheckboxClicked()"
-                  [disabled]="matchRegExp" />
-        <span>multiple words (separated by space)</span>
-      </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()" />
-                  <span>match regular expression <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small></span>
-                </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()" />
-        <span>don't
-                  scroll the find result into view</span>
-      </label>
-              </section>
-              <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-                <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext(false)">next</button>
-                <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findPrevious(false)"
-                  style="margin-left: 10px">previous</button>
-              </section>
-            </div>
-            <div style="flex: 1">
-              <!-- Right column -->
-              <div class="column-header">
-                <b>Secondary find controller</b>
-                <small>(only available in the API)</small>
+                <div style="flex: 1">
+                  <!-- Right column -->
+                  <div class="column-header">
+                    <b>Secondary find controller</b>
+                    <small>(only available in the API)</small>
+                  </div>
+                  <section class="section">
+                    <div class="space-y-2">
+                      <label for="api-search-input" class="block text-sm font-medium text-gray-700 mb-1">API Search Term</label>
+                      <input
+                        id="api-search-input"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                        [(ngModel)]="searchtext2"
+                        placeholder="search term"
+                      />
+                    </div>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="highlightAll2" (change)="onCheckboxClicked2()" />
+                      <span>highlight all</span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchCase2" (change)="onCheckboxClicked2()" />
+                      <span>match case</span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        class="form-checkbox text-primary-600 margin"
+                        [(ngModel)]="wholeWord2"
+                        (change)="onCheckboxClicked2()"
+                        [disabled]="matchRegExp2"
+                      />
+                      <span>whole word</span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        class="form-checkbox text-primary-600 margin"
+                        [(ngModel)]="matchDiacritics2"
+                        (change)="onCheckboxClicked2()"
+                        [disabled]="matchRegExp2"
+                      />
+                      <span>match diacritics</span>
+                    </label>
+                    <small style="margin-left: 1em">try licao to find lição</small>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        class="form-checkbox text-primary-600 margin"
+                        [(ngModel)]="multiple2"
+                        (change)="onCheckboxClicked()"
+                        [disabled]="matchRegExp2"
+                      />
+                      <span>multiple words (separated by space)</span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp2" (change)="onCheckboxClicked()" />
+                      <span>match regular expression <small style="margin-left: 1em">try nasalized|nasalization</small></span>
+                    </label>
+                  </section>
+                  <section class="section compact">
+                    <label class="flex items-center space-x-2">
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="dontScrollIntoView2" (change)="onCheckboxClicked()" />
+                      <span>don't scroll the find result into view</span>
+                    </label>
+                  </section>
+                  <section class="section" style="margin-top: 5px; margin-bottom: 10px">
+                    <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext(true)">next</button>
+                    <button
+                      class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow"
+                      (click)="findPrevious(true)"
+                      style="margin-left: 10px"
+                    >
+                      previous
+                    </button>
+                  </section>
+                </div>
               </div>
-              <section class="section">
-                <div class="space-y-2">
-                  <label for="api-search-input" class="block text-sm font-medium text-gray-700 mb-1">API Search Term</label>
-                  <input id="api-search-input" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin" [(ngModel)]="searchtext2" placeholder="search term" />
-                </div>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="highlightAll2" (change)="onCheckboxClicked2()" />
-        <span>highlight
-                  all</span>
-      </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchCase2" (change)="onCheckboxClicked2()" />
-        <span>match
-                  case</span>
-      </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="wholeWord2" (change)="onCheckboxClicked2()"
-                  [disabled]="matchRegExp2" />
-        <span>whole word</span>
-      </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchDiacritics2" (change)="onCheckboxClicked2()"
-                  [disabled]="matchRegExp2" />
-        <span>match diacritics</span>
-      </label>
-                <small style="margin-left: 1em">try licao to find lição</small>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="multiple2" (change)="onCheckboxClicked()"
-                  [disabled]="matchRegExp2" />
-        <span>multiple words (separated by space)</span>
-      </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp2" (change)="onCheckboxClicked()" />
-                  <span>match regular expression <small style="margin-left: 1em">try nasalized|nasalization</small></span>
-                </label>
-              </section>
-              <section class="section compact">
-                <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="dontScrollIntoView2" (change)="onCheckboxClicked()" />
-        <span>don't
-                  scroll the find result into view</span>
-      </label>
-              </section>
-              <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-                <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext(true)">next</button>
-                <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findPrevious(true)"
-                  style="margin-left: 10px">previous</button>
-              </section>
             </div>
-          </div>
-          </div>
           }
           @if (findcomponentTab === 'findresults') {
-          <div class="tab-content">
-<p>The event <code>(updateFindMatchesCount)</code> contains three attributes telling you about the search
-            result:</p>
-          <ul>
-            <li>
-              <code>matches</code> is an array of arrays of numbers. The first dimension is the page index. If there's a
-              find result on a page, the inner
-              array is a list of find positions. Basically, such a position the number of characters before the hit.
-            </li>
-            <li><code>matchesLength</code> is a similar array of arrays of numbers. In a nutshell, it tells you how long
-              your search term is.</li>
-          </ul>
-          You can get the text of each page by calling <code>ngxPdfViewerService.getPageAsText()</code>. If you want to
-          find out which part of the DOM shows
-          the find result, you need to catch the event <code>renderedtextlayerhighlights</code>. This demo uses this
-          event to add a black border to the find
-          results.
-          </div>
+            <div class="tab-content">
+              <p>The event <code>(updateFindMatchesCount)</code> contains three attributes telling you about the search result:</p>
+              <ul>
+                <li>
+                  <code>matches</code> is an array of arrays of numbers. The first dimension is the page index. If there's a find result on a page, the inner
+                  array is a list of find positions. Basically, such a position the number of characters before the hit.
+                </li>
+                <li><code>matchesLength</code> is a similar array of arrays of numbers. In a nutshell, it tells you how long your search term is.</li>
+              </ul>
+              You can get the text of each page by calling <code>ngxPdfViewerService.getPageAsText()</code>. If you want to find out which part of the DOM shows
+              the find result, you need to catch the event <code>renderedtextlayerhighlights</code>. This demo uses this event to add a black border to the find
+              results.
+            </div>
           }
-          @if (codeTab === 'notesonthedemo') {
-          <div class="tab-content">
-<ul>
-            <li>
-              The demo is a bit slow because the example document is huge. This, in turn, allows you to watch the find
-              result events, demonstrating the
-              asynchronous nature of the find API.
-            </li>
-            <li>I've chosen a portuguese text because this language has many special characters (such as ã, ç, and ê).
-            </li>
-          </ul>
-          </div>
+          @if (findcomponentTab === 'notesonthedemo') {
+            <div class="tab-content">
+              <ul>
+                <li>
+                  The demo is a bit slow because the example document is huge. This, in turn, allows you to watch the find result events, demonstrating the
+                  asynchronous nature of the find API.
+                </li>
+                <li>I've chosen a portuguese text because this language has many special characters (such as ã, ç, and ê).</li>
+              </ul>
+            </div>
           }
         </div>
-    </div>
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 use-available-height"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width: 43%">
-              <div class="w-full">
+      </div>
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 use-available-height"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 43%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'htmltemplate'"
-              [class.border-primary-600]="codeTab === 'htmltemplate'"
-              [class.text-gray-500]="codeTab !== 'htmltemplate'"
-              [class.border-transparent]="codeTab !== 'htmltemplate'"
-              (click)="codeTab = 'htmltemplate'">
-              HTML template
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'typescript'"
-              [class.border-primary-600]="codeTab === 'typescript'"
-              [class.text-gray-500]="codeTab !== 'typescript'"
-              [class.border-transparent]="codeTab !== 'typescript'"
-              (click)="codeTab = 'typescript'">
-              TypeScript
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'tsresultsdemo'"
-              [class.border-primary-600]="codeTab === 'tsresultsdemo'"
-              [class.text-gray-500]="codeTab !== 'tsresultsdemo'"
-              [class.border-transparent]="codeTab !== 'tsresultsdemo'"
-              (click)="codeTab = 'tsresultsdemo'">
-              TS - results demo
-            </button>
-          </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'htmltemplate'"
+                [class.border-primary-600]="codeTab === 'htmltemplate'"
+                [class.text-gray-500]="codeTab !== 'htmltemplate'"
+                [class.border-transparent]="codeTab !== 'htmltemplate'"
+                (click)="codeTab = 'htmltemplate'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'typescript'"
+                [class.border-primary-600]="codeTab === 'typescript'"
+                [class.text-gray-500]="codeTab !== 'typescript'"
+                [class.border-transparent]="codeTab !== 'typescript'"
+                (click)="codeTab = 'typescript'"
+              >
+                TypeScript
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'tsresultsdemo'"
+                [class.border-primary-600]="codeTab === 'tsresultsdemo'"
+                [class.text-gray-500]="codeTab !== 'tsresultsdemo'"
+                [class.border-transparent]="codeTab !== 'tsresultsdemo'"
+                (click)="codeTab = 'tsresultsdemo'"
+              >
+                TS - results demo
+              </button>
+            </div>
           </div>
 
           <!-- Tab content -->
           @if (codeTab === 'htmltemplate') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/find/html.md"> </app-ie11-markdown>
-          <section>CSS class of the search results: <code>hightlight</code>.</section>
-          <section>CSS class of the search results: <code>customHightlight</code>.</section>
-          <section>
-            <div style="flex: auto">
-              @if (findState !== undefined) {
-              {{ findStateText }}
-              <br />
-              @if (pagesWithResult.length > 0) {
-              <span><span style="text-overflow: ellipsis; white-space: nowrap">on page {{ pagesWithResult.join(', ')
-                  }}</span>
-              </span>
-              }
-              <br />
-              @if (totalMatches && totalMatches > 0) {
-              <span> selected: result {{ currentMatchNumber }} of {{ totalMatches }} </span>
-              }
-              }
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/find/html.md"> </app-ie11-markdown>
+              <section>CSS class of the search results: <code>hightlight</code>.</section>
+              <section>CSS class of the search results: <code>customHightlight</code>.</section>
+              <section>
+                <div style="flex: auto">
+                  @if (findState !== undefined) {
+                    {{ findStateText }}
+                    <br />
+                    @if (pagesWithResult.length > 0) {
+                      <span
+                        ><span style="text-overflow: ellipsis; white-space: nowrap">on page {{ pagesWithResult.join(', ') }}</span>
+                      </span>
+                    }
+                    <br />
+                    @if (totalMatches && totalMatches > 0) {
+                      <span> selected: result {{ currentMatchNumber }} of {{ totalMatches }} </span>
+                    }
+                  }
+                </div>
+              </section>
             </div>
-          </section>
-          </div>
           }
           @if (codeTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/find/ts.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/find/ts.md"> </app-ie11-markdown>
+            </div>
           }
           @if (codeTab === 'tsresultsdemo') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/find/ts2.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/find/ts2.md"> </app-ie11-markdown>
+            </div>
           }
         </div>
+      </div>
     </div>
-  </div>
   }
 
-  <div class="use-available-height bg-white border border-gray-300 rounded-lg shadow-md p-6"
-    [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+  <div class="use-available-height bg-white border border-gray-300 rounded-lg shadow-md p-6" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px">
       <div>
-        <small>The example PDF has been published under a <a
-            href="https://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons (CC BY-NC-SA 3.0) license</a> at
-          <a href="https://wisc.pb.unizin.org/portuguese/">https://wisc.pb.unizin.org/portuguese/</a>.</small>
-        </div>
-        <app-fullscreen-button></app-fullscreen-button>
+        <small
+          >The example PDF has been published under a
+          <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons (CC BY-NC-SA 3.0) license</a> at
+          <a href="https://wisc.pb.unizin.org/portuguese/">https://wisc.pb.unizin.org/portuguese/</a>.</small
+        >
+      </div>
+      <app-fullscreen-button></app-fullscreen-button>
     </div>
-    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
-      (updateFindMatchesCount)="updateFindMatchesCount($event)" (updateFindState)="updateFindState($event)"
-      backgroundColor="#ffffff" [height]="'90vh'" [handTool]="false" [showHandToolButton]="true" [page]="1"
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+      (updateFindMatchesCount)="updateFindMatchesCount($event)"
+      (updateFindState)="updateFindState($event)"
+      backgroundColor="#ffffff"
+      [height]="'90vh'"
+      [handTool]="false"
+      [showHandToolButton]="true"
+      [page]="1"
       [showFindRegexp]="true"
-      [theme]="theme">
+      [theme]="theme"
+    >
     </ngx-extended-pdf-viewer>
   </div>
 </div>

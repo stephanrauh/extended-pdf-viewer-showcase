@@ -7,17 +7,12 @@ import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-export-file',
-    
-    standalone: true,
-    templateUrl: './export-file.component.html',
-    styleUrls: ['./export-file.component.css'],
-    imports: [
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-export-file',
+
+  standalone: true,
+  templateUrl: './export-file.component.html',
+  styleUrls: ['./export-file.component.css'],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class ExportFileComponent {
   private themeService = inject(ThemeService);
@@ -50,7 +45,7 @@ export class ExportFileComponent {
   }
 
   public async getCurrentDocumentAsBlob(): Promise<void> {
-    this.selectedTabIndex = 2;
+    this.exportfilecomponentTab = 'extractedfile';
     this.blob = await this.pdfViewerService.getCurrentDocumentAsBlob();
   }
 }

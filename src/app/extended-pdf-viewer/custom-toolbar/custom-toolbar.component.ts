@@ -10,7 +10,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-custom-toolbar',
-    
+
     standalone: true,
     templateUrl: './custom-toolbar.component.html',
     styleUrls: ['./custom-toolbar.component.css'],
@@ -41,7 +41,7 @@ export class CustomToolbarComponent {
 
   public zoom = '100%';
   public customtoolbarcomponentTab: string = 'livedemo';
-  public codeTab: string = 'htmltemplate';
+  public codeTab: string = 'typescript';
 
   private pdfViewerService = inject(NgxExtendedPdfViewerService);
 

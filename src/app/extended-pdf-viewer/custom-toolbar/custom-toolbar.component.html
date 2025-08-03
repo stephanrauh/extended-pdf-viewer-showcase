@@ -50,32 +50,32 @@
             <div class="space-y-1">
               <label class="flex items-center space-x-1 text-sm">
                 <input type="radio" class="form-radio text-primary-600" value="default" aria-label="Demo" [(ngModel)]="toolbarVariant" />
-                <span>standard layout</span>
+                <span class="ps-1">standard layout</span>
               </label>
-              <br />
               <label class="flex items-center space-x-1 text-sm">
                 <input type="radio" class="form-radio text-primary-600" value="findbar" aria-label="Demo" [(ngModel)]="toolbarVariant" />
-                <span>custom findbar (large input field in a dedicated line)</span>
+                <span class="ps-1">custom findbar (large input field in a dedicated line)</span>
               </label>
-              <br />
               <label class="flex items-center space-x-1 text-sm">
                 <input type="radio" class="form-radio text-primary-600" value="checkbox" aria-label="Demo" [(ngModel)]="toolbarVariant" />
-                <span>radiobutton zoom</span>
+                <span class="ps-1">radiobutton zoom</span>
               </label>
-              <br />
               <label class="flex items-center space-x-1 text-sm">
                 <input type="radio" class="form-radio text-primary-600" value="additional" aria-label="Demo" [(ngModel)]="toolbarVariant" />
-                <span>custom color and additional buttons ("open PDF in new tab" and "export as image" button)</span>
+                <span class="ps-1">custom color and additional buttons ("open PDF in new tab" and "export as image" button)</span>
               </label>
-              <br />
-              <label class="flex items-center space-x-1 text-sm">
-                <input type="radio" class="form-radio text-primary-600" value="floating" aria-label="Demo" [(ngModel)]="toolbarVariant" />
-                <span>floating zoombar</span>
-              </label>
-              <label class="flex items-center space-x-1 text-sm">
-                <input type="checkbox" class="form-checkbox text-primary-600 padding-left" [(ngModel)]="showFreeFloatingBar" />
-                <span>show it! (uncheck to hide)</span>
-              </label>
+              <div class="grid grid-cols-2">
+                <label class="flex items-center space-x-1 text-sm">
+                  <input type="radio" class="form-radio text-primary-600" value="floating" aria-label="Demo" [(ngModel)]="toolbarVariant" />
+                  <span class="ps-1">floating zoombar</span>
+                </label>
+                @if (toolbarVariant === 'floating') {
+                  <label class="flex items-center space-x-1 text-sm">
+                    <input type="checkbox" class="form-checkbox text-primary-600" [(ngModel)]="showFreeFloatingBar" />
+                    <span>show it! (uncheck to hide)</span>
+                  </label>
+                }
+              </div>
             </div>
           </div>
         }
@@ -216,8 +216,8 @@
         [showZoomButtons]="toolbarVariant !== 'floating'"
         [showFreeFloatingBar]="showFreeFloatingBar"
         [textLayer]="toolbarVariant === 'findbar'"
-      
-      [theme]="theme">
+        [theme]="theme"
+      >
       </ngx-extended-pdf-viewer>
     }
   </app-demo>

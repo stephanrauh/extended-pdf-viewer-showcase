@@ -1,4 +1,6 @@
-## Prequisites
+# Getting Started
+
+## Prerequisites
 
 You can get the PDF viewer up and running in roughly two minutes. You need node.js, npm and a current version of Angular. Plus, you need to configure your server to support \*.mjs files with the correct MIME type. See the <a href="/extended-pdf-viewer/troubleshooting">troubleshooting</a> page to learn how to configure your server.
 

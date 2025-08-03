@@ -64,7 +64,7 @@
             to print documents containing several hundred pages with Internet Explorer 11.</p>
             <section class="section">
               <div class="space-y-1">
-                <label for="print-from-input" class="block text-sm font-medium text-gray-700 mb-1">From Page</label>
+                <label for="print-from-input" class="block text-sm font-medium text-gray-700">From Page</label>
                 <input id="print-from-input"
                        class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                        [(ngModel)]="from"
@@ -73,7 +73,7 @@
                 <small id="print-from-help" class="block text-gray-500 text-xs">Starting page number for printing</small>
               </div>
               <div class="space-y-2">
-                <label for="print-to-input" class="block text-sm font-medium text-gray-700 mb-1">To Page</label>
+                <label for="print-to-input" class="block text-sm font-medium text-gray-700">To Page</label>
                 <input id="print-to-input"
                        class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                        [(ngModel)]="to"
@@ -84,7 +84,7 @@
             </section>
             <section class="section">
               <div class="space-y-2">
-                <label for="print-included-input" class="block text-sm font-medium text-gray-700 mb-1">Include Pages</label>
+                <label for="print-included-input" class="block text-sm font-medium text-gray-700">Include Pages</label>
                 <input id="print-included-input"
                        class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                        [(ngModel)]="included"
@@ -95,7 +95,7 @@
             </section>
             <section class="section">
               <div class="space-y-2">
-                <label for="print-excluded-input" class="block text-sm font-medium text-gray-700 mb-1">Exclude Pages</label>
+                <label for="print-excluded-input" class="block text-sm font-medium text-gray-700">Exclude Pages</label>
                 <input id="print-excluded-input"
                        class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                        [(ngModel)]="excluded"
@@ -117,7 +117,7 @@
           </p>
           <section class="section">
             <div class="space-y-2">
-              <label for="range-from-input" class="block text-sm font-medium text-gray-700 mb-1">From Page</label>
+              <label for="range-from-input" class="block text-sm font-medium text-gray-700">From Page</label>
               <input id="range-from-input"
                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
                      [(ngModel)]="from"
@@ -126,7 +126,7 @@
               <small id="range-from-help" class="block text-gray-500 text-xs">Starting page number for print range</small>
             </div>
             <div class="space-y-2">
-              <label for="range-to-input" class="block text-sm font-medium text-gray-700 mb-1">To Page</label>
+              <label for="range-to-input" class="block text-sm font-medium text-gray-700">To Page</label>
               <input id="range-to-input"
                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
                      [(ngModel)]="to"
@@ -137,7 +137,7 @@
           </section>
           <section class="section">
             <div class="space-y-2">
-              <label for="range-included-input" class="block text-sm font-medium text-gray-700 mb-1">Include Pages</label>
+              <label for="range-included-input" class="block text-sm font-medium text-gray-700">Include Pages</label>
               <input id="range-included-input"
                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
                      [(ngModel)]="included"
@@ -148,7 +148,7 @@
           </section>
           <section class="section">
             <div class="space-y-2">
-              <label for="range-excluded-input" class="block text-sm font-medium text-gray-700 mb-1">Exclude Pages</label>
+              <label for="range-excluded-input" class="block text-sm font-medium text-gray-700">Exclude Pages</label>
               <input id="range-excluded-input"
                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
                      [(ngModel)]="excluded"
@@ -192,35 +192,35 @@
           <div class="space-y-2">
 
             <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="10" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <input type="radio" class="form-radio text-primary-600" [value]="10" aria-label="Print resolution" [(ngModel)]="printResolution" />
           <span>[printResolution]="10"</span>
         </label>
             <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="75" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <input type="radio" class="form-radio text-primary-600" [value]="75" aria-label="Print resolution" [(ngModel)]="printResolution" />
           <span>[printResolution]="75"</span>
         </label>
             <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="150" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <input type="radio" class="form-radio text-primary-600" [value]="150" aria-label="Print resolution" [(ngModel)]="printResolution" />
           <span>[printResolution]="150"</span>
         </label>
             <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="300" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <input type="radio" class="form-radio text-primary-600" [value]="300" aria-label="Print resolution" [(ngModel)]="printResolution" />
           <span>[printResolution]="300"</span>
         </label>
             <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="600" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <input type="radio" class="form-radio text-primary-600" [value]="600" aria-label="Print resolution" [(ngModel)]="printResolution" />
           <span>[printResolution]="600"</span>
         </label>
             <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="1200" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <input type="radio" class="form-radio text-primary-600" [value]="1200" aria-label="Print resolution" [(ngModel)]="printResolution" />
           <span>[printResolution]="1200"</span>
         </label>
             <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="2400" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <input type="radio" class="form-radio text-primary-600" [value]="2400" aria-label="Print resolution" [(ngModel)]="printResolution" />
           <span>[printResolution]="2400"</span>
         </label>
             <label class="flex items-center space-x-2">
-          <input type="radio" class="form-radio text-primary-600" value="3600" aria-label="Print resolution" [(ngModel)]="printResolution" />
+          <input type="radio" class="form-radio text-primary-600" [value]="3600" aria-label="Print resolution" [(ngModel)]="printResolution" />
           <span>[printResolution]="3600"</span>
         </label>
 

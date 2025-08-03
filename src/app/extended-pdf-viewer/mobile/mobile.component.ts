@@ -5,10 +5,11 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { AsyncPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-mobile',
-    
+
     standalone: true,
     templateUrl: './mobile.component.html',
     styleUrls: ['./mobile.component.css'],
@@ -17,6 +18,7 @@ import { AsyncPipe } from '@angular/common';
         DemoComponent,
         NgxExtendedPdfViewerModule,
         AsyncPipe,
+        FormsModule
     ],
 })
 export class MobileComponent {

@@ -31,8 +31,6 @@ export class ExportAnnotationsComponent {
 
   public imageDataURL: string | undefined = undefined;
 
-  public selectedTabIndex = 0;
-
   private _fullscreen = false;
 
   public rawAnnotations: EditorAnnotation[] | null | undefined = null;
@@ -54,7 +52,7 @@ export class ExportAnnotationsComponent {
   }
 
   public exportAnnotations(): void {
-    this.selectedTabIndex = 5;
+    this.codeTab = 'livedemo';
     this.rawAnnotations = this.pdfViewerService.getSerializedAnnotations();
   }
 

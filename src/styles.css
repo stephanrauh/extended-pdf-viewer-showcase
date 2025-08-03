@@ -4,6 +4,116 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Restore HTML element styling that Tailwind resets */
+h1 {
+  font-size: 1.5rem; /* 24px - Main page title */
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+h2 {
+  font-size: 1.25rem; /* 29px - Major sections */
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: 1.125rem; /* 20px - Subsections */
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+/* Reduce space between paragraph and following list */
+p + ul,
+p + ol {
+  margin-top: -0.5rem;
+}
+
+/* Lists */
+ul {
+  list-style-type: disc;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+ol {
+  list-style-type: decimal;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+ul ul {
+  list-style-type: circle;
+  margin-bottom: 0.5rem;
+}
+
+ul ul ul {
+  list-style-type: square;
+}
+
+ol ol {
+  list-style-type: lower-alpha;
+  margin-bottom: 0.5rem;
+}
+
+ol ol ol {
+  list-style-type: lower-roman;
+}
+
+li {
+  margin-bottom: 0.25rem;
+  line-height: 1.6;
+  display: list-item;
+}
+
+/* Links */
+a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--accent-secondary);
+  text-decoration: none;
+}
+
+/* Strong and emphasis */
+strong, b {
+  font-weight: 700;
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid var(--accent-primary);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* Horizontal rules */
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-primary);
+  margin: 2rem 0;
+}
+
 /* Theme Variables */
 :root {
   /* Light theme colors */
@@ -275,7 +385,7 @@ dd:after {
   .radio-group {
     gap: 0.25rem; /* 4px - still compact on mobile */
   }
-  
+
   .radio-group label {
     padding: 0.25rem 0; /* 4px - minimal touch padding */
     min-height: 2rem; /* 32px - minimum for mobile touch */

@@ -1,102 +1,109 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
-                <div class="w-full">
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="infinitescrollcomponentTab === 'gettingstarted'"
-              [class.border-primary-600]="infinitescrollcomponentTab === 'gettingstarted'"
-              [class.text-gray-500]="infinitescrollcomponentTab !== 'gettingstarted'"
-              [class.border-transparent]="infinitescrollcomponentTab !== 'gettingstarted'"
-              (click)="infinitescrollcomponentTab = 'gettingstarted'">
-              Getting started
-            </button>
-          </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="infinitescrollcomponentTab === 'gettingstarted'"
+                [class.border-primary-600]="infinitescrollcomponentTab === 'gettingstarted'"
+                [class.text-gray-500]="infinitescrollcomponentTab !== 'gettingstarted'"
+                [class.border-transparent]="infinitescrollcomponentTab !== 'gettingstarted'"
+                (click)="infinitescrollcomponentTab = 'gettingstarted'"
+              >
+                Getting started
+              </button>
+            </div>
           </div>
 
           <!-- Tab content -->
           @if (infinitescrollcomponentTab === 'gettingstarted') {
-          <div class="tab-content">
-<p>
-              This option allows you to display the PDF file without scrollbar.
-            </p>
-            <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="showWidgets" />
-        <span>show widgets</span>
-      </label> (forces reload)
-            <p></p>
-            <div class="space-y-2">
+            <div class="tab-content">
+              <p>This option allows you to display the PDF file without scrollbar.</p>
               <label class="flex items-center space-x-2">
-                <input type="radio" class="form-radio text-primary-600" [value]="0" />
-                <span>tiny file (1 page, 41 KB)</span>
+                <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="showWidgets" />
+                <span>show widgets</span>
               </label>
-              <label class="flex items-center space-x-2">
-                <input type="radio" class="form-radio text-primary-600" [value]="1" />
-                <span>small file (4 pages, 700 KB)</span>
-              </label>
-              <label class="flex items-center space-x-2">
-                <input type="radio" class="form-radio text-primary-600" [value]="2" />
-                <span>huge file (300+ pages, 2 MB)</span>
-              </label>
-            </div>
-            @if (file === 2) {
-              <p>
+              (forces reload)
+              <p></p>
+              <div class="space-y-2">
+                <label class="flex items-center space-x-2">
+                  <input type="radio" class="form-radio text-primary-600" [value]="0" [(ngModel)]="file" />
+                  <span>tiny file (1 page, 41 KB)</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" class="form-radio text-primary-600" [value]="1" [(ngModel)]="file"/>
+                  <span>small file (4 pages, 700 KB)</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" class="form-radio text-primary-600" [value]="2" [(ngModel)]="file"/>
+                  <span>huge file (300+ pages, 2 MB)</span>
+                </label>
+              </div>
+              @if (file === 2) {
+                <p></p>
                 <div class="space-y-2">
                   <label class="flex items-center space-x-2">
-                    <input type="radio" class="form-radio text-primary-600" [value]="'100%'" />
+                    <input type="radio" class="form-radio text-primary-600" [value]="'100%'" [(ngModel)]="zoom" />
                     <span>zoom: 100%</span>
                   </label>
                   <label class="flex items-center space-x-2">
-                    <input type="radio" class="form-radio text-primary-600" [value]="'7%'" />
+                    <input type="radio" class="form-radio text-primary-600" [value]="'7%'" [(ngModel)]="zoom" />
                     <span>zoom: 7%, scrollMode = wrapped (demonstrates performance challenges)</span>
                   </label>
                 </div>
-                {{zoom}} {{zoom === '100%'}} {{zoom === '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped}}
-            }
-          </div>
+              }
+            </div>
           }
         </div>
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
-                <div class="w-full">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="infinitescrollcomponentTab === 'htmltemplate'"
-              [class.border-primary-600]="infinitescrollcomponentTab === 'htmltemplate'"
-              [class.text-gray-500]="infinitescrollcomponentTab !== 'htmltemplate'"
-              [class.border-transparent]="infinitescrollcomponentTab !== 'htmltemplate'"
-              (click)="infinitescrollcomponentTab = 'htmltemplate'">
-              HTML template
-            </button>
-            <button
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="infinitescrollcomponentTab === 'typescript'"
-              [class.border-primary-600]="infinitescrollcomponentTab === 'typescript'"
-              [class.text-gray-500]="infinitescrollcomponentTab !== 'typescript'"
-              [class.border-transparent]="infinitescrollcomponentTab !== 'typescript'"
-              (click)="infinitescrollcomponentTab = 'typescript'">
-              Typescript
-            </button>
-          </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codetab === 'htmltemplate'"
+                [class.border-primary-600]="codetab === 'htmltemplate'"
+                [class.text-gray-500]="codetab !== 'htmltemplate'"
+                [class.border-transparent]="codetab !== 'htmltemplate'"
+                (click)="codetab = 'htmltemplate'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codetab === 'typescript'"
+                [class.border-primary-600]="codetab === 'typescript'"
+                [class.text-gray-500]="codetab !== 'typescript'"
+                [class.border-transparent]="codetab !== 'typescript'"
+                (click)="codetab = 'typescript'"
+              >
+                Typescript
+              </button>
+            </div>
           </div>
 
           <!-- Tab content -->
-          @if (infinitescrollcomponentTab === 'htmltemplate') {
-          <div class="tab-content">
-<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/infinite-scroll/html.md"> </app-ie11-markdown>
-          </div>
+          @if (codetab === 'htmltemplate') {
+            <div class="tab-content">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/infinite-scroll/html.md"> </app-ie11-markdown>
+            </div>
           }
-          @if (infinitescrollcomponentTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/infinite-scroll/ts.md"> </app-ie11-markdown>
-          </div>
+          @if (codetab === 'typescript') {
+            <div class="tab-content">
+              <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/infinite-scroll/ts.md"> </app-ie11-markdown>
+            </div>
           }
         </div>
       </div>
@@ -106,17 +113,17 @@
   <app-demo [src]="filenames[file]">
     @if (showPdfViewer) {
       <ngx-extended-pdf-viewer
-            [src]="filenames[file]"
-            [textLayer]="showWidgets"
-            [showHandToolButton]="showWidgets"
-            [showToolbar]="showWidgets"
-            [sidebarVisible]="showWidgets"
-            [zoom]="zoom"
-            [scrollMode]="zoom === '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped"
-            [pageViewMode]="'infinite-scroll'"
-            
-      [theme]="theme">
-          </ngx-extended-pdf-viewer>
-        }
+        [src]="filenames[file]"
+        [textLayer]="showWidgets"
+        [showHandToolButton]="showWidgets"
+        [showToolbar]="showWidgets"
+        [sidebarVisible]="showWidgets"
+        [zoom]="zoom"
+        [scrollMode]="zoom === '100%' ? ScrollModeType.vertical : ScrollModeType.wrapped"
+        [pageViewMode]="'infinite-scroll'"
+        [theme]="theme"
+      >
+      </ngx-extended-pdf-viewer>
+    }
   </app-demo>
-    </div>
+</div>

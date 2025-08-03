@@ -1,3 +1,5 @@
+# Additional Troubleshooting Information
+
 ## Modals and tabs (before version 22.3.0)
 Putting an `<ngx-extended-pdf-viewer>` into a modal dialog or in a tab often causes timing problems. That always happens if the pdf viewer is part of the DOM, but invisible, as in these two examples:
 

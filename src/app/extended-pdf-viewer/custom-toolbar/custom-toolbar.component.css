@@ -65,3 +65,7 @@
   -webkit-appearance: auto;
   -moz-appearance: auto;
 }
+
+.padding-left {
+  padding-left: 10px;
+}
