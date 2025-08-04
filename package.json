@@ -29,7 +29,7 @@
     "@angular/ssr": "^20.1.4",
     "angular2-smart-table": "^3.7.0",
     "marked": "^15.0.12",
-    "ngx-extended-pdf-viewer": "^24.2.5",
+    "ngx-extended-pdf-viewer": "^24.3.0",
     "ngx-markdown": "^20.0.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "pdf-lib": "^1.17.1",
