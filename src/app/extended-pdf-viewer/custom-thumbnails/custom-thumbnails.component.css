@@ -4,11 +4,6 @@
   position: relative;
 }
 
-.thumbnailSelectionRing {
-  display: contents;
-  background-color: blue;
-}
-
 .thumbnail-text {
   position: relative;
   top: 50%;
@@ -19,7 +14,6 @@
   font-size:120%;
 }
 
-.pdf-js-version-3-7 .thumbnail-text {
-  left: 10px;
-  top: 70px;
+#thumbnailView a {
+  border: none;
 }
