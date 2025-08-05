@@ -1,142 +1,168 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-  <div class="flex-container-row">
-    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:52%">
-              <div class="w-full">
+    <div class="flex-container-row">
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 52%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="layerscomponentTab === 'ui'"
-              [class.border-primary-600]="layerscomponentTab === 'ui'"
-              [class.text-gray-500]="layerscomponentTab !== 'ui'"
-              [class.border-transparent]="layerscomponentTab !== 'ui'"
-              (click)="layerscomponentTab = 'ui'">
-              UI
-            </button>
-            <button 
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="layerscomponentTab === 'api'"
-              [class.border-primary-600]="layerscomponentTab === 'api'"
-              [class.text-gray-500]="layerscomponentTab !== 'api'"
-              [class.border-transparent]="layerscomponentTab !== 'api'"
-              (click)="layerscomponentTab = 'api'">
-              API
-            </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="layerscomponentTab === 'ui'"
+                [class.border-primary-600]="layerscomponentTab === 'ui'"
+                [class.text-gray-500]="layerscomponentTab !== 'ui'"
+                [class.border-transparent]="layerscomponentTab !== 'ui'"
+                (click)="layerscomponentTab = 'ui'"
+              >
+                UI
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="layerscomponentTab === 'api'"
+                [class.border-primary-600]="layerscomponentTab === 'api'"
+                [class.text-gray-500]="layerscomponentTab !== 'api'"
+                [class.border-transparent]="layerscomponentTab !== 'api'"
+                (click)="layerscomponentTab = 'api'"
+              >
+                API
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="layerscomponentTab === 'demo'"
+                [class.border-primary-600]="layerscomponentTab === 'demo'"
+                [class.text-gray-500]="layerscomponentTab !== 'demo'"
+                [class.border-transparent]="layerscomponentTab !== 'demo'"
+                (click)="layerscomponentTab = 'demo'"
+              >
+                Live Demo
+              </button>
+            </div>
           </div>
-          </div>
-          
+
           <!-- Tab content -->
           @if (layerscomponentTab === 'ui') {
-          <div class="tab-content">
-<p>
-            ngx-extended-pdf-viewer supports layered PDF files. You can hide and show each layer in the new
-            "layers" tab of the sidebar. This also works for hidden layers.
-          </p>
-          <p>Just in case you don't speak French: the word "calque" in the list of layers simply means "layer".</p>
-          </div>
+            <div class="tab-content">
+              <p>
+                ngx-extended-pdf-viewer supports layered PDF files. You can hide and show each layer in the new "layers" tab of the sidebar. This also works for
+                hidden layers.
+              </p>
+              <p>Just in case you don't speak French: the word "calque" in the list of layers simply means "layer".</p>
+            </div>
           }
           @if (layerscomponentTab === 'api') {
-          <div class="tab-content">
-<code>ngxExtendedPdfViewerService</code> offers two methods allowing you to control the layers
-          programmatically:
-          <ul>
-            <li>
-              <code>listLayers()</code> yields a list of the layers. Don't call it too early. A good point in time is
-              the event
-              <code>(pagesLoaded)</code>.
-            </li>
-            <li>
-              <code>toggleLayer(id)</code> toggles a layer. You need to pass the ID of the layer. The ID, in turn, is
-              part of the
-              result of <code>listLayers()</code>.
-            </li>
-          </ul>
-          Note there's not two-way binding. The PDF viewer doesn't fire an event if the user toggles the layers in the
-          PDF file.
-          However, you can register a callback to a low-level API like so: <br><code>PDFViewerApplication.eventBus.on(<br>
-            &nbsp;&nbsp;'optionalcontentconfig',<br>
-          &nbsp;&nbsp;callback)</code>
-          <p><b>Live demo:</b></p>
-          @for (layer of layers; track layer) {
-          <span>
-            @if (layer.visible) {
-            <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"class="px-4 py-2 text-primary-600 hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500" color="primary" (click)="toggle(layer.layerId)">toggle {{ layer.name
-              }}</button>
-            }
-            @if (!layer.visible) {
-            <button class="px-4 py-2 border border-primary-600 text-primary-600 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500"class="px-4 py-2 text-primary-600 hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500" color="primary" (click)="toggle(layer.layerId)">toggle {{ layer.name
-              }}</button>
-            }
-          </span>
+            <div class="tab-content">
+              <code>ngxExtendedPdfViewerService</code> offers two methods allowing you to control the layers programmatically:
+              <ul>
+                <li>
+                  <code>listLayers()</code> yields a list of the layers. Don't call it too early. A good point in time is the event <code>(pagesLoaded)</code>.
+                </li>
+                <li>
+                  <code>toggleLayer(id)</code> toggles a layer. You need to pass the ID of the layer. The ID, in turn, is part of the result of
+                  <code>listLayers()</code>.
+                </li>
+              </ul>
+              Note there's not two-way binding. The PDF viewer doesn't fire an event if the user toggles the layers in the PDF file. However, you can register a
+              callback to a low-level API like so: <br /><code
+                >PDFViewerApplication.eventBus.on(<br />
+                &nbsp;&nbsp;'optionalcontentconfig',<br />
+                &nbsp;&nbsp;callback)</code
+              >
+            </div>
           }
-          </div>
+          @if (layerscomponentTab === 'demo') {
+            <div class="tab-content">
+              <p><b>Live demo:</b></p>
+              @for (layer of layers; track layer) {
+                <span>
+                  @if (layer.visible) {
+                    <button
+                      class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                      (click)="toggle(layer.layerId)"
+                    >
+                      toggle {{ layer.name }}
+                    </button>
+                  }
+                  @if (!layer.visible) {
+                    <button
+                      class="px-4 py-2 border border-primary-600 text-primary-600 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                      (click)="toggle(layer.layerId)"
+                    >
+                      toggle {{ layer.name }}
+                    </button>
+                  }
+                </span>
+              }
+            </div>
           }
         </div>
-    </div>
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:46%">
-              <div class="w-full">
+      </div>
+      <div
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
+        style="flex: 1 1 100%; box-sizing: border-box; max-width: 46%"
+      >
+        <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'htmltemplate'"
-              [class.border-primary-600]="codeTab === 'htmltemplate'"
-              [class.text-gray-500]="codeTab !== 'htmltemplate'"
-              [class.border-transparent]="codeTab !== 'htmltemplate'"
-              (click)="codeTab = 'htmltemplate'">
-              HTML template
-            </button>
-            <button 
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'apitypescript'"
-              [class.border-primary-600]="codeTab === 'apitypescript'"
-              [class.text-gray-500]="codeTab !== 'apitypescript'"
-              [class.border-transparent]="codeTab !== 'apitypescript'"
-              (click)="codeTab = 'apitypescript'">
-              API - TypeScript
-            </button>
-            <button 
-              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="codeTab === 'apihtml'"
-              [class.border-primary-600]="codeTab === 'apihtml'"
-              [class.text-gray-500]="codeTab !== 'apihtml'"
-              [class.border-transparent]="codeTab !== 'apihtml'"
-              (click)="codeTab = 'apihtml'">
-              API - HTML
-            </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'htmltemplate'"
+                [class.border-primary-600]="codeTab === 'htmltemplate'"
+                [class.text-gray-500]="codeTab !== 'htmltemplate'"
+                [class.border-transparent]="codeTab !== 'htmltemplate'"
+                (click)="codeTab = 'htmltemplate'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'apitypescript'"
+                [class.border-primary-600]="codeTab === 'apitypescript'"
+                [class.text-gray-500]="codeTab !== 'apitypescript'"
+                [class.border-transparent]="codeTab !== 'apitypescript'"
+                (click)="codeTab = 'apitypescript'"
+              >
+                API - TypeScript
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'apihtml'"
+                [class.border-primary-600]="codeTab === 'apihtml'"
+                [class.text-gray-500]="codeTab !== 'apihtml'"
+                [class.border-transparent]="codeTab !== 'apihtml'"
+                (click)="codeTab = 'apihtml'"
+              >
+                API - HTML
+              </button>
+            </div>
           </div>
-          </div>
-          
+
           <!-- Tab content -->
           @if (codeTab === 'htmltemplate') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/layers/html.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/layers/html.md"> </app-ie11-markdown>
+            </div>
           }
           @if (codeTab === 'apitypescript') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/layers/ts-api.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/layers/ts-api.md"> </app-ie11-markdown>
+            </div>
           }
           @if (codeTab === 'apihtml') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/layers/html-api.md"> </app-ie11-markdown>
-          </div>
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/layers/html-api.md"> </app-ie11-markdown>
+            </div>
           }
         </div>
+      </div>
     </div>
-  </div>
   }
 
   <app-demo [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'">
-    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'" [height]="'90vh'"
-      (pagesLoaded)="listLayers()"
-      [theme]="theme">
+    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'" [height]="'90vh'" (pagesLoaded)="listLayers()" [theme]="theme">
     </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

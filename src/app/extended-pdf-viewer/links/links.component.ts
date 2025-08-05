@@ -6,6 +6,7 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
 import { LanguagePipe } from 'ngx-markdown';
+import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-links',
 
@@ -18,6 +19,7 @@ import { LanguagePipe } from 'ngx-markdown';
         NgxExtendedPdfViewerModule,
         AsyncPipe,
         LanguagePipe,
+        FormsModule
     ],
 })
 export class LinksComponent {

@@ -48,23 +48,23 @@
               <p>Chose a link target:</p>
               <div class="space-y-1">
                 <label class="flex items-center space-x-1 text-sm">
-                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.BLANK" />
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.BLANK" [(ngModel)]="target" />
                   <span>[target]="LinkTarget.BLANK" (opens a new window)</span>
                 </label>
                 <label class="flex items-center space-x-1 text-sm">
-                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.SELF" />
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.SELF" [(ngModel)]="target" />
                   <span>[target]="LinkTarget.SELF" (same window)</span>
                 </label>
                 <label class="flex items-center space-x-1 text-sm">
-                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.PARENT" />
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.PARENT" [(ngModel)]="target" />
                   <span>[target]="LinkTarget.PARENT" (opens the PDF in the parent iFrame)</span>
                 </label>
                 <label class="flex items-center space-x-1 text-sm">
-                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.TOP" />
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.TOP" [(ngModel)]="target" />
                   <span>[target]="LinkTarget.TOP" (opens the PDF in the same window, breaking out of any iframe context)</span>
                 </label>
                 <label class="flex items-center space-x-1 text-sm">
-                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.NONE" />
+                  <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.NONE" [(ngModel)]="target" />
                   <span>[target]="LinkTarget.NONE" (identical to TOP)</span>
                 </label>
               </div>
@@ -137,12 +137,12 @@
             <app-ie11-markdown [data]="sourcecode | language: 'typescript'"></app-ie11-markdown>
           </div>
         }
-        @if (codeTab === 'html'  && linkscomponentTab !== 'defaultlinktargets') {
+        @if (codeTab === 'html' && linkscomponentTab !== 'defaultlinktargets') {
           <div class="tab-content">
             <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html.md"></app-ie11-markdown>
           </div>
         }
-        @if (codeTab === 'typescript'  && linkscomponentTab === 'defaultlinktargets') {
+        @if (codeTab === 'typescript' && linkscomponentTab === 'defaultlinktargets') {
           <div class="tab-content">
             <app-ie11-markdown src="/assets/extended-pdf-viewer/links/ts2.md"></app-ie11-markdown>
           </div>

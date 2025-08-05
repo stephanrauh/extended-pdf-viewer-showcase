@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import {
   IPDFViewerApplication,
@@ -14,7 +14,6 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-simple',
-
   standalone: true,
   templateUrl: './file-info.component.html',
   styleUrls: ['./file-info.component.css'],
@@ -22,6 +21,8 @@ import { AsyncPipe } from '@angular/common';
 })
 export class FileInfoComponent {
   private themeService = inject(ThemeService);
+
+  private cdr = inject(ChangeDetectorRef);
 
   public get theme(): string {
     return this.themeService.theme();
@@ -45,9 +46,12 @@ export class FileInfoComponent {
     this._fullscreen = full;
   }
 
-  public onPagesLoaded() {
+  public async onPagesLoaded() {
     if (this.PDFViewerApplication) {
-      new PdfDocumentPropertiesExtractor().getDocumentProperties(this.PDFViewerApplication).then((result) => (this.fileInfo = result));
+      const result = await new PdfDocumentPropertiesExtractor().getDocumentProperties(this.PDFViewerApplication);
+      console.log(result);
+      this.fileInfo = result;
+      this.cdr.markForCheck();
     }
   }
 

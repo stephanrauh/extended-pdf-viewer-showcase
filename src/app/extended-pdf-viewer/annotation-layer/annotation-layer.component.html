@@ -7,7 +7,7 @@
         <!-- Tab buttons -->
         <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="activeTab === 'types'"
             [class.border-primary-600]="activeTab === 'types'"
@@ -16,7 +16,7 @@
             (click)="activeTab = 'types'">
             Types of layers
           </button>
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="activeTab === 'manipulating'"
             [class.border-primary-600]="activeTab === 'manipulating'"
@@ -27,7 +27,7 @@
           </button>
         </div>
           </div>
-        
+
         <!-- Tab content -->
         @if (activeTab === 'types') {
           <div class="tab-content">
@@ -80,7 +80,7 @@
         <!-- Tab buttons -->
         <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="codeTab === 'html'"
             [class.border-primary-600]="codeTab === 'html'"
@@ -89,7 +89,7 @@
             (click)="codeTab = 'html'">
             HTML template
           </button>
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="codeTab === 'typescript'"
             [class.border-primary-600]="codeTab === 'typescript'"
@@ -98,7 +98,7 @@
             (click)="codeTab = 'typescript'">
             TypeScript
           </button>
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="codeTab === 'popups'"
             [class.border-primary-600]="codeTab === 'popups'"
@@ -109,7 +109,7 @@
           </button>
         </div>
           </div>
-        
+
         <!-- Tab content -->
         @if (codeTab === 'html') {
           <div class="tab-content">
@@ -133,7 +133,7 @@
 
   <app-demo [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'">
     <ngx-extended-pdf-viewer [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
-      [page]="2" [zoom]="'auto'" (annotationLayerRendered)="onAnnotationLayerRendered($event)"
+      [page]="2" [zoom]="'page-fit'" (annotationLayerRendered)="onAnnotationLayerRendered($event)"
       [theme]="theme">
     </ngx-extended-pdf-viewer>
   </app-demo>
