@@ -29,7 +29,7 @@
     "@angular/ssr": "^20.1.4",
     "angular2-smart-table": "^3.7.0",
     "marked": "^15.0.12",
-    "ngx-extended-pdf-viewer": "^24.3.0",
+    "ngx-extended-pdf-viewer": "^24.3.1-alpha.1",
     "ngx-markdown": "^20.0.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "pdf-lib": "^1.17.1",
@@ -69,7 +69,7 @@
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
     "typescript": "5.8.3",
-    "typescript-eslint": "^8.38.0",
+    "typescript-eslint": "^8.39.0",
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "overrides": {
