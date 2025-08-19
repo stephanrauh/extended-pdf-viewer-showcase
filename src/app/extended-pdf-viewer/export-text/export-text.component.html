@@ -18,7 +18,7 @@
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="exporttextcomponentTab === 'htmltemplate'"
               [class.border-primary-600]="exporttextcomponentTab === 'htmltemplate'"
@@ -27,7 +27,7 @@
               (click)="exporttextcomponentTab = 'htmltemplate'">
               HTML template
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="exporttextcomponentTab === 'typescript'"
               [class.border-primary-600]="exporttextcomponentTab === 'typescript'"
@@ -36,7 +36,7 @@
               (click)="exporttextcomponentTab = 'typescript'">
               TypeScript
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="exporttextcomponentTab === 'extractedtext'"
               [class.border-primary-600]="exporttextcomponentTab === 'extractedtext'"
@@ -47,7 +47,7 @@
             </button>
           </div>
           </div>
-          
+
           <!-- Tab content -->
           @if (exporttextcomponentTab === 'htmltemplate') {
           <div class="tab-content">
@@ -86,7 +86,7 @@
       [showHandToolButton]="true"
       [handTool]="false"
 
-      
+
       [theme]="theme">
     </ngx-extended-pdf-viewer>
   </app-demo>

@@ -188,6 +188,20 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  max-height: 45vh; /* Limit upper content to 45% of viewport height */
+}
+
+
+
+/* Upper content areas - limit to 45% height with scrollbars */
+.flex-container-row > div {
+  overflow-y: auto; /* Add scrollbar when content exceeds height */
+  max-height: 45vh; /* Match parent height constraint */
+}
+
+.full-height,
+.full-height > div {
+  max-height: 100%;
 }
 
 .margin-right {

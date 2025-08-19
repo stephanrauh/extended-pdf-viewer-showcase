@@ -7,7 +7,7 @@
         <!-- Tab buttons -->
         <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="activeTab === 'images'"
             [class.border-primary-600]="activeTab === 'images'"
@@ -16,7 +16,7 @@
             (click)="activeTab = 'images'">
             Images
           </button>
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="activeTab === 'highlights'"
             [class.border-primary-600]="activeTab === 'highlights'"
@@ -25,7 +25,7 @@
             (click)="activeTab = 'highlights'">
             Highlights
           </button>
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="activeTab === 'coordinates'"
             [class.border-primary-600]="activeTab === 'coordinates'"
@@ -34,7 +34,7 @@
             (click)="activeTab = 'coordinates'">
             Coordinates
           </button>
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="activeTab === 'caveat'"
             [class.border-primary-600]="activeTab === 'caveat'"
@@ -45,7 +45,7 @@
           </button>
         </div>
           </div>
-        
+
         <!-- Tab content -->
         @if (activeTab === 'images') {
           <div class="tab-content">
@@ -195,7 +195,7 @@
         <!-- Tab buttons -->
         <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="activeTab2 === 'html'"
             [class.border-primary-600]="activeTab2 === 'html'"
@@ -204,7 +204,7 @@
             (click)="activeTab2 = 'html'">
             HTML template
           </button>
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="activeTab2 === 'ts-images'"
             [class.border-primary-600]="activeTab2 === 'ts-images'"
@@ -213,7 +213,7 @@
             (click)="activeTab2 = 'ts-images'">
             TS (images)
           </button>
-          <button 
+          <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
             [class.text-primary-600]="activeTab2 === 'ts-highlight'"
             [class.border-primary-600]="activeTab2 === 'ts-highlight'"
@@ -224,7 +224,7 @@
           </button>
         </div>
           </div>
-        
+
         <!-- Tab content -->
         @if (activeTab2 === 'html') {
           <div class="tab-content">

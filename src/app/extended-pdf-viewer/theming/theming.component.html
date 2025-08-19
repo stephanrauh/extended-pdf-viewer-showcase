@@ -6,7 +6,7 @@
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="themingcomponentTab === 'lighttheme'"
               [class.border-primary-600]="themingcomponentTab === 'lighttheme'"
@@ -15,7 +15,7 @@
               (click)="themingcomponentTab = 'lighttheme'">
               Light theme
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="themingcomponentTab === 'darktheme'"
               [class.border-primary-600]="themingcomponentTab === 'darktheme'"
@@ -26,7 +26,7 @@
             </button>
           </div>
           </div>
-          
+
           <!-- Tab content -->
           @if (themingcomponentTab === 'lighttheme') {
           <div class="tab-content">
@@ -56,7 +56,7 @@
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'htmltemplate'"
               [class.border-primary-600]="codeTab === 'htmltemplate'"
@@ -65,7 +65,7 @@
               (click)="codeTab = 'htmltemplate'">
               HTML template
             </button>
-            <button 
+            <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'typescript'"
               [class.border-primary-600]="codeTab === 'typescript'"
@@ -76,7 +76,7 @@
             </button>
           </div>
           </div>
-          
+
           <!-- Tab content -->
           @if (codeTab === 'htmltemplate') {
           <div class="tab-content">

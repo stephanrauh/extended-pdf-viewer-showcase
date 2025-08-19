@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <div class="overflow-none distance16 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+      <div class="distance16 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
         <div class="flex-container-column">
                   <div class="w-full">
           <!-- Tab buttons -->
@@ -233,7 +233,7 @@
       }
     </div>
   </div>
-  <div class="overflow-y-scroll distance16 progress bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:49%">
+  <div class="distance16 progress bg-white border border-gray-300 rounded-lg shadow-md p-3"appearance="outlined"  style="flex: 1 1 100%; box-sizing: border-box; max-width:49%">
             <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -273,16 +273,16 @@
           }
         </div>
   </div>
-}
+  }
 
-<app-demo [src]="src">
-  <ngx-extended-pdf-viewer
-    [src]="src"
-    [replaceBrowserPrint]="replaceBrowserPrint"
-    zoom="50%"
-    [printResolution]="printResolution"
-    [enablePrintAutoRotate]="enablePrintAutoRotate"
+  <app-demo [src]="src">
+    <ngx-extended-pdf-viewer
+      [src]="src"
+      [replaceBrowserPrint]="replaceBrowserPrint"
+      zoom="50%"
+      [printResolution]="printResolution"
+      [enablePrintAutoRotate]="enablePrintAutoRotate"
       [theme]="theme">
-  </ngx-extended-pdf-viewer>
-</app-demo>
+    </ngx-extended-pdf-viewer>
+  </app-demo>
 </div>
