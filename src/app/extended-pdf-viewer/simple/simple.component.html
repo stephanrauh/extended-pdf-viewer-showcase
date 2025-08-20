@@ -2,8 +2,7 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 45%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[45%]"
       >
         <div class="w-full">
           <!-- Tab buttons -->
@@ -143,14 +142,13 @@
                 two years old. Debugging the ES5 code isn't fun - it's partially minified and it's using old syntax.
               </p>
               <label class="flex items-center space-x-2">
-                <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="minifiedJSLibraries" />
+                <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="minifiedJSLibraries" />
                 <span>use the minified JS libraries</span>
               </label>
               <label class="flex items-center space-x-2">
                 <input
                   type="checkbox"
-                  class="form-checkbox text-primary-600"
-                  class="margin"
+                  class="form-checkbox text-primary-600 margin"
                   [(ngModel)]="forceUsingLegacyES5"
                   [disabled]="minifiedJSLibraries"
                 />
@@ -229,8 +227,7 @@
         </div>
       </div>
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 53%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[53%]"
       >
         @if (selectedTab === 0) {
           <div>

@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1 margin-right flex-1 box-border max-w-[50%]">
         <p>The text layer is an optional, invisible layer above the PDF document, which
           is rendered as an image. You need it to
         </p>
@@ -15,7 +15,7 @@
         </p>
         <p><b>Demos:</b></p>
         <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="markLongWords" />
+        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="markLongWords" />
         <span>mark long words</span>
       </label>
         <label class="flex items-center space-x-1 text-sm">
@@ -23,14 +23,14 @@
           <span>put each text layer <code>&lt;span&gt;</code> into a box</span>
         </label>
         <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="showTextLayer" />
+        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="showTextLayer" />
         <span>show the text layer</span>
       </label>
             <p>The demos show that the text layer isn't perfect. The positions are good enough for finding and marking text, but
               they don't match the precise positions. Plus, sometime words are spread among several <code>&lt;span&gt;</code> tags.
             </p>
           </div>
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1 flex-1 box-border max-w-[48%]">
             <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">

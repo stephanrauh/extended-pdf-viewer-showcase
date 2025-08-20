@@ -2,8 +2,7 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 50%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[50%]"
       >
         <div class="w-full">
           <!-- Tab buttons -->
@@ -42,27 +41,27 @@
               <label class="block text-sm font-medium text-gray-700"></label>
               <div class="space-y-2">
                 <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" class="compact" value="100%" [(ngModel)]="mobileFriendlyZoomSetting" />
+                  <input type="radio" class="form-radio text-primary-600 compact" value="100%" [(ngModel)]="mobileFriendlyZoomSetting" />
                   <span>[mobileFriendlyZoom]="'100%' (default)"</span>
                 </label>
                 <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" class="compact" [value]="'150%'" [(ngModel)]="mobileFriendlyZoomSetting" />
+                  <input type="radio" class="form-radio text-primary-600 compact" [value]="'150%'" [(ngModel)]="mobileFriendlyZoomSetting" />
                   <span>[mobileFriendlyZoom]="'150%'"</span>
                 </label>
                 <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" class="compact" value="200%" [(ngModel)]="mobileFriendlyZoomSetting" />
+                  <input type="radio" class="form-radio text-primary-600 compact" value="200%" [(ngModel)]="mobileFriendlyZoomSetting" />
                   <span>[mobileFriendlyZoom]="'200%'"</span>
                 </label>
                 <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" class="compact" value="1.7" [(ngModel)]="mobileFriendlyZoomSetting" />
+                  <input type="radio" class="form-radio text-primary-600 compact" value="1.7" [(ngModel)]="mobileFriendlyZoomSetting" />
                   <span>[mobileFriendlyZoom]="1.7"</span>
                 </label>
                 <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" class="compact" value="true" [(ngModel)]="mobileFriendlyZoomSetting" />
+                  <input type="radio" class="form-radio text-primary-600 compact" value="true" [(ngModel)]="mobileFriendlyZoomSetting" />
                   <span>[mobileFriendlyZoom]="true"</span>
                 </label>
                 <label class="flex items-center space-x-2">
-                  <input type="radio" class="form-radio text-primary-600" class="compact" value="false" [(ngModel)]="mobileFriendlyZoomSetting" />
+                  <input type="radio" class="form-radio text-primary-600 compact" value="false" [(ngModel)]="mobileFriendlyZoomSetting" />
                   <span>[mobileFriendlyZoom]="false"</span>
                 </label>
               </div>
@@ -86,7 +85,7 @@
           }
         </div>
       </div>
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 48%">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[48%]">
         <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">

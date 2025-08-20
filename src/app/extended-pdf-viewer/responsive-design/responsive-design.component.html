@@ -2,7 +2,7 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1"
         [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + settingsWidth"
       >
         <div class="w-full">
@@ -535,7 +535,7 @@
       </div>
       @if (currentTab === 0) {
         <div
-          class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+          class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1"
           [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
         >
           <app-ie11-markdown src="/assets/extended-pdf-viewer/hiding-buttons/ts.md"> </app-ie11-markdown>
@@ -543,7 +543,7 @@
       }
       @if (currentTab === 1) {
         <div
-          class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+          class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1"
           [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
         >
           <app-ie11-markdown [data]="sourcecode | language: 'html'"> </app-ie11-markdown>
@@ -551,7 +551,7 @@
       }
       @if (currentTab === 2) {
         <div
-          class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+          class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1"
           [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
         >
           <div class="w-full">
@@ -585,7 +585,7 @@
             @if (codeTab === 'definingbreakpoints') {
               <div class="tab-content">
                 <div
-                  class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+                  class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1"
                   [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
                 >
                   <app-ie11-markdown [data]="breakpoints | language: 'typescript'"> </app-ie11-markdown>
@@ -595,7 +595,7 @@
             @if (codeTab === 'buttonvisibility') {
               <div class="tab-content">
                 <div
-                  class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
+                  class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1"
                   [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:' + codeWidth"
                 >
                   <app-ie11-markdown [data]="sourcecode | language: 'html'"> </app-ie11-markdown>

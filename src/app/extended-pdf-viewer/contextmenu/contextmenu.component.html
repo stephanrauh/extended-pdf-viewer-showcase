@@ -1,18 +1,18 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]">
         <p>
           The context menu of the pdf viewer adds little value. In some cases, it may even confuse users. So you can use the attribute
           <code>[contextMenuAllowed]="false"</code>
           to get rid of built-in browser options like "save as an image" and "inspect".
         </p>
         <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="allowContextMenu" />
+        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="allowContextMenu" />
         <span>allowContextMenu</span>
       </label>
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
         <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">

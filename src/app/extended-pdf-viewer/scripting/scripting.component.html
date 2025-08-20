@@ -1,76 +1,74 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
-    <div class="flex-container-row" >
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:60%;">
+    <div class="flex-container-row">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[60%]">
         <p>
-          pdf.js ships with a JavaScript engine. There's little security risk because they're executing
-          JavaScript in a sandbox. Even so, you can deactivate scripting altogether.
+          pdf.js ships with a JavaScript engine. There's little security risk because they're executing JavaScript in a sandbox. Even so, you can deactivate
+          scripting altogether.
         </p>
         <p>If you want to deactivate the JavaScript engine, keep two things in mind:</p>
         <ul>
-          <li>You must disable JavaScript before loading the pdf.js engine. Usually initializing
-            <code>pdfDefaultOptions.enableScripting = false;</code> in the constructor of your component
-            is early enough (unless you've already opened a PDF document before).
+          <li>
+            You must disable JavaScript before loading the pdf.js engine. Usually initializing <code>pdfDefaultOptions.enableScripting = false;</code> in the
+            constructor of your component is early enough (unless you've already opened a PDF document before).
           </li>
-          <li>If your PDF file contains a script to print the file immediately after opening it,
-            it's still printed. The only difference is it's not printed using the JavaScript engine,
-            so any option your JavaScript code may pass is lost.
+          <li>
+            If your PDF file contains a script to print the file immediately after opening it, it's still printed. The only difference is it's not printed using
+            the JavaScript engine, so any option your JavaScript code may pass is lost.
           </li>
         </ul>
         <p>The demo needs JavaScript to put the cursor into the first form field, to validate your input, and to implement the "re-initialize" button.</p>
         <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="enableScripting" />
-        <span>enable JavaScript</span>
-      </label> (forces reload)
+          <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enableScripting" />
+          <span>enable JavaScript (forces reload)</span>
+        </label>
+
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 use-available-height" style="flex: 1 1 100%; box-sizing: border-box; max-width:38%;">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 use-available-height flex-1 box-border max-w-[38%]">
         <div class="w-full">
-        <!-- Tab buttons -->
-        <div class="overflow-x-auto">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-          <button
-            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-            [class.text-primary-600]="activeTab === 'html'"
-            [class.border-primary-600]="activeTab === 'html'"
-            [class.text-gray-500]="activeTab !== 'html'"
-            [class.border-transparent]="activeTab !== 'html'"
-            (click)="activeTab = 'html'">
-            HTML template
-          </button>
-          <button
-            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-            [class.text-primary-600]="activeTab === 'typescript'"
-            [class.border-primary-600]="activeTab === 'typescript'"
-            [class.text-gray-500]="activeTab !== 'typescript'"
-            [class.border-transparent]="activeTab !== 'typescript'"
-            (click)="activeTab = 'typescript'">
-            TypeScript
-          </button>
-        </div>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'html'"
+                [class.border-primary-600]="activeTab === 'html'"
+                [class.text-gray-500]="activeTab !== 'html'"
+                [class.border-transparent]="activeTab !== 'html'"
+                (click)="activeTab = 'html'"
+              >
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'typescript'"
+                [class.border-primary-600]="activeTab === 'typescript'"
+                [class.text-gray-500]="activeTab !== 'typescript'"
+                [class.border-transparent]="activeTab !== 'typescript'"
+                (click)="activeTab = 'typescript'"
+              >
+                TypeScript
+              </button>
+            </div>
           </div>
 
-        <!-- Tab content -->
-        @if (activeTab === 'html') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/html.md"> </app-ie11-markdown>
-        </div>
+          <!-- Tab content -->
+          @if (activeTab === 'html') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/html.md"> </app-ie11-markdown>
+            </div>
           }
-        @if (activeTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/ts.md"> </app-ie11-markdown>
-        </div>
+          @if (activeTab === 'typescript') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/scripting/ts.md"> </app-ie11-markdown>
+            </div>
           }
-      </div>
+        </div>
       </div>
     </div>
   }
 
   <app-demo [src]="'/assets/pdfs/160F-2019.pdf'">
-    <ngx-extended-pdf-viewer
-      [src]="'/assets/pdfs/160F-2019.pdf'"
-      [height]="'auto'"
-
-      [theme]="theme">
-    </ngx-extended-pdf-viewer>
+    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/160F-2019.pdf'" [height]="'auto'" [theme]="theme"> </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

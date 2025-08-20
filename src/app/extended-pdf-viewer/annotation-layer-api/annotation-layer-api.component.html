@@ -1,8 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%; box-sizing: border-box; max-width: 60%">
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[60%]">
       <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">
@@ -54,7 +53,7 @@
             viewer, not an editor - you can do
             something similar. You add an an image to the annotation layer. In most cases, you won't see the difference.
           </p>
-          <table style="background-color: transparent">
+          <table class="bg-transparent">
             <tbody>
               <tr>
                 <td>
@@ -114,7 +113,7 @@
             Adding highlight annotations programmatically allows you to mark important text sections in the PDF.
             This demonstrates the <code>addHighlightToAnnotationLayer()</code> method with different positioning options.
           </p>
-          <table style="background-color: transparent">
+          <table class="bg-transparent">
             <tbody>
               <tr>
                 <td>
@@ -189,8 +188,7 @@
           }
       </div>
     </div>
-    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width: 38%">
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[38%]">
       <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">

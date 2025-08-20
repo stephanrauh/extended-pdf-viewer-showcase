@@ -2,8 +2,7 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]"
       >
         <div class="w-full">
           <!-- Tab buttons -->
@@ -27,7 +26,7 @@
             <div class="tab-content">
               <p>This option allows you to display the PDF file without scrollbar.</p>
               <label class="flex items-center space-x-2">
-                <input type="checkbox" class="form-checkbox text-primary-600" class="margin" [(ngModel)]="showWidgets" />
+                <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="showWidgets" />
                 <span>show widgets</span>
               </label>
               (forces reload)
@@ -64,8 +63,7 @@
         </div>
       </div>
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]"
       >
         <div class="w-full">
           <!-- Tab buttons -->

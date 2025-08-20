@@ -1,9 +1,9 @@
 
-<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+<div class="flex justify-between items-start mb-2">
   <div>
     <app-copyright [src]="url"></app-copyright>
   </div>
-  <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+  <app-fullscreen-button class="flex-shrink-0 ml-4"></app-fullscreen-button>
 </div>
 <ngx-extended-pdf-viewer
   [src]="url"

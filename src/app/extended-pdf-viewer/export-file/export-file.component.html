@@ -1,13 +1,13 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[40%]">
         <p>
           You can export the PDF as a Blob, including filled fields and drawings, texts, images, and highlights added by the user.
         </p>
         <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="getCurrentDocumentAsBlob()" style="margin-left: 16px">Export the PDF file</button>
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
                 <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -55,7 +55,7 @@
           }
           @if (exportfilecomponentTab === 'extractedfile') {
           <div class="tab-content">
-<div class="distance16">
+<div class="mt-3">
               @if (blob) {
                 <div>
                   <p>Blob type: {{blob.type}}</p>

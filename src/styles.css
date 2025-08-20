@@ -197,6 +197,25 @@ body {
 .flex-container-row > div {
   overflow-y: auto; /* Add scrollbar when content exceeds height */
   max-height: 45vh; /* Match parent height constraint */
+
+}
+.flex-container-row > div::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+}
+
+.flex-container-row > div::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.flex-container-row > div::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.5);
+  border-radius: 8px;
+}
+
+.flex-container-row > div::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.7);
 }
 
 .full-height,

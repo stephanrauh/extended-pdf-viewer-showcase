@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[50%]">
         <p>
           Once the PDF file has been loaded, you can extract quite a few metadata from it. You can get
           these infos after receiving the <code>(pagesLoaded)</code> event.
@@ -55,7 +55,7 @@
           </table>
         }
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[48%]">
         <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">

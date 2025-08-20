@@ -1,6 +1,6 @@
 <div class="flex-container-column fill-container">
-  <div class="flex-container-row" >
-    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+  <div class="flex-container-row full-height" >
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]">
       <p>
         Modal dialogs often remove the HTML code from the DOM before calling <code>ngOnDestroy()</code> of the <code>NgxExtendedPdfViewerComponent</code>,
         resulting in a couple of error messages on the console. To avoid this, call <code>ngOnDestroy()</code>
@@ -14,7 +14,7 @@
       </p>
       <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500" (click)="openDialog()">open modal</button>
     </div>
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
       <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">

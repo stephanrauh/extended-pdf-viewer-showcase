@@ -2,8 +2,7 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]"
       >
         <p>This demo shows how to add annotations to a PDF using pdf-lib.</p>
         <div class="space-y-2">
@@ -16,7 +15,7 @@
         </div>
         <p class="text-sm text-gray-600 mt-2">Current annotations: {{ getStickyNotesCount() }}</p>
       </div>
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
         <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">

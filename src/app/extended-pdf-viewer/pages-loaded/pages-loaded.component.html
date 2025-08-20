@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:48%;">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[48%]">
         <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">
@@ -40,7 +40,7 @@
           }
       </div>
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:50%">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[50%]">
         <div class=" bg-white border border-gray-300 rounded-lg shadow-md p-6">
           <b>Messages sent by the PDF</b>
           <button (click)="messages = []" style="margin-top:-13px; background: none; border: none; cursor: pointer; padding: 8px; border-radius: 4px; color: #666;" title="Clear messages">
@@ -50,7 +50,7 @@
           </button>
         </div>
 
-          <div class="messages distance16">
+          <div class="messages mt-3">
             @if (!messages) {
               <div>
                 No message yet. This means no document has been loaded yet.

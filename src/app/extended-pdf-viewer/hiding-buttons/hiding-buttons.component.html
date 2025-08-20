@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16"
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1"
       [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+settingsWidth">
               <div class="w-full">
           <!-- Tab buttons -->
@@ -45,12 +45,12 @@
 
           <!-- Main toolbar toggle -->
           <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [(ngModel)]="showToolbar" />
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [(ngModel)]="showToolbar" />
         <span>showToolbar (hiding the toolbar hides every
             button)</span>
       </label>
           <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
             [(ngModel)]="showSecondaryToolbarButton" />
         <span>showSecondaryToolbarButton (only shown if there are menu
             items)</span>
@@ -60,60 +60,60 @@
             <!-- Column 1: Core UI Elements -->
             <div class="checkbox-item">
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showSidebarButton" />
         <span>showSidebarButton</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar" [(ngModel)]="showFindButton" />
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar" [(ngModel)]="showFindButton" />
         <span>showFindButton
                 (requires text layer)</span>
       </label>
               @if (showFindButton) {
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="large-margin compact" [disabled]="!showToolbar && showFindButton"
+        <input type="checkbox" class="form-checkbox text-primary-600 large-margin compact" [disabled]="!showToolbar && showFindButton"
                 [(ngModel)]="findbarVisible" />
         <span>findbarVisible</span>
       </label>
               }
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showPagingButtons" />
         <span>showPagingButtons</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showZoomButtons" />
         <span>showZoomButtons</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showPresentationModeButton" />
         <span>showPresentationModeButton</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showOpenFileButton" />
         <span>showOpenFileButton</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showMovePageButton" />
         <span>showMovePageButton</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showHandToolButton" />
         <span>showHandToolButton</span>
       </label>
 
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showPrintButton" />
         <span>showPrintButton</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showDownloadButton" />
         <span>showDownloadButton</span>
       </label>
@@ -127,63 +127,63 @@
             <!-- Column 2: Editor Tools & Actions -->
             <div class="checkbox-item">
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showSignatureEditor" />
         <span>showSignatureEditor</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showDrawEditor" />
         <span>showDrawEditor</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showHighlightEditor" />
         <span>showHighlightEditor</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showStampEditor" />
         <span>showStampEditor</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showTextEditor" />
         <span>showTextEditor</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showRotateButton" />
         <span>showRotateButton</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showRotateCwButton" />
         <span>showRotateCwButton</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showRotateCcwButton" />
         <span>showRotateCcwButton</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showScrollingButtons" />
         <span>showScrollingButtons</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showSpreadButton" />
         <span>showSpreadButton</span>
       </label>
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showPropertiesButton" />
         <span>showPropertiesButton</span>
       </label>
               @if (showPropertiesButton) {
               <label class="flex items-center space-x-1 text-sm">
-        <input type="checkbox" class="form-checkbox text-primary-600" class="large-margin compact" [disabled]="!showToolbar"
+        <input type="checkbox" class="form-checkbox text-primary-600 large-margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="propertiesDialogVisible" />
         <span>propertiesDialogVisible</span>
       </label>
@@ -215,7 +215,7 @@
           }
         </div>
     @if (currentTab === 0) {
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16"
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1"
       [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
       <div class="source-code-container">
         <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
@@ -223,7 +223,7 @@
     </div>
     }
     @if (currentTab === 1) {
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16"
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1"
       [style]="'flex: 1 1 100%; box-sizing: border-box; max-width:'+codeWidth">
       <div class="source-code-container">
         <app-ie11-markdown src="/assets/extended-pdf-viewer/hiding-buttons/ts.md"> </app-ie11-markdown>

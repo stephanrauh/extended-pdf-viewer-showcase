@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-4 distance16 margin-right" style="flex: 1 1 100%; box-sizing: border-box; max-width:45%">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-4 mt-1 margin-right flex-1 box-border max-w-[45%]">
         <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -172,7 +172,7 @@
           }
         </div>
       </div>
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-4 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:53%">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-4 mt-1 flex-1 box-border max-w-[53%]">
         <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -215,7 +215,7 @@
   }
 
   <app-demo [src]="src">
-    <div style="margin-bottom: 8px;">
+    <div class="mb-2">
       <small>Note there's a bug in the PDF file. See the <a [routerLink]="['/annotation-layer']">annotation layer demo</a> to see the bugfix.</small>
     </div>
       <ngx-extended-pdf-viewer

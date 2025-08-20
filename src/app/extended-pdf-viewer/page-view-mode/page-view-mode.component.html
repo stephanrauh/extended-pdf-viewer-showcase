@@ -2,8 +2,7 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 margin-right"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1 margin-right flex-1 box-border max-w-[40%]"
       >
         <div class="w-full">
           <!-- Tab buttons -->
@@ -31,15 +30,15 @@
               </p>
               <div class="space-y-0.5">
                 <label class="flex items-center space-x-1 text-sm">
-                  <input type="radio" class="form-radio text-primary-600" value="off" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5" />
+                  <input type="radio" class="form-radio text-primary-600 leading-6" value="off" aria-label="Demo" [(ngModel)]="spreadMode" />
                   <span>no spread</span>
                 </label>
                 <label class="flex items-center space-x-1 text-sm">
-                  <input type="radio" class="form-radio text-primary-600" value="odd" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5" />
+                  <input type="radio" class="form-radio text-primary-600 leading-6" value="odd" aria-label="Demo" [(ngModel)]="spreadMode" />
                   <span>odd spread</span>
                 </label>
                 <label class="flex items-center space-x-1 text-sm">
-                  <input type="radio" class="form-radio text-primary-600" value="even" aria-label="Demo" [(ngModel)]="spreadMode" style="line-height: 1.5" />
+                  <input type="radio" class="form-radio text-primary-600 leading-6" value="even" aria-label="Demo" [(ngModel)]="spreadMode" />
                   <span>even spread</span>
                 </label>
               </div>
@@ -52,8 +51,7 @@
         </div>
       </div>
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1 flex-1 box-border max-w-[58%]"
       >
         <div class="w-full">
           <!-- Tab buttons -->
@@ -101,7 +99,7 @@
   <div
     class="use-available-height bg-white border border-gray-300 rounded-lg shadow-md p-3"
     appearance="outlined"
-    [class.distance16]="!(fullscreenService.isFullscreen$ | async)"
+    [class.mt-3]="!(fullscreenService.isFullscreen$ | async)"
   >
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px">
       <div>

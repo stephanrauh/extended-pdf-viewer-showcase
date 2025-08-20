@@ -1,5 +1,5 @@
-<div class="card use-available-height" [class.distance16]="!(fullscreenService.isFullscreen$ | async)">
-  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+<div class="card use-available-height" [class.mt-3]="!(fullscreenService.isFullscreen$ | async)">
+  <div class="flex justify-between items-start mb-2">
     <div>
       @if (showNote && additionalNote) {
         <small>{{ additionalNote }}</small>
@@ -7,7 +7,7 @@
       <app-copyright [src]="src"></app-copyright>
       <ng-content select="[slot=additional-info]"></ng-content>
     </div>
-    <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+    <app-fullscreen-button class="flex-shrink-0 ml-4"></app-fullscreen-button>
   </div>
   
   <ng-content></ng-content>

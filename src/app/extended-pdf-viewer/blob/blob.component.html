@@ -1,10 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
-      <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
-      >
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]">
         <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -64,11 +61,10 @@
                 <code>NgxExtendedPdfViewerService.getCurrentDocumentAsBlob()</code> to send the file to your server. Or the user can fill a form embedded in the
                 PDF file, and you can download the file containing the user's input.
               </p>
-              <section class="section" style="margin-top: 5px; margin-bottom: 10px">
+              <section class="section mt-1 mb-2">
                 <button
-                  class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow"
+                  class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow ml-2"
                   (click)="downloadAsBlob()"
-                  style="margin-left: 10px"
                 >
                   download the file as a BLOB
                 </button>
@@ -89,7 +85,7 @@
           }
         </div>
       </div>
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
         <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">

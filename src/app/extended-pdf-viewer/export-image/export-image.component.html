@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1 flex-1 box-border max-w-[40%]">
         <p>
           You can export the PDF file as an image. Note that the text of the PDF usually scales smoothlessly; you can print it with high resolution. However,
           the images embedded in the PDF file usually don't scale as gracefully, as you can see in the example document.
@@ -50,10 +50,7 @@
           Export as image
         </button>
       </div>
-      <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 distance16 progress"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
-      >
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1 flex-1 box-border max-w-[58%]">
         <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -105,7 +102,7 @@
         }
         @if (exportimagecomponentTab === 'extractedimage') {
           <div class="tab-content">
-            <div class="distance16">
+            <div class="mt-3">
               @if (imageDataURL) {
                 <div>
                   <div>Width: {{ widthDisplay }}</div>

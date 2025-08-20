@@ -1,8 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!fullscreen) {
   <div class="flex-container-row">
-    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]">
       <p>The book mode displays the PDF file like a book and renders a
         nice page-turn effect.
       </p>
@@ -13,8 +12,7 @@
           version 23.2.0, but it's still not perfect.</li>
       </ul>
     </div>
-<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
       <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">
@@ -59,7 +57,7 @@
   }
 
   <app-demo [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'">
-    <div style="margin-bottom: 8px;">
+    <div class="mb-2">
       <small>Note there's a bug in the PDF file. See the <a [routerLink]="['/annotation-layer']">annotation layer
           demo</a>
         to see the bugfix.</small>

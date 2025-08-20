@@ -2,8 +2,7 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 margin-right"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 40%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]"
       >
         <p>
           You can customize both the sidebar. The only disadvantage is you have to set the `top` position yourself. If you're offering an optional mobile-frieny
@@ -11,15 +10,15 @@
         </p>
         <div class="space-y-2">
           <label class="flex items-center space-x-2">
-            <input type="radio" class="form-radio text-primary-600" value="default" aria-label="Demo" [(ngModel)]="sidebarType" style="line-height: 1.5" />
+            <input type="radio" class="form-radio text-primary-600 leading-6" value="default" aria-label="Demo" [(ngModel)]="sidebarType" />
             <span>sidebar with standard layout</span>
           </label>
           <label class="flex items-center space-x-2">
-            <input type="radio" class="form-radio text-primary-600" value="without" aria-label="Demo" [(ngModel)]="sidebarType" style="line-height: 1.5" />
+            <input type="radio" class="form-radio text-primary-600 leading-6" value="without" aria-label="Demo" [(ngModel)]="sidebarType" />
             <span>sidebar without toolbar</span>
           </label>
           <label class="flex items-center space-x-2">
-            <input type="radio" class="form-radio text-primary-600" value="fancy" aria-label="Demo" [(ngModel)]="sidebarType" style="line-height: 1.5" />
+            <input type="radio" class="form-radio text-primary-600 leading-6" value="fancy" aria-label="Demo" [(ngModel)]="sidebarType" />
             <span>fancy layout</span>
           </label>
         </div>
@@ -30,8 +29,7 @@
         </label>
       </div>
       <div
-        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress"
-        style="flex: 1 1 100%; box-sizing: border-box; max-width: 58%"
+        class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]"
       >
         <div class="w-full">
           <!-- Tab buttons -->

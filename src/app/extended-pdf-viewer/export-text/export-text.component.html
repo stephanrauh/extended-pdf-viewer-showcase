@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16" style="flex: 1 1 100%; box-sizing: border-box; max-width:40%;">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[40%]">
         <p>You can extract text from the PDF file that's currently displayed.</p>
         <p>You can get the text either as plain text or as text with metadata. The second option,
           <code>NgxExtendedPdfViewerService::getPageAsLines</code>,
@@ -13,7 +13,7 @@
         <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="exportAsText()" style="margin-left: 16px">Export as text</button>
         <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="exportAsLines()" style="margin-left: 16px;margin-top:8px">Export as lines</button>
       </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 distance16 progress" style="flex: 1 1 100%; box-sizing: border-box; max-width:58%;">
+  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
                 <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -62,7 +62,7 @@
           @if (exporttextcomponentTab === 'extractedtext') {
           <div class="tab-content">
 @if (extractedText) {
-              <div class="distance16">
+              <div class="mt-3">
                 {{ extractedText }}
               </div>
             }

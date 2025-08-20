@@ -1,7 +1,6 @@
 <article class="custom-find-wrapper pdf-wrapper flex-container-column fill-container">
   <div class="pdf-code-wrapper flex-container-row">
-    <div class="overflow-none distance16 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:40%">
+    <div class="overflow-none mt-1 margin-right bg-white border border-gray-300 rounded-lg shadow-md p-6 flex-1 box-border max-w-[40%]" appearance="outlined">
               <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -80,7 +79,7 @@
             </div>
             <small class="row">
               @if (totalMatches && totalMatches > 0) {
-              <span style="margin-left: 24px">Result {{ currentMatchNumber }} of {{ totalMatches }} </span>
+              <span class="ml-6">Result {{ currentMatchNumber }} of {{ totalMatches }} </span>
               }
             </small>
           </div>
@@ -89,8 +88,7 @@
         </div>
     </div>
 
-    <div class="overflow-y-scroll distance16 progress bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined"
-      style="flex: 1 1 100%; box-sizing: border-box; max-width:59%">
+    <div class="overflow-y-auto mt-1 bg-white border border-gray-300 rounded-lg shadow-md p-6 flex-1 box-border max-w-[59%]" appearance="outlined">
               <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -159,14 +157,14 @@
     </div>
   </div>
 
-  <div class="pdf-card distance16 use-available-space bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+  <div class="pdf-card mt-3 use-available-space bg-white border border-gray-300 rounded-lg shadow-md p-6"appearance="outlined">
+    <div class="flex justify-between items-start mb-2">
       <div>
         <small>The example PDF has been published under a <a
             href="https://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons (CC BY-NC-SA 3.0) license</a> at
           <a href="https://wisc.pb.unizin.org/portuguese/">https://wisc.pb.unizin.org/portuguese/</a>.</small>
       </div>
-      <app-fullscreen-button style="flex-shrink: 0; margin-left: 16px;"></app-fullscreen-button>
+      <app-fullscreen-button class="flex-shrink-0 ml-4"></app-fullscreen-button>
     </div>
     <ngx-extended-pdf-viewer src="/assets/pdfs/Portugues-para-principiantes-1538054164.pdf" [textLayer]="true"
       [showFindButton]="false" (updateFindMatchesCount)="onUpdateFindMatchesCount($event)" (pdfLoaded)="pdfLoaded()"
