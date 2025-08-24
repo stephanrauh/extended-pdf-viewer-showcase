@@ -2,27 +2,82 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
       <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[60%]">
-        <p>
-          pdf.js ships with a JavaScript engine. There's little security risk because they're executing JavaScript in a sandbox. Even so, you can deactivate
-          scripting altogether.
-        </p>
-        <p>If you want to deactivate the JavaScript engine, keep two things in mind:</p>
-        <ul>
-          <li>
-            You must disable JavaScript before loading the pdf.js engine. Usually initializing <code>pdfDefaultOptions.enableScripting = false;</code> in the
-            constructor of your component is early enough (unless you've already opened a PDF document before).
-          </li>
-          <li>
-            If your PDF file contains a script to print the file immediately after opening it, it's still printed. The only difference is it's not printed using
-            the JavaScript engine, so any option your JavaScript code may pass is lost.
-          </li>
-        </ul>
-        <p>The demo needs JavaScript to put the cursor into the first form field, to validate your input, and to implement the "re-initialize" button.</p>
-        <label class="flex items-center space-x-2">
-          <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enableScripting" />
-          <span>enable JavaScript (forces reload)</span>
-        </label>
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="leftCardTab === 'scripting'"
+                [class.border-primary-600]="leftCardTab === 'scripting'"
+                [class.text-gray-500]="leftCardTab !== 'scripting'"
+                [class.border-transparent]="leftCardTab !== 'scripting'"
+                (click)="leftCardTab = 'scripting'"
+              >
+                Scripting
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="leftCardTab === 'catalog-js'"
+                [class.border-primary-600]="leftCardTab === 'catalog-js'"
+                [class.text-gray-500]="leftCardTab !== 'catalog-js'"
+                [class.border-transparent]="leftCardTab !== 'catalog-js'"
+                (click)="leftCardTab = 'catalog-js'"
+              >
+                Advanced JavaScript
+              </button>
+            </div>
+          </div>
 
+          <!-- Tab content -->
+          @if (leftCardTab === 'scripting') {
+            <div class="tab-content">
+              <p>
+                pdf.js ships with a JavaScript engine that's emulating JavaScript in a sandbox (QuickJS). That's reducing the security risk considerably. Read
+                the
+                <a
+                  href="https://attackanddefense.dev/firefox-internals/2021/10/14/implementing-form-filling-and-accessibility-in-the-firefox-pdf-viewer.html"
+                  target="#">full story here</a>. JavaScript is partially disabled by default, but you can disable it completely by adding
+                <code>pdfDefaultOptions.enableScripting = false;</code> before loading the PDF.js engine.
+              </p>
+              <p>Note: Auto-print scripts will still work, but without JavaScript's custom options.</p>
+              <p>The demo needs JavaScript to put the cursor into the first form field, to validate your input, and to implement the "re-initialize" button.</p>
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enableScripting" />
+                <span>enable JavaScript (forces reload)</span>
+              </label>
+            </div>
+          }
+          @if (leftCardTab === 'catalog-js') {
+            <div class="tab-content">
+              <p>
+                PDF files can contain JavaScript code in the catalog dictionary. This JavaScript is executed when the document is opened and can be used for
+                additional actions (AA) or open/close events (OC).
+              </p>
+              <p>These flags control whether JavaScript found in the PDF catalog should be executed:</p>
+              <ul>
+                <li><code>enableCatalogAAJavaScript</code> - Controls execution of Additional Actions JavaScript. It seems only "Will Print" is supported.
+                  The other actions - "Did Print", "Will/Did Close", and "Will/Did Save" are ignored by pdf.js.</li>
+                <li><code>enableOpenActionJavaScript</code> - Controls execution of Open Action JavaScript. Note that pdf.js
+                executes this action twice (as of August 2025).</li>
+              </ul>
+              <div class="space-y-2">
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enableScripting" />
+                  <span>enable scripting (forces reload)</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enableCatalogAAJavaScript" />
+                  <span>enable Catalog AA JavaScript</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enableOpenActionJavaScript" />
+                  <span>enable Open Action JavaScript</span>
+                </label>
+              </div>
+            </div>
+          }
+        </div>
       </div>
       <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 use-available-height flex-1 box-border max-w-[38%]">
         <div class="w-full">
@@ -68,7 +123,14 @@
     </div>
   }
 
-  <app-demo [src]="'/assets/pdfs/160F-2019.pdf'">
-    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/160F-2019.pdf'" [height]="'auto'" [theme]="theme"> </ngx-extended-pdf-viewer>
+  <app-demo [src]="leftCardTab === 'catalog-js' ? '/assets/pdfs/address-form.pdf' : '/assets/pdfs/160F-2019.pdf'">
+    @if (showPdfViewer) {
+      <ngx-extended-pdf-viewer
+        [src]="leftCardTab === 'catalog-js' ? '/assets/pdfs/address-form.pdf' : '/assets/pdfs/160F-2019.pdf'"
+        [height]="'auto'"
+        [theme]="theme"
+      >
+      </ngx-extended-pdf-viewer>
+    }
   </app-demo>
 </div>
