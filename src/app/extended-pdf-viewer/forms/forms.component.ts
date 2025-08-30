@@ -9,7 +9,7 @@ import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 @Component({
     selector: 'app-forms',
-    
+
     standalone: true,
     templateUrl: './forms.component.html',
     styleUrls: ['./forms.component.css'],
@@ -29,7 +29,7 @@ export class FormsComponent {
   fullscreenService = inject(FullscreenService);
 
   public selectedTab = 0;
-  
+
   public get theme(): string {
     return this.themeService.theme();
   }
@@ -89,6 +89,7 @@ export class FormsComponent {
 
   public updateFormData(): void {
     setTimeout(() => {})
+    debugger;
     if (this.xfa) {
       this.xfaFormData = {
         ...this.xfaFormData,

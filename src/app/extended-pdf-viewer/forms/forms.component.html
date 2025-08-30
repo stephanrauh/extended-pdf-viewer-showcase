@@ -99,7 +99,8 @@
                 </div>
                 <div>
                   <label class="block text-xs font-medium text-gray-700 mb-1">Country</label>
-                  <select class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" (selectionChange)="this.updateFormData()" [(ngModel)]="country">
+                  <select class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                          [(ngModel)]="country" (ngModelChange)="updateFormData()">
                     @for (country of countries; track country) {
                       <option [value]="country">{{ country }}</option>
                     }
@@ -115,7 +116,7 @@
                 </div>
                 <div>
                   <label class="block text-xs font-medium text-gray-700 mb-1">Databases</label>
-                  <select class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" (selectionChange)="this.updateFormData()" [(ngModel)]="databases" multiple>
+                  <select class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"  [(ngModel)]="databases" (ngModelChange)="updateFormData()" multiple>
                     <option value="oracle">Oracle</option>
                     <option value="sqlServer">SQL Server</option>
                     <option value="db2">DB2</option>
@@ -126,18 +127,6 @@
 
               <!-- Right Column -->
               <div class="space-y-3">
-                <div>
-                  <label for="other-job-experience-textarea" class="block text-sm font-medium text-gray-700 mb-1">Other Job Experience</label>
-                  <textarea
-                    id="other-job-experience-textarea"
-                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
-                    rows="3"
-                    (ngModelChange)="this.delayedUpdateFormData()"
-                    [(ngModel)]="otherJobExperience"
-                    placeholder="Other Job Experience"
-                  ></textarea>
-                </div>
-
                 <!-- Programming Languages -->
                 <div>
                   <label class="block text-xs font-medium text-gray-700 mb-2">Programming Languages</label>
@@ -166,22 +155,34 @@
                   <label class="block text-xs font-medium text-gray-700 mb-2">Education Level</label>
                   <div class="radio-group">
                     <label>
-                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="highSchool" (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" />
+                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="highSchool" [(ngModel)]="educationLevel" (ngModelChange)="updateFormData()" aria-label="Education Level" />
                       <span class="text-xs">High School Diploma</span>
                     </label>
                     <label>
-                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="associateDegree" (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" />
+                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="associateDegree" [(ngModel)]="educationLevel" (ngModelChange)="updateFormData()" aria-label="Education Level" />
                       <span class="text-xs">Associate's Degree</span>
                     </label>
                     <label>
-                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="bachelorDegree" (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" />
+                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="bachelorDegree" [(ngModel)]="educationLevel" (ngModelChange)="updateFormData()" aria-label="Education Level" />
                       <span class="text-xs">Bachelor's Degree</span>
                     </label>
                     <label>
-                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="masterDegree" (change)="this.updateFormData()" [(ngModel)]="educationLevel" aria-label="Education Level" />
+                      <input type="radio" class="form-radio text-primary-600 w-3 h-3" value="masterDegree" [(ngModel)]="educationLevel" (ngModelChange)="updateFormData()" aria-label="Education Level" />
                       <span class="text-xs">Master's Degree</span>
                     </label>
                   </div>
+                </div>
+
+                <div>
+                  <label for="other-job-experience-textarea" class="block text-sm font-medium text-gray-700 mb-1">Other Job Experience</label>
+                  <textarea
+                    id="other-job-experience-textarea"
+                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                    rows="3"
+                    (ngModelChange)="this.delayedUpdateFormData()"
+                    [(ngModel)]="otherJobExperience"
+                    placeholder="Other Job Experience"
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -291,7 +292,7 @@
         -->
         <div class="space-y-1">
         <label for="service-in-select" class="block text-sm font-medium text-gray-700">Service in</label>
-        <select id="service-in-select" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" (selectionChange)="this.updateFormData()" [(ngModel)]="serviceIn">
+        <select id="service-in-select" class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" [(ngModel)]="serviceIn" (ngModelChange)="updateFormData()">
 
             <option value=""></option>
             <option value="01">English</option>
@@ -322,11 +323,11 @@
         <label class="block text-sm font-medium text-gray-700 mb-2">Have you ever used a nickname?</label>
         <div class="radio-group">
           <label>
-            <input type="radio" class="form-radio text-primary-600" value="Y" (change)="this.updateFormData()" [(ngModel)]="aliasNameIndicator" aria-label="Nickname" />
+            <input type="radio" class="form-radio text-primary-600" value="Y" [(ngModel)]="aliasNameIndicator" (ngModelChange)="updateFormData()" aria-label="Nickname" />
             <span>Yes</span>
           </label>
           <label>
-            <input type="radio" class="form-radio text-primary-600" value="N" (change)="this.updateFormData()" [(ngModel)]="aliasNameIndicator" aria-label="Nickname" />
+            <input type="radio" class="form-radio text-primary-600" value="N" [(ngModel)]="aliasNameIndicator" (ngModelChange)="updateFormData()" aria-label="Nickname" />
             <span>No</span>
           </label>
         </div>
