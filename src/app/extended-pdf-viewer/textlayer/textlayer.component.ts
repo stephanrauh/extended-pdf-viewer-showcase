@@ -76,21 +76,26 @@ export class TextlayerComponent {
 
   public doMarkLongWordsInSpan(span: HTMLSpanElement): void {
     if (!this._markLongWords) {
-      span.innerHTML = span.innerText.replace('\n', '');
+      span.textContent = span.innerText.replace('\n', '');
     } else {
-      const withMarks = span.innerText
-        .split(' ')
-        .map((t) => this.markOneLongWord(t))
-        .join(' ');
-      span.innerHTML = withMarks;
+      // Create elements safely
+      const originalText = span.innerText;
+      span.textContent = '';
+      originalText.split(' ').forEach((word, index) => {
+        if (word.length > 6) {
+          const longWordSpan = document.createElement('div');
+          longWordSpan.className = 'long-word';
+          longWordSpan.textContent = word; // Safe - no HTML parsing
+          span.appendChild(longWordSpan);
+        } else {
+          span.appendChild(document.createTextNode(word));
+        }
+        // Add space between words except for the last one
+        if (index < originalText.split(' ').length - 1) {
+          span.appendChild(document.createTextNode(' '));
+        }
+      });
     }
-  }
-
-  private markOneLongWord(word: string): string {
-    if (word.length > 6) {
-      return `<div class="long-word">${word}</div>`;
-    }
-    return word;
   }
 
   public get showTextLayer(): boolean {
