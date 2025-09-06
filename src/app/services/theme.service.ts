@@ -1,4 +1,4 @@
-import { Injectable, signal, effect } from '@angular/core';
+import { Injectable, signal, effect, Injector, runInInjectionContext } from '@angular/core';
 
 export type Theme = 'light' | 'dark';
 
@@ -14,15 +14,20 @@ export class ThemeService {
   // Computed signal to track if dark mode is active
   public readonly isDarkMode = signal(this.theme() === 'dark');
 
-  constructor() {
-    // Effect to update DOM and localStorage when theme changes
-    effect(() => {
-      const currentTheme = this.theme();
-      this.updateDocument(currentTheme);
-      this.saveToStorage(currentTheme);
-      this.syncPdfViewerTheme(currentTheme);
-      this.isDarkMode.set(currentTheme === 'dark');
-    });
+  constructor(private injector: Injector) {
+    // Use setTimeout with runInInjectionContext to delay initialization and prevent circular dependency issues
+    setTimeout(() => {
+      runInInjectionContext(this.injector, () => {
+        // Effect to update DOM and localStorage when theme changes
+        effect(() => {
+          const currentTheme = this.theme();
+          this.updateDocument(currentTheme);
+          this.saveToStorage(currentTheme);
+          this.syncPdfViewerTheme(currentTheme);
+          this.isDarkMode.set(currentTheme === 'dark');
+        });
+      });
+    }, 0);
   }
 
   /**
@@ -47,16 +52,21 @@ export class ThemeService {
       return 'light';
     }
 
-    // Try to get from app localStorage first
-    const saved = localStorage.getItem(this.storageKey) as Theme;
-    if (saved && (saved === 'light' || saved === 'dark')) {
-      return saved;
-    }
+    try {
+      // Try to get from app localStorage first
+      const saved = localStorage.getItem(this.storageKey) as Theme;
+      if (saved && (saved === 'light' || saved === 'dark')) {
+        return saved;
+      }
 
-    // Check if PDF viewer has a theme preference
-    const pdfTheme = localStorage.getItem('ngx-extended-pdf-viewer.theme') as Theme;
-    if (pdfTheme && (pdfTheme === 'light' || pdfTheme === 'dark')) {
-      return pdfTheme;
+      // Check if PDF viewer has a theme preference
+      const pdfTheme = localStorage.getItem('ngx-extended-pdf-viewer.theme') as Theme;
+      if (pdfTheme && (pdfTheme === 'light' || pdfTheme === 'dark')) {
+        return pdfTheme;
+      }
+    } catch /* (safariSecurityException) */ {
+      // localStorage is not available on Safari in certain contexts
+      console.warn('localStorage not available, falling back to system preference');
     }
 
     // Fall back to system preference
@@ -88,14 +98,15 @@ export class ThemeService {
    * Save theme preference to localStorage
    */
   private saveToStorage(theme: Theme): void {
-    if (typeof localStorage === 'undefined') {
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
       return;
     }
 
     try {
       localStorage.setItem(this.storageKey, theme);
-    } catch (error) {
-      console.warn('Failed to save theme preference:', error);
+    } catch /* (safariSecurityException) */ {
+      // localStorage is not available on Safari in certain contexts
+      console.warn('Failed to save theme preference - localStorage not available');
     }
   }
 
@@ -103,15 +114,16 @@ export class ThemeService {
    * Sync theme with ngx-extended-pdf-viewer's theme system
    */
   private syncPdfViewerTheme(theme: Theme): void {
-    if (typeof localStorage === 'undefined') {
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
       return;
     }
 
     try {
       // Update the PDF viewer's theme localStorage key
       localStorage.setItem('ngx-extended-pdf-viewer.theme', theme);
-    } catch (error) {
-      console.warn('Failed to sync PDF viewer theme:', error);
+    } catch /* (safariSecurityException) */ {
+      // localStorage is not available on Safari in certain contexts
+      console.warn('Failed to sync PDF viewer theme - localStorage not available');
     }
   }
 }

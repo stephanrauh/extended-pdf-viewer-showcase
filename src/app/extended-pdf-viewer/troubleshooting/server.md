@@ -46,3 +46,29 @@ customHeaders:
       - key: 'Content-Type'
         value: 'application/javascript'
 ```
+
+Azure Web App requires this configuration (notice the `application/javascript` setting):
+
+```xml
+<configuration>
+    <system.webServer>
+        <staticContent>
+            <mimeMap fileExtension=".json" mimeType="application/json" />
+            <mimeMap fileExtension=".importmap" mimeType="application/importmap+json" />
+            <mimeMap fileExtension=".mjs" mimeType="application/javascript" />
+            <mimeMap fileExtension=".ftl" mimeType="text/html" />
+        </staticContent>
+        <rewrite>
+            <rules>
+                <rule name="Main Rule" stopProcessing="true">
+                    <match url=".*" />
+                    <conditions logicalGrouping="MatchAll">
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="/" />
+                </rule>
+            </rules>
+        </rewrite>
+    </system.webServer>
+</configuration>
+```
