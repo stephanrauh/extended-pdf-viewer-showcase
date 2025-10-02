@@ -72,3 +72,34 @@ Azure Web App requires this configuration (notice the `application/javascript` s
     </system.webServer>
 </configuration>
 ```
+
+## ASP.NET Core Static Files Configuration Issue
+
+### Problem
+You may encounter 404 errors when loading localization files (`.ftl` files) in ASP.NET Core applications, even though the files exist on the server. This typically manifests as:
+
+- Console errors: `ERROR Error at fetchData (viewer-5.3.749.mjs:7597:13)`
+- 404 errors for localization files like `assets/locale/en-US/viewer.ftl`
+- PDF viewer loads correctly but localization fails
+
+### Symptoms
+- The PDF viewer displays but console shows errors fetching `.ftl` files
+- Localization files return 404 errors despite being present in the file system
+- Manual download of the `.ftl` files works correctly
+
+### Solution
+Configure ASP.NET Core's static files middleware to explicitly map the `.ftl` file extension. Add this configuration to your `Startup.cs` or `Program.cs`:
+
+```csharp
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = new FileExtensionContentTypeProvider
+    {
+        Mappings = {
+            [".ftl"] = "text/plain"
+        }
+    }
+});
+```
+
+This ensures that ASP.NET Core serves `.ftl` files with the correct MIME type, allowing the PDF viewer to load localization data properly.
