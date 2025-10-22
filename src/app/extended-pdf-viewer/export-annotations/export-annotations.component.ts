@@ -1,4 +1,4 @@
-import { EditorAnnotation, FreeTextEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule, HighlightEditorAnnotation } from 'ngx-extended-pdf-viewer';
+import { EditorAnnotation, FreeTextEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule, HighlightEditorAnnotation, InkEditorAnnotation } from 'ngx-extended-pdf-viewer';
 import { Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -119,6 +119,42 @@ export class ExportAnnotationsComponent {
     console.log('Before adding highlight');
     await this.pdfViewerService.addEditorAnnotation(highlightAnnotation);
     console.log('After adding highlight');
+    const anno = this.pdfViewerService.getSerializedAnnotations();
+    if (anno) {
+      console.log(anno[anno.length - 1]);
+    }
+  }
+
+  public async addDrawing(): Promise<void> {
+    const x = 400 * Math.random();
+    const y = 350 + 500 * Math.random();
+    const thickness = 5 + Math.random() * 5; // Thickness between 5-10
+    const drawing: InkEditorAnnotation = {
+      annotationType: 15,
+      color: [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)],
+      thickness: thickness,
+      opacity: 1,
+      paths: {
+        // Bezier curves - create a gentle wave with properly calculated control points
+        lines: [
+          [NaN, NaN, NaN, NaN, x, y,
+           x + 10, y + 15, x + 20, y + 25, x + 30, y + 20,
+           x + 40, y + 15, x + 50, y + 25, x + 60, y + 20]
+        ],
+        // Raw points of the path
+        points: [
+          [x, y, x + 30, y + 20, x + 60, y + 20]
+        ]
+      },
+      pageIndex: 0,
+      // Note: rect is recalculated during deserialization, so this value is mostly ignored
+      rect: [x, y, x + 60, y + 25],
+      rotation: 0,
+    };
+    console.log(drawing);
+    console.log('Before adding drawing');
+    await this.pdfViewerService.addEditorAnnotation(drawing);
+    console.log('After adding drawing');
     const anno = this.pdfViewerService.getSerializedAnnotations();
     if (anno) {
       console.log(anno[anno.length - 1]);

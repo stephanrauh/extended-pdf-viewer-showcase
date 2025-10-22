@@ -43,13 +43,15 @@
           @if (exportannotationscomponentTab === 'livedemo') {
             <div class="tab-content">
               <p>
-                You can export text, drawings, images, and highlight you've added to a PDF file. You can also add texts and highlights programmatically.
-                However, the PDF viewer doesn't support adding drawings programmatically. As for images, that's supported, but using the
-                <a href="./annotation-layer-api">high-level different API</a>.
+                You can export text, drawings, images, and highlights you've added to a PDF file. You can also add texts, highlights, and ink drawings programmatically.
+                As for images, that's supported, but using the <a href="./annotation-layer-api">high-level different API</a>.
               </p>
               <p>
-                <b>Breaking change between pdf.js 3.5 and 3.9:</b> The coordinates of the serialized drawings have changed. Please keep in mind that this is an
-                internal API of pdf.js, so it's subject to change without notice.
+                <b>Frequent breaking changes:</b> This API relies on a rapidly evolving internal pdf.js data structure. Every once in a while,
+                this results in a breaking change. I try to avoid that - but it happened twice now. At the time being, please be aware that this
+                API may break at any time without notice when I update the base library, pdf.js. The latest breaking change is
+                version 25.6.0, which fixes the ink editor export. Please bear with me! I'm sure the API will become stable in future.
+                But we're not there yet.
               </p>
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mb-1 me-1" (click)="exportAnnotations()">
                 Export annotations
@@ -59,6 +61,9 @@
               </button>
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mb-1 me-1" (click)="addHighlight()">
                 Add highlight (currently broken)
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mb-1 me-1" (click)="addDrawing()">
+                Add ink drawing
               </button>
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mb-1 me-1" (click)="removeEditors()">
                 Remove editors
@@ -85,6 +90,9 @@
               </button>
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="addHighlight()">
                 Add highlight (currently broken)
+              </button>
+              <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="addDrawing()">
+                Add ink drawing
               </button>
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="removeEditors()">
                 Remove editors
