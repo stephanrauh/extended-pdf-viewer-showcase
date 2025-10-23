@@ -25,7 +25,12 @@
 }
 
 small {
-  font-size: 10px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+[data-theme="dark"] small {
+  color: #9ca3af;
 }
 
 .column-header {

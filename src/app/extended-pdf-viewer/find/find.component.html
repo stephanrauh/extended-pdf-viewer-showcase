@@ -97,9 +97,8 @@
                       (change)="onCheckboxClicked()"
                       [disabled]="matchRegExp"
                     />
-                    <span>match diacritics</span>
+                    <span style="line-height: 12px">match diacritics <small style="margin-left: 0.5em">try licao to find lição</small></span>
                   </label>
-                  <small style="margin-left: 1em">try licao to find lição</small>
                 </section>
                 <section class="section compact">
                   <label class="flex items-center space-x-2">
@@ -116,9 +115,8 @@
                 <section class="section compact">
                   <label class="flex items-center space-x-2">
                     <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()" />
-                    <span>match regular expression></span>
+                    <span style="line-height: 12px">match regular expression <small style="margin-left: 0.5em">try (?<=\s)([A-z]+ough)</small></span>
                   </label>
-                  <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small>
                 </section>
                 <section class="section compact">
                   <label class="flex items-center space-x-2">
@@ -216,7 +214,7 @@
                         (change)="onCheckboxClicked()"
                         [disabled]="matchRegExp"
                       />
-                      <span>match diacritics <small style="margin-left: 1em">try licao to find lição</small></span>
+                      <span style="line-height: 12px">match diacritics <small style="margin-left: 1em">try licao to find lição</small></span>
                     </label>
                   </section>
                   <section class="section compact">
@@ -234,7 +232,7 @@
                   <section class="section compact">
                     <label class="flex items-center space-x-2">
                       <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp" (change)="onCheckboxClicked()" />
-                      <span>match regular expression <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small></span>
+                      <span style="line-height: 12px">match regular expression <small style="margin-left: 1em">try (?<=\s)([A-z]+ough)</small></span>
                     </label>
                   </section>
                   <section class="section compact">
@@ -304,9 +302,8 @@
                         (change)="onCheckboxClicked2()"
                         [disabled]="matchRegExp2"
                       />
-                      <span>match diacritics</span>
+                      <span style="line-height: 12px">match diacritics <small style="margin-left: 0.5em">try licao to find lição</small></span>
                     </label>
-                    <small style="margin-left: 1em">try licao to find lição</small>
                   </section>
                   <section class="section compact">
                     <label class="flex items-center space-x-2">
@@ -323,7 +320,7 @@
                   <section class="section compact">
                     <label class="flex items-center space-x-2">
                       <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp2" (change)="onCheckboxClicked()" />
-                      <span>match regular expression <small style="margin-left: 1em">try nasalized|nasalization</small></span>
+                      <span style="line-height: 12px">match regular expression <small style="margin-left: 1em">try nasalized|nasalization</small></span>
                     </label>
                   </section>
                   <section class="section compact">
@@ -470,7 +467,6 @@
       (updateFindMatchesCount)="updateFindMatchesCount($event)"
       (updateFindState)="updateFindState($event)"
       backgroundColor="#ffffff"
-      [height]="'90vh'"
       [handTool]="false"
       [showHandToolButton]="true"
       [page]="1"
