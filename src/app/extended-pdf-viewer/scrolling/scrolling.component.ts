@@ -8,7 +8,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-scrolling',
-    
+
     standalone: true,
     templateUrl: './scrolling.component.html',
     styleUrls: ['./scrolling.component.css'],
@@ -31,8 +31,6 @@ export class ScrollingComponent {
 
   private _fullscreen = false;
 
-  public selectedTab = 0;
-
   public zoom = 'page-width';
   public scrollingcomponentTab: string = 'regularpdffiles';
   public codeTab: string = 'htmltemplate';
@@ -46,7 +44,7 @@ export class ScrollingComponent {
   }
 
   public get src(): string {
-    if (this.selectedTab === 0) {
+    if (this.scrollingcomponentTab === 'regularpdffiles') {
       return './assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf';
     } else {
       return './assets/pdfs/issue1707-with-rulers.pdf';

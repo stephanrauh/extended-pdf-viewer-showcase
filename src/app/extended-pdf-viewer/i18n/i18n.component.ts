@@ -63,13 +63,14 @@ export class I18nComponent {
     this._language = language;
 
     if (writingDirectionChange) {
-      // brute force approach necessary because Angular's mat-drawer doesn't detect the change
-      // between LTR and RTL languages
-      const drawer = document.getElementsByClassName('mat-drawer-content')[0] as HTMLElement;
-      const styleLeft = drawer.style.marginLeft;
-      const styleRight = drawer.style.marginRight;
-      drawer.style.marginLeft = styleRight;
-      drawer.style.marginRight = styleLeft;
+      // brute force approach necessary to swap margins between LTR and RTL languages
+      const mainContent = document.querySelector('main') as HTMLElement;
+      if (mainContent) {
+        const styleLeft = mainContent.style.marginLeft;
+        const styleRight = mainContent.style.marginRight;
+        mainContent.style.marginLeft = styleRight;
+        mainContent.style.marginRight = styleLeft;
+      }
     }
 
     this.hidePdfViewer = true;
