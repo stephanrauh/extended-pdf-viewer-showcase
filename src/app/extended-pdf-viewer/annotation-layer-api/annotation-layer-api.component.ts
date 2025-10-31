@@ -8,7 +8,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-annotation-layer-api',
-    
+
     standalone: true,
     templateUrl: './annotation-layer-api.component.html',
     styleUrls: ['./annotation-layer-api.component.css'],
@@ -30,7 +30,7 @@ export class AnnotationLayerApiComponent {
   fullscreenService = inject(FullscreenService);
 
   private _fullscreen = false;
-  
+
   // Tab state for the two tab groups
   activeTab: string = 'images';
   activeTab2: string = 'html';
@@ -65,14 +65,16 @@ export class AnnotationLayerApiComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async addHighlight(parameters: any): Promise<void> {
     const { color, left, bottom, right, top, thickness, rotation, opacity } = parameters;
-    await this.pdfService.addImageToAnnotationLayer({ // Temporarily using addImageToAnnotationLayer instead of addHighlightToAnnotationLayer
-      urlOrDataUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIytjb2xvcisiLz48L3N2Zz4=',
-      page: 11,
+    await this.pdfService.addHighlightToAnnotationLayer(
+      color,
+      11,
       left,
       bottom,
       right,
       top,
-      rotation: rotation || 0
-    });
+      thickness,
+      rotation || 0,
+      opacity
+    );
   }
 }
