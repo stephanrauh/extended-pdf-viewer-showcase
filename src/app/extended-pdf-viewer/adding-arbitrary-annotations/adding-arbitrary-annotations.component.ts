@@ -171,7 +171,7 @@ export class AddingArbitraryAnnotationsComponent {
   private async loadModifiedPDF(pdfBytes: Uint8Array): Promise<void> {
     try {
       // Create blob URL for the modified PDF
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([pdfBytes as BlobPart], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
       // Update the PDF source to load the new PDF
