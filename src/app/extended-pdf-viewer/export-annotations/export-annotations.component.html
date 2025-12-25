@@ -36,6 +36,16 @@
               >
                 large files
               </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="exportannotationscomponentTab === 'idbehavior'"
+                [class.border-primary-600]="exportannotationscomponentTab === 'idbehavior'"
+                [class.text-gray-500]="exportannotationscomponentTab !== 'idbehavior'"
+                [class.border-transparent]="exportannotationscomponentTab !== 'idbehavior'"
+                (click)="exportannotationscomponentTab = 'idbehavior'"
+              >
+                ID behavior
+              </button>
             </div>
           </div>
 
@@ -116,6 +126,78 @@
                 <code>(annotationLayerRendered)</code> and add the annotations in the event handler. Not that this event is triggered for every page
                 individually. The event handler should add the annotations that belong to this particular page, but not to other pages.
               </p>
+            </div>
+          }
+          @if (exportannotationscomponentTab === 'idbehavior') {
+            <div class="tab-content">
+              <h3 class="text-lg font-semibold mb-2">Understanding Annotation IDs</h3>
+              <p class="mb-3">
+                <strong>Added in version 25.6.2:</strong> All annotations now include an <code>id</code> field when exported or accessed via events.
+                However, it's important to understand how these IDs work to avoid confusion.
+              </p>
+
+              <h4 class="text-md font-semibold mb-2">ID Behavior Summary</h4>
+              <ul class="list-disc list-inside mb-3 space-y-1">
+                <li><strong>Temporary Only:</strong> IDs are valid only during the current session</li>
+                <li><strong>Not Persistent:</strong> When re-applying annotations via <code>addEditorAnnotation()</code>, new IDs are always assigned</li>
+                <li><strong>Automatically Ignored:</strong> Any <code>id</code> field in annotations you pass to <code>addEditorAnnotation()</code> is ignored</li>
+                <li><strong>Optional for Storage:</strong> You can safely omit the <code>id</code> field when storing annotations for later use</li>
+              </ul>
+
+              <h4 class="text-md font-semibold mb-2">When to Use IDs</h4>
+              <p class="mb-3">
+                IDs are useful for <strong>real-time event tracking</strong>:
+              </p>
+              <ul class="list-disc list-inside mb-3 space-y-1">
+                <li>Responding to <code>(annotationEditorEvent)</code> - the event includes the annotation ID</li>
+                <li>Using <code>getSerializedAnnotation(id)</code> to retrieve a specific annotation by its temporary ID</li>
+                <li>Tracking changes to specific annotations during a single session</li>
+              </ul>
+
+              <h4 class="text-md font-semibold mb-2">Best Practice: Storing Annotations</h4>
+              <p class="mb-2">
+                When storing annotations for later re-use (e.g., in localStorage or a database), you have two options:
+              </p>
+              <div class="bg-gray-100 p-3 rounded mb-3 overflow-x-auto">
+                <pre class="text-xs"><code>// Option 1: Remove IDs before storing (recommended)
+const annotations = pdfService.getSerializedAnnotations();
+const toStore = annotations.map((&#123; id, ...rest &#125;) => rest);
+localStorage.setItem('annotations', JSON.stringify(toStore));
+
+// Option 2: Keep IDs (they'll be ignored anyway)
+const annotations = pdfService.getSerializedAnnotations();
+localStorage.setItem('annotations', JSON.stringify(annotations));</code></pre>
+              </div>
+              <p class="mb-3">
+                Both approaches work identically because <code>addEditorAnnotation()</code> always assigns new IDs regardless of whether
+                you include the old IDs or not.
+              </p>
+
+              <h4 class="text-md font-semibold mb-2">Example: Re-applying Stored Annotations</h4>
+              <div class="bg-gray-100 p-3 rounded mb-3 overflow-x-auto">
+                <pre class="text-xs"><code>// Re-apply annotations (new IDs will be assigned automatically)
+const stored = JSON.parse(localStorage.getItem('annotations'));
+await pdfService.addEditorAnnotation(stored);
+
+// The annotations now have NEW IDs, different from when they were exported</code></pre>
+              </div>
+
+              <h4 class="text-md font-semibold mb-2">What Happens to IDs?</h4>
+              <p class="mb-3">
+                When you call <code>addEditorAnnotation()</code> with an annotation that has an <code>id</code> field:
+              </p>
+              <ul class="list-disc list-inside mb-3 space-y-1">
+                <li>The provided <code>id</code> is <strong>completely ignored</strong></li>
+                <li>A new unique ID is automatically generated</li>
+                <li>No ID collision detection occurs (because old IDs are never used)</li>
+                <li>This ensures annotations never interfere with each other</li>
+              </ul>
+
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-3">
+                <p class="text-sm">
+                  <strong>⚠️ Important:</strong> Do not rely on IDs to persist across document reloads, page refreshes, or sessions.
+                </p>
+              </div>
             </div>
           }
         </div>
