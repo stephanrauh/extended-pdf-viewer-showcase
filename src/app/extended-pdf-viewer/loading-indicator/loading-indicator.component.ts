@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, signal, computed, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, signal, computed, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { firstValueFrom } from 'rxjs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -27,6 +27,7 @@ interface PdfState {
 })
 export class LoadingIndicatorComponent {
   private themeService = inject(ThemeService);
+  private cdr = inject(ChangeDetectorRef);
 
   public get theme(): string {
     return this.themeService.theme();
@@ -118,6 +119,7 @@ export class LoadingIndicatorComponent {
 
   public loadLargeFile(): void {
     this.src = undefined;
+    this.cdr.markForCheck();
     setTimeout(async () => await this.loadPdfWithDelay());
   }
 
@@ -131,9 +133,11 @@ export class LoadingIndicatorComponent {
         { responseType: 'blob' }));
 
       this.src = blob;
+      this.cdr.markForCheck();
     } catch {
       this.onPdfLoadingFailed("Couldn't load the PDF file");
       this.src = undefined;
+      this.cdr.markForCheck();
     }
   }
 

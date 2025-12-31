@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { ScrollModeType, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -22,6 +22,7 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class InfiniteScrollComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -65,7 +66,10 @@ export class InfiniteScrollComponent {
   public set showWidgets(v: boolean) {
     if (this._showWidgets !== v) {
       this.showPdfViewer = false;
-      setTimeout(() => this.showPdfViewer = true);
+      setTimeout(() => {
+        this.showPdfViewer = true;
+        this.cdr.markForCheck();
+      });
     }
     this._showWidgets = v;
   }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { NgxExtendedPdfViewerService, ScrollModeType, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
@@ -27,6 +27,7 @@ import { DemoComponent } from '../common/demo.component';
     ],
 })
 export class TwoWayBindingComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -97,6 +98,9 @@ export class TwoWayBindingComponent {
     const view = this.activeSidebarView;
     this.src=file;
     // loading a file resets the default view
-    setTimeout(() => this.activeSidebarView = view, 150);
+    setTimeout(() => {
+      this.activeSidebarView = view;
+      this.cdr.markForCheck();
+    }, 150);
   }
 }

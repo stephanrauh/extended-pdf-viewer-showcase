@@ -1,6 +1,6 @@
 import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { countries } from './countries';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { ThemeService } from '../../services/theme.service';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +24,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
     ],
 })
 export class FormsComponent {
+  private cdr = inject(ChangeDetectorRef);
   private ngxService = inject(NgxExtendedPdfViewerService);
   private themeService = inject(ThemeService);
   fullscreenService = inject(FullscreenService);
@@ -126,6 +127,7 @@ export class FormsComponent {
         Other: this.other,
       };
     }
+    this.cdr.markForCheck();
   }
 
   public setFormData(data: Record<string, string | string[] | number | boolean> | any) {
@@ -152,6 +154,7 @@ export class FormsComponent {
       this.cSharp = Boolean(data.cSharp);
       this.updateFormData();
     }
+    this.cdr.markForCheck();
   }
 
   constructor() {
@@ -207,6 +210,7 @@ export class FormsComponent {
     } else {
       this.downloaded = 'download failed';
     }
+    this.cdr.markForCheck();
   }
 
   public async readRawFormDescription(): Promise<void> {
@@ -222,6 +226,7 @@ export class FormsComponent {
       maxLen: annotation.fieldAnnotation.maxLen,
       rect: annotation.fieldAnnotation.rect,
     }));
+    this.cdr.markForCheck();
   }
 
   public onSelectTab(event: any): void {
@@ -231,18 +236,21 @@ export class FormsComponent {
       setTimeout(() => {
         this.src = '/assets/pdfs/OoPdfFormExample.pdf';
         this.visible = true;
+        this.cdr.markForCheck();
       });
     } else if (event.index === 3) {
       this.selectedTab = 4;
       setTimeout(() => {
         this.src = '/assets/pdfs/OoPdfFormExample.pdf';
         this.visible = true;
+        this.cdr.markForCheck();
       });
     } else if (event.index === 4) {
       this.selectedTab = 5;
       setTimeout(() => {
         this.src = '/assets/pdfs/OoPdfFormExample.pdf';
         this.visible = true;
+        this.cdr.markForCheck();
       });
     } else if (event.index === 5) {
       this.formData = {};
@@ -250,6 +258,7 @@ export class FormsComponent {
       setTimeout(() => {
         this.src = '/assets/pdfs/under-copyright/XFA-Canada-Immigration.pdf';
         this.visible = true;
+        this.cdr.markForCheck();
       });
       this.xfa = true;
       this.updateFormData();

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
@@ -22,6 +22,7 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class PrerenderingComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -89,6 +90,7 @@ export class PrerenderingComponent {
     if (finished) {
       this.statistics('(none)', `${startPage} -> ${endPage}`);
     }
+    this.cdr.markForCheck();
   }
 
   private statistics(

@@ -1,5 +1,5 @@
 import { EditorAnnotation, FreeTextEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule, HighlightEditorAnnotation, InkEditorAnnotation } from 'ngx-extended-pdf-viewer';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -21,6 +21,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
     ],
 })
 export class ExportAnnotationsComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -54,6 +55,7 @@ export class ExportAnnotationsComponent {
   public exportAnnotations(): void {
     this.codeTab = 'livedemo';
     this.rawAnnotations = this.pdfViewerService.getSerializedAnnotations();
+    this.cdr.markForCheck();
   }
 
   public async addTextEditor(): Promise<void> {
@@ -196,6 +198,7 @@ export class ExportAnnotationsComponent {
     if (anno) {
       console.log(anno[0]);
     }
+    this.cdr.markForCheck();
   }
 
   public adjustSize(event: Event) {

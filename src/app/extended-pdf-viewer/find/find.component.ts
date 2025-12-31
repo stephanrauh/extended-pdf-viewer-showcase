@@ -83,15 +83,20 @@ export class FindComponent {
         const promises = this.find() as Promise<number>[];
 
         // delay the second search to make sure the first search has scrolled to the first result
-        const wrappedPromises = promises.map(p =>
-          p.then(result => result > 0 ? result : Promise.reject())
-        );
-        ((async () => {
-        await Promise.any(wrappedPromises);
-        this._searchtext2 = "Portuguese";
-        this.highlightAll2 = true;
-        this.find2();
-        }))();
+        const wrappedPromises = promises.map(async (promise) => {
+          const result = await promise;
+          if (result <= 0) {
+            throw new Error('No results');
+          }
+          return result;
+        });
+        (async () => {
+          await Promise.any(wrappedPromises);
+          this._searchtext2 = "Portuguese";
+          this.highlightAll2 = true;
+          this.find2();
+          this.cdr.markForCheck();
+        })();
     } else {
       this._searchtext2 = "";
       this.highlightAll2 = false;
@@ -161,6 +166,7 @@ export class FindComponent {
       const numberOfResultsPerPage = await numberOfResultsPromise;
       if (numberOfResultsPerPage > 0) {
         this.pagesWithResult.push(pageIndex);
+        this.cdr.markForCheck();
       }
     });
     return numberOfResultsPromises;
@@ -187,6 +193,7 @@ export class FindComponent {
       const numberOfResultsPerPage = await numberOfResultsPromise;
       if (numberOfResultsPerPage > 0) {
         this.pagesWithResult.push(pageIndex);
+        this.cdr.markForCheck();
       }
     });
     return numberOfResultsPromises;
@@ -207,12 +214,13 @@ export class FindComponent {
 
   public updateFindState(result: FindState) {
     this.findState = result;
+    this.cdr.markForCheck();
   }
 
   public updateFindMatchesCount(result: FindResultMatchesCount) {
     this.currentMatchNumber = result.current;
     this.totalMatches = result.total;
-    this.cdr.detectChanges();
+    this.cdr.markForCheck();
   }
 
   public onCheckboxClicked() {

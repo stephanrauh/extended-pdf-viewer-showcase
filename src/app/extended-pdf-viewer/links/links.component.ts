@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { LinkTarget, PageRenderedEvent, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from 'src/app/services/fullscreen.service';
@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     ],
 })
 export class LinksComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -53,7 +54,10 @@ export class LinksComponent {
   public set selectedTab(tab: number) {
     this._selectedTab = tab;
     this.hidden = true;
-    setTimeout(() => (this.hidden = false), 250);
+    setTimeout(() => {
+      this.hidden = false;
+      this.cdr.markForCheck();
+    }, 250);
   }
 
   public get selectedTab(): number {
@@ -70,7 +74,10 @@ export class LinksComponent {
       this.hidden = true;
       pdfDefaultOptions.externalLinkTarget = t;
       console.log('externalLinkTarget', pdfDefaultOptions.externalLinkTarget);
-      setTimeout(() => (this.hidden = false), 250);
+      setTimeout(() => {
+        this.hidden = false;
+        this.cdr.markForCheck();
+      }, 250);
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -15,6 +15,7 @@ import { AsyncPipe } from '@angular/common';
   imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class ExportFileComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -47,5 +48,6 @@ export class ExportFileComponent {
   public async getCurrentDocumentAsBlob(): Promise<void> {
     this.exportfilecomponentTab = 'extractedfile';
     this.blob = await this.pdfViewerService.getCurrentDocumentAsBlob();
+    this.cdr.markForCheck();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, PasswordPrompt, pdfDefaultOptions, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { CustomPasswordPrompt } from './custom-password-prompt';
@@ -17,6 +17,7 @@ import { AsyncPipe } from '@angular/common';
   imports: [FormsModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class PasswordsComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -61,6 +62,7 @@ export class PasswordsComponent {
     }
     setTimeout(() => {
       this.src = '/assets/pdfs/GraalVM-password-protected.pdf';
+      this.cdr.markForCheck();
     });
   }
 

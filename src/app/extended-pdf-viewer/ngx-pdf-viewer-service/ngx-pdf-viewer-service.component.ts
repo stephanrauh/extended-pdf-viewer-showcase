@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
@@ -17,6 +17,7 @@ import { isBrowser } from '../common/utilities';
   imports: [NgxExtendedPdfViewerModule, AsyncPipe, Angular2SmartTableModule],
 })
 export class NgxPdfViewerServiceComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -69,6 +70,7 @@ export class NgxPdfViewerServiceComponent {
 
   public async ngOnInit(): Promise<void> {
     this.attributesAndEvents = await convertMDToTable('/assets/extended-pdf-viewer/ngx-pdf-viewer-service/methods-table.md', this.httpClient);
+    this.cdr.markForCheck();
   }
 
   public ngAfterViewInit(): void {

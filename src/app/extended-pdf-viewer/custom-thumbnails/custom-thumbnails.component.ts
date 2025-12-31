@@ -6,6 +6,42 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
 
+/**
+ * BREAKING CHANGES ANALYSIS (ngx-extended-pdf-viewer v26.0.0+)
+ * ==============================================================
+ *
+ * The thumbnail CSS was updated to match modern PDF.js v5.4.938+ styling with box-shadow approach.
+ *
+ * ✅ NO BREAKING CHANGES for custom thumbnails
+ *
+ * Custom thumbnails continue to work because:
+ *
+ * 1. **Selector Scoping**: The new modern CSS uses `#thumbnailsView > .thumbnail` (direct child selector),
+ *    but custom thumbnails wrap `.thumbnail` in `<a class="pdf-viewer-template">`, so they don't match.
+ *    Custom thumbnails fall back to legacy CSS rules that remain for backward compatibility.
+ *
+ * 2. **Preserved Classes**: All classes used by custom thumbnails still exist:
+ *    - `.thumbnail` - ✅ Present (legacy support)
+ *    - `.thumbnailImage` - ✅ Present (legacy support)
+ *    - `.thumbnailSelectionRing` - ✅ Present (legacy support, though not used in this example)
+ *
+ * 3. **CSS Variables**: Still supported:
+ *    - `--thumbnail-width` - ✅ Used by both modern and legacy CSS
+ *    - `--thumbnail-height` - ✅ Set inline by PDF.js, still works
+ *
+ * 4. **Custom Styling**: The template uses `style="border: none"` inline, which overrides
+ *    both old and new default borders, so visual appearance is unaffected.
+ *
+ * 5. **Events**: `(thumbnailDrawn)` event and DOM manipulation via `querySelector` continue to work.
+ *
+ * Default (non-custom) thumbnails now feature:
+ * - Modern box-shadow borders instead of solid borders
+ * - Rounded corners (8px instead of 2px)
+ * - Page number overlay badges (::after pseudo-element)
+ * - [aria-current="page"] for current page selection
+ * - Improved light/dark mode support via CSS variables
+ */
+
 @Component({
     selector: 'app-custom-thumbnails',
 
@@ -52,7 +88,7 @@ export class CustomThumbnailsComponent {
     });
   }
 
-  public onPageChange(page: number): void {
+  public onPageChange(page: number | undefined): void {
     setTimeout(() => {
       const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
       if (radiobuttons) {

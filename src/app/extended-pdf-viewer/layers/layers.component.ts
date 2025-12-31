@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, PdfLayer, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -20,6 +20,7 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class LayersComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -55,6 +56,7 @@ export class LayersComponent {
     } else {
       console.log("This document either hasn't layers, or you've called listLayers() before the PDF layers have been rendered");
     }
+    this.cdr.markForCheck();
   }
 
   public async toggle(layerId: string): Promise<void> {

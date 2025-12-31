@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -20,6 +20,7 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class ExportTextComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -56,6 +57,7 @@ export class ExportTextComponent {
     this.exporttextcomponentTab = "extractedtext";
     this.extractedLines = [];
     this.extractedText = await this.pdfViewerService.getPageAsText(1);
+    this.cdr.markForCheck();
   }
 
   public async exportAsLines(): Promise<void> {
@@ -64,5 +66,6 @@ export class ExportTextComponent {
     this.extractedText = undefined;
     this.extractedLines = lines.map((line) => line.text);
     console.log(lines);
+    this.cdr.markForCheck();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { ThemeService } from '../../services/theme.service';
@@ -24,6 +24,7 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class CustomToolbarComponent {
+  private cdr = inject(ChangeDetectorRef);
   public fullscreenService = inject(FullscreenService);
   private themeService = inject(ThemeService);
 
@@ -53,7 +54,10 @@ export class CustomToolbarComponent {
         variant === 'findbar'
           ? '/assets/pdfs/GraalVM Dictionary Bytecode, Interpreters, C1 Compiler, C2 Compiler, CPUs, and More.pdf'
           : '/assets/pdfs/dachstein.pdf';
-      setTimeout(() => (this.showPdfViewer = true), 100);
+      setTimeout(() => {
+        this.showPdfViewer = true;
+        this.cdr.markForCheck();
+      }, 100);
     } else {
       this._toolbarVariant = variant;
     }

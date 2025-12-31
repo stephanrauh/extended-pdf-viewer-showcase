@@ -12,7 +12,7 @@
               [class.border-primary-600]="themingcomponentTab === 'lighttheme'"
               [class.text-gray-500]="themingcomponentTab !== 'lighttheme'"
               [class.border-transparent]="themingcomponentTab !== 'lighttheme'"
-              (click)="themingcomponentTab = 'lighttheme'">
+              (click)="themingcomponentTab = 'lighttheme'; selectedTab = 1">
               Light theme
             </button>
             <button
@@ -21,7 +21,7 @@
               [class.border-primary-600]="themingcomponentTab === 'darktheme'"
               [class.text-gray-500]="themingcomponentTab !== 'darktheme'"
               [class.border-transparent]="themingcomponentTab !== 'darktheme'"
-              (click)="themingcomponentTab = 'darktheme'">
+              (click)="themingcomponentTab = 'darktheme'; selectedTab = 2">
               Dark theme
             </button>
           </div>

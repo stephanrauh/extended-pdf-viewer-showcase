@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, PageRenderedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { BlobService } from './blob.service';
@@ -24,6 +24,9 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class BlobComponent {
+
+  private cdr = inject(ChangeDetectorRef);
+
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -59,6 +62,7 @@ export class BlobComponent {
   public loadLargeFile(): void {
     this.http.get('/assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf', { responseType: 'blob' }).subscribe((res) => {
       this.src = res;
+      this.cdr.markForCheck();
     });
   }
 
@@ -69,6 +73,7 @@ export class BlobComponent {
     } else {
       this.downloaded = 'download failed';
     }
+    this.cdr.markForCheck();
   }
 
   public pageRendered($event: PageRenderedEvent) {

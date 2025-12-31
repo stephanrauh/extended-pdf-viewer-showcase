@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -9,7 +9,6 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-export-image',
-
     standalone: true,
     templateUrl: './export-image.component.html',
     styleUrls: ['./export-image.component.css'],
@@ -22,13 +21,14 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class ExportImageComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
     return this.themeService.theme();
   }
   private pdfViewerService = inject(NgxExtendedPdfViewerService);
-  fullscreenService = inject(FullscreenService);
+  public fullscreenService = inject(FullscreenService);
 
   public imageDataURL: string | undefined = undefined;
 
@@ -87,10 +87,11 @@ export class ExportImageComponent {
     return false;
   }
 
-  public exportAsImage(): void {
+  public async exportAsImage(): Promise<void> {
     this.exportimagecomponentTab = 'extractedimage';
     const scale = { width: this.width, height: this.height, scale: this.scale };
-    (async () => this.showImage(await this.pdfViewerService.getPageAsImage(1, scale, this.background)))();
+    this.showImage(await this.pdfViewerService.getPageAsImage(1, scale, this.background));
+    this.cdr.markForCheck();
   }
 
   public exportAsText(): void {
@@ -118,6 +119,7 @@ export class ExportImageComponent {
     i.onload = () => {
       this.widthDisplay = i.width;
       this.heightDisplay = i.height;
+      this.cdr.markForCheck();
     };
     i.src = dataURL;
   }

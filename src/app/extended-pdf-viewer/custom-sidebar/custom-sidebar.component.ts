@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
@@ -15,8 +15,8 @@ import { AsyncPipe } from '@angular/common';
   imports: [FormsModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class CustomSidebarComponent {
-  private pdfService = inject(NgxExtendedPdfViewerService);
-  fullscreenService = inject(FullscreenService);
+  private cdr = inject(ChangeDetectorRef);
+  public fullscreenService = inject(FullscreenService);
 
   public activeTab = 'html';
 
@@ -42,7 +42,10 @@ export class CustomSidebarComponent {
     if (this._sidebarType !== sidebarType) {
       this.showPdfViewer = false;
       this._sidebarType = sidebarType;
-      setTimeout(() => (this.showPdfViewer = true), 500);
+      setTimeout(() => {
+        this.showPdfViewer = true;
+        this.cdr.markForCheck();
+      }, 500);
     } else {
       this._sidebarType = sidebarType;
     }

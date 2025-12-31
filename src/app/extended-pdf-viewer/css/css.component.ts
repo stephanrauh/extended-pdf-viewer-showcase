@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, OnInit, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, inject } from '@angular/core';
 import { ISortDirection, Settings, Angular2SmartTableModule } from 'angular2-smart-table';
 import { firstValueFrom } from 'rxjs';
 import { isBrowser } from '../common/utilities';
@@ -15,6 +15,7 @@ import { isBrowser } from '../common/utilities';
     ],
 })
 export class CSSComponent implements OnInit, AfterViewInit {
+  private cdr = inject(ChangeDetectorRef);
   private httpClient = inject(HttpClient);
   private element = inject(ElementRef);
 
@@ -58,6 +59,7 @@ export class CSSComponent implements OnInit, AfterViewInit {
 
   public async ngOnInit(): Promise<void> {
     this.attributesAndEvents = await this.convertMDToTable('/assets/extended-pdf-viewer/css/css.md');
+    this.cdr.markForCheck();
   }
 
   private async convertMDToTable(file: string): Promise<object[]> {

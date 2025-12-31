@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ElementRef, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ChangeDetectionStrategy, OnInit, ElementRef, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { compareFunction, convertMDToTable } from '../attributes/md-to-table-converter';
@@ -26,6 +26,7 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class DefaultOptionsComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -85,6 +86,7 @@ export class DefaultOptionsComponent implements OnInit {
   public async ngOnInit(): Promise<void> {
     this.availableOptions = await convertMDToTable('/assets/extended-pdf-viewer/default-options/available-options.md', this.httpClient);
     this.coveredOptions = await convertMDToTable('/assets/extended-pdf-viewer/default-options/covered-options.md', this.httpClient);
+    this.cdr.markForCheck();
   }
 
   public addPlaceHolders(): void {

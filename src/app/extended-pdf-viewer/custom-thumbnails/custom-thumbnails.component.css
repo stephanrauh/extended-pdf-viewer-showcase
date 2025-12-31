@@ -1,17 +1,67 @@
-.thumbnail-radiobutton {
-  top: -76px;
-  right: 10px;
+/* Custom thumbnail container - positioned to allow absolute positioning of children */
+.pdf-viewer-template .thumbnail {
   position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  height: auto;
+  border: none;
 }
 
+/* Radio button positioned at top-right of thumbnail */
+.thumbnail-radiobutton {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  transform: scale(1.5);
+  z-index: 3;
+  cursor: pointer;
+}
+
+/* Diagonal text overlay on thumbnail image */
 .thumbnail-text {
-  position: relative;
+  position: absolute;
   top: 50%;
-  left: 14%;
-  transform: rotate(-45deg);
-  z-index: 1;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  z-index: 2;
   color: black;
-  font-size:120%;
+  font-size: 120%;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* Image container with fixed dimensions */
+.image-container {
+  position: relative;
+  width: var(--thumbnail-width);
+  height: var(--thumbnail-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container .thumbnailImage {
+  width: var(--thumbnail-width);
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0.375px 1.5px 0 rgba(0, 0, 0, 0.05),
+              0 0 0 1px rgba(207, 207, 216, 1),
+              0 3px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Page number badge below thumbnail */
+.thumbnail-page-number {
+  margin-top: 8px;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: blue;
+  color: white;
+  line-height: 25px;
+  font-size: 13px;
 }
 
 #thumbnailView a {

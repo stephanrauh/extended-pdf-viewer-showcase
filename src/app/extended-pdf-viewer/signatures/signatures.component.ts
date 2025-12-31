@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -22,6 +22,7 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class SignaturesComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -52,7 +53,10 @@ export class SignaturesComponent {
   public set showSignature(show: boolean) {
     this._showSignature = show;
     this.showPdf = false;
-    setTimeout(() => (this.showPdf = true), 100);
+    setTimeout(() => {
+      this.showPdf = true;
+      this.cdr.markForCheck();
+    }, 100);
   }
 
   constructor() {

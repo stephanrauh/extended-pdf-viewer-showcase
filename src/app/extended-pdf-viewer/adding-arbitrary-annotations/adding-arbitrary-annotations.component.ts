@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, NgxExtendedPdfViewerModule, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -15,6 +15,7 @@ import { PDFDocument, PDFString, PDFName, PDFArray } from 'pdf-lib';
   imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
 })
 export class AddingArbitraryAnnotationsComponent {
+  private cdr = inject(ChangeDetectorRef);
   public fullscreenService = inject(FullscreenService);
   private themeService = inject(ThemeService);
   private notificationService = inject(PDFNotificationService);
@@ -79,6 +80,7 @@ export class AddingArbitraryAnnotationsComponent {
 
       // Update the viewer with the new PDF
       await this.loadModifiedPDF(modifiedPdfBytes);
+      this.cdr.markForCheck();
     } catch (error) {
       console.error('Error adding sticky note:', error);
     }
@@ -176,6 +178,7 @@ export class AddingArbitraryAnnotationsComponent {
 
       // Update the PDF source to load the new PDF
         this.pdfSrc = url;
+        this.cdr.markForCheck();
     } catch (error) {
       console.error('Error loading modified PDF:', error);
     }

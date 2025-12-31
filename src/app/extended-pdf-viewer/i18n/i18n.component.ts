@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     ],
 })
 export class I18nComponent {
+  private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
   public get theme(): string {
@@ -45,6 +46,7 @@ export class I18nComponent {
     this.hidePdfViewer = true;
     setTimeout(() => {
       this.hidePdfViewer = false;
+      this.cdr.markForCheck();
     });
   }
 
@@ -76,6 +78,7 @@ export class I18nComponent {
     this.hidePdfViewer = true;
     setTimeout(() => {
       this.hidePdfViewer = false;
+      this.cdr.markForCheck();
     });
   }
 }
