@@ -12,6 +12,27 @@
   display: none;
 }
 
+/* Force the PDF viewer to fill the screen height */
+::ng-deep .screen ngx-extended-pdf-viewer {
+  height: 100% !important;
+}
+
+::ng-deep .screen ngx-extended-pdf-viewer .zoom {
+  height: 100% !important;
+}
+
+::ng-deep .screen ngx-extended-pdf-viewer #outerContainer {
+  height: 100% !important;
+}
+
+::ng-deep .screen ngx-extended-pdf-viewer #mainContainer {
+  height: 100% !important;
+}
+
+::ng-deep .screen ngx-extended-pdf-viewer #viewerContainer {
+  height: 100% !important;
+}
+
 .mat-mdc-radio-button {
   padding-top: 5px;
   display: block;
