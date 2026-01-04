@@ -5,16 +5,11 @@ import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
-    selector: 'app-navigation',
-
-    standalone: true,
-    templateUrl: './navigation.component.html',
+  selector: 'app-navigation',
+  standalone: true,
+  templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css'],
-  imports: [
-        Ie11MarkdownComponent,
-        DemoComponent,
-        NgxExtendedPdfViewerModule,
-    ],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule],
 })
 export class NavigationComponent {
   private cdr = inject(ChangeDetectorRef);
