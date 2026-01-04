@@ -1,5 +1,9 @@
-Add this line to your global `styles.scss`:
+Add this CSS to the CSS of your component:
 ```css
-@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+.pdf-host {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 ```
-

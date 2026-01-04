@@ -1,41 +1,33 @@
 ```typescript
-import { Component, Inject, AfterViewInit } from '@angular/core';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import PerfectScrollbar from 'perfect-scrollbar';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true,
-};
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { NgScrollbarExt, NgScrollbarAsyncViewport } from 'ngx-scrollbar';
 
 @Component({
-standalone: false, 
-  selector: 'app-perfect-scrollbar',
-  templateUrl: './perfect-scrollbar.component.html',
-  styleUrls: ['./perfect-scrollbar.component.css'],
-  providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
-  ]
+  selector: 'app-custom-scrollbar',
+  templateUrl: './custom-scrollbar.component.html',
+  styleUrls: ['./custom-scrollbar.component.css'],
+  standalone: true,
+  imports: [NgScrollbarExt, NgScrollbarAsyncViewport, NgxExtendedPdfViewerModule]
 })
-export class PerfectScrollbarComponent implements AfterViewInit {
-  public scrollbar: any = undefined;
+export class CustomScrollbarComponent {
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  constructor(
-    @Inject(PERFECT_SCROLLBAR_CONFIG)
-    public config: PerfectScrollbarConfigInterface
-  ) {}
+  public pdfReady = false;
 
-  public ngAfterViewInit(): void {
-    const container = document.querySelector('#viewerContainer');
-    this.scrollbar = new PerfectScrollbar(container, this.config);
-
-    const sidebar = document.querySelector('#thumbnailView') as HTMLElement;
-    if (sidebar) {
-      this.scrollbar = new PerfectScrollbar(sidebar, this.config);
-    }
+  public onPagesLoaded(): void {
+    // asyncViewport="auto" handles waiting for the element
+    requestAnimationFrame(() => {
+      this.pdfReady = true;
+      this.cdr.detectChanges();
+    });
   }
 }
 ```
+
+**Important notes:**
+- **Import both `NgScrollbarExt` and `NgScrollbarAsyncViewport`**: The `asyncViewport` attribute requires the `NgScrollbarAsyncViewport` directive to be imported. This is a separate directive that works together with `NgScrollbarExt`.
+- **Use `asyncViewport="auto"`**: This tells ngx-scrollbar to automatically poll for the viewport element to become available, eliminating race conditions with pdf.js's asynchronous DOM building.
+- **Use `(pagesLoaded)` instead of `(pdfLoaded)`**: The `pagesLoaded` event fires after the viewer DOM structure is built, making `#viewerContainer` reliably available.
+- **Simple and clean**: No manual initialization, no element verification, no ViewChild needed - `asyncViewport` handles everything automatically.
+- Call `ChangeDetectorRef.detectChanges()` after setting `pdfReady = true` to prevent Angular's ExpressionChangedAfterItHasBeenCheckedError.
+- **Auto-updating**: ngx-scrollbar uses ResizeObserver by default to automatically detect size changes.

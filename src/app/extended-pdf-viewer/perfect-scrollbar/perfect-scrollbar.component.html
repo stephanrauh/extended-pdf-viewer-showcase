@@ -2,14 +2,20 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row distance-bottom16" >
       <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]">
-        <p><a target="#" href="https://github.com/mdbootstrap/perfect-scrollbar">Perfect Scrollbar</a> is a nice library
-        showing a customizable scrollbar on every browser, on every operating system.
-        You can add it to ngx-extended-pdf-viewer with a few lines of code.
+        <p>Are you big into custom scrollbars, such as the "Perfect Scrollbar"? Unfortunately, the Angular plugin
+          for perfect Scrollbar has been abandandoned, but there's an alternative that's actively maintained:</p>
+        <p>
+          <a target="#" href="https://github.com/MurhafSousli/ngx-scrollbar">ngx-scrollbar</a>
+        provides customizable overlay scrollbars that work on every browser and operating system.
+        It integrates seamlessly with ngx-extended-pdf-viewer using external viewport binding.
+        <b>However, there's a bug</b>: the scrollbar doesn't show until you start scrolling. It does not
+        show when hovering over the PDF file. I haven't found a way to make it work properly.
       </p>
-      <p><b>Caveat:</b> I suspect the library has been abandoned. I'm going to remove both the demo and the support soon.</p>
-      <p>In this demo, the distinguishing feature of the perfect scrollbar is that it gets a bit wider when the
-        mouse hovers over it. If the mouse is outside the PDF file, the scrollbar vanishes completely.
+      <p>In this demo, the scrollbar appears on hover with a draggable thumb. The library uses native scrolling performance
+        while providing a consistent cross-browser appearance. It attaches to pdf.js's existing scroll container without
+        interfering with the viewer's internal DOM structure.
       </p>
+      <p></p>
     </div>
 <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
       <div class="w-full">
@@ -82,8 +88,22 @@
 }
 
 <app-demo [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'">
-  <ngx-extended-pdf-viewer [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
-      [theme]="theme">
-  </ngx-extended-pdf-viewer>
+  <div class="pdf-host">
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
+      [theme]="theme"
+      (pagesLoaded)="onPagesLoaded()">
+    </ngx-extended-pdf-viewer>
+
+    @if (pdfReady) {
+      <ng-scrollbar
+        [externalViewport]="'#viewerContainer'"
+        [externalContentWrapper]="'#viewer'"
+        asyncViewport="auto"
+        track="vertical"
+        visibility="hover">
+      </ng-scrollbar>
+    }
+  </div>
 </app-demo>
 </div>
