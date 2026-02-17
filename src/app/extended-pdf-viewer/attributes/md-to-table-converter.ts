@@ -22,7 +22,6 @@ function splitLines(raw: string): string[] {
 }
 
 function parseColumns(line: string): object {
-  console.log(line);
   const columns = line.split('|');
 
   let description = "";

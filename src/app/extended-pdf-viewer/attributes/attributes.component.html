@@ -37,7 +37,7 @@
           ignored.</li>
       </ul>
 
-      <angular2-smart-table [settings]="attributeTableSettings" [source]="attributesAndEvents"></angular2-smart-table>
+      <angular2-smart-table [settings]="attributeTableSettings" [source]="attributesSource"></angular2-smart-table>
         </div>
           }
         @if (activeTab === 'low-level-api') {
@@ -52,7 +52,7 @@
         the documentation. Note that I won't try to keep my fork of the base library compatible. That's simply
         impossible with such an active project.
       </p>
-      <angular2-smart-table [settings]="lowLevelApiTableSettings" [source]="lowLevelApi"></angular2-smart-table>
+      <angular2-smart-table [settings]="lowLevelApiTableSettings" [source]="lowLevelApiSource"></angular2-smart-table>
         </div>
           }
       </div>

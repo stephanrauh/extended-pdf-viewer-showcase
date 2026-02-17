@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, ChangeDetectionStrategy, OnInit, ElementRef, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ElementRef, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { compareFunction, convertMDToTable } from '../attributes/md-to-table-converter';
 import { HttpClient } from '@angular/common/http';
-import { Settings, Angular2SmartTableModule } from 'angular2-smart-table';
+import { Settings, Angular2SmartTableModule, LocalDataSource } from 'angular2-smart-table';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -16,7 +16,6 @@ import { AsyncPipe } from '@angular/common';
     standalone: true,
     templateUrl: './default-options.component.html',
     styleUrls: ['./default-options.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         Ie11MarkdownComponent,
         Angular2SmartTableModule,
@@ -63,9 +62,9 @@ export class DefaultOptionsComponent implements OnInit {
     },
   };
 
-  public availableOptions: object[] = [];
+  public availableOptions = new LocalDataSource();
 
-  public coveredOptions: object[] = [];
+  public coveredOptions = new LocalDataSource();
   public defaultoptionscomponentTab: string = 'overview';
   public codeTab: string = 'htmltemplate';
 
@@ -84,9 +83,14 @@ export class DefaultOptionsComponent implements OnInit {
   }
 
   public async ngOnInit(): Promise<void> {
-    this.availableOptions = await convertMDToTable('/assets/extended-pdf-viewer/default-options/available-options.md', this.httpClient);
-    this.coveredOptions = await convertMDToTable('/assets/extended-pdf-viewer/default-options/covered-options.md', this.httpClient);
-    this.cdr.markForCheck();
+    const [availableOptions, coveredOptions] = await Promise.all([
+      convertMDToTable('/assets/extended-pdf-viewer/default-options/available-options.md', this.httpClient),
+      convertMDToTable('/assets/extended-pdf-viewer/default-options/covered-options.md', this.httpClient),
+    ]);
+    await this.availableOptions.load(availableOptions);
+    await this.coveredOptions.load(coveredOptions);
+    // No Zone.js in this app — must trigger CD explicitly after async data load.
+    this.cdr.detectChanges();
   }
 
   public addPlaceHolders(): void {

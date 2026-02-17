@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, inject } from '@angular/core';
-import { ISortDirection, Settings, Angular2SmartTableModule } from 'angular2-smart-table';
+import { ISortDirection, Settings, Angular2SmartTableModule, LocalDataSource } from 'angular2-smart-table';
 import { firstValueFrom } from 'rxjs';
 import { isBrowser } from '../common/utilities';
 
@@ -19,7 +19,7 @@ export class CSSComponent implements OnInit, AfterViewInit {
   private httpClient = inject(HttpClient);
   private element = inject(ElementRef);
 
-  public attributesAndEvents: object[] = [];
+  public attributesAndEvents = new LocalDataSource();
 
   private compareFunction = (dir: number, a: string, b: string) => {
     a = a.replace('[', '').replace(']', '').replace('(', '').replace(')', '').replace('<s>', '').replace('</s>', '');
@@ -58,8 +58,10 @@ export class CSSComponent implements OnInit, AfterViewInit {
   };
 
   public async ngOnInit(): Promise<void> {
-    this.attributesAndEvents = await this.convertMDToTable('/assets/extended-pdf-viewer/css/css.md');
-    this.cdr.markForCheck();
+    const data = await this.convertMDToTable('/assets/extended-pdf-viewer/css/css.md');
+    await this.attributesAndEvents.load(data);
+    // No Zone.js in this app — must trigger CD explicitly after async data load.
+    this.cdr.detectChanges();
   }
 
   private async convertMDToTable(file: string): Promise<object[]> {

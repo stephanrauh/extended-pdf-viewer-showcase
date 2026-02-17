@@ -28,6 +28,26 @@
               >
                 TypeScript
               </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'hidePopup'"
+                [class.border-primary-600]="activeTab === 'hidePopup'"
+                [class.text-gray-500]="activeTab !== 'hidePopup'"
+                [class.border-transparent]="activeTab !== 'hidePopup'"
+                (click)="activeTab = 'hidePopup'"
+              >
+                Hide popup while drawing
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'eventTypes'"
+                [class.border-primary-600]="activeTab === 'eventTypes'"
+                [class.text-gray-500]="activeTab !== 'eventTypes'"
+                [class.border-transparent]="activeTab !== 'eventTypes'"
+                (click)="activeTab = 'eventTypes'"
+              >
+                Event types
+              </button>
             </div>
           </div>
 
@@ -35,13 +55,48 @@
           @if (activeTab === 'html') {
             <div class="tab-content">
               You can listen to the events of the annotation editors (i.e. the highlight tool and adding images, drawing, and text). Note that many events are
-              fired when commiting the annotation.
+              fired when committing the annotation.
               <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-events/html.md"> </app-ie11-markdown>
             </div>
           }
           @if (activeTab === 'typescript') {
             <div class="tab-content">
               <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-events/ts.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (activeTab === 'hidePopup') {
+            <div class="tab-content">
+              The <code>drawingStarted</code> and <code>drawingStopped</code> events fire when the user
+              starts and stops actively drawing or highlighting. Use them to hide the editor options popup
+              (color, thickness, opacity) while drawing. The popups are regular DOM elements with the CSS class
+              <code>.editorParamsToolbar</code> and can be hidden by adding the <code>hidden</code> class.
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-events/hide-popup.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (activeTab === 'eventTypes') {
+            <div class="tab-content">
+              <p>The <code>event.type</code> field tells you what happened. These are the possible values:</p>
+              <table class="table table-sm">
+                <thead><tr><th>Type</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code>added</code></td><td>A new annotation editor (e.g. highlight) has been created.</td></tr>
+                  <tr><td><code>removed</code></td><td>An annotation editor has been deleted.</td></tr>
+                  <tr><td><code>moved</code></td><td>An annotation editor has been moved to a different position.</td></tr>
+                  <tr><td><code>sizeChanged</code></td><td>An annotation editor has been resized.</td></tr>
+                  <tr><td><code>commit</code></td><td>A free-text editor has been committed (lost focus).</td></tr>
+                  <tr><td><code>colorChanged</code></td><td>The color of a drawing, highlight, or free-text editor changed.</td></tr>
+                  <tr><td><code>thicknessChanged</code></td><td>The thickness of a drawing or highlight changed.</td></tr>
+                  <tr><td><code>opacityChanged</code></td><td>The opacity of a drawing changed.</td></tr>
+                  <tr><td><code>fontSizeChanged</code></td><td>The font size of a free-text editor changed.</td></tr>
+                  <tr><td><code>bezierPathChanged</code></td><td>A single stroke of an ink/pencil drawing has been completed.</td></tr>
+                  <tr><td><code>imageAdded</code></td><td>An image stamp has been placed on the page.</td></tr>
+                  <tr><td><code>altTextChanged</code></td><td>The alt text of an annotation editor changed.</td></tr>
+                  <tr><td><code>commented</code></td><td>A comment has been added to an annotation.</td></tr>
+                  <tr><td><code>commentRemoved</code></td><td>A comment has been removed from an annotation.</td></tr>
+                  <tr><td><code>drawingStarted</code></td><td>The user started actively drawing (ink/pencil) or highlighting.</td></tr>
+                  <tr><td><code>drawingStopped</code></td><td>The user stopped actively drawing or highlighting (pointer released).</td></tr>
+                </tbody>
+              </table>
             </div>
           }
         </div>

@@ -54,16 +54,12 @@
             <app-ie11-markdown src="/assets/extended-pdf-viewer/default-options/options.md"></app-ie11-markdown>
           </div>
           }
-          @if (defaultoptionscomponentTab === 'availableoptions') {
-          <div class="tab-content">
+          <div class="tab-content" [hidden]="defaultoptionscomponentTab !== 'availableoptions'">
 <angular2-smart-table [settings]="tableSettings" [source]="availableOptions"></angular2-smart-table>
           </div>
-          }
-          @if (codeTab === 'optionscoveredbyattributes') {
-          <div class="tab-content">
+          <div class="tab-content" [hidden]="defaultoptionscomponentTab !== 'optionscoveredbyattributes'">
 <angular2-smart-table [settings]="tableSettings" [source]="coveredOptions"></angular2-smart-table>
           </div>
-          }
         </div>
             </div>
         <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 use-available-height flex-1 box-border max-w-[38%]">

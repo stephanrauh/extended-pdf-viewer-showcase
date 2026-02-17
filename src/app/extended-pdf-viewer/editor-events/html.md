@@ -1,9 +1,9 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'/assets/pdfs/Introduction.pdf'"
+  [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
   [height]="'90vh'"
-  (annotationLayerRendered)="onEvent('annotationLayerRendered', $event)"
-  (annotationEditorLayerRendered)="onEvent('annotationEditorLayerRendered', $event)"
-  >
+  [textLayer]="true"
+  (annotationEditorEvent)="onEditorEvent($event)"
+>
 </ngx-extended-pdf-viewer>
 ```
