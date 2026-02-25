@@ -466,6 +466,36 @@ button:active {
   box-shadow: 0 5px 5px -3px var(--shadow-color-strong), 0 8px 10px 1px var(--shadow-color), 0 3px 14px 2px var(--shadow-color);
 }
 
+/* Custom findbar two-row layout for the custom toolbar demo */
+ngx-extended-pdf-viewer .findbar:has(> .findbar-row) {
+  width: calc(100% - 68px);
+  max-width: calc(100% - 68px);
+  box-sizing: border-box;
+  padding: 4px 12px 4px 6px;
+}
+
+ngx-extended-pdf-viewer .findbar > .findbar-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: auto;
+  min-width: 0;
+}
+
+ngx-extended-pdf-viewer .findbar > .findbar-row pdf-find-input-area,
+ngx-extended-pdf-viewer .findbar > .findbar-row #findInputContainer,
+ngx-extended-pdf-viewer .findbar > .findbar-row pdf-search-input-field,
+ngx-extended-pdf-viewer .findbar > .findbar-row .loadingInput {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+}
+
+ngx-extended-pdf-viewer .findbar > .findbar-row #findInput {
+  flex: 1;
+  min-width: 0;
+}
+
 /* Prevent touch move for PDF viewer */
 .ngx-extended-pdf-viewer-prevent-touch-move .drawer-content {
   touch-action: none;

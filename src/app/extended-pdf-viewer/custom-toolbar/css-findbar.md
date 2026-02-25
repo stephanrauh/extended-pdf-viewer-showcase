@@ -1,9 +1,7 @@
-```css
-.no-float, .no-float * {
-  float: none !important;
-}
+The CSS class `findbar-row` is built into `ngx-extended-pdf-viewer`. Using this class
+in your `customFindbarButtons` template creates a two-row layout automatically:
 
-::ng-deep .no-float #findInput {
-  width: 95%;
-}
-```
+- Each `<div class="findbar-row">` takes the full width of the findbar
+- The `#findInput` stretches to fill the entire first row
+
+No additional CSS is needed.

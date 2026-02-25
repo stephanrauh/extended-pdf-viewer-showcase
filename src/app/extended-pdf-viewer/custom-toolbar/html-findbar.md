@@ -7,16 +7,16 @@
 </ngx-extended-pdf-viewer>
 
 <ng-template #customFindbarInputArea>
-  <div id="findbarInputContainer">
+  <div id="findInputContainer">
     <pdf-search-input-field></pdf-search-input-field>
   </div>
 </ng-template>
 
 <ng-template #customFindbarButtons>
-  <div class="no-float">
+  <div class="findbar-row">
     <pdf-find-input-area [customFindbarInputArea]="customFindbarInputArea"></pdf-find-input-area>
   </div>
-  <div class="no-float">
+  <div class="findbar-row">
     <pdf-find-highlight-all></pdf-find-highlight-all>
     <pdf-find-match-case></pdf-find-match-case>
     <pdf-find-entire-word></pdf-find-entire-word>
