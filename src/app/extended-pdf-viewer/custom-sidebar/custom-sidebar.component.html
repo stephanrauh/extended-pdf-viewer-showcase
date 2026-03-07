@@ -105,15 +105,15 @@
 </div>
 
 <ng-template #withoutSidebar>
-  <div id="sidebarContainer" style="top: -1px">
+  <div id="viewsManager" style="top: 32px">
     <pdf-sidebar-content></pdf-sidebar-content>
-    <div id="sidebarResizer" class="hidden"></div>
+    <div id="viewsManagerResizer" class="hidden"></div>
   </div>
 </ng-template>
 
 <ng-template #fancySidebar>
-  <div id="sidebarContainer" style="top: 31px; background-color: goldenrod">
-    <div id="additionalSidebarContainer">
+  <div id="viewsManager" style="top: 31px">
+    <div id="additionalSidebarContainer" style="background-color: goldenrod">
       <div id="toolbarSidebar">
         <button
           style="background-color: red; height: 100%; width: 34%; border: 0; margin: 0; padding: 0"
@@ -145,6 +145,6 @@
       </div>
     </div>
     <pdf-sidebar-content></pdf-sidebar-content>
-    <div id="sidebarResizer" class="hidden"></div>
+    <div id="viewsManagerResizer" class="hidden"></div>
   </div>
 </ng-template>

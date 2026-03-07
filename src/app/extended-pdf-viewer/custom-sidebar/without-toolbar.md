@@ -1,8 +1,8 @@
 ```html
 <ng-template #withoutSidebar>
-  <div id="sidebarContainer" style="top:-1px">
+  <div id="viewsManager" style="top:32px">
     <pdf-sidebar-content></pdf-sidebar-content>
-    <div id="sidebarResizer" class="hidden"></div>
+    <div id="viewsManagerResizer" class="hidden"></div>
   </div>
 </ng-template>
 ```
