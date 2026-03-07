@@ -1,4 +1,5 @@
 import { EditorAnnotation, FreeTextEditorAnnotation, NgxExtendedPdfViewerService, pdfDefaultOptions, NgxExtendedPdfViewerModule, HighlightEditorAnnotation, InkEditorAnnotation } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -15,7 +16,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
     imports: [
         Ie11MarkdownComponent,
         DemoComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
         JsonPipe,
     ],

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, effect, OnDestroy, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FindOptions, FindResultMatchesCount, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { MyCustomFindController } from './my-custom-find-controller';
 import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -20,7 +21,7 @@ interface CustomFindOptions extends FindOptions {
         FormsModule,
         Ie11MarkdownComponent,
         FullscreenButtonComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
     ],
 })
 export class CustomFindComponent implements OnDestroy {

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, RenderedTextLayerHighlights, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { FindState, FindResultMatchesCount } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +19,7 @@ import { AsyncPipe } from '@angular/common';
         FormsModule,
         Ie11MarkdownComponent,
         FullscreenButtonComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
     ],
 })

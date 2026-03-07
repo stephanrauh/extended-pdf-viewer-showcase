@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, NgxExtendedPdfViewerModule, PDFNotificationService } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
@@ -12,7 +13,7 @@ import { PDFDocument, PDFString, PDFName, PDFArray } from 'pdf-lib';
   standalone: true,
   templateUrl: './adding-arbitrary-annotations.component.html',
   styleUrls: ['./adding-arbitrary-annotations.component.css'],
-  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
 export class AddingArbitraryAnnotationsComponent {
   private cdr = inject(ChangeDetectorRef);

@@ -41,13 +41,17 @@ export class SimpleComponent implements OnDestroy {
   public get minifiedJSLibraries() {
     try {
       if (localStorage) {
-        return localStorage.getItem('ngx-extended-pdf-viewer.simple.minifiedJSLibraries') === 'true';
+        const stored = localStorage.getItem('ngx-extended-pdf-viewer.simple.minifiedJSLibraries');
+        if (stored !== null) {
+          return stored === 'true';
+        }
       }
     } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
     }
-    return false;
+    return true;
   }
+
   public set minifiedJSLibraries(value) {
     try {
       if (localStorage) {

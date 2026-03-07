@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
@@ -12,7 +13,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './annotation-layer.component.html',
   styleUrls: ['./annotation-layer.component.css'],
-  imports: [CommonModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
+  imports: [CommonModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
 export class AnnotationLayerComponent {
   private themeService = inject(ThemeService);

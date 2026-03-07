@@ -7,6 +7,7 @@ import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.
 import { DemoComponent } from '../common/demo.component';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 
 interface PdfState {
   status: 'idle' | 'loading' | 'loaded' | 'loaded and rendered' | 'error';
@@ -22,7 +23,7 @@ interface PdfState {
     imports: [
         Ie11MarkdownComponent,
         DemoComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
     ],
 })
 export class LoadingIndicatorComponent {

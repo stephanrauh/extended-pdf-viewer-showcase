@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@
 import { ThemeService } from '../../services/theme.service';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { NgxExtendedPdfViewerService, ScrollModeType, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { PdfSidebarView } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,7 @@ import { DemoComponent } from '../common/demo.component';
         RouterLink,
         Ie11MarkdownComponent,
         DemoComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
     ],
 })

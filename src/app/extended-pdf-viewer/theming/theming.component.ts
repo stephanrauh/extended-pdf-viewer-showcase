@@ -4,6 +4,7 @@ import { ThemeService } from '../../services/theme.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'app-forms',
@@ -15,7 +16,7 @@ import { AsyncPipe } from '@angular/common';
     imports: [
         Ie11MarkdownComponent,
         DemoComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
     ],
 })

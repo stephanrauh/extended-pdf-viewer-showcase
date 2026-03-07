@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, PasswordPrompt, pdfDefaultOptions, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { CustomPasswordPrompt } from './custom-password-prompt';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +15,7 @@ import { AsyncPipe } from '@angular/common';
   standalone: true,
   templateUrl: './passwords.component.html',
   styleUrls: ['./passwords.component.css'],
-  imports: [FormsModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
+  imports: [FormsModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
 export class PasswordsComponent {
   private cdr = inject(ChangeDetectorRef);

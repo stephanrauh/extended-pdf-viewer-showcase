@@ -1,4 +1,5 @@
 import { NgxExtendedPdfViewerService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { countries } from './countries';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -18,7 +19,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
         FormsModule,
         Ie11MarkdownComponent,
         DemoComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
         JsonPipe,
     ],

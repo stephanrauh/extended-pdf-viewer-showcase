@@ -1,6 +1,7 @@
 import { Component, ViewChild, Output, EventEmitter, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerComponent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { CopyrightComponent } from '../common/copyright.component';
 import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
 
@@ -12,7 +13,7 @@ import { FullscreenButtonComponent } from '../../components/fullscreen-button/fu
     imports: [
         CopyrightComponent,
         FullscreenButtonComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
     ]
 })
 export class ModalDialogComponent {

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ElementRef, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { compareFunction, convertMDToTable } from '../attributes/md-to-table-converter';
 import { HttpClient } from '@angular/common/http';
 import { Settings, Angular2SmartTableModule, LocalDataSource } from 'angular2-smart-table';
@@ -20,7 +21,7 @@ import { AsyncPipe } from '@angular/common';
         Ie11MarkdownComponent,
         Angular2SmartTableModule,
         DemoComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
     ],
 })

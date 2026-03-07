@@ -1,6 +1,7 @@
 import { Component, effect, OnDestroy, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, NgxExtendedPdfViewerService, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { PDFPrintRange } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +20,7 @@ import { LanguagePipe } from 'ngx-markdown';
         FormsModule,
         Ie11MarkdownComponent,
         DemoComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
         LanguagePipe,
     ],

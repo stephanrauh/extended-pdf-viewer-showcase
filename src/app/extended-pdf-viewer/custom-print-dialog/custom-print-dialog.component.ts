@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NgxExtendedPdfViewerService, ProgressBarEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -14,7 +15,7 @@ import { FullscreenButtonComponent } from '../../components/fullscreen-button/fu
   templateUrl: './custom-print-dialog.component.html',
   styleUrls: ['./custom-print-dialog.component.css'],
   encapsulation: ViewEncapsulation.None,
-  imports: [FormsModule, Ie11MarkdownComponent, CopyrightComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule],
+  imports: [FormsModule, Ie11MarkdownComponent, CopyrightComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective],
 })
 export class CustomPrintDialogComponent {
   private themeService = inject(ThemeService);

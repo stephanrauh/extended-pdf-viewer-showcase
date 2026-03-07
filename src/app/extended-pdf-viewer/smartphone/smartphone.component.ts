@@ -4,6 +4,7 @@ import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -12,7 +13,7 @@ import { AsyncPipe } from '@angular/common';
   standalone: true,
   templateUrl: './smartphone.component.html',
   styleUrls: ['./smartphone.component.css', './devices.min.css'],
-  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
 export class SmartphoneComponent {
   private themeService = inject(ThemeService);

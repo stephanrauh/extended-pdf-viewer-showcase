@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, PageRenderedEvent, PageRenderEvent, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { RouterLink } from '@angular/router';
@@ -12,7 +13,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './book-mode.component.html',
   styleUrls: ['./book-mode.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule],
+  imports: [Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective],
 })
 export class BookModeComponent {
   private themeService = inject(ThemeService);

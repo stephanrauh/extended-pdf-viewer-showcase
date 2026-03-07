@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { CopyrightComponent } from '../common/copyright.component';
 import { FullscreenButtonComponent } from '../../components/fullscreen-button/fullscreen-button.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -15,7 +16,7 @@ import { AsyncPipe } from '@angular/common';
   standalone: true,
   templateUrl: './page-view-mode.component.html',
   styleUrls: ['./page-view-mode.component.css'],
-  imports: [FormsModule, Ie11MarkdownComponent, RouterLink, CopyrightComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, AsyncPipe],
+  imports: [FormsModule, Ie11MarkdownComponent, RouterLink, CopyrightComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
 export class PageViewModeComponent {
   private themeService = inject(ThemeService);

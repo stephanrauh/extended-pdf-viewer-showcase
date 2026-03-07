@@ -1,4 +1,5 @@
 import { PageRenderedEvent, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
@@ -15,7 +16,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './textlayer.component.html',
   styleUrls: ['./textlayer.component.css'],
   encapsulation: ViewEncapsulation.None,
-  imports: [FormsModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, AsyncPipe],
+  imports: [FormsModule, Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
 export class TextlayerComponent {
   private themeService = inject(ThemeService);

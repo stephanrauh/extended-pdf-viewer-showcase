@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { AsyncPipe } from '@angular/common';
 import { LanguagePipe } from 'ngx-markdown';
 
@@ -18,7 +19,7 @@ import { LanguagePipe } from 'ngx-markdown';
         FormsModule,
         Ie11MarkdownComponent,
         DemoComponent,
-        NgxExtendedPdfViewerModule,
+        NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
         LanguagePipe,
     ],

@@ -1,6 +1,7 @@
 import { Component, effect, OnInit, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FileInputChanged, IPDFViewerApplication, PDFNotificationService, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { isBrowser } from '../common/utilities';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +15,7 @@ import { AsyncPipe } from '@angular/common';
   standalone: true,
   templateUrl: './multiple-documents.component.html',
   styleUrls: ['./multiple-documents.component.css'],
-  imports: [FormsModule, Ie11MarkdownComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, AsyncPipe],
+  imports: [FormsModule, Ie11MarkdownComponent, FullscreenButtonComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
 export class MultipleDocumentsComponent implements OnInit {
   private themeService = inject(ThemeService);
