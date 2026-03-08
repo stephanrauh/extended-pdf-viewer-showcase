@@ -56,25 +56,7 @@ export class I18nComponent {
   }
 
   public set language(language: string) {
-    let writingDirectionChange = false;
-    if (this._language === 'ar' && language !== 'ar') {
-      writingDirectionChange = true;
-    }
-    if (this._language !== 'ar' && language === 'ar') {
-      writingDirectionChange = true;
-    }
     this._language = language;
-
-    if (writingDirectionChange) {
-      // brute force approach necessary to swap margins between LTR and RTL languages
-      const mainContent = document.querySelector('main') as HTMLElement;
-      if (mainContent) {
-        const styleLeft = mainContent.style.marginLeft;
-        const styleRight = mainContent.style.marginRight;
-        mainContent.style.marginLeft = styleRight;
-        mainContent.style.marginRight = styleLeft;
-      }
-    }
 
     this.hidePdfViewer = true;
     setTimeout(() => {
