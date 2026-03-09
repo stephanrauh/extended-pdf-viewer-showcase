@@ -68,8 +68,9 @@
             <div class="tab-content">
               The <code>drawingStarted</code> and <code>drawingStopped</code> events fire when the user
               starts and stops actively drawing or highlighting. Use them to hide the editor options popup
-              (color, thickness, opacity) while drawing. The popups are regular DOM elements with the CSS class
-              <code>.editorParamsToolbar</code> and can be hidden by adding the <code>hidden</code> class.
+              (color, thickness, opacity) while drawing. Each editor has its own toolbar with a unique ID
+              (e.g. <code>editorInkParamsToolbar</code>, <code>editorHighlightParamsToolbar</code>).
+              Hide the toolbar by adding the <code>hidden</code> CSS class.
               <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-events/hide-popup.md"> </app-ie11-markdown>
             </div>
           }

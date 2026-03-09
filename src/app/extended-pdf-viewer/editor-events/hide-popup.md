@@ -15,15 +15,23 @@ import { AnnotationEditorEvent } from 'ngx-extended-pdf-viewer';
 @Component({ ... })
 export class EditorEventsComponent {
 
+  private toolbarMap: Record<string, string> = {
+    InkEditor: 'editorInkParamsToolbar',
+    HighlightEditor: 'editorHighlightParamsToolbar',
+  };
+
   public onEditorEvent(event: AnnotationEditorEvent): void {
+    const toolbarId = this.toolbarMap[event.editorType];
+    if (!toolbarId) return;
+
+    const toolbar = document.getElementById(toolbarId);
+    if (!toolbar) return;
+
     if (event.type === 'drawingStarted') {
-      // Hide all editor option popups while the user is drawing
-      const popups = document.querySelectorAll('.editorParamsToolbar');
-      popups.forEach(el => el.classList.add('hidden'));
-    } else if (event.type === 'drawingStopped') {
-      // Show the currently active editor's popup again
-      const popups = document.querySelectorAll('.editorParamsToolbar');
-      popups.forEach(el => el.classList.remove('hidden'));
+      toolbar.classList.add('hidden');
+    }
+    if (event.type === 'drawingStopped') {
+      toolbar.classList.remove('hidden');
     }
   }
 }
