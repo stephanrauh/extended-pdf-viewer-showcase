@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
-import { PagesLoadedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { AnnotationEditorEvent, PagesLoadedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -29,7 +29,15 @@ export class EditorEventsComponent {
 
   private changeDetector = inject(ChangeDetectorRef);
 
+  private toolbarMap: Record<string, string> = {
+    InkEditor: 'editorInkParamsToolbar',
+    HighlightEditor: 'editorHighlightParamsToolbar',
+  };
+
   public onEvent(type: string, event: any): void {
+    if (type === 'annotationEditorEvent') {
+      this.onEditorEvent(event as AnnotationEditorEvent);
+    }
     const now = new Date().toLocaleTimeString();
     let e = '(no parameters)';
     if (event) {
@@ -44,6 +52,21 @@ export class EditorEventsComponent {
     }
     this.messages.push(`${now} ${type} ${e}`);
     this.changeDetector.detectChanges();
+  }
+
+  private onEditorEvent(event: AnnotationEditorEvent): void {
+    const toolbarId = this.toolbarMap[event.editorType];
+    if (!toolbarId) return;
+
+    const toolbar = document.getElementById(toolbarId);
+    if (!toolbar) return;
+
+    if (event.type === 'drawingStarted') {
+      toolbar.classList.add('hidden');
+    }
+    if (event.type === 'drawingStopped') {
+      toolbar.classList.remove('hidden');
+    }
   }
 
   public onPagesLoaded(pagecount: PagesLoadedEvent): void {

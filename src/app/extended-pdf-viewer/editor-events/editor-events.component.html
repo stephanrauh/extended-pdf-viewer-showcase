@@ -66,11 +66,16 @@
           }
           @if (activeTab === 'hidePopup') {
             <div class="tab-content">
+              <p>Use case: when the user is drawing or highlighting text, the editor options block a part of the PDF file.
+                So how can we hide the editor options while drawing? Editor events to the rescue!
+              </p>
+              <p>
               The <code>drawingStarted</code> and <code>drawingStopped</code> events fire when the user
               starts and stops actively drawing or highlighting. Use them to hide the editor options popup
               (color, thickness, opacity) while drawing. Each editor has its own toolbar with a unique ID
               (e.g. <code>editorInkParamsToolbar</code>, <code>editorHighlightParamsToolbar</code>).
               Hide the toolbar by adding the <code>hidden</code> CSS class.
+              </p>
               <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-events/hide-popup.md"> </app-ie11-markdown>
             </div>
           }
