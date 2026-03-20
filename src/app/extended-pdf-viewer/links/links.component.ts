@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
-import { LinkTarget, PageRenderedEvent, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { AnnotationLayerRenderedEvent, LinkAnnotationsAddedEvent, LinkTarget, pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { FullscreenService } from 'src/app/services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
@@ -86,15 +86,59 @@ export class LinksComponent {
     return this._target;
   }
 
-  public afterPageRendered(pageRenderedEvent: PageRenderedEvent) {
-    if (this._selectedTab === 2) {
-      const pageView = pageRenderedEvent.source; /* as PdfPageView */
-      const div = pageView.div as HTMLDivElement;
-      div.querySelectorAll('a').forEach((a: HTMLAnchorElement) => {
-        a.href = 'javascript: void(0)';
-        a.target = '';
-      });
+  public annotationLayerLinks: string[] = [];
+  public autoDetectedLinks: string[] = [];
+
+  public afterAnnotationLayerRendered(event: AnnotationLayerRenderedEvent) {
+    if (this.linkscomponentTab === 'deactivatinglinks') {
+      this.deactivateLinks(event.source.div as HTMLDivElement);
     }
+  }
+
+  public afterLinkAnnotationsAdded(event: LinkAnnotationsAddedEvent) {
+    if (this.linkscomponentTab === 'deactivatinglinks') {
+      this.deactivateLinks(event.source.div as HTMLDivElement);
+    }
+  }
+
+  private deactivateLinks(div: HTMLDivElement) {
+    div.querySelectorAll('a').forEach((a: HTMLAnchorElement) => {
+      a.href = 'javascript: void(0)';
+      a.target = '';
+    });
+  }
+
+  public resetAutoDetectedLinks() {
+    this.annotationLayerLinks = [];
+    this.autoDetectedLinks = [];
+    this.hidden = true;
+    setTimeout(() => {
+      this.hidden = false;
+      this.cdr.markForCheck();
+    }, 250);
+  }
+
+  private extractLinks(div: HTMLDivElement): string[] {
+    const links: string[] = [];
+    div.querySelectorAll('a[href]').forEach((a: Element) => {
+      const href = (a as HTMLAnchorElement).href;
+      if (href && !href.startsWith('javascript:')) {
+        links.push(href);
+      }
+    });
+    return links;
+  }
+
+  public onAutoDetectedAnnotationLayerRendered(event: AnnotationLayerRenderedEvent) {
+    const links = this.extractLinks(event.source.div as HTMLDivElement);
+    this.annotationLayerLinks = [...new Set([...this.annotationLayerLinks, ...links])];
+    this.cdr.markForCheck();
+  }
+
+  public onAutoDetectedLinkAnnotationsAdded(event: LinkAnnotationsAddedEvent) {
+    const allLinks = this.extractLinks(event.source.div as HTMLDivElement);
+    this.autoDetectedLinks = [...new Set([...this.autoDetectedLinks, ...allLinks])];
+    this.cdr.markForCheck();
   }
 
   public get sourcecode(): string {

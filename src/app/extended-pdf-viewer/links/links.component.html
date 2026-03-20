@@ -38,6 +38,16 @@
               >
                 Deactivating links
               </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="linkscomponentTab === 'autodetected'"
+                [class.border-primary-600]="linkscomponentTab === 'autodetected'"
+                [class.text-gray-500]="linkscomponentTab !== 'autodetected'"
+                [class.border-transparent]="linkscomponentTab !== 'autodetected'"
+                (click)="linkscomponentTab = 'autodetected'; resetAutoDetectedLinks()"
+              >
+                Auto-detected links
+              </button>
             </div>
           </div>
 
@@ -91,9 +101,56 @@
           @if (linkscomponentTab === 'deactivatinglinks') {
             <div class="tab-content">
               <p>
-                You can manipulate links using the <code>pageRendered</code> event. This demo deactivates the links. Note you can't modify the appearance of the
+                You can manipulate links using the <code>annotationLayerRendered</code> event. This demo deactivates the links. Note you can't modify the appearance of the
                 links. They are part of the PDF file, so they can't be displayed differently. But you can modify the invisible annotation layer.
+                Auto-detected links (e.g. URLs found in text) are injected after the annotation layer renders. Use the <code>linkAnnotationsAdded</code> event
+                to react to those.
               </p>
+            </div>
+          }
+          @if (linkscomponentTab === 'autodetected') {
+            <div class="tab-content">
+              <p>
+                PDF files can contain explicit link annotations, but pdf.js also auto-detects URLs and email addresses in the visible text and turns them into
+                clickable links. These two kinds of links become available at different times:
+              </p>
+              <ul class="text-sm space-y-1 mt-2">
+                <li><strong>(annotationLayerRendered)</strong> fires first. At this point, only explicit PDF link annotations are in the DOM.</li>
+                <li><strong>(linkAnnotationsAdded)</strong> fires after auto-detected links have been injected.</li>
+              </ul>
+              <p class="mt-2 text-sm">
+                <strong>Prerequisites:</strong> Auto-detected links require two conditions:
+              </p>
+              <ul class="text-sm space-y-1 mt-1">
+                <li><code>[textLayer]="true"</code> &mdash; the text layer must be active so pdf.js can scan the rendered text for URLs and email addresses.</li>
+                <li><code>pdfDefaultOptions.enableAutoLinking</code> must be <code>true</code> (this is the default).</li>
+              </ul>
+              <div class="mt-3 space-y-2 text-sm">
+                <div>
+                  <strong>Links at <code>annotationLayerRendered</code> (live demo):</strong>
+                  @if (annotationLayerLinks.length === 0) {
+                    <span class="text-gray-400 ml-1">waiting...</span>
+                  } @else {
+                    <ul class="list-disc ml-5 mt-1">
+                      @for (link of annotationLayerLinks; track link) {
+                        <li class="break-all">{{ link }}</li>
+                      }
+                    </ul>
+                  }
+                </div>
+                <div>
+                  <strong>All links at <code>linkAnnotationsAdded</code> (live demo):</strong>
+                  @if (autoDetectedLinks.length === 0) {
+                    <span class="text-gray-400 ml-1">waiting...</span>
+                  } @else {
+                    <ul class="list-disc ml-5 mt-1">
+                      @for (link of autoDetectedLinks; track link) {
+                        <li class="break-all">{{ link }}</li>
+                      }
+                    </ul>
+                  }
+                </div>
+              </div>
             </div>
           }
         </div>
@@ -130,12 +187,12 @@
         </div>
 
         <!-- Tab content -->
-        @if (codeTab === 'typescript' && linkscomponentTab !== 'defaultlinktargets') {
+        @if (codeTab === 'typescript' && linkscomponentTab !== 'defaultlinktargets' && linkscomponentTab !== 'autodetected') {
           <div class="tab-content">
             <app-ie11-markdown [data]="sourcecode | language: 'typescript'"></app-ie11-markdown>
           </div>
         }
-        @if (codeTab === 'html' && linkscomponentTab !== 'defaultlinktargets') {
+        @if (codeTab === 'html' && linkscomponentTab !== 'defaultlinktargets' && linkscomponentTab !== 'autodetected') {
           <div class="tab-content">
             <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html.md"></app-ie11-markdown>
           </div>
@@ -150,14 +207,47 @@
             <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html2.md"></app-ie11-markdown>
           </div>
         }
+        @if (codeTab === 'typescript' && linkscomponentTab === 'autodetected') {
+          <div class="tab-content">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/links/ts-autodetected.md"></app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'html' && linkscomponentTab === 'autodetected') {
+          <div class="tab-content">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html-autodetected.md"></app-ie11-markdown>
+          </div>
+        }
       </div>
     </div>
   }
 
-  <app-demo [src]="'/assets/pdfs/blind-text-collection.pdf'">
-    @if (!hidden) {
-      <ngx-extended-pdf-viewer [src]="'/assets/pdfs/blind-text-collection.pdf'" [height]="'90vh'" (pageRendered)="afterPageRendered($event)" [theme]="theme">
-      </ngx-extended-pdf-viewer>
-    }
-  </app-demo>
+  @if (linkscomponentTab !== 'autodetected') {
+    <app-demo [src]="'/assets/pdfs/blind-text-collection.pdf'">
+      @if (!hidden) {
+        <ngx-extended-pdf-viewer
+          [src]="'/assets/pdfs/blind-text-collection.pdf'"
+          [height]="'90vh'"
+          (annotationLayerRendered)="afterAnnotationLayerRendered($event)"
+          (linkAnnotationsAdded)="afterLinkAnnotationsAdded($event)"
+          [theme]="theme"
+        >
+        </ngx-extended-pdf-viewer>
+      }
+    </app-demo>
+  }
+  @if (linkscomponentTab === 'autodetected') {
+    <app-demo [src]="'/assets/pdfs/auto-detected-links.pdf'">
+      @if (!hidden) {
+        <ngx-extended-pdf-viewer
+          [src]="'/assets/pdfs/auto-detected-links.pdf'"
+          [height]="'90vh'"
+          [textLayer]="true"
+          (annotationLayerRendered)="onAutoDetectedAnnotationLayerRendered($event)"
+          (linkAnnotationsAdded)="onAutoDetectedLinkAnnotationsAdded($event)"
+          [theme]="theme"
+        >
+        </ngx-extended-pdf-viewer>
+      }
+    </app-demo>
+  }
 </div>
