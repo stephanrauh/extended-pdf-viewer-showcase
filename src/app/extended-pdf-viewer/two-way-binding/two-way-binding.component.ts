@@ -37,7 +37,6 @@ export class TwoWayBindingComponent {
    private pdfService = inject(NgxExtendedPdfViewerService);
    fullscreenService = inject(FullscreenService);
 
-   public _selectedTab = 0;
    public codeTab: string = 'html';
 
   public handTool = true;
@@ -73,7 +72,10 @@ export class TwoWayBindingComponent {
 
   }
 
+  private _selectedTab = 0;
+
   public set selectedTab(index: number) {
+    this._selectedTab = index;
     try {
       if (localStorage) {
         localStorage.setItem('ngx-extended-pdf-viewer.simple.selectedTab', String(index));
@@ -81,17 +83,20 @@ export class TwoWayBindingComponent {
     } catch /* safariSecurityException */ {
       // localStorage is not available on Safari
     }
+    this.cdr.markForCheck();
   }
 
   public get selectedTab(): number {
+    return this._selectedTab;
+  }
+
+  constructor() {
     try {
       if (localStorage) {
-        return Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
+        this._selectedTab = Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
       }
-      return 0;
-    } catch /* (safariSecurityException) */ {
+    } catch /* safariSecurityException */ {
       // localStorage is not available on Safari
-      return 0;
     }
   }
 

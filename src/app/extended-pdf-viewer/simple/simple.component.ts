@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, OnDestroy, inject } from '@angular/core';
 import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, PdfLoadedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -27,8 +27,7 @@ export class SimpleComponent implements OnDestroy {
   logService = inject(LogService);
   fullscreenService = inject(FullscreenService);
   private themeService = inject(ThemeService);
-
-  public _selectedTab = 0;
+  private cdr = inject(ChangeDetectorRef);
 
   public page = 5;
 
@@ -126,7 +125,10 @@ export class SimpleComponent implements OnDestroy {
     return false;
   }
 
+  private _selectedTab = 0;
+
   public set selectedTab(index: number) {
+    this._selectedTab = index;
     try {
       if (localStorage) {
         localStorage.setItem('ngx-extended-pdf-viewer.simple.selectedTab', String(index));
@@ -134,17 +136,11 @@ export class SimpleComponent implements OnDestroy {
     } catch /* (safariSecurityException) */ {
       // localStorage is not available on Safari
     }
+    this.cdr.markForCheck();
   }
 
   public get selectedTab(): number {
-    try {
-      if (localStorage) {
-        return Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
-      }
-    } catch /* (safariSecurityException) */ {
-      // localStorage is not available on Safari
-    }
-    return 0;
+    return this._selectedTab;
   }
 
   public set theme(theme: string) {
@@ -160,6 +156,13 @@ export class SimpleComponent implements OnDestroy {
   }
 
   constructor() {
+    try {
+      if (localStorage) {
+        this._selectedTab = Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
+      }
+    } catch /* (safariSecurityException) */ {
+      // localStorage is not available on Safari
+    }
     const notificationService = inject(PDFNotificationService);
 
     this.startTime = new Date().getTime();
