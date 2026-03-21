@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { Component, inject, viewChild } from '@angular/core';
+import { NgxExtendedPdfViewerComponent, NgxExtendedPdfViewerService, ResponsiveVisibility, PdfBreakpoints, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { ThemeService } from '../../services/theme.service';
@@ -25,6 +25,7 @@ import { LanguagePipe } from 'ngx-markdown';
     ]
 })
 export class ResponsiveDesignComponent {
+  private pdfViewer = viewChild<NgxExtendedPdfViewerComponent>('pdfViewer');
   private pdfService = inject(NgxExtendedPdfViewerService);
   private themeService = inject(ThemeService);
   
@@ -74,6 +75,7 @@ export class ResponsiveDesignComponent {
 
   public set xs(value: number) {
     PdfBreakpoints.xs = value;
+    this.triggerToolbarUpdate();
   }
 
   public get sm() {
@@ -82,6 +84,7 @@ export class ResponsiveDesignComponent {
 
   public set sm(value: number) {
     PdfBreakpoints.sm = value;
+    this.triggerToolbarUpdate();
   }
 
   public get md() {
@@ -90,8 +93,8 @@ export class ResponsiveDesignComponent {
 
   public set md(value: number) {
     PdfBreakpoints.md = value;
+    this.triggerToolbarUpdate();
   }
-
 
   public get lg() {
     return PdfBreakpoints.lg;
@@ -99,8 +102,8 @@ export class ResponsiveDesignComponent {
 
   public set lg(value: number) {
     PdfBreakpoints.lg = value;
+    this.triggerToolbarUpdate();
   }
-
 
   public get xl() {
     return PdfBreakpoints.xl;
@@ -108,6 +111,7 @@ export class ResponsiveDesignComponent {
 
   public set xl(value: number) {
     PdfBreakpoints.xl = value;
+    this.triggerToolbarUpdate();
   }
 
   public get xxl() {
@@ -116,6 +120,11 @@ export class ResponsiveDesignComponent {
 
   public set xxl(value: number) {
     PdfBreakpoints.xxl = value;
+    this.triggerToolbarUpdate();
+  }
+
+  private triggerToolbarUpdate(): void {
+    this.pdfViewer()?.onResize();
   }
 
   public settingsWidth = "60%";

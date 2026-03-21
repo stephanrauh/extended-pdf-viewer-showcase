@@ -96,10 +96,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showSidebarButton"
+                    [(ngModel)]="showSidebarButton"
                   >
                     @for (option of traditionalOptions; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -108,10 +108,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showFindButton"
+                    [(ngModel)]="showFindButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -120,10 +120,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showPagingButtons"
+                    [(ngModel)]="showPagingButtons"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -132,10 +132,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showZoomButtons"
+                    [(ngModel)]="showZoomButtons"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -144,10 +144,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showDrawEditor"
+                    [(ngModel)]="showDrawEditor"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -156,10 +156,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showTextEditor"
+                    [(ngModel)]="showTextEditor"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -168,10 +168,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showPresentationModeButton"
+                    [(ngModel)]="showPresentationModeButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -180,10 +180,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showOpenFileButton"
+                    [(ngModel)]="showOpenFileButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -192,10 +192,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showPrintButton"
+                    [(ngModel)]="showPrintButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -204,10 +204,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showDownloadButton"
+                    [(ngModel)]="showDownloadButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -216,10 +216,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showRotateButton"
+                    [(ngModel)]="showRotateButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -228,10 +228,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showHandToolButton"
+                    [(ngModel)]="showHandToolButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -240,10 +240,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showScrollingButtons"
+                    [(ngModel)]="showScrollingButtons"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -252,10 +252,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showSpreadButton"
+                    [(ngModel)]="showSpreadButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -264,10 +264,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showPropertiesButton"
+                    [(ngModel)]="showPropertiesButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -353,10 +353,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showSidebarButton"
+                    [(ngModel)]="showSidebarButton"
                   >
                     @for (option of traditionalOptions; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -365,10 +365,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showFindButton"
+                    [(ngModel)]="showFindButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -377,10 +377,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showPagingButtons"
+                    [(ngModel)]="showPagingButtons"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -389,10 +389,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showZoomButtons"
+                    [(ngModel)]="showZoomButtons"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -401,10 +401,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showDrawEditor"
+                    [(ngModel)]="showDrawEditor"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -413,10 +413,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showTextEditor"
+                    [(ngModel)]="showTextEditor"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -425,10 +425,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showPresentationModeButton"
+                    [(ngModel)]="showPresentationModeButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -437,10 +437,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showOpenFileButton"
+                    [(ngModel)]="showOpenFileButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -449,10 +449,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showPrintButton"
+                    [(ngModel)]="showPrintButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -461,10 +461,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showDownloadButton"
+                    [(ngModel)]="showDownloadButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -473,10 +473,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showRotateButton"
+                    [(ngModel)]="showRotateButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -485,10 +485,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showHandToolButton"
+                    [(ngModel)]="showHandToolButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -497,10 +497,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showScrollingButtons"
+                    [(ngModel)]="showScrollingButtons"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -509,10 +509,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showSpreadButton"
+                    [(ngModel)]="showSpreadButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -521,10 +521,10 @@
                   <select
                     class="w-full max-w-[200px] px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                     [disabled]="!showToolbar"
-                    [(value)]="showPropertiesButton"
+                    [(ngModel)]="showPropertiesButton"
                   >
                     @for (option of options; track option) {
-                      <option [value]="option">{{ withExplanation(option) }}</option>
+                      <option [ngValue]="option">{{ withExplanation(option) }}</option>
                     }
                   </select>
                 </div>
@@ -609,7 +609,7 @@
   }
 
   <app-demo [src]="'/assets/pdfs/user-experience.pdf'">
-    <ngx-extended-pdf-viewer
+    <ngx-extended-pdf-viewer #pdfViewer
       [src]="'/assets/pdfs/user-experience.pdf'"
       [height]="'auto'"
       [showToolbar]="showToolbar"
