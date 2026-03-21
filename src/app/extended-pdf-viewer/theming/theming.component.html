@@ -24,6 +24,15 @@
               (click)="themingcomponentTab = 'darktheme'; selectedTab = 2">
               Dark theme
             </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="themingcomponentTab === 'pdfbackground'"
+              [class.border-primary-600]="themingcomponentTab === 'pdfbackground'"
+              [class.text-gray-500]="themingcomponentTab !== 'pdfbackground'"
+              [class.border-transparent]="themingcomponentTab !== 'pdfbackground'"
+              (click)="themingcomponentTab = 'pdfbackground'; selectedTab = 3">
+              PDF background color
+            </button>
           </div>
           </div>
 
@@ -46,6 +55,27 @@
               it fit nicely with the demo, but the checkboxes are invisible because they still use the default
               color theme. For the same reason, the input fields have a light background. Theming only changes
               the appearance of the PDF viewer. It does not change the way PDF files are rendered.
+            </p>
+          </div>
+          }
+          @if (themingcomponentTab === 'pdfbackground') {
+          <div class="tab-content">
+            <p>
+              <code>[pdfBackgroundColor]</code> changes the background color of the PDF pages themselves (the canvas).
+              Unlike <code>[backgroundColor]</code>, which only affects the area around the pages, this modifies
+              how each page is rendered. Since version 26.0.0, it updates reactively at runtime.
+            </p>
+            <p class="mt-2">
+              Pick a color to see the effect:
+            </p>
+            <div class="flex items-center space-x-3 mt-2">
+              <input type="color" [value]="pdfBackgroundColor" (input)="pdfBackgroundColor = $any($event.target).value" class="w-10 h-10 border border-gray-300 rounded cursor-pointer" />
+              <code>{{ pdfBackgroundColor }}</code>
+              <button class="px-2 py-1 text-xs bg-gray-200 rounded hover:bg-gray-300" (click)="pdfBackgroundColor = ''">Reset</button>
+            </div>
+            <p class="mt-2">
+              <b>Note:</b> this only works with PDF files that have a transparent background. Most PDF files define their own
+              opaque background, which covers the <code>pdfBackgroundColor</code>.
             </p>
           </div>
           }
@@ -78,14 +108,24 @@
           </div>
 
           <!-- Tab content -->
-          @if (codeTab === 'htmltemplate') {
+          @if (codeTab === 'htmltemplate' && themingcomponentTab !== 'pdfbackground') {
           <div class="tab-content">
 <app-ie11-markdown src="/assets/extended-pdf-viewer/theming/html.md"> </app-ie11-markdown>
           </div>
           }
-          @if (codeTab === 'typescript') {
+          @if (codeTab === 'typescript' && themingcomponentTab !== 'pdfbackground') {
           <div class="tab-content">
 <app-ie11-markdown src="/assets/extended-pdf-viewer/theming/ts.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'htmltemplate' && themingcomponentTab === 'pdfbackground') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/theming/html-pdfbackground.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'typescript' && themingcomponentTab === 'pdfbackground') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/theming/ts-pdfbackground.md"> </app-ie11-markdown>
           </div>
           }
         </div>
@@ -95,7 +135,8 @@
 
   <app-demo [src]="src">
     <ngx-extended-pdf-viewer [src]="src" [theme]="theme"
-      [backgroundColor]="backgroundColor" >
+      [backgroundColor]="backgroundColor"
+      [pdfBackgroundColor]="pdfBackgroundColor">
     </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

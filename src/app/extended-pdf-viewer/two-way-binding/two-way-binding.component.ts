@@ -78,7 +78,7 @@ export class TwoWayBindingComponent {
     this._selectedTab = index;
     try {
       if (localStorage) {
-        localStorage.setItem('ngx-extended-pdf-viewer.simple.selectedTab', String(index));
+        localStorage.setItem('ngx-extended-pdf-viewer.two-way-binding.selectedTab', String(index));
       }
     } catch /* safariSecurityException */ {
       // localStorage is not available on Safari
@@ -93,7 +93,11 @@ export class TwoWayBindingComponent {
   constructor() {
     try {
       if (localStorage) {
-        this._selectedTab = Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
+        const stored = Number(localStorage.getItem('ngx-extended-pdf-viewer.two-way-binding.selectedTab'));
+        // Only restore if it's a valid tab index (0, 1, or 2)
+        if (stored >= 0 && stored <= 2) {
+          this._selectedTab = stored;
+        }
       }
     } catch /* safariSecurityException */ {
       // localStorage is not available on Safari

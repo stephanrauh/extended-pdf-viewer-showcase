@@ -4,11 +4,12 @@ import { ThemeService } from '../../services/theme.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { FormsModule } from '@angular/forms';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'app-forms',
-    
+
     standalone: true,
     templateUrl: './theming.component.html',
     styleUrls: ['./theming.component.css'],
@@ -18,6 +19,7 @@ import { AsyncPipe } from '@angular/common';
         DemoComponent,
         NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
+        FormsModule,
     ],
 })
 export class ThemingComponent {
@@ -29,6 +31,7 @@ export class ThemingComponent {
     return this.themeService.theme();
   }
   public backgroundColor = 'lightgrey';
+  public pdfBackgroundColor = '';
   public src = '/assets/pdfs/OoPdfFormExample.pdf';
   public themingcomponentTab: string = 'lighttheme';
   public codeTab: string = 'htmltemplate';
@@ -42,12 +45,20 @@ export class ThemingComponent {
     if (tab === 1) {
       this.themeService.setTheme('light');
       this.backgroundColor = 'lightgrey';
+      this.pdfBackgroundColor = '';
       this.src = '/assets/pdfs/OoPdfFormExample.pdf';
     }
     if (tab === 2) {
       this.themeService.setTheme('dark');
       this.backgroundColor = 'black';
+      this.pdfBackgroundColor = '';
       this.src = '/assets/pdfs/OoPdfFormExample-dark.pdf';
+    }
+    if (tab === 3) {
+      this.themeService.setTheme('light');
+      this.backgroundColor = 'lightgrey';
+      this.pdfBackgroundColor = '#00D000';
+      this.src = '/assets/pdfs/OoPdfFormExample.pdf';
     }
   }
 
