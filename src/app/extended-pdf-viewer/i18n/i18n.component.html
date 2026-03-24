@@ -28,6 +28,16 @@
               >
                 custom translations
               </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="i18ncomponentTab === 'readingdirection'"
+                [class.border-primary-600]="i18ncomponentTab === 'readingdirection'"
+                [class.text-gray-500]="i18ncomponentTab !== 'readingdirection'"
+                [class.border-transparent]="i18ncomponentTab !== 'readingdirection'"
+                (click)="i18ncomponentTab = 'readingdirection'"
+              >
+                reading direction
+              </button>
             </div>
           </div>
 
@@ -76,6 +86,52 @@
               <p>
                 <b>Caveat:</b> Every once in a while, the team at Mozilla or - less frequently - I add a translation. When you modify the default translation,
                 please check the new changes with each major version of pdf.js.
+              </p>
+            </div>
+          }
+          @if (i18ncomponentTab === 'readingdirection') {
+            <div class="tab-content">
+              <p>
+                The <code>[readingDirection]</code> attribute controls the reading direction independently from the UI language.
+              </p>
+              <ul class="list-disc list-inside space-y-1 text-sm mb-3">
+                <li><code>'auto'</code> (default): inherits the direction from the UI language. If the UI is set to Arabic or Hebrew, pages automatically display right-to-left. In most cases, this is all you need.</li>
+                <li><code>'ltr'</code>: forces left-to-right page ordering, even with an RTL UI language.</li>
+                <li><code>'rtl'</code>: forces right-to-left page ordering when the UI language is LTR (e.g., English). Use this when displaying Arabic, Hebrew, or Farsi documents in an English UI. Also useful for certain Japanese books that read right-to-left.</li>
+              </ul>
+              <p>
+                In RTL mode:
+              </p>
+              <ul class="list-disc list-inside space-y-1 text-sm mb-3">
+                <li>Spread pages are displayed right-to-left (right page first)</li>
+                <li>Arrow key navigation is reversed (left arrow = next page, right arrow = previous page)</li>
+                <li>Horizontal and wrapped scroll modes display pages right-to-left</li>
+              </ul>
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">readingDirection</label>
+                <select
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  [(ngModel)]="readingDirection"
+                >
+                  <option value="auto">auto (inherit from UI language)</option>
+                  <option value="ltr">ltr (left-to-right)</option>
+                  <option value="rtl">rtl (right-to-left)</option>
+                </select>
+              </div>
+              <div class="space-y-2 mt-2">
+                <label class="block text-sm font-medium text-gray-700">spread</label>
+                <select
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  [(ngModel)]="spread"
+                >
+                  <option value="off">off</option>
+                  <option value="odd">odd</option>
+                  <option value="even">even</option>
+                </select>
+              </div>
+              <p class="mt-2 text-sm text-gray-600">
+                Try enabling a spread mode and switching between LTR and RTL to see the page order change.
+                Use the left/right arrow keys to verify that navigation direction is also reversed.
               </p>
             </div>
           }
@@ -156,7 +212,7 @@
   }
 
   <app-demo [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'">
-    @if (selectedTab === 0 && !hidePdfViewer) {
+    @if (i18ncomponentTab === 'usingaspecificlanguage' && !hidePdfViewer) {
       <ngx-extended-pdf-viewer
         [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
         backgroundColor="#ffffff"
@@ -166,12 +222,23 @@
       >
       </ngx-extended-pdf-viewer>
     }
-    @if (selectedTab === 1 && !hidePdfViewer) {
+    @if (i18ncomponentTab === 'customtranslations' && !hidePdfViewer) {
       <ngx-extended-pdf-viewer
         [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
         backgroundColor="#ffffff"
         [textLayer]="true"
         [language]="'fr'"
+        [theme]="theme"
+      >
+      </ngx-extended-pdf-viewer>
+    }
+    @if (i18ncomponentTab === 'readingdirection' && !hidePdfViewer) {
+      <ngx-extended-pdf-viewer
+        [src]="'/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf'"
+        backgroundColor="#ffffff"
+        [textLayer]="true"
+        [readingDirection]="readingDirection"
+        [spread]="spread"
         [theme]="theme"
       >
       </ngx-extended-pdf-viewer>

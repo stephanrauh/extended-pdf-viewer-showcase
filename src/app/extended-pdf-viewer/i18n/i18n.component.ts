@@ -38,6 +38,9 @@ export class I18nComponent {
   public codeTab: string = 'htmltemplate';
   private _language: string | undefined = 'nl-BE';
 
+  public readingDirection: 'ltr' | 'rtl' | 'auto' = 'auto';
+  public spread: 'off' | 'odd' | 'even' = 'odd';
+
   public get selectedTab(): number {
     return this._selectedTab;
   }
