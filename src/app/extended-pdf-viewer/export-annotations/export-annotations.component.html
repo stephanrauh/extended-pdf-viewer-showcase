@@ -70,7 +70,7 @@
                 Add text editor
               </button>
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mb-1 me-1" (click)="addHighlight()">
-                Add highlight (currently broken)
+                Add highlight
               </button>
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow mb-1 me-1" (click)="addDrawing()">
                 Add ink drawing
@@ -99,7 +99,7 @@
                 Add text editor
               </button>
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="addHighlight()">
-                Add highlight (currently broken)
+                Add highlight
               </button>
               <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="addDrawing()">
                 Add ink drawing
@@ -229,6 +229,16 @@ await pdfService.addEditorAnnotation(stored);
               </button>
               <button
                 class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'tshighlight'"
+                [class.border-primary-600]="codeTab === 'tshighlight'"
+                [class.text-gray-500]="codeTab !== 'tshighlight'"
+                [class.border-transparent]="codeTab !== 'tshighlight'"
+                (click)="codeTab = 'tshighlight'"
+              >
+                TS - highlight
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
                 [class.text-primary-600]="codeTab === 'tsdrawing'"
                 [class.border-primary-600]="codeTab === 'tsdrawing'"
                 [class.text-gray-500]="codeTab !== 'tsdrawing'"
@@ -280,6 +290,11 @@ await pdfService.addEditorAnnotation(stored);
           @if (codeTab === 'tstext') {
             <div class="tab-content">
               <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - add text.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (codeTab === 'tshighlight') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/export-annotations/ts - add highlight.md"> </app-ie11-markdown>
             </div>
           }
           @if (codeTab === 'tsdrawing') {

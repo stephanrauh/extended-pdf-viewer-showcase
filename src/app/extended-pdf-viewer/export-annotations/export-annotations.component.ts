@@ -85,47 +85,34 @@ export class ExportAnnotationsComponent {
   }
 
   public async addHighlight(): Promise<void> {
-    // Create a highlight at a random position
-    const x = 200 + Math.random() * 200; // Left edge
-    const y = 400 + Math.random() * 200; // Bottom edge
-    const width = 100 + Math.random() * 100; // Width of highlight
-    const height = 15 + Math.random() * 10; // Height of highlight (text line height)
+    // Create a highlight at a random position (in PDF points)
+    const left = 100 + Math.random() * 200;
+    const bottom = 300 + Math.random() * 300;
+    const width = 100 + Math.random() * 150;
+    const height = 12 + Math.random() * 8;
+    const right = left + width;
+    const top = bottom + height;
 
-    // Calculate coordinates for highlight
-    const left = x;
-    const bottom = y;
-    const right = x + width;
-    const top = y + height;
-
-    // Create quadPoints object with numeric keys (like the export format)
-    const quadPoints: any = {};
-    quadPoints[0] = left;   // x1 - left edge start
-    quadPoints[1] = top;    // y1 - top edge start
-    quadPoints[2] = right;  // x2 - right edge end
-    quadPoints[3] = top;    // y2 - top edge end
-    quadPoints[4] = left;   // x3 - left edge start (bottom)
-    quadPoints[5] = bottom; // y3 - bottom edge start
-    quadPoints[6] = right;  // x4 - right edge end (bottom)
-    quadPoints[7] = bottom; // y4 - bottom edge end
+    // quadPoints in Adobe Acrobat format: tL, tR, bL, bR for each box
+    const quadPoints = [
+      left, top,      // top-left
+      right, top,     // top-right
+      left, bottom,   // bottom-left
+      right, bottom,  // bottom-right
+    ];
 
     const highlightAnnotation: HighlightEditorAnnotation = {
       opacity: 0.5,
       thickness: 10,
       annotationType: 9 as const,
       color: [255, 255, 0], // Yellow highlight
+      quadPoints,
       pageIndex: 0,
-      rect: [left, bottom, right, top], // Bounding box
+      rect: [left, bottom, right, top],
       rotation: 0 as const,
     };
 
-    console.log(highlightAnnotation);
-    console.log('Before adding highlight');
     await this.pdfViewerService.addEditorAnnotation(highlightAnnotation);
-    console.log('After adding highlight');
-    const anno = this.pdfViewerService.getSerializedAnnotations();
-    if (anno) {
-      console.log(anno[anno.length - 1]);
-    }
   }
 
   public async addDrawing(): Promise<void> {
