@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { CommonModule } from '@angular/common';
@@ -14,6 +14,13 @@ import { CommonModule } from '@angular/common';
 export class ModalComponent {
   public activeTab = 'typescript';
   public isModalOpen = false;
+
+  @HostListener('document:keydown.escape')
+  public onEscapeKey() {
+    if (this.isModalOpen) {
+      this.closeDialog();
+    }
+  }
 
   public openDialog() {
     this.isModalOpen = true;

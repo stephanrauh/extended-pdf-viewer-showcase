@@ -4,7 +4,7 @@ import { FullscreenService } from '../../services/fullscreen.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Settings, Angular2SmartTableModule } from 'angular2-smart-table';
+import { Settings, Angular2SmartTableModule, LocalDataSource } from 'angular2-smart-table';
 import { convertMDToTable } from '../attributes/md-to-table-converter';
 import { isBrowser } from '../common/utilities';
 
@@ -30,7 +30,7 @@ export class NgxPdfViewerServiceComponent {
   private httpClient = inject(HttpClient);
   private domElement = inject(ElementRef);
 
-  public attributesAndEvents: object[] = [];
+  public attributesAndEvents = new LocalDataSource();
 
   public attributeTableSettings: Settings = {
     actions: {
@@ -69,8 +69,9 @@ export class NgxPdfViewerServiceComponent {
   }
 
   public async ngOnInit(): Promise<void> {
-    this.attributesAndEvents = await convertMDToTable('/assets/extended-pdf-viewer/ngx-pdf-viewer-service/methods-table.md', this.httpClient);
-    this.cdr.markForCheck();
+    const data = await convertMDToTable('/assets/extended-pdf-viewer/ngx-pdf-viewer-service/methods-table.md', this.httpClient);
+    await this.attributesAndEvents.load(data);
+    this.cdr.detectChanges();
   }
 
   public ngAfterViewInit(): void {
