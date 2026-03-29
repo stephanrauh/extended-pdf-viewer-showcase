@@ -1,0 +1,30 @@
+.margin {
+    margin-left: 8px;
+}
+
+.compact {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.checkbox-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 7px 16px;
+}
+
+.checkbox-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.checkbox-item label {
+    line-height: 1.4;
+    padding: 0;
+}
+
+.source-code-container {
+    max-height: 50vh;
+    overflow-y: auto;
+}

@@ -74,6 +74,7 @@ import { EditorEventsComponent } from './extended-pdf-viewer/editor-events/edito
 import { LoadingIndicatorComponent } from './extended-pdf-viewer/loading-indicator/loading-indicator.component';
 import { ModifyingPageOrderComponent } from './extended-pdf-viewer/modifying-page-order/modifying-page-order.component';
 import { AddingArbitraryAnnotationsComponent } from './extended-pdf-viewer/adding-arbitrary-annotations/adding-arbitrary-annotations.component';
+import { DisableButtonsComponent } from './extended-pdf-viewer/disable-buttons/disable-buttons.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/extended-pdf-viewer/simple', pathMatch: 'full' },
@@ -101,6 +102,7 @@ export const routes: Routes = [
       { path: 'custom-sidebar', component: CustomSidebarComponent },
       { path: 'custom-thumbnails', component: CustomThumbnailsComponent },
       { path: 'custom-find', component: CustomFindComponent },
+      { path: 'disable-buttons', component: DisableButtonsComponent },
       { path: 'display-options', component: DisplayOptionsComponent },
       { path: 'export-file', component: ExportFileComponent },
       { path: 'export-image', component: ExportImageComponent },

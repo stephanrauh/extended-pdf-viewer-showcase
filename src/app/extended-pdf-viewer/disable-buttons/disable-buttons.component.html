@@ -1,0 +1,124 @@
+<div class="flex-container-column fill-container">
+  @if (!(fullscreenService.isFullscreen$ | async)) {
+  <div class="flex-container-row">
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1 flex-1 box-border max-w-[60%]">
+      <div class="w-full">
+        <h3 class="text-base font-semibold mb-1">Disable toolbar buttons (#2818)</h3>
+        <p class="text-xs text-gray-700 mb-2">
+          Disabling keeps buttons visible but grayed out, indicating a feature exists but is temporarily unavailable.
+        </p>
+
+        <div class="checkbox-columns">
+          <div class="checkbox-item">
+            <span class="text-xs font-semibold text-gray-500 uppercase">Editors</span>
+            <label class="flex items-center space-x-1 text-xs font-medium"><input type="checkbox" class="margin compact" [(ngModel)]="disableEditorButtons" /><span>All editors</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableTextEditor" /><span>TextEditor</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableDrawEditor" /><span>DrawEditor</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableStampEditor" /><span>StampEditor</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableHighlightEditor" /><span>HighlightEditor</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableCommentEditor" /><span>CommentEditor</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableSignatureEditor" /><span>SignatureEditor</span></label>
+          </div>
+
+          <div class="checkbox-item">
+            <span class="text-xs font-semibold text-gray-500 uppercase">Navigation</span>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableSidebarButton" /><span>SidebarButton</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableFindButton" /><span>FindButton</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disablePagingButtons" /><span>PagingButtons</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableFirstAndLastPageButtons" /><span>First/LastPage</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disablePreviousAndNextPageButtons" /><span>Prev/NextPage</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disablePageNumber" /><span>PageNumber</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableZoomButtons" /><span>ZoomButtons</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableZoomDropdown" /><span>ZoomDropdown</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disablePresentationModeButton" /><span>PresentationMode</span></label>
+          </div>
+
+          <div class="checkbox-item">
+            <span class="text-xs font-semibold text-gray-500 uppercase">Actions</span>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableMovePageButton" /><span>MovePageButton</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableOpenFileButton" /><span>OpenFileButton</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disablePrintButton" /><span>PrintButton</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableDownloadButton" /><span>DownloadButton</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableSecondaryToolbarButton" /><span>SecondaryToolbar</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableRotateCwButton" /><span>RotateCwButton</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableRotateCcwButton" /><span>RotateCcwButton</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableHandToolButton" /><span>HandToolButton</span></label>
+          </div>
+
+          <div class="checkbox-item">
+            <span class="text-xs font-semibold text-gray-500 uppercase">Secondary menu</span>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableSinglePageModeButton" /><span>SinglePageMode</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableVerticalScrollButton" /><span>VerticalScroll</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableHorizontalScrollButton" /><span>HorizontalScroll</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableWrappedScrollButton" /><span>WrappedScroll</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableInfiniteScrollButton" /><span>InfiniteScroll</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableBookModeButton" /><span>BookMode</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableSpreadButton" /><span>SpreadButton</span></label>
+            <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disablePropertiesButton" /><span>PropertiesButton</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1 flex-1 box-border max-w-[38%]">
+      <div class="source-code-container">
+        <app-ie11-markdown [data]="sourcecode | language : 'html'"> </app-ie11-markdown>
+      </div>
+    </div>
+  </div>
+  }
+
+  <app-demo [src]="'/assets/pdfs/user-experience.pdf'">
+    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/user-experience.pdf'"
+      [height]="'auto'"
+      [textLayer]="true"
+      [showHandToolButton]="true"
+      [showMovePageButton]="true"
+      [showPresentationModeButton]="true"
+      [showScrollingButtons]="true"
+      [showSpreadButton]="true"
+      [showPropertiesButton]="true"
+      [showRotateCwButton]="true"
+      [showRotateCcwButton]="true"
+      [showDownloadButton]="true"
+      [showTextEditor]="true"
+      [showDrawEditor]="true"
+      [showStampEditor]="true"
+      [showHighlightEditor]="true"
+      [showCommentEditor]="true"
+      [showSignatureEditor]="true"
+      [disableEditorButtons]="disableEditorButtons"
+      [disableTextEditor]="disableTextEditor"
+      [disableDrawEditor]="disableDrawEditor"
+      [disableStampEditor]="disableStampEditor"
+      [disableHighlightEditor]="disableHighlightEditor"
+      [disableCommentEditor]="disableCommentEditor"
+      [disableSignatureEditor]="disableSignatureEditor"
+      [disableSidebarButton]="disableSidebarButton"
+      [disableFindButton]="disableFindButton"
+      [disableMovePageButton]="disableMovePageButton"
+      [disablePagingButtons]="disablePagingButtons"
+      [disableFirstAndLastPageButtons]="disableFirstAndLastPageButtons"
+      [disablePreviousAndNextPageButtons]="disablePreviousAndNextPageButtons"
+      [disablePageNumber]="disablePageNumber"
+      [disableZoomButtons]="disableZoomButtons"
+      [disableZoomDropdown]="disableZoomDropdown"
+      [disablePresentationModeButton]="disablePresentationModeButton"
+      [disableOpenFileButton]="disableOpenFileButton"
+      [disablePrintButton]="disablePrintButton"
+      [disableDownloadButton]="disableDownloadButton"
+      [disableSecondaryToolbarButton]="disableSecondaryToolbarButton"
+      [disableRotateCwButton]="disableRotateCwButton"
+      [disableRotateCcwButton]="disableRotateCcwButton"
+      [disableHandToolButton]="disableHandToolButton"
+      [disableSpreadButton]="disableSpreadButton"
+      [disablePropertiesButton]="disablePropertiesButton"
+      [disableSinglePageModeButton]="disableSinglePageModeButton"
+      [disableVerticalScrollButton]="disableVerticalScrollButton"
+      [disableHorizontalScrollButton]="disableHorizontalScrollButton"
+      [disableWrappedScrollButton]="disableWrappedScrollButton"
+      [disableInfiniteScrollButton]="disableInfiniteScrollButton"
+      [disableBookModeButton]="disableBookModeButton"
+      [theme]="theme">
+    </ngx-extended-pdf-viewer>
+  </app-demo>
+</div>
