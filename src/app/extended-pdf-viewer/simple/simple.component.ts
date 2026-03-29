@@ -225,7 +225,7 @@ export class SimpleComponent implements OnDestroy {
       this.time = endTime - this.startTime;
     }
     this.currentTime = endTime - this.currentStartTime;
-    console.log('Rendered', new Date().getTime() - this.currentStartTime, 'ms');
+    console.log('Rendered page ' + event.pageNumber + " " + (new Date().getTime() - this.currentStartTime) + 'ms (cumulated)');
   }
   public ngOnDestroy() {
     pdfDefaultOptions.rangeChunkSize = 64 * 1024; // restore the default value
