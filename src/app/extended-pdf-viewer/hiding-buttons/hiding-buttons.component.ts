@@ -42,6 +42,7 @@ export class HidingButtonsComponent {
   public showTextEditor = false;
   public showMovePageButton = false;
   public showSignatureEditor = false;
+  public showCommentEditor = false;
   public showStampEditor = false;
   public showPagingButtons = false;
   public showZoomButtons = false;
@@ -104,6 +105,7 @@ export class HidingButtonsComponent {
   [showSignatureEditor]="${this.showSignatureEditor}"
   [showHighlightEditor]="${this.showHighlightEditor}"
   [showDrawEditor]="${this.showDrawEditor}"
+  [showCommentEditor]="${this.showCommentEditor}"
   [showStampEditor]="${this.showStampEditor}"
   [showTextEditor]="${this.showTextEditor}"
   [showZoomButtons]="${this.showZoomButtons}"

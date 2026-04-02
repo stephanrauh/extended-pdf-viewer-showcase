@@ -153,6 +153,11 @@
       </label>
               <label class="flex items-center space-x-1 text-sm">
         <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
+                [(ngModel)]="showCommentEditor" />
+        <span>showCommentEditor</span>
+      </label>
+              <label class="flex items-center space-x-1 text-sm">
+        <input type="checkbox" class="form-checkbox text-primary-600 margin compact" [disabled]="!showToolbar"
                 [(ngModel)]="showRotateButton" />
         <span>showRotateButton</span>
       </label>
@@ -238,6 +243,7 @@
     <ngx-extended-pdf-viewer [filenameForDownload]="downloadFileName" [src]="'/assets/pdfs/user-experience.pdf'"
       [height]="'auto'" [showToolbar]="showToolbar" [showSidebarButton]="showSidebarButton"
       [showFindButton]="showFindButton" [showDrawEditor]="showDrawEditor" [showSignatureEditor]="showSignatureEditor"
+      [showCommentEditor]="showCommentEditor"
       [showStampEditor]="showStampEditor" [showHighlightEditor]="showHighlightEditor" [showTextEditor]="showTextEditor"
       [textLayer]="true" [showMovePageButton]="showMovePageButton" [showPagingButtons]="showPagingButtons"
       [showZoomButtons]="showZoomButtons" [showPresentationModeButton]="showPresentationModeButton"
