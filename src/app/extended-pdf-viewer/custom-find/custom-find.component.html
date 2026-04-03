@@ -56,11 +56,11 @@
             <p>
               Demonstration of customizing the find functionality.
               This works by overriding the default find functionality of the pdf.js viewer, adding support for regex
-              search in this example."
+              search in this example.
               A more complete implementation would provide a custom find bar.
             </p>
             <p>
-              <b>Note:</b> This is a simple demo does not protect against invalid regex. Also note that the case is
+              <b>Note:</b> This simple demo does not protect against invalid regex. Also note that the case is
               (deliberately) ignored by the demo. So <code>(?<=\s)([A-i]+ough)</code> doesn't work as you might expect.
               Instead, use <code>(?<=\s)([a-i]+ough)</code>.
             </p>
@@ -167,7 +167,7 @@
       <app-fullscreen-button class="flex-shrink-0 ml-4"></app-fullscreen-button>
     </div>
     <ngx-extended-pdf-viewer src="/assets/pdfs/Portugues-para-principiantes-1538054164.pdf" [textLayer]="true"
-      [showFindButton]="false" (updateFindMatchesCount)="onUpdateFindMatchesCount($event)" (pdfLoaded)="pdfLoaded()"
+      (updateFindMatchesCount)="onUpdateFindMatchesCount($event)" (pdfLoaded)="pdfLoaded()"
       [showFindButton]="currentTab===0"
       [theme]="theme">
     </ngx-extended-pdf-viewer>

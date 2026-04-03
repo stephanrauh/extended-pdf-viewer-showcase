@@ -46,8 +46,7 @@
             <div class="tab-content">
               <p><b>Using this feature is dangerous!</b></p>
               <p>
-                PDF files can contains a digital signature, optionally backed by a cryptographic verification. Such a signature confirms that the PDF that it's
-                been created by the author (and not someone else).
+                PDF files can contains a digital signature, optionally backed by a cryptographic verification. Such a signature confirms that the PDF has been created by the author (and not someone else).
               </p>
               <p>
                 However, ngx-extended-pdf-viewer <b>does not verify the validity</b> of the signature. One of the test files has an invalid signature. The
@@ -77,7 +76,7 @@
           @if (signaturescomponentTab === 'unverifiedsignaturesandsecurityconsiderations') {
             <div class="tab-content">
               <p>
-                The base library, pdf.js, has only recently activated support for signatures. The team had a long-standing policy not to support signature
+                The base library, pdf.js, has only recently activated support for signatures. The team had a long-standing policy not to support signatures
                 because it's difficult to verify signatures.
               </p>
               <p>

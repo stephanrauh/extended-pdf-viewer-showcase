@@ -113,7 +113,7 @@ export class HidingButtonsComponent {
   [showOpenFileButton]="${this.showOpenFileButton}"
   [showPrintButton]="${this.showPrintButton}"
   [showDownloadButton]="${this.showDownloadButton}"
-  [show=SecondaryToolbarButton]="${this.showSecondaryToolbarButton}"
+  [showSecondaryToolbarButton]="${this.showSecondaryToolbarButton}"
   [showMovePageButton]="${this.showMovePageButton}"
   [showRotateButton]="${this.showRotateButton}"
   [showRotateCwButton]="${this.showRotateCwButton}"

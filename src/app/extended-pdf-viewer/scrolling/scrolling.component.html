@@ -53,7 +53,7 @@
                   <code>scrollPageIntoView(42, {{ '{' }}left: '100%' &#125;)</code> scrolls to the right hand side of the page.
                 </li>
               </ul>
-              <p>Note that numerical values refer to pixels, so which part of the page become visible depends on the zoom level. Better use percentages.</p>
+              <p>Note that numerical values refer to pixels, so which part of the page becomes visible depends on the zoom level. Better use percentages.</p>
               <div class="grid grid-cols-2 gap-3 mt-4">
                 <button
                   class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
@@ -85,7 +85,7 @@
           @if (scrollingcomponentTab === 'cornercases') {
             <div class="tab-content">
               <p>
-                The <code>left</code> parameter can be confusing, especially if your PDF document features bot landscape and portrait pages. In theory, the
+                The <code>left</code> parameter can be confusing, especially if your PDF document features both landscape and portrait pages. In theory, the
                 <code>left</code> parameters causes the page to scroll to the left by a given percentage. However, that's not always possible because the
                 horizontal scrollbar doesn't allow for arbitrary scrolling. In particular, 100% would indicate the page scrolls out of the visible area, but the
                 scrollbar doesn't allow that. You can see this in the demo by setting the zoom level to different settings and by clicking the

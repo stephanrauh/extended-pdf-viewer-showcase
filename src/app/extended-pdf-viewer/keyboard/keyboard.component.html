@@ -132,7 +132,7 @@
                 <td>reset zoom</td>
               </tr>
               <tr>
-                <td title="alternative keys: RIGHT, PAGE UP">UP</td>
+                <td title="alternative keys: LEFT, PAGE UP">UP</td>
                 <td><label class="flex items-center space-x-2">
         <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="acceptUp" />
         <span></span>
@@ -141,10 +141,10 @@
         <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="ignoreUp" />
         <span></span>
       </label></td>
-                <td>next page (only if zoom = "page fit")</td>
+                <td>previous page (only if zoom = "page fit")</td>
               </tr>
               <tr>
-                <td title="alternative keys: LEFT, PAGE DOWN">DOWN</td>
+                <td title="alternative keys: RIGHT, PAGE DOWN">DOWN</td>
                 <td><label class="flex items-center space-x-2">
         <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="acceptDown" />
         <span></span>
@@ -153,7 +153,7 @@
         <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="ignoreDown" />
         <span></span>
       </label></td>
-                <td>previous page (only if zoom = "page fit")</td>
+                <td>next page (only if zoom = "page fit")</td>
               </tr>
               <tr>
                 <td>CTRL+UP</td>
@@ -237,7 +237,7 @@
         <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="ignoreHome" />
         <span></span>
       </label></td>
-                <td>next page</td>
+                <td>first page</td>
               </tr>
               <tr>
                 <td>END</td>
@@ -249,7 +249,7 @@
         <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="ignoreEnd" />
         <span></span>
       </label></td>
-                <td>next page</td>
+                <td>last page</td>
               </tr>
               <tr>
                 <td>S</td>
@@ -285,7 +285,7 @@
         <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="ignoreH" />
         <span></span>
       </label></td>
-                <td>"hand" mode"</td>
+                <td>"hand" mode</td>
               </tr>
               <tr>
                 <td>R</td>

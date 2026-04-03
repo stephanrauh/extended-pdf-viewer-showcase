@@ -8,5 +8,5 @@ So please clone this repository first:
 ```batch
 git clone https://github.com/stephanrauh/extended-pdf-viewer-showcase.git
 npm install
-ng serve --open
+npm start
 ```

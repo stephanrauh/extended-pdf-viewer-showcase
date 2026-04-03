@@ -161,7 +161,7 @@ export class ExportAnnotationsComponent {
   }
 
   public removeDrawingEditors(): void {
-    const filter = (serial: any) => serial?.annotationType === 15;
+    const filter = (serial: any) => serial?.annotationType === 15 && serial?.pageIndex === 0;
     this.pdfViewerService.removeEditorAnnotations(filter);
   }
 

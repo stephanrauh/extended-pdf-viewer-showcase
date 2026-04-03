@@ -53,7 +53,7 @@
               <p>
                 Before version 16.2, ngx-extended-pdf-viewer used a special module to support server-side rendering. If you're still using it, update to
                 ngx-extended-pdf-viewer 17+ and abandon
-                <code>NgxExtededPdfViewerServerModule</code> in favor of the new, unified approach.
+                <code>NgxExtendedPdfViewerServerModule</code> in favor of the new, unified approach.
               </p>
             </div>
           }
@@ -80,7 +80,7 @@
           </div>
 
           <!-- Tab content -->
-          @if (codeTab === 'htmltemplate') {
+          @if (serversiderenderingcomponentTab === 'htmltemplate') {
             <div class="tab-content">
               <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/server-side-rendering/html.md"> </app-ie11-markdown>
             </div>

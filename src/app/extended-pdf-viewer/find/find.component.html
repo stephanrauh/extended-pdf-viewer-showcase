@@ -120,7 +120,7 @@
                 </section>
                 <section class="section compact">
                   <label class="flex items-center space-x-2">
-                    <input type="checkbox" class="form-checkbox text-primary-600 mrgin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()" />
+                    <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="dontScrollIntoView" (change)="onCheckboxClicked()" />
                     <span>don't scroll the find result into view</span>
                   </label>
                 </section>
@@ -311,7 +311,7 @@
                         type="checkbox"
                         class="form-checkbox text-primary-600 margin"
                         [(ngModel)]="multiple2"
-                        (change)="onCheckboxClicked()"
+                        (change)="onCheckboxClicked2()"
                         [disabled]="matchRegExp2"
                       />
                       <span>multiple words (separated by space)</span>
@@ -319,13 +319,13 @@
                   </section>
                   <section class="section compact">
                     <label class="flex items-center space-x-2">
-                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp2" (change)="onCheckboxClicked()" />
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="matchRegExp2" (change)="onCheckboxClicked2()" />
                       <span style="line-height: 12px">match regular expression <small style="margin-left: 1em">try nasalized|nasalization</small></span>
                     </label>
                   </section>
                   <section class="section compact">
                     <label class="flex items-center space-x-2">
-                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="dontScrollIntoView2" (change)="onCheckboxClicked()" />
+                      <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="dontScrollIntoView2" (change)="onCheckboxClicked2()" />
                       <span>don't scroll the find result into view</span>
                     </label>
                   </section>
@@ -349,7 +349,7 @@
               <ul>
                 <li>
                   <code>matches</code> is an array of arrays of numbers. The first dimension is the page index. If there's a find result on a page, the inner
-                  array is a list of find positions. Basically, such a position the number of characters before the hit.
+                  array is a list of find positions. Basically, such a position is the number of characters before the hit.
                 </li>
                 <li><code>matchesLength</code> is a similar array of arrays of numbers. In a nutshell, it tells you how long your search term is.</li>
               </ul>
@@ -415,8 +415,8 @@
           @if (codeTab === 'htmltemplate') {
             <div class="tab-content">
               <app-ie11-markdown src="/assets/extended-pdf-viewer/find/html.md"> </app-ie11-markdown>
-              <section>CSS class of the search results: <code>hightlight</code>.</section>
-              <section>CSS class of the search results: <code>customHightlight</code>.</section>
+              <section>CSS class of the search results: <code>highlight</code>.</section>
+              <section>CSS class of the search results: <code>customHighlight</code>.</section>
               <section>
                 <div style="flex: auto">
                   @if (findState !== undefined) {

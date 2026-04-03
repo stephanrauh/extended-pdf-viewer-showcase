@@ -4,7 +4,7 @@ Install the library with `npm install`:
 npm i ngx-extended-pdf-viewer --save
 ```
 
-Next, open the file `angular.json` (or `.angular-cli.json` if you're using an older version of Angular) and configure Angular to copy the `assets` folder of the library into the `assets` folder of your application:
+Next, open the file `angular.json` and configure Angular to copy the `assets` folder of the library into the `assets` folder of your application:
 
 ```json
   "assets": [

@@ -166,7 +166,7 @@ import { LinkTarget } from 'ngx-extended-pdf-viewer';
 import { FullscreenService } from '../../services/fullscreen.service';
 ...
 ngOnInit(): void {
-  pdfDefaultOptions.externalLinkTarget = LinkTarget.${this.target};
+  pdfDefaultOptions.externalLinkTarget = LinkTarget.${target};
 }`;
   }
 }

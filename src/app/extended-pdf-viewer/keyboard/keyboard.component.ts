@@ -212,7 +212,7 @@ export class KeyboardComponent {
   }
 
   public set acceptUp(v: boolean) {
-    this.accept('CTRL+UP', v);
+    this.accept('UP', v);
   }
 
   public get acceptUp() {
@@ -496,7 +496,7 @@ export class KeyboardComponent {
   }
 
   public get ignoreAltCtrlG() {
-    return this.ignoreKeys.some((k) => k.toLowerCase() === 'Ctrl+WHEEL'.toLowerCase());
+    return this.ignoreKeys.some((k) => k.toLowerCase() === 'Alt+Ctrl+G'.toLowerCase());
   }
 
   public set acceptCtrlWheel(v: boolean) {

@@ -4,7 +4,7 @@
   <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[45%]">
         <p>You can override the default function <code>globalThis.ngxConsoleFilter(logLevel, message)</code> to filter the log messages.</p>
         <p>
-          This live demo re-defines <code>ngxConsolefilter()</code> to grab the version number from the console messages and to store it in a variable so it can
+          This live demo re-defines <code>ngxConsoleFilter()</code> to grab the version number from the console messages and to store it in a variable so it can
           be shown here:
         </p>
         @if (version) {
@@ -19,13 +19,13 @@
           </p>
         }
         <p>
-          The original use-case of <code>ngxConsolefilter()</code> is suppressing messages you don't want to log. For example, many PDF documents cause the viewer
+          The original use-case of <code>ngxConsoleFilter()</code> is suppressing messages you don't want to log. For example, many PDF documents cause the viewer
           to emit messages like <code>Warning: TT: undefined function: 32</code>. That's one of the messages you can almost always safely ignore, so it doesn't
-          make sense to pump it into, say, an ELK stack or Splunk. If your custom implementation of <code>ngxConsolefilter()</code> returns false depending on the message
+          make sense to pump it into, say, an ELK stack or Splunk. If your custom implementation of <code>ngxConsoleFilter()</code> returns false depending on the message
           text, the message is never logged.
         </p>
         <p>The live demo shows that, too: when you open the console window, you'll see every message with the exception of the version info.</p>
-        <p><b>Breaking change: </b>Before version 17, you have to register the filter function with the<code>Window</code> object instead of <code>globalThis</code>.</p>
+        <p><b>Breaking change: </b>Before version 17, you have to register the filter function with the <code>Window</code> object instead of <code>globalThis</code>.</p>
       </div>
   <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[53%]">
         <div class="w-full">

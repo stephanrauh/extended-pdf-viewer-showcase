@@ -54,7 +54,7 @@
           <!-- Tab content -->
           @if (linkscomponentTab === 'defaultlinktargets') {
             <div class="tab-content">
-              <p>Chose a link target:</p>
+              <p>Choose a link target:</p>
               <div class="space-y-1">
                 <label class="flex items-center space-x-1 text-sm">
                   <input type="radio" class="form-radio text-primary-600" [value]="LinkTarget.BLANK" [(ngModel)]="target" />
@@ -77,7 +77,7 @@
                   <span>[target]="LinkTarget.NONE" (identical to TOP)</span>
                 </label>
               </div>
-              <p>The link target is only considered at render time. So this demo forces a reload when you chose a different option.</p>
+              <p>The link target is only considered at render time. So this demo forces a reload when you choose a different option.</p>
             </div>
           }
           @if (linkscomponentTab === 'description') {
