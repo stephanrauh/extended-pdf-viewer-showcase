@@ -142,7 +142,7 @@ export class LinksComponent {
   }
 
   public get sourcecode(): string {
-    let target: string;
+    let target = 'BLANK';
     switch (this._target) {
       case LinkTarget.BLANK:
         target = 'BLANK';
