@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnDestroy } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
@@ -15,8 +15,9 @@ import { AsyncPipe } from '@angular/common';
   styleUrls: ['./modifying-page-order.component.css'],
   imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
-export class ModifyingPageOrderComponent {
+export class ModifyingPageOrderComponent implements OnDestroy {
   private themeService = inject(ThemeService);
+  private cdr = inject(ChangeDetectorRef);
 
   public get theme(): string {
     return this.themeService.theme();
@@ -24,8 +25,29 @@ export class ModifyingPageOrderComponent {
   fullscreenService = inject(FullscreenService);
 
   public activeTab = 'html';
+  public demoTab: 'reorder' | 'splitMerge' = 'reorder';
+  public showViewer = true;
 
   constructor() {
     pdfDefaultOptions.enablePageReordering = true;
+  }
+
+  public onDemoTabChange(tab: 'reorder' | 'splitMerge'): void {
+    this.demoTab = tab;
+    this.showViewer = false;
+    if (tab === 'splitMerge') {
+      (pdfDefaultOptions as any).enableSplitMerge = true;
+    } else {
+      (pdfDefaultOptions as any).enableSplitMerge = false;
+    }
+    setTimeout(() => {
+      this.showViewer = true;
+      this.cdr.markForCheck();
+    });
+  }
+
+  ngOnDestroy(): void {
+    pdfDefaultOptions.enablePageReordering = false;
+    (pdfDefaultOptions as any).enableSplitMerge = false;
   }
 }

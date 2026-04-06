@@ -30,8 +30,8 @@ export class EditorEventsComponent {
   private changeDetector = inject(ChangeDetectorRef);
 
   private toolbarMap: Record<string, string> = {
-    InkEditor: 'editorInkParamsToolbar',
-    HighlightEditor: 'editorHighlightParamsToolbar',
+    inkEditor: 'editorInkParamsToolbar',
+    highlightEditor: 'editorHighlightParamsToolbar',
   };
 
   public onEvent(type: string, event: any): void {

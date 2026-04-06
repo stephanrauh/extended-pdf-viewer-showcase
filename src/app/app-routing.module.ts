@@ -53,7 +53,6 @@ import { ServerSideRenderingComponent } from './extended-pdf-viewer/server-side-
 import { SideBySideComponent } from './extended-pdf-viewer/side-by-side/side-by-side.component';
 import { SignaturesComponent } from './extended-pdf-viewer/signatures/signatures.component';
 import { SimpleComponent } from './extended-pdf-viewer/simple/simple.component';
-import { SmartphoneComponent } from './extended-pdf-viewer/smartphone/smartphone.component';
 import { TextlayerComponent } from './extended-pdf-viewer/textlayer/textlayer.component';
 import { ThemingComponent } from './extended-pdf-viewer/theming/theming.component';
 import { TouchGesturesComponent } from './extended-pdf-viewer/touch-gestures/touch-gestures.component';
@@ -154,7 +153,6 @@ export const routes: Routes = [
       { path: 'server-side-rendering', component: ServerSideRenderingComponent },
       { path: 'side-by-side', component: SideBySideComponent },
       { path: 'signatures', component: SignaturesComponent },
-      { path: 'smartphone', component: SmartphoneComponent },
       { path: 'textlayer', component: TextlayerComponent },
       { path: 'theming', component: ThemingComponent },
       { path: 'touch-gestures', component: TouchGesturesComponent },

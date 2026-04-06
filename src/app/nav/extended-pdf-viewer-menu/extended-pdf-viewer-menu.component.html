@@ -26,6 +26,9 @@
   <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/attributes'" routerLinkActive="active"
      class="menu-item"
      [class.menu-item-active]="router.isActive('/extended-pdf-viewer/attributes', false)">Attributes and events</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/ngx-pdf-viewer-service'" routerLinkActive="active"
+     class="menu-item"
+     [class.menu-item-active]="router.isActive('/extended-pdf-viewer/ngx-pdf-viewer-service', false)">NgxPdfViewerService API</a>
   <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/css'" routerLinkActive="active"
      class="menu-item"
      [class.menu-item-active]="router.isActive('/extended-pdf-viewer/css', false)">Useful CSS rules</a>
@@ -129,9 +132,6 @@
   <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/editor-setting'" routerLinkActive="active"
      class="menu-item"
      [class.menu-item-active]="router.isActive('/extended-pdf-viewer/editor-setting', false)">Editor API (settings)</a>
-  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/ngx-pdf-viewer-service'" routerLinkActive="active"
-     class="menu-item"
-     [class.menu-item-active]="router.isActive('/extended-pdf-viewer/ngx-pdf-viewer-service', false)">NgxPdfViewerService API</a>
   <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/editor-events'" routerLinkActive="active"
      class="menu-item"
      [class.menu-item-active]="router.isActive('/extended-pdf-viewer/editor-events', false)">EditorEvents</a>
@@ -207,9 +207,6 @@
   <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/page-view-mode'" routerLinkActive="active"
      class="menu-item"
      [class.menu-item-active]="router.isActive('/extended-pdf-viewer/page-view-mode', false)">Single-page mode</a>
-  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/smartphone'" routerLinkActive="active"
-     class="menu-item"
-     [class.menu-item-active]="router.isActive('/extended-pdf-viewer/smartphone', false)">Smartphones</a>
   <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/textlayer'" routerLinkActive="active"
      class="menu-item"
      [class.menu-item-active]="router.isActive('/extended-pdf-viewer/textlayer', false)">Text layer</a>

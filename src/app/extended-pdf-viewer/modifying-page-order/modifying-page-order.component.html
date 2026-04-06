@@ -2,64 +2,99 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row" >
       <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]">
-        <p>Since version 24.2.0, users can modify the page order of the PDF file:
-      </p>
-      <ul>
-        <li>You can swap two pages in the thumbnail view. Just drag and drop a thumbnail up or down.</li>
-        <li>The toolbar offers buttons to move the current page up or down.</li>
-      </ul>
-      <p>By default, drag-and-drop reordering is deactivated. You must enable it with `pdfDefaultOptions.enablePageReordering = true`.</p>
-      <p>The toolbar buttons are also invisible by default. You must enable them with `[movePageButton]="true" (or any other of the
-        `ResponsiveVisibility` attributes).</p>
-  </div>
-  <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
-    <div class="w-full">
-        <!-- Tab buttons -->
-        <div class="overflow-x-auto">
-            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+        <!-- Demo tabs -->
+        <div class="flex space-x-2 border-b border-gray-200 mb-4">
           <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-            [class.text-primary-600]="activeTab === 'html'"
-            [class.border-primary-600]="activeTab === 'html'"
-            [class.text-gray-500]="activeTab !== 'html'"
-            [class.border-transparent]="activeTab !== 'html'"
-            (click)="activeTab = 'html'">
-            HTML template
+            [class.text-primary-600]="demoTab === 'reorder'"
+            [class.border-primary-600]="demoTab === 'reorder'"
+            [class.text-gray-500]="demoTab !== 'reorder'"
+            [class.border-transparent]="demoTab !== 'reorder'"
+            (click)="onDemoTabChange('reorder')">
+            Page Reordering
           </button>
           <button
             class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-            [class.text-primary-600]="activeTab === 'typescript'"
-            [class.border-primary-600]="activeTab === 'typescript'"
-            [class.text-gray-500]="activeTab !== 'typescript'"
-            [class.border-transparent]="activeTab !== 'typescript'"
-            (click)="activeTab = 'typescript'">
-            TypeScript
+            [class.text-primary-600]="demoTab === 'splitMerge'"
+            [class.border-primary-600]="demoTab === 'splitMerge'"
+            [class.text-gray-500]="demoTab !== 'splitMerge'"
+            [class.border-transparent]="demoTab !== 'splitMerge'"
+            (click)="onDemoTabChange('splitMerge')">
+            Split &amp; Merge
           </button>
         </div>
+
+        @if (demoTab === 'reorder') {
+          <p>Since version 24.2.0, users can modify the page order of the PDF file:</p>
+          <ul>
+            <li>You can swap two pages in the thumbnail view. Just drag and drop a thumbnail up or down.</li>
+            <li>The toolbar offers buttons to move the current page up or down.</li>
+          </ul>
+          <p>By default, drag-and-drop reordering is deactivated. You must enable it with <code>pdfDefaultOptions.enablePageReordering = true</code>.</p>
+          <p>The toolbar buttons are also invisible by default. You must enable them with <code>[movePageButton]="true"</code> (or any other of the
+            <code>ResponsiveVisibility</code> attributes).</p>
+        }
+        @if (demoTab === 'splitMerge') {
+          <p>The split &amp; merge feature allows you to copy, cut, delete, and save selected pages as a new PDF.</p>
+          <ul>
+            <li>Open the sidebar to see thumbnails with checkboxes.</li>
+            <li>Select one or more pages using the checkboxes.</li>
+            <li>Use the action menu above the thumbnails to copy, cut, delete, or save selected pages.</li>
+          </ul>
+          <p>Enable it with <code>(pdfDefaultOptions as any).enableSplitMerge = true</code>.</p>
+          <p><strong>Note:</strong> This is an experimental feature from pdf.js. It may change in future versions.</p>
+        }
+      </div>
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'html'"
+                [class.border-primary-600]="activeTab === 'html'"
+                [class.text-gray-500]="activeTab !== 'html'"
+                [class.border-transparent]="activeTab !== 'html'"
+                (click)="activeTab = 'html'">
+                HTML template
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'typescript'"
+                [class.border-primary-600]="activeTab === 'typescript'"
+                [class.text-gray-500]="activeTab !== 'typescript'"
+                [class.border-transparent]="activeTab !== 'typescript'"
+                (click)="activeTab = 'typescript'">
+                TypeScript
+              </button>
+            </div>
           </div>
 
-        <!-- Tab content -->
-        @if (activeTab === 'html') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/modifying-page-order/html.md"> </app-ie11-markdown>
-        </div>
+          <!-- Tab content -->
+          @if (activeTab === 'html') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/modifying-page-order/html.md"> </app-ie11-markdown>
+            </div>
           }
-        @if (activeTab === 'typescript') {
-          <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/modifying-page-order/ts.md"> </app-ie11-markdown>
-        </div>
+          @if (activeTab === 'typescript') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/modifying-page-order/ts.md"> </app-ie11-markdown>
+            </div>
           }
+        </div>
       </div>
-  </div>
-</div>
-}
+    </div>
+  }
 
-<app-demo [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'">
-  <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
-    [showMovePageButton]="true"
-
-      [theme]="theme">
-  </ngx-extended-pdf-viewer>
-</app-demo>
+  @if (showViewer) {
+    <app-demo [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'">
+      <ngx-extended-pdf-viewer
+        [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
+        [showMovePageButton]="true"
+        [sidebarVisible]="demoTab === 'splitMerge'"
+        [theme]="theme">
+      </ngx-extended-pdf-viewer>
+    </app-demo>
+  }
 </div>

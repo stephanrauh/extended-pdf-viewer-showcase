@@ -19,7 +19,7 @@
         }
 
         @if (showProgress) {
-          <div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-primary-600 h-2 rounded-full" style="width: 45%"></div></div>
+          <div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-primary-600 h-2 rounded-full" [style.width.%]="printPercentage"></div></div>
         }
 
         @if (showCompleted) {

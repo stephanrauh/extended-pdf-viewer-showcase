@@ -1,3 +1,10 @@
 ```html
-
+<ngx-extended-pdf-viewer
+  [src]="'/assets/pdfs/simple-demo-document.pdf'"
+  [height]="'auto'"
+  [textLayer]="true"
+  [showHandToolButton]="true"
+  [handTool]="false"
+>
+</ngx-extended-pdf-viewer>
 ```
