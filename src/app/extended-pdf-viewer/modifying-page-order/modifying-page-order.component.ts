@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, inject, OnDestroy } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { FullscreenService } from '../../services/fullscreen.service';
-import { pdfDefaultOptions, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
@@ -27,19 +27,12 @@ export class ModifyingPageOrderComponent implements OnDestroy {
   public activeTab = 'html';
   public demoTab: 'reorder' | 'splitMerge' = 'reorder';
   public showViewer = true;
-
-  constructor() {
-    pdfDefaultOptions.enablePageReordering = true;
-  }
+  public enableSplitMerge = false;
 
   public onDemoTabChange(tab: 'reorder' | 'splitMerge'): void {
     this.demoTab = tab;
     this.showViewer = false;
-    if (tab === 'splitMerge') {
-      (pdfDefaultOptions as any).enableSplitMerge = true;
-    } else {
-      (pdfDefaultOptions as any).enableSplitMerge = false;
-    }
+    this.enableSplitMerge = tab === 'splitMerge';
     setTimeout(() => {
       this.showViewer = true;
       this.cdr.markForCheck();
@@ -47,7 +40,6 @@ export class ModifyingPageOrderComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    pdfDefaultOptions.enablePageReordering = false;
-    (pdfDefaultOptions as any).enableSplitMerge = false;
+    // No need to reset pdfDefaultOptions — we use component inputs instead
   }
 }

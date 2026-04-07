@@ -2,6 +2,7 @@
 <ngx-extended-pdf-viewer
   [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
   [enablePageReordering]="true"
+  [enableSplitMerge]="true"
   [showMovePageButton]="true"
   [sidebarVisible]="true">
 </ngx-extended-pdf-viewer>

@@ -18,6 +18,18 @@
               </label>
             </div>
 
+            <!-- Right-click on images -->
+            <div>
+              <label class="flex items-center space-x-2 text-sm">
+                <input type="checkbox" class="form-checkbox text-primary-600" [(ngModel)]="enableImageRightClick" />
+                <span>Enable right-click on images</span>
+              </label>
+              <small class="block text-gray-500 mt-0.5 text-xs ml-6">
+                Sets <code>pdfDefaultOptions.imagesRightClickMinSize</code> to 16px.
+                Right-click an image in the PDF to save it.
+              </small>
+            </div>
+
             <!-- Scroll Mode -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Scroll mode:</label>

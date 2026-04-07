@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
-import { PageViewModeType, ScrollModeType, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { PageViewModeType, ScrollModeType, NgxExtendedPdfViewerModule, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 import { FullscreenService } from '../../services/fullscreen.service';
 import { FormsModule } from '@angular/forms';
@@ -27,6 +27,14 @@ export class DisplayOptionsComponent {
   public activeTab = 'html';
 
   public showBorders = false;
+
+  public get enableImageRightClick(): boolean {
+    return pdfDefaultOptions.imagesRightClickMinSize > 0;
+  }
+
+  public set enableImageRightClick(value: boolean) {
+    pdfDefaultOptions.imagesRightClickMinSize = value ? 16 : -1;
+  }
 
   public scrollMode = 0; // ScrollModeType.vertical (default)
 

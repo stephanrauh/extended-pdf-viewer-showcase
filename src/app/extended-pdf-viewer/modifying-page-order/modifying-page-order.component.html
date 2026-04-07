@@ -25,23 +25,21 @@
         </div>
 
         @if (demoTab === 'reorder') {
-          <p>Since version 24.2.0, users can modify the page order of the PDF file:</p>
+          <p>Users can modify the page order of the PDF file:</p>
           <ul>
-            <li>You can swap two pages in the thumbnail view. Just drag and drop a thumbnail up or down.</li>
+            <li>Open the sidebar and drag-and-drop a thumbnail to reorder pages.</li>
             <li>The toolbar offers buttons to move the current page up or down.</li>
           </ul>
-          <p>By default, drag-and-drop reordering is deactivated. You must enable it with <code>pdfDefaultOptions.enablePageReordering = true</code>.</p>
-          <p>The toolbar buttons are also invisible by default. You must enable them with <code>[movePageButton]="true"</code> (or any other of the
-            <code>ResponsiveVisibility</code> attributes).</p>
+          <p>Enable it with the <code>[enablePageReordering]</code> attribute. The toolbar buttons are invisible by default &mdash; show them with <code>[showMovePageButton]="true"</code>.</p>
         }
         @if (demoTab === 'splitMerge') {
-          <p>The split &amp; merge feature allows you to copy, cut, delete, and save selected pages as a new PDF.</p>
+          <p>The split &amp; merge feature lets users copy, cut, delete, and export selected pages as a new PDF.</p>
           <ul>
-            <li>Open the sidebar to see thumbnails with checkboxes.</li>
-            <li>Select one or more pages using the checkboxes.</li>
-            <li>Use the action menu above the thumbnails to copy, cut, delete, or save selected pages.</li>
+            <li>Select pages using the checkboxes next to each thumbnail.</li>
+            <li>Use the "Manage" dropdown above the thumbnails to copy, cut, delete, or export.</li>
+            <li>Undo is supported.</li>
           </ul>
-          <p>Enable it with <code>(pdfDefaultOptions as any).enableSplitMerge = true</code>.</p>
+          <p>Enable it with the <code>[enableSplitMerge]</code> attribute.</p>
           <p><strong>Note:</strong> This is an experimental feature from pdf.js. It may change in future versions.</p>
         }
       </div>
@@ -74,7 +72,9 @@
           <!-- Tab content -->
           @if (activeTab === 'html') {
             <div class="tab-content">
-              <app-ie11-markdown src="/assets/extended-pdf-viewer/modifying-page-order/html.md"> </app-ie11-markdown>
+              <app-ie11-markdown [src]="demoTab === 'splitMerge'
+                ? '/assets/extended-pdf-viewer/modifying-page-order/html-split-merge.md'
+                : '/assets/extended-pdf-viewer/modifying-page-order/html.md'"> </app-ie11-markdown>
             </div>
           }
           @if (activeTab === 'typescript') {
@@ -91,8 +91,10 @@
     <app-demo [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'">
       <ngx-extended-pdf-viewer
         [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
+        [enablePageReordering]="true"
+        [enableSplitMerge]="enableSplitMerge"
         [showMovePageButton]="true"
-        [sidebarVisible]="demoTab === 'splitMerge'"
+        [sidebarVisible]="true"
         [theme]="theme">
       </ngx-extended-pdf-viewer>
     </app-demo>

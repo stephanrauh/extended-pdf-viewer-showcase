@@ -1,12 +1,9 @@
 ```typescript
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-
-@Component({
-standalone: false,  ... })
+@Component({ ... })
 export class ModifyingPageOrderComponent {
-
-  constructor() {
-    pdfDefaultOptions.enablePageReordering = true;
-  }
+  // No TypeScript needed!
+  // Page reordering and split & merge are enabled
+  // via the [enablePageReordering] and [enableSplitMerge]
+  // attributes on <ngx-extended-pdf-viewer>.
 }
 ```
