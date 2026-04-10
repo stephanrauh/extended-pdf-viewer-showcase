@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { pdfDefaultOptions, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { versions } from './versions';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
@@ -55,11 +55,13 @@ export class NavComponent {
     return this._viewer || 'ngx-extended-pdf-viewer';
   }
 
-  public pdfjsVersion = '';
+  public pdfjsVersion = computed(() => {
+    const PDFViewerApplication = this.notificationService.onPDFJSInitSignal();
+    return PDFViewerApplication ? `, pdf.js ${this.notificationService.pdfjsVersion},` : '';
+  });
 
   constructor() {
     const route = inject(ActivatedRoute);
-    const notificationService = this.notificationService;
 
     if (this.isBrowser()) {
       route.url.subscribe(() => {
@@ -73,11 +75,6 @@ export class NavComponent {
         if (!location.pathname.includes('iframe')) {
           this.hideMenu = isFullscreen;
         }
-      });
-
-      effect(() => {
-        const PDFViewerApplication = notificationService.onPDFJSInitSignal();
-        setTimeout(() => this.pdfjsVersion = PDFViewerApplication ? `, pdf.js ${this.notificationService.pdfjsVersion},` : '');
       });
 
       try {

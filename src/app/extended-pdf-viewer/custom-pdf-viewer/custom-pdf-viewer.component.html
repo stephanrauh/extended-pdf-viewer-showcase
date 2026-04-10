@@ -1,0 +1,101 @@
+<div class="flex-container-column fill-container">
+  @if (!(fullscreenService.isFullscreen$ | async)) {
+    <div class="flex-container-row">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border">
+        <div class="w-full">
+          <!-- Tab buttons -->
+          <div class="overflow-x-auto">
+            <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'description'"
+                [class.border-primary-600]="codeTab === 'description'"
+                [class.text-gray-500]="codeTab !== 'description'"
+                [class.border-transparent]="codeTab !== 'description'"
+                (click)="codeTab = 'description'">
+                Description
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="codeTab === 'html'"
+                [class.border-primary-600]="codeTab === 'html'"
+                [class.text-gray-500]="codeTab !== 'html'"
+                [class.border-transparent]="codeTab !== 'html'"
+                (click)="codeTab = 'html'">
+                HTML
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab content -->
+          @if (codeTab === 'description') {
+            <div class="tab-content">
+              <p>
+                <code>[customPdfViewer]</code> allows you to replace the entire default viewer HTML with your own template.
+                This gives you full control over the viewer structure: you can rearrange or remove the toolbar, sidebar,
+                findbar, and any other UI element.
+              </p>
+              <p>
+                The template replaces everything <em>except</em> the PDF rendering itself. The <code>&lt;div id="viewer"&gt;</code>
+                is where pdf.js renders the pages &mdash; you must include it along with its parent containers
+                (<code>#outerContainer</code>, <code>#mainContainer</code>, <code>#viewerContainer</code>).
+              </p>
+              <p>
+                You also need <code>&lt;pdf-dummy-components&gt;</code> which provides hidden DOM elements that pdf.js expects.
+              </p>
+              <p>
+                This demo shows a custom viewer with a sidebar for page navigation,
+                replacing the default toolbar entirely.
+              </p>
+            </div>
+          }
+          @if (codeTab === 'html') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-pdf-viewer/html.md"></app-ie11-markdown>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  <app-demo [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'">
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
+      [customPdfViewer]="minimalViewer"
+      (pagesLoaded)="onPagesLoaded($event)"
+      (pageChange)="onPageChange($event)"
+      [theme]="theme">
+    </ngx-extended-pdf-viewer>
+  </app-demo>
+</div>
+
+<ng-template #minimalViewer>
+  <div class="zoom" style="height: 90vh" #root>
+    <div class="html">
+      <div class="body">
+        <div id="outerContainer">
+          <div id="mainContainer" class="custom-layout">
+            <pdf-dummy-components></pdf-dummy-components>
+
+            <div class="custom-sidebar">
+              <label class="sidebar-label">Go to page</label>
+              <select id="custom-page-select" class="page-select" [value]="currentPage" (change)="goToPage(+$any($event.target).value)">
+                @for (p of pages; track p) {
+                  <option [value]="p" [selected]="p === currentPage">Page {{ p }}</option>
+                }
+              </select>
+            </div>
+
+            <div id="viewerContainer" class="custom-viewer-container">
+              <div id="viewer" class="pdfViewer"></div>
+            </div>
+
+          </div>
+          <!-- Optional: add dialog components here if you need them
+               (e.g. pdf-password-dialog, pdf-alt-text-dialog, etc.) -->
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

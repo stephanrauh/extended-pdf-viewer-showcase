@@ -17,6 +17,7 @@ import { ContextmenuComponent } from './extended-pdf-viewer/contextmenu/contextm
 import { CustomPrintDialogComponent } from './extended-pdf-viewer/custom-print-dialog/custom-print-dialog.component';
 import { CustomSidebarComponent } from './extended-pdf-viewer/custom-sidebar/custom-sidebar.component';
 import { CustomThumbnailsComponent } from './extended-pdf-viewer/custom-thumbnails/custom-thumbnails.component';
+import { CustomPdfViewerComponent } from './extended-pdf-viewer/custom-pdf-viewer/custom-pdf-viewer.component';
 import { CustomToolbarComponent } from './extended-pdf-viewer/custom-toolbar/custom-toolbar.component';
 import { CustomizationComponent } from './extended-pdf-viewer/customization/customization.component';
 import { DefaultOptionsComponent } from './extended-pdf-viewer/default-options/default-options.component';
@@ -100,6 +101,7 @@ export const routes: Routes = [
       { path: 'custom-toolbar', component: CustomToolbarComponent },
       { path: 'custom-sidebar', component: CustomSidebarComponent },
       { path: 'custom-thumbnails', component: CustomThumbnailsComponent },
+      { path: 'custom-pdf-viewer', component: CustomPdfViewerComponent },
       { path: 'custom-find', component: CustomFindComponent },
       { path: 'disable-buttons', component: DisableButtonsComponent },
       { path: 'display-options', component: DisplayOptionsComponent },

@@ -1,0 +1,44 @@
+.custom-layout {
+  display: flex;
+  height: 100%;
+}
+
+.custom-viewer-container {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+.custom-sidebar {
+  width: 120px;
+  background: #f3f4f6;
+  border-right: 1px solid #d1d5db;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.custom-layout #viewerContainer {
+  top: 0 !important;
+}
+
+.sidebar-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+}
+
+#custom-page-select {
+  width: 70px;
+  padding: 4px 6px;
+  font-size: 13px;
+  border: 1px solid #9ca3af;
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
+  appearance: auto !important;
+  -webkit-appearance: menulist !important;
+}
