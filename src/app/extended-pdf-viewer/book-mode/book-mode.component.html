@@ -5,6 +5,16 @@
       <p>The book mode displays the PDF file like a book and renders a
         nice page-turn effect.
       </p>
+      <p>Use <code>[showPageFlipButton]="true"</code> together with <code>[showHandToolButton]="true"</code>
+        to get a three-mode cursor tool in the toolbar: <b>text selection</b>, <b>hand tool</b> (pan), and <b>page flip</b>.
+        When entering book mode, the page-flip mode activates automatically.
+      </p>
+      <p>Additional options:</p>
+      <ul>
+        <li><code>[enableFlipByDrag]="false"</code> disables drag-to-flip without showing the toolbar buttons, allowing text selection and panning. Click-to-flip still works.</li>
+        <li><code>[showPageCorners]="false"</code> hides the dog-ear fold animation on page corners.</li>
+        <li>Drag-to-flip is automatically disabled when zoomed in beyond page-fit scale.</li>
+      </ul>
       <p>Book mode suffers from a couple of limitations:</p>
       <ul>
         <li>Presentation mode doesn't work.</li>
@@ -67,6 +77,8 @@
       pageViewMode="book" [height]="'95%'" [zoom]="'page-fit'" [sidebarVisible]="false" [showBorders]="false"
       (pageRendered)="onPageRendered($event)" (pageRender)="onPageRender($event)" [showPresentationModeButton]="true"
       [textLayer]="true"
+      [showHandToolButton]="true"
+      [showPageFlipButton]="true"
       [theme]="theme">
     </ngx-extended-pdf-viewer>
   </app-demo>
