@@ -65,15 +65,7 @@
             placeholder="#FF0000"
           />
         </div>
-        <div class="space-y-1">
-          <label class="block text-sm font-medium text-gray-700">highlight editor default color</label>
-          <input
-            class="w-full py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
-            (change)="editorHighlightDefaultColor = $event"
-            (input)="editorHighlightDefaultColor = $event"
-            placeholder="#FF0000"
-          />
-        </div>
+        <!-- highlight editor default color removed — the feature was never wired up in pdf.js -->
         <div class="space-y-1">
           <label class="block text-sm font-medium text-gray-700">highlight editor thickness</label>
           <input
