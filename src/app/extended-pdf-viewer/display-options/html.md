@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-    [src]="'/assets/pdfs/codpaste-teachingpack.pdf'"
+    [src]="'/assets/pdfs/Bootstrap-vs-Material-Design-vs-Prime-vs-Tailwind.pdf'"
     [showBorders]="showBorders"
     [(scrollMode)]="scrollMode"
     [(pageViewMode)]="pageViewMode"

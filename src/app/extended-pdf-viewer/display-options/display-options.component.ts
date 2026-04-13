@@ -28,12 +28,23 @@ export class DisplayOptionsComponent {
 
   public showBorders = false;
 
+  constructor() {
+    // Restore right-click setting after page reload
+    const saved = sessionStorage.getItem('enableImageRightClick');
+    if (saved === 'true') {
+      pdfDefaultOptions.imagesRightClickMinSize = 16;
+    }
+  }
+
   public get enableImageRightClick(): boolean {
     return pdfDefaultOptions.imagesRightClickMinSize > 0;
   }
 
   public set enableImageRightClick(value: boolean) {
     pdfDefaultOptions.imagesRightClickMinSize = value ? 16 : -1;
+    // This setting is read during PDF initialization, so persist and reload
+    sessionStorage.setItem('enableImageRightClick', String(value));
+    window.location.reload();
   }
 
   public scrollMode = 0; // ScrollModeType.vertical (default)

@@ -269,6 +269,10 @@ code {
   font-size: 16px;
 }
 
+small code {
+  font-size: 11px;
+}
+
 /* Definition list styles */
 dt,
 dd {
