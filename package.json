@@ -34,7 +34,7 @@
     "angular2-smart-table": "^4.1.1",
     "esbuild": "^0.27.7",
     "marked": "^17.0.5",
-    "ngx-extended-pdf-viewer": "^26.0.0",
+    "ngx-extended-pdf-viewer": "^27.0.0-rc.1",
     "ngx-markdown": "^21.1.0",
     "ngx-scrollbar": "^19.1.4",
     "pdf-lib": "^1.17.1",

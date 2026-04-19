@@ -85,7 +85,7 @@ export class CustomThumbnailsComponent {
     const notificationService = inject(PDFNotificationService);
 
     effect(() => {
-      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal()!;
     });
   }
 

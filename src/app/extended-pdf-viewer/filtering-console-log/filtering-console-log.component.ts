@@ -47,7 +47,7 @@ export class FilteringConsoleLogComponent {
     const notificationService = inject(PDFNotificationService);
 
     effect(() => {
-      if ((this.PDFViewerApplication = notificationService.onPDFJSInitSignal())) {
+      if ((this.PDFViewerApplication = notificationService.onPDFJSInitSignal()!)) {
         this.init();
       }
     });

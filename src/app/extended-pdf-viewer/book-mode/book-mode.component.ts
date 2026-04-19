@@ -33,7 +33,7 @@ export class BookModeComponent {
     const notificationService = inject(PDFNotificationService);
 
     effect(() => {
-      this.PDFViewerApplication = notificationService.onPDFJSInitSignal();
+      this.PDFViewerApplication = notificationService.onPDFJSInitSignal()!;
     });
   }
 
