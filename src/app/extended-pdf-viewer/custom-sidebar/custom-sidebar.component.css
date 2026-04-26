@@ -1,0 +1,423 @@
+/* ============================================================ */
+/* Review Sidebar                                                */
+/* ============================================================ */
+:host ::ng-deep .review-sidebar {
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+  padding: 0 !important;
+}
+
+
+:host ::ng-deep .review-header {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+:host ::ng-deep .review-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+:host ::ng-deep .review-filters {
+  display: flex;
+  gap: 4px;
+}
+
+:host ::ng-deep .filter-btn {
+  padding: 3px 10px;
+  font-size: 11px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+:host ::ng-deep .filter-btn:hover {
+  background: #f1f5f9;
+}
+
+:host ::ng-deep .filter-btn.active {
+  background: #6366f1;
+  color: #fff;
+  border-color: #6366f1;
+}
+
+:host ::ng-deep .review-list {
+  padding: 4px 0;
+}
+
+:host ::ng-deep .page-group {
+  margin-bottom: 12px;
+}
+
+:host ::ng-deep .page-group-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+:host ::ng-deep .page-group-header:hover {
+  color: #6366f1;
+}
+
+:host ::ng-deep .comment-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 6px;
+  transition: border-color 0.15s;
+}
+
+:host ::ng-deep .comment-card:hover {
+  border-color: #cbd5e1;
+  cursor: pointer;
+}
+
+:host ::ng-deep .comment-card.resolved {
+  opacity: 0.65;
+}
+
+:host ::ng-deep .comment-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+:host ::ng-deep .comment-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+:host ::ng-deep .comment-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+:host ::ng-deep .comment-author {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:host ::ng-deep .comment-time {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+:host ::ng-deep .status-badge {
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+:host ::ng-deep .status-badge.open {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+:host ::ng-deep .status-badge.resolved {
+  background: #d1fae5;
+  color: #059669;
+}
+
+:host ::ng-deep .comment-text {
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+:host ::ng-deep .delete-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #cbd5e1;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+}
+
+:host ::ng-deep .comment-card:hover .delete-btn {
+  opacity: 1;
+}
+
+:host ::ng-deep .delete-btn:hover {
+  color: #ef4444;
+}
+
+:host ::ng-deep .sidebarResizer {
+  z-index: 200;
+}
+
+:host ::ng-deep .add-comment-bar {
+  border-top: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+:host ::ng-deep .add-comment-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  font-size: 13px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #334155;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+:host ::ng-deep .add-comment-input:focus {
+  border-color: #6366f1;
+  background: #fff;
+}
+
+:host ::ng-deep .add-comment-input::placeholder {
+  color: #94a3b8;
+}
+
+:host ::ng-deep .add-comment-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: #6366f1;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+:host ::ng-deep .add-comment-btn:hover {
+  background: #4f46e5;
+}
+
+:host ::ng-deep .add-comment-btn:disabled {
+  background: #e2e8f0;
+  color: #94a3b8;
+  cursor: default;
+}
+
+/* ============================================================ */
+/* TOC Sidebar                                                    */
+/* ============================================================ */
+:host ::ng-deep .toc-sidebar {
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+  padding: 0 !important;
+}
+
+:host ::ng-deep .toc-header {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+:host ::ng-deep .toc-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+:host ::ng-deep .toc-search-icon {
+  position: absolute;
+  left: 8px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+:host ::ng-deep .toc-search-input {
+  width: 100%;
+  padding: 6px 28px 6px 28px;
+  font-size: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #334155;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+:host ::ng-deep .toc-search-input:focus {
+  border-color: #6366f1;
+  background: #fff;
+}
+
+:host ::ng-deep .toc-search-input::placeholder {
+  color: #94a3b8;
+}
+
+:host ::ng-deep .toc-clear {
+  position: absolute;
+  right: 6px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+:host ::ng-deep .toc-clear:hover {
+  color: #64748b;
+}
+
+:host ::ng-deep .toc-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+:host ::ng-deep .toc-section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 12px 4px;
+}
+
+:host ::ng-deep .bookmarks-label {
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid #e2e8f0;
+}
+
+:host ::ng-deep .toc-list {
+  padding: 0 4px;
+}
+
+:host ::ng-deep .toc-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #334155;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+:host ::ng-deep .toc-entry:hover {
+  background: #e2e8f0;
+}
+
+:host ::ng-deep .toc-entry-title {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:host ::ng-deep .toc-entry-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+:host ::ng-deep .bookmark-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+:host ::ng-deep .toc-entry:hover .bookmark-btn,
+:host ::ng-deep .bookmark-btn.active {
+  opacity: 1;
+}
+
+:host ::ng-deep .bookmark-btn:hover {
+  color: #f59e0b;
+}
+
+:host ::ng-deep .toc-page-num {
+  font-size: 10px;
+  color: #94a3b8;
+  min-width: 16px;
+  text-align: right;
+}
+
+:host ::ng-deep .bookmark-entry {
+  background: #fffbeb;
+}
+
+:host ::ng-deep .bookmark-entry:hover {
+  background: #fef3c7;
+}
+
+/* ============================================================ */
+/* Shared                                                         */
+/* ============================================================ */
+:host ::ng-deep .empty-state {
+  text-align: center;
+  padding: 24px 12px;
+  font-size: 12px;
+  color: #94a3b8;
+}

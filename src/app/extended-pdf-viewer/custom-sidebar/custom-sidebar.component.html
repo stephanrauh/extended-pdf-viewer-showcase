@@ -5,24 +5,24 @@
         class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]"
       >
         <p>
-          You can customize the sidebar. The only disadvantage is you have to set the `top` position yourself. If you're offering an optional mobile-friendly
-          large toolbar, the `top` position of custom sidebars is not adjusted automatically.
+          You can replace the default sidebar with a fully custom Angular template.
+          These demos show two real-world examples.
         </p>
         <div class="space-y-2">
           <label class="flex items-center space-x-2">
             <input type="radio" class="form-radio text-primary-600 leading-6" value="default" aria-label="Demo" [(ngModel)]="sidebarType" />
-            <span>sidebar with standard layout</span>
+            <span>default sidebar</span>
           </label>
           <label class="flex items-center space-x-2">
-            <input type="radio" class="form-radio text-primary-600 leading-6" value="without" aria-label="Demo" [(ngModel)]="sidebarType" />
-            <span>sidebar without toolbar</span>
+            <input type="radio" class="form-radio text-primary-600 leading-6" value="review" aria-label="Demo" [(ngModel)]="sidebarType" />
+            <span>document review sidebar</span>
           </label>
           <label class="flex items-center space-x-2">
-            <input type="radio" class="form-radio text-primary-600 leading-6" value="fancy" aria-label="Demo" [(ngModel)]="sidebarType" />
-            <span>fancy layout</span>
+            <input type="radio" class="form-radio text-primary-600 leading-6" value="toc" aria-label="Demo" [(ngModel)]="sidebarType" />
+            <span>searchable TOC sidebar</span>
           </label>
         </div>
-        <p>The attribute <code>[(sidebarVisible)]</code> supports two-way binding. It's updated when the user opens or hides the sidebar.</p>
+        <p class="mt-3">The attribute <code>[(sidebarVisible)]</code> supports two-way binding.</p>
         <label class="flex items-center space-x-2">
           <input type="checkbox" class="form-checkbox text-primary-600" [(ngModel)]="sidebarOpen" />
           <span>show sidebar</span>
@@ -32,7 +32,6 @@
         class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]"
       >
         <div class="w-full">
-          <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
               <button
@@ -47,41 +46,55 @@
               </button>
               <button
                 class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-                [class.text-primary-600]="activeTab === 'no-toolbar'"
-                [class.border-primary-600]="activeTab === 'no-toolbar'"
-                [class.text-gray-500]="activeTab !== 'no-toolbar'"
-                [class.border-transparent]="activeTab !== 'no-toolbar'"
-                (click)="activeTab = 'no-toolbar'"
+                [class.text-primary-600]="activeTab === 'review'"
+                [class.border-primary-600]="activeTab === 'review'"
+                [class.text-gray-500]="activeTab !== 'review'"
+                [class.border-transparent]="activeTab !== 'review'"
+                (click)="activeTab = 'review'"
               >
-                no toolbar
+                review sidebar
               </button>
               <button
                 class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-                [class.text-primary-600]="activeTab === 'fancy-sidebar'"
-                [class.border-primary-600]="activeTab === 'fancy-sidebar'"
-                [class.text-gray-500]="activeTab !== 'fancy-sidebar'"
-                [class.border-transparent]="activeTab !== 'fancy-sidebar'"
-                (click)="activeTab = 'fancy-sidebar'"
+                [class.text-primary-600]="activeTab === 'toc'"
+                [class.border-primary-600]="activeTab === 'toc'"
+                [class.text-gray-500]="activeTab !== 'toc'"
+                [class.border-transparent]="activeTab !== 'toc'"
+                (click)="activeTab = 'toc'"
               >
-                fancy sidebar
+                searchable TOC
+              </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'ts'"
+                [class.border-primary-600]="activeTab === 'ts'"
+                [class.text-gray-500]="activeTab !== 'ts'"
+                [class.border-transparent]="activeTab !== 'ts'"
+                (click)="activeTab = 'ts'"
+              >
+                TypeScript
               </button>
             </div>
           </div>
 
-          <!-- Tab content -->
           @if (activeTab === 'html') {
             <div class="tab-content">
               <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/html.md"> </app-ie11-markdown>
             </div>
           }
-          @if (activeTab === 'no-toolbar') {
+          @if (activeTab === 'review') {
             <div class="tab-content">
-              <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/without-toolbar.md"> </app-ie11-markdown>
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/review-sidebar.md"> </app-ie11-markdown>
             </div>
           }
-          @if (activeTab === 'fancy-sidebar') {
+          @if (activeTab === 'toc') {
             <div class="tab-content">
-              <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/fancy-sidebar.md"> </app-ie11-markdown>
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/toc-sidebar.md"> </app-ie11-markdown>
+            </div>
+          }
+          @if (activeTab === 'ts') {
+            <div class="tab-content">
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/custom-sidebar/typescript.md"> </app-ie11-markdown>
             </div>
           }
         </div>
@@ -93,7 +106,7 @@
     @if (showPdfViewer) {
       <ngx-extended-pdf-viewer
         [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
-        [customSidebar]="sidebarType === 'fancy' ? fancySidebar : sidebarType === 'without' ? withoutSidebar : undefined"
+        [customSidebar]="sidebarType === 'review' ? reviewSidebar : sidebarType === 'toc' ? tocSidebar : undefined"
         [(sidebarVisible)]="sidebarOpen"
         [textLayer]="true"
         [showHandToolButton]="true"
@@ -104,47 +117,172 @@
   </app-demo>
 </div>
 
-<ng-template #withoutSidebar>
-  <div id="viewsManager" style="top: 32px">
-    <pdf-sidebar-content></pdf-sidebar-content>
-    <div id="viewsManagerResizer" class="hidden"></div>
+<!-- ============================================================ -->
+<!-- Document Review Sidebar                                       -->
+<!-- ============================================================ -->
+<ng-template #reviewSidebar>
+  <div id="viewsManager" class="sidebar review-sidebar" style="top: 32px; bottom: auto; padding: 0; display: flex; flex-direction: column; align-items: stretch">
+    <div class="review-header" style="margin: 8px; flex-shrink: 0">
+      <div class="review-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        Comments ({{ filteredComments.length }})
+      </div>
+      <div class="review-filters">
+        <button class="filter-btn" [class.active]="reviewFilter === 'all'" (click)="reviewFilter = 'all'">All</button>
+        <button class="filter-btn" [class.active]="reviewFilter === 'open'" (click)="reviewFilter = 'open'">Open</button>
+        <button class="filter-btn" [class.active]="reviewFilter === 'resolved'" (click)="reviewFilter = 'resolved'">Resolved</button>
+      </div>
+    </div>
+
+    <div class="review-list" style="flex: 1; overflow-y: auto; overflow-x: hidden; margin: 0 8px">
+      @for (page of commentPages; track page) {
+        <div class="page-group">
+          <button class="page-group-header" (click)="goToPage(page)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Page {{ page }}
+          </button>
+          @for (comment of commentsForPage(page); track comment.id) {
+            <div class="comment-card" [class.resolved]="comment.status === 'resolved'" (click)="goToPage(comment.page)">
+              <div class="comment-top">
+                <div class="comment-avatar" [style.background-color]="comment.color">{{ comment.initials }}</div>
+                <div class="comment-meta">
+                  <span class="comment-author">{{ comment.author }}</span>
+                  <span class="comment-time">{{ comment.timestamp }}</span>
+                </div>
+                <button
+                  class="status-badge"
+                  [class.open]="comment.status === 'open'"
+                  [class.resolved]="comment.status === 'resolved'"
+                  (click)="$event.stopPropagation(); toggleCommentStatus(comment)"
+                  [title]="comment.status === 'open' ? 'Mark as resolved' : 'Reopen'"
+                >
+                  {{ comment.status }}
+                </button>
+                <button
+                  class="delete-btn"
+                  (click)="$event.stopPropagation(); deleteComment(comment)"
+                  title="Delete comment"
+                >
+                  &times;
+                </button>
+              </div>
+              <div class="comment-text">{{ comment.text }}</div>
+            </div>
+          }
+        </div>
+      }
+      @if (filteredComments.length === 0) {
+        <div class="empty-state">No {{ reviewFilter }} comments.</div>
+      }
+    </div>
+
+    <div class="add-comment-bar" style="display: flex; align-items: center; gap: 6px; margin: 8px; flex-shrink: 0">
+      <input
+        class="add-comment-input"
+        type="text"
+        placeholder="Add a comment on the current page..."
+        [(ngModel)]="newCommentText"
+        (keydown.enter)="addComment()"
+      />
+      <button class="add-comment-btn" (click)="addComment()" [disabled]="!newCommentText.trim()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+
+    <div id="viewsManagerResizer" class="sidebarResizer" role="separator" aria-controls="viewsManager" tabindex="0"></div>
   </div>
 </ng-template>
 
-<ng-template #fancySidebar>
-  <div id="viewsManager" style="top: 31px">
-    <div id="additionalSidebarContainer" style="background-color: goldenrod">
-      <div id="toolbarSidebar">
-        <button
-          style="background-color: red; height: 100%; width: 34%; border: 0; margin: 0; padding: 0"
-          type="button"
-          id="viewThumbnail"
-          class="toolbarButton"
-          data-l10n-id="thumbs"
-        >
-          <span data-l10n-id="thumbs_label">Thumbnails</span>
-        </button>
-        <button
-          style="background-color: green; height: 100%; width: 35%; border: 0; margin: 0; padding: 0"
-          type="button"
-          id="viewOutline"
-          class="toolbarButton"
-          data-l10n-id="document_outline"
-        >
-          <span data-l10n-id="document_outline_label">Document Outline</span>
-        </button>
-        <button
-          style="background-color: blue; height: 100%; width: 34%; border: 0; margin: 0; padding: 0"
-          type="button"
-          id="viewAttachments"
-          class="toolbarButton"
-          data-l10n-id="attachments"
-        >
-          <span data-l10n-id="attachments_label">Attachments</span>
-        </button>
+<!-- ============================================================ -->
+<!-- Searchable TOC Sidebar                                        -->
+<!-- ============================================================ -->
+<ng-template #tocSidebar>
+  <div id="viewsManager" class="sidebar toc-sidebar" style="top: 32px; bottom: auto; padding: 0; display: flex; flex-direction: column; align-items: stretch">
+    <div class="toc-header">
+      <div class="toc-search">
+        <svg class="toc-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          class="toc-search-input"
+          placeholder="Filter table of contents..."
+          [(ngModel)]="tocFilter"
+        />
+        @if (tocFilter) {
+          <button class="toc-clear" (click)="tocFilter = ''">&times;</button>
+        }
       </div>
     </div>
-    <pdf-sidebar-content></pdf-sidebar-content>
-    <div id="viewsManagerResizer" class="hidden"></div>
+
+    <div class="toc-content">
+      <div class="toc-section-label">Table of Contents</div>
+      <div class="toc-list">
+        @for (entry of filteredToc; track entry.title) {
+          <button
+            class="toc-entry"
+            [style.padding-left.px]="12 + entry.level * 16"
+            (click)="goToPage(entry.page)"
+          >
+            <span class="toc-entry-title">{{ entry.title }}</span>
+            <div class="toc-entry-actions">
+              <button
+                class="bookmark-btn"
+                [class.active]="isBookmarked(entry.page)"
+                (click)="$event.stopPropagation(); toggleBookmark(entry.page, entry.title)"
+                [title]="isBookmarked(entry.page) ? 'Remove bookmark' : 'Bookmark this page'"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" [attr.fill]="isBookmarked(entry.page) ? '#f59e0b' : 'none'" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </button>
+              <span class="toc-page-num">{{ entry.page }}</span>
+            </div>
+          </button>
+        }
+        @if (filteredToc.length === 0) {
+          <div class="empty-state">No matching entries.</div>
+        }
+      </div>
+
+      @if (bookmarks.length > 0) {
+        <div class="toc-section-label bookmarks-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          Bookmarks
+        </div>
+        <div class="toc-list">
+          @for (bm of bookmarks; track bm.page) {
+            <button class="toc-entry bookmark-entry" (click)="goToPage(bm.page)">
+              <span class="toc-entry-title">{{ bm.label }}</span>
+              <div class="toc-entry-actions">
+                <button
+                  class="bookmark-btn active"
+                  (click)="$event.stopPropagation(); toggleBookmark(bm.page, bm.label)"
+                  title="Remove bookmark"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </button>
+                <span class="toc-page-num">{{ bm.page }}</span>
+              </div>
+            </button>
+          }
+        </div>
+      }
+    </div>
+
+    <div id="viewsManagerResizer" class="sidebarResizer" role="separator" aria-controls="viewsManager" tabindex="0"></div>
   </div>
 </ng-template>
