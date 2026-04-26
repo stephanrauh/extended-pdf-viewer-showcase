@@ -1,5 +1,5 @@
 /* Custom thumbnail container - positioned to allow absolute positioning of children */
-.pdf-viewer-template .thumbnail {
+.thumbnail[data-page-number] {
   position: relative;
   display: inline-flex;
   flex-direction: column;
