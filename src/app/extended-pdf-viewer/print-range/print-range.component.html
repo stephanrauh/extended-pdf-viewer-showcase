@@ -63,45 +63,47 @@
               useful for very large documents that'd crash your browser - such as trying
             to print documents containing several hundred pages with Internet Explorer 11.</p>
             <section class="section">
-              <div class="space-y-1">
-                <label for="print-from-input" class="block text-sm font-medium text-gray-700">From Page</label>
-                <input id="print-from-input"
-                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
-                       [(ngModel)]="from"
-                       placeholder="from page number"
-                       aria-describedby="print-from-help" />
-                <small id="print-from-help" class="block text-gray-500 text-xs">Starting page number for printing</small>
-              </div>
-              <div class="space-y-2">
-                <label for="print-to-input" class="block text-sm font-medium text-gray-700">To Page</label>
-                <input id="print-to-input"
-                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
-                       [(ngModel)]="to"
-                       placeholder="to page number"
-                       aria-describedby="print-to-help" />
-                <small id="print-to-help" class="block text-gray-500 text-xs">Ending page number for printing</small>
-              </div>
-            </section>
-            <section class="section">
-              <div class="space-y-2">
-                <label for="print-included-input" class="block text-sm font-medium text-gray-700">Include Pages</label>
-                <input id="print-included-input"
-                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
-                       [(ngModel)]="included"
-                       placeholder="including (comma separated list of page numbers)"
-                       aria-describedby="print-included-help" />
-                <small id="print-included-help" class="block text-gray-500 text-xs">Comma-separated list of additional pages to include</small>
+              <div class="flex gap-4">
+                <div class="space-y-1 flex-1">
+                  <label for="print-from-input" class="block text-sm font-medium text-gray-700">From Page</label>
+                  <input id="print-from-input"
+                         class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                         [(ngModel)]="from"
+                         placeholder="from page number"
+                         aria-describedby="print-from-help" />
+                  <small id="print-from-help" class="block text-gray-500 text-xs">Starting page number for printing</small>
+                </div>
+                <div class="space-y-1 flex-1">
+                  <label for="print-to-input" class="block text-sm font-medium text-gray-700">To Page</label>
+                  <input id="print-to-input"
+                         class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                         [(ngModel)]="to"
+                         placeholder="to page number"
+                         aria-describedby="print-to-help" />
+                  <small id="print-to-help" class="block text-gray-500 text-xs">Ending page number for printing</small>
+                </div>
               </div>
             </section>
             <section class="section">
-              <div class="space-y-2">
-                <label for="print-excluded-input" class="block text-sm font-medium text-gray-700">Exclude Pages</label>
-                <input id="print-excluded-input"
-                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
-                       [(ngModel)]="excluded"
-                       placeholder="excluding (comma separated list of page numbers)"
-                       aria-describedby="print-excluded-help" />
-                <small id="print-excluded-help" class="block text-gray-500 text-xs">Comma-separated list of pages to exclude from printing</small>
+              <div class="flex gap-4">
+                <div class="space-y-1 flex-1">
+                  <label for="print-included-input" class="block text-sm font-medium text-gray-700">Include Pages</label>
+                  <input id="print-included-input"
+                         class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                         [(ngModel)]="included"
+                         placeholder="including (comma separated list of page numbers)"
+                         aria-describedby="print-included-help" />
+                  <small id="print-included-help" class="block text-gray-500 text-xs">Comma-separated list of additional pages to include</small>
+                </div>
+                <div class="space-y-1 flex-1">
+                  <label for="print-excluded-input" class="block text-sm font-medium text-gray-700">Exclude Pages</label>
+                  <input id="print-excluded-input"
+                         class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+                         [(ngModel)]="excluded"
+                         placeholder="excluding (comma separated list of page numbers)"
+                         aria-describedby="print-excluded-help" />
+                  <small id="print-excluded-help" class="block text-gray-500 text-xs">Comma-separated list of pages to exclude from printing</small>
+                </div>
               </div>
             </section>
             <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1.5 px-3 text-sm rounded shadow mt-2" (click)="print()">NgxExtendedPdfViewerService.print()</button>
@@ -116,45 +118,47 @@
             to call <code>NgxExtendedPdfViewerService.removePrintRange()</code>.
           </p>
           <section class="section">
-            <div class="space-y-2">
-              <label for="range-from-input" class="block text-sm font-medium text-gray-700">From Page</label>
-              <input id="range-from-input"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
-                     [(ngModel)]="from"
-                     placeholder="from page number"
-                     aria-describedby="range-from-help" />
-              <small id="range-from-help" class="block text-gray-500 text-xs">Starting page number for print range</small>
-            </div>
-            <div class="space-y-2">
-              <label for="range-to-input" class="block text-sm font-medium text-gray-700">To Page</label>
-              <input id="range-to-input"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
-                     [(ngModel)]="to"
-                     placeholder="to page number"
-                     aria-describedby="range-to-help" />
-              <small id="range-to-help" class="block text-gray-500 text-xs">Ending page number for print range</small>
-            </div>
-          </section>
-          <section class="section">
-            <div class="space-y-2">
-              <label for="range-included-input" class="block text-sm font-medium text-gray-700">Include Pages</label>
-              <input id="range-included-input"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
-                     [(ngModel)]="included"
-                     placeholder="including (comma separated list of page numbers)"
-                     aria-describedby="range-included-help" />
-              <small id="range-included-help" class="block text-gray-500 text-xs">Comma-separated list of additional pages to include</small>
+            <div class="flex gap-4">
+              <div class="space-y-1 flex-1">
+                <label for="range-from-input" class="block text-sm font-medium text-gray-700">From Page</label>
+                <input id="range-from-input"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                       [(ngModel)]="from"
+                       placeholder="from page number"
+                       aria-describedby="range-from-help" />
+                <small id="range-from-help" class="block text-gray-500 text-xs">Starting page number for print range</small>
+              </div>
+              <div class="space-y-1 flex-1">
+                <label for="range-to-input" class="block text-sm font-medium text-gray-700">To Page</label>
+                <input id="range-to-input"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                       [(ngModel)]="to"
+                       placeholder="to page number"
+                       aria-describedby="range-to-help" />
+                <small id="range-to-help" class="block text-gray-500 text-xs">Ending page number for print range</small>
+              </div>
             </div>
           </section>
           <section class="section">
-            <div class="space-y-2">
-              <label for="range-excluded-input" class="block text-sm font-medium text-gray-700">Exclude Pages</label>
-              <input id="range-excluded-input"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
-                     [(ngModel)]="excluded"
-                     placeholder="excluding (comma separated list of page numbers)"
-                     aria-describedby="range-excluded-help" />
-              <small id="range-excluded-help" class="block text-gray-500 text-xs">Comma-separated list of pages to exclude from printing</small>
+            <div class="flex gap-4">
+              <div class="space-y-1 flex-1">
+                <label for="range-included-input" class="block text-sm font-medium text-gray-700">Include Pages</label>
+                <input id="range-included-input"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                       [(ngModel)]="included"
+                       placeholder="including (comma separated list of page numbers)"
+                       aria-describedby="range-included-help" />
+                <small id="range-included-help" class="block text-gray-500 text-xs">Comma-separated list of additional pages to include</small>
+              </div>
+              <div class="space-y-1 flex-1">
+                <label for="range-excluded-input" class="block text-sm font-medium text-gray-700">Exclude Pages</label>
+                <input id="range-excluded-input"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                       [(ngModel)]="excluded"
+                       placeholder="excluding (comma separated list of page numbers)"
+                       aria-describedby="range-excluded-help" />
+                <small id="range-excluded-help" class="block text-gray-500 text-xs">Comma-separated list of pages to exclude from printing</small>
+              </div>
             </div>
           </section>
           <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="setPrintRange()">NgxExtendedPdfViewerService.setPrintRange()</button>
