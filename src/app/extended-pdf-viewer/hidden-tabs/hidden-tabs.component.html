@@ -1,0 +1,144 @@
+<div class="flex-container-column fill-container">
+  <div class="flex-container-row">
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[45%]">
+      <p>A common pattern is to mount the PDF viewer inside a tab, an Ionic route transition, or any other
+        container that is hidden when the application loads. The viewer is mounted right away but lives inside a
+        <code>display: none</code> subtree until the user activates the tab.
+      </p>
+      <p>Two historical bugs made this awkward:</p>
+      <ul>
+        <li>Before <strong>version 22.3.0</strong>, the viewer attempted to initialize PDF.js while hidden, failed
+          (because pages have no layout when their ancestor is <code>display: none</code>), and never recovered
+          even after the container was shown &mdash; users saw an empty viewer. Fixed in #2749 by a
+          <code>waitForRootElement()</code> guard inside <code>ngx-extended-pdf-viewer</code> that delays
+          initialization until the host element gains an <code>offsetParent</code>. Tab&nbsp;2 below demonstrates
+          this: the viewer is mounted from the start but only initializes the first time you switch to Tab&nbsp;2,
+          and <code>[page]="5"</code> takes effect normally.
+        </li>
+        <li>Until <strong>version 27.5.0</strong>, the corner case of a viewer that initialized visibly and was
+          <em>later</em> hidden (e.g. a route transition fires <code>scrollPageIntoView()</code> mid-flight,
+          or application code calls the scroll service while the viewer is on an inactive tab) still failed
+          silently with <code>offsetParent is not set</code>. #1321 fixed that: such scroll requests are now
+          deferred via <code>ResizeObserver</code> + <code>IntersectionObserver</code> and replayed when the
+          viewer becomes visible again.
+        </li>
+      </ul>
+      <p>If you are running this showcase locally a third tab appears with a regression test for that corner
+        case &mdash; it is hidden in the public showcase because the workflow is too involved to be a useful
+        product demo.</p>
+    </div>
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[53%]">
+      <div class="w-full">
+        <div class="overflow-x-auto">
+          <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'html'"
+              [class.border-primary-600]="codeTab === 'html'"
+              [class.text-gray-500]="codeTab !== 'html'"
+              [class.border-transparent]="codeTab !== 'html'"
+              (click)="codeTab = 'html'">
+              HTML template
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'typescript'"
+              [class.border-primary-600]="codeTab === 'typescript'"
+              [class.text-gray-500]="codeTab !== 'typescript'"
+              [class.border-transparent]="codeTab !== 'typescript'"
+              (click)="codeTab = 'typescript'">
+              Typescript
+            </button>
+          </div>
+        </div>
+
+        @if (codeTab === 'html') {
+          <div class="tab-content">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/hidden-tabs/html.md">
+            </app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'typescript') {
+          <div class="tab-content">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/hidden-tabs/ts.md">
+            </app-ie11-markdown>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full mt-4">
+    <div class="overflow-x-auto">
+      <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+        <button
+          class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+          [class.text-primary-600]="activeTab === 'tab1'"
+          [class.border-primary-600]="activeTab === 'tab1'"
+          [class.text-gray-500]="activeTab !== 'tab1'"
+          [class.border-transparent]="activeTab !== 'tab1'"
+          (click)="activeTab = 'tab1'">
+          Tab 1 (no viewer)
+        </button>
+        <button
+          class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+          [class.text-primary-600]="activeTab === 'tab2'"
+          [class.border-primary-600]="activeTab === 'tab2'"
+          [class.text-gray-500]="activeTab !== 'tab2'"
+          [class.border-transparent]="activeTab !== 'tab2'"
+          (click)="activeTab = 'tab2'">
+          Tab 2 (viewer with [page]="5")
+        </button>
+        @if (isLocalhost) {
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'tab3'"
+            [class.border-primary-600]="activeTab === 'tab3'"
+            [class.text-gray-500]="activeTab !== 'tab3'"
+            [class.border-transparent]="activeTab !== 'tab3'"
+            (click)="activeTab = 'tab3'">
+            Tab 3 (regression test, localhost only)
+          </button>
+        }
+      </div>
+    </div>
+
+    <div [hidden]="activeTab !== 'tab1'" class="tab-content p-6">
+      <p>This tab is intentionally empty. The PDF viewer lives on Tab&nbsp;2 and is mounted inside a
+        <code>[hidden]</code> block, so it initializes while invisible. Click Tab&nbsp;2 to make it visible &mdash;
+        thanks to the #1321 fix, the deferred scroll fires and the viewer lands on page&nbsp;5.
+      </p>
+    </div>
+
+    <div [hidden]="activeTab !== 'tab2'" class="tab-content h-screen">
+      <ngx-extended-pdf-viewer
+        [src]="'./assets/pdfs/The Public Domain - Enclosing the Commons of the Mind.pdf'"
+        [page]="5"
+        [height]="'90vh'"
+        [showBorders]="false"
+        [theme]="theme">
+      </ngx-extended-pdf-viewer>
+    </div>
+
+    @if (isLocalhost) {
+      <div [hidden]="activeTab !== 'tab3'" class="tab-content p-6">
+        <p>Regression test for the deferred-scroll fix. The viewer lives on Tab&nbsp;2; to use this test
+          you must first visit Tab&nbsp;2 once so the viewer loads (ngx-extended-pdf-viewer's
+          <code>waitForRootElement</code> guard delays initialization until the host element is visible).
+          Then:</p>
+        <ol>
+          <li>Switch back here (Tab&nbsp;3). The viewer is now hidden again.</li>
+          <li>Click <em>Scroll to page&nbsp;8 (while hidden)</em>. The scroll is requested on the hidden viewer.</li>
+          <li>Switch to Tab&nbsp;2.</li>
+        </ol>
+        <p>Expected: the viewer lands on page&nbsp;8 (deferred scroll replayed). Pre-#1321 it would have stayed on
+          page&nbsp;5 with an <code>offsetParent is not set</code> warning.</p>
+        <button type="button"
+                class="mt-3 px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 focus:outline-none"
+                (click)="scrollToSeven()">
+          Scroll to page 7 (while hidden)
+        </button>
+      </div>
+    }
+  </div>
+</div>

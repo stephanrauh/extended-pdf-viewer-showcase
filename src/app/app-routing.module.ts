@@ -29,6 +29,7 @@ import { FileInfoComponent } from './extended-pdf-viewer/file-info/file-info.com
 import { FilteringConsoleLogComponent } from './extended-pdf-viewer/filtering-console-log/filtering-console-log.component';
 import { FindComponent } from './extended-pdf-viewer/find/find.component';
 import { FormsComponent } from './extended-pdf-viewer/forms/forms.component';
+import { HiddenTabsComponent } from './extended-pdf-viewer/hidden-tabs/hidden-tabs.component';
 import { HidingButtonsComponent } from './extended-pdf-viewer/hiding-buttons/hiding-buttons.component';
 import { I18nComponent } from './extended-pdf-viewer/i18n/i18n.component';
 import { IFrameComponent } from './extended-pdf-viewer/iframe/iframe.component';
@@ -127,6 +128,7 @@ export const routes: Routes = [
       { path: 'book-mode', component: BookModeComponent },
       { path: 'iframe/:id', component: IFrameComponent },
       { path: 'intro', component: IntroComponent },
+      { path: 'hidden-tabs', component: HiddenTabsComponent },
       { path: 'hiding-buttons', component: HidingButtonsComponent },
       { path: 'responsive-design', component: ResponsiveDesignComponent },
       { path: 'links', component: LinksComponent },

@@ -107,25 +107,13 @@ There's a catch: starting with version 8.1.2, ngx-extended-pdf-viewer uses an al
 
 Oh, and if you've got a better idea how to check compatibility, don't hesitate to <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues">open a bug report</a>!
 
-## No PDF file shown - error message "offsetParent not set - cannot scroll" in the console
+## "offsetParent is not set" warning in the console
 
-This error means that the PDF viewer is invisible at load time. For example, that happens frequently with modal windows. If there's a fade-in animation, there's a small time frame when the PDF viewer is still invisible. In this case, you need to add a small delay before initializing it.
+Historically this warning meant the PDF viewer was mounted while invisible (modal mid-fade-in, inactive tab, etc.) and no PDF ever rendered. The host application had to delay opening the PDF until after the container was visible &mdash; see issue <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/489#issuecomment-703838087">#489</a> for the original workarounds.
 
-Two solutions are sketched in the <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/489#issuecomment-703838087">GitHub issues</a>:
+This is a non-issue since version 22.3.0 (#2749): ngx-extended-pdf-viewer now defers its own initialization with a `waitForRootElement()` guard until the host element gains `offsetParent`, so the PDF renders correctly the first time the container becomes visible without any application-side timeout.
 
-```typescript
-openModal(modaltemplate: any): void {
-  modaltemplate.show();
-  setTimeout(() => this.stringSource = this.url, 50); // <<< added delay
-}
-```
-
-If you're using Bootstrap, you can also use the event `(onshown)` like so:
-
-```html
-<div bsModal #pdfModal="bs-modal" class="modal" 
-     (onShown)="onModalShown($event)">
-```
+Starting with version 27.5.0 (#1321), the remaining edge case is also covered: if the viewer initializes visibly and is *later* hidden (route transition, tab switch, …) while the application requests `scrollPageIntoView()`, the request is now deferred via `ResizeObserver`/`IntersectionObserver` and replayed when the viewer becomes visible again, instead of being silently dropped with the legacy warning. No workaround is needed on the application side.
 
 ## Trouble with printing (aka: compatibility to Bootstrap and other CSS frameworks)
 Problems with printing are almost always problems of your CSS code. That doesn't necessarily mean you've done anything wrong.
@@ -255,11 +243,3 @@ constructor() {
 ```
 
 If everything works, the file is lazy-loaded when the PDF viewer opens, and you're rewarded with a non-blocking PDF viewer, even if your PDF file is huge.
-
-## set delayFirstView="1000" (deprecated)
-
-This workaround was needed in the early version of ngx-extended-pdf-viewer, before I understood how to initialize the library correctly. However, it may come in handy every once in a while. Sometimes the initialization of the pdf viewer takes some time, so the PDF file is opened too early. As a work-around, you can add a delay. Setting it to one second is usually a good compromise:
-
-```html
-<ngx-extended-pdf-viewer src="..." [delayFirstView]="1000"></ngx-extended-pdf-viewer>
-```
