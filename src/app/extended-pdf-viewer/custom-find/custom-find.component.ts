@@ -68,6 +68,10 @@ export class CustomFindComponent implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.restoreFindFeature();
+    // pdfDefaultOptions is a module-level singleton — without this reset, every other demo
+    // page would keep using MyCustomFindController, which doesn't honour listenToEventBus
+    // and would shadow the regular controller's multi-color highlights.
+    pdfDefaultOptions.findController = undefined;
   }
 
   public findRegex(): void {

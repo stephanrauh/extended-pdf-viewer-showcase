@@ -25,14 +25,16 @@ export class ModifyingPageOrderComponent implements OnDestroy {
   fullscreenService = inject(FullscreenService);
 
   public activeTab = 'html';
-  public demoTab: 'reorder' | 'splitMerge' = 'reorder';
+  public demoTab: 'reorder' | 'splitMerge' | 'merge' = 'reorder';
   public showViewer = true;
   public enableSplitMerge = false;
+  public enableMerge = false;
 
-  public onDemoTabChange(tab: 'reorder' | 'splitMerge'): void {
+  public onDemoTabChange(tab: 'reorder' | 'splitMerge' | 'merge'): void {
     this.demoTab = tab;
     this.showViewer = false;
     this.enableSplitMerge = tab === 'splitMerge';
+    this.enableMerge = tab === 'merge';
     setTimeout(() => {
       this.showViewer = true;
       this.cdr.markForCheck();

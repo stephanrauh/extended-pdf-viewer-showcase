@@ -398,7 +398,7 @@ class PDFFindController {
   /**
    * @param {PDFFindControllerOptions} options
    */
-  constructor({ linkService, eventBus, updateMatchesCountOnProgress = true, pageViewMode }) {
+  constructor({ linkService, eventBus, updateMatchesCountOnProgress = true, pageViewMode, listenToEventBus = true }) {
     this._linkService = linkService;
     this._eventBus = eventBus;
     this.#updateMatchesCountOnProgress = updateMatchesCountOnProgress;
@@ -411,8 +411,12 @@ class PDFFindController {
     this.onIsPageVisible = null;
 
     this.#reset();
-    eventBus._on("find", this.onFind.bind(this));
-    eventBus._on("findbarclose", this.#onFindBarClose.bind(this));
+    // Honour listenToEventBus so the secondary (programmatic) instance doesn't
+    // double-respond to user-typed searches and shadow the primary controller.
+    if (listenToEventBus) {
+      eventBus._on("find", this.onFind.bind(this));
+      eventBus._on("findbarclose", this.#onFindBarClose.bind(this));
+    }
   }
 
   get highlightMatches() {

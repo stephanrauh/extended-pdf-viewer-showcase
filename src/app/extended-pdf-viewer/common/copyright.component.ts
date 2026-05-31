@@ -11,7 +11,7 @@ import { CopyrightService } from './copyright.service';
 export class CopyrightComponent {
   private copyrightService = inject(CopyrightService);
 
-  @Input() src!: string;
+  @Input() src: string | undefined;
 
   get copyrightHint(): string {
     const hint = this.copyrightService.getCopyrightHint(this.src);

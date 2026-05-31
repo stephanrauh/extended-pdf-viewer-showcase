@@ -145,11 +145,11 @@ function getNormalizeWithNFKC() {
         }
       }
     }
-    if (ranges.join("") !== NormalizeWithNFKC) {
-      throw new Error(
-        "getNormalizeWithNFKC - update the `NormalizeWithNFKC` string."
-      );
-    }
+    // The upstream pdf.js hardcoded `NormalizeWithNFKC` above was generated for a
+    // specific Firefox build's Unicode table. Browsers ship newer Unicode tables
+    // over time, so the runtime-generated `ranges.join("")` no longer matches.
+    // Trust the runtime result instead of throwing the old "update the string" error.
+    NormalizeWithNFKC = ranges.join("");
   }
   return NormalizeWithNFKC;
 }

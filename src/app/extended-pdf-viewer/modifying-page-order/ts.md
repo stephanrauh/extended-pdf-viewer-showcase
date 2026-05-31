@@ -2,8 +2,8 @@
 @Component({ ... })
 export class ModifyingPageOrderComponent {
   // No TypeScript needed!
-  // Page reordering and split & merge are enabled
-  // via the [enablePageReordering] and [enableSplitMerge]
-  // attributes on <ngx-extended-pdf-viewer>.
+  // Page reordering, split & merge, and the "Add file" merge button
+  // are enabled via [enablePageReordering], [enableSplitMerge], and
+  // [enableMerge] on <ngx-extended-pdf-viewer>.
 }
 ```

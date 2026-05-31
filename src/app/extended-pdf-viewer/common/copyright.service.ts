@@ -33,7 +33,10 @@ export class CopyrightService {
     'unverified-signature.pdf': 'the PDF file is published with kind permission by Cristiano Rafael Steffens (see https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/514#issuecomment-720089147).'
   };
 
-  getCopyrightHint(src: string): string | undefined {
+  getCopyrightHint(src: string | undefined | null): string | undefined {
+    if (!src) {
+      return undefined;
+    }
     let key = src;
     const index = src.lastIndexOf("/");
     if (index >= 0) {

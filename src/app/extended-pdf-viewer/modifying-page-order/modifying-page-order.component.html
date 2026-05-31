@@ -22,6 +22,15 @@
             (click)="onDemoTabChange('splitMerge')">
             Split &amp; Merge
           </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="demoTab === 'merge'"
+            [class.border-primary-600]="demoTab === 'merge'"
+            [class.text-gray-500]="demoTab !== 'merge'"
+            [class.border-transparent]="demoTab !== 'merge'"
+            (click)="onDemoTabChange('merge')">
+            Merge Files
+          </button>
         </div>
 
         @if (demoTab === 'reorder') {
@@ -41,6 +50,16 @@
           </ul>
           <p>Enable it with the <code>[enableSplitMerge]</code> attribute.</p>
           <p><strong>Note:</strong> This is an experimental feature from pdf.js. It may change in future versions.</p>
+        }
+        @if (demoTab === 'merge') {
+          <p>The merge feature adds an "Add file" button above the thumbnails. Users can pick another PDF or an image and append its pages to the current document.</p>
+          <ul>
+            <li>Open the sidebar and click the "Add file" button in the header.</li>
+            <li>Select one or more PDFs or images. The picker accepts <code>application/pdf,image/*</code> with <code>multiple</code>.</li>
+            <li>The new pages appear at the end of the document.</li>
+          </ul>
+          <p>Enable it with the <code>[enableMerge]</code> attribute.</p>
+          <p><strong>Note:</strong> Introduced in pdf.js 6.0 and still experimental upstream. It may change in future versions.</p>
         }
       </div>
       <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
@@ -72,9 +91,10 @@
           <!-- Tab content -->
           @if (activeTab === 'html') {
             <div class="tab-content">
-              <app-ie11-markdown [src]="demoTab === 'splitMerge'
-                ? '/assets/extended-pdf-viewer/modifying-page-order/html-split-merge.md'
-                : '/assets/extended-pdf-viewer/modifying-page-order/html.md'"> </app-ie11-markdown>
+              <app-ie11-markdown [src]="
+                demoTab === 'splitMerge' ? '/assets/extended-pdf-viewer/modifying-page-order/html-split-merge.md' :
+                demoTab === 'merge' ? '/assets/extended-pdf-viewer/modifying-page-order/html-merge.md' :
+                '/assets/extended-pdf-viewer/modifying-page-order/html.md'"> </app-ie11-markdown>
             </div>
           }
           @if (activeTab === 'typescript') {
@@ -93,6 +113,7 @@
         [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
         [enablePageReordering]="true"
         [enableSplitMerge]="enableSplitMerge"
+        [enableMerge]="enableMerge"
         [showMovePageButton]="true"
         [sidebarVisible]="true"
         [theme]="theme">
