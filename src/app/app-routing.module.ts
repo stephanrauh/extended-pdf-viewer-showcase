@@ -28,6 +28,7 @@ import { ExportTextComponent } from './extended-pdf-viewer/export-text/export-te
 import { FileInfoComponent } from './extended-pdf-viewer/file-info/file-info.component';
 import { FilteringConsoleLogComponent } from './extended-pdf-viewer/filtering-console-log/filtering-console-log.component';
 import { FindComponent } from './extended-pdf-viewer/find/find.component';
+import { FindCustomFindbarComponent } from './extended-pdf-viewer/find-custom-findbar/find-custom-findbar.component';
 import { FormsComponent } from './extended-pdf-viewer/forms/forms.component';
 import { HiddenTabsComponent } from './extended-pdf-viewer/hidden-tabs/hidden-tabs.component';
 import { HidingButtonsComponent } from './extended-pdf-viewer/hiding-buttons/hiding-buttons.component';
@@ -124,6 +125,7 @@ export const routes: Routes = [
       { path: 'forms', component: FormsComponent },
       { path: 'layers', component: LayersComponent },
       { path: 'find', component: FindComponent },
+      { path: 'find-custom-findbar', component: FindCustomFindbarComponent },
       { path: 'i18n', component: I18nComponent },
       { path: 'infinite-scroll', component: InfiniteScrollComponent },
       { path: 'book-mode', component: BookModeComponent },

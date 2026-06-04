@@ -1,0 +1,87 @@
+.find-custom-findbar-page {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.status-row {
+  display: flex;
+  gap: 1rem;
+  font-family: monospace;
+  font-size: 0.875rem;
+  color: #111;
+  background: #f3f4f6;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+#findbarInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 2px 0;
+}
+
+#findbarInputContainer .find-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+#findbarInputContainer .button-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+#findbarInputContainer #findInput {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  padding: 0 8px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  color: #000000;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#findbarInputContainer #findInput.no-match {
+  background-color: #c0392b;
+  border-color: #000000;
+  color: #ffffff;
+}
+
+#findbarInputContainer .find-btn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0;
+  line-height: 1;
+  margin-right: 5px;
+}
+
+#findbarInputContainer .custom-find-count {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #000000;
+  font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: 2px;
+}

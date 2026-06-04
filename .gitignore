@@ -36,6 +36,9 @@ speed-measure-plugin.json
 /.sass-cache
 /connect.lock
 /coverage
+/e2e/.playwright-report
+/e2e/.playwright-results
+/e2e/test-results
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log

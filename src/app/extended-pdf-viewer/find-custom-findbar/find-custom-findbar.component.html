@@ -1,0 +1,53 @@
+<div class="find-custom-findbar-page">
+  <h2>Reproduction of issue #3210</h2>
+  <p>
+    Mirrors the reporter's
+    <a href="https://gist.github.com/HarshSuthar05/4b37c7cd6c260597756b6a967d19858d">gist</a>
+    without Ionic. The PDF is the reporter's attachment (<code>dummy-manual.pdf</code>).
+    Type into the custom find input below — if matches show, find works on
+    desktop too and the regression is iOS-specific.
+  </p>
+
+  <div class="status-row">
+    <span>Counter:</span>
+    <span id="find-counter-text" data-testid="find-counter-text">{{ searchCounterText }}</span>
+    <span id="find-total" data-testid="find-total">total={{ totalMatches }}</span>
+    <span id="find-current" data-testid="find-current">current={{ currentMatch }}</span>
+    <span id="find-no-match" data-testid="find-no-match">noMatch={{ searchHasNoMatch }}</span>
+  </div>
+
+  <ngx-extended-pdf-viewer
+    [src]="pdfPath"
+    height="80vh"
+    [textLayer]="true"
+    [handTool]="true"
+    [showHandToolButton]="true"
+    [customFindbarButtons]="customFindbarButtons"
+    (updateFindMatchesCount)="onUpdateFindMatchesCount($event)"
+    (updateFindState)="onUpdateFindState($event)"
+  ></ngx-extended-pdf-viewer>
+
+  <ng-template #customFindbarButtons>
+    <div id="findbarInputContainer">
+      <div class="find-row">
+        <input
+          id="findInput"
+          type="text"
+          [(ngModel)]="searchText"
+          (input)="onSearchInput()"
+          [class.no-match]="searchHasNoMatch"
+          autocomplete="off"
+        />
+      </div>
+      <div class="button-row">
+        <button id="findPreviousButton" class="find-btn" (click)="findPrevious()" title="Previous">&lt;</button>
+        <button id="findNextButton" class="find-btn" (click)="findNext()" title="Next">&gt;</button>
+        @if (searchCounterText) {
+          <span class="custom-find-count" id="custom-find-count">
+            {{ searchCounterText }}
+          </span>
+        }
+      </div>
+    </div>
+  </ng-template>
+</div>
