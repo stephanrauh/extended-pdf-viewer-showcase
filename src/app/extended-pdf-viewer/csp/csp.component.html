@@ -5,37 +5,115 @@
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            <button
+            <a
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="cspcomponentTab === 'activating'"
+              [class.border-primary-600]="cspcomponentTab === 'activating'"
+              [class.text-gray-500]="cspcomponentTab !== 'activating'"
+              [class.border-transparent]="cspcomponentTab !== 'activating'"
+              [routerLink]="['..', 'activating-csp']"
+              queryParamsHandling="preserve">
+              Activating CSP
+            </a>
+            <a
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="cspcomponentTab === 'gettingstarted'"
               [class.border-primary-600]="cspcomponentTab === 'gettingstarted'"
               [class.text-gray-500]="cspcomponentTab !== 'gettingstarted'"
               [class.border-transparent]="cspcomponentTab !== 'gettingstarted'"
-              (click)="cspcomponentTab = 'gettingstarted'">
-              Getting started
-            </button>
+              [routerLink]="['..', 'inline-scripts']"
+              queryParamsHandling="preserve">
+              Inline scripts
+            </a>
+            <a
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="cspcomponentTab === 'wasm'"
+              [class.border-primary-600]="cspcomponentTab === 'wasm'"
+              [class.text-gray-500]="cspcomponentTab !== 'wasm'"
+              [class.border-transparent]="cspcomponentTab !== 'wasm'"
+              [routerLink]="['..', 'webassembly']"
+              queryParamsHandling="preserve">
+              WebAssembly
+            </a>
           </div>
           </div>
 
           <!-- Tab content -->
+          @if (cspcomponentTab === 'activating') {
+          <div class="tab-content">
+            <p>
+              Two opt-ins activate the showcase's strict CSP. First, drop a
+              <code>&lt;meta http-equiv="Content-Security-Policy"&gt;</code> tag into
+              <code>src/index.html</code> — the directives on the right are what this
+              showcase ships with. Second, if you include
+              <code>require-trusted-types-for 'script'</code>, register a default
+              Trusted Types policy in <code>src/main.ts</code> so libraries that assign
+              <code>innerHTML</code> without their own policy (ngx-markdown, marked, Prism)
+              keep working.
+            </p>
+            <p>
+              The Angular library and pdf.js already ship the matching policies
+              (<code>pdf-viewer</code>, <code>angular*</code>); your app only needs the
+              default fallback. Wrap its <code>createHTML</code> callback with DOMPurify
+              so the policy actually sanitises — the identity functions shown on the
+              right satisfy the runtime check but strip nothing, so they're only safe
+              when every string passing through is already trusted.
+            </p>
+          </div>
+          }
           @if (cspcomponentTab === 'gettingstarted') {
           <div class="tab-content">
+            <p>
+              By default the PDF viewer doesn't need inline scripts. Opt in to
+              <code>[useInlineScripts]="true"</code> and the viewer skips one extra
+              round-trip for <code>op-chaining-support.js</code> at the cost of needing
+              <code>'unsafe-inline'</code> in your CSP. Toggle the checkbox and watch
+              the network tab.
+            </p>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="useInlineScripts" />
+              <span>use inline scripts</span>
+            </label>
+          </div>
+          }
+          @if (cspcomponentTab === 'wasm') {
+          <div class="tab-content">
 <p>
-            The PDF viewer supports Content Security Policy (CSP) by default.
-            However, if you don't need CSP, the PDF viewer can load the PDF file faster if you disable CSP. To be honest,
-            at the moment the
-            difference is only a single request, but if the idea carries fruit, maybe there's more to come.
+            pdf.js decodes JBIG2 / JPEG2000 images via small WebAssembly modules. Strict CSPs that omit
+            <code>'wasm-unsafe-eval'</code> break that — set <code>pdfDefaultOptions.useWasm = false</code>
+            to load the <code>*_nowasm_fallback.js</code> siblings instead. Output pixels match; only
+            decode speed differs. The PDF below is JBIG2-encoded; watch the network tab for
+            <code>*.wasm</code> vs. <code>*_nowasm_fallback.js</code>.
           </p>
-          <p>
-            You can observe the difference in the network tab of the developer tools of your browser. If "use inline
-            scripts" is checked, the file
-            <code>op-chaining-support.js</code> is not loaded from the server. If "use inline scripts" is unchecked, the
-            file is loaded.
+          <div class="flex items-center gap-3 mt-3">
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="useWasm" />
+              <span>use WebAssembly</span>
+            </label>
+            <button
+              class="px-3 py-1.5 text-xs font-medium bg-primary-600 text-white rounded disabled:opacity-50"
+              [disabled]="benchmarkRunning"
+              (click)="startBenchmark()">
+              @if (benchmarkRunning) {
+                Running… ({{ benchmarkSamples.length }}/{{ benchmarkIterations }})
+              } @else {
+                Run {{ benchmarkIterations }}× benchmark
+              }
+            </button>
+          </div>
+          @if (firstPageRenderMs !== undefined && !benchmarkRunning && benchmarkSamples.length === 0) {
+          <p class="mt-3 text-sm">
+            <strong>Page 1 rendered in {{ firstPageRenderMs }} ms</strong>
+            ({{ useWasm ? 'WebAssembly' : 'JavaScript fallback' }}).
           </p>
-          <label class="flex items-center space-x-2">
-        <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="useInlineScripts" />
-        <span>use inline scripts</span>
-      </label>
+          }
+          @if (!benchmarkRunning && benchmarkSamples.length > 0) {
+          <p class="mt-3 text-sm">
+            <strong>Benchmark ({{ useWasm ? 'WebAssembly' : 'JavaScript fallback' }}):</strong>
+            median {{ benchmarkMedian }} ms (min {{ benchmarkMin }}, max {{ benchmarkMax }}, n={{ benchmarkSamples.length }}).
+            <span class="text-gray-500">[{{ benchmarkSamples.join(', ') }}]</span>
+          </p>
+          }
           </div>
           }
         </div>
@@ -45,6 +123,27 @@
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+            @if (cspcomponentTab === 'activating') {
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'indexhtml'"
+              [class.border-primary-600]="codeTab === 'indexhtml'"
+              [class.text-gray-500]="codeTab !== 'indexhtml'"
+              [class.border-transparent]="codeTab !== 'indexhtml'"
+              (click)="codeTab = 'indexhtml'">
+              index.html
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'maints'"
+              [class.border-primary-600]="codeTab === 'maints'"
+              [class.text-gray-500]="codeTab !== 'maints'"
+              [class.border-transparent]="codeTab !== 'maints'"
+              (click)="codeTab = 'maints'">
+              main.ts
+            </button>
+            }
+            @if (cspcomponentTab !== 'activating') {
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'htmltemplate'"
@@ -54,11 +153,33 @@
               (click)="codeTab = 'htmltemplate'">
               HTML template
             </button>
+            }
+            @if (cspcomponentTab === 'wasm') {
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'tscode'"
+              [class.border-primary-600]="codeTab === 'tscode'"
+              [class.text-gray-500]="codeTab !== 'tscode'"
+              [class.border-transparent]="codeTab !== 'tscode'"
+              (click)="codeTab = 'tscode'">
+              TypeScript
+            </button>
+            }
           </div>
           </div>
 
           <!-- Tab content -->
-          @if (codeTab === 'htmltemplate') {
+          @if (codeTab === 'indexhtml' && cspcomponentTab === 'activating') {
+          <div class="tab-content">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/csp/index-html.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'maints' && cspcomponentTab === 'activating') {
+          <div class="tab-content">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/csp/main-ts.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'htmltemplate' && cspcomponentTab !== 'activating') {
           <div class="tab-content">
 @if (useInlineScripts) {
           <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/csp/html.md"> </app-ie11-markdown>
@@ -68,14 +189,23 @@
           }
           </div>
           }
+          @if (codeTab === 'tscode' && cspcomponentTab === 'wasm') {
+          <div class="tab-content">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/csp/wasm.md"> </app-ie11-markdown>
+          </div>
+          }
         </div>
     </div>
   </div>
 
-  <app-demo [src]="'/assets/pdfs/2404.00465v1.pdf'">
+  <app-demo [src]="cspcomponentTab === 'wasm' ? '/assets/pdfs/jbig2-demo.pdf' : '/assets/pdfs/2404.00465v1.pdf'">
     <div class="w-full">
-      <ngx-extended-pdf-viewer [src]="'./assets/pdfs/2404.00465v1.pdf'" [useInlineScripts]="useInlineScripts"
-      [theme]="theme">
+      <ngx-extended-pdf-viewer
+        [src]="viewerSrc"
+        [useInlineScripts]="useInlineScripts"
+        [theme]="theme"
+        (pdfLoaded)="onPdfLoaded($event)"
+        (pageRendered)="onPageRendered($event)">
       </ngx-extended-pdf-viewer>
     </div>
   </app-demo>

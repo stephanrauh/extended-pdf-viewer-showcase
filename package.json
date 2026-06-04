@@ -20,16 +20,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^22.0.0-rc.2",
-    "@angular/common": "^22.0.0-rc.2",
-    "@angular/compiler": "^22.0.0-rc.2",
-    "@angular/core": "^22.0.0-rc.2",
-    "@angular/forms": "^22.0.0-rc.2",
-    "@angular/platform-browser": "^22.0.0-rc.2",
-    "@angular/platform-browser-dynamic": "^22.0.0-rc.2",
-    "@angular/platform-server": "^22.0.0-rc.2",
-    "@angular/router": "^22.0.0-rc.2",
-    "@angular/ssr": "^22.0.0-rc.2",
+    "@angular/animations": "^22.0.0",
+    "@angular/common": "^22.0.0",
+    "@angular/compiler": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0",
+    "@angular/platform-browser": "^22.0.0",
+    "@angular/platform-browser-dynamic": "^22.0.0",
+    "@angular/platform-server": "^22.0.0",
+    "@angular/router": "^22.0.0",
+    "@angular/ssr": "^22.0.0",
     "@standard-schema/spec": "^1.1.0",
     "angular2-smart-table": "^4.1.1",
     "esbuild": "^0.27.7",
@@ -43,10 +43,10 @@
     "web-animations-js": "^2.3.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^22.0.0-rc.2",
-    "@angular/cli": "^22.0.0-rc.2",
-    "@angular/compiler-cli": "^22.0.0-rc.2",
-    "@angular/language-service": "^22.0.0-rc.2",
+    "@angular-devkit/build-angular": "^22.0.0",
+    "@angular/cli": "^22.0.0",
+    "@angular/compiler-cli": "^22.0.0",
+    "@angular/language-service": "^22.0.0",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.19",
     "@types/jest": "^30.0.0",
@@ -77,20 +77,20 @@
   "overrides": {
     "ajv": ">=8.18.0",
     "angular2-smart-table": {
-      "@angular/forms": "^22.0.0-rc.2",
-      "@angular/core": "^22.0.0-rc.2",
-      "@angular/common": "^22.0.0-rc.2"
+      "@angular/forms": "^22.0.0",
+      "@angular/core": "^22.0.0",
+      "@angular/common": "^22.0.0"
     },
     "ngx-markdown": {
-      "@angular/core": "^22.0.0-rc.2",
-      "@angular/common": "^22.0.0-rc.2",
-      "@angular/platform-browser": "^22.0.0-rc.2"
+      "@angular/core": "^22.0.0",
+      "@angular/common": "^22.0.0",
+      "@angular/platform-browser": "^22.0.0"
     },
     "jest-preset-angular": {
-      "@angular/core": "^22.0.0-rc.2",
-      "@angular/compiler-cli": "^22.0.0-rc.2",
-      "@angular-devkit/build-angular": "^22.0.0-rc.2",
-      "@angular/platform-browser-dynamic": "^22.0.0-rc.2",
+      "@angular/core": "^22.0.0",
+      "@angular/compiler-cli": "^22.0.0",
+      "@angular-devkit/build-angular": "^22.0.0",
+      "@angular/platform-browser-dynamic": "^22.0.0",
       "jest": "^30.0.0"
     },
     "uuid": ">=11.1.1",
