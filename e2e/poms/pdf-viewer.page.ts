@@ -662,6 +662,94 @@ export class PdfViewerPage {
   // ─── text-layer / canvas overlay measurement ─────────────────────────────
 
   /**
+   * Toggles a global stylesheet that forces every text-layer span to render
+   * opaque red. pdf.js paints the text layer transparent (or near-transparent)
+   * so canvas glyphs show through; flipping it to opaque red lets a page
+   * screenshot reveal where the text layer actually lands relative to the
+   * canvas-rendered ink.
+   *
+   * Idempotent — calling enable twice is safe; calling disable when nothing
+   * was injected is a no-op.
+   */
+  async setTextLayerOpaqueRed(enabled: boolean): Promise<void> {
+    await this.page.evaluate((on) => {
+      const ID = '__e2e_textlayer_red__';
+      document.getElementById(ID)?.remove();
+      if (!on) return;
+      const style = document.createElement('style');
+      style.id = ID;
+      // The text layer normally uses `color: transparent` and a low opacity,
+      // and individual spans may carry `-webkit-text-fill-color` for caret
+      // styling. Override every channel that could keep the glyph invisible.
+      style.textContent = `
+        .textLayer { opacity: 1 !important; }
+        .textLayer span,
+        .textLayer br {
+          color: red !important;
+          opacity: 1 !important;
+          -webkit-text-fill-color: red !important;
+          background-color: transparent !important;
+          mix-blend-mode: normal !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }, enabled);
+  }
+
+  /**
+   * Screenshots one `.page` element and counts dark + pure-red pixels.
+   * Decoding happens in the browser (PNG bytes → `<img>` → canvas →
+   * `getImageData`) so no Node-side PNG dependency is needed.
+   *
+   * "Dark" = each of R, G, B < 80 (ink). "Red" = red channel dominates both
+   * green and blue by at least 50 — accepts anti-aliased glyph edges that
+   * a strict `R>180,G<80,B<80` check would drop.
+   */
+  async countPagePixels(
+    pageNumber: number,
+  ): Promise<{ dark: number; red: number; total: number }> {
+    const locator = this.page.locator(`.page[data-page-number="${pageNumber}"]`);
+    await locator.scrollIntoViewIfNeeded();
+    const buffer = await locator.screenshot();
+    const base64 = buffer.toString('base64');
+
+    return await this.page.evaluate(async (b64) => {
+      const blob = await (await fetch(`data:image/png;base64,${b64}`)).blob();
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      try {
+        await new Promise<void>((resolve, reject) => {
+          img.onload = () => resolve();
+          img.onerror = () => reject(new Error('PNG decode failed'));
+          img.src = url;
+        });
+        const cv = document.createElement('canvas');
+        cv.width = img.naturalWidth;
+        cv.height = img.naturalHeight;
+        const ctx = cv.getContext('2d');
+        if (!ctx) return { dark: 0, red: 0, total: 0 };
+        ctx.drawImage(img, 0, 0);
+        const data = ctx.getImageData(0, 0, cv.width, cv.height).data;
+        let dark = 0;
+        let red = 0;
+        const total = data.length / 4;
+        for (let i = 0; i < data.length; i += 4) {
+          const a = data[i + 3];
+          if (a === 0) continue;
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          if (r < 80 && g < 80 && b < 80) dark++;
+          else if (r > 80 && r - g >= 50 && r - b >= 50) red++;
+        }
+        return { dark, red, total };
+      } finally {
+        URL.revokeObjectURL(url);
+      }
+    }, base64);
+  }
+
+  /**
    * For each non-empty <span> in the page's text layer, samples the canvas
    * region underneath (expanded by `paddingRatio` × the div's size to absorb
    * pdf.js's natural sub-pixel drift) and counts how many divs land on

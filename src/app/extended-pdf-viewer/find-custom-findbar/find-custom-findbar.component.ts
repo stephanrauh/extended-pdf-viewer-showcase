@@ -78,6 +78,19 @@ export class FindCustomFindbarComponent implements OnDestroy {
     this.pdfViewerService.findPrevious();
   }
 
+  /**
+   * Pure programmatic find — bypasses the input element and the standard
+   * findbar listener that gets attached to <input id="findInput">. This
+   * isolates the path the reporter actually exercises: `service.find(...)`
+   * with no keystroke synthesis. If this button reports 0 matches but
+   * typing the same text works, the standard findbar's piggyback listener
+   * is involved in the difference.
+   */
+  public findProgrammatically(query: string): void {
+    this.searchText = query;
+    this.pdfViewerService.find(query, { highlightAll: true });
+  }
+
   public onUpdateFindMatchesCount(event: FindResultMatchesCount): void {
     this.currentMatch = Number(event?.current ?? 0);
     this.totalMatches = Number(event?.total ?? 0);

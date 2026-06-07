@@ -98,14 +98,15 @@ export class ThemeService {
    * Save theme preference to localStorage
    */
   private saveToStorage(theme: Theme): void {
-    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
-      return;
-    }
-
+    // The `typeof localStorage` check has to live inside the try/catch.
+    // In sandboxed Safari contexts the `localStorage` property is defined
+    // but its getter throws SecurityError on access, including via `typeof`.
     try {
+      if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+        return;
+      }
       localStorage.setItem(this.storageKey, theme);
     } catch /* (safariSecurityException) */ {
-      // localStorage is not available on Safari in certain contexts
       console.warn('Failed to save theme preference - localStorage not available');
     }
   }
@@ -114,15 +115,12 @@ export class ThemeService {
    * Sync theme with ngx-extended-pdf-viewer's theme system
    */
   private syncPdfViewerTheme(theme: Theme): void {
-    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
-      return;
-    }
-
     try {
-      // Update the PDF viewer's theme localStorage key
+      if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+        return;
+      }
       localStorage.setItem('ngx-extended-pdf-viewer.theme', theme);
     } catch /* (safariSecurityException) */ {
-      // localStorage is not available on Safari in certain contexts
       console.warn('Failed to sync PDF viewer theme - localStorage not available');
     }
   }

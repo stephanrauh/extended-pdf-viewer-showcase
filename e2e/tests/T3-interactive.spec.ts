@@ -60,6 +60,36 @@ test.describe('T3 — find with customFindbarButtons', () => {
       )
       .toBeGreaterThan(0);
   });
+
+  // Same regression check, but pure programmatic — click a button that calls
+  // pdfViewerService.find('H', { highlightAll: true }) directly, with no
+  // typing into <input id="findInput">. This isolates service.find() from
+  // the standard findbar listener that the library auto-attaches to any
+  // element with id="findInput". If the typing test passes but this one
+  // fails (or vice versa), the standard findbar listener is in the loop.
+  test('button-driven service.find("H") reports a non-zero total', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto('/extended-pdf-viewer/find-custom-findbar');
+    await viewer.waitForFirstPageRender();
+
+    // No findbar open — just click the button.
+    await page.locator('#find-H-programmatically').click();
+
+    await expect
+      .poll(
+        async () => {
+          const text = await page.locator('#find-total').textContent();
+          const match = text?.match(/total=(\d+)/);
+          return match ? Number(match[1]) : 0;
+        },
+        {
+          timeout: 30_000,
+          message: 'expected programmatic service.find("H") to report total > 0',
+        },
+      )
+      .toBeGreaterThan(0);
+  });
+
 });
 
 test.describe('T3 — custom-find', () => {

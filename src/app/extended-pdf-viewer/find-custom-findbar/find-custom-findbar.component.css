@@ -18,6 +18,30 @@
   border-radius: 4px;
 }
 
+.programmatic-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background: #fef3c7;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.programmatic-row button {
+  padding: 4px 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.programmatic-row button:hover {
+  background: #1d4ed8;
+}
+
 #findbarInputContainer {
   display: flex;
   flex-direction: column;

@@ -35,6 +35,15 @@ export default defineConfig({
       // the full toolbar.
       use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } },
     },
+    {
+      // Added for stephanrauh/ngx-extended-pdf-viewer#3210 — pdf.js's
+      // `for await (const value of readableStream)` in getTextContent()
+      // throws "undefined is not a function" in Safari, breaking find
+      // across the whole document. Run the find tests against Playwright's
+      // WebKit to gate the api.js patch.
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'], viewport: { width: 1920, height: 1080 } },
+    },
   ],
 
   webServer: {

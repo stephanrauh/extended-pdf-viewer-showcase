@@ -5,7 +5,10 @@
     <a href="https://gist.github.com/HarshSuthar05/4b37c7cd6c260597756b6a967d19858d">gist</a>
     without Ionic. The PDF is the reporter's attachment (<code>dummy-manual.pdf</code>).
     Type into the custom find input below — if matches show, find works on
-    desktop too and the regression is iOS-specific.
+    desktop too and the regression is iOS-specific. The viewer is configured
+    with <code>[minifiedJSLibraries]="false"</code> so Safari stack traces
+    point at <code>viewer-6.0.1154.mjs</code> (unminified) instead of
+    <code>.min.mjs</code>.
   </p>
 
   <div class="status-row">
@@ -16,12 +19,26 @@
     <span id="find-no-match" data-testid="find-no-match">noMatch={{ searchHasNoMatch }}</span>
   </div>
 
+  <div class="programmatic-row">
+    <span>Programmatic find (no input element, no findbar listener):</span>
+    <button id="find-H-programmatically" type="button" (click)="findProgrammatically('H')">
+      service.find('H')
+    </button>
+    <button id="find-the-programmatically" type="button" (click)="findProgrammatically('the')">
+      service.find('the')
+    </button>
+    <button id="find-clear-programmatically" type="button" (click)="findProgrammatically('')">
+      clear
+    </button>
+  </div>
+
   <ngx-extended-pdf-viewer
     [src]="pdfPath"
     height="80vh"
     [textLayer]="true"
     [handTool]="true"
     [showHandToolButton]="true"
+    [minifiedJSLibraries]="false"
     [customFindbarButtons]="customFindbarButtons"
     (updateFindMatchesCount)="onUpdateFindMatchesCount($event)"
     (updateFindState)="onUpdateFindState($event)"
