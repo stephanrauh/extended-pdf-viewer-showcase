@@ -94,7 +94,15 @@
                 }
               ],
               "outputHashing": "all",
-              "statsJson": true
+              "statsJson": true,
+              "optimization": {
+                "scripts": true,
+                "fonts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                }
+              }
             },
             "development": {
               "optimization": false,

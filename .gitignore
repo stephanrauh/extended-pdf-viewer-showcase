@@ -63,3 +63,4 @@ Thumbs.db
 /ftp.sh
 .env
 /ftp/.env
+/test-results/.last-run.json
