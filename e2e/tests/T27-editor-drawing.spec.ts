@@ -1,6 +1,5 @@
 import { test, expect } from '../fixtures';
 import { PdfViewerPage } from '../poms/pdf-viewer.page';
-import * as fs from 'node:fs';
 
 /**
  * T27 — real user gestures land annotations on the editor layer.
@@ -54,98 +53,40 @@ async function expectExportContains(
 }
 
 test.describe('T27 — drawing editors produce persistent annotations', () => {
-  // Control: prove my ink gesture works on a route where T14 verifies it
-  // does. If this passes, /export-annotations is route-specific.
-  test('CONTROL ink on /editor-events page 9', async ({ page }) => {
-    const viewer = new PdfViewerPage(page);
-    await viewer.goto('/extended-pdf-viewer/editor-events');
-    await viewer.waitForPageRender(9);
-    await viewer.activateEditor('draw');
-
-    const editorLayer = page
-      .locator('.page[data-page-number="9"] .annotationEditorLayer')
-      .first();
-    await editorLayer.waitFor({ state: 'visible', timeout: 10_000 });
-    const box = await editorLayer.boundingBox();
-    expect(box).not.toBeNull();
-    // Match T14 exactly (0.3 position, 60→120 move). Use scrollIntoView so
-    // box.y is the layout position of the page top WITHIN the viewport.
-    await editorLayer.scrollIntoViewIfNeeded();
-    const box2 = await editorLayer.boundingBox();
-    const startX = box2!.x + box2!.width * 0.3;
-    const startY = box2!.y + box2!.height * 0.3;
-    await page.mouse.move(startX, startY);
-    await page.mouse.down();
-    await page.mouse.move(startX + 60, startY + 40, { steps: 10 });
-    await page.mouse.move(startX + 120, startY + 20, { steps: 10 });
-    await page.mouse.up();
-    await page.waitForTimeout(800);
-
-    const diag = await page.evaluate(() => {
-      const layer = document.querySelector(
-        '.page[data-page-number="9"] .annotationEditorLayer',
-      );
-      return {
-        layerChildCount: layer?.children.length ?? 0,
-        innerHTML: layer ? layer.innerHTML.slice(0, 800) : null,
-      };
-    });
-    fs.writeFileSync(
-      '/tmp/t27-control.json',
-      JSON.stringify(diag, null, 2),
-    );
-
-    expect(diag.layerChildCount).toBeGreaterThan(0);
-  });
-
   test('ink: a real stroke lands a type-15 annotation in the export', async ({
     page,
   }) => {
     const viewer = await gotoExportRoute(page);
     await viewer.activateEditor('draw');
 
-    const box = await editorLayerBox(page);
-    // Stay inside the central 40 % of the page — Chromium ink mode opens
-    // a "Color / Thickness / Opacity" params panel that floats over the
-    // outer right edge of /export-annotations and swallows pointerdown.
-    const x0 = box.x + box.width * 0.4;
-    const y0 = box.y + box.height * 0.4;
+    // `.annotationEditorLayer` for page 1 is the full PDF-page height, often
+    // taller than the viewer's visible scroll area. A percentage offset like
+    // `box.height * 0.4` can land BELOW the viewer's viewport and route the
+    // pointer event to <html> instead of the editor layer — pdf.js's
+    // pointerdown handler then bails (`event.target !== this.div`) and no
+    // stroke starts. Stay near the top-left, which is guaranteed visible
+    // once we scroll the layer into view.
+    const editorLayer = page
+      .locator('.page[data-page-number="1"] .annotationEditorLayer')
+      .first();
+    await editorLayer.scrollIntoViewIfNeeded();
+    const box = (await editorLayer.boundingBox())!;
+    const x0 = box.x + 120;
+    const y0 = box.y + 80;
     await page.mouse.move(x0, y0);
     await page.mouse.down();
     await page.mouse.move(x0 + 60, y0 + 40, { steps: 12 });
-    await page.mouse.move(x0 + 100, y0 + 20, { steps: 12 });
+    await page.mouse.move(x0 + 120, y0 + 20, { steps: 12 });
     await page.mouse.up();
 
-    // Wait a moment for the commit, then dump diagnostic state.
-    await page.waitForTimeout(800);
-    const diag = await page.evaluate(() => {
-      const layer = document.querySelector(
-        '.page[data-page-number="1"] .annotationEditorLayer',
-      );
-      const editorLike = document.querySelectorAll(
-        '.page[data-page-number="1"] .annotationEditorLayer *',
-      );
-      return {
-        layerExists: !!layer,
-        layerChildCount: layer?.children.length ?? 0,
-        layerInnerHTML: layer ? layer.innerHTML.slice(0, 800) : null,
-        descendantTagCounts: Array.from(editorLike).reduce(
-          (m, el) => ({ ...m, [el.tagName.toLowerCase()]: (m[el.tagName.toLowerCase()] ?? 0) + 1 }),
-          {} as Record<string, number>,
-        ),
-        editorModeAttr:
-          document
-            .querySelector('#primaryEditorInk')
-            ?.classList.contains('toggled') ?? false,
-      };
-    });
-    fs.writeFileSync(
-      '/tmp/t27-ink-debug.json',
-      JSON.stringify(diag, null, 2),
-    );
+    // Ink reports `supportMultipleDrawings = true`, so a single mouseup does
+    // NOT auto-commit — the stroke stays in a shared draw-layer SVG until the
+    // user ends the session. Escape routes through
+    // `unselectAll → commitOrRemove → endDrawingSession(false)`, which
+    // creates the editor on `.annotationEditorLayer`. Unusual semantics
+    // (most apps cancel on Escape) but pdf.js treats it as commit-or-discard.
+    await page.keyboard.press('Escape');
 
-    // pdf.js attaches the new ink editor as a child of .annotationEditorLayer
-    // shortly after pointerup. Poll because the commit is async.
     await expect
       .poll(
         async () =>
