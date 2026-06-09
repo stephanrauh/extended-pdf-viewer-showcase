@@ -180,9 +180,19 @@
             a major part of the pages are just placeholders.
           </p>
           <p>This, in turn, means you can't add an annotation. If you want to add annotations to large files reliably,
-            catch the event <code>(annotationLayerRendered)</code> and add the annotations in the event handler. Note
-            that this event is triggered for every page individually. The event handler should add the annotations
+            catch the event <code>(annotationEditorLayerRendered)</code> and add the annotations in the event handler.
+            Note that this event is triggered for every page individually. The event handler should add the annotations
             that belong to this particular page, but not to other pages.
+          </p>
+          <p>Be sure to wait for <code>(annotationEditorLayerRendered)</code>, <strong>not</strong>
+            <code>(annotationLayerRendered)</code>. <code>addImageToAnnotationLayer()</code> and
+            <code>addHighlightToAnnotationLayer()</code> add <em>editor</em> annotations, so they need the annotation
+            <em>editor</em> layer of the page. That layer is created only after the page has been rendered, and slightly
+            after the (display) annotation layer. Calling these methods too early - for example from an
+            <code>(annotationLayerRendered)</code> handler - means the editor layer for the page doesn't exist yet, and
+            you get the console warning <code>paste: "Cannot read properties of undefined (reading 'deserialize')"</code>
+            while nothing is added (see <a href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/2656"
+              target="_blank" rel="noopener">issue #2656</a>).
           </p>
         </div>
           }

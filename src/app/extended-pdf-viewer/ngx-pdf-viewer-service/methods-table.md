@@ -31,8 +31,8 @@
 | getSerializedAnnotations()        | Annotations         | Get all editor and form annotations in serialized format                                              |
 | addEditorAnnotation()             | Annotations         | Add a new editor annotation                                                                  |
 | removeEditorAnnotations()         | Annotations         | Remove editor annotations (optionally filtered)                                              |
-| addImageToAnnotationLayer()       | Annotations         | Add an image as a stamp annotation                                                           |
-| addHighlightToAnnotationLayer()   | Annotations         | Add a highlight annotation                                                                   |
+| addImageToAnnotationLayer()       | Annotations         | Add an image as a stamp annotation. Targets a specific page's annotation _editor_ layer, so wait for `(annotationEditorLayerRendered)` of that page — not `(annotationLayerRendered)`. Calling it before the editor layer exists logs `paste: "Cannot read properties of undefined (reading 'deserialize')"` and adds nothing (#2656). |
+| addHighlightToAnnotationLayer()   | Annotations         | Add a highlight annotation. Same timing rule as `addImageToAnnotationLayer()`: wait for `(annotationEditorLayerRendered)` of the target page. |
 | switchAnnotationEdtorMode()       | Annotations         | Switch annotation editor mode. When activating a mode at startup, listen to `(annotationEditorLayerRendered)` rather than `(pagesLoaded)` or `(pageRendered)` — the editor layer is created after `pageRendered` fires, so calling it earlier leaves the cursor active but drawing unresponsive until the mode is toggled again. |
 | editorFontSize (property)         | Annotation Editor   | Set font size for text annotations                                                           |
 | editorFontColor (property)        | Annotation Editor   | Set font color for text annotations                                                          |
