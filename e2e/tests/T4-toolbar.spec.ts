@@ -163,6 +163,18 @@ test.describe('T4 toolbar — zoom', () => {
       .toBeGreaterThan(baseline.width);
     const enlarged = await viewer.getCanvasSize(visiblePage);
 
+    // Zoom out the same number of steps we zoomed in, returning to the
+    // baseline scale. getCanvasSize reports the *backing-store* pixel size,
+    // which pdf.js caps at maxCanvasPixels (5 MP on platforms it detects as
+    // iOS — including Playwright's webkit on macOS, which reports platform
+    // "MacIntel" plus touch points). Once that cap is reached the backing
+    // store saturates, so adjacent zoomed-in levels report the *same* width
+    // and a single zoom-out can't be observed. Returning all the way to the
+    // baseline scale drops below the cap, where the shrink is measurable
+    // again — and the poll, by waiting for the backing store to actually
+    // change, also waits for the re-render to settle before we check layer
+    // alignment.
+    await viewer.zoomOut();
     await viewer.zoomOut();
     await expect
       .poll(async () => (await viewer.getCanvasSize(visiblePage)).width, {
