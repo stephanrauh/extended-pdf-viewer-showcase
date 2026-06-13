@@ -64,3 +64,4 @@ Thumbs.db
 .env
 /ftp/.env
 /test-results/.last-run.json
+/e2e/TODO.md
