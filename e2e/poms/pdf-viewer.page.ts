@@ -441,16 +441,48 @@ export class PdfViewerPage {
     tolerancePx = 2,
     options: { includeAnnotationEditorLayer?: boolean } = {},
   ): Promise<void> {
-    const wrapper = await this.getLayerBox(pageNumber, '.canvasWrapper');
-    expect(wrapper, `.canvasWrapper missing on page ${pageNumber}`).not.toBeNull();
-    const ref = wrapper!;
-
     const checked: Array<
       '.textLayer' | '.annotationLayer' | '.annotationEditorLayer'
     > = ['.textLayer', '.annotationLayer'];
     if (options.includeAnnotationEditorLayer) {
       checked.push('.annotationEditorLayer');
     }
+
+    // Layer alignment is eventually-consistent. After a zoom or rotation pdf.js
+    // re-renders the canvas first and relays out the overlays separately — the
+    // text layer in particular is rebuilt asynchronously and can trail the
+    // canvas by a frame or two (most visibly on WebKit). A one-shot read races
+    // that relayout and sees the text layer still at its old position (a near
+    // page-width x offset). So poll until the layers settle within tolerance,
+    // then assert once below for a precise per-layer/-dimension message.
+    const worstMisalignment = async (): Promise<number> => {
+      const ref = await this.getLayerBox(pageNumber, '.canvasWrapper');
+      if (!ref) return Number.POSITIVE_INFINITY;
+      let worst = 0;
+      for (const sel of checked) {
+        const box = await this.getLayerBox(pageNumber, sel);
+        if (!box) continue;
+        worst = Math.max(
+          worst,
+          Math.abs(box.x - ref.x),
+          Math.abs(box.y - ref.y),
+          Math.abs(box.width - ref.width),
+          Math.abs(box.height - ref.height),
+        );
+      }
+      return worst;
+    };
+    await expect
+      .poll(worstMisalignment, { timeout: 5_000 })
+      .toBeLessThanOrEqual(tolerancePx)
+      .catch(() => {
+        // Timed out — fall through to the detailed assertions, which re-measure
+        // and report exactly which layer/dimension is off.
+      });
+
+    const wrapper = await this.getLayerBox(pageNumber, '.canvasWrapper');
+    expect(wrapper, `.canvasWrapper missing on page ${pageNumber}`).not.toBeNull();
+    const ref = wrapper!;
     for (const sel of checked) {
       const box = await this.getLayerBox(pageNumber, sel);
       if (!box) continue;
