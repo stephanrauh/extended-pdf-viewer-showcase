@@ -3,3 +3,13 @@
   margin-left: 16px;
   width: 200px;
 }
+
+/*
+ * #3225 The global stylesheet sets `code { font-size: 16px }`, which looks
+ * oversized inside the smaller `text-sm`/`text-xs` table cells and captions of
+ * the "ID behavior" tab. Let inline <code> follow its surrounding text size.
+ * <pre> code blocks keep the global size, so they're left untouched.
+ */
+.tab-content :not(pre) > code {
+  font-size: inherit;
+}

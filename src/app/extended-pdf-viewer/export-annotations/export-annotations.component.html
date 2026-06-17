@@ -132,70 +132,85 @@
             <div class="tab-content">
               <h3 class="text-lg font-semibold mb-2">Understanding Annotation IDs</h3>
               <p class="mb-3">
-                <strong>Added in version 25.6.2:</strong> All annotations now include an <code>id</code> field when exported or accessed via events.
-                However, it's important to understand how these IDs work to avoid confusion.
+                Every serialized annotation carries two kinds of identifier. Knowing which is which saves a lot of confusion when
+                you store annotations and load them back later.
               </p>
 
-              <h4 class="text-md font-semibold mb-2">ID Behavior Summary</h4>
-              <ul class="list-disc list-inside mb-3 space-y-1">
-                <li><strong>Temporary Only:</strong> IDs are valid only during the current session</li>
-                <li><strong>Not Persistent:</strong> When re-applying annotations via <code>addEditorAnnotation()</code>, new IDs are always assigned</li>
-                <li><strong>Automatically Ignored:</strong> Any <code>id</code> field in annotations you pass to <code>addEditorAnnotation()</code> is ignored</li>
-                <li><strong>Optional for Storage:</strong> You can safely omit the <code>id</code> field when storing annotations for later use</li>
-              </ul>
+              <div class="overflow-x-auto mb-3">
+                <table class="text-sm border border-gray-300">
+                  <thead>
+                    <tr class="bg-gray-100">
+                      <th class="border border-gray-300 px-2 py-1 text-left">Field</th>
+                      <th class="border border-gray-300 px-2 py-1 text-left"><code>id</code></th>
+                      <th class="border border-gray-300 px-2 py-1 text-left"><code>customId</code> (since v28, #3225)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 px-2 py-1">Who sets it</td>
+                      <td class="border border-gray-300 px-2 py-1">pdf.js (automatic)</td>
+                      <td class="border border-gray-300 px-2 py-1">You (e.g. a UUID)</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-2 py-1">Survives a JS save/restore round-trip?<br /><span class="text-xs text-gray-500">(<code>getSerializedAnnotations()</code> → your storage → <code>addEditorAnnotation()</code>)</span></td>
+                      <td class="border border-gray-300 px-2 py-1"><strong>No</strong> — ignored on re-add, a fresh id is assigned</td>
+                      <td class="border border-gray-300 px-2 py-1"><strong>Yes</strong> — preserved, as long as you persist the JSON and re-apply it</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-2 py-1">Survives exporting / downloading a PDF file?<br /><span class="text-xs text-gray-500">(the <strong>Download</strong> button — writing a <code>.pdf</code>, then reopening it; not "Export annotations", which is JSON)</span></td>
+                      <td class="border border-gray-300 px-2 py-1"><strong>No</strong></td>
+                      <td class="border border-gray-300 px-2 py-1"><strong>No</strong> — it lives only in this JS API, never in the file</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-2 py-1">Use it for</td>
+                      <td class="border border-gray-300 px-2 py-1">Live event tracking within one session</td>
+                      <td class="border border-gray-300 px-2 py-1">Matching annotations to your own records</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-              <h4 class="text-md font-semibold mb-2">When to Use IDs</h4>
+              <h4 class="text-md font-semibold mb-2">The temporary <code>id</code></h4>
               <p class="mb-3">
-                IDs are useful for <strong>real-time event tracking</strong>:
+                <code>id</code> (e.g. <code>pdfjs_internal_editor_3</code>) is handy for <strong>real-time tracking</strong>: it appears on every
+                <code>(annotationEditorEvent)</code>, and you can look an annotation up with <code>getSerializedAnnotation(id)</code>. But it is
+                regenerated each session and is dropped when you re-add an annotation, so never persist it.
               </p>
-              <ul class="list-disc list-inside mb-3 space-y-1">
-                <li>Responding to <code>(annotationEditorEvent)</code> - the event includes the annotation ID</li>
-                <li>Using <code>getSerializedAnnotation(id)</code> to retrieve a specific annotation by its temporary ID</li>
-                <li>Tracking changes to specific annotations during a single session</li>
-              </ul>
 
-              <h4 class="text-md font-semibold mb-2">Best Practice: Storing Annotations</h4>
-              <p class="mb-2">
-                When storing annotations for later re-use (e.g., in localStorage or a database), you have two options:
+              <h4 class="text-md font-semibold mb-2">The stable <code>customId</code> (#3225)</h4>
+              <p class="mb-3">
+                Set your own <code>customId</code> on a serialized annotation before you store it, and it is preserved through the
+                <code>getSerializedAnnotations()</code> → store → <code>addEditorAnnotation()</code> round-trip. It is also surfaced on every
+                <code>(annotationEditorEvent)</code> and is accepted by <code>getSerializedAnnotation(customId)</code>, so it is the field to
+                rely on when you need a durable handle. (Keeping <code>customId</code> values unique is your responsibility.)
               </p>
+              <p class="mb-3">
+                <strong>What "stable" means here:</strong> it survives <em>your</em> JavaScript save/restore cycle — you read the annotations out,
+                keep the JSON in your own storage (localStorage, a database, …), and feed it back later with <code>addEditorAnnotation()</code>.
+                It is <strong>not</strong> stored in the PDF itself. If you hit the <strong>Download</strong> button and reopen the resulting file,
+                the <code>customId</code> is gone — it never travels into the document (and neither does the temporary <code>id</code>). It lives
+                purely in this JavaScript export/import API.
+              </p>
+
+              <h4 class="text-md font-semibold mb-2">Best Practice: Storing &amp; Restoring with a Stable ID</h4>
               <div class="bg-gray-100 p-3 rounded mb-3 overflow-x-auto">
-                <pre class="text-xs"><code>// Option 1: Remove IDs before storing (recommended)
-const annotations = pdfService.getSerializedAnnotations();
-const toStore = annotations.map((&#123; id, ...rest &#125;) => rest);
+                <pre class="text-xs"><code>// Save: give each annotation your own stable id (keep it if it already has one).
+const annotations = pdfService.getSerializedAnnotations() ?? [];
+const toStore = annotations.map((a) => (&#123; ...a, customId: a.customId ?? crypto.randomUUID() &#125;));
 localStorage.setItem('annotations', JSON.stringify(toStore));
 
-// Option 2: Keep IDs (they'll be ignored anyway)
-const annotations = pdfService.getSerializedAnnotations();
-localStorage.setItem('annotations', JSON.stringify(annotations));</code></pre>
-              </div>
-              <p class="mb-3">
-                Both approaches work identically because <code>addEditorAnnotation()</code> always assigns new IDs regardless of whether
-                you include the old IDs or not.
-              </p>
-
-              <h4 class="text-md font-semibold mb-2">Example: Re-applying Stored Annotations</h4>
-              <div class="bg-gray-100 p-3 rounded mb-3 overflow-x-auto">
-                <pre class="text-xs"><code>// Re-apply annotations (new IDs will be assigned automatically)
+// Restore: customId is preserved (only the throwaway `id` is regenerated).
 const stored = JSON.parse(localStorage.getItem('annotations'));
 await pdfService.addEditorAnnotation(stored);
 
-// The annotations now have NEW IDs, different from when they were exported</code></pre>
+// getSerializedAnnotations() now returns the same customId values you stored.</code></pre>
               </div>
-
-              <h4 class="text-md font-semibold mb-2">What Happens to IDs?</h4>
-              <p class="mb-3">
-                When you call <code>addEditorAnnotation()</code> with an annotation that has an <code>id</code> field:
-              </p>
-              <ul class="list-disc list-inside mb-3 space-y-1">
-                <li>The provided <code>id</code> is <strong>completely ignored</strong></li>
-                <li>A new unique ID is automatically generated</li>
-                <li>No ID collision detection occurs (because old IDs are never used)</li>
-                <li>This ensures annotations never interfere with each other</li>
-              </ul>
 
               <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-3">
                 <p class="text-sm">
-                  <strong>⚠️ Important:</strong> Do not rely on IDs to persist across document reloads, page refreshes, or sessions.
+                  <strong>⚠️ Important:</strong> "Persisting" here means keeping the serialized JSON in your own storage and re-applying it with
+                  <code>addEditorAnnotation()</code> — use <code>customId</code> for that, since the <code>id</code> you pass in is always ignored.
+                  Neither id is written into the PDF, so downloading the file and reopening it does <strong>not</strong> bring either back.
                 </p>
               </div>
             </div>

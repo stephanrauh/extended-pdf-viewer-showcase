@@ -94,20 +94,32 @@ test.describe('T13 — /simple default toolbar responsive layout', () => {
       // so the canvas can be in the DOM and rendered without being
       // visible to Playwright. The test is about toolbar layout, so
       // wait only for the toolbar to have a layout box.
+      // Wait for pdf.js's responsive toolbar to *settle* into a single row.
+      // On mount the toolbar can briefly render every item at full width —
+      // which wraps to two/three rows — before the breakpoint logic hides the
+      // overflow items. Snapshotting `height` as soon as it first has a box
+      // catches that transient (seen intermittently on webkit), so poll until
+      // the height is in the single-row band instead of measuring once.
+      //
+      // A single-row pdf.js toolbar is ~32px tall; a wrapped layout is ~64px+.
+      // 50px tolerates theme padding but excludes wrapping. The `h > 0` half of
+      // the band also covers "no layout box yet", so this one poll waits for
+      // both "mounted" and "settled".
       const toolbar = page.locator('#toolbarViewer').first();
       await expect
         .poll(
           async () => {
-            const box = await toolbar.boundingBox();
-            return box?.height ?? 0;
+            const h = (await toolbar.boundingBox())?.height ?? 0;
+            return h > 0 && h < 50;
           },
-          { timeout: 15_000 },
+          {
+            timeout: 5_000,
+            message: `toolbar should settle to a single row (~32px, <50px) at viewport ${width}px`,
+          },
         )
-        .toBeGreaterThan(0);
+        .toBe(true);
 
-      // A single-row pdf.js toolbar is ~32px tall; a wrapped two-row
-      // layout would be ~64px. 50px tolerates theme padding but
-      // excludes wrapping.
+      // Now stable — snapshot once more for a precise px in the failure message.
       const toolbarBox = await toolbar.boundingBox();
       expect(
         toolbarBox!.height,
