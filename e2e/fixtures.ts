@@ -1,4 +1,47 @@
 import { test as base, expect, type ConsoleMessage } from '@playwright/test';
+import { execSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import * as path from 'node:path';
+
+/**
+ * Pick the pdf.js build the whole e2e suite runs against, based on the branch
+ * currently checked out in the sibling `mypdf.js` repo:
+ *
+ *   - branch name contains "bleeding-edge"  → every test runs against the
+ *     bleeding-edge build (the showcase's `assetsFolder: 'bleeding-edge'`),
+ *     so the suite validates whatever engine you're developing on;
+ *   - `../mypdf.js` is missing, is not a git work tree, or is on any other
+ *     branch / a stable tag / detached HEAD  → default to the stable build.
+ *
+ * The switch is driven through the same `showcase.viewer` localStorage key the
+ * app itself uses (see nav.component.ts#activateViewer), seeded below.
+ */
+function detectBleedingEdge(): boolean {
+  // fixtures.ts lives in <showcase>/e2e, so mypdf.js is two levels up.
+  const mypdfDir = path.resolve(__dirname, '../../mypdf.js');
+  try {
+    if (!existsSync(mypdfDir)) return false;
+    const git = (args: string): string =>
+      execSync(`git -C "${mypdfDir}" ${args}`, {
+        stdio: ['ignore', 'pipe', 'ignore'],
+      })
+        .toString()
+        .trim();
+    if (git('rev-parse --is-inside-work-tree') !== 'true') return false;
+    return /bleeding-edge/i.test(git('rev-parse --abbrev-ref HEAD'));
+  } catch {
+    // No git, no repo, or any other failure → safe stable default.
+    return false;
+  }
+}
+
+/** True when the suite should exercise the bleeding-edge pdf.js build. */
+export const usingBleedingEdge = detectBleedingEdge();
+
+// eslint-disable-next-line no-console
+console.log(
+  `[e2e] mypdf.js → running against the ${usingBleedingEdge ? 'bleeding-edge' : 'stable'} build`,
+);
 
 type Fixtures = {
   consoleLog: ConsoleMessage[];
@@ -22,6 +65,15 @@ export const test = base.extend<Fixtures>({
           'false',
         );
       });
+      // Align the whole suite with the checked-out mypdf.js branch: when it's
+      // bleeding-edge, switch the showcase to the bleeding-edge build for every
+      // test (same key the in-app viewer switch uses). On stable we leave the
+      // app's own default ('assets') untouched.
+      if (usingBleedingEdge) {
+        await page.addInitScript(() => {
+          localStorage.setItem('showcase.viewer', 'bleeding-edge');
+        });
+      }
       await use(undefined);
     },
     { auto: true },
