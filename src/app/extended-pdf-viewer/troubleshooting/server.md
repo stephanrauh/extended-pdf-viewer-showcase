@@ -47,7 +47,7 @@ customHeaders:
         value: 'application/javascript'
 ```
 
-Azure Web App requires this configuration (notice the `application/javascript` setting):
+Azure **Windows** App Service (IIS) requires this configuration (notice the `application/javascript` setting):
 
 ```xml
 <configuration>
@@ -71,6 +71,19 @@ Azure Web App requires this configuration (notice the `application/javascript` s
         </rewrite>
     </system.webServer>
 </configuration>
+```
+
+Azure **Linux** App Service and **Azure Static Web Apps** ignore `web.config` entirely — it's an IIS (Windows) feature. If your `.mjs` files are still served with the wrong MIME type after deploying a `web.config`, this is why.
+
+On **Azure Static Web Apps**, define the MIME types in `staticwebapp.config.json` (in the root of your deployed app) instead:
+
+```json
+{
+  "mimeTypes": {
+    ".mjs": "text/javascript",
+    ".ftl": "text/plain"
+  }
+}
 ```
 
 ## ASP.NET Core Static Files Configuration Issue
