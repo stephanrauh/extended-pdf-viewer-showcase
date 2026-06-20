@@ -48,6 +48,16 @@
               >
                 Event types
               </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="activeTab === 'screenshot'"
+                [class.border-primary-600]="activeTab === 'screenshot'"
+                [class.text-gray-500]="activeTab !== 'screenshot'"
+                [class.border-transparent]="activeTab !== 'screenshot'"
+                (click)="activeTab = 'screenshot'"
+              >
+                Screenshot annotation
+              </button>
             </div>
           </div>
 
@@ -104,6 +114,58 @@
                   <tr><td><code>drawingStopped</code></td><td>The user stopped actively drawing or highlighting (pointer released).</td></tr>
                 </tbody>
               </table>
+            </div>
+          }
+          @if (activeTab === 'screenshot') {
+            <div class="tab-content">
+              <p>
+                A frequent question (see
+                <a class="text-primary-600 underline" href="https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues/3228" target="_blank" rel="noopener">issue #3228</a>):
+                <em>"After I resized an annotation I want a screenshot of that area, but the
+                x / y / width / height are strange numbers below 1."</em>
+              </p>
+              <p>
+                Those numbers are <strong>normalized coordinates</strong>: fractions between 0 and 1,
+                relative to the page, measured from the top-left corner. They are not pixels and not
+                PDF points. See the dedicated
+                <a class="text-primary-600 underline" [routerLink]="'/extended-pdf-viewer/coordinates'">Coordinate systems</a>
+                page for the full story.
+              </p>
+              <p>
+                Add a highlight, draw, or image annotation in the viewer below (and resize or move it).
+                The viewer keeps reporting the editor's normalized rectangle. Because
+                <code>getPageAsCanvas()</code> accepts a <code>cropBox</code> in exactly these
+                coordinates, screenshotting the annotation needs no coordinate maths at all.
+              </p>
+
+              @if (annotationRect) {
+                <div class="text-xs bg-gray-50 border border-gray-200 rounded p-2 my-2">
+                  <div>editor type: <code>{{ annotationEditorType }}</code> on page <code>{{ annotationPage }}</code></div>
+                  <div>x: <code>{{ annotationRect.x | number: '1.4-4' }}</code></div>
+                  <div>y: <code>{{ annotationRect.y | number: '1.4-4' }}</code></div>
+                  <div>width: <code>{{ annotationRect.width | number: '1.4-4' }}</code></div>
+                  <div>height: <code>{{ annotationRect.height | number: '1.4-4' }}</code></div>
+                </div>
+              } @else {
+                <div class="text-xs text-gray-500 my-2">No annotation yet — add one in the viewer below.</div>
+              }
+
+              <button
+                class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1.5 px-3 text-sm rounded shadow disabled:opacity-50"
+                (click)="takeScreenshot()"
+                [disabled]="!annotationRect"
+              >
+                Screenshot this annotation
+              </button>
+
+              @if (screenshotDataURL) {
+                <div class="mt-3">
+                  <div class="text-xs text-gray-600 mb-1">{{ screenshotWidth }} × {{ screenshotHeight }} px</div>
+                  <img [src]="screenshotDataURL" alt="screenshot of the annotation" class="border border-gray-300" />
+                </div>
+              }
+
+              <app-ie11-markdown src="/assets/extended-pdf-viewer/editor-events/screenshot.md"> </app-ie11-markdown>
             </div>
           }
         </div>

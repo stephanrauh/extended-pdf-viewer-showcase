@@ -2,6 +2,11 @@
   @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
     <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[60%]">
+      <p class="text-sm text-gray-600 mb-2">
+        The positions and sizes below use normalized 0&ndash;1 page-relative coordinates. The
+        <a class="text-primary-600 underline" [routerLink]="'/extended-pdf-viewer/coordinates'">Coordinate systems</a>
+        page explains them and how to convert to pixels or PDF points.
+      </p>
       <div class="w-full">
         <!-- Tab buttons -->
         <div class="overflow-x-auto">

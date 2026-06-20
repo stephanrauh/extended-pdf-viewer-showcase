@@ -6,6 +6,7 @@ import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-annotation-layer-api',
@@ -19,6 +20,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
         DemoComponent,
         NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
+        RouterLink,
     ],
 })
 export class AnnotationLayerApiComponent {

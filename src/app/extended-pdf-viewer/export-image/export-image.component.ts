@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-export-image',
@@ -19,6 +20,7 @@ import { AsyncPipe } from '@angular/common';
         DemoComponent,
         NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
         AsyncPipe,
+        RouterLink,
     ],
 })
 export class ExportImageComponent {

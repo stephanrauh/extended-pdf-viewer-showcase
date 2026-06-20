@@ -6,6 +6,7 @@ import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { PDFDocument, PDFString, PDFName, PDFArray } from 'pdf-lib';
 
 @Component({
@@ -13,7 +14,7 @@ import { PDFDocument, PDFString, PDFName, PDFArray } from 'pdf-lib';
   standalone: true,
   templateUrl: './adding-arbitrary-annotations.component.html',
   styleUrls: ['./adding-arbitrary-annotations.component.css'],
-  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe, RouterLink],
 })
 export class AddingArbitraryAnnotationsComponent {
   private cdr = inject(ChangeDetectorRef);

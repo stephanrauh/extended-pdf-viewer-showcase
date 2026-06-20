@@ -6,6 +6,11 @@
           You can export the PDF file as an image. Note that the text of the PDF usually scales smoothly; you can print it with high resolution. However,
           the images embedded in the PDF file usually don't scale as gracefully, as you can see in the example document.
         </p>
+        <p class="text-sm text-gray-600">
+          Want only a part of the page? <code>getPageAsImage()</code> and <code>getPageAsCanvas()</code> take an optional
+          <code>cropBox</code> in normalized 0&ndash;1 coordinates &mdash; see the
+          <a class="text-primary-600 underline" [routerLink]="'/extended-pdf-viewer/coordinates'">Coordinate systems</a> page.
+        </p>
         <div class="space-y-1">
           <label class="block text-xs font-medium text-gray-700">desired width (pixels)</label>
           <input

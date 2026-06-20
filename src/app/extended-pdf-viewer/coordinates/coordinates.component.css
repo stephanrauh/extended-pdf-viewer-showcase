@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+
+/* The comparison table is rendered by the markdown child component, so we have
+   to pierce view encapsulation to style it. The global stylesheet only sets a
+   background colour, which leaves the columns cramped and borderless. */
+:host ::ng-deep table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1.25rem;
+}
+
+:host ::ng-deep th,
+:host ::ng-deep td {
+  border: 1px solid var(--border-secondary, #d1d5db);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+:host ::ng-deep thead th {
+  font-weight: 600;
+  background-color: var(--bg-tertiary, #f3f4f6);
+}

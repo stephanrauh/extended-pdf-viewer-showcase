@@ -73,6 +73,7 @@ import { EditorSettingsComponent } from './extended-pdf-viewer/editor-settings/e
 import { CustomFindComponent } from './extended-pdf-viewer/custom-find/custom-find.component';
 import { CSPComponent } from './extended-pdf-viewer/csp/csp.component';
 import { EditorEventsComponent } from './extended-pdf-viewer/editor-events/editor-events.component';
+import { CoordinatesComponent } from './extended-pdf-viewer/coordinates/coordinates.component';
 import { LoadingIndicatorComponent } from './extended-pdf-viewer/loading-indicator/loading-indicator.component';
 import { ModifyingPageOrderComponent } from './extended-pdf-viewer/modifying-page-order/modifying-page-order.component';
 import { AddingArbitraryAnnotationsComponent } from './extended-pdf-viewer/adding-arbitrary-annotations/adding-arbitrary-annotations.component';
@@ -144,6 +145,7 @@ export const routes: Routes = [
       { path: 'multiple-documents', component: MultipleDocumentsComponent },
       { path: 'navigation', component: NavigationComponent },
       { path: 'editor-events', component: EditorEventsComponent },
+      { path: 'coordinates', component: CoordinatesComponent },
       { path: 'events', component: PagesLoadedComponent },
       { path: 'pages-loaded', component: PagesLoadedComponent },
       { path: 'passwords', component: PasswordsComponent },

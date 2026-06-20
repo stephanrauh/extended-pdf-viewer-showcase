@@ -5,6 +5,12 @@
         class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[40%]"
       >
         <p>This demo shows how to add annotations to a PDF using pdf-lib.</p>
+        <p class="text-sm text-gray-600">
+          pdf-lib uses PDF user-space coordinates (points, bottom-left origin), so watch out for the
+          flipped Y axis. The
+          <a class="text-primary-600 underline" [routerLink]="'/extended-pdf-viewer/coordinates'">Coordinate systems</a>
+          page explains how the systems relate.
+        </p>
         <div class="space-y-2">
           <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow me-1" (click)="addDemoStickyNotes()">
             Add Demo Annotation
