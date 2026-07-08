@@ -8,7 +8,8 @@
     },
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "analytics": false
   },
   "projects": {
     "pdf-showcase": {
