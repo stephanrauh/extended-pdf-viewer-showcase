@@ -58,7 +58,9 @@ Thumbs.db
 /src/assets/pdfs/checkboxes.pdf
 /src/assets/pdfs/OoPdfFormExample-2.pdf
 /src/assets/pdfs/under-copyright
-*.pdf
+# Do NOT blanket-ignore *.pdf: the demo PDFs above must stay committable.
+# Exclude specific copyrighted/large PDFs individually (see the list above)
+# or place them under src/assets/pdfs/under-copyright/.
 *.docx
 /ftp.sh
 .env

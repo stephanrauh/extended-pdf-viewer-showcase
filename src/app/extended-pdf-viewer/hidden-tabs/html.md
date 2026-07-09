@@ -11,7 +11,7 @@
 
 <div [hidden]="activeTab !== 'tab2'">
   <ngx-extended-pdf-viewer
-    [src]="'./assets/pdfs/sample.pdf'"
+    [src]="'./assets/pdfs/pdf-sample.pdf'"
     [page]="5"
     [height]="'90vh'">
   </ngx-extended-pdf-viewer>

@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'/assets/pdfs/Portugues-para-principiantes-1538054164.pdf'"
+  [src]="'/assets/pdfs/Portugues-para-principiantes.pdf'"
   [height]="'90vh'"
   (pageChange)="onEvent('pageChange', $event)"
   (afterPrint)="onEvent('afterPrint', $event)"

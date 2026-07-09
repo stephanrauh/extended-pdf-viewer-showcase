@@ -1,6 +1,6 @@
 ```html
 <ngx-extended-pdf-viewer
-  [src]="'/assets/pdfs/demo.pdf'"
+  [src]="'/assets/pdfs/pdf-sample.pdf'"
   [height]="'90vh'"
   [mobileFriendlyZoom]="zoom"
 >
