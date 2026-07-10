@@ -103,15 +103,19 @@ export class EditorEventsComponent {
     // box also changes size on "fontSizeChanged" / "commit", which carry no
     // rectangle at all.) Refreshing on every event keeps width/height in sync
     // no matter how the annotation was resized.
-    if (!editor || typeof editor.x !== 'number' || typeof editor.width !== 'number') {
+    //
+    // Use `normalizedPageRect`, not the raw `x`/`y`/`width`/`height`: the raw
+    // values are stored in whatever rotation the page had when the annotation was
+    // added (axes swapped for 90/270), whereas normalizedPageRect is always in the
+    // un-rotated page frame that getPageAsCanvas() expects as its cropBox.
+    //
+    // Guard on the raw numeric fields first: for "drawingStarted"/"drawingStopped"
+    // event.source is the editor *class* (a static dispatch), not a positioned
+    // instance, so it has neither x/y nor normalizedPageRect - skip those.
+    if (!editor || typeof editor.x !== 'number' || typeof editor.width !== 'number' || !editor.normalizedPageRect) {
       return;
     }
-    this.annotationRect = {
-      x: editor.x,
-      y: editor.y,
-      width: editor.width,
-      height: editor.height,
-    };
+    this.annotationRect = editor.normalizedPageRect;
     this.annotationPage = (event as any).page;
     this.annotationEditorType = event.editorType;
   }

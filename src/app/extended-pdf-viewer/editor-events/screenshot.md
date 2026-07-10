@@ -1,13 +1,13 @@
 ### How it works
 
-The `annotationEditorEvent` reports the editor's rectangle in **normalized
-coordinates**: `x`, `y`, `width` and `height` are fractions between `0` and `1`,
-relative to the page and measured from the **top-left** corner. That is why they
-look like "strange numbers below one".
+The `annotationEditorEvent` gives you the live editor as `event.source`. To
+screenshot the annotation, read its **`normalizedPageRect`** and hand it straight
+to `getPageAsCanvas()` (or `getPageAsImage()`) as the `cropBox` — no maths needed.
 
-You don't have to convert anything to screenshot the annotation:
-`getPageAsCanvas()` (and `getPageAsImage()`) accept a `cropBox` argument in
-exactly that coordinate system.
+`normalizedPageRect` is a rectangle in **normalized coordinates**: `x`, `y`,
+`width` and `height` are fractions between `0` and `1`, measured from the
+**top-left** corner of the page. That is why they look like "strange numbers
+below one". It is the exact coordinate system the `cropBox` expects.
 
 ```typescript
 import { NgxExtendedPdfViewerService, PdfPageCropBox } from 'ngx-extended-pdf-viewer';
@@ -28,13 +28,9 @@ public onAnnotationEditorEvent(event: any): void {
     return;
   }
   const editor = event.source;
-  if (editor && typeof editor.x === 'number' && typeof editor.width === 'number') {
-    this.annotationRect = {
-      x: editor.x,           // all four are fractions between 0 and 1,
-      y: editor.y,           // measured from the top-left corner of the page
-      width: editor.width,
-      height: editor.height,
-    };
+  if (editor && editor.normalizedPageRect) {
+    // normalizedPageRect is already a { x, y, width, height } cropBox.
+    this.annotationRect = editor.normalizedPageRect;
     this.annotationPage = event.page;
   }
 }
@@ -49,13 +45,41 @@ public async screenshotAnnotation(): Promise<string | undefined> {
     { scale: 3 },          // render at 3x so the cropped thumbnail stays crisp
     undefined,             // background
     undefined,             // backgroundColorToReplace (keeps the default)
-    undefined,             // annotationMode (keeps the default)
+    undefined,             // annotationMode (keeps the default, see below)
     this.annotationRect,   // <-- the cropBox
   );
 }
 ```
 
-> **Need PDF points instead of a screenshot?** The same normalized rectangle can
-> be turned into PDF user-space coordinates (bottom-left origin) with
+### Why `normalizedPageRect`, and not `editor.x` / `editor.y`?
+
+The editor also exposes raw `x`, `y`, `width` and `height`, and for an annotation
+added on an **un-rotated** page they happen to equal `normalizedPageRect`. But
+those raw values are stored in whatever rotation the page had **when the
+annotation was added**:
+
+- for 90° / 270°, the width and height are **swapped** (the on-screen axes, not
+  the page's), and
+- `y` is the annotation's **bottom** edge, not its top.
+
+So if you rotate the page, then add a stamp, then screenshot it, the raw values
+crop the wrong region entirely. `normalizedPageRect` converts them back into the
+page's un-rotated frame for you, so it always describes the same physical area no
+matter how the page was rotated. Always use it for a `cropBox`.
+
+### The screenshot is WYSIWYG
+
+- **Editor annotations are included.** `getPageAsCanvas()` / `getPageAsImage()`
+  default to `annotationMode: AnnotationMode.ENABLE_STORAGE`, so an image stamp
+  you just added (but haven't saved into the PDF yet) and current form-field
+  values show up in the screenshot. Pass `AnnotationMode.ENABLE` if you only want
+  the annotations already baked into the document.
+- **Rotation is honoured.** A rotated page is captured in its on-screen
+  orientation. To override that, pass a `rotation` (`0` | `90` | `180` | `270`)
+  as the last argument — e.g. `0` always yields the page in its authored
+  orientation regardless of how the user rotated it.
+
+> **Need PDF points instead of a screenshot?** The same rectangle can be turned
+> into PDF user-space coordinates (bottom-left origin) with
 > `pdfPage.getViewport({ scale }).convertToViewportRectangle(...)`, or by calling
 > `event.source.getRect(0, 0)`. See the **Coordinate systems** page for details.

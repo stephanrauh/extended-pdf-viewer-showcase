@@ -54,6 +54,50 @@
               </p>
 
               <angular2-smart-table [settings]="attributeTableSettings" [source]="attributesAndEvents"></angular2-smart-table>
+
+              <h2>Exporting a page: <code>getPageAsCanvas()</code> / <code>getPageAsImage()</code></h2>
+              <p>
+                Both methods render a page to an off-screen canvas;
+                <code>getPageAsImage()</code> additionally returns it as a PNG data URL. They share the same
+                parameters:
+              </p>
+              <pre><code>getPageAsCanvas(
+  pageNumber: number,
+  scale: &#123; scale?: number; width?: number; height?: number &#125;,
+  background?: string,
+  backgroundColorToReplace?: string,   // default '#FFFFFF'
+  annotationMode?: AnnotationMode,     // default AnnotationMode.ENABLE_STORAGE
+  cropBox?: PdfPageCropBox,            // optional region, normalized 0..1
+  rotation?: 0 | 90 | 180 | 270,       // optional rotation override
+): Promise&lt;HTMLCanvasElement | undefined&gt;</code></pre>
+
+              <h3><code>cropBox</code> — screenshot a single region</h3>
+              <p>
+                Pass a <code>cropBox</code> (a <code>&#123; x, y, width, height &#125;</code> rectangle in
+                normalized <code>0..1</code> coordinates, top-left origin, on the page's <strong>un-rotated</strong>
+                frame) to return only that part of the page. To screenshot an annotation, read the editor's
+                <code>event.source.normalizedPageRect</code> from the <code>annotationEditorEvent</code> and pass it
+                straight in — see the <strong>Editor events</strong> demo. Do <em>not</em> use the editor's raw
+                <code>x</code>/<code>y</code>/<code>width</code>/<code>height</code>: they are stored in the rotation
+                the annotation was added at, so they mis-crop rotated annotations.
+              </p>
+
+              <h3><code>annotationMode</code> — what shows up</h3>
+              <p>
+                Defaults to <code>AnnotationMode.ENABLE_STORAGE</code>, so the screenshot is WYSIWYG: it includes
+                annotations you just added with the editor (e.g. an image stamp) and current form-field values, not
+                only the annotations already saved into the PDF. Pass <code>AnnotationMode.ENABLE</code> for saved
+                annotations only, or <code>AnnotationMode.DISABLE</code> for none.
+              </p>
+
+              <h3><code>rotation</code> — override the page rotation</h3>
+              <p>
+                By default the screenshot follows the rotation the user applied in the viewer. Pass a
+                <code>rotation</code> of <code>0</code>, <code>90</code>, <code>180</code> or <code>270</code> to
+                override it: <code>0</code> always yields the page in its authored orientation no matter how the user
+                rotated it on screen, while <code>90</code>/<code>180</code>/<code>270</code> force a specific
+                rotation. When you also pass a <code>cropBox</code>, the crop follows the same rotation.
+              </p>
             </div>
           }
           <!--

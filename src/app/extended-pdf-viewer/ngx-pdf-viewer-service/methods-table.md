@@ -10,8 +10,8 @@
 | filteredPageCount()               | Print Methods       | Get count of pages that will be printed                                                      |
 | getPageAsLines()                  | Text Extraction     | Extract text from a page organized by lines with position data                               |
 | getPageAsText()                   | Text Extraction     | Extract plain text content from a page                                                       |
-| getPageAsCanvas()                 | Image/Canvas Export | Export a page as HTML canvas element                                                         |
-| getPageAsImage()                  | Image/Canvas Export | Export a page as data URL image                                                              |
+| getPageAsCanvas()                 | Image/Canvas Export | Export a page (or a cropped region) as an HTML canvas; optional cropBox and rotation override |
+| getPageAsImage()                  | Image/Canvas Export | Export a page (or a cropped region) as a PNG data URL; optional cropBox and rotation override |
 | getCurrentDocumentAsBlob()        | Document Operations | Get the current PDF document as a blob                                                       |
 | getFormData()                     | Document Operations | Extract form field data from the PDF                                                         |
 | addPageToRenderQueue()            | Page Rendering      | Add a specific page to the rendering queue                                                   |
