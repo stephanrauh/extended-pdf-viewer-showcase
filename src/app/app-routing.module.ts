@@ -73,6 +73,7 @@ import { EditorSettingsComponent } from './extended-pdf-viewer/editor-settings/e
 import { CustomFindComponent } from './extended-pdf-viewer/custom-find/custom-find.component';
 import { CSPComponent } from './extended-pdf-viewer/csp/csp.component';
 import { EditorEventsComponent } from './extended-pdf-viewer/editor-events/editor-events.component';
+import { DragModeComponent } from './extended-pdf-viewer/drag-mode/drag-mode.component';
 import { CoordinatesComponent } from './extended-pdf-viewer/coordinates/coordinates.component';
 import { LoadingIndicatorComponent } from './extended-pdf-viewer/loading-indicator/loading-indicator.component';
 import { ModifyingPageOrderComponent } from './extended-pdf-viewer/modifying-page-order/modifying-page-order.component';
@@ -145,6 +146,7 @@ export const routes: Routes = [
       { path: 'multiple-documents', component: MultipleDocumentsComponent },
       { path: 'navigation', component: NavigationComponent },
       { path: 'editor-events', component: EditorEventsComponent },
+      { path: 'drag-mode', component: DragModeComponent },
       { path: 'coordinates', component: CoordinatesComponent },
       { path: 'events', component: PagesLoadedComponent },
       { path: 'pages-loaded', component: PagesLoadedComponent },

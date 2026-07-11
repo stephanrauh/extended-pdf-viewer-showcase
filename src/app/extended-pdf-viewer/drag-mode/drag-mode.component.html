@@ -1,0 +1,116 @@
+<div class="flex-container-column fill-container">
+  <div class="flex-container-row">
+    <!-- Left: description -->
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[48%]">
+      <h2 class="text-lg font-semibold mb-2">Drag mode &mdash; move &amp; resize without creating artifacts</h2>
+      <p class="mb-2">
+        pdf.js has no dedicated &ldquo;select&rdquo; mode: to grab an annotation you must be in its creation tool, where every click on
+        the empty page drops a new, unwanted annotation. This page shows you how to implement a <strong>drag mode</strong> that suppresses exactly
+        those empty-canvas clicks &mdash; existing annotations stay fully draggable and resizable &mdash; without any change to the library.
+      </p>
+      <ul class="list-disc ms-6 mb-2 text-sm">
+        <li><strong>Double-click</strong> an existing ink/stamp/highlight annotation to activate the editor in <strong>drag</strong> mode.</li>
+        <li>A second double-click switches to <strong>paint</strong>, a third back to <strong>drag</strong>, and so on. The toolbar button does the same step.</li>
+        <li>Committing a freshly drawn annotation drops back to <strong>drag</strong> automatically &mdash; so you never accidentally paint after finishing.</li>
+        <li>Double-clicking a <em>text</em> annotation still edits its text (it is deliberately exempt from the cycle).</li>
+      </ul>
+      <p class="text-sm">
+        Current state:
+        <strong>
+          @switch (state) {
+            @case ('drag') { DRAG — move/resize annotations; empty-canvas clicks are ignored }
+            @case ('paint') { PAINT — clicks create annotations }
+            @default { editor off — double-click an annotation to start }
+          }
+        </strong>
+      </p>
+    </div>
+
+    <!-- Right: source code -->
+    <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[50%]">
+      <div class="overflow-x-auto">
+        <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'html'"
+            [class.border-primary-600]="activeTab === 'html'"
+            [class.text-gray-500]="activeTab !== 'html'"
+            [class.border-transparent]="activeTab !== 'html'"
+            (click)="activeTab = 'html'"
+          >
+            HTML template
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="activeTab === 'typescript'"
+            [class.border-primary-600]="activeTab === 'typescript'"
+            [class.text-gray-500]="activeTab !== 'typescript'"
+            [class.border-transparent]="activeTab !== 'typescript'"
+            (click)="activeTab = 'typescript'"
+          >
+            TypeScript
+          </button>
+        </div>
+      </div>
+
+      @if (activeTab === 'html') {
+        <div class="tab-content">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/drag-mode/html.md"> </app-ie11-markdown>
+        </div>
+      }
+      @if (activeTab === 'typescript') {
+        <div class="tab-content">
+          <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/drag-mode/ts.md"> </app-ie11-markdown>
+        </div>
+      }
+    </div>
+  </div>
+
+  <app-demo [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'">
+    <ngx-extended-pdf-viewer
+      [height]="'80vh'"
+      [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'"
+      [textLayer]="true"
+      [customToolbar]="dragToolbar"
+      (annotationEditorEvent)="onAnnotationEditorEvent($event)"
+      (dblclick)="onViewerDoubleClick($event)"
+      [theme]="theme"
+    >
+    </ngx-extended-pdf-viewer>
+  </app-demo>
+</div>
+
+<ng-template #dragToolbar>
+  <div id="toolbarViewer">
+    <div id="toolbarViewerLeft">
+      <pdf-toggle-sidebar></pdf-toggle-sidebar>
+      <div class="toolbarButtonSpacer"></div>
+      <pdf-paging-area></pdf-paging-area>
+    </div>
+
+    <pdf-zoom-toolbar></pdf-zoom-toolbar>
+
+    <div id="toolbarViewerRight">
+      <pdf-editor></pdf-editor>
+
+      <!-- The custom drag/paint toggle. Same step as the double-click cycle. -->
+      @if (state !== 'none') {
+        <button
+          type="button"
+          class="toolbarButton"
+          style="width: auto; padding: 0 10px; white-space: nowrap;"
+          [style.background-color]="state === 'drag' ? '#2563eb' : ''"
+          [style.color]="state === 'drag' ? '#fff' : ''"
+          [attr.aria-pressed]="state === 'drag'"
+          title="Drag mode: move/resize existing annotations without creating new ones"
+          (click)="cycle()"
+        >
+          &#10021; {{ state === 'drag' ? 'Drag ON' : (state === 'paint' ? 'Paint' : 'Drag') }}
+        </button>
+      }
+
+      <pdf-download></pdf-download>
+      <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
+    </div>
+  </div>
+</ng-template>
