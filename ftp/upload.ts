@@ -1,9 +1,15 @@
 import * as ftp from 'basic-ftp';
 import * as fs from 'fs';
 import * as path from 'path';
-require('dotenv').config();
+import { homedir } from 'os';
+import { join } from 'path';
+require('dotenv').config({ path: join(homedir(), '.pdfviewer-ftp.env') });
 
 console.log(process.env.ftphost);
+if (!process.env.ftppassword) {
+  console.log("FTP credentials are missing.");
+  process.exit();
+}
 
 const remoteRootFolder = '/pdfviewer.net';
 // const remoteRootFolder = '/angularfaces';
