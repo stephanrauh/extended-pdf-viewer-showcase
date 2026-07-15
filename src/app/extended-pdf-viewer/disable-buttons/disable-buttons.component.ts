@@ -73,6 +73,10 @@ export class DisableButtonsComponent {
   public disableCommentEditor = false;
   public disableSignatureEditor = false;
 
+  // pdf.js 6.1: supportsDownloading=false hides the download/save buttons AND
+  // disables the download manager entirely (no-op on the stable/6.0 engine).
+  public disableDownloadingCapability = false;
+
   public get sourcecode() {
     const attrs: string[] = [];
     const add = (name: string, value: boolean) => { if (value) attrs.push(`  [${name}]="true"`); };
@@ -109,6 +113,8 @@ export class DisableButtonsComponent {
     add('disableWrappedScrollButton', this.disableWrappedScrollButton);
     add('disableInfiniteScrollButton', this.disableInfiniteScrollButton);
     add('disableBookModeButton', this.disableBookModeButton);
+    // supportsDownloading defaults to true, so only show it when turned off.
+    if (this.disableDownloadingCapability) attrs.push('  [supportsDownloading]="false"');
 
     if (attrs.length === 0) {
       return `<ngx-extended-pdf-viewer

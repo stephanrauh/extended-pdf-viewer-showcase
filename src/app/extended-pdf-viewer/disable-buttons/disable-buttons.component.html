@@ -39,6 +39,7 @@
             <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableOpenFileButton" /><span>OpenFileButton</span></label>
             <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disablePrintButton" /><span>PrintButton</span></label>
             <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableDownloadButton" /><span>DownloadButton</span></label>
+            <label class="flex items-center space-x-1 text-xs" title="pdf.js 6.1: hides the download/save buttons AND disables the download manager (no-op on stable/6.0)"><input type="checkbox" class="margin compact" [(ngModel)]="disableDownloadingCapability" /><span>Downloading (6.1+)</span></label>
             <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableSecondaryToolbarButton" /><span>SecondaryToolbar</span></label>
             <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableRotateCwButton" /><span>RotateCwButton</span></label>
             <label class="flex items-center space-x-1 text-xs"><input type="checkbox" class="margin compact" [(ngModel)]="disableRotateCcwButton" /><span>RotateCcwButton</span></label>
@@ -80,6 +81,7 @@
       [showRotateCwButton]="true"
       [showRotateCcwButton]="true"
       [showDownloadButton]="true"
+      [supportsDownloading]="!disableDownloadingCapability"
       [showTextEditor]="true"
       [showDrawEditor]="true"
       [showStampEditor]="true"
