@@ -64,10 +64,15 @@ points. Two ways to get there:
 const [x1, y1, x2, y2] = event.source.getRect(0, 0);
 
 // (b) Do it yourself with the page's viewport (this is what the form-field
-//     API and the "Adding arbitrary annotations" demo use internally):
+//     API and the "Adding arbitrary annotations" demo use internally).
+//     pdf.js 6.1 removed viewport.convertToViewportRectangle(), so apply the
+//     viewport transform to both corners of the rectangle instead:
 const dpiRatio = 96 / 72;
-const viewport = pdfPage.getViewport({ scale: dpiRatio });
-const rectInPixels = viewport.convertToViewportRectangle(annotation.rect);
+const { transform } = pdfPage.getViewport({ scale: dpiRatio });
+const toViewport = (x: number, y: number): [number, number] => [x * transform[0] + y * transform[2] + transform[4], x * transform[1] + y * transform[3] + transform[5]];
+const [x1, y1] = toViewport(annotation.rect[0], annotation.rect[1]);
+const [x2, y2] = toViewport(annotation.rect[2], annotation.rect[3]);
+const rectInPixels = [x1, y1, x2, y2];
 ```
 
 Remember the **Y axis flips** between PDF space (bottom-left) and the screen /

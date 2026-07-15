@@ -80,6 +80,8 @@ matter how the page was rotated. Always use it for a `cropBox`.
   orientation regardless of how the user rotated it.
 
 > **Need PDF points instead of a screenshot?** The same rectangle can be turned
-> into PDF user-space coordinates (bottom-left origin) with
-> `pdfPage.getViewport({ scale }).convertToViewportRectangle(...)`, or by calling
-> `event.source.getRect(0, 0)`. See the **Coordinate systems** page for details.
+> into PDF user-space coordinates (bottom-left origin) by calling
+> `event.source.getRect(0, 0)`, or by applying the page viewport's `transform` to
+> the rectangle yourself. (pdf.js 6.1 removed the former
+> `viewport.convertToViewportRectangle(...)` helper.) See the **Coordinate
+> systems** page for details.
