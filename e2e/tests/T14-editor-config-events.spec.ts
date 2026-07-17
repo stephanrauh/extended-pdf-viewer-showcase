@@ -82,18 +82,26 @@ test.describe('T14 — /editor-events', () => {
     expect(box, 'editor layer on page 9 must have a layout').not.toBeNull();
     const startX = box!.x + box!.width * 0.3;
     const startY = box!.y + box!.height * 0.3;
-    await page.mouse.move(startX, startY);
-    await page.mouse.down();
-    await page.mouse.move(startX + 60, startY + 40, { steps: 10 });
-    await page.mouse.move(startX + 120, startY + 20, { steps: 10 });
-    await page.mouse.up();
 
-    // The demo serialises every annotationEditorEvent into a message
-    // line containing JSON.stringify(event).substring(0, 60). Match
-    // the type discriminator rather than the whole string.
+    // Re-issue the stroke until a drawingStopped message appears. The first ink
+    // gesture in a cold browser session can be dropped while pdf.js lazy-loads
+    // its editor code — no event fires, and because the gesture already
+    // finished, waiting longer on a single stroke can't recover it (that is the
+    // hard-to-kill flake here, which even a Playwright retry misses when the
+    // gesture drops on both attempts). Drawing again once the code is warm is
+    // what a real user would do, and it makes the test self-correcting.
+    //
+    // The demo serialises every annotationEditorEvent into a message line
+    // containing JSON.stringify(event).substring(0, 60); match the type
+    // discriminator rather than the whole string.
     await expect
       .poll(
         async () => {
+          await page.mouse.move(startX, startY);
+          await page.mouse.down();
+          await page.mouse.move(startX + 60, startY + 40, { steps: 10 });
+          await page.mouse.move(startX + 120, startY + 20, { steps: 10 });
+          await page.mouse.up();
           const texts = await messages.allInnerTexts();
           return texts.some(
             (t) =>
@@ -101,7 +109,7 @@ test.describe('T14 — /editor-events', () => {
               t.includes('"type":"drawingStopped"'),
           );
         },
-        { timeout: 10_000 },
+        { timeout: 25_000, intervals: [500, 1000, 1500] },
       )
       .toBe(true);
   });

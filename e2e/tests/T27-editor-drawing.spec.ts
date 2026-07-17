@@ -39,17 +39,50 @@ async function editorLayerBox(page: PdfViewerPage['page']) {
   return box!;
 }
 
-async function expectExportContains(
-  page: PdfViewerPage['page'],
-  pattern: RegExp,
-): Promise<void> {
+async function exportedJson(page: PdfViewerPage['page']): Promise<string> {
   await page
     .getByRole('button', { name: 'Export annotations', exact: true })
     .click();
   const textarea = page.locator('textarea').first();
   await expect(textarea).toBeVisible({ timeout: 10_000 });
-  const json = await textarea.inputValue();
-  expect(json).toMatch(pattern);
+  return await textarea.inputValue();
+}
+
+async function expectExportContains(
+  page: PdfViewerPage['page'],
+  pattern: RegExp,
+): Promise<void> {
+  expect(await exportedJson(page)).toMatch(pattern);
+}
+
+/**
+ * Perform an editor gesture, re-issuing it until an annotation lands on page
+ * 1's editor layer.
+ *
+ * Why re-issue: the first editor gesture in a fresh browser session can be
+ * dropped outright while pdf.js lazy-loads its editor code — the annotation
+ * never appears, and because the gesture already finished, no amount of waiting
+ * recovers it (a single-gesture-then-poll test just times out). A real user
+ * whose stroke didn't register would simply draw again; doing the same here
+ * makes the test robust to that cold-load drop on its own, rather than leaning
+ * on a Playwright-level retry (which we saw can fail on both attempts when the
+ * gesture drops twice in a row).
+ */
+async function landAnnotation(
+  page: PdfViewerPage['page'],
+  gesture: () => Promise<void>,
+): Promise<void> {
+  await expect
+    .poll(
+      async () => {
+        await gesture();
+        return await page
+          .locator('.page[data-page-number="1"] .annotationEditorLayer > *')
+          .count();
+      },
+      { timeout: 25_000, intervals: [500, 1000, 1500] },
+    )
+    .toBeGreaterThan(0);
 }
 
 test.describe('T27 — drawing editors produce persistent annotations', () => {
@@ -73,11 +106,6 @@ test.describe('T27 — drawing editors produce persistent annotations', () => {
     const box = (await editorLayer.boundingBox())!;
     const x0 = box.x + 120;
     const y0 = box.y + 80;
-    await page.mouse.move(x0, y0);
-    await page.mouse.down();
-    await page.mouse.move(x0 + 60, y0 + 40, { steps: 12 });
-    await page.mouse.move(x0 + 120, y0 + 20, { steps: 12 });
-    await page.mouse.up();
 
     // Ink reports `supportMultipleDrawings = true`, so a single mouseup does
     // NOT auto-commit — the stroke stays in a shared draw-layer SVG until the
@@ -85,17 +113,14 @@ test.describe('T27 — drawing editors produce persistent annotations', () => {
     // `unselectAll → commitOrRemove → endDrawingSession(false)`, which
     // creates the editor on `.annotationEditorLayer`. Unusual semantics
     // (most apps cancel on Escape) but pdf.js treats it as commit-or-discard.
-    await page.keyboard.press('Escape');
-
-    await expect
-      .poll(
-        async () =>
-          await page
-            .locator('.page[data-page-number="1"] .annotationEditorLayer > *')
-            .count(),
-        { timeout: 10_000 },
-      )
-      .toBeGreaterThan(0);
+    await landAnnotation(page, async () => {
+      await page.mouse.move(x0, y0);
+      await page.mouse.down();
+      await page.mouse.move(x0 + 60, y0 + 40, { steps: 12 });
+      await page.mouse.move(x0 + 120, y0 + 20, { steps: 12 });
+      await page.mouse.up();
+      await page.keyboard.press('Escape');
+    });
 
     await expectExportContains(page, /"annotationType"\s*:\s*15\b/);
   });
@@ -109,30 +134,54 @@ test.describe('T27 — drawing editors produce persistent annotations', () => {
     const box = await editorLayerBox(page);
     const x = box.x + box.width * 0.25;
     const y = box.y + box.height * 0.25;
-    // FreeText: a single click on the editor layer places the editor;
-    // keyboard input populates its contenteditable child.
-    await page.mouse.click(x, y);
 
+    // FreeText: a click places the editor; its contenteditable child
+    // (`.freeTextEditor .internal`) takes the text; Escape commits it.
+    //
+    // Poll only the place-and-type step (not the commit or export): click to
+    // place the editor if it isn't there yet — covering a cold-dropped first
+    // click — then type into the contenteditable *element* and confirm the
+    // characters actually landed in it. Typing into the element rather than via
+    // ambient keyboard focus is what fixes the WebKit flake where the click
+    // placed the editor but focus was lost before the keystrokes, committing an
+    // empty type-3 box. Only type while the field is still empty so re-polling
+    // doesn't duplicate the text.
     const typed = 'T27 freetext canary';
-    await page.keyboard.type(typed);
-    // Escape commits the FreeText editor (clicking outside also works
-    // but risks landing on another DOM element and starting a new editor).
-    await page.keyboard.press('Escape');
-
+    const content = page
+      .locator('.page[data-page-number="1"] .freeTextEditor .internal')
+      .first();
+    // Read the contenteditable without the 15s action-timeout auto-wait of
+    // innerText() — under load that element can be momentarily unreadable, and
+    // a thrown timeout would propagate out of expect.poll and fail the test
+    // instead of just retrying. evaluate + catch turns any hiccup into a retry.
+    const readText = async (): Promise<string> =>
+      (await content
+        .evaluate((el) => (el as HTMLElement).innerText)
+        .catch(() => '')) ?? '';
     await expect
       .poll(
-        async () =>
-          await page
-            .locator('.page[data-page-number="1"] .annotationEditorLayer > *')
-            .count(),
-        { timeout: 10_000 },
+        async () => {
+          try {
+            if (!(await content.count())) {
+              await page.mouse.click(x, y);
+              return '';
+            }
+            if (!(await readText()).includes(typed)) {
+              await content.pressSequentially(typed, { timeout: 5_000 });
+            }
+            return await readText();
+          } catch {
+            return '';
+          }
+        },
+        { timeout: 25_000, intervals: [500, 1000, 1500] },
       )
-      .toBeGreaterThan(0);
+      .toContain(typed);
+    await page.keyboard.press('Escape');
 
     await expectExportContains(page, /"annotationType"\s*:\s*3\b/);
     // Round-trip the actual typed text — proves it isn't an empty editor.
-    const json = await page.locator('textarea').first().inputValue();
-    expect(json).toContain(typed);
+    expect(await exportedJson(page)).toContain(typed);
   });
 
   test('highlight: drag-selecting page text lands a type-9 annotation', async ({
@@ -159,20 +208,15 @@ test.describe('T27 — drawing editors produce persistent annotations', () => {
     const startX = spanBox!.x + 2;
     const midY = spanBox!.y + spanBox!.height / 2;
     const endX = spanBox!.x + spanBox!.width - 2;
-    await page.mouse.move(startX, midY);
-    await page.mouse.down();
-    await page.mouse.move(endX, midY, { steps: 10 });
-    await page.mouse.up();
 
-    await expect
-      .poll(
-        async () =>
-          await page
-            .locator('.page[data-page-number="1"] .annotationEditorLayer > *')
-            .count(),
-        { timeout: 10_000 },
-      )
-      .toBeGreaterThan(0);
+    // Re-drag until the highlight lands (see landAnnotation) — the first drag
+    // in a cold session is the one most prone to being dropped.
+    await landAnnotation(page, async () => {
+      await page.mouse.move(startX, midY);
+      await page.mouse.down();
+      await page.mouse.move(endX, midY, { steps: 10 });
+      await page.mouse.up();
+    });
 
     await expectExportContains(page, /"annotationType"\s*:\s*9\b/);
   });

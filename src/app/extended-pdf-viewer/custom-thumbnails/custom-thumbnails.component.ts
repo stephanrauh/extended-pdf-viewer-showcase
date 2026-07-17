@@ -81,6 +81,12 @@ export class CustomThumbnailsComponent {
 
   private PDFViewerApplication!: IPDFViewerApplication;
 
+  // The page whose radio button should be selected. Tracked here so both
+  // (pageChange) and (thumbnailDrawn) reconcile against the same value: a
+  // thumbnail rendered lazily *after* a navigation still ends up selected,
+  // because onThumbnailDrawn compares its page against this field.
+  private currentPage = 1;
+
   constructor() {
     const notificationService = inject(PDFNotificationService);
 
@@ -90,12 +96,13 @@ export class CustomThumbnailsComponent {
   }
 
   public onPageChange(page: number | undefined): void {
+    this.currentPage = page ?? 1;
     setTimeout(() => {
       const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
       if (radiobuttons) {
         for (let i = 1; i <= radiobuttons.length; i++) {
           const cbx = radiobuttons.item(i - 1) as HTMLInputElement;
-          cbx.checked = cbx.getAttribute('data-page-number') === String(page);
+          cbx.checked = cbx.getAttribute('data-page-number') === String(this.currentPage);
         }
       }
     });
@@ -106,11 +113,11 @@ export class CustomThumbnailsComponent {
     const thumbnail = thumbnailEvent.thumbnail;
     const page = thumbnailEvent.pageId;
 
-    if (page === this.PDFViewerApplication.page) {
-      const radiobutton = thumbnail.querySelector('input.thumbnail-radiobutton');
-      if (radiobutton instanceof HTMLInputElement) {
-        radiobutton.checked = true;
-      }
+    // Reconcile against the tracked current page rather than a live read that
+    // may lag the navigation. A thumbnail that draws late still selects itself.
+    const radiobutton = thumbnail.querySelector('input.thumbnail-radiobutton');
+    if (radiobutton instanceof HTMLInputElement) {
+      radiobutton.checked = page === this.currentPage;
     }
 
     const overlay = thumbnail.querySelector('.image-container') as HTMLElement;

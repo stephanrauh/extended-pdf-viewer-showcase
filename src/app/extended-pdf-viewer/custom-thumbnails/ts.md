@@ -1,12 +1,23 @@
   ```typescript
+  // Selected page, tracked so a lazily-drawn thumbnail can still select itself.
+  private currentPage = 1;
+
+  public onPageChange(page: number | undefined): void {
+    this.currentPage = page ?? 1;
+    const radiobuttons = document.getElementsByClassName('thumbnail-radiobutton');
+    for (let i = 0; i < radiobuttons.length; i++) {
+      const cbx = radiobuttons.item(i) as HTMLInputElement;
+      cbx.checked = cbx.getAttribute('data-page-number') === String(this.currentPage);
+    }
+  }
+
   public onThumbnailDrawn(thumbnailEvent: PdfThumbnailDrawnEvent): void {
     const thumbnail = thumbnailEvent.thumbnail;
+    const page = thumbnailEvent.pageId;
 
-    if (page === this.PDFViewerApplication.page) {
-      const radiobutton = thumbnail.querySelector('input.thumbnail-radiobutton');
-      if (radiobutton instanceof HTMLInputElement) {
-        radiobutton.checked = true;
-      }
+    const radiobutton = thumbnail.querySelector('input.thumbnail-radiobutton');
+    if (radiobutton instanceof HTMLInputElement) {
+      radiobutton.checked = page === this.currentPage;
     }
 
     const overlay = thumbnail.querySelector('.image-container') as HTMLElement;

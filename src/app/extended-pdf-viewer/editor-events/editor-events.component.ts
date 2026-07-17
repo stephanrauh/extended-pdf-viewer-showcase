@@ -100,7 +100,7 @@ export class EditorEventsComponent {
     // The live editor always has the *current* rectangle, so we read it from
     // there rather than from event.value. (event.value is unreliable for this:
     // "sizeChanged" reports the rect from *before* the resize, and a free-text
-    // box also changes size on "fontSizeChanged" / "commit", which carry no
+    // box also changes size on "fontSizeChanged" / "textChanged", which carry no
     // rectangle at all.) Refreshing on every event keeps width/height in sync
     // no matter how the annotation was resized.
     //

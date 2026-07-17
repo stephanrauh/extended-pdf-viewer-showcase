@@ -21,7 +21,7 @@ public onAnnotationEditorEvent(event: any): void {
   // Read the rectangle from the live editor (event.source) - it always has the
   // *current* values. Don't rely on event.value: "sizeChanged" reports the rect
   // from *before* the resize, and a free-text box also changes size on
-  // "fontSizeChanged" / "commit", which carry no rectangle at all. Refreshing on
+  // "fontSizeChanged" / "textChanged", which carry no rectangle at all. Refreshing on
   // every event (except "removed") keeps width/height in sync however the user
   // resized the annotation.
   if (event.type === 'removed') {
