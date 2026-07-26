@@ -51,16 +51,45 @@
           @if (leftCardTab === 'catalog-js') {
             <div class="tab-content">
               <p>
-                PDF files can contain JavaScript code in the catalog dictionary. This JavaScript is executed when the document is opened and can be used for
-                additional actions (AA) or open/close events (OC).
+                A PDF file can carry JavaScript in four different places, and each of them runs at a different moment. The document below has all of them,
+                and every script writes one line into the log field - so you can watch the order of events as it happens.
               </p>
-              <p>These flags control whether JavaScript found in the PDF catalog should be executed:</p>
+              <table class="action-table">
+                <tr><th>Where</th><th>When it runs</th></tr>
+                <tr><td><code>/Names /JavaScript</code></td><td>document-level script, when the file is opened</td></tr>
+                <tr><td><code>/OpenAction</code></td><td>when the file is opened</td></tr>
+                <tr><td><code>/AA</code> in the catalog</td><td>WillPrint, DidPrint, WillSave, DidSave, WillClose*</td></tr>
+                <tr><td><code>/AA</code> on a page</td><td>PageOpen, PageClose - scroll to page 2</td></tr>
+              </table>
+              <p>These two flags decide which of them ngx-extended-pdf-viewer lets through:</p>
               <ul>
-                <li><code>enableCatalogAAJavaScript</code> - Controls execution of Additional Actions JavaScript. It seems only "Will Print" is supported.
-                  The other actions - "Did Print", "Will/Did Close", and "Will/Did Save" are ignored by pdf.js.</li>
-                <li><code>enableOpenActionJavaScript</code> - Controls execution of Open Action JavaScript. Note that pdf.js
-                executes this action twice (as of August 2025).</li>
+                <li><code>enableCatalogAAJavaScript</code> - the additional actions of the catalog. Printing triggers WillPrint
+                  and DidPrint, the download button triggers WillSave and DidSave. Switch the flag off and the log stays empty
+                  for those events, because the library strips the scripts out of the catalog before pdf.js ever sees them.
+                  <br />
+                  *WillClose is the exception: the script is in the file and pdf.js hands it to the sandbox, but you never see it
+                  run. When the viewer closes a document it tears the JavaScript sandbox down before the event gets there, so the
+                  script is dropped. That happens in pdf.js itself, not in this library - the file that dispatches the event is
+                  unchanged from Mozilla's code.</li>
+                <li><code>enableOpenActionJavaScript</code> - the <code>/OpenAction</code> entry. Watch the log: pdf.js runs
+                  this one twice, once while the sandbox initializes the document and once for the "Open" event.</li>
               </ul>
+              <p>
+                Neither flag covers the document-level script in the name tree or the page actions. Those run whenever
+                <code>enableScripting</code> is on - worth knowing if you accept PDF files from strangers.
+              </p>
+              <p>
+                <strong>About the alert boxes:</strong> pdf.js only shows <code>app.alert()</code> when you interacted with
+                the document during the last five seconds, and every alert uses that gesture up. Printing and saving
+                explicitly don't count as an interaction (see <code>event.js</code> in pdf.js), so click into the log field
+                first, then press Ctrl+P - otherwise WillPrint writes its line but stays silent. <code>console.println()</code>
+                has no such restriction; look for "PDF.js Console::" in the browser console.
+              </p>
+              <p>
+                One more thing worth knowing: a script that changes the <em>colour</em> of a field never reaches the printout.
+                pdf.js applies colours to the HTML input element on screen only. Changes to a field's <em>value</em> or
+                <em>visibility</em> do show up, because those go through the annotation storage.
+              </p>
               <div class="space-y-2">
                 <label class="flex items-center space-x-2">
                   <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="enableScripting" />
@@ -123,12 +152,13 @@
     </div>
   }
 
-  <app-demo [src]="leftCardTab === 'catalog-js' ? '/assets/pdfs/address-form.pdf' : '/assets/pdfs/160F-2019.pdf'">
+  <app-demo [src]="leftCardTab === 'catalog-js' ? '/assets/pdfs/pdf-actions-demo.pdf' : '/assets/pdfs/160F-2019.pdf'">
     @if (showPdfViewer) {
       <ngx-extended-pdf-viewer
-        [src]="leftCardTab === 'catalog-js' ? '/assets/pdfs/address-form.pdf' : '/assets/pdfs/160F-2019.pdf'"
+        [src]="leftCardTab === 'catalog-js' ? '/assets/pdfs/pdf-actions-demo.pdf' : '/assets/pdfs/160F-2019.pdf'"
         [height]="'auto'"
         [theme]="theme"
+        [textLayer]="true"
       >
       </ngx-extended-pdf-viewer>
     }

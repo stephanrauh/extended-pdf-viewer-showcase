@@ -1,0 +1,142 @@
+%PDF-1.7
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R /AcroForm 9 0 R
+     /OpenAction 12 0 R
+     /Names << /JavaScript << /Names [(ngxDocLevel) 13 0 R] >> >>
+     /AA << /WC 14 0 R /WS 15 0 R /DS 16 0 R /WP 17 0 R /DP 18 0 R >> >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792]
+     /Resources << /Font << /FR 7 0 R /FB 8 0 R >> >>
+     /Contents 4 0 R /Annots [10 0 R]
+     /AA << /O 19 0 R /C 20 0 R >> >>
+endobj
+4 0 obj
+<< /Length 1466 >>
+stream
+BT
+/FB 17 Tf 1 0 0 1 56 726 Tm (Every JavaScript action a PDF file can have) Tj
+/FR 11 Tf 1 0 0 1 56 700 Tm (Each action below writes one line into the log field, so you can watch the order of events.) Tj
+/FB 11 Tf 1 0 0 1 56 672 Tm (Runs when the file is opened) Tj
+/FR 11 Tf 1 0 0 1 68 654 Tm (document-level JavaScript  \(/Names /JavaScript\)  -  neither switch can turn this one off) Tj
+/FR 11 Tf 1 0 0 1 68 638 Tm (OpenAction  \(/OpenAction\)  -  needs "enable Open Action JavaScript", shows an alert) Tj
+/FR 11 Tf 1 0 0 1 68 622 Tm (PageOpen  \(page /AA /O\)  -  fires again for every page you scroll to) Tj
+/FB 11 Tf 1 0 0 1 56 596 Tm (Runs later - all of these need "enable Catalog AA JavaScript") Tj
+/FR 11 Tf 1 0 0 1 68 578 Tm (WillPrint and DidPrint  \(/AA /WP and /DP\)  -  press Ctrl+P) Tj
+/FR 11 Tf 1 0 0 1 68 562 Tm (WillSave and DidSave  \(/AA /WS and /DS\)  -  click the download button) Tj
+/FR 11 Tf 1 0 0 1 68 546 Tm (WillClose  \(/AA /WC\)  -  in this file, but pdf.js drops it while closing the document) Tj
+/FR 11 Tf 1 0 0 1 68 530 Tm (PageClose  \(page /AA /C\)  -  scroll away from a page) Tj
+/FB 11 Tf 1 0 0 1 56 500 Tm (Click into the log field first, then press Ctrl+P.) Tj
+/FR 10 Tf 1 0 0 1 56 484 Tm (pdf.js only shows an alert when you interacted with the document during the last five seconds,) Tj
+/FR 10 Tf 1 0 0 1 56 470 Tm (and printing itself does not count. Without that click, WillPrint writes to the log but stays silent.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792]
+     /Resources << /Font << /FR 7 0 R /FB 8 0 R >> >>
+     /Contents 6 0 R
+     /AA << /O 21 0 R /C 22 0 R >> >>
+endobj
+6 0 obj
+<< /Length 218 >>
+stream
+BT
+/FB 17 Tf 1 0 0 1 56 726 Tm (Page 2) Tj
+/FR 11 Tf 1 0 0 1 56 700 Tm (Scrolling here fired PageClose on page 1 and PageOpen on this page.) Tj
+/FR 11 Tf 1 0 0 1 56 682 Tm (Scroll back to page 1 to read the log.) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+8 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+9 0 obj
+<< /Fields [10 0 R] /DA (/Helv 0 Tf 0 g) /DR << /Font << /Helv 7 0 R >> >> >>
+endobj
+10 0 obj
+<< /Type /Annot /Subtype /Widget /FT /Tx /Ff 4096 /T (log) /V ()
+     /Rect [56 180 556 450] /DA (/Helv 10 Tf 0 g) /F 4 /P 3 0 R
+     /MK << /BC [0.5 0.5 0.5] /BG [0.97 0.97 0.97] >>
+     /AA << /Fo 23 0 R >> >>
+endobj
+11 0 obj
+<< /Type /Metadata /Subtype /XML /Length 0 >>
+stream
+
+endstream
+endobj
+12 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("OpenAction \(/OpenAction\)"\); } else { console.println\("OpenAction \(/OpenAction\)"\); } app.alert\("OpenAction: this script ran while the document was being opened."\);) >>
+endobj
+13 0 obj
+<< /Type /Action /S /JavaScript /JS (var ngxDoc = this; globalThis.ngxStep = 0; globalThis.ngxLog = function \(name\) {   globalThis.ngxStep = globalThis.ngxStep + 1;   var line = globalThis.ngxStep + ". " + name;   console.println\(line\);   var field = ngxDoc.getField\("log"\);   if \(field\) { field.value = field.value + String.fromCharCode\(10\) + line; } }; ngxLog\("Document-level JavaScript \(/Names /JavaScript\)"\);) >>
+endobj
+14 0 obj
+<< /Type /Action /S /JavaScript /JS (app.alert\("WillClose: the viewer is about to close this document."\); if \(globalThis.ngxLog\) { ngxLog\("WillClose \(/AA /WC\)"\); } else { console.println\("WillClose \(/AA /WC\)"\); }) >>
+endobj
+15 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("WillSave \(/AA /WS\)"\); } else { console.println\("WillSave \(/AA /WS\)"\); }) >>
+endobj
+16 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("DidSave \(/AA /DS\)"\); } else { console.println\("DidSave \(/AA /DS\)"\); }) >>
+endobj
+17 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("WillPrint \(/AA /WP\)"\); } else { console.println\("WillPrint \(/AA /WP\)"\); } app.alert\("WillPrint: this runs before the print dialog opens."\);) >>
+endobj
+18 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("DidPrint \(/AA /DP\)"\); } else { console.println\("DidPrint \(/AA /DP\)"\); }) >>
+endobj
+19 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("PageOpen page 1 \(/AA /O\)"\); } else { console.println\("PageOpen page 1 \(/AA /O\)"\); }) >>
+endobj
+20 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("PageClose page 1 \(/AA /C\)"\); } else { console.println\("PageClose page 1 \(/AA /C\)"\); }) >>
+endobj
+21 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("PageOpen page 2 \(/AA /O\)"\); } else { console.println\("PageOpen page 2 \(/AA /O\)"\); }) >>
+endobj
+22 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("PageClose page 2 \(/AA /C\)"\); } else { console.println\("PageClose page 2 \(/AA /C\)"\); }) >>
+endobj
+23 0 obj
+<< /Type /Action /S /JavaScript /JS (if \(globalThis.ngxLog\) { ngxLog\("Focus on the log field - the alerts are armed for five seconds"\); } else { console.println\("Focus on the log field - the alerts are armed for five seconds"\); }) >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000240 00000 n 
+0000000303 00000 n 
+0000000501 00000 n 
+0000002019 00000 n 
+0000002200 00000 n 
+0000002469 00000 n 
+0000002566 00000 n 
+0000002668 00000 n 
+0000002761 00000 n 
+0000002989 00000 n 
+0000003069 00000 n 
+0000003334 00000 n 
+0000003781 00000 n 
+0000004026 00000 n 
+0000004198 00000 n 
+0000004368 00000 n 
+0000004610 00000 n 
+0000004782 00000 n 
+0000004966 00000 n 
+0000005152 00000 n 
+0000005336 00000 n 
+0000005522 00000 n 
+trailer
+<< /Size 24 /Root 1 0 R >>
+startxref
+5778
+%%EOF
