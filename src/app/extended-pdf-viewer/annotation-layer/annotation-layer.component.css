@@ -1,0 +1,158 @@
+/* ---------------------------------------------------------------------------
+   The clickable layer stack
+   --------------------------------------------------------------------------- */
+
+.layer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.layer-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'name badge'
+    'short css';
+  gap: 0.1rem 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border: 1px solid #d1d5db;
+  border-left-width: 5px;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.layer-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 12%);
+}
+
+.layer-card:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.layer-card--active {
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 2px #2563eb;
+}
+
+/* Layers the current page doesn't have stay clickable - the explanation says why. */
+.layer-card--missing {
+  opacity: 0.55;
+}
+
+.layer-card__name {
+  grid-area: name;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.layer-card__short {
+  grid-area: short;
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+
+.layer-card__badge {
+  grid-area: badge;
+  align-self: center;
+  font-size: 0.65rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.layer-card--missing .layer-card__badge,
+.layer-card--unavailable .layer-card__badge {
+  color: #b45309;
+}
+
+.layer-card__css {
+  grid-area: css;
+  align-self: center;
+  font-size: 0.65rem;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+/* Listed top to bottom, so the last card is the canvas at the bottom of the stack. */
+.layer-card:nth-child(1) {
+  border-left-color: #d946ef;
+}
+.layer-card:nth-child(2) {
+  border-left-color: #f59e0b;
+}
+.layer-card:nth-child(3) {
+  border-left-color: #10b981;
+}
+.layer-card:nth-child(4) {
+  border-left-color: #3b82f6;
+}
+.layer-card:nth-child(5) {
+  border-left-color: #64748b;
+}
+
+.layer-stack__base {
+  margin-top: 0.15rem;
+  padding-top: 0.3rem;
+  border-top: 2px dashed #d1d5db;
+  font-size: 0.65rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------------------
+   Isolating a single layer in the viewer below.
+
+   Every layer is dimmed, then the chosen one is brought back. The text and the
+   annotation layers are invisible by design, so isolating them also paints them -
+   otherwise you would be looking at an empty page and learn nothing.
+   --------------------------------------------------------------------------- */
+
+.isolate ::ng-deep .canvasWrapper,
+.isolate ::ng-deep .textLayer,
+.isolate ::ng-deep .annotationLayer,
+.isolate ::ng-deep .annotationEditorLayer,
+.isolate ::ng-deep .xfaLayer {
+  opacity: 0.04 !important;
+  transition: opacity 0.2s ease;
+}
+
+.isolate-canvasWrapper ::ng-deep .canvasWrapper,
+.isolate-textLayer ::ng-deep .textLayer,
+.isolate-annotationLayer ::ng-deep .annotationLayer,
+.isolate-annotationEditorLayer ::ng-deep .annotationEditorLayer,
+.isolate-xfaLayer ::ng-deep .xfaLayer {
+  opacity: 1 !important;
+}
+
+/* The text layer only holds transparent text, so make it readable while it is isolated. */
+.isolate-textLayer ::ng-deep .textLayer :is(span, br) {
+  color: #1e3a8a !important;
+  background-color: rgb(59 130 246 / 10%);
+  outline: 1px solid rgb(59 130 246 / 25%);
+}
+
+/* The annotation layer consists of invisible hit areas - outline them. */
+.isolate-annotationLayer ::ng-deep .annotationLayer section,
+.isolate-annotationLayer ::ng-deep .annotationLayer .popupTriggerArea {
+  background-color: rgb(16 185 129 / 12%);
+  outline: 2px solid rgb(16 185 129 / 70%);
+}
+
+.isolate-annotationEditorLayer ::ng-deep .annotationEditorLayer {
+  outline: 2px dashed rgb(217 70 239 / 70%);
+  outline-offset: -2px;
+}
+
+.isolate-xfaLayer ::ng-deep .xfaLayer {
+  outline: 2px dashed rgb(245 158 11 / 70%);
+  outline-offset: -2px;
+}
