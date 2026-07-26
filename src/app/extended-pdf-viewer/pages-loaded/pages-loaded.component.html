@@ -56,7 +56,8 @@
                 No message yet. This means no document has been loaded yet.
               </div>
             }
-            @for (m of messages; track m) {
+            <!-- track $index: two events in the same second produce the very same text (NG0955) -->
+            @for (m of messages; track $index) {
               <div>{{ m }}</div>
             }
           </div>

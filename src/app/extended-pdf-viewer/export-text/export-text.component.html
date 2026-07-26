@@ -66,7 +66,8 @@
                 {{ extractedText }}
               </div>
             }
-            @for (line of extractedLines; track line) {
+            <!-- track $index: a document may well contain the same line twice (NG0955) -->
+            @for (line of extractedLines; track $index) {
               <div>
                 {{line}}
               </div>
