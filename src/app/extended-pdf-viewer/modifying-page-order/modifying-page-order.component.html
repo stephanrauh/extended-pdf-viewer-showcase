@@ -31,6 +31,15 @@
             (click)="onDemoTabChange('merge')">
             Merge Files
           </button>
+          <button
+            class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+            [class.text-primary-600]="demoTab === 'api'"
+            [class.border-primary-600]="demoTab === 'api'"
+            [class.text-gray-500]="demoTab !== 'api'"
+            [class.border-transparent]="demoTab !== 'api'"
+            (click)="onDemoTabChange('api')">
+            Merge &amp; delete API
+          </button>
         </div>
 
         @if (demoTab === 'reorder') {
@@ -61,6 +70,54 @@
           </ul>
           <p>Enable it with the <code>[enableMerge]</code> attribute.</p>
           <p><strong>Note:</strong> Introduced in pdf.js 6.0 and still experimental upstream. It may change in future versions.</p>
+        }
+        @if (demoTab === 'api') {
+          <p>
+            <code>NgxExtendedPdfViewerService</code> lets you do the same thing from your code &mdash; and more: the
+            &quot;Add file&quot; button always inserts <em>after</em> the current page, but
+            <code>mergeDocument()</code> can put pages <strong>in front of the document</strong>, too.
+          </p>
+          <p class="text-sm">Try it (the file on the server is never modified &mdash; press &quot;Start over&quot; to reload it):</p>
+          <div class="flex flex-wrap gap-2 my-2">
+            <button class="px-3 py-1.5 text-xs bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
+              [disabled]="busy" (click)="prependDocument()">Add a PDF before page 1</button>
+            <button class="px-3 py-1.5 text-xs bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
+              [disabled]="busy" (click)="appendDocument()">Append the same PDF</button>
+            <button class="px-3 py-1.5 text-xs bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
+              [disabled]="busy" (click)="insertOnePageHere()">Insert one page after the current one</button>
+            <button class="px-3 py-1.5 text-xs bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
+              [disabled]="busy" (click)="addImageAsPage()">Add an image as page 1</button>
+            <button class="px-3 py-1.5 text-xs bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50"
+              [disabled]="busy" (click)="deleteFirstPage()">Delete page 1</button>
+            <button class="px-3 py-1.5 text-xs bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50"
+              [disabled]="busy" (click)="deletePagesTwoToThree()">Delete pages 2-3</button>
+            <label class="px-3 py-1.5 text-xs bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 cursor-pointer">
+              Add your own file first&hellip;
+              <input type="file" accept="application/pdf,image/*" multiple class="hidden" (change)="mergeSelectedFiles($event)" />
+            </label>
+            <button class="px-3 py-1.5 text-xs border border-gray-400 rounded-md hover:bg-gray-100"
+              (click)="reset()">Start over</button>
+          </div>
+          @if (status) {
+            <p class="text-sm bg-primary-50 border border-primary-600/30 rounded-md p-2">{{ status }}</p>
+          }
+          <ul class="text-sm mt-2">
+            <li><code>mergeDocument(source, options)</code> takes a URL, a <code>File</code>, a <code>Blob</code>, raw
+              bytes, or an <code>ImageBitmap</code> &mdash; or an array of them. <code>insertAfterPage</code> counts from
+              1, and <code>0</code> means &quot;in front of the document&quot;; omit it to append.
+              <code>includePages</code> and <code>excludePages</code> pick single pages and ranges, e.g.
+              <code>[1, [4, 8]]</code>.</li>
+            <li><code>deletePages(pages)</code> removes pages by number, e.g. <code>deletePages([1, [8, 10]])</code>.
+              Unlike the sidebar's delete button, this can't be undone.</li>
+            <li><code>extractPages(pageInfos)</code> is the escape hatch: it passes pdf.js's own page descriptions
+              through unchanged, so you can combine several documents in one go &mdash; at the price of pdf.js's
+              0-based counting.</li>
+          </ul>
+          <p class="text-sm">
+            All three replace the document on screen and resolve once it has been rendered. Pages the user has already
+            reordered in the sidebar keep their position. Use <code>getCurrentDocumentAsBlob()</code> if you want to
+            store the result.
+          </p>
         }
       </div>
       <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
@@ -95,12 +152,15 @@
               <app-ie11-markdown [src]="
                 demoTab === 'splitMerge' ? '/assets/extended-pdf-viewer/modifying-page-order/html-split-merge.md' :
                 demoTab === 'merge' ? '/assets/extended-pdf-viewer/modifying-page-order/html-merge.md' :
+                demoTab === 'api' ? '/assets/extended-pdf-viewer/modifying-page-order/html-api.md' :
                 '/assets/extended-pdf-viewer/modifying-page-order/html.md'"> </app-ie11-markdown>
             </div>
           }
           @if (activeTab === 'typescript') {
             <div class="tab-content">
-              <app-ie11-markdown src="/assets/extended-pdf-viewer/modifying-page-order/ts.md"> </app-ie11-markdown>
+              <app-ie11-markdown [src]="demoTab === 'api'
+                ? '/assets/extended-pdf-viewer/modifying-page-order/ts-api.md'
+                : '/assets/extended-pdf-viewer/modifying-page-order/ts.md'"> </app-ie11-markdown>
             </div>
           }
         </div>
