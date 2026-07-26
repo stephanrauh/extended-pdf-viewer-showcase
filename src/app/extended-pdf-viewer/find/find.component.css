@@ -17,11 +17,38 @@
 }
 
 .padding-top {
-  padding-top: 0.5em;
+  padding-top: 0.25em;
 }
 
 .compact {
-  height: 30px;
+  height: 24px;
+}
+
+/*
+ * The search options used to be one tall column, which pushed the PDF viewer so far down
+ * that a search result couldn't scroll into view. Two columns halve the height.
+ */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1rem;
+  align-items: center;
+}
+
+.checkbox-grid .section.compact {
+  height: auto;
+  min-height: 22px;
+}
+
+.checkbox-grid span {
+  font-size: 13px;
+  line-height: 1.15;
+}
+
+@media (max-width: 900px) {
+  .checkbox-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 small {
@@ -34,7 +61,7 @@ small {
 }
 
 .column-header {
-  min-height: 50px;
+  min-height: 38px;
   display: flex;
   flex-direction: column;
   justify-content: center;

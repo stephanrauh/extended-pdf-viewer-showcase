@@ -1,7 +1,7 @@
 <div class="flex-container-column fill-container">
   @if (!(fullscreenService.isFullscreen$ | async)) {
     <div class="flex-container-row">
-      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[55%]">
+      <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-3 mt-1 flex-1 box-border max-w-[55%]">
         <div class="w-full">
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
@@ -58,12 +58,13 @@
                     <label for="search-input" class="block text-sm font-medium text-gray-700 mb-1">Search Term</label>
                     <input
                       id="search-input"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                      class="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
                       [(ngModel)]="searchtext"
                       placeholder="search term"
                     />
                   </div>
                 </section>
+                <div class="checkbox-grid">
                 <section class="section compact">
                   <label class="flex items-center space-x-2">
                     <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="highlightAll" (change)="onCheckboxClicked()" />
@@ -124,10 +125,11 @@
                     <span>don't scroll the find result into view</span>
                   </label>
                 </section>
+                </div>
                 <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext(false)">next</button>
+                  <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1 px-4 rounded shadow" (click)="findNext(false)">next</button>
                   <button
-                    class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow"
+                    class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1 px-4 rounded shadow"
                     (click)="findPrevious(false)"
                     style="margin-left: 10px"
                   >
@@ -175,7 +177,7 @@
                       <label for="user-search-input" class="block text-sm font-medium text-gray-700 mb-1">User Search Term</label>
                       <input
                         id="user-search-input"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                        class="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
                         [(ngModel)]="searchtext"
                         placeholder="search term"
                       />
@@ -242,9 +244,9 @@
                     </label>
                   </section>
                   <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-                    <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext(false)">next</button>
+                    <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1 px-4 rounded shadow" (click)="findNext(false)">next</button>
                     <button
-                      class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow"
+                      class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1 px-4 rounded shadow"
                       (click)="findPrevious(false)"
                       style="margin-left: 10px"
                     >
@@ -263,7 +265,7 @@
                       <label for="api-search-input" class="block text-sm font-medium text-gray-700 mb-1">API Search Term</label>
                       <input
                         id="api-search-input"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
+                        class="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 margin"
                         [(ngModel)]="searchtext2"
                         placeholder="search term"
                       />
@@ -330,9 +332,9 @@
                     </label>
                   </section>
                   <section class="section" style="margin-top: 5px; margin-bottom: 10px">
-                    <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="findNext(true)">next</button>
+                    <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1 px-4 rounded shadow" (click)="findNext(true)">next</button>
                     <button
-                      class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow"
+                      class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-1 px-4 rounded shadow"
                       (click)="findPrevious(true)"
                       style="margin-left: 10px"
                     >
