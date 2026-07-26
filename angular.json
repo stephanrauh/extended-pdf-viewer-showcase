@@ -41,7 +41,8 @@
               {
                 "glob": "**/*",
                 "input": "node_modules/ngx-extended-pdf-viewer/assets",
-                "output": "/assets/"
+                "output": "/assets/",
+                "ignore": ["locale/fr/viewer.ftl"]
               },
               {
                 "glob": "**/*",
@@ -51,7 +52,8 @@
               {
                 "glob": "**/*",
                 "input": "node_modules/ngx-extended-pdf-viewer/bleeding-edge",
-                "output": "/bleeding-edge/"
+                "output": "/bleeding-edge/",
+                "ignore": ["locale/fr/viewer.ftl"]
               },
               {
                 "glob": "**/*",
