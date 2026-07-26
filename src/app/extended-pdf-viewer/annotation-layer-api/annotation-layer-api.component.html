@@ -103,13 +103,19 @@
                 <td>
                   <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow h-16"
                     title="Add image using pixel coordinates (250px from left edge, 350px from bottom)"
-                    (click)="addImage({ left: '250px', bottom: '350px' })">
-                    addImage({{ 'left: 250px, bottom: 350px'}})
+                    (click)="addImage({ left: '60px', bottom: '120px' })">
+                    addImage({{ 'left: 60px, bottom: 120px'}})
                   </button>
                 </td>
               </tr>
             </tbody>
           </table>
+          <p class="mt-3 text-sm text-gray-600">
+            Percentages are the safe choice. Pixel values refer to the page <em>as it is rendered right now</em>, so
+            they shrink when the user zooms out or the window gets smaller - a value that fits at full size can end up
+            outside the page. The library keeps the rectangle on the page and tells you in the console when nothing is
+            left to draw on.
+          </p>
         </div>
           }
         @if (activeTab === 'highlights') {
