@@ -89,6 +89,33 @@ export class LinksComponent {
   public annotationLayerLinks: string[] = [];
   public autoDetectedLinks: string[] = [];
 
+  /**
+   * The (annotationLayerRendered) and (linkAnnotationsAdded) events only fire while a page is
+   * being rendered. Pages that are already on screen when you open the "Deactivating links" tab
+   * never see them, so reload the viewer to render every page again - and to bring the links
+   * back when you leave the tab.
+   */
+  public selectTab(tab: string): void {
+    if (this.linkscomponentTab === tab) {
+      return;
+    }
+    const deactivationChanged = this.linkscomponentTab === 'deactivatinglinks' || tab === 'deactivatinglinks';
+    this.linkscomponentTab = tab;
+    if (tab === 'autodetected') {
+      this.resetAutoDetectedLinks();
+    } else if (deactivationChanged) {
+      this.reloadViewer();
+    }
+  }
+
+  private reloadViewer(): void {
+    this.hidden = true;
+    setTimeout(() => {
+      this.hidden = false;
+      this.cdr.markForCheck();
+    }, 250);
+  }
+
   public afterAnnotationLayerRendered(event: AnnotationLayerRenderedEvent) {
     if (this.linkscomponentTab === 'deactivatinglinks') {
       this.deactivateLinks(event.source.div as HTMLDivElement);
@@ -111,11 +138,7 @@ export class LinksComponent {
   public resetAutoDetectedLinks() {
     this.annotationLayerLinks = [];
     this.autoDetectedLinks = [];
-    this.hidden = true;
-    setTimeout(() => {
-      this.hidden = false;
-      this.cdr.markForCheck();
-    }, 250);
+    this.reloadViewer();
   }
 
   private extractLinks(div: HTMLDivElement): string[] {

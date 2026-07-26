@@ -14,7 +14,7 @@
                 [class.border-primary-600]="linkscomponentTab === 'defaultlinktargets'"
                 [class.text-gray-500]="linkscomponentTab !== 'defaultlinktargets'"
                 [class.border-transparent]="linkscomponentTab !== 'defaultlinktargets'"
-                (click)="linkscomponentTab = 'defaultlinktargets'"
+                (click)="selectTab('defaultlinktargets')"
               >
                 Default link targets
               </button>
@@ -24,7 +24,7 @@
                 [class.border-primary-600]="linkscomponentTab === 'description'"
                 [class.text-gray-500]="linkscomponentTab !== 'description'"
                 [class.border-transparent]="linkscomponentTab !== 'description'"
-                (click)="linkscomponentTab = 'description'"
+                (click)="selectTab('description')"
               >
                 Description
               </button>
@@ -34,7 +34,7 @@
                 [class.border-primary-600]="linkscomponentTab === 'deactivatinglinks'"
                 [class.text-gray-500]="linkscomponentTab !== 'deactivatinglinks'"
                 [class.border-transparent]="linkscomponentTab !== 'deactivatinglinks'"
-                (click)="linkscomponentTab = 'deactivatinglinks'"
+                (click)="selectTab('deactivatinglinks')"
               >
                 Deactivating links
               </button>
@@ -44,7 +44,7 @@
                 [class.border-primary-600]="linkscomponentTab === 'autodetected'"
                 [class.text-gray-500]="linkscomponentTab !== 'autodetected'"
                 [class.border-transparent]="linkscomponentTab !== 'autodetected'"
-                (click)="linkscomponentTab = 'autodetected'; resetAutoDetectedLinks()"
+                (click)="selectTab('autodetected')"
               >
                 Auto-detected links
               </button>
@@ -187,24 +187,24 @@
         </div>
 
         <!-- Tab content -->
-        @if (codeTab === 'typescript' && linkscomponentTab !== 'defaultlinktargets' && linkscomponentTab !== 'autodetected') {
-          <div class="tab-content">
-            <app-ie11-markdown [data]="sourcecode | language: 'typescript'"></app-ie11-markdown>
-          </div>
-        }
-        @if (codeTab === 'html' && linkscomponentTab !== 'defaultlinktargets' && linkscomponentTab !== 'autodetected') {
-          <div class="tab-content">
-            <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html.md"></app-ie11-markdown>
-          </div>
-        }
-        @if (codeTab === 'typescript' && linkscomponentTab === 'defaultlinktargets') {
+        @if (codeTab === 'typescript' && linkscomponentTab === 'deactivatinglinks') {
           <div class="tab-content">
             <app-ie11-markdown src="/assets/extended-pdf-viewer/links/ts2.md"></app-ie11-markdown>
           </div>
         }
-        @if (codeTab === 'html' && linkscomponentTab === 'defaultlinktargets') {
+        @if (codeTab === 'html' && linkscomponentTab === 'deactivatinglinks') {
           <div class="tab-content">
             <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html2.md"></app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'typescript' && (linkscomponentTab === 'defaultlinktargets' || linkscomponentTab === 'description')) {
+          <div class="tab-content">
+            <app-ie11-markdown [data]="sourcecode | language: 'typescript'"></app-ie11-markdown>
+          </div>
+        }
+        @if (codeTab === 'html' && (linkscomponentTab === 'defaultlinktargets' || linkscomponentTab === 'description')) {
+          <div class="tab-content">
+            <app-ie11-markdown src="/assets/extended-pdf-viewer/links/html.md"></app-ie11-markdown>
           </div>
         }
         @if (codeTab === 'typescript' && linkscomponentTab === 'autodetected') {
