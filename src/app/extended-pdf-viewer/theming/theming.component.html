@@ -108,9 +108,14 @@
           </div>
 
           <!-- Tab content -->
-          @if (codeTab === 'htmltemplate' && themingcomponentTab !== 'pdfbackground') {
+          @if (codeTab === 'htmltemplate' && themingcomponentTab === 'lighttheme') {
           <div class="tab-content">
-<app-ie11-markdown src="/assets/extended-pdf-viewer/theming/html.md"> </app-ie11-markdown>
+<app-ie11-markdown src="/assets/extended-pdf-viewer/theming/html-light.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'htmltemplate' && themingcomponentTab === 'darktheme') {
+          <div class="tab-content">
+<app-ie11-markdown src="/assets/extended-pdf-viewer/theming/html-dark.md"> </app-ie11-markdown>
           </div>
           }
           @if (codeTab === 'typescript' && themingcomponentTab !== 'pdfbackground') {

@@ -42,7 +42,7 @@ export class TouchGesturesComponent {
 
   constructor() {
     this.isMobile = isBrowser() ? 'ontouchstart' in document.documentElement : false;
-    pdfDefaultOptions.doubleTapZoomFactor = '125%';
+    pdfDefaultOptions.doubleTapZoomFactor = 'page-width';
     pdfDefaultOptions.doubleTapResetsZoomOnSecondDoubleTap = true;
   }
 }

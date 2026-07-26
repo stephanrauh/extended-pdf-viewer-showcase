@@ -1,3 +1,3 @@
 ```typescript
-export class FormsComponent {}
+export class ThemingComponent {}
 ```
