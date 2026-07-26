@@ -5,7 +5,7 @@ test.describe.configure({ mode: 'parallel' });
 
 // /touch-gestures advertises a double-tap / double-click gesture that
 // zooms to `pdfDefaultOptions.doubleTapZoomFactor` (the demo sets it
-// to '125%'). On a second double-tap, the demo also enables
+// to 'page-width'). On a second double-tap, the demo also enables
 // `doubleTapResetsZoomOnSecondDoubleTap = true`, so zoom returns to
 // the previously stored value.
 //
@@ -17,24 +17,31 @@ test.describe.configure({ mode: 'parallel' });
 const TOUCH = '/extended-pdf-viewer/touch-gestures';
 
 test.describe('T22 — /touch-gestures double-click zoom cycle', () => {
-  test('double-click zooms to 125% and a second double-click restores the previous zoom', async ({
+  test('double-click zooms to page width and a second double-click restores the previous zoom', async ({
     page,
   }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto(TOUCH);
     await viewer.waitForFirstPageRender();
 
-    const initialZoom = await viewer.getZoomValue();
+    // Start from a fixed numeric zoom so the double-tap target
+    // ('page-width') is guaranteed to differ from the starting value —
+    // the demo's default zoom would otherwise be free to coincide with it.
+    const initialZoom = '1';
+    await viewer.setZoom(initialZoom);
+    await expect
+      .poll(async () => await viewer.getZoomValue(), { timeout: 10_000 })
+      .toBe(initialZoom);
 
     // Double-click a rendered page canvas; the dblclick bubbles to
     // #viewer where `(dblclick)="zoomToPageWidth($event)"` is bound,
-    // which sets `zoom` to doubleTapZoomFactor='125%'. The demo's
-    // zoomLevels list includes 1.25, so the <select> snaps to "1.25".
+    // which sets `zoom` to doubleTapZoomFactor='page-width'. The demo's
+    // zoomLevels list includes 'page-width', so the <select> snaps to it.
     await page.locator('#viewer .page canvas').first().dblclick();
 
     await expect
       .poll(async () => await viewer.getZoomValue(), { timeout: 10_000 })
-      .toBe('1.25');
+      .toBe('page-width');
 
     // Second double-click: doubleTapResetsZoomOnSecondDoubleTap=true
     // restores the previously stored zoom value.
