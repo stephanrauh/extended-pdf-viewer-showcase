@@ -3,6 +3,7 @@
     [src]="'/assets/pdfs/unverified-signature.pdf'"
     [height]="'90vh'"
     [showUnverifiedSignatures]="true"
+    [signatureVerifier]="myVerifier"
   >
   </ngx-extended-pdf-viewer>
 ```

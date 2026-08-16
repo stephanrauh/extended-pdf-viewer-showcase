@@ -58,6 +58,55 @@ test.describe('T19 — /signatures unverified-signature warning bar', () => {
   });
 });
 
+test.describe('T19 — /signatures digital signature properties panel', () => {
+  // The demo supplies a stub [signatureVerifier]. Without one the browser build
+  // of pdf.js never activates the panel, so the button's presence is the proof
+  // that the verifier was installed.
+  test('the properties button appears and opens the verifier result', async ({
+    page,
+  }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(SIGNATURES);
+    await viewer.waitForFirstPageRender();
+
+    const button = page.locator('#signaturePropertiesButton');
+    await expect(button).toBeVisible({ timeout: 15_000 });
+    await button.click();
+
+    // The stub reports subjectCN "Demo Signer (not verified)".
+    await expect(page.locator('#signaturePropertiesPanel')).toContainText(
+      /Demo Signer/i,
+      { timeout: 15_000 },
+    );
+  });
+
+  test('without a verifier the properties button stays hidden', async ({
+    page,
+  }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(SIGNATURES);
+    await viewer.waitForFirstPageRender();
+    await expect(page.locator('#signaturePropertiesButton')).toBeVisible({
+      timeout: 15_000,
+    });
+
+    // Switch to the "Verifying signatures" tab and drop the verifier; the demo
+    // remounts the viewer the same way the "show signature" checkbox does.
+    await page.getByRole('button', { name: 'Verifying signatures' }).click();
+    await page
+      .locator('label')
+      .filter({ hasText: /signatureVerifier/ })
+      .locator('input[type="checkbox"]')
+      .first()
+      .uncheck();
+
+    await viewer.waitForFirstPageRender();
+    await expect(page.locator('#signaturePropertiesButton')).toBeHidden({
+      timeout: 15_000,
+    });
+  });
+});
+
 test.describe('T19 — /signatures signature editor toolbar button', () => {
   test('the signature editor button is rendered when enableSignatureEditor=true', async ({
     page,

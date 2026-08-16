@@ -9,20 +9,26 @@
   <ul>
     <li>By default, the library ships binaries compiled to a pretty contemporary JavaScript version. The precise EcmaScript version varies over time,
       but sometimes even the ESR versions of Firefox are too old to run this code.</li>
-    <li>As a fallback, the library can also run ES2015 code. Most of the time, this suffices to run the PDF viewer on iOS and Android devices
-      that haven't been updated during the last one or two years.
+    <li>As a fallback, the library ships a second, transpiled build. It reaches back to roughly Chrome and Edge 80, Firefox 78, and Safari 13.1
+      (iOS 13.4), which covers most iOS and Android devices that haven't been updated for a few years. Older than that is out of scope.
     </li>
     <li>Internet Explorer is not supported. If you need an IE11 version, you can try ngx-extended-pdf-viewer 7.3.2,
       but without any support from my side.</li>
   </ul>
 
-  <p>When the library initializes, it runs a few checks:</p>
+  <p>When the library initializes, it runs a few checks to decide which of the two builds your browser gets:</p>
   <ul>
-    <li>Does the browser support private fields and methods using the <code>#</code> prefix?</li>
-    <li>Does it support optional chaining?</li>
-    <li>Does it support logical assignment operators?</li>
+    <li>Does the browser support private fields and methods using the <code>#</code> prefix, optional chaining, logical assignment operators,
+      and <code>String.at()</code>?</li>
+    <li>Does it support <code>Promise.withResolvers()</code>?</li>
+    <li>Does it support iterator helpers, such as <code>[].values().map()</code> and <code>.toArray()</code>?</li>
   </ul>
 
-  <p>If any of these checks fails, the library uses the slow and huge ES2015 build.</p>
-  <p>In case of an emergency, you can force ngx-extended-pdf-viewer to use the ES2015 build by setting the attribute <code>[forceUsingLegacyES5]="true"</code>.</p>
+  <p>
+    The last check is the one that actually decides. pdf.js 6 calls iterator helpers on <code>Map</code> and <code>Set</code>, and the modern build
+    ships no polyfills - so the modern build needs Chrome/Edge 122, Firefox 131, or Safari/iOS 18.4. Everything below that gets the transpiled build.
+  </p>
+
+  <p>If any of these checks fails, the library uses the slower and larger transpiled build.</p>
+  <p>In case of an emergency, you can force ngx-extended-pdf-viewer to use the transpiled build by setting the attribute <code>[forceUsingLegacyES5]="true"</code>.</p>
 </div>

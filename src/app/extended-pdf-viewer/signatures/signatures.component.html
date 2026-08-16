@@ -30,6 +30,16 @@
             </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="signaturescomponentTab === 'verifyingsignatures'"
+              [class.border-primary-600]="signaturescomponentTab === 'verifyingsignatures'"
+              [class.text-gray-500]="signaturescomponentTab !== 'verifyingsignatures'"
+              [class.border-transparent]="signaturescomponentTab !== 'verifyingsignatures'"
+              (click)="signaturescomponentTab = 'verifyingsignatures'"
+            >
+              Verifying signatures
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="signaturescomponentTab === 'unverifiedsignaturesandsecurityconsiderations'"
               [class.border-primary-600]="signaturescomponentTab === 'unverifiedsignaturesandsecurityconsiderations'"
               [class.text-gray-500]="signaturescomponentTab !== 'unverifiedsignaturesandsecurityconsiderations'"
@@ -71,6 +81,43 @@
                 <li>They show even if you set <code>showUnverifiedSignatures = false</code>.</li>
               </ul>
               <p>By default, the signature editor is disabled. You can enable it with `pdfDefaultOptions.enableSignatureEditor = true;`.</p>
+            </div>
+          }
+          @if (signaturescomponentTab === 'verifyingsignatures') {
+            <div class="tab-content">
+              <p>
+                Since version 30, ngx-extended-pdf-viewer can show the digital signature properties panel pdf.js 6.2 introduced. The button appears in the
+                toolbar as soon as the document contains a signature - but only if you supply a verifier.
+              </p>
+              <p>
+                pdf.js deliberately ships none. The Firefox build talks to NSS, the operating system's certificate store; a web page has no equivalent. Parsing
+                the PKCS#7 blob is the easy part. Deciding <b>which root certificates you trust</b> is the part only your application can answer, so
+                <code>[signatureVerifier]</code> is where you plug in your own answer.
+              </p>
+              <p>
+                <b>The verifier below is a stub.</b> It checks nothing at all - it reports whatever you pick in the dropdown, so you can see how the panel
+                renders each status. That is also the honest lesson of this demo: the panel displays a claim made by the JavaScript running on the page. It is
+                not evidence. Anything the browser tells your user about a signature is only as trustworthy as the code you shipped and the trust store it
+                consulted.
+              </p>
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="useVerifier" />
+                <span>provide a <code>[signatureVerifier]</code> (uncheck to see the button disappear)</span>
+              </label>
+              <label class="flex items-center space-x-2 mt-2">
+                <span>reported status:</span>
+                <select [(ngModel)]="demoStatus" [disabled]="!useVerifier" class="px-2 py-1 text-sm border border-gray-300 rounded-md bg-white text-gray-900">
+                  <option value="verified">verified</option>
+                  <option value="untrusted">untrusted</option>
+                  <option value="invalid">invalid</option>
+                  <option value="expired">expired</option>
+                  <option value="revoked">revoked</option>
+                  <option value="unknown">unknown</option>
+                </select>
+              </label>
+              @if (certificateClick) {
+                <p class="mt-2"><b>{{ certificateClick }}</b></p>
+              }
             </div>
           }
           @if (signaturescomponentTab === 'unverifiedsignaturesandsecurityconsiderations') {
@@ -142,6 +189,7 @@
   <app-demo [src]="'/assets/pdfs/unverified-signature.pdf'">
     @if (showPdf) {
       <ngx-extended-pdf-viewer [src]="'/assets/pdfs/unverified-signature.pdf'" [height]="'90vh'" [showUnverifiedSignatures]="showSignature"
+      [signatureVerifier]="useVerifier ? demoVerifier : undefined"
       [theme]="theme">
       </ngx-extended-pdf-viewer>
     }
