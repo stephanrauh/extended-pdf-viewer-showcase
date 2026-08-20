@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { ServerSideRenderingComponent } from './server-side-rendering.component';
 
@@ -8,9 +9,10 @@ describe('ServerSideRenderingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [ServerSideRenderingComponent]
-})
-    .compileComponents();
+      imports: [ServerSideRenderingComponent],
+      // The component tree injects ActivatedRoute.
+      providers: [provideRouter([])],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ServerSideRenderingComponent);
     component = fixture.componentInstance;
