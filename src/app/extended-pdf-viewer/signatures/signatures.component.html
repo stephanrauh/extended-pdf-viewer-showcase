@@ -85,6 +85,28 @@
           }
           @if (signaturescomponentTab === 'verifyingsignatures') {
             <div class="tab-content">
+              <!-- The controls come first on purpose: the explanation below is long
+                   enough to push them under the fold otherwise. -->
+              <div class="border border-gray-300 rounded-md bg-gray-50 p-3 mb-3">
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="useVerifier" />
+                  <span>provide a <code>[signatureVerifier]</code> (uncheck to see the button disappear)</span>
+                </label>
+                <label class="flex items-center space-x-2 mt-2">
+                  <span>reported status:</span>
+                  <select [(ngModel)]="demoStatus" [disabled]="!useVerifier" class="px-2 py-1 text-sm border border-gray-300 rounded-md bg-white text-gray-900">
+                    <option value="verified">verified</option>
+                    <option value="untrusted">untrusted</option>
+                    <option value="invalid">invalid</option>
+                    <option value="expired">expired</option>
+                    <option value="revoked">revoked</option>
+                    <option value="unknown">unknown</option>
+                  </select>
+                </label>
+                @if (certificateClick) {
+                  <p class="mt-2"><b>{{ certificateClick }}</b></p>
+                }
+              </div>
               <p>
                 Since version 30, ngx-extended-pdf-viewer can show the digital signature properties panel pdf.js 6.2 introduced. The button appears in the
                 toolbar as soon as the document contains a signature - but only if you supply a verifier.
@@ -95,29 +117,21 @@
                 <code>[signatureVerifier]</code> is where you plug in your own answer.
               </p>
               <p>
-                <b>The verifier below is a stub.</b> It checks nothing at all - it reports whatever you pick in the dropdown, so you can see how the panel
-                renders each status. That is also the honest lesson of this demo: the panel displays a claim made by the JavaScript running on the page. It is
-                not evidence. Anything the browser tells your user about a signature is only as trustworthy as the code you shipped and the trust store it
-                consulted.
+                <b>The verifier above is a stub.</b> It checks nothing at all - it reports whatever you pick in the dropdown, so you can see how the panel
+                renders each status.
               </p>
-              <label class="flex items-center space-x-2">
-                <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="useVerifier" />
-                <span>provide a <code>[signatureVerifier]</code> (uncheck to see the button disappear)</span>
-              </label>
-              <label class="flex items-center space-x-2 mt-2">
-                <span>reported status:</span>
-                <select [(ngModel)]="demoStatus" [disabled]="!useVerifier" class="px-2 py-1 text-sm border border-gray-300 rounded-md bg-white text-gray-900">
-                  <option value="verified">verified</option>
-                  <option value="untrusted">untrusted</option>
-                  <option value="invalid">invalid</option>
-                  <option value="expired">expired</option>
-                  <option value="revoked">revoked</option>
-                  <option value="unknown">unknown</option>
-                </select>
-              </label>
-              @if (certificateClick) {
-                <p class="mt-2"><b>{{ certificateClick }}</b></p>
-              }
+              <p>
+                The stub exaggerates a real problem. Your verifier is JavaScript running in your page, so the green checkmark does not say "this document is
+                authentic" - it says <i>trust the programmer who built this page</i>. Anyone who can change that code changes the verdict: a cross-site
+                scripting hole, a compromised npm package, a tampered CDN or a browser extension is enough to make every signature in every document report
+                "verified". Your users can neither see that code nor check it.
+              </p>
+              <p>
+                That is not the level of trust a digital signature aims at. A signature should prove who signed the document, and keep proving it no matter who
+                serves the file. Acrobat Reader answers that question with code the user installed themselves, checked against the operating system's
+                certificate store - both out of reach of whoever runs the website. A verdict rendered by a web page cannot reach that bar, however carefully you
+                implement it. So treat the panel as a convenience, not as proof, and point your users to a desktop PDF reader whenever the answer really matters.
+              </p>
             </div>
           }
           @if (signaturescomponentTab === 'unverifiedsignaturesandsecurityconsiderations') {
