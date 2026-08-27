@@ -21,8 +21,11 @@ public async addDrawing(): Promise<void> {
       ]
     },
     pageIndex: 0,
-    // Note: rect is recalculated during deserialization, so this value is mostly ignored
+    // A drawing sits where its points are, so this box is ignored for drawings.
+    // Every other annotation type needs a real [left, bottom, right, top].
     rect: [x, y, x + 60, y + 25],
+    // Not "turn the drawing by 90 degrees": it says which way up the page was
+    // when you measured the coordinates above. See the "coordinates" tab.
     rotation: 0,
   };
   await this.pdfViewerService.addEditorAnnotation(drawing);

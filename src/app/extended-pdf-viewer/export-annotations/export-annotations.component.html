@@ -46,6 +46,16 @@
               >
                 ID behavior
               </button>
+              <button
+                class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+                [class.text-primary-600]="exportannotationscomponentTab === 'coordinates'"
+                [class.border-primary-600]="exportannotationscomponentTab === 'coordinates'"
+                [class.text-gray-500]="exportannotationscomponentTab !== 'coordinates'"
+                [class.border-transparent]="exportannotationscomponentTab !== 'coordinates'"
+                (click)="exportannotationscomponentTab = 'coordinates'"
+              >
+                coordinates &amp; rotation
+              </button>
             </div>
           </div>
 
@@ -213,6 +223,59 @@ await pdfService.addEditorAnnotation(stored);
                   Neither id is written into the PDF, so downloading the file and reopening it does <strong>not</strong> bring either back.
                 </p>
               </div>
+            </div>
+          }
+          @if (exportannotationscomponentTab === 'coordinates') {
+            <div class="tab-content">
+              <h3 class="text-lg font-semibold mb-2">Putting an annotation where you want it</h3>
+              <p class="mb-3">
+                When you add an annotation from your own code, you have to say where it goes. Two of the fields that decide
+                that hold a surprise. You don't need this tab if you only save the annotations your users made and load them
+                back later — that works on its own, rotated pages included. It's about the annotations <strong>you</strong>
+                calculate.
+              </p>
+
+              <h4 class="text-md font-semibold mb-2"><code>rect</code> — the box the annotation sits in</h4>
+              <p class="mb-3">
+                <code>rect</code> is <code>[left, bottom, right, top]</code>, measured from the <em>bottom</em> left corner of
+                the page. Texts, images and highlights land wherever this box is, so it needs four real numbers.
+              </p>
+              <p class="mb-3">
+                <strong>Drawings are the exception.</strong> A drawing already knows where it is — you gave it the points of
+                the line — so its <code>rect</code> is worked out for you and whatever you write there is ignored. That is a
+                trap worth knowing: an empty <code>rect: []</code> looks perfectly fine as long as you're testing with
+                drawings, and puts every other annotation nowhere the moment you add one.
+              </p>
+              <p class="mb-3">
+                As of version 30.0.0 you get a message in the browser console when a <code>rect</code> isn't usable, instead of
+                an annotation that simply never appears.
+              </p>
+
+              <h4 class="text-md font-semibold mb-2"><code>rotation</code> — which way up your numbers are</h4>
+              <p class="mb-3">
+                <code>rotation</code> is the one that costs people an afternoon. It does <strong>not</strong> turn your
+                annotation by 90 degrees. It tells the viewer which way up the page was when you measured the coordinates you're
+                passing in — and "which way up" counts both the rotation stored in the document itself and the rotation your
+                user applied with the rotate buttons.
+              </p>
+              <p class="mb-3">
+                If your documents are upright and nobody rotates them, <code>rotation: 0</code> is all you ever need, and you can
+                stop reading here.
+              </p>
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-3">
+                <p class="text-sm">
+                  <strong>⚠️ The symptom to recognise:</strong> a wrong <code>rotation</code> doesn't give you a tilted
+                  annotation. It gives you one in the wrong <em>place</em> — often off the page altogether. If you've ever drawn
+                  a square through the API and found it somewhere else entirely, this is why. Scanned documents are the usual
+                  culprit: many of them are stored sideways and turned upright by the file itself, so the page you see is not the
+                  page your coordinates are measured on.
+                </p>
+              </div>
+              <p class="mb-3">
+                <strong>When a page misbehaves, measure instead of calculating.</strong> Draw one annotation by hand on that
+                page, press <em>Export annotations</em>, and look at the <code>rotation</code> and the coordinates you get back.
+                Build your own annotations to match. That takes a minute and it survives future updates of the library.
+              </p>
             </div>
           }
         </div>
