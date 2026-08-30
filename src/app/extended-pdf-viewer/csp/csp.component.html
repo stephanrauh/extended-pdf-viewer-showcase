@@ -42,33 +42,55 @@
           @if (cspcomponentTab === 'activating') {
           <div class="tab-content">
             <p>
-              Two opt-ins activate the showcase's strict CSP. First, drop a
-              <code>&lt;meta http-equiv="Content-Security-Policy"&gt;</code> tag into
-              <code>src/index.html</code> — the directives on the right are what this
-              showcase ships with. Second, if you include
-              <code>require-trusted-types-for 'script'</code>, register a default
-              Trusted Types policy in <code>src/main.ts</code> so libraries that assign
-              <code>innerHTML</code> without their own policy (ngx-markdown, marked, Prism)
-              keep working.
+              Start with the <strong>Minimal CSP</strong> tab: that policy is the
+              smallest one the viewer runs under, measured directive by directive on an
+              empty Angular application. Every line is explained there, along with the
+              directives you can leave out — <code>worker-src</code>,
+              <code>font-src</code> and <code>'wasm-unsafe-eval'</code> are not needed,
+              and neither are Trusted Types.
             </p>
             <p>
-              The Angular library and pdf.js already ship the matching policies
-              (<code>pdf-viewer</code>, <code>angular*</code>); your app only needs the
-              default fallback. Wrap its <code>createHTML</code> callback with DOMPurify
-              so the policy actually sanitises — the identity functions shown on the
-              right satisfy the runtime check but strip nothing, so they're only safe
-              when every string passing through is already trusted.
+              Its one concession is <code>style-src 'unsafe-inline'</code>, which the
+              viewer's injected stylesheet needs. If your server can generate a nonce per
+              response, the <strong>Nonce</strong> tab shows how to get rid of that too:
+              hand it to Angular's <code>CSP_NONCE</code> and the viewer stamps it on
+              every <code>&lt;script&gt;</code> and <code>&lt;style&gt;</code> it creates.
+            </p>
+            <p>
+              The <code>index.html</code> and <code>main.ts</code> tabs show what
+              <em>this showcase</em> ships: a stricter policy that adds
+              <code>require-trusted-types-for 'script'</code>. That is optional hardening,
+              not a requirement of the viewer. If you switch it on, register a default
+              Trusted Types policy in <code>src/main.ts</code> so libraries that assign
+              <code>innerHTML</code> without their own policy (ngx-markdown, marked, Prism)
+              keep working; the library and pdf.js already ship theirs
+              (<code>pdf-viewer</code>, <code>angular*</code>). Wrap its
+              <code>createHTML</code> callback with DOMPurify so the policy actually
+              sanitises — the identity functions shown there satisfy the runtime check but
+              strip nothing.
             </p>
           </div>
           }
           @if (cspcomponentTab === 'gettingstarted') {
           <div class="tab-content">
             <p>
-              By default the PDF viewer doesn't need inline scripts. Opt in to
-              <code>[useInlineScripts]="true"</code> and the viewer skips one extra
-              round-trip for <code>op-chaining-support.js</code> at the cost of needing
-              <code>'unsafe-inline'</code> in your CSP. Toggle the checkbox and watch
-              the network tab.
+              Before it loads pdf.js, the viewer runs a small probe that decides whether
+              this browser can run the modern bundle or needs the legacy one. The probe
+              has to be a separate script, because it deliberately uses syntax an old
+              browser cannot parse. <code>[useInlineScripts]</code> — which defaults to
+              <code>true</code> — chooses how it is delivered: inline, saving one
+              round-trip for <code>op-chaining-support.js</code>, but requiring
+              <code>'unsafe-inline'</code> in your <code>script-src</code>. Set it to
+              <code>false</code> and the probe is loaded as a normal file, which any
+              <code>script-src 'self'</code> allows. Toggle the checkbox and watch the
+              network tab.
+            </p>
+            <p>
+              You do not have to get this right for the viewer to work: if the inline
+              probe is blocked, the viewer notices the CSP violation and re-loads the
+              same probe from the file. Setting <code>[useInlineScripts]="false"</code>
+              is still worth it, because it avoids the blocked attempt — and with it the
+              violation your browser console (and your CSP report endpoint) records.
             </p>
             <label class="flex items-center space-x-2">
               <input type="checkbox" class="form-checkbox text-primary-600 margin" [(ngModel)]="useInlineScripts" />
@@ -79,10 +101,13 @@
           @if (cspcomponentTab === 'wasm') {
           <div class="tab-content">
 <p>
-            pdf.js decodes JBIG2 / JPEG2000 images via small WebAssembly modules. Strict CSPs that omit
-            <code>'wasm-unsafe-eval'</code> break that — set <code>pdfDefaultOptions.useWasm = false</code>
-            to load the <code>*_nowasm_fallback.js</code> siblings instead. Output pixels match; only
-            decode speed differs. The PDF below is JBIG2-encoded; watch the network tab for
+            pdf.js decodes JBIG2 / JPEG2000 images via small WebAssembly modules. A CSP that omits
+            <code>'wasm-unsafe-eval'</code> blocks them — in the worker as well as in the page. Nothing
+            breaks: pdf.js downloads the <code>.wasm</code>, fails to compile it, and falls back to the
+            <code>*_nowasm_fallback.js</code> sibling on its own. Output pixels match; only decode speed
+            differs. Set <code>pdfDefaultOptions.useWasm = false</code> to skip the download that is going
+            to fail anyway, or add <code>'wasm-unsafe-eval'</code> to <code>script-src</code> to keep the
+            faster path. The PDF below is JBIG2-encoded; watch the network tab for
             <code>*.wasm</code> vs. <code>*_nowasm_fallback.js</code>.
           </p>
           <div class="flex items-center gap-3 mt-3">
@@ -124,6 +149,24 @@
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
             @if (cspcomponentTab === 'activating') {
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'minimalcsp'"
+              [class.border-primary-600]="codeTab === 'minimalcsp'"
+              [class.text-gray-500]="codeTab !== 'minimalcsp'"
+              [class.border-transparent]="codeTab !== 'minimalcsp'"
+              (click)="codeTab = 'minimalcsp'">
+              Minimal CSP
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="codeTab === 'nonce'"
+              [class.border-primary-600]="codeTab === 'nonce'"
+              [class.text-gray-500]="codeTab !== 'nonce'"
+              [class.border-transparent]="codeTab !== 'nonce'"
+              (click)="codeTab = 'nonce'">
+              Nonce
+            </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'indexhtml'"
@@ -169,6 +212,16 @@
           </div>
 
           <!-- Tab content -->
+          @if (codeTab === 'minimalcsp' && cspcomponentTab === 'activating') {
+          <div class="tab-content">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/csp/minimal-csp.md"> </app-ie11-markdown>
+          </div>
+          }
+          @if (codeTab === 'nonce' && cspcomponentTab === 'activating') {
+          <div class="tab-content">
+            <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/csp/nonce-ts.md"> </app-ie11-markdown>
+          </div>
+          }
           @if (codeTab === 'indexhtml' && cspcomponentTab === 'activating') {
           <div class="tab-content">
             <app-ie11-markdown ngPreserveWhitespaces src="/assets/extended-pdf-viewer/csp/index-html.md"> </app-ie11-markdown>

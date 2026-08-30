@@ -38,7 +38,7 @@ export class CSPComponent implements OnInit, OnDestroy {
    public _useInlineScripts = false;
    public _useWasm = true;
   public cspcomponentTab: 'activating' | 'gettingstarted' | 'wasm' = 'activating';
-  public codeTab: 'htmltemplate' | 'tscode' | 'indexhtml' | 'maints' = 'indexhtml';
+  public codeTab: 'htmltemplate' | 'tscode' | 'indexhtml' | 'maints' | 'minimalcsp' | 'nonce' = 'minimalcsp';
 
   public viewerSrc: string = WARMUP_SRC;
 
@@ -79,7 +79,7 @@ export class CSPComponent implements OnInit, OnDestroy {
       const next = CSPComponent.VARIANT_TO_TAB[variant] ?? 'activating';
       if (this.cspcomponentTab === next) return;
       this.cspcomponentTab = next;
-      this.codeTab = next === 'activating' ? 'indexhtml' : 'htmltemplate';
+      this.codeTab = next === 'activating' ? 'minimalcsp' : 'htmltemplate';
       this.resetMeasurement();
     });
   }
