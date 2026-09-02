@@ -1,4 +1,4 @@
-import { Component, effect, ViewEncapsulation, inject } from '@angular/core';
+import { Component, effect, signal, ViewEncapsulation, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { IPDFViewerApplication, PDFNotificationService, PdfThumbnailDrawnEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
@@ -67,7 +67,13 @@ export class CustomThumbnailsComponent {
 
   private _fullscreen = false;
 
-  public rotation: 0 | 180 = 0;
+  // A signal, not a plain field: the double-click listener below is registered
+  // from (thumbnailDrawn), which the library raises outside the Angular zone
+  // (pdf.js is initialised with ngZone.runOutsideAngular). A plain field
+  // assignment there would never be picked up by change detection, so the
+  // [rotation] binding would never see it. Writing a signal schedules change
+  // detection on its own — in zoned and zoneless apps alike.
+  public rotation = signal<0 | 180>(0);
   public customthumbnailscomponentTab: string = 'htmltemplate';
   public codeTab: string = 'htmltemplate12';
 
@@ -138,7 +144,7 @@ export class CustomThumbnailsComponent {
     }
 
     overlay.ondblclick = () => {
-      this.rotation = this.rotation ? 0 : 180;
+      this.rotation.update((r) => (r ? 0 : 180));
     };
   }
 }

@@ -45,8 +45,9 @@
           <div class="tab-content">
 <p>
               If you want to call Angular code from the template, implement `(thumbnailDrawn)` and use it to register the event listener.
-              If you're not using ngZone, you need to call
-              `ChangeDetectorRef.detectChanges()` or `ChangeDetectorRef.markForCheck()`.
+              Careful: the viewer runs pdf.js outside the Angular zone, so a listener you register there fires outside it too.
+              Assigning a plain field from that listener never reaches change detection. Write a signal instead (as this demo does),
+              or call `NgZone.run()` / `ChangeDetectorRef.detectChanges()` yourself.
             </p>
             <p>The demo sets the initial state of the radio buttons in `(thumbnailDrawn)`.
             It also adds an event listener to rotate the pages on double-click.</p>
@@ -132,7 +133,7 @@
       (thumbnailDrawn)="onThumbnailDrawn($event)"
       [sidebarVisible]="true"
       [activeSidebarView]="1"
-      [rotation]="rotation"
+      [rotation]="rotation()"
       [showBorders]="false"
 
       [theme]="theme">

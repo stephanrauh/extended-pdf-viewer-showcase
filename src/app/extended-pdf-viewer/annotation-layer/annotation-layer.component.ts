@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, NgZone, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { AnnotationLayerRenderedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
@@ -31,6 +31,10 @@ export class AnnotationLayerComponent {
   private themeService = inject(ThemeService);
   private elementRef = inject(ElementRef);
   private cdr = inject(ChangeDetectorRef);
+  private ngZone = inject(NgZone);
+
+  /** Debounces the layer check: every rendered page fires an event of its own. */
+  private updateTimer: ReturnType<typeof setTimeout> | undefined;
 
   public get theme(): string {
     return this.themeService.theme();
@@ -115,20 +119,59 @@ export class AnnotationLayerComponent {
     this.updateLayerStatus();
   }
 
+  /** Scrolling to an already rendered page doesn't render anything, but it does change the answer. */
+  public onPageChange(): void {
+    this.updateLayerStatus();
+  }
+
   /**
    * Looks at the page currently on screen and reports which layers pdf.js has really
    * created. Isolating a layer only shows something if that layer exists and isn't empty.
+   *
+   * pdf.js dispatches its events outside the Angular zone, so the update has to be brought
+   * back in - otherwise the component is up to date but the diagram above never repaints.
    */
   private updateLayerStatus(): void {
-    setTimeout(() => {
-      const page = this.elementRef.nativeElement.querySelector('.page') as HTMLElement | null;
-      for (const layer of this.layers) {
-        const div = page?.querySelector('.' + layer.cssClass);
-        layer.present = !!div;
-        layer.empty = !div || div.childElementCount === 0;
-      }
-      this.cdr.markForCheck();
+    clearTimeout(this.updateTimer);
+    this.updateTimer = setTimeout(() => {
+      this.ngZone.run(() => {
+        const page = this.findVisiblePage();
+        for (const layer of this.layers) {
+          const div = page?.querySelector('.' + layer.cssClass);
+          layer.present = !!div;
+          layer.empty = !div || div.childElementCount === 0;
+        }
+        this.cdr.markForCheck();
+      });
     }, 300);
+  }
+
+  /**
+   * The page the user is looking at. Only rendered pages carry layers at all, and the
+   * first page in the DOM is usually not the one on screen, so the diagram has to ask
+   * the page that fills most of the viewer.
+   */
+  private findVisiblePage(): HTMLElement | null {
+    const host = this.elementRef.nativeElement as HTMLElement;
+    const container = host.querySelector('#viewerContainer') as HTMLElement | null;
+    if (!container) {
+      return null;
+    }
+    const view = container.getBoundingClientRect();
+    let visiblePage: HTMLElement | null = null;
+    let largestOverlap = 0;
+    for (const page of Array.from(host.querySelectorAll<HTMLElement>('.page'))) {
+      if (page.childElementCount === 0) {
+        continue; // not rendered yet - pdf.js adds the layers only when it paints the page
+      }
+      const rect = page.getBoundingClientRect();
+      const overlap = Math.min(rect.bottom, view.bottom) - Math.max(rect.top, view.top);
+      if (overlap > largestOverlap) {
+        largestOverlap = overlap;
+        visiblePage = page;
+      }
+    }
+    return visiblePage;
   }
 
   public toggleLayer(layer: PdfLayerDescription): void {

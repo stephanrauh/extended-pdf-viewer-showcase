@@ -187,6 +187,38 @@ test.describe('T12 — /custom-thumbnails', () => {
     await expect(cbx2).toBeChecked({ timeout: 10_000 });
     await expect(cbx1).not.toBeChecked();
   });
+
+  test('double-clicking a thumbnail rotates the pages (the "Call Angular code" promise)', async ({
+    page,
+  }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto('/extended-pdf-viewer/custom-thumbnails');
+    await viewer.waitForFirstPageRender();
+
+    // onThumbnailDrawn registers `overlay.ondblclick` on .image-container,
+    // toggling the component's `rotation` field between 0 and 180, which is
+    // bound to [rotation]. Wait for the label so we know the callback ran.
+    const thumb1 = page.locator('.thumbnail[data-page-number="1"]').first();
+    await expect(thumb1.locator('.thumbnail-text')).toHaveText('title page', {
+      timeout: 15_000,
+    });
+
+    // pdf.js stamps the current rotation onto every layer it lays out
+    // (`setLayerDimensions` → data-main-rotation), which is the only
+    // DOM-visible trace of a 180° turn: the page box keeps its size.
+    const rotation = () =>
+      page.evaluate(() => {
+        const el = document.querySelector('#viewer .page [data-main-rotation]');
+        return el ? Number(el.getAttribute('data-main-rotation')) : null;
+      });
+    expect(await rotation()).toBe(0);
+
+    await thumb1.locator('.image-container').dblclick();
+    await expect.poll(rotation, { timeout: 10_000 }).toBe(180);
+
+    await thumb1.locator('.image-container').dblclick();
+    await expect.poll(rotation, { timeout: 10_000 }).toBe(0);
+  });
 });
 
 test.describe('T12 — /custom-pdf-viewer', () => {
