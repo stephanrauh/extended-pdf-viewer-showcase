@@ -52,7 +52,17 @@ type Fixtures = {
 
 export const test = base.extend<Fixtures>({
   seedStorage: [
-    async ({ page }, use) => {
+    async ({ page }, use, testInfo) => {
+      // Record the build under test, so the HTML report answers "which engine
+      // did this run use?" on its own. An all-green run keeps no trace and no
+      // screenshot (both are retain-on-failure), and the console.log
+      // attachment carries the viewer's banner, not the bundle path - so
+      // without this the only evidence is the line fixtures.ts logs to stdout.
+      testInfo.annotations.push({
+        type: 'engine',
+        description: usingBleedingEdge ? 'bleeding-edge' : 'stable',
+      });
+
       // The showcase remembers a few demo toggles in localStorage. Seed the
       // ones whose default would break tests under a fresh-profile run.
       await page.addInitScript(() => {
