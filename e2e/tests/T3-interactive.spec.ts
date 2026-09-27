@@ -155,6 +155,16 @@ test.describe('T3 — multiple-documents', () => {
 });
 
 test.describe('T3 — passwords', () => {
+  // Cancelling the password dialog below makes pdf.js reject the pending
+  // document load with a PasswordException, and that rejection reaches the
+  // page as an unhandled error. It is provoked on purpose here, so it is
+  // allowed - but only this one; anything else on this route still fails.
+  // WebKit reports an unhandled rejection as "Unhandled Promise Rejection:
+  // PasswordException: ...", Chromium as "PasswordException: ...".
+  test.use({
+    allowedPageErrors: [/^(Unhandled Promise Rejection: )?PasswordException/],
+  });
+
   test('selecting the correct password opens the PDF', async ({ page }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto('/extended-pdf-viewer/passwords');

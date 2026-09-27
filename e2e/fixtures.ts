@@ -50,7 +50,19 @@ type Fixtures = {
   seedStorage: void;
 };
 
-export const test = base.extend<Fixtures>({
+type Options = {
+  /**
+   * Uncaught exceptions on the page fail the test, even when every explicit
+   * assertion passed. A test that deliberately provokes an exception opts the
+   * matching messages out with `test.use({ allowedPageErrors: [/…/] })`.
+   * Keep the list per test file and per pattern - a blanket allow hides the
+   * regressions this check exists to catch.
+   */
+  allowedPageErrors: RegExp[];
+};
+
+export const test = base.extend<Fixtures & Options>({
+  allowedPageErrors: [[], { option: true }],
   seedStorage: [
     async ({ page }, use, testInfo) => {
       // Record the build under test, so the HTML report answers "which engine
@@ -115,7 +127,7 @@ export const test = base.extend<Fixtures>({
   ],
 
   pageErrors: [
-    async ({ page }, use, testInfo) => {
+    async ({ page, allowedPageErrors }, use, testInfo) => {
       const errors: Error[] = [];
       page.on('pageerror', (err) => errors.push(err));
 
@@ -133,6 +145,34 @@ export const test = base.extend<Fixtures>({
         // eslint-disable-next-line no-console
         console.log(
           `\n=== pageerrors captured for "${testInfo.title}" ===\n${body}\n=== end ===\n`,
+        );
+        // The test already failed on its own; don't bury that message.
+        return;
+      }
+
+      // The test's own assertions passed - but an uncaught exception on the
+      // page is a bug in the viewer regardless of what the test looked at
+      // (a listener that threw, a broken lazy import, a null deref after a
+      // teardown). Fail here so it can't hide behind a green assertion.
+      const unexpected = errors.filter(
+        (e) => !allowedPageErrors.some((re) => re.test(`${e.name}: ${e.message}`)),
+      );
+      if (unexpected.length > 0) {
+        // Message plus the first few frames: enough to see *where* it threw
+        // without opening the report.
+        const summary = unexpected
+          .map((e) => {
+            const frames = (e.stack ?? '')
+              .split('\n')
+              .filter((l) => /^\s+at /.test(l))
+              .slice(0, 3)
+              .join('\n');
+            return `  - ${e.name}: ${e.message.split('\n')[0]}\n${frames}`;
+          })
+          .join('\n');
+        throw new Error(
+          `${unexpected.length} uncaught page error(s) during "${testInfo.title}" ` +
+            `(full stacks in the pageerrors.log attachment):\n${summary}`,
         );
       }
     },

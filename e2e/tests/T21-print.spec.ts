@@ -27,7 +27,10 @@ async function stubPrint(page: import('@playwright/test').Page): Promise<void> {
         }
       });
     };
-    new MutationObserver(patchIframes).observe(document.documentElement, {
+    // addInitScript also runs inside the print iframe pdf.js creates, at a
+    // point where that frame's `documentElement` is still null. Observing
+    // the document node itself works in both the host page and the frame.
+    new MutationObserver(patchIframes).observe(document, {
       childList: true,
       subtree: true,
     });

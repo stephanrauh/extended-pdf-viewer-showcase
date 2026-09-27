@@ -65,7 +65,15 @@ export default defineConfig({
       // throws "undefined is not a function" in Safari, breaking find
       // across the whole document. Run the find tests against Playwright's
       // WebKit to gate the api.js patch.
+      //
+      // Only the find-related specs run here (T3 find/custom findbar, T4
+      // toolbar find bar, T7 Ctrl+F). WebKit used to replay the whole suite,
+      // which doubled the run time and the energy cost of every `test:e2e`
+      // for a single Safari-specific bug class. Add a file to this list only
+      // for a WebKit-specific regression - the chromium project remains the
+      // full gate.
       name: 'webkit',
+      testMatch: /T(3|4|7)-.*\.spec\.ts$/,
       use: { ...devices['Desktop Safari'], viewport: { width: 1920, height: 1080 } },
     },
   ],
