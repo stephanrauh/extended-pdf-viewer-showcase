@@ -1,4 +1,4 @@
 export const versions = {
-  angular: '22.1.4',
-  extendedPdfViewer: '31.0.0-alpha.0',
+  angular: '22.2.1',
+  extendedPdfViewer: '31.0.0-alpha.1',
 } 
