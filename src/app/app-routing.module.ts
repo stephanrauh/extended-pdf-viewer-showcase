@@ -70,6 +70,7 @@ import { AnnotationLayerComponent } from './extended-pdf-viewer/annotation-layer
 import { SecurityComponent } from './extended-pdf-viewer/security/security.component';
 import { AnnotationLayerApiComponent } from './extended-pdf-viewer/annotation-layer-api/annotation-layer-api.component';
 import { EditorSettingsComponent } from './extended-pdf-viewer/editor-settings/editor-settings.component';
+import { EraserUndoRedoComponent } from './extended-pdf-viewer/eraser-undo-redo/eraser-undo-redo.component';
 import { CustomFindComponent } from './extended-pdf-viewer/custom-find/custom-find.component';
 import { CSPComponent } from './extended-pdf-viewer/csp/csp.component';
 import { EditorEventsComponent } from './extended-pdf-viewer/editor-events/editor-events.component';
@@ -115,6 +116,7 @@ export const routes: Routes = [
       { path: 'export-text', component: ExportTextComponent },
       { path: 'export-annotations', component: ExportAnnotationsComponent },
       { path: 'editor-setting', component: EditorSettingsComponent},
+      { path: 'eraser-undo-redo', component: EraserUndoRedoComponent },
       {
         path: 'ngx-pdf-viewer-service',
         loadComponent: () =>

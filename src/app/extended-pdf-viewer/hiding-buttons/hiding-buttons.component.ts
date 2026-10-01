@@ -38,6 +38,8 @@ export class HidingButtonsComponent {
   public showFindButton = false;
   public findbarVisible = false;
   public showDrawEditor = false;
+  public showEraserEditor = false;
+  public showUndoRedoButtons = false;
   public showHighlightEditor = false;
   public showTextEditor = false;
   public showMovePageButton = false;
@@ -105,6 +107,8 @@ export class HidingButtonsComponent {
   [showSignatureEditor]="${this.showSignatureEditor}"
   [showHighlightEditor]="${this.showHighlightEditor}"
   [showDrawEditor]="${this.showDrawEditor}"
+  [showEraserEditor]="${this.showEraserEditor}"
+  [showUndoRedoButtons]="${this.showUndoRedoButtons}"
   [showCommentEditor]="${this.showCommentEditor}"
   [showStampEditor]="${this.showStampEditor}"
   [showTextEditor]="${this.showTextEditor}"

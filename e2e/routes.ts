@@ -60,6 +60,7 @@ export const ROUTES: RouteSpec[] = [
 
   { path: `${E}/editor-setting`, label: 'editor-setting', hasViewer: true },
   { path: `${E}/editor-events`, label: 'editor-events', hasViewer: true },
+  { path: `${E}/eraser-undo-redo`, label: 'eraser-undo-redo', hasViewer: true },
 
   { path: `${E}/ngx-pdf-viewer-service`, label: 'ngx-pdf-viewer-service', hasViewer: false },
 

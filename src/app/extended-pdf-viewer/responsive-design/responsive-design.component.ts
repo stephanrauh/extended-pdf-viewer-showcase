@@ -55,9 +55,9 @@ export class ResponsiveDesignComponent {
   public downloadFileName = 'user-defined-name.pdf';
 
 
-  public traditionalOptions: ResponsiveVisibility[] = [true, false, 'always-visible',  'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+  public traditionalOptions: ResponsiveVisibility[] = [true, false, 'always-visible',  'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
 
-  public options: ResponsiveVisibility[] = [true, false, 'always-visible', 'always-in-secondary-menu', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+  public options: ResponsiveVisibility[] = [true, false, 'always-visible', 'always-in-secondary-menu', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
 
   public withExplanation(option: ResponsiveVisibility) {
     if (option === true) {
@@ -120,6 +120,15 @@ export class ResponsiveDesignComponent {
 
   public set xxl(value: number) {
     PdfBreakpoints.xxl = value;
+    this.triggerToolbarUpdate();
+  }
+
+  public get xxxl() {
+    return PdfBreakpoints.xxxl;
+  }
+
+  public set xxxl(value: number) {
+    PdfBreakpoints.xxxl = value;
     this.triggerToolbarUpdate();
   }
 
@@ -190,6 +199,7 @@ export class CustomBreakpointsComponent {
     PdfBreakpoints.lg = ${this.lg};
     PdfBreakpoints.xl = ${this.xl};
     PdfBreakpoints.xxl = ${this.xxl};
+    PdfBreakpoints.xxxl = ${this.xxxl};
   }
 }`;
   }
