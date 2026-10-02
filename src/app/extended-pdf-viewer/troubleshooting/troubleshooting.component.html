@@ -1,131 +1,127 @@
 <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1">
   <h1>Troubleshooting</h1>
-  <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/server.md"> </app-ie11-markdown>
 
-  <h2>Maximum resolutions</h2>
-  <p>
-    Several users reported problems with huge images. Sometimes this is difficult to recognize: good image compression means a small PDF
-    file can contain an image with very high resolution.
-  </p>
-  <p>
-    The PDF viewer renders every page as a canvas. Browsers can't create arbitrary large canvases. ngx-extended-pdf-viewer automatically
-    reduces the resolution if necessary. You can also influence the resolution yourself. In the browser, it's determined by
-    the attribute <code>[(zoom)]</code> and in print it's determined by `[printResolution]`.
-  </p>
-  <p>
-    According to <a href="https://www.npmjs.com/package/canvas-size#test-results">the documentation of the canvas-size project,</a> these
-    are the maximum canvas sizes:
-  </p>
-  <h3>Desktop</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Browser (OS)</th>
-        <th class="text-right">Max Width</th>
-        <th class="text-right">Max Height</th>
-        <th class="text-right">Max Area (Total)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Chrome 83 (Mac, Win *)</td>
-        <td class="text-right">65,535</td>
-        <td class="text-right">65,535</td>
-        <td class="text-right">16,384 x 16,384 (268,435,456)</td>
-      </tr>
-      <tr>
-        <td>Chrome 70 (Mac, Win *)</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">16,384 x 16,384 (268,435,456)</td>
-      </tr>
-      <tr>
-        <td>Edge 17 *</td>
-        <td class="text-right">16,384</td>
-        <td class="text-right">16,384</td>
-        <td class="text-right">16,384 x 16,384 (268,435,456)</td>
-      </tr>
-      <tr>
-        <td>Firefox 63 (Mac, Win *)</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">11,180 x 11,180 (124,992,400)</td>
-      </tr>
-      <tr>
-        <td>IE 11 *</td>
-        <td class="text-right">16,384</td>
-        <td class="text-right">16,384</td>
-        <td class="text-right">8,192 x 8,192 (67,108,864)</td>
-      </tr>
-      <tr>
-        <td>IE 9 - 10 *</td>
-        <td class="text-right">8,192</td>
-        <td class="text-right">8,192</td>
-        <td class="text-right">8,192 x 8,192 (67,108,864)</td>
-      </tr>
-      <tr>
-        <td>Safari 7 - 12</td>
-        <td class="text-right">4,194,303</td>
-        <td class="text-right">8,388,607</td>
-        <td class="text-right">16,384 x 16,384 (268,435,456)</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3>Mobile</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Browser (OS)</th>
-        <th class="text-right">Max Width</th>
-        <th class="text-right">Max Height</th>
-        <th class="text-right">Max Area (Total)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Chrome 68 (Android 9) *</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">14,188 x 14,188 (201,299,344)</td>
-      </tr>
-      <tr>
-        <td>Chrome 68 (Android 7.1 - 8) *</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">14,188 x 14,188 (201,299,344)</td>
-      </tr>
-      <tr>
-        <td>Chrome 68 (Android 6)</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">10,836 x 10,836 (117,418,896)</td>
-      </tr>
-      <tr>
-        <td>Chrome 68 (Android 5) *</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">11,402 x 11,402 (130,005,604)</td>
-      </tr>
-      <tr>
-        <td>Chrome 68 (Android 4.4) *</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">32,767</td>
-        <td class="text-right">16,384 x 16,384 (268,435,456)</td>
-      </tr>
-      <tr>
-        <td>IE (Windows Phone 8.x)</td>
-        <td class="text-right">4,096</td>
-        <td class="text-right">4,096</td>
-        <td class="text-right">4,096 x 4,096 (16,777,216)</td>
-      </tr>
-      <tr>
-        <td>Safari (iOS 9 - 12)</td>
-        <td class="text-right">4,194,303</td>
-        <td class="text-right">8,388,607</td>
-        <td class="text-right">4,096 x 4,096 (16,777,216)</td>
-      </tr>
-    </tbody>
-  </table>
-  <br>
-  <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/text.md"> </app-ie11-markdown>
+  <!-- Tab buttons: each tab is a route, so you can link to it directly -->
+  <div class="overflow-x-auto">
+    <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
+      @for (topic of topics; track topic.id) {
+        <a
+          class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+          [class.text-primary-600]="activeTopic() === topic.id"
+          [class.border-primary-600]="activeTopic() === topic.id"
+          [class.text-gray-500]="activeTopic() !== topic.id"
+          [class.border-transparent]="activeTopic() !== topic.id"
+          [routerLink]="['/extended-pdf-viewer/troubleshooting', topic.id]">
+          {{ topic.title }}
+        </a>
+      }
+    </div>
+  </div>
+
+  <div class="tab-content">
+    @switch (activeTopic()) {
+      @case ('overview') {
+        <p>Find your symptom below. Each link opens the tab with the solution.</p>
+        <table class="symptom-table">
+          <thead>
+            <tr>
+              <th>Symptom</th>
+              <th>Where to look</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"Expected a JavaScript module script but the server responds with a MIME type of text/plain", or 404 errors for <code>.ftl</code> files</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'setup']">Setup and installation</a> (server configuration)</td>
+            </tr>
+            <tr>
+              <td>The worker file can't be found, or its URL contains your context path twice</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'setup']">Setup and installation</a></td>
+            </tr>
+            <tr>
+              <td>"Setting up fake worker", or large PDF files load very slowly</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'setup']">Setup and installation</a></td>
+            </tr>
+            <tr>
+              <td>The viewer isn't shown in my language</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'setup']">Setup and installation</a></td>
+            </tr>
+            <tr>
+              <td>My CSS overrides stopped working after upgrading to version 30</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'setup']">Setup and installation</a></td>
+            </tr>
+            <tr>
+              <td>The viewer is empty, or has a height of 0 pixels</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'display']">Display and layout</a></td>
+            </tr>
+            <tr>
+              <td>The viewer is in a tab or a modal; "offsetParent is not set"; errors when closing a modal</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'display']">Display and layout</a></td>
+            </tr>
+            <tr>
+              <td>"You're trying to open two instances of the PDF viewer"</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'display']">Display and layout</a></td>
+            </tr>
+            <tr>
+              <td>A Blob, a Base64 string or a password-protected file doesn't open</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'display']">Display and layout</a></td>
+            </tr>
+            <tr>
+              <td>Pages with huge images don't render, or look blurry</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'display']">Display and layout</a></td>
+            </tr>
+            <tr>
+              <td>A button doesn't show</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'display']">Display and layout</a></td>
+            </tr>
+            <tr>
+              <td>There's no find button, or I can't select text</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'find-and-select']">Find and select text</a></td>
+            </tr>
+            <tr>
+              <td>The printout is scaled down, has empty pages, or contains parts of my application</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'printing']">Printing</a></td>
+            </tr>
+            <tr>
+              <td>CTRL+P prints the PDF file instead of my page</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'printing']">Printing</a></td>
+            </tr>
+            <tr>
+              <td>The viewer doesn't run on an older browser or device</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'browsers']">Browsers and mobile</a></td>
+            </tr>
+            <tr>
+              <td>An error occurs inside pdf.js, and the stack trace is unreadable</td>
+              <td><a [routerLink]="['/extended-pdf-viewer/troubleshooting', 'debugging']">Debugging and bug reports</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Other pages cover their own pitfalls: <a routerLink="/extended-pdf-viewer/csp">Content Security Policy</a>,
+          <a routerLink="/extended-pdf-viewer/server-side-rendering">server-side rendering</a>,
+          <a routerLink="/extended-pdf-viewer/range-requests">CORS and range requests</a>, and
+          <a routerLink="/extended-pdf-viewer/keycloak">authentication</a>.
+        </p>
+      }
+      @case ('setup') {
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/setup.md"> </app-ie11-markdown>
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/server.md"> </app-ie11-markdown>
+      }
+      @case ('display') {
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/display.md"> </app-ie11-markdown>
+      }
+      @case ('find-and-select') {
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/find-and-select.md"> </app-ie11-markdown>
+      }
+      @case ('printing') {
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/printing.md"> </app-ie11-markdown>
+      }
+      @case ('browsers') {
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/browsers.md"> </app-ie11-markdown>
+      }
+      @case ('debugging') {
+        <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/debugging.md"> </app-ie11-markdown>
+      }
+    }
+  </div>
 </div>

@@ -61,6 +61,19 @@ type Options = {
   allowedPageErrors: RegExp[];
 };
 
+/**
+ * Browser notices that WebKit reports as page errors although no code threw.
+ * Matched exactly, for every test - unlike `allowedPageErrors`, which is meant
+ * for exceptions a test provokes on purpose.
+ */
+const BENIGN_PAGE_ERRORS: RegExp[] = [
+  // A ResizeObserver callback changed the layout of an observed element (e.g.
+  // pdf.js's find bar toggling `wrapContainers`); the remaining notifications
+  // are delivered in the next frame. Chromium doesn't surface this as a page
+  // error; WebKit does, intermittently.
+  /^ResizeObserver loop completed with undelivered notifications\.$/,
+];
+
 export const test = base.extend<Fixtures & Options>({
   allowedPageErrors: [[], { option: true }],
   seedStorage: [
@@ -155,7 +168,9 @@ export const test = base.extend<Fixtures & Options>({
       // (a listener that threw, a broken lazy import, a null deref after a
       // teardown). Fail here so it can't hide behind a green assertion.
       const unexpected = errors.filter(
-        (e) => !allowedPageErrors.some((re) => re.test(`${e.name}: ${e.message}`)),
+        (e) =>
+          !BENIGN_PAGE_ERRORS.some((re) => re.test(e.message)) &&
+          !allowedPageErrors.some((re) => re.test(`${e.name}: ${e.message}`)),
       );
       if (unexpected.length > 0) {
         // Message plus the first few frames: enough to see *where* it threw

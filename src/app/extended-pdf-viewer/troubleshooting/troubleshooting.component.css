@@ -1,0 +1,15 @@
+.symptom-table {
+  margin-bottom: 1.5rem;
+}
+
+.symptom-table th,
+.symptom-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.25rem 2rem 0.25rem 0;
+}
+
+.symptom-table th:last-child,
+.symptom-table td:last-child {
+  padding-right: 0;
+}

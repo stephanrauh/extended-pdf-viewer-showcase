@@ -1,6 +1,6 @@
-# Server Configuration Issues
+## Server configuration (MIME types)
 
-## "Failed to load module script: Expected a JavaScript module script but the server responds with a MIME type of "text/plain"
+### "Failed to load module script: Expected a JavaScript module script but the server responds with a MIME type of "text/plain"
 
 Update your server configuration. Many servers don't recognize `*.mjs` files as JavaScript. To fix this, you have to configure the server so it sends the file with the proper MIME type (`text/javascript`). You also have to configure the new i18n files. They've got the file ending `.ftl` and need the MIME type `text/plain`.
 
@@ -86,21 +86,21 @@ On **Azure Static Web Apps**, define the MIME types in `staticwebapp.config.json
 }
 ```
 
-## ASP.NET Core Static Files Configuration Issue
+### ASP.NET Core Static Files Configuration Issue
 
-### Problem
+#### Problem
 You may encounter 404 errors when loading localization files (`.ftl` files) in ASP.NET Core applications, even though the files exist on the server. This typically manifests as:
 
 - Console errors: `ERROR Error at fetchData (viewer-5.3.749.mjs:7597:13)`
 - 404 errors for localization files like `assets/locale/en-US/viewer.ftl`
 - PDF viewer loads correctly but localization fails
 
-### Symptoms
+#### Symptoms
 - The PDF viewer displays but console shows errors fetching `.ftl` files
 - Localization files return 404 errors despite being present in the file system
 - Manual download of the `.ftl` files works correctly
 
-### Solution
+#### Solution
 Configure ASP.NET Core's static files middleware to explicitly map the `.ftl` file extension. Add this configuration to your `Startup.cs` or `Program.cs`:
 
 ```csharp

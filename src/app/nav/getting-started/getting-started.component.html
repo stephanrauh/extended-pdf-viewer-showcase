@@ -71,7 +71,12 @@
           }
     @if (activeTab === 'difficulties') {
           <div class="tab-content">
-      <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/text.md"> </app-ie11-markdown>
+      <p>
+        The <a href="/extended-pdf-viewer/troubleshooting">troubleshooting page</a> collects the solutions to the most common problems.
+        These are the ones you're most likely to meet when setting up the viewer:
+      </p>
+      <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/setup.md"> </app-ie11-markdown>
+      <app-ie11-markdown src="/assets/extended-pdf-viewer/troubleshooting/server.md"> </app-ie11-markdown>
     </div>
           }
     @if (activeTab === 'complaints') {

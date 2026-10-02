@@ -241,31 +241,28 @@ test.describe('T16 — /forms educationLevel radios (Angular → PDF)', () => {
           .map((el) => el.getAttribute('data-element-id') ?? ''),
       );
 
-    const clickDemo = async (label: string): Promise<void> => {
-      await page
+    const demoRadio = (label: string) =>
+      page
         .locator('label')
         .filter({ hasText: label })
         .locator('input[type="radio"]')
-        .first()
-        .check();
-    };
+        .first();
 
     const idAfterSelecting = async (label: string): Promise<string> => {
       const before = await checkedIds();
-      await clickDemo(label);
-      // For most labels, the click changes the selection; poll until
-      // the checked id differs from `before`. For the case where
-      // `label` is already selected (idempotent), exit once a single
-      // radio remains checked.
+      // Decide idempotency from the demo radio, not from the PDF: right
+      // after the click, the PDF still shows the old selection until
+      // Angular has propagated the change, and treating "unchanged" as
+      // "already selected" would record the previous label's id.
+      const alreadySelected = await demoRadio(label).isChecked();
+      await demoRadio(label).check();
       await expect
         .poll(
           async () => {
             const now = await checkedIds();
             if (now.length !== 1) return false;
-            if (before.length === 1 && before[0] === now[0]) {
-              return true;
-            }
-            return before.length !== 1 || before[0] !== now[0];
+            if (alreadySelected || before.length !== 1) return true;
+            return before[0] !== now[0];
           },
           { timeout: 10_000 },
         )

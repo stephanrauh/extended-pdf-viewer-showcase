@@ -170,6 +170,7 @@ export const routes: Routes = [
       { path: 'theming', component: ThemingComponent },
       { path: 'touch-gestures', component: TouchGesturesComponent },
       { path: 'troubleshooting', component: TroubleshootingComponent },
+      { path: 'troubleshooting/:topic', component: TroubleshootingComponent },
       { path: 'two-way-binding', component: TwoWayBindingComponent },
       { path: 'zoom', component: ZoomComponent },
       { path: '**', redirectTo: 'simple' }
