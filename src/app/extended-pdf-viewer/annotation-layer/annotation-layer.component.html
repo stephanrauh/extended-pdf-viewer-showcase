@@ -112,7 +112,8 @@
               sharp, and the wrapper also carries the invisible accessibility markup (the struct tree).</li>
             <li><strong>Text layer</strong> (<code>.textLayer</code>) allows you to mark and copy text. It's also the
               base of the search engine. You can render faster if you set <code>[textLayer]="false"</code>, but if you
-              do, your users can't use the find bar.</li>
+              do, your users can't use the find bar or select text. <b>Breaking change in version 31.0.0-alpha.2 (#3292):</b>
+              before, <code>[textLayer]="false"</code> only hid the find button, and the text layer was rendered anyway.</li>
             <li><strong>Annotation layer</strong> (<code>.annotationLayer</code>) - links, comment popups, file
               attachments, and interactive forms. Everything in it comes from the PDF file itself.</li>
             <li><strong>Annotation editor layer</strong> (<code>.annotationEditorLayer</code>) - the highlights, free
