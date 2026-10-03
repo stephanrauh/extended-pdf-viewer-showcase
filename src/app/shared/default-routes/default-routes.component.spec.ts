@@ -10,8 +10,9 @@ describe('DefaultRoutesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DefaultRoutesComponent],
-      // The component injects Router and ActivatedRoute.
-      providers: [provideRouter([])],
+      // The component injects Router and ActivatedRoute, and redirects in ngOnInit.
+      // The catch-all route lets that navigation succeed instead of rejecting.
+      providers: [provideRouter([{ path: '**', children: [] }])],
     }).compileComponents();
   });
 

@@ -31,6 +31,7 @@
             },
             "index": "src/index.html",
             "tsConfig": "tsconfig.app.json",
+            "externalDependencies": ["marked-katex-extension"],
             "assets": [
               "src/.htaccess",
               "src/favicon.ico",

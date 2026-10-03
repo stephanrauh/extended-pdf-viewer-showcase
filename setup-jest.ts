@@ -1,6 +1,7 @@
-import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
+import { setupZonelessTestEnv } from 'jest-preset-angular/setup-env/zoneless';
 
-setupZoneTestEnv();
+// The showcase runs zoneless (zone.js is not a dependency).
+setupZonelessTestEnv();
 
 // jsdom implements neither matchMedia nor the ResizeObserver/IntersectionObserver
 // APIs. ThemeService reads the prefers-color-scheme media query in its
