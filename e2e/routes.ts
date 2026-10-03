@@ -81,6 +81,7 @@ export const ROUTES: RouteSpec[] = [
 
   { path: `${E}/links`, label: 'links', hasViewer: true },
   { path: `${E}/loading-indicator`, label: 'loading-indicator', hasViewer: true },
+  { path: `${E}/loading-errors`, label: 'loading-errors', hasViewer: true, skipRender: 'demo opens a missing file on purpose' },
 
   { path: `${E}/keyboard`, label: 'keyboard', hasViewer: true },
   { path: `${E}/keycloak`, label: 'keycloak', hasViewer: true, skip: 'requires external auth server' },

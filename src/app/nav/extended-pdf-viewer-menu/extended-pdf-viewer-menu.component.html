@@ -186,6 +186,9 @@
   <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/loading-indicator'" routerLinkActive="active"
      class="menu-item"
      [class.menu-item-active]="router.isActive('/extended-pdf-viewer/loading-indicator', false)">Loading indicator</a>
+  <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/loading-errors'" routerLinkActive="active"
+     class="menu-item"
+     [class.menu-item-active]="router.isActive('/extended-pdf-viewer/loading-errors', false)">Loading errors</a>
   <a (click)="toggleDrawer()" [routerLink]="'/extended-pdf-viewer/multiple-documents'" routerLinkActive="active"
      class="menu-item"
      [class.menu-item-active]="router.isActive('/extended-pdf-viewer/multiple-documents', false)">Loading & unloading PDFs + drag'n'drop</a>

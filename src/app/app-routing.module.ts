@@ -77,6 +77,7 @@ import { EditorEventsComponent } from './extended-pdf-viewer/editor-events/edito
 import { DragModeComponent } from './extended-pdf-viewer/drag-mode/drag-mode.component';
 import { CoordinatesComponent } from './extended-pdf-viewer/coordinates/coordinates.component';
 import { LoadingIndicatorComponent } from './extended-pdf-viewer/loading-indicator/loading-indicator.component';
+import { LoadingErrorsComponent } from './extended-pdf-viewer/loading-errors/loading-errors.component';
 import { ModifyingPageOrderComponent } from './extended-pdf-viewer/modifying-page-order/modifying-page-order.component';
 import { AddingArbitraryAnnotationsComponent } from './extended-pdf-viewer/adding-arbitrary-annotations/adding-arbitrary-annotations.component';
 import { DisableButtonsComponent } from './extended-pdf-viewer/disable-buttons/disable-buttons.component';
@@ -140,6 +141,7 @@ export const routes: Routes = [
       { path: 'responsive-design', component: ResponsiveDesignComponent },
       { path: 'links', component: LinksComponent },
       { path: 'loading-indicator', component: LoadingIndicatorComponent},
+      { path: 'loading-errors', component: LoadingErrorsComponent },
       { path: 'keyboard', component: KeyboardComponent },
       { path: 'keycloak', component: KeycloakComponent },
       { path: 'mobile', component: MobileComponent },
