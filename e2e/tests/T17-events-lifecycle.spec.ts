@@ -200,3 +200,28 @@ test.describe('T17 — /filtering-console-log captured version', () => {
     );
   });
 });
+
+// stephanrauh/ngx-extended-pdf-viewer#3274 The viewer listens for wheel events
+// on window. When the host application removes the viewer's DOM before the
+// viewer has unbound that listener (a route change while scrolling), a wheel
+// event used to throw "Cannot read properties of null (reading 'parentNode')".
+test.describe('T17 — teardown', () => {
+  test('a wheel event after the viewer DOM is gone does not throw', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto('/extended-pdf-viewer/simple');
+    await viewer.waitForFirstPageRender();
+
+    const errors = await page.evaluate(() => {
+      const messages: string[] = [];
+      const onError = (event: ErrorEvent) => messages.push(event.message);
+      window.addEventListener('error', onError);
+      // The state between "DOM removed" and "listeners unbound".
+      document.getElementById('viewerContainer')!.remove();
+      window.dispatchEvent(new WheelEvent('wheel', { deltaY: 100, cancelable: true }));
+      window.removeEventListener('error', onError);
+      return messages;
+    });
+
+    expect(errors).toEqual([]);
+  });
+});
