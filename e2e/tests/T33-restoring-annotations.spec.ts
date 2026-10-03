@@ -201,7 +201,7 @@ async function addInk(page: Page): Promise<void> {
 // ─── tests ─────────────────────────────────────────────────────────────────
 
 test.describe('T33 — restoring annotations (#3240, #3254, #3237)', () => {
-  // The fixes are on both fork branches (6.2 and bleeding-edge), so this runs
+  // The fixes are on both fork branches (stable and bleeding-edge), so this runs
   // against whichever build the fixture selected — no skip.
   test.beforeEach(async ({ page }) => {
     await captureViewerApplication(page);
