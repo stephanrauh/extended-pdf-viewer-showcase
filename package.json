@@ -16,6 +16,7 @@
     "test:e2e:ui": "playwright test --config=e2e/playwright.config.ts --ui",
     "test:e2e:report": "playwright show-report e2e/.playwright-report",
     "test:e2e:install": "playwright install chromium",
+    "test:e2e:install-old-browsers": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON e2e/install-old-browsers.mjs",
     "lint": "ng lint",
     "full": "cd ../ngx-extended-pdf-viewer && npm run build:base && npm run build:lib && cd ../extended-pdf-viewer-showcase && npm run prebuild && ng s --host 0.0.0.0",
     "ts": "cd ../ngx-extended-pdf-viewer && npm run build:lib && cd ../extended-pdf-viewer-showcase && npm run prebuild && ng s --host 0.0.0.0",

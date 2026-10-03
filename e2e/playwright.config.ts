@@ -1,4 +1,7 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices, type Project } from '@playwright/test';
+import { existsSync } from 'node:fs';
+import * as path from 'node:path';
+import { BROWSER_MATRIX, executablePath } from './browser-matrix';
 
 const BASE_URL = process.env.E2E_BASE_URL ?? 'http://localhost:4200';
 const CI = !!process.env.CI;
@@ -15,6 +18,32 @@ const LOCAL_WORKERS: number | string = workersEnv
     ? Number(workersEnv)
     : workersEnv
   : '25%';
+
+// stephanrauh/ngx-extended-pdf-viewer#3273 Old Chrome versions, one project
+// each - but only for the browsers that `npm run test:e2e:install-old-browsers`
+// has downloaded, so a fresh checkout runs as before. `tests` in
+// browser-matrix.ts picks each one's share: the whole suite, T2 + T37, or T37
+// alone. The browser with 'all' (Chrome 147, the oldest one on the modern
+// bundle) replaces the `chromium` project below; without it, Playwright's own
+// Chromium runs the whole suite as before.
+const BROWSERS_DIR = path.join(__dirname, '.browsers');
+const TEST_MATCH = {
+  all: undefined,
+  render: /T(2|37)-.*\.spec\.ts$/,
+  compat: /T37-.*\.spec\.ts$/,
+};
+const installedOldBrowsers = BROWSER_MATRIX.filter((entry) => existsSync(executablePath(BROWSERS_DIR, entry)));
+const oldBrowserRunsAllTests = installedOldBrowsers.some((entry) => entry.tests === 'all');
+const oldBrowserProjects: Project[] = installedOldBrowsers.map((entry) => ({
+  name: entry.name,
+  testMatch: TEST_MATCH[entry.tests],
+  metadata: { expectedBundle: entry.expectedBundle },
+  use: {
+    ...devices['Desktop Chrome'],
+    viewport: { width: 1920, height: 1080 },
+    launchOptions: { executablePath: executablePath(BROWSERS_DIR, entry) },
+  },
+}));
 
 export default defineConfig({
   testDir: './tests',
@@ -52,13 +81,18 @@ export default defineConfig({
   },
 
   projects: [
-    {
-      name: 'chromium',
-      // The pdf.js toolbar hides First/Last/Find/Tools/page-input at narrow
-      // widths. 1920x1080 keeps the showcase + viewer in a layout that shows
-      // the full toolbar.
-      use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } },
-    },
+    // Left out when an old Chrome runs the whole suite instead (see above).
+    ...(oldBrowserRunsAllTests
+      ? []
+      : [
+          {
+            name: 'chromium',
+            // The pdf.js toolbar hides First/Last/Find/Tools/page-input at narrow
+            // widths. 1920x1080 keeps the showcase + viewer in a layout that shows
+            // the full toolbar.
+            use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } },
+          },
+        ]),
     {
       // Added for stephanrauh/ngx-extended-pdf-viewer#3210 — pdf.js's
       // `for await (const value of readableStream)` in getTextContent()
@@ -76,6 +110,7 @@ export default defineConfig({
       testMatch: /T(3|4|7)-.*\.spec\.ts$/,
       use: { ...devices['Desktop Safari'], viewport: { width: 1920, height: 1080 } },
     },
+    ...oldBrowserProjects,
   ],
 
   webServer: {
