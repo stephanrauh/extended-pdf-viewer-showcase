@@ -100,6 +100,16 @@ export const test = base.extend<Fixtures & Options>({
           'false',
         );
       });
+      // Keep a handle on the viewer's PDFViewerApplication as `window.__ngxApp`,
+      // so a test can read the viewer's state (current page, zoom, document)
+      // instead of guessing it from the DOM. The library publishes it once per
+      // page load on this event (see pdf-script-loader.service.ts); the object
+      // survives a remount of <ngx-extended-pdf-viewer>.
+      await page.addInitScript(() => {
+        document.addEventListener('ngxViewerFileHasBeenLoaded', (e: Event) => {
+          (window as unknown as Record<string, unknown>).__ngxApp = (e as CustomEvent).detail.PDFViewerApplication;
+        });
+      });
       // Align the whole suite with the checked-out mypdf.js branch: when it's
       // bleeding-edge, switch the showcase to the bleeding-edge build for every
       // test (same key the in-app viewer switch uses). On stable we leave the

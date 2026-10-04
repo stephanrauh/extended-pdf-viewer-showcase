@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { DefaultRoutesComponent } from './shared/default-routes/default-routes.component';
 import { GettingStartedComponent } from './nav/getting-started/getting-started.component';
+import { environment } from '../environments/environment';
+import { ViewerHarnessComponent } from './e2e-harness/viewer-harness.component';
 
 // Import all the component routes from extended-pdf-viewer-routing
 import { PasswordsComponent } from './extended-pdf-viewer/passwords/passwords.component';
@@ -178,6 +180,8 @@ export const routes: Routes = [
       { path: '**', redirectTo: 'simple' }
     ]
   },
+  // The bare viewer the Playwright suite drives (e2e/). Development builds only.
+  ...(environment.production ? [] : [{ path: 'e2e/viewer', component: ViewerHarnessComponent }]),
   { path: ':path', component: DefaultRoutesComponent },
   { path: '**', redirectTo: '/extended-pdf-viewer/simple', pathMatch: 'full' }
 ];
