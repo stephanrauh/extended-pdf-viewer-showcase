@@ -107,35 +107,15 @@ test.describe('T21 — /custom-print-dialog progress lifecycle', () => {
       timeout: 30_000,
     });
 
-    // After the iframe finishes rendering, afterPrint fires →
-    // showCompleted=true and either "Printing completed!" or
-    // "Printing was cancelled!" appears.
-    await expect(
-      page.getByText(/Printing (completed|was cancelled)!/),
-    ).toBeVisible({ timeout: 60_000 });
+    // After the iframe finishes rendering, afterPrint fires and the demo
+    // reports the outcome. Every page was rendered and window.print() ran,
+    // so this is a completed print - "cancelled" would mean the print
+    // service aborted.
+    await expect(page.getByText('Printing completed!')).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByText('Printing was cancelled!')).toHaveCount(0);
+    expect(await printCalls(page)).toBe(1);
   });
 });
 
-// /presentations enables the presentation-mode button via
-// [showPresentationModeButton]="true". Activating the actual
-// fullscreen mode requires a user gesture that Playwright can't
-// reliably synthesise across all platforms; the testable claim is
-// that the button is exposed and clickable.
-
-test.describe('T21 — /presentations exposes the presentation-mode button', () => {
-  const PRESENTATIONS = '/extended-pdf-viewer/presentations';
-
-  test('the #presentationMode toolbar button is rendered and enabled', async ({
-    page,
-  }) => {
-    const viewer = new PdfViewerPage(page);
-    await viewer.goto(PRESENTATIONS);
-    await viewer.waitForFirstPageRender();
-
-    // pdf-presentation-mode.component sets primaryToolbarId="presentationMode"
-    // (no `primary` prefix — see the file directly).
-    const button = page.locator('#presentationMode');
-    await expect(button).toBeVisible({ timeout: 15_000 });
-    await expect(button).toBeEnabled();
-  });
-});
+// The presentation-mode button is entered and left for real in T36 and, from
+// the toolbar and from the menu, in T39.

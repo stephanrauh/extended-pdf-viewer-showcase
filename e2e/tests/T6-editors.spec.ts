@@ -89,7 +89,7 @@ test.describe('T6 editors — annotation-layer-api', () => {
 });
 
 test.describe('T6 editors — annotation-layer (popups)', () => {
-  test('Toggle popup synthesises a click on each popup trigger area', async ({
+  test('Toggle popup opens the annotation\'s comment popup and closes it again', async ({
     page,
   }) => {
     const viewer = new PdfViewerPage(page);
@@ -102,31 +102,20 @@ test.describe('T6 editors — annotation-layer (popups)', () => {
       .getByRole('button', { name: /Manipulating the annotation layer/i })
       .click();
 
-    // There must be popup trigger areas to toggle. If this precondition
-    // fails the demo PDF changed and the test should be updated.
-    await expect
-      .poll(async () => await page.locator('.popupTriggerArea').count(), {
-        timeout: 10_000,
-      })
-      .toBeGreaterThan(0);
+    // The demo PDF's free-text annotation, and the popup that shows its comment.
+    const trigger = page.locator('.annotationLayer .freeTextAnnotation.popupTriggerArea').first();
+    await expect(trigger).toContainText('The author of this book', { timeout: 10_000 });
+    const popup = page.locator('.annotationLayer .commentPopup');
+    await expect(popup).toBeHidden();
 
-    // Counter increments each time any .popupTriggerArea is clicked, so we
-    // can verify the button actually fans out clicks.
-    await page.evaluate(() => {
-      (window as any).__popupClicks = 0;
-      document.querySelectorAll('.popupTriggerArea').forEach((el) => {
-        el.addEventListener('click', () => ((window as any).__popupClicks += 1));
-      });
-    });
+    const toggle = page.getByRole('button', { name: /Toggle popup programmatically/i });
+    await toggle.click();
+    await expect(popup).toBeVisible();
+    await expect(popup).toContainText('The author of this book');
+    await expect(trigger).toHaveClass(/\bselected\b/);
 
-    await page
-      .getByRole('button', { name: /Toggle popup programmatically/i })
-      .click();
-
-    await expect
-      .poll(async () => await page.evaluate(() => (window as any).__popupClicks), {
-        timeout: 10_000,
-      })
-      .toBeGreaterThan(0);
+    await toggle.click();
+    await expect(popup).toBeHidden();
+    await expect(trigger).not.toHaveClass(/\bselected\b/);
   });
 });

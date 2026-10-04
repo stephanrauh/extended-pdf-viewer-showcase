@@ -103,20 +103,80 @@ test.describe('T7 — /scrolling', () => {
   });
 });
 
-test.describe('T7 — /book-mode', () => {
-  test('renders the viewer in book mode with a canvas painted', async ({
-    page,
-  }) => {
-    const viewer = new PdfViewerPage(page);
-    await viewer.goto('/extended-pdf-viewer/book-mode');
-    await viewer.waitForFirstPageRender();
-    await viewer.assertCanvasHasContent();
+test.describe('T7 — book mode', () => {
+  // The bare viewer (src/app/e2e-harness), so the book is configured by the
+  // test and not by a demo's settings.
+  const BOOK = '/e2e/viewer?src=/assets/pdfs/Portugues-para-principiantes.pdf&pageViewMode=book';
 
-    // Book mode collapses the page list into a single visible page at a
-    // time, so the viewer should expose a Page Flip button.
-    await expect(
-      page.locator('#primaryCursorPageFlipTool'),
-    ).toBeAttached();
+  /** The pages the book currently shows, as [left, right]; '' = empty side. */
+  const openPages = (page: import('@playwright/test').Page) =>
+    page.evaluate(() => {
+      const shown = Array.from(document.querySelectorAll<HTMLElement>('.page.stf__item[data-page-number]')).filter(
+        (p) => getComputedStyle(p).display !== 'none' && p.getBoundingClientRect().width > 0,
+      );
+      const side = (cls: string) => shown.find((p) => p.classList.contains(cls))?.dataset.pageNumber ?? '';
+      return [side('--left'), side('--right')];
+    });
+
+  test('next and previous turn a whole spread, and the pages are painted', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(BOOK);
+    await viewer.waitForFirstPageRender();
+    // The page-flip library ignores a turn while the previous one is still
+    // animating - a user, too, waits until the page has landed.
+    const flipped = async (pages: string[]) => {
+      await expect.poll(() => openPages(page)).toEqual(pages);
+      await expect
+        .poll(async () => await page.evaluate(() => (window as any).__ngxApp.pdfViewer.pageFlip.getState()))
+        .toBe('read');
+    };
+
+    // A closed book: the cover alone on the right.
+    await expect.poll(() => openPages(page), { timeout: 15_000 }).toEqual(['', '1']);
+
+    await viewer.nextPage();
+    await flipped(['2', '3']);
+    await viewer.assertCanvasHasContent(2);
+    await viewer.assertCanvasHasContent(3);
+
+    await viewer.nextPage();
+    await flipped(['4', '5']);
+
+    await viewer.previousPage();
+    await flipped(['2', '3']);
+  });
+
+  test('[page] on load opens the book at that page, not on the cover', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(`${BOOK}&page=11`);
+    await viewer.waitForFirstPageRender();
+    // Page 11 is a right-hand page: the spread is 10|11.
+    await expect.poll(() => openPages(page), { timeout: 15_000 }).toEqual(['10', '11']);
+    await viewer.assertCanvasHasContent(11);
+  });
+
+  test('jumping to a page opens the spread that contains it', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(BOOK);
+    await viewer.waitForFirstPageRender();
+    await expect.poll(() => openPages(page), { timeout: 15_000 }).toEqual(['', '1']);
+
+    // Retype until the jump happens: a number typed within the first ~50 ms
+    // after the book appears can be overwritten by the toolbar's initial update
+    // before Enter arrives (no 'pagechanging' at all). That race is a known,
+    // separate issue; this test is about where the jump lands.
+    await expect
+      .poll(
+        async () => {
+          await viewer.gotoPage(11);
+          await page.waitForTimeout(300);
+          return await openPages(page);
+        },
+        { timeout: 15_000 },
+      )
+      .toEqual(['10', '11']);
+    // Page 11 is a right-hand page: the spread is 10|11.
+    await viewer.assertCanvasHasContent(11);
   });
 });
 

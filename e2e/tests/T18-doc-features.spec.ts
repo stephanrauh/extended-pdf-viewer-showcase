@@ -84,20 +84,19 @@ test.describe('T18 — /prerendering paints pages around the viewport', () => {
     await viewer.goto(PRERENDERING);
     await viewer.waitForPageRender(17);
 
+    // Page 15 is out of sight: without prerendering, pdf.js wouldn't paint it.
+    const inView = await page.evaluate(() => {
+      const p = document.querySelector('.page[data-page-number="15"]')!.getBoundingClientRect();
+      const c = document.querySelector('#viewerContainer')!.getBoundingClientRect();
+      return p.bottom > c.top && p.top < c.bottom;
+    });
+    expect(inView, 'page 15 must be outside the viewport').toBe(false);
+
     // The recursive setTimeout chain in onPageRendered may take a
-    // while to drain the entire range; allow generous time.
-    await expect
-      .poll(
-        async () =>
-          await page.evaluate(() => {
-            const canvas = document.querySelector<HTMLCanvasElement>(
-              '.page[data-page-number="15"] canvas',
-            );
-            return canvas ? canvas.width > 0 && canvas.height > 0 : false;
-          }),
-        { timeout: 30_000 },
-      )
-      .toBe(true);
+    // while to drain the entire range; allow generous time. A sized canvas
+    // isn't enough - it has to carry the page's content.
+    await viewer.waitForPageRender(15, 30_000);
+    await viewer.assertCanvasHasContent(15);
   });
 });
 
@@ -108,23 +107,17 @@ test.describe('T18 — /prerendering paints pages around the viewport', () => {
 test.describe('T18 — /perfect-scrollbar mounts the third-party scrollbar', () => {
   const PERFECT = '/extended-pdf-viewer/perfect-scrollbar';
 
-  test('an <ng-scrollbar> appears once the PDF has loaded', async ({
-    page,
-  }) => {
+  // The demo currently renders an EMPTY <ng-scrollbar>: no track, no thumb.
+  // ngx-scrollbar 19 looks for `externalViewport` inside the element's own
+  // content, but the demo puts <ng-scrollbar> next to the viewer instead of
+  // around it, so the '#viewerContainer' selector matches nothing. The old
+  // test only checked that the element and its static attributes existed, so
+  // it passed anyway. Turn this into a real test (drag the thumb, the viewer
+  // scrolls) once the demo shows a scrollbar again.
+  test.fixme('dragging the custom scrollbar scrolls the document', async ({ page }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto(PERFECT);
     await viewer.waitForFirstPageRender();
-
-    // The custom element materialises after pagesLoaded; the demo
-    // waits a single requestAnimationFrame before setting pdfReady.
-    const scrollbar = page.locator('ng-scrollbar');
-    await expect(scrollbar).toHaveCount(1, { timeout: 15_000 });
-
-    // Sanity check: the static attributes pdfReady gives us are
-    // visible. [externalViewport] / [externalContentWrapper] are
-    // Angular property bindings and never reach the DOM as attrs,
-    // so we read the ones that are templated as plain attributes.
-    await expect(scrollbar).toHaveAttribute('track', 'vertical');
-    await expect(scrollbar).toHaveAttribute('visibility', 'hover');
+    await expect(page.locator('ng-scrollbar *').first()).toBeVisible();
   });
 });

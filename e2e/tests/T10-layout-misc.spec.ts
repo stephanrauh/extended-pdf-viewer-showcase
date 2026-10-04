@@ -140,13 +140,18 @@ test.describe('T10 — /modify-page-order', () => {
     await thumb1.waitFor({ state: 'attached', timeout: 30_000 });
     await thumb2.waitFor({ state: 'attached', timeout: 30_000 });
 
-    // The demo ships without `[textLayer]="true"`, so we use the canvas
-    // pixel hash as the identity signal: after swapping pages 1 and 2,
-    // the page-1 wrapper renders what was originally page 2, so the
-    // canvas hash must differ from before.
+    // The demo ships without `[textLayer]="true"`, so the canvas pixel hash
+    // is the identity signal: after the move, the first page must show
+    // exactly what page 2 showed before, and the second page what page 1
+    // showed - not merely "something different".
     await viewer.waitForPageRender(1);
+    await viewer.waitForPageRender(2);
+    await viewer.assertCanvasHasContent(1);
+    await viewer.assertCanvasHasContent(2);
     const beforeHash = await viewer.hashCanvas(1);
+    const page2Hash = await viewer.hashCanvas(2);
     expect(beforeHash).not.toBe('');
+    expect(page2Hash, 'pages 1 and 2 must look different for this test to mean anything').not.toBe(beforeHash);
 
     // pdf.js's thumbnail reordering uses `mousedown`-based dragging
     // (the thumbnail element has `draggable=false`), so Playwright's
@@ -169,7 +174,10 @@ test.describe('T10 — /modify-page-order', () => {
 
     await expect
       .poll(async () => await viewer.hashCanvas(1), { timeout: 15_000 })
-      .not.toBe(beforeHash);
+      .toBe(page2Hash);
+    await expect
+      .poll(async () => await viewer.hashCanvas(2), { timeout: 15_000 })
+      .toBe(beforeHash);
   });
 });
 
@@ -192,16 +200,23 @@ test.describe('T10 — /layers', () => {
     await toggleButton.waitFor({ state: 'attached', timeout: 30_000 });
 
     const visiblePage = await viewer.waitForCurrentPage();
-    const beforeHash = await viewer.hashCanvas(visiblePage);
+    await viewer.assertCanvasHasContent(visiblePage);
+    await viewer.snapshotCanvas('before', visiblePage);
 
     await toggleButton.click();
 
     // Toggling a layer must change the visible pixels — render-only checks
     // would pass when toggleLayer silently no-ops.
     await expect
-      .poll(async () => await viewer.hashCanvas(visiblePage), {
-        timeout: 15_000,
-      })
-      .not.toBe(beforeHash);
+      .poll(async () => await viewer.countChangedPixels('before', visiblePage), { timeout: 15_000 })
+      .toBeGreaterThan(5_000);
+    const layerSize = await viewer.countChangedPixels('before', visiblePage);
+
+    // Toggling it back restores the original rendering (up to anti-aliasing
+    // noise) - so the change above was that layer, not an unrelated re-render.
+    await toggleButton.click();
+    await expect
+      .poll(async () => await viewer.countChangedPixels('before', visiblePage), { timeout: 15_000 })
+      .toBeLessThan(layerSize / 100);
   });
 });

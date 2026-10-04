@@ -72,13 +72,17 @@ test.describe('T23 — /options', () => {
   test('pdfDefaultOptions.assetsFolder routes pdf.js artefacts to /bleeding-edge/', async ({
     page,
   }) => {
+    // Start on the stable build, whatever the suite runs on: when the whole
+    // suite runs on bleeding-edge (fixtures.ts), every route loads from
+    // /bleeding-edge/ and this test couldn't tell whether the demo's own
+    // `assetsFolder` assignment did anything. This init script runs after the
+    // fixture's, so it wins.
+    await page.addInitScript(() => localStorage.setItem('showcase.viewer', 'ngx-extended-pdf-viewer'));
+
     const assetFetches: string[] = [];
     page.on('request', (req) => {
       const url = req.url();
-      // viewer/worker/sandbox bundles all live next to each other;
-      // any of them showing up under bleeding-edge proves the flag
-      // reached pdf.js. Filter to .mjs to keep the array small.
-      if (url.endsWith('.mjs')) {
+      if (/\/(viewer|pdf\.worker)-[^/]*\.mjs(\?|$)/.test(url)) {
         assetFetches.push(url);
       }
     });
@@ -87,16 +91,12 @@ test.describe('T23 — /options', () => {
     await viewer.goto(OPTIONS);
     await viewer.waitForFirstPageRender();
 
-    // At least one bundle must come from /bleeding-edge/ — the flag
-    // the demo sets in its constructor. If the default ('assets')
-    // were used instead, the bleeding-edge filter would be empty.
-    const bleedingEdgeFetches = assetFetches.filter((u) =>
-      u.includes('/bleeding-edge/'),
-    );
-    expect(
-      bleedingEdgeFetches.length,
-      `expected at least one pdf.js .mjs fetch under /bleeding-edge/, got: ${JSON.stringify(assetFetches)}`,
-    ).toBeGreaterThan(0);
+    // Both the viewer and the worker come from /bleeding-edge/, and nothing
+    // from the stable folder.
+    const fetched = JSON.stringify(assetFetches);
+    expect(assetFetches.some((u) => /\/bleeding-edge\/viewer-/.test(u)), `viewer bundle: ${fetched}`).toBe(true);
+    expect(assetFetches.some((u) => /\/bleeding-edge\/pdf\.worker-/.test(u)), `worker bundle: ${fetched}`).toBe(true);
+    expect(assetFetches.filter((u) => !u.includes('/bleeding-edge/')), 'no stable bundle').toEqual([]);
   });
 });
 

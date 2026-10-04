@@ -240,6 +240,56 @@ export class PdfViewerPage {
   }
 
   /**
+   * Keeps a copy of a page canvas's pixels in the browser under `name`, for
+   * {@link countChangedPixels}. Two renderings of the same content can differ
+   * in a few dozen anti-aliased edge pixels, so "looks the same again" has to
+   * be measured, not hashed.
+   */
+  async snapshotCanvas(name: string, pageNumber: number): Promise<void> {
+    await this.page.evaluate(
+      ({ key, num }) => {
+        const canvas = document.querySelector<HTMLCanvasElement>(`.page[data-page-number="${num}"] canvas`)!;
+        const data = canvas.getContext('2d')!.getImageData(0, 0, canvas.width, canvas.height).data.slice();
+        ((window as any).__canvasSnapshots ??= {})[key] = { data, width: canvas.width, height: canvas.height };
+      },
+      { key: name, num: pageNumber },
+    );
+  }
+
+  /**
+   * Number of pixels whose colour differs clearly (summed RGB distance > 60)
+   * between two snapshots - or between a snapshot and the page's canvas as
+   * it is now, when `other` is a page number. Returns -1 if the sizes differ.
+   */
+  async countChangedPixels(name: string, other: string | number): Promise<number> {
+    return await this.page.evaluate(
+      ({ key, cmp }) => {
+        const snaps = (window as any).__canvasSnapshots;
+        const a = snaps[key];
+        let b = typeof cmp === 'string' ? snaps[cmp] : undefined;
+        if (typeof cmp === 'number') {
+          const canvas = document.querySelector<HTMLCanvasElement>(`.page[data-page-number="${cmp}"] canvas`);
+          if (!canvas) return -1;
+          b = {
+            data: canvas.getContext('2d')!.getImageData(0, 0, canvas.width, canvas.height).data,
+            width: canvas.width,
+            height: canvas.height,
+          };
+        }
+        if (!a || !b || a.width !== b.width || a.height !== b.height) return -1;
+        let changed = 0;
+        for (let i = 0; i < a.data.length; i += 4) {
+          const d =
+            Math.abs(a.data[i] - b.data[i]) + Math.abs(a.data[i + 1] - b.data[i + 1]) + Math.abs(a.data[i + 2] - b.data[i + 2]);
+          if (d > 60) changed++;
+        }
+        return changed;
+      },
+      { key: name, cmp: other },
+    );
+  }
+
+  /**
    * Returns the text content of a page's text layer. Useful for "I navigated
    * to page N — is the right text actually showing?" assertions. Returns the
    * empty string if the text layer isn't present (route may have

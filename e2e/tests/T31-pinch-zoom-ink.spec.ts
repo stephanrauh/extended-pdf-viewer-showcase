@@ -262,6 +262,18 @@ async function scrollTop(page: Page): Promise<number> {
   );
 }
 
+/**
+ * Runs a pinch and checks that it really zoomed in. Without this, the drawing
+ * checks after a "pinch" would also pass if the gesture had done nothing -
+ * and then the tests would no longer cover the scenario of #3260 at all.
+ */
+async function expectPinchZoomsIn(page: Page, pinch: () => Promise<void>): Promise<void> {
+  const scale = () => page.evaluate(() => (window as any).__ngxApp.pdfViewer.currentScale as number);
+  const before = await scale();
+  await pinch();
+  await expect.poll(scale, { message: `pinch zooms in from ${before}` }).toBeGreaterThan(before * 1.3);
+}
+
 /** Two fingers spreading apart — what pdf.js's TouchManager turns into a zoom. */
 async function pinchZoom(cdp: CDPSession, cx: number, cy: number): Promise<void> {
   const points = (gap: number) => [
@@ -398,7 +410,7 @@ test.describe('T31 — #3260 ink editor keeps accepting strokes after a zoom', (
 
     await activateDrawByMouse(page);
     const origin = await freeSpotInLayer(page);
-    await pinchZoom(cdp, origin.x + 200, origin.y + 200);
+    await expectPinchZoomsIn(page, () => pinchZoom(cdp, origin.x + 200, origin.y + 200));
     // The library's iOS canvas-optimization service resets visible pages 2s
     // after the gesture; wait past that cooldown so the re-render is included.
     await page.waitForTimeout(3_000);
@@ -437,7 +449,7 @@ test.describe('T31 — #3260 ink editor keeps accepting strokes after a zoom', (
 
     await activateDrawByTouch(page, cdp);
     const origin = await freeSpotInLayer(page);
-    await pinchZoom(cdp, origin.x + 200, origin.y + 200);
+    await expectPinchZoomsIn(page, () => pinchZoom(cdp, origin.x + 200, origin.y + 200));
     await page.waitForTimeout(3_000);
 
     // The pinch drops out of editing mode, exactly as the bug report describes;
@@ -461,7 +473,7 @@ test.describe('T31 — #3260 ink editor keeps accepting strokes after a zoom', (
 
     await activateDrawByTouch(page, cdp);
     const origin = await freeSpotInLayer(page);
-    await staggeredPinchZoom(cdp, origin.x + 200, origin.y + 200);
+    await expectPinchZoomsIn(page, () => staggeredPinchZoom(cdp, origin.x + 200, origin.y + 200));
     await page.waitForTimeout(3_000);
 
     await activateDrawByTouch(page, cdp);
@@ -568,7 +580,7 @@ test.describe('T31 — #3260 ink editor keeps accepting strokes after a zoom', (
 
     await activateDrawByPen(page, cdp);
     const origin = await freeSpotInLayer(page);
-    await pinchZoom(cdp, origin.x + 200, origin.y + 200);
+    await expectPinchZoomsIn(page, () => pinchZoom(cdp, origin.x + 200, origin.y + 200));
     await page.waitForTimeout(3_000);
 
     await activateDrawByPen(page, cdp);

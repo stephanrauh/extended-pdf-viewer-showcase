@@ -53,23 +53,23 @@ test.describe('T35 — sidebar views', () => {
     await viewer.assertCanvasHasContent(target);
   });
 
-  test('the outline view lists entries and clicking one navigates', async ({ page }) => {
+  test('the outline view lists the chapters and clicking one opens its page', async ({ page }) => {
     const viewer = await openRoute(page);
 
     await page.locator('#viewOutline').click();
     await expect(page.locator('#outlinesView')).toBeVisible();
 
-    const links = page.locator('#outlinesView .treeItem > a');
-    await expect.poll(async () => await links.count(), { timeout: 15_000 }).toBeGreaterThan(1);
+    // The PDF's outline has 17 top-level entries; the last one is the index,
+    // whose destination is page 314.
+    const links = page.locator('#outlinesView > .treeItem > a');
+    await expect(links).toHaveCount(17, { timeout: 15_000 });
+    await expect(links.last()).toHaveText(/^Index/);
 
-    const before = await viewer.getCurrentPageFromViewport();
-    // Prefer a link that clearly targets a later page: the last top-level
-    // entry. If the outline were mis-wired to no-op, the viewport would stay.
     await links.last().click();
 
-    await expect
-      .poll(async () => await viewer.getCurrentPageFromViewport(), { timeout: 15_000 })
-      .toBeGreaterThan(before);
+    await viewer.expectViewportOnPage(314);
+    await viewer.waitForPageRender(314);
+    await viewer.assertCanvasHasContent(314);
   });
 
   test('the attachments view lists the embedded files of a PDF with attachments', async ({ page }) => {
@@ -102,14 +102,22 @@ test.describe('T35 — sidebar views', () => {
 
     const visiblePage = await viewer.waitForCurrentPage();
     await viewer.assertCanvasHasContent(visiblePage);
-    const beforeHash = await viewer.hashCanvas(visiblePage);
+    await viewer.snapshotCanvas('allLayers', visiblePage);
 
     await toggles.first().click();
 
     // A checkbox that doesn't reach pdf.js's optional-content config would
     // leave the pixels untouched.
     await expect
-      .poll(async () => await viewer.hashCanvas(visiblePage), { timeout: 15_000 })
-      .not.toBe(beforeHash);
+      .poll(async () => await viewer.countChangedPixels('allLayers', visiblePage), { timeout: 15_000 })
+      .toBeGreaterThan(5_000);
+    const layerSize = await viewer.countChangedPixels('allLayers', visiblePage);
+
+    // Toggling it back restores the original rendering (up to anti-aliasing
+    // noise) - so the change above was that layer, not an unrelated re-render.
+    await toggles.first().click();
+    await expect
+      .poll(async () => await viewer.countChangedPixels('allLayers', visiblePage), { timeout: 15_000 })
+      .toBeLessThan(layerSize / 100);
   });
 });

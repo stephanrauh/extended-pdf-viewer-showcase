@@ -36,6 +36,7 @@ export const ROUTES: RouteSpec[] = [
   { path: `${E}/browser-support`, label: 'browser-support', hasViewer: false },
   { path: `${E}/changelog`, label: 'changelog', hasViewer: false },
   { path: `${E}/contextmenu`, label: 'contextmenu', hasViewer: true },
+  { path: `${E}/coordinates`, label: 'coordinates', hasViewer: false },
 
   { path: `${E}/csp/activating-csp`, label: 'csp / activating', hasViewer: true },
   { path: `${E}/csp/inline-scripts`, label: 'csp / inline-scripts', hasViewer: true },
@@ -52,6 +53,7 @@ export const ROUTES: RouteSpec[] = [
   { path: `${E}/custom-find`, label: 'custom-find', hasViewer: true, skipRender: 'viewer below accordion; does not auto-render' },
   { path: `${E}/disable-buttons`, label: 'disable-buttons', hasViewer: true },
   { path: `${E}/display-options`, label: 'display-options', hasViewer: true },
+  { path: `${E}/drag-mode`, label: 'drag-mode', hasViewer: true },
 
   { path: `${E}/export-file`, label: 'export-file', hasViewer: true },
   { path: `${E}/export-image`, label: 'export-image', hasViewer: true },
@@ -68,6 +70,7 @@ export const ROUTES: RouteSpec[] = [
   { path: `${E}/filtering-console-log`, label: 'filtering-console-log', hasViewer: true },
   { path: `${E}/forms`, label: 'forms', hasViewer: true },
   { path: `${E}/find`, label: 'find', hasViewer: true, skipRender: 'viewer below accordion; does not auto-render' },
+  { path: `${E}/find-custom-findbar`, label: 'find-custom-findbar', hasViewer: true },
   { path: `${E}/layers`, label: 'layers', hasViewer: true },
 
   { path: `${E}/i18n`, label: 'i18n', hasViewer: true },

@@ -12,6 +12,10 @@ test.describe('T1 smoke — every route mounts', () => {
       // App shell rendered (not a blank/redirect-only response).
       await expect(page.locator('app-root')).toBeAttached();
 
+      // Still on the requested route: unknown routes redirect to /simple, and
+      // that page would pass every check below.
+      await expect(page).toHaveURL((url) => url.pathname === route.path);
+
       // Some child content rendered inside <app-root> — guards against an
       // empty error component.
       await expect(page.locator('app-root *').first()).toBeAttached({

@@ -77,11 +77,16 @@ test.describe('T15 — /display-options scrollMode (all 4 radios)', () => {
       await viewer.waitForFirstPageRender();
 
       // Vertical (0) is the default; toggle away first so re-selecting
-      // it actually fires the change.
+      // it actually fires the change - and prove the toggle-away landed, or
+      // the final assertion would just re-check the untouched default.
       if (mode.value === 0) {
         await radioByLabel(page, '1 (horizontal)').check();
+        await expect(page.locator('.pdfViewer.scrollHorizontal')).toHaveCount(1);
       }
       await radioByLabel(page, mode.label).check();
+      await expect
+        .poll(async () => await page.evaluate(() => (window as any).__ngxApp.pdfViewer.scrollMode))
+        .toBe(mode.value);
       await mode.assert(page);
     });
   }
@@ -111,30 +116,40 @@ test.describe('T15 — /display-options spread (all 3 radios)', () => {
       .toBe(0);
   });
 
-  test('spread "odd" wraps page pairs in .spread containers', async ({ page }) => {
+  // The page numbers inside each `.spread` wrapper, e.g. [["1","2"],["3","4"]].
+  const spreads = (page: import('@playwright/test').Page) =>
+    page.evaluate(() =>
+      Array.from(document.querySelectorAll('.pdfViewer .spread'))
+        .slice(0, 3)
+        .map((s) =>
+          Array.from(s.querySelectorAll<HTMLElement>('.page[data-page-number]')).map((p) => p.dataset.pageNumber),
+        ),
+    );
+
+  test('spread "odd" pairs pages 1+2, 3+4, ...', async ({ page }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto(DISPLAY);
     await viewer.waitForFirstPageRender();
 
     await page.locator('input[name="spread"][value="odd"]').check();
-    await expect
-      .poll(async () => await page.locator('.pdfViewer .spread').count(), {
-        timeout: 15_000,
-      })
-      .toBeGreaterThan(0);
+    await expect.poll(() => spreads(page), { timeout: 15_000 }).toEqual([
+      ['1', '2'],
+      ['3', '4'],
+      ['5', '6'],
+    ]);
   });
 
-  test('spread "even" wraps page pairs in .spread containers', async ({ page }) => {
+  test('spread "even" leaves page 1 alone, then pairs 2+3, 4+5, ...', async ({ page }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto(DISPLAY);
     await viewer.waitForFirstPageRender();
 
     await page.locator('input[name="spread"][value="even"]').check();
-    await expect
-      .poll(async () => await page.locator('.pdfViewer .spread').count(), {
-        timeout: 15_000,
-      })
-      .toBeGreaterThan(0);
+    await expect.poll(() => spreads(page), { timeout: 15_000 }).toEqual([
+      ['1'],
+      ['2', '3'],
+      ['4', '5'],
+    ]);
   });
 });
 
@@ -164,17 +179,21 @@ test.describe('T15 — /display-options pageViewMode (all 4 radios)', () => {
       .toBe(1);
   });
 
-  test('pageViewMode "book" attaches the page-flip cursor button', async ({ page }) => {
+  test('pageViewMode "book" shows the document as a book', async ({ page }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto(DISPLAY);
     await viewer.waitForFirstPageRender();
 
     await page.locator('input[name="pageViewMode"][value="book"]').check();
 
-    // Book mode exposes #primaryCursorPageFlipTool (per T7-navigation).
-    await expect(page.locator('#primaryCursorPageFlipTool')).toBeAttached({
-      timeout: 10_000,
-    });
+    await expect
+      .poll(async () => await page.evaluate(() => (window as any).__ngxApp.pdfViewer.pageViewMode))
+      .toBe('book');
+    // The page-flip library takes over the pages: the cover (page 1) sits
+    // alone on the right-hand side, like the first page of a closed book.
+    await expect(page.locator('.page.stf__item[data-page-number="1"]')).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('.page.stf__item[data-page-number="1"]')).toHaveClass(/--right/);
+    await viewer.assertCanvasHasContent(1);
   });
 
   test('pageViewMode "multiple" (default) renders more than one painted canvas', async ({
@@ -185,8 +204,17 @@ test.describe('T15 — /display-options pageViewMode (all 4 radios)', () => {
     await viewer.waitForFirstPageRender();
 
     // Default. Toggle through single then back to multiple to make
-    // re-selecting observable.
+    // re-selecting observable - and prove "single" landed, or the final
+    // assertion would just re-check the untouched default.
+    const painted = () =>
+      page.evaluate(
+        () =>
+          Array.from(document.querySelectorAll<HTMLCanvasElement>('.page[data-page-number] canvas')).filter(
+            (c) => c.width > 0 && c.height > 0,
+          ).length,
+      );
     await page.locator('input[name="pageViewMode"][value="single"]').check();
+    await expect.poll(painted, { timeout: 15_000 }).toBe(1);
     await page.locator('input[name="pageViewMode"][value="multiple"]').check();
 
     await expect
@@ -205,18 +233,25 @@ test.describe('T15 — /display-options pageViewMode (all 4 radios)', () => {
       .toBeGreaterThan(1);
   });
 
-  test('pageViewMode "infinite-scroll" keeps the radio selected and the viewer responsive', async ({
+  test('pageViewMode "infinite-scroll" lets the page scroll instead of the viewer', async ({
     page,
   }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto(DISPLAY);
     await viewer.waitForFirstPageRender();
+    const innerScrollRange = () =>
+      page.locator('#viewerContainer').evaluate((el) => el.scrollHeight - el.clientHeight);
+    // Before: the viewer scrolls its pages itself.
+    expect(await innerScrollRange()).toBeGreaterThan(100);
 
-    const radio = page.locator('input[name="pageViewMode"][value="infinite-scroll"]');
-    await radio.check();
-    await expect(radio).toBeChecked();
-    // Strong infinite-scroll behaviour is asserted by T7-navigation;
-    // here we just prove the radio click survives the mode swap.
+    await page.locator('input[name="pageViewMode"][value="infinite-scroll"]').check();
+
+    await expect
+      .poll(async () => await page.evaluate(() => (window as any).__ngxApp.pdfViewer.pageViewMode))
+      .toBe('infinite-scroll');
+    // After: the viewer grows to the height of the whole document, so it has
+    // nothing left to scroll - the surrounding page does the scrolling.
+    await expect.poll(innerScrollRange, { timeout: 15_000 }).toBeLessThanOrEqual(1);
     await viewer.assertCanvasHasContent();
   });
 });
