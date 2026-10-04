@@ -29,11 +29,6 @@ export class EraserUndoRedoComponent {
 
   public options: ResponsiveVisibility[] = [true, false, 'always-visible', 'always-in-secondary-menu', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
 
-  /** The eraser and the undo/redo buttons only exist in the bleeding-edge bundle (pdf.js 6.3 and up). */
-  public get isBleedingEdge(): boolean {
-    return pdfDefaultOptions.assetsFolder?.includes('bleeding-edge');
-  }
-
   public withExplanation(option: ResponsiveVisibility): string {
     if (option === true) {
       return 'true (uses the defaults)';
