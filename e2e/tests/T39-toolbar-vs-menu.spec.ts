@@ -3,6 +3,7 @@ import * as path from 'node:path';
 import type { Locator, Page } from '@playwright/test';
 import { test, expect } from '../fixtures';
 import { PdfViewerPage } from '../poms/pdf-viewer.page';
+import { BUTTONS, type ToolbarButton } from '../poms/toolbar-buttons';
 
 /**
  * T39 — every toolbar action works the same from the toolbar and from the
@@ -26,44 +27,8 @@ type Via = 'toolbar' | 'menu';
 const VIAS: Via[] = ['toolbar', 'menu'];
 const SHOW: Record<Via, string> = { toolbar: 'always-visible', menu: 'always-in-secondary-menu' };
 
-/** The two DOM copies of a button: its toolbar id and its menu-entry id. */
-type Button = { toolbar: string; menu: string };
-const B = {
-  first: { toolbar: 'primaryFirstPage', menu: 'secondaryFirstPage' },
-  previous: { toolbar: 'primaryPrevious', menu: 'secondaryPreviousPage' },
-  next: { toolbar: 'primaryNext', menu: 'primaryNextPage' },
-  last: { toolbar: 'primaryLastPage', menu: 'secondaryLastPage' },
-  zoomIn: { toolbar: 'primaryZoomIn', menu: 'secondaryZoomIn' },
-  zoomOut: { toolbar: 'primaryZoomOut', menu: 'secondaryZoomOut' },
-  rotateCw: { toolbar: 'primaryPageRotateCw', menu: 'secondaryPageRotateCw' },
-  rotateCcw: { toolbar: 'primaryPageRotateCcw', menu: 'secondaryPageRotateCcw' },
-  handTool: { toolbar: 'primaryCursorHandTool', menu: 'secondaryCursorHandTool' },
-  selectTool: { toolbar: 'primaryCursorSelectTool', menu: 'secondaryCursorSelectTool' },
-  sidebar: { toolbar: 'viewsManagerToggleButton', menu: 'secondaryViewsManagerToggleButton' },
-  find: { toolbar: 'primaryViewFind', menu: 'secondaryViewFind' },
-  properties: { toolbar: 'documentProperties', menu: 'secondaryDocumentProperties' },
-  scrollPage: { toolbar: 'scrollPage', menu: 'secondaryScrollPage' },
-  scrollVertical: { toolbar: 'scrollVertical', menu: 'secondaryScrollVertical' },
-  scrollHorizontal: { toolbar: 'scrollHorizontal', menu: 'secondaryScrollHorizontal' },
-  scrollWrapped: { toolbar: 'scrollWrapped', menu: 'secondaryScrollWrapped' },
-  infiniteScroll: { toolbar: 'infiniteScroll', menu: 'secondaryInfiniteScroll' },
-  bookMode: { toolbar: 'book-mode', menu: 'secondaryBook-mode' },
-  spreadNone: { toolbar: 'spreadNone', menu: 'secondarySpreadNone' },
-  spreadOdd: { toolbar: 'spreadOdd', menu: 'secondarySpreadOdd' },
-  spreadEven: { toolbar: 'spreadEven', menu: 'secondarySpreadEven' },
-  presentation: { toolbar: 'presentationMode', menu: 'secondaryPresentationMode' },
-  openFile: { toolbar: 'openFile', menu: 'secondaryOpenFile' },
-  print: { toolbar: 'printButton', menu: 'secondaryPrintButton' },
-  download: { toolbar: 'downloadButton', menu: 'secondaryDownload' },
-  highlight: { toolbar: 'primaryEditorHighlight', menu: 'secondaryEditorHighlight' },
-  freeText: { toolbar: 'primaryEditorFreeText', menu: 'secondaryEditorFreeText' },
-  ink: { toolbar: 'primaryEditorInk', menu: 'secondaryEditorInk' },
-  stamp: { toolbar: 'primaryEditorStamp', menu: 'secondaryEditorStamp' },
-  signature: { toolbar: 'primaryEditorSignatureButton', menu: 'secondaryEditorSignatureButton' },
-  eraser: { toolbar: 'primaryEditorEraser', menu: 'secondaryEditorEraser' },
-  undo: { toolbar: 'primaryEditorUndo', menu: 'secondaryEditorUndo' },
-  redo: { toolbar: 'primaryEditorRedo', menu: 'secondaryEditorRedo' },
-} satisfies Record<string, Button>;
+type Button = ToolbarButton;
+const B = BUTTONS;
 
 /** pdf.js AnnotationEditorType values (src/shared/util.js in mypdf.js). */
 const EDITOR = { NONE: 0, FREETEXT: 3, HIGHLIGHT: 9, STAMP: 13, INK: 15, SIGNATURE: 101, ERASER: 103 };

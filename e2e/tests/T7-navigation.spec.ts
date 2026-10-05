@@ -149,7 +149,9 @@ test.describe('T7 — book mode', () => {
   test('[page] on load opens the book at that page, not on the cover', async ({ page }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto(`${BOOK}&page=11`);
-    await viewer.waitForFirstPageRender();
+    // Not waitForFirstPageRender(): it waits for page 1's canvas, which a book
+    // opened at page 11 rightly keeps hidden.
+    await viewer.waitForViewerMounted();
     // Page 11 is a right-hand page: the spread is 10|11.
     await expect.poll(() => openPages(page), { timeout: 15_000 }).toEqual(['10', '11']);
     await viewer.assertCanvasHasContent(11);
