@@ -4,6 +4,7 @@ import type { Locator, Page } from '@playwright/test';
 import { test, expect } from '../fixtures';
 import { PdfViewerPage } from '../poms/pdf-viewer.page';
 import { BUTTONS, type ToolbarButton } from '../poms/toolbar-buttons';
+import { stubPrint } from '../poms/print-stub';
 
 /**
  * T39 — every toolbar action works the same from the toolbar and from the
@@ -549,32 +550,4 @@ async function expectedPageCount(page: Page, src: string): Promise<number> {
     await task.destroy();
     return n;
   }, src);
-}
-
-/**
- * Replaces window.print so no OS dialog opens, and records how many pages
- * pdf.js had put into its print container at the moment it called print().
- */
-async function stubPrint(page: Page): Promise<void> {
-  await page.addInitScript(() => {
-    const w = window as any;
-    w.__printCalls = 0;
-    w.__printedPages = -1;
-    const stub = () => {
-      w.__printCalls += 1;
-      w.__printedPages = document.querySelectorAll('#printContainer > *').length;
-    };
-    window.print = stub;
-    const patchIframes = () => {
-      document.querySelectorAll('iframe').forEach((f) => {
-        try {
-          if (f.contentWindow) f.contentWindow.print = stub;
-        } catch {
-          // cross-origin iframe - not ours
-        }
-      });
-    };
-    new MutationObserver(patchIframes).observe(document, { childList: true, subtree: true });
-    patchIframes();
-  });
 }
