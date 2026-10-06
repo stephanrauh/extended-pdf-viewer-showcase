@@ -148,3 +148,98 @@ test.describe('T48 — [readingDirection]', () => {
     });
   }
 });
+
+test.describe('T48 — book mode and [readingDirection]', () => {
+  /** The visible pages of the book from left to right, as the reader sees them ('' = an empty side). */
+  const spread = (page: Page) =>
+    page.evaluate(() => {
+      const block = document.querySelector('.stf__block')!.getBoundingClientRect();
+      const middle = block.left + block.width / 2;
+      const shown = Array.from(document.querySelectorAll<HTMLElement>('.page.stf__item[data-page-number]')).filter(
+        (p) => getComputedStyle(p).display !== 'none' && p.getBoundingClientRect().width > 0,
+      );
+      const side = (left: boolean) =>
+        shown.find((p) => {
+          const r = p.getBoundingClientRect();
+          return r.left + r.width / 2 < middle === left;
+        })?.dataset.pageNumber ?? '';
+      return [side(true), side(false)];
+    });
+  const turned = async (page: Page, expected: string[]) => {
+    await expect.poll(() => spread(page), { timeout: 15_000 }).toEqual(expected);
+    await expect.poll(() => app(page, 'app.pdfViewer.pageFlip.getState()')).toBe('read');
+  };
+
+  test('"ltr": the cover is on the right, the book opens to the left', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(`/e2e/viewer?src=${DOC}&pageViewMode=book&readingDirection=ltr`);
+    await viewer.waitForFirstPageRender();
+    await turned(page, ['', '1']);
+    await viewer.nextPage();
+    await turned(page, ['2', '3']);
+  });
+
+  test('"rtl": the cover is on the left, the pages follow from right to left, and they read normally', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(`/e2e/viewer?src=${DOC}&pageViewMode=book&readingDirection=rtl`);
+    await viewer.waitForFirstPageRender();
+    await turned(page, ['1', '']);
+    await viewer.nextPage();
+    await turned(page, ['3', '2']);
+    await viewer.assertCanvasHasContent(2);
+    // The book is mirrored, the page content isn't: the text layer runs left to right.
+    const words = await page.evaluate(() => {
+      const spans = Array.from(document.querySelectorAll<HTMLElement>('.page[data-page-number="2"] .textLayer span:not(:has(span))')).filter(
+        (s) => s.textContent!.trim().length > 3 && s.getBoundingClientRect().width > 0,
+      );
+      const first = spans[0].getBoundingClientRect();
+      // in a mirrored page, the second word of a line would be left of the first one
+      const next = spans.find((s) => Math.abs(s.getBoundingClientRect().top - first.top) < 2 && s !== spans[0]);
+      return next ? next.getBoundingClientRect().left > first.left : null;
+    });
+    expect(words, 'text reads left to right').not.toBe(false);
+  });
+
+  for (const direction of ['ltr', 'rtl'] as const) {
+    test(`"${direction}": clicking the outer corner of a page turns the pages`, async ({ page }) => {
+      const viewer = new PdfViewerPage(page);
+      // With the hand tool, the mouse pans the book instead of turning its pages (#3140).
+      await viewer.goto(`/e2e/viewer?src=${DOC}&pageViewMode=book&readingDirection=${direction}&page=2&zoom=page-fit&handTool=false`);
+      // Not waitForFirstPageRender(): the book opened at page 2 rightly hides page 1's canvas.
+      await viewer.waitForPageRender(2);
+      const forward = direction === 'ltr' ? ['4', '5'] : ['5', '4'];
+      const back = direction === 'ltr' ? ['2', '3'] : ['3', '2'];
+      await turned(page, back);
+      // The library turns a page when the user clicks one of its outer corners.
+      const corner = async (side: 'left' | 'right') => {
+        const book = await page.evaluate(() => {
+          const rects = Array.from(document.querySelectorAll<HTMLElement>('.page.stf__item[data-page-number]'))
+            .filter((p) => getComputedStyle(p).display !== 'none')
+            .map((p) => p.getBoundingClientRect())
+            .filter((r) => r.width > 0);
+          return { left: Math.min(...rects.map((r) => r.left)), right: Math.max(...rects.map((r) => r.right)), bottom: Math.min(...rects.map((r) => r.bottom)) };
+        });
+        expect(book.bottom, 'the whole book is visible').toBeLessThanOrEqual(page.viewportSize()!.height);
+        await page.mouse.click(side === 'left' ? book.left + 15 : book.right - 15, book.bottom - 15);
+      };
+      const forwardSide = direction === 'ltr' ? 'right' : 'left';
+      const backSide = direction === 'ltr' ? 'left' : 'right';
+      await corner(forwardSide);
+      await turned(page, forward);
+      await corner(backSide);
+      await turned(page, back);
+    });
+  }
+
+  test('switching the reading direction while the book is open', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(`/e2e/viewer?src=${DOC}&pageViewMode=book&readingDirection=ltr`);
+    await viewer.waitForFirstPageRender();
+    await viewer.nextPage();
+    await turned(page, ['2', '3']);
+    await page.evaluate(() => (window as any).__setInput('readingDirection', 'rtl'));
+    await turned(page, ['3', '2']);
+    await viewer.nextPage();
+    await turned(page, ['5', '4']);
+  });
+});

@@ -41,6 +41,15 @@
             </ul>
             <p>The keys are defined by their name and - optionally - their modifiers (SHIFT, ALT, CTRL, CMD, and META). CMD is used on Apple keyboards, while META is used on some UNIX keyboards.</p>
             <p>Examples: "CTRL+SHIFT+P" is the key binding of the presentation mode. "F4" toggles the sidebar.</p>
+            <p>
+              Ignoring a key means the PDF viewer doesn't react to it. The browser still does: keys like End, Home, Page Up, Page Down,
+              Space and the arrow keys scroll the viewer the way the browser always scrolls. For example, if you ignore "End", the End key
+              doesn't jump to the last page, but it still scrolls to the end of the document.
+            </p>
+            <p>
+              The browser's own shortcuts, such as CTRL+T, CTRL+W, CTRL+N, CTRL+TAB or F11, never reach a web page. Neither
+              ngx-extended-pdf-viewer nor your application can use or block them.
+            </p>
           </div>
           }
           @if (keyboardcomponentTab === 'demo') {

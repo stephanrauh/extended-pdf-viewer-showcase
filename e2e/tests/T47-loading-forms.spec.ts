@@ -47,6 +47,32 @@ test.describe('T47 — password-protected documents', () => {
     await expect.poll(async () => (await named(page, 'pdfLoaded')).length).toBe(1);
   });
 
+  test('the password is hidden while typing, Enter submits without reloading, and Chrome has nothing to complain about', async ({ page }) => {
+    const domWarnings: string[] = [];
+    page.on('console', (m) => {
+      if (/password/i.test(m.text()) && /\[DOM\]|form/i.test(m.text())) domWarnings.push(m.text());
+    });
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(`/e2e/viewer?src=${PROTECTED}`);
+    await expect(page.locator('#passwordDialog')).toBeVisible({ timeout: 30_000 });
+    await expect(page.locator('#password')).toHaveAttribute('type', 'password');
+    const url = page.url();
+    let navigated = false;
+    page.on('framenavigated', (f) => {
+      if (f === page.mainFrame()) navigated = true;
+    });
+
+    await page.locator('#password').fill(PASSWORD);
+    await page.locator('#password').press('Enter');
+    await viewer.waitForFirstPageRender();
+    expect(navigated, 'Enter must not submit the form to the server').toBe(false);
+    expect(page.url()).toBe(url);
+    // pdf.js handles Enter and the OK button itself - the form must not check the password a second time.
+    await page.waitForTimeout(500);
+    expect((await named(page, 'pdfLoaded')).length).toBe(1);
+    expect(domWarnings).toEqual([]);
+  });
+
   test('cancelling the password dialog opens nothing', async ({ page }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto(`/e2e/viewer?src=${PROTECTED}`);
