@@ -7,10 +7,11 @@
 #   sh e2e/run-local.sh T43                 # one spec
 #   sh e2e/run-local.sh T43 T44             # several
 #   PROJECT=webkit sh e2e/run-local.sh T43
+#   START=1 sh e2e/run-local.sh T43         # start the dev server if none runs
 #   RESTART=1 sh e2e/run-local.sh T43       # restart the dev server first, e.g.
 #                                           # after rebuilding the library
 #
-# Starts the dev server if nothing answers on port 4300. Port 4300 keeps it
+# Without START or RESTART, it waits for an ng serve on port 4300. That port keeps it
 # apart from an `ng serve` on the default port 4200.
 DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$DIR/.."
@@ -22,14 +23,20 @@ if [ -n "$RESTART" ]; then
   lsof -ti tcp:4300 -sTCP:LISTEN | xargs kill 2>/dev/null
   sleep 2
 fi
-if ! curl -s -o /dev/null http://localhost:4300/; then
-  (cd "$ROOT" && nohup npx ng serve --port 4300 > "$SERVER_LOG" 2>&1 &)
+# Start a server only on request (START=1 or RESTART=1): a server that is
+# still starting doesn't listen yet, and must not get a twin.
+if [ -n "$START$RESTART" ] && ! lsof -ti tcp:4300 -sTCP:LISTEN > /dev/null; then
+  # < /dev/null: the server must not hold on to this script's input, or the
+  # caller waits for the server to exit.
+  (cd "$ROOT" && nohup npx ng serve --port 4300 > "$SERVER_LOG" 2>&1 < /dev/null &)
 fi
 for i in $(seq 1 120); do
   curl -s -o /dev/null http://localhost:4300/ && break
   sleep 2
 done
 
+# Playwright empties its results folder on start - never run from inside it.
+cd "$ROOT" || exit 1
 E2E_BASE_URL=http://localhost:4300 npx --prefix "$ROOT" playwright test --config="$DIR/playwright.config.ts" \
   --project="${PROJECT:-chrome-147}" --retries=0 --reporter=line "$@" > "$LOG" 2>&1
 grep -E "^\s+[0-9]+\) |Error:|Timeout|waiting for|^\s+Expected|^\s+Received|^\s+[0-9]+ (passed|failed|skipped|flaky)" "$LOG" | head -80

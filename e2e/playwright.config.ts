@@ -110,6 +110,17 @@ export default defineConfig({
       testMatch: /T(3|4|7)-.*\.spec\.ts$/,
       use: { ...devices['Desktop Safari'], viewport: { width: 1920, height: 1080 } },
     },
+    // Firefox runs the whole suite, but only on request (E2E_FIREFOX=1): like
+    // WebKit, a second full run would double the time and energy of every
+    // `test:e2e`. Install it once with `npx playwright install firefox`.
+    ...(process.env.E2E_FIREFOX
+      ? [
+          {
+            name: 'firefox',
+            use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
+          },
+        ]
+      : []),
     ...oldBrowserProjects,
   ],
 

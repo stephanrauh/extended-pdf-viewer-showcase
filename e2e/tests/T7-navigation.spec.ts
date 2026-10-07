@@ -157,6 +157,22 @@ test.describe('T7 — book mode', () => {
     await viewer.assertCanvasHasContent(11);
   });
 
+  test('[page] on load, on a slow computer: the book still opens at that page', async ({ page, browserName }) => {
+    // Under load, the book used to open on the cover: while it was being built, the scroll
+    // position (always "page 1") overrode [page]. A 4x slower CPU made that happen every time.
+    test.skip(browserName !== 'chromium', 'CPU throttling needs the Chrome DevTools Protocol');
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(`${BOOK}&page=11`);
+    await viewer.waitForViewerMounted();
+    await expect.poll(() => openPages(page), { timeout: 30_000 }).toEqual(['10', '11']);
+    await page.waitForTimeout(2000);
+    expect(await openPages(page), 'still open at page 11 once everything has settled').toEqual(['10', '11']);
+    expect(await page.evaluate(() => (window as any).__ngxApp.page)).toBe(11);
+    await expect(page.locator('#pageNumber')).toHaveValue('11');
+  });
+
   test('jumping to a page opens the spread that contains it', async ({ page }) => {
     const viewer = new PdfViewerPage(page);
     await viewer.goto(BOOK);

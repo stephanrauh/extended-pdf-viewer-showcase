@@ -288,22 +288,5 @@ test.describe('T47 — form data', () => {
     await expect(first).toHaveValue('Ada');
   });
 
-  test('XFA forms are rendered as XFA and accept input', async ({ page }) => {
-    const XFA = '/assets/pdfs/under-copyright/XFA-Canada-Immigration.pdf';
-    // The file is copyrighted, so it isn't in the repository - only on the server.
-    const available = (await page.request.head(XFA)).headers()['content-type']?.includes('pdf');
-    test.skip(!available, `${XFA} is not available here`);
-    const viewer = new PdfViewerPage(page);
-    await viewer.goto(`/e2e/viewer?src=${XFA}`);
-    await viewer.waitForViewerMounted();
-    const xfaLayer = page.locator('.xfaLayer').first();
-    await expect(xfaLayer).toBeVisible({ timeout: 30_000 });
-    expect(await app(page, 'app.pdfDocument.isPureXfa')).toBe(true);
-    const input = xfaLayer.locator('input[type="text"]').first();
-    await expect(input).toBeVisible();
-    await input.fill('Lovelace');
-    await input.press('Tab');
-    await expect(input).toHaveValue('Lovelace');
-    await expect.poll(async () => (await named(page, 'xfaLayerRendered')).length).toBeGreaterThan(0);
-  });
+  // XFA forms: see T51, which uses our own XFA form with every kind of field.
 });

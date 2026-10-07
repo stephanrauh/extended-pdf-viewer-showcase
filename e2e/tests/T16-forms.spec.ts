@@ -346,3 +346,26 @@ test.describe('T16 — /forms two-way binding (PDF → Angular)', () => {
     await expect(demoTypeScript).not.toBeChecked({ timeout: 10_000 });
   });
 });
+
+test.describe('T16 — /forms, the XFA tab', () => {
+  test('the demo fills our own XFA form, and edits in the form come back to the demo', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(FORMS);
+    await viewer.waitForFirstPageRender();
+    await page.getByRole('button', { name: 'XFA Forms' }).click();
+    const layer = page.locator('.xfaLayer').first();
+    await expect(layer).toBeVisible({ timeout: 30_000 });
+    await expect(layer).toContainText('Membership application');
+
+    // The demo's values arrive in the form (GivenName and Language are unambiguous).
+    await expect(layer.locator('input.xfaTextfield').nth(1)).toHaveValue('Michelle');
+    await expect(page.locator('.xfaLayer select').first()).toHaveValue('fr', { timeout: 15_000 }); // on page 2
+
+    // A change in the demo reaches the form ...
+    await page.locator('#given-name-input').fill('Ada');
+    await expect(layer.locator('input.xfaTextfield').nth(1)).toHaveValue('Ada', { timeout: 10_000 });
+    // ... and a change in the form reaches the demo.
+    await page.locator('.xfaLayer select').first().selectOption('de');
+    await expect(page.locator('#language-select')).toHaveValue('de', { timeout: 10_000 });
+  });
+});
