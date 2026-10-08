@@ -32,7 +32,7 @@ async function open(page: Page, query: string): Promise<PdfViewerPage> {
 const state = (page: Page, expr: string) => page.evaluate((e) => new Function('app', `return (${e});`)((window as any).__ngxApp), expr);
 
 test.describe('T46 — [disableXxx] flags', () => {
-  type Case = { flag: string; button: keyof typeof BUTTONS; expr: string; query?: string };
+  type Case = { flag: string; button: keyof typeof BUTTONS; expr: string; query?: string; src?: string };
   const events = (name: string) => `(window.__ngxEvents || []).filter(e => e.name === '${name}').length`;
   const CASES: Case[] = [
     { flag: 'disablePreviousAndNextPageButtons', button: 'next', expr: 'app.page' },
@@ -50,7 +50,8 @@ test.describe('T46 — [disableXxx] flags', () => {
     { flag: 'disableWrappedScrollButton', button: 'scrollWrapped', expr: 'app.pdfViewer.scrollMode' },
     { flag: 'disableSinglePageModeButton', button: 'scrollPage', expr: 'app.pdfViewer.scrollMode' },
     { flag: 'disableBookModeButton', button: 'bookMode', expr: 'app.pdfViewer.pageViewMode' },
-    { flag: 'disablePrintButton', button: 'print', expr: 'window.__printCalls' },
+    // Printing renders every page before it calls print(): ~9 s for the 641 pages of DOC.
+    { flag: 'disablePrintButton', button: 'print', expr: 'window.__printCalls', src: TEXT },
     { flag: 'disableDownloadButton', button: 'download', expr: events('pdfDownloaded') },
     { flag: 'disableTextEditor', button: 'freeText', expr: 'app.pdfViewer.annotationEditorMode' },
     { flag: 'disableDrawEditor', button: 'ink', expr: 'app.pdfViewer.annotationEditorMode' },
@@ -59,12 +60,12 @@ test.describe('T46 — [disableXxx] flags', () => {
     { flag: 'disableEditorButtons', button: 'ink', expr: 'app.pdfViewer.annotationEditorMode' },
   ];
 
-  for (const { flag, button, expr, query = '' } of CASES) {
+  for (const { flag, button, expr, query = '', src = DOC } of CASES) {
     test(`[${flag}]: ${button} is disabled and does nothing, and works again once re-enabled`, async ({ page }) => {
       await stubPrint(page);
       // Downloads must not leave the browser.
       page.on('download', (d) => d.cancel());
-      await open(page, `src=${DOC}&show=always-visible&${flag}=true${query}`);
+      await open(page, `src=${src}&show=always-visible&${flag}=true${query}`);
       const toolbarButton = page.locator(`#${BUTTONS[button].toolbar}`);
       await expect(toolbarButton).toBeVisible();
       await expect(toolbarButton).toBeDisabled();
