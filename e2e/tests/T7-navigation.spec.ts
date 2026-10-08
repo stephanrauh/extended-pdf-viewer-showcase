@@ -37,6 +37,27 @@ test.describe('T7 — /navigation', () => {
     await viewer.waitForPageRender(80);
     await viewer.expectViewportOnPage(80);
   });
+
+  test('the page field keeps following navigation after an edit that changes nothing', async ({
+    page,
+  }) => {
+    // Typing a number and restoring the original one fires "input" but no
+    // "change". The field used to stay in "being edited" mode for good and
+    // stopped showing the current page.
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto('/extended-pdf-viewer/navigation');
+    await viewer.waitForFirstPageRender();
+    await expect(viewer.pageNumberInput).toHaveValue('1');
+
+    await viewer.pageNumberInput.fill('2');
+    await viewer.pageNumberInput.fill('1');
+    await viewer.pageNumberInput.blur();
+
+    await viewer.nextPage();
+    // The viewer navigates either way; only the field used to lag behind.
+    await expect.poll(async () => await viewer.getCurrentPageFromViewport(), { timeout: 10_000 }).toBe(2);
+    await expect(viewer.pageNumberInput).toHaveValue('2');
+  });
 });
 
 test.describe('T7 — /scrolling', () => {
