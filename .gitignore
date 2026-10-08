@@ -68,3 +68,5 @@ Thumbs.db
 /ftp/.env
 /test-results/.last-run.json
 /e2e/TODO.md
+playwright-tests-overview-claude.md
+playwright-tests-overview.md
