@@ -56,31 +56,28 @@ async function expectExportContains(
 }
 
 /**
- * Perform an editor gesture, re-issuing it until an annotation lands on page
- * 1's editor layer.
+ * Performs an editor gesture once, like a user who has just picked the tool,
+ * and expects an annotation to land on page 1's editor layer.
  *
- * Why re-issue: the first editor gesture in a fresh browser session can be
- * dropped outright while pdf.js lazy-loads its editor code — the annotation
- * never appears, and because the gesture already finished, no amount of waiting
- * recovers it (a single-gesture-then-poll test just times out). A real user
- * whose stroke didn't register would simply draw again; doing the same here
- * makes the test robust to that cold-load drop on its own, rather than leaning
- * on a Playwright-level retry (which we saw can fail on both attempts when the
- * gesture drops twice in a row).
+ * Why the pause: pdf.js drops an editor gesture that starts in the same instant as the click
+ * on the tool (measured: 5 of 15 dropped at 0 ms, none of 45 at 100 ms or
+ * more, cold browser sessions included). No human is that fast, so the tests
+ * pause like a user after picking a tool and then perform every gesture
+ * exactly once - a dropped gesture fails the test instead of being retried.
  */
 async function landAnnotation(
   page: PdfViewerPage['page'],
   gesture: () => Promise<void>,
 ): Promise<void> {
+  await page.waitForTimeout(150);
+  await gesture();
   await expect
     .poll(
-      async () => {
-        await gesture();
-        return await page
+      async () =>
+        await page
           .locator('.page[data-page-number="1"] .annotationEditorLayer > *')
-          .count();
-      },
-      { timeout: 25_000, intervals: [500, 1000, 1500] },
+          .count(),
+      { message: 'the gesture created an editor', timeout: 10_000 },
     )
     .toBeGreaterThan(0);
 }
@@ -138,44 +135,20 @@ test.describe('T27 — drawing editors produce persistent annotations', () => {
     // FreeText: a click places the editor; its contenteditable child
     // (`.freeTextEditor .internal`) takes the text; Escape commits it.
     //
-    // Poll only the place-and-type step (not the commit or export): click to
-    // place the editor if it isn't there yet — covering a cold-dropped first
-    // click — then type into the contenteditable *element* and confirm the
-    // characters actually landed in it. Typing into the element rather than via
-    // ambient keyboard focus is what fixes the WebKit flake where the click
-    // placed the editor but focus was lost before the keystrokes, committing an
-    // empty type-3 box. Only type while the field is still empty so re-polling
-    // doesn't duplicate the text.
+    // One click places the editor (after a user's pause, see landAnnotation);
+    // then type into the contenteditable *element*, not via ambient keyboard
+    // focus: WebKit can lose focus between the click and the keystrokes, which
+    // would commit an empty type-3 box.
     const typed = 'T27 freetext canary';
     const content = page
       .locator('.page[data-page-number="1"] .freeTextEditor .internal')
       .first();
-    // Read the contenteditable without the 15s action-timeout auto-wait of
-    // innerText() — under load that element can be momentarily unreadable, and
-    // a thrown timeout would propagate out of expect.poll and fail the test
-    // instead of just retrying. evaluate + catch turns any hiccup into a retry.
-    const readText = async (): Promise<string> =>
-      (await content
-        .evaluate((el) => (el as HTMLElement).innerText)
-        .catch(() => '')) ?? '';
+    await page.waitForTimeout(150);
+    await page.mouse.click(x, y);
+    await expect(content, 'the click placed a free-text editor').toBeVisible();
+    await content.pressSequentially(typed);
     await expect
-      .poll(
-        async () => {
-          try {
-            if (!(await content.count())) {
-              await page.mouse.click(x, y);
-              return '';
-            }
-            if (!(await readText()).includes(typed)) {
-              await content.pressSequentially(typed, { timeout: 5_000 });
-            }
-            return await readText();
-          } catch {
-            return '';
-          }
-        },
-        { timeout: 25_000, intervals: [500, 1000, 1500] },
-      )
+      .poll(async () => await content.evaluate((el) => (el as HTMLElement).innerText))
       .toContain(typed);
     await page.keyboard.press('Escape');
 
@@ -209,8 +182,6 @@ test.describe('T27 — drawing editors produce persistent annotations', () => {
     const midY = spanBox!.y + spanBox!.height / 2;
     const endX = spanBox!.x + spanBox!.width - 2;
 
-    // Re-drag until the highlight lands (see landAnnotation) — the first drag
-    // in a cold session is the one most prone to being dropped.
     await landAnnotation(page, async () => {
       await page.mouse.move(startX, midY);
       await page.mouse.down();

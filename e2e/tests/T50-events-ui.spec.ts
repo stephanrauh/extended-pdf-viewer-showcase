@@ -152,10 +152,11 @@ test('beforePrint and afterPrint: once each, in that order', async ({ page }) =>
 test('thumbnailDrawn: one per thumbnail, for the right pages', async ({ page }) => {
   await open(page, 'src=/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf&sidebarVisible=true');
   await expect(page.locator('#thumbnailsView .thumbnail')).toHaveCount(10, { timeout: 20_000 });
-  await expect.poll(async () => (await named(page, 'thumbnailDrawn')).length, { timeout: 20_000 }).toBeGreaterThan(0);
-  const pageIds = (await named(page, 'thumbnailDrawn')).map((e) => e.payload.pageId);
-  expect(new Set(pageIds).size, `no thumbnail drawn twice: ${pageIds}`).toBe(pageIds.length);
-  expect(pageIds.every((n) => n >= 1 && n <= 10)).toBe(true);
+  // Exactly one event for each of the ten thumbnails - none missing, none twice.
+  const pageIds = async () => (await named(page, 'thumbnailDrawn')).map((e) => e.payload.pageId as number).sort((a, b) => a - b);
+  await expect.poll(pageIds, { timeout: 20_000 }).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  await page.waitForTimeout(1000);
+  expect(await pageIds(), 'no thumbnail reported twice').toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 });
 
 test('linkAnnotationsAdded: once per page with links, with the page number', async ({ page }) => {

@@ -12,7 +12,9 @@ import { stubPrint } from '../poms/print-stub';
  * Most files come from pdf.js's own test corpus in the sibling pdf.js/
  * checkout (../pdf.js/test/pdfs). They are served to the browser at test
  * time and never copied into this repository; without the checkout, those
- * tests are skipped. The XFA example is our own (e2e/tools/make-xfa-form.mjs).
+ * tests are skipped - unless CI or E2E_REQUIRE_CORPUS is set: then a missing
+ * file fails the test, so a pipeline can't go green without running them.
+ * The XFA example is our own (pdf-creator/make-xfa-form.mjs).
  */
 
 test.describe.configure({ mode: 'parallel' });
@@ -23,11 +25,15 @@ const CORPUS = join(__dirname, '../../../pdf.js/test/pdfs');
 
 /**
  * Serves a file of pdf.js's test corpus under /e2e-corpus/<name> and returns
- * that URL; skips the test if the corpus isn't there.
+ * that URL; skips the test if the corpus isn't there (fails it on CI).
  */
 async function corpus(page: Page, name: string): Promise<string> {
   const file = join(CORPUS, name);
-  test.skip(!existsSync(file), `pdf.js test corpus not found: ${file}`);
+  if (process.env['CI'] || process.env['E2E_REQUIRE_CORPUS']) {
+    expect(existsSync(file), `pdf.js test corpus not found: ${file}`).toBe(true);
+  } else {
+    test.skip(!existsSync(file), `pdf.js test corpus not found: ${file}`);
+  }
   const url = `/e2e-corpus/${name}`;
   await page.route(
     (u) => u.pathname === url,
@@ -220,8 +226,8 @@ test.describe('T51 — XFA forms', () => {
   const shown = (page: Page) =>
     page.evaluate(() =>
       Array.from(document.querySelectorAll<HTMLElement>('.xfaLayer input, .xfaLayer textarea, .xfaLayer select')).map((e) => {
-        const field = e as HTMLInputElement & HTMLSelectElement;
-        if (e.tagName === 'SELECT') return Array.from(field.selectedOptions, (o) => o.value).join('+');
+        if (e instanceof HTMLSelectElement) return Array.from(e.selectedOptions, (o) => o.value).join('+');
+        const field = e as HTMLInputElement;
         if (field.type === 'checkbox' || field.type === 'radio') return field.checked;
         return field.value;
       }),

@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { PDFDocument, rgb } from 'pdf-lib';
 import { test, expect } from '../fixtures';
 import { PdfViewerPage } from '../poms/pdf-viewer.page';
 import { stubPrint } from '../poms/print-stub';
@@ -39,7 +40,43 @@ test('a viewer in a modal: open and close it three times, it works every time', 
 });
 
 test.describe('T48 — printing a page range', () => {
-  async function printed(page: Page, range: object | undefined): Promise<number> {
+  /**
+   * Ten pages that can't be mistaken for each other: each has a big black square
+   * at its own position. Real documents are mostly white with small text - too
+   * similar for a fingerprint to tell which page was printed.
+   */
+  async function distinctPages(): Promise<Buffer> {
+    const doc = await PDFDocument.create();
+    for (let i = 0; i < 10; i++) {
+      const page = doc.addPage([595, 842]);
+      page.drawRectangle({ x: 40 + (i % 3) * 180, y: 620 - Math.floor(i / 3) * 190, width: 150, height: 150, color: rgb(0, 0, 0) });
+      page.drawText(`Page ${i + 1}`, { x: 40, y: 30, size: 24 });
+    }
+    return Buffer.from(await doc.save());
+  }
+
+  /** Fingerprints of every page of the document (see print-stub.ts), rendered by pdf.js directly. */
+  async function pageFingerprints(page: Page): Promise<number[][]> {
+    return await page.evaluate(async () => {
+      const w = window as any;
+      const doc = w.__ngxApp.pdfDocument;
+      const result: number[][] = [];
+      for (let n = 1; n <= doc.numPages; n++) {
+        const pdfPage = await doc.getPage(n);
+        // the size pdf.js prints at (150 DPI), so both images are shrunk alike
+        const viewport = pdfPage.getViewport({ scale: 150 / 72 });
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(viewport.width);
+        canvas.height = Math.round(viewport.height);
+        await pdfPage.render({ canvas, canvasContext: canvas.getContext('2d'), viewport }).promise;
+        result.push(w.__fingerprint(canvas));
+      }
+      return result;
+    });
+  }
+
+  /** Prints with the given range and tells which pages were printed, in order. */
+  async function printed(page: Page, range: object | undefined, pages: number[][]): Promise<number[]> {
     const afterPrints = () => page.evaluate(() => (window as any).__ngxEvents.filter((e: any) => e.name === 'afterPrint').length);
     const finished = await afterPrints();
     await page.evaluate(() => ((window as any).__printCalls = 0));
@@ -47,25 +84,49 @@ test.describe('T48 — printing a page range', () => {
     await expect.poll(async () => await page.evaluate(() => (window as any).__printCalls), { timeout: 30_000 }).toBe(1);
     // print() ignores calls while a print job is still running, so wait for its end.
     await expect.poll(afterPrints, { timeout: 30_000 }).toBe(finished + 1);
-    return await page.evaluate(() => (window as any).__printedPages);
+    const printedFingerprints: number[][] = await page.evaluate(() => (window as any).__printedFingerprints);
+    expect(printedFingerprints.length, 'every printed page has an image').toBe(await page.evaluate(() => (window as any).__printedPages));
+    // Compare the layout, not the brightness: the correlation of the gray values around their mean.
+    const centered = (v: number[]) => {
+      const mean = v.reduce((sum, x) => sum + x, 0) / v.length;
+      return v.map((x) => x - mean);
+    };
+    const correlation = (a: number[], b: number[]) => {
+      const [ca, cb] = [centered(a), centered(b)];
+      const dot = ca.reduce((sum, x, i) => sum + x * cb[i], 0);
+      return dot / Math.sqrt(ca.reduce((sum, x) => sum + x * x, 0) * cb.reduce((sum, x) => sum + x * x, 0));
+    };
+    return printedFingerprints.map((fingerprint) => {
+      const ranked = pages.map((p, i) => ({ n: i + 1, c: correlation(fingerprint, p) })).sort((a, b) => b.c - a.c);
+      // The match has to be clear, or the fingerprints can't tell the pages apart.
+      expect(ranked[0].c, `printed page looks like page ${ranked[0].n}`).toBeGreaterThan(0.8);
+      expect(ranked[0].c - ranked[1].c, `page ${ranked[0].n} vs. page ${ranked[1].n}`).toBeGreaterThan(0.3);
+      return ranked[0].n;
+    });
   }
 
   test('from/to/excluded/included select the pages that are printed', async ({ page }) => {
     await stubPrint(page);
+    const bytes = await distinctPages();
+    await page.route(
+      (u) => u.pathname === '/ten-distinct-pages.pdf',
+      (route) => route.fulfill({ body: bytes, contentType: 'application/pdf' }),
+    );
     const viewer = new PdfViewerPage(page);
-    await viewer.goto('/e2e/viewer?src=/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf');
+    await viewer.goto('/e2e/viewer?src=/ten-distinct-pages.pdf');
     await viewer.waitForFirstPageRender();
     await expect
       .poll(() => page.evaluate(() => (window as any).__ngxEvents.filter((e: any) => e.name === 'pagesLoaded').length), { timeout: 30_000 })
       .toBe(1);
-    const pages = (await app(page, 'app.pagesCount')) as number;
-    expect(pages).toBe(10);
+    expect(await app(page, 'app.pagesCount')).toBe(10);
+    const pages = await pageFingerprints(page);
 
-    expect(await printed(page, { from: 2, to: 4 })).toBe(3);
-    expect(await printed(page, { from: 2, to: 4, excluded: [3] })).toBe(2);
-    expect(await printed(page, { included: [1, 5, 7] })).toBe(3);
+    // Which pages, in which order - not just how many.
+    expect(await printed(page, { from: 2, to: 4 }, pages)).toEqual([2, 3, 4]);
+    expect(await printed(page, { from: 2, to: 4, excluded: [3] }, pages)).toEqual([2, 4]);
+    expect(await printed(page, { included: [1, 5, 7] }, pages)).toEqual([1, 5, 7]);
     // A range applies to one print job only: the next one prints everything.
-    expect(await printed(page, undefined)).toBe(pages);
+    expect(await printed(page, undefined, pages)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   });
 
   test('[enablePrint]="false": no printing, not even with Ctrl+P', async ({ page }) => {

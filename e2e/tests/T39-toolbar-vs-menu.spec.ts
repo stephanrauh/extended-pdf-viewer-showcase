@@ -495,22 +495,15 @@ for (const via of VIAS) {
       const layer = page.locator('.page[data-page-number="1"] .annotationEditorLayer');
       await layer.scrollIntoViewIfNeeded();
       const box = (await layer.boundingBox())!;
-      // Re-draw until the stroke lands: pdf.js loads the editor code lazily, and
-      // the first gesture of a cold session can be dropped (see T27).
-      await expect
-        .poll(
-          async () => {
-            await page.mouse.move(box.x + 120, box.y + 80);
-            await page.mouse.down();
-            await page.mouse.move(box.x + 180, box.y + 120, { steps: 12 });
-            await page.mouse.move(box.x + 240, box.y + 100, { steps: 12 });
-            await page.mouse.up();
-            await page.keyboard.press('Escape');
-            return await count();
-          },
-          { timeout: 25_000, intervals: [500, 1000, 1500] },
-        )
-        .toBeGreaterThan(0);
+      // One stroke, after a user's pause (see poms/editor-gestures.ts).
+      await page.waitForTimeout(150);
+      await page.mouse.move(box.x + 120, box.y + 80);
+      await page.mouse.down();
+      await page.mouse.move(box.x + 180, box.y + 120, { steps: 12 });
+      await page.mouse.move(box.x + 240, box.y + 100, { steps: 12 });
+      await page.mouse.up();
+      await page.keyboard.press('Escape');
+      await expect.poll(count, 'the stroke landed').toBeGreaterThan(0);
       const drawn = await count();
 
       await press(page, via, B.undo);

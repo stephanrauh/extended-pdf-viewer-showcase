@@ -108,7 +108,16 @@ test('T42 — with the default settings, no width loses or duplicates a button',
     if ((await inToolbar(page, b.toolbar)) || (await inMenu(page, b.menu))) reachable.push(name);
   }
   await closeMenu(page);
-  expect(reachable.length, `reachable at 1400 px: ${reachable.join(', ')}`).toBeGreaterThan(20);
+  // An explicit list, so a button that vanishes everywhere fails the test too.
+  // Hidden by default: handTool, selectTool, presentation (showXxxButton = false)
+  // and signature (showSignatureEditor = 'xxl', wider than 1400 px).
+  const DEFAULT_BUTTONS = [
+    'first', 'previous', 'next', 'last', 'zoomIn', 'zoomOut', 'rotateCw', 'rotateCcw', 'sidebar', 'find', 'properties',
+    'scrollPage', 'scrollVertical', 'scrollHorizontal', 'scrollWrapped', 'infiniteScroll', 'bookMode',
+    'spreadNone', 'spreadOdd', 'spreadEven', 'openFile', 'print', 'download',
+    'highlight', 'freeText', 'ink', 'stamp', 'eraser', 'undo', 'redo',
+  ];
+  expect(reachable, 'reachable at 1400 px').toEqual(DEFAULT_BUTTONS);
 
   for (const width of [1400, 1010, 990, 920, 900, 800, 780, 670, 650, 620, 600, 570, 550, 500, 480]) {
     await test.step(`${width} px`, async () => {

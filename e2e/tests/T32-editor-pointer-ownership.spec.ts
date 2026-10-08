@@ -215,6 +215,7 @@ async function activateDrawByPen(page: Page, cdp: CDPSession): Promise<void> {
   if (!(await isDrawActive(page))) {
     const bb = (await inkButton(page).boundingBox())!;
     await penTap(cdp, bb.x + bb.width / 2, bb.y + bb.height / 2);
+    await page.waitForTimeout(150); // a user's pause - see landFirstStroke
   }
   await expectDrawActive(page);
 }
@@ -223,6 +224,7 @@ async function activateDrawByTouch(page: Page, cdp: CDPSession): Promise<void> {
   if (!(await isDrawActive(page))) {
     const bb = (await inkButton(page).boundingBox())!;
     await touchTap(cdp, bb.x + bb.width / 2, bb.y + bb.height / 2);
+    await page.waitForTimeout(150); // a user's pause - see landFirstStroke
   }
   await expectDrawActive(page);
 }
@@ -244,19 +246,18 @@ async function routeToOtherViewer(page: Page): Promise<void> {
   await page.locator('.page[data-page-number="1"]').scrollIntoViewIfNeeded();
 }
 
-/** See T31: the first editor gesture of a fresh session can be dropped. */
+/**
+ * Draws the opening stroke once and expects it to land. pdf.js drops a gesture
+ * that starts in the same instant as the tap on the tool, so activating the
+ * tool includes the pause a user takes (see poms/editor-gestures.ts).
+ */
 async function landFirstStroke(
   page: Page,
   gesture: () => Promise<void>,
 ): Promise<void> {
+  await gesture();
   await expect
-    .poll(
-      async () => {
-        await gesture();
-        return await countEditors(page);
-      },
-      { timeout: 25_000, intervals: [500, 1000, 1500] },
-    )
+    .poll(async () => await countEditors(page), { message: 'the first stroke landed', timeout: 10_000 })
     .toBeGreaterThan(0);
 }
 

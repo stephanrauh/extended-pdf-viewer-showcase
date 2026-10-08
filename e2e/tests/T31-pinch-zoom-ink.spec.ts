@@ -65,6 +65,7 @@ async function expectDrawActive(page: Page): Promise<void> {
 async function activateDrawByMouse(page: Page): Promise<void> {
   if (!(await isDrawActive(page))) {
     await inkButton(page).click();
+    await page.waitForTimeout(150); // a user's pause - see landFirstStroke
   }
   await expectDrawActive(page);
 }
@@ -74,6 +75,7 @@ async function activateDrawByTouch(page: Page, cdp: CDPSession): Promise<void> {
   if (!(await isDrawActive(page))) {
     const bb = (await inkButton(page).boundingBox())!;
     await touchTap(cdp, bb.x + bb.width / 2, bb.y + bb.height / 2);
+    await page.waitForTimeout(150); // a user's pause - see landFirstStroke
   }
   await expectDrawActive(page);
 }
@@ -338,23 +340,17 @@ async function staggeredPinchZoom(
 }
 
 /**
- * The very first editor gesture of a fresh session can be dropped while pdf.js
- * lazy-loads its editor code (see the note in T27), so the opening stroke is
- * re-issued until it lands. Later strokes are asserted once — that is the
- * behaviour under test.
+ * Draws the opening stroke once and expects it to land. pdf.js drops a gesture
+ * that starts in the same instant as the click on the tool, so activating the
+ * tool includes the pause a user takes (see poms/editor-gestures.ts).
  */
 async function landFirstStroke(
   page: Page,
   gesture: () => Promise<void>,
 ): Promise<void> {
+  await gesture();
   await expect
-    .poll(
-      async () => {
-        await gesture();
-        return await countEditors(page);
-      },
-      { timeout: 25_000, intervals: [500, 1000, 1500] },
-    )
+    .poll(async () => await countEditors(page), { message: 'the first stroke landed', timeout: 10_000 })
     .toBeGreaterThan(0);
 }
 

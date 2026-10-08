@@ -179,24 +179,13 @@ test.describe('T47 — network', () => {
     expect(loaded, 'bytes loaded for page 1').toBeLessThan(1_694_231 / 2);
   });
 
-  test('[disableRange] and [disableStream] off: the file is still shown when ranges are available', async ({ page }) => {
+  test('[disableRange]: the file is loaded in one go, even when the server supports ranges', async ({ page }) => {
     const ranges = await serveWithRanges(page);
     const viewer = new PdfViewerPage(page);
     await viewer.goto(`/e2e/viewer?src=${BIG}&opt.disableRange=true`);
     await viewer.waitForFirstPageRender();
     await viewer.assertCanvasHasContent(1);
     expect(ranges, 'no range requests with disableRange').toEqual([]);
-  });
-
-  test('[disableRange]: the file is loaded in one go', async ({ page }) => {
-    const ranges: string[] = [];
-    page.on('request', (r) => {
-      if (decodeURIComponent(r.url()).endsWith(BIG) && r.headers()['range']) ranges.push(r.headers()['range']);
-    });
-    const viewer = new PdfViewerPage(page);
-    await viewer.goto(`/e2e/viewer?src=${BIG}&opt.disableRange=true&opt.disableStream=true`);
-    await viewer.waitForFirstPageRender();
-    expect(ranges).toEqual([]);
   });
 
   test('switching to another document while the first one is still loading shows the second one', async ({ page }) => {

@@ -3,10 +3,11 @@ import { expect, type Page } from '@playwright/test';
 /**
  * Real user gestures that create annotations with pdf.js's editors.
  *
- * Every gesture is re-issued until it lands: pdf.js loads the editor code
- * lazily, and the first editor gesture of a fresh browser session can be
- * dropped outright - waiting longer doesn't bring it back, drawing again does
- * (see the note in T27 and the showcase-e2e-flakiness notes).
+ * pdf.js drops an editor gesture that starts in the same instant as the click
+ * on the tool (measured: 5 of 15 dropped at 0 ms, none of 45 at 100 ms or
+ * more, cold browser sessions included). No human is that fast, so the tests
+ * pause like a user after picking a tool and then perform every gesture
+ * exactly once - a dropped gesture fails the test instead of being retried.
  *
  * The caller switches the editor on first (e.g. `viewer.activateEditor('draw')`).
  */
@@ -31,19 +32,13 @@ async function countEditors(page: Page, pageNumber: number): Promise<number> {
   return await editorLayer(page, pageNumber).locator(':scope > *').count();
 }
 
-/** Re-runs `gesture` until the editor layer of the page has gained an editor. */
+/** Runs `gesture` once and expects the editor layer of the page to gain an editor. */
 export async function landAnnotation(page: Page, pageNumber: number, gesture: () => Promise<void>): Promise<void> {
   const before = await countEditors(page, pageNumber);
+  await gesture();
   await expect
-    .poll(
-      async () => {
-        if ((await countEditors(page, pageNumber)) > before) return true;
-        await gesture();
-        return (await countEditors(page, pageNumber)) > before;
-      },
-      { timeout: 25_000, intervals: [500, 1000, 1500] },
-    )
-    .toBe(true);
+    .poll(async () => await countEditors(page, pageNumber), { message: 'the gesture created an editor', timeout: 10_000 })
+    .toBeGreaterThan(before);
 }
 
 /**
@@ -95,28 +90,12 @@ export async function typeFreeText(page: Page, text: string, pageNumber = 1, at 
   const box = (await layer.boundingBox())!;
   const x = box.x + box.width * at.x;
   const y = box.y + box.height * at.y;
-  const content = page.locator(`.page[data-page-number="${pageNumber}"] .freeTextEditor .internal`).first();
-  const readText = async (): Promise<string> =>
-    (await content.evaluate((el) => (el as HTMLElement).innerText).catch(() => '')) ?? '';
-  await expect
-    .poll(
-      async () => {
-        try {
-          if (!(await content.count())) {
-            await page.mouse.click(x, y);
-            return '';
-          }
-          if (!(await readText()).includes(text)) {
-            await content.pressSequentially(text, { timeout: 5_000 });
-          }
-          return await readText();
-        } catch {
-          return '';
-        }
-      },
-      { timeout: 25_000, intervals: [500, 1000, 1500] },
-    )
-    .toContain(text);
+  const content = page.locator(`.page[data-page-number="${pageNumber}"] .freeTextEditor .internal`).last();
+  const editorsBefore = await page.locator(`.page[data-page-number="${pageNumber}"] .freeTextEditor`).count();
+  await page.mouse.click(x, y);
+  await expect(page.locator(`.page[data-page-number="${pageNumber}"] .freeTextEditor`), 'the click placed an editor').toHaveCount(editorsBefore + 1);
+  await content.pressSequentially(text);
+  await expect.poll(async () => await content.evaluate((el) => (el as HTMLElement).innerText)).toContain(text);
   await page.keyboard.press('Escape');
 }
 
