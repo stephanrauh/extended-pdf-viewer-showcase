@@ -63,12 +63,12 @@
                   <code>listLayers()</code>.
                 </li>
               </ul>
-              Note there's no two-way binding. The PDF viewer doesn't fire an event if the user toggles the layers in the PDF file. However, you can register a
-              callback to a low-level API like so: <br /><code
-                >PDFViewerApplication.eventBus.on(<br />
-                &nbsp;&nbsp;'optionalcontentconfig',<br />
-                &nbsp;&nbsp;callback)</code
-              >
+              <p>
+                To keep your list in sync, listen to <code>(layerVisibilityChanged)</code>. It fires whenever a layer is shown or hidden: by the user in
+                the sidebar, by a link or an outline entry of the PDF file, or by <code>toggleLayer()</code>. It reports every layer with its current
+                visibility, because showing one layer of a radio-button group hides the others. Together with <code>toggleLayer()</code>, that's a
+                two-way binding. Try it: toggle a layer in the sidebar and watch the buttons of the live demo.
+              </p>
             </div>
           }
           @if (layerscomponentTab === 'demo') {
@@ -160,7 +160,12 @@
   }
 
   <app-demo [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'">
-    <ngx-extended-pdf-viewer [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'" [height]="'90vh'" (pagesLoaded)="listLayers()" [theme]="theme">
+    <ngx-extended-pdf-viewer
+      [src]="'/assets/pdfs/themes_de_la_Science-fiction.pdf'"
+      [height]="'90vh'"
+      (pagesLoaded)="listLayers()"
+      (layerVisibilityChanged)="onLayerVisibilityChanged($event)"
+      [theme]="theme">
     </ngx-extended-pdf-viewer>
   </app-demo>
 </div>

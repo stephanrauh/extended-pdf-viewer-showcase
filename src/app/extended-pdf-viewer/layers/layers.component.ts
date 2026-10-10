@@ -61,7 +61,12 @@ export class LayersComponent {
   }
 
   public async toggle(layerId: string): Promise<void> {
+    // (layerVisibilityChanged) updates the list
     await this.pdfService.toggleLayer(layerId);
-    await this.listLayers();
+  }
+
+  public onLayerVisibilityChanged(layers: PdfLayer[]): void {
+    this.layers = layers;
+    this.cdr.markForCheck();
   }
 }
