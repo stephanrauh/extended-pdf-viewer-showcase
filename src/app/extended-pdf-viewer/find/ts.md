@@ -27,7 +27,7 @@ export class FindComponent {
   constructor(private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService) {}
 
   public onCheckboxClicked() {
-    this.ngxExtendedPdfViewerService.find(this._searchtext, this.highlightAll, this.matchCase, this.wholeWord, this.ignoreAccents);
+    this.find();
   }
 
   public findNext(): void {
@@ -47,8 +47,7 @@ export class FindComponent {
     this.totalMatches = result.total;
   }
 
-   private find(): Array<Promise<number>> | undefined {
-    this.pagesWithResult = [];
+  private find(): Array<Promise<number>> | undefined {
     if (!this._searchtext) {
       this.findState = undefined;
       this.currentMatchNumber = undefined;
@@ -65,10 +64,14 @@ export class FindComponent {
       findMultiple: this.multiple,
       regexp: this.matchRegExp
     });
+    // every search gets a list of its own, so the late results of an earlier search can't end up in it
+    const pagesWithResult: number[] = [];
+    this.pagesWithResult = pagesWithResult;
     numberOfResultsPromises?.forEach(async (numberOfResultsPromise, pageIndex) => {
       const numberOfResultsPerPage = await numberOfResultsPromise;
       if (numberOfResultsPerPage > 0) {
-        this.pagesWithResult.push(pageIndex);
+        pagesWithResult.push(pageIndex + 1); // page numbers count from 1
+        pagesWithResult.sort((a, b) => a - b);
       }
     });
     return numberOfResultsPromises;

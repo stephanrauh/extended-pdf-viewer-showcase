@@ -146,7 +146,6 @@ export class FindComponent {
   }
 
   private find(): Promise<number>[] | undefined {
-    this.pagesWithResult = [];
     if (!this._searchtext) {
       this.findState = undefined;
       this.currentMatchNumber = undefined;
@@ -163,18 +162,11 @@ export class FindComponent {
       findMultiple: this.multiple,
       regexp: this.matchRegExp
     });
-    numberOfResultsPromises?.forEach(async (numberOfResultsPromise, pageIndex) => {
-      const numberOfResultsPerPage = await numberOfResultsPromise;
-      if (numberOfResultsPerPage > 0) {
-        this.pagesWithResult.push(pageIndex);
-        this.cdr.markForCheck();
-      }
-    });
+    this.collectPagesWithResult(numberOfResultsPromises);
     return numberOfResultsPromises;
   }
 
   private find2(): Promise<number>[] | undefined {
-    this.pagesWithResult = [];
     if (!this._searchtext2) {
       this.findState = undefined;
       this.currentMatchNumber = undefined;
@@ -190,14 +182,25 @@ export class FindComponent {
       findMultiple: this.multiple2,
       regexp: this.matchRegExp2
     });
+    this.collectPagesWithResult(numberOfResultsPromises);
+    return numberOfResultsPromises;
+  }
+
+  /**
+   * Lists the pages containing a match. Every search gets a list of its own, so the
+   * late results of an earlier search can't end up in the list of the current one.
+   */
+  private collectPagesWithResult(numberOfResultsPromises: Promise<number>[] | undefined): void {
+    const pagesWithResult: number[] = [];
+    this.pagesWithResult = pagesWithResult;
     numberOfResultsPromises?.forEach(async (numberOfResultsPromise, pageIndex) => {
       const numberOfResultsPerPage = await numberOfResultsPromise;
       if (numberOfResultsPerPage > 0) {
-        this.pagesWithResult.push(pageIndex);
+        pagesWithResult.push(pageIndex + 1); // page numbers count from 1
+        pagesWithResult.sort((a, b) => a - b);
         this.cdr.markForCheck();
       }
     });
-    return numberOfResultsPromises;
   }
 
   constructor() {
@@ -225,30 +228,11 @@ export class FindComponent {
   }
 
   public onCheckboxClicked() {
-    const searchtext = this.multiple ? this._searchtext.split(' ') : this._searchtext;
-    this.ngxExtendedPdfViewerService.find(searchtext, {
-      highlightAll: this.highlightAll,
-      matchCase: this.matchCase,
-      wholeWords: this.wholeWord,
-      matchDiacritics: this.matchDiacritics,
-      findMultiple: this.multiple,
-      regexp: this.matchRegExp,
-      dontScrollIntoView: this.dontScrollIntoView,
-      useSecondaryFindcontroller: false
-    });
+    this.find();
   }
 
   public onCheckboxClicked2() {
-    this.ngxExtendedPdfViewerService.find(this._searchtext2, {
-      highlightAll: this.highlightAll2,
-      matchCase: this.matchCase2,
-      wholeWords: this.wholeWord2,
-      matchDiacritics: this.matchDiacritics2,
-      findMultiple: this.multiple2,
-      regexp: this.matchRegExp2,
-      dontScrollIntoView: this.dontScrollIntoView2,
-      useSecondaryFindcontroller: true
-    });
+    this.find2();
   }
   public findNext(useSecondaryFindcontroller: boolean): void {
     this.ngxExtendedPdfViewerService.findNext(useSecondaryFindcontroller);
