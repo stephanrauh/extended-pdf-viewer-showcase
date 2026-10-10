@@ -96,6 +96,31 @@ for (const [name, threshold] of Object.entries(BREAKPOINTS)) {
   });
 }
 
+// The undo/redo buttons are hidden by default; 'xxxl' is the value the documentation recommends.
+test('T42 — showUndoRedoButtons="xxxl": in the toolbar from 1000 px, in the menu below', async ({ page }) => {
+  await open(page, '&showUndoRedoButtons=xxxl');
+  const threshold = BREAKPOINTS.xxxl;
+
+  await setViewerWidth(page, threshold + 10);
+  for (const name of ['undo', 'redo'] as const) {
+    await expect.poll(() => inToolbar(page, BUTTONS[name].toolbar), `${name} at ${threshold + 10} px: toolbar`).toBe(true);
+  }
+  await openMenu(page);
+  for (const name of ['undo', 'redo'] as const) {
+    expect(await inMenu(page, BUTTONS[name].menu), `${name} at ${threshold + 10} px: not in the menu`).toBe(false);
+  }
+  await closeMenu(page);
+
+  await setViewerWidth(page, threshold - 10);
+  for (const name of ['undo', 'redo'] as const) {
+    await expect.poll(() => inToolbar(page, BUTTONS[name].toolbar), `${name} at ${threshold - 10} px: not in the toolbar`).toBe(false);
+  }
+  await openMenu(page);
+  for (const name of ['undo', 'redo'] as const) {
+    expect(await inMenu(page, BUTTONS[name].menu), `${name} at ${threshold - 10} px: in the menu`).toBe(true);
+  }
+});
+
 test('T42 — with the default settings, no width loses or duplicates a button', async ({ page }) => {
   await open(page);
 
@@ -109,13 +134,14 @@ test('T42 — with the default settings, no width loses or duplicates a button',
   }
   await closeMenu(page);
   // An explicit list, so a button that vanishes everywhere fails the test too.
-  // Hidden by default: handTool, selectTool, presentation (showXxxButton = false)
+  // Hidden by default: handTool, selectTool, presentation (showXxxButton = false),
+  // undo and redo (showUndoRedoButtons = false since 31.0.0)
   // and signature (showSignatureEditor = 'xxl', wider than 1400 px).
   const DEFAULT_BUTTONS = [
     'first', 'previous', 'next', 'last', 'zoomIn', 'zoomOut', 'rotateCw', 'rotateCcw', 'sidebar', 'find', 'properties',
     'scrollPage', 'scrollVertical', 'scrollHorizontal', 'scrollWrapped', 'infiniteScroll', 'bookMode',
     'spreadNone', 'spreadOdd', 'spreadEven', 'openFile', 'print', 'download',
-    'highlight', 'freeText', 'ink', 'stamp', 'eraser', 'undo', 'redo',
+    'highlight', 'freeText', 'ink', 'stamp', 'eraser',
   ];
   expect(reachable, 'reachable at 1400 px').toEqual(DEFAULT_BUTTONS);
 
