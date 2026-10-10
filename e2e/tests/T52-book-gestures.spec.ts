@@ -62,6 +62,33 @@ test('dragging the corner of the right page across the book turns the page', asy
   await expect.poll(() => flipState(page)).toBe('read');
 });
 
+// #3294: zooming into a book activates the hand tool. Its mousedown handler
+// used to swallow the clicks that turn the page.
+test('with the hand tool, clicking a page turns it, and panning doesn\'t', async ({ page }) => {
+  await openBook(page);
+  await page.evaluate(() => (window as any).__ngxApp.eventBus.dispatch('switchcursortool', { tool: 1 }));
+  await expect.poll(() => page.evaluate(() => (window as any).__ngxApp.pdfCursorTools.activeTool)).toBe(1);
+  const b = await book(page);
+  const middle = (b.top + b.bottom) / 2;
+
+  // a click on the right page turns it
+  await page.mouse.click(b.right - 100, middle);
+  await expect.poll(() => currentPage(page), { timeout: 10_000 }).toBe(4);
+  await expect.poll(() => flipState(page)).toBe('read');
+
+  // a drag pans; the click the browser fires afterwards mustn't turn the page
+  await page.mouse.move(b.right - 100, middle);
+  await page.mouse.down();
+  await page.mouse.move(b.right - 300, middle - 20, { steps: 10 });
+  await page.mouse.up();
+  await page.waitForTimeout(1500);
+  expect(await currentPage(page)).toBe(4);
+
+  // a click on the left page turns it back
+  await page.mouse.click(b.left + 100, middle);
+  await expect.poll(() => currentPage(page), { timeout: 10_000 }).toBe(2);
+});
+
 test('[enableFlipByDrag]="false": dragging doesn\'t turn the page', async ({ page }) => {
   await openBook(page, '&enableFlipByDrag=false');
   await dragPage(page);
