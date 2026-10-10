@@ -20,12 +20,13 @@
           </li>
         </ul>
         <p>
-          The toolbar is already full at 910 pixels, so both use the new responsive level <code>'xxxl'</code> by default: they stay in the
-          toolbar when it's at least 1000 pixels wide, and move to the secondary menu otherwise.
+          The toolbar is already full at 910 pixels, so the eraser uses the new responsive level <code>'xxxl'</code> by default: it stays in
+          the toolbar when it's at least 1000 pixels wide, and moves to the secondary menu otherwise. This demo shows the undo and redo
+          buttons the same way.
         </p>
         <p>
-          <strong>Note:</strong> the undo and redo buttons are shown by default during the 31.0.0 alphas only. From 31.0.0 on, they're hidden
-          by default, so add <code>[showUndoRedoButtons]="true"</code> if your users work on touch devices. Keep the buttons in the toolbar
+          <strong>Note:</strong> the undo and redo buttons are hidden by default (the 31.0.0 alphas showed them), so add
+          <code>[showUndoRedoButtons]="'xxxl'"</code> or <code>[showUndoRedoButtons]="true"</code> if your users work on touch devices. Keep the buttons in the toolbar
           rather than in the secondary menu &mdash; two taps per undo are hardly better than no button at all.
         </p>
         <p>Try it: activate the Draw tool, draw something, then undo, redo, and erase it.</p>
