@@ -70,17 +70,26 @@ test('with the hand tool, clicking a page turns it, and panning doesn\'t', async
   await expect.poll(() => page.evaluate(() => (window as any).__ngxApp.pdfCursorTools.activeTool)).toBe(1);
   const b = await book(page);
   const middle = (b.top + b.bottom) / 2;
+  const drag = async (fromX: number, toX: number) => {
+    await page.mouse.move(fromX, middle);
+    await page.mouse.down();
+    await page.mouse.move(toX, middle - 20, { steps: 10 });
+    await page.mouse.up();
+  };
 
   // a click on the right page turns it
   await page.mouse.click(b.right - 100, middle);
   await expect.poll(() => currentPage(page), { timeout: 10_000 }).toBe(4);
   await expect.poll(() => flipState(page)).toBe('read');
 
-  // a drag pans; the click the browser fires afterwards mustn't turn the page
-  await page.mouse.move(b.right - 100, middle);
-  await page.mouse.down();
-  await page.mouse.move(b.right - 300, middle - 20, { steps: 10 });
-  await page.mouse.up();
+  // a drag on the (empty) left page pans; the click that may follow mustn't turn the page
+  await drag(b.left + 200, b.left + 400);
+  await page.waitForTimeout(1500);
+  expect(await currentPage(page)).toBe(4);
+
+  // pressing on a link of the table of contents (page 5) and dragging away:
+  // the hand tool leaves links alone, and that mustn't spoil the next click
+  await drag(b.right - 100, b.right - 300);
   await page.waitForTimeout(1500);
   expect(await currentPage(page)).toBe(4);
 
