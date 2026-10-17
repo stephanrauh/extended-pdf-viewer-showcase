@@ -63,28 +63,75 @@ test('buttons that open something say whether it is open', async ({ page }) => {
 
 test('tool and editor buttons say which one is active', async ({ page }) => {
   await open(page, '&handTool=false');
-  // The editor buttons are a radio group: exactly one of them (or none) is checked.
+  // The editor buttons open their options panel (like upstream pdf.js since 2024), so they
+  // aren't radios: they say whether their panel is open. #3295
   const ink = page.locator(`#${BUTTONS.ink.toolbar}`);
   const freeText = page.locator(`#${BUTTONS.freeText.toolbar}`);
-  await expect(ink).toHaveAttribute('role', 'radio');
-  await expect(ink).toHaveAttribute('aria-checked', 'false');
+  await expect(page.locator('#editorModeButtons [role="radio"], #editorModeButtons[role="radiogroup"]')).toHaveCount(0);
+  await expect(ink).not.toHaveAttribute('aria-checked', /./);
+  await expect(ink).toHaveAttribute('aria-expanded', 'false');
   await ink.click();
-  await expect(ink).toHaveAttribute('aria-checked', 'true');
-  await expect(freeText).toHaveAttribute('aria-checked', 'false');
+  await expect(ink).toHaveAttribute('aria-expanded', 'true');
+  await expect(freeText).toHaveAttribute('aria-expanded', 'false');
   await freeText.click();
-  await expect(freeText).toHaveAttribute('aria-checked', 'true');
-  await expect(ink).toHaveAttribute('aria-checked', 'false');
+  await expect(freeText).toHaveAttribute('aria-expanded', 'true');
+  await expect(ink).toHaveAttribute('aria-expanded', 'false');
+  // Unlike a radio, an editor can be switched off again.
+  await freeText.click();
+  await expect(freeText).toHaveAttribute('aria-expanded', 'false');
+
+  // The cursor tools open nothing: they are toggle buttons, announced as pressed. #3295
+  const handTool = page.locator(`#${BUTTONS.handTool.toolbar}`);
+  const selectTool = page.locator(`#${BUTTONS.selectTool.toolbar}`);
+  await expect(selectTool).toHaveAttribute('aria-pressed', 'true');
+  await expect(handTool).toHaveAttribute('aria-pressed', 'false');
+  await handTool.click();
+  await expect(handTool).toHaveAttribute('aria-pressed', 'true');
+  await expect(selectTool).toHaveAttribute('aria-pressed', 'false');
+  for (const tool of [handTool, selectTool]) {
+    await expect(tool).not.toHaveAttribute('aria-expanded', /./);
+    await expect(tool).not.toHaveAttribute('aria-haspopup', /./);
+  }
+
+  // pdf.js updates the scroll and spread buttons, too. They must stay toggle buttons: no aria-checked.
+  const scrollVertical = page.locator(`#${BUTTONS.scrollVertical.toolbar}`);
+  const spreadNone = page.locator(`#${BUTTONS.spreadNone.toolbar}`);
+  await expect(scrollVertical).toHaveAttribute('aria-pressed', 'true');
+  await expect(spreadNone).toHaveAttribute('aria-pressed', 'true');
+  for (const id of ['scrollPage', 'scrollVertical', 'scrollHorizontal', 'scrollWrapped', 'spreadNone', 'spreadOdd', 'spreadEven']) {
+    await expect(page.locator(`#${id}`), id).not.toHaveAttribute('aria-checked', /./);
+  }
 });
 
 test('the active entries of the Tools menu are announced as pressed', async ({ page }) => {
   await open(page, '', 'always-in-secondary-menu');
   await page.locator('#secondaryToolbarToggle').click();
   await expect(page.locator(`#${BUTTONS.scrollVertical.menu}`)).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator(`#${BUTTONS.scrollHorizontal.menu}`)).not.toHaveAttribute('aria-pressed', /./);
+  // #3295 an inactive toggle button says "not pressed"; a plain action button says nothing
+  await expect(page.locator(`#${BUTTONS.scrollHorizontal.menu}`)).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.locator(`#${BUTTONS.print.menu}`)).not.toHaveAttribute('aria-pressed', /./);
   await page.locator(`#${BUTTONS.scrollHorizontal.menu}`).click();
   if (!(await page.locator('#secondaryToolbar').isVisible())) await page.locator('#secondaryToolbarToggle').click();
   await expect(page.locator(`#${BUTTONS.scrollHorizontal.menu}`)).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator(`#${BUTTONS.scrollVertical.menu}`)).not.toHaveAttribute('aria-pressed', /./);
+  await expect(page.locator(`#${BUTTONS.scrollVertical.menu}`)).toHaveAttribute('aria-pressed', 'false');
+});
+
+test('an entry of the Tools menu that opens a panel says whether the panel is open (#3295)', async ({ page }) => {
+  await open(page, '', 'always-in-secondary-menu');
+  const ink = page.locator(`#${BUTTONS.ink.menu}`);
+  await page.locator('#secondaryToolbarToggle').click();
+  await expect(ink).toHaveAttribute('aria-expanded', 'false');
+  await expect(ink).toHaveAttribute('aria-controls', 'editorInkParamsToolbar');
+  await expect(ink).toHaveAttribute('aria-haspopup', 'true');
+  await expect(ink).not.toHaveAttribute('aria-pressed', /./);
+  await page.waitForTimeout(150);
+  await ink.click();
+  await expect(page.locator('#editorInkParamsToolbar')).toBeVisible();
+  await expect(ink).toHaveAttribute('aria-expanded', 'true');
+  // Opening the menu closes the open panels, so the entry is collapsed again.
+  await page.locator('#secondaryToolbarToggle').click();
+  await expect(page.locator('#editorInkParamsToolbar')).toBeHidden();
+  await expect(ink).toHaveAttribute('aria-expanded', 'false');
 });
 
 test('the toolbar can be operated with Tab, Enter and Space', async ({ page }) => {

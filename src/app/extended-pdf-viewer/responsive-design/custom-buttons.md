@@ -7,6 +7,7 @@ looks like so:
   primaryToolbarId="infiniteScroll"
   l10nId="infinite_scroll"
   [toggled]="pageViewMode == 'infinite-scroll'"
+  [toggleButton]="true"
   [action]="onClick"
   l10nLabel="pdfjs-infinite-scroll-button-label"
   [order]="3400"
@@ -26,6 +27,8 @@ The two `l10n` attributes use the translation tables of pdf.js. They're useless 
 pre-defined texts of the `viewer.properties` file. In most cases, `[title]` should to the trick just as well.
 
 `[order]` determines where the button appears in the secondary menu. The default buttons use increments of 100, so you can insert 99 custom menu items between two default menu items. If the button shows in the toolbar, its position is determined by the position in the source code (plus CSS - in other words, it's the exactly the behavior you'd expect).
+
+`[toggled]` highlights the button. Tell screen readers what the highlight means: add `[toggleButton]="true"` if the button switches something on and off (it's announced as "pressed" or "not pressed"), or set `ariaControls` (and `ariaHasPopup`) to the id of the popup the button opens (it's announced as "expanded" or "collapsed"). Without either, `[toggled]` is only a visual effect.
 
 The `[action]` attribute is a bit tricky. You can't use `this` in the event listener method because the event listener is used both for the toolbar (`this` is available here) and the secondary menu (`this` is undefined here). I'm sure I've selected a clumsy solution, but here's my current approach:
 
