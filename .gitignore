@@ -70,3 +70,4 @@ Thumbs.db
 /e2e/TODO.md
 playwright-tests-overview-claude.md
 playwright-tests-overview.md
+/e2e/coverage/out
