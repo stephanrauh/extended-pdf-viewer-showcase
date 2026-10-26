@@ -2,12 +2,14 @@ import AxeBuilder from '@axe-core/playwright';
 import type { Page } from '@playwright/test';
 import { test, expect } from '../fixtures';
 import { PdfViewerPage } from '../poms/pdf-viewer.page';
-import { applyThemeContext, type ViewerTheme } from '../poms/theme-audit';
+import { applyThemeContext, comboLabel, THEME_COMBOS, type ThemeCombo } from '../poms/theme-audit';
 
 /**
  * T56 — an automated accessibility scan (axe-core) of every surface of the
- * viewer, in the light and the dark theme: toolbar, Tools menu, sidebar views,
- * find bar, editor panels and dialogs.
+ * viewer: toolbar, Tools menu, sidebar views, find bar, editor panels and
+ * dialogs. Like T28, in all four combinations of the viewer theme and the OS
+ * color scheme: the colors must follow the viewer theme, and the mismatched
+ * combinations are where they used to follow the OS instead (#3219).
  *
  * axe checks the rules a machine can judge (roles, names, ARIA validity,
  * labels, contrast of text at WCAG AA). T54 covers what axe can't see:
@@ -23,7 +25,6 @@ test.describe.configure({ mode: 'parallel' });
 const BOOK = '/assets/pdfs/Portugues-para-principiantes.pdf';
 const PASSWORDS = '/extended-pdf-viewer/passwords';
 const VIEWER = 'ngx-extended-pdf-viewer';
-const THEMES: ViewerTheme[] = ['light', 'dark'];
 
 /** Runs axe on `include` (default: the whole viewer) and asserts softly that it found nothing. */
 async function scan(page: Page, surface: string, include = VIEWER): Promise<void> {
@@ -45,17 +46,21 @@ async function scan(page: Page, surface: string, include = VIEWER): Promise<void
   expect.soft(violations.map((v) => v.id), `${surface}: ${violations.length} axe rule(s) violated\n${report}`).toEqual([]);
 }
 
-async function open(page: Page, theme: ViewerTheme, query = ''): Promise<PdfViewerPage> {
-  await applyThemeContext(page, { viewer: theme, os: theme });
+/**
+ * The harness doesn't read the showcase's theme from localStorage (that's the demo
+ * pages' ThemeService), so the viewer theme goes in as the [theme] input.
+ */
+async function open(page: Page, theme: ThemeCombo, query = ''): Promise<PdfViewerPage> {
+  await applyThemeContext(page, theme);
   const viewer = new PdfViewerPage(page);
-  await viewer.goto(`/e2e/viewer?src=${BOOK}&show=always-visible${query}`);
+  await viewer.goto(`/e2e/viewer?src=${BOOK}&show=always-visible&theme=${theme.viewer}${query}`);
   await viewer.waitForFirstPageRender();
   await page.waitForTimeout(500);
   return viewer;
 }
 
-for (const theme of THEMES) {
-  test.describe(`T56 axe — ${theme} theme`, () => {
+for (const theme of THEME_COMBOS) {
+  test.describe(`T56 axe — ${comboLabel(theme)}`, () => {
     test('toolbar, document and the Tools menu', async ({ page }) => {
       const viewer = await open(page, theme, '&sidebarVisible=false');
       await scan(page, 'toolbar + document');
@@ -67,7 +72,8 @@ for (const theme of THEMES) {
     test('sidebar: thumbnails and outline', async ({ page }) => {
       await open(page, theme, '&sidebarVisible=true');
       await expect(page.locator('#viewsManager')).toBeVisible();
-      await page.locator('#thumbnailsView .thumbnail').first().waitFor({ state: 'visible' });
+      await page.locator('#viewThumbnail').click();
+      await page.locator('#thumbnailsView .thumbnail:visible').first().waitFor({ state: 'visible' });
       await scan(page, 'sidebar thumbnails', '#viewsManager');
       await page.locator('#viewOutline').click();
       await page.locator('#outlinesView .treeItem a').first().waitFor({ state: 'visible' });
@@ -117,7 +123,8 @@ for (const theme of THEMES) {
     });
 
     test('password dialog', async ({ page }) => {
-      await applyThemeContext(page, { viewer: theme, os: theme });
+      // A demo page, so the theme does come from localStorage here.
+      await applyThemeContext(page, theme);
       const viewer = new PdfViewerPage(page);
       await viewer.goto(PASSWORDS);
       await expect(page.locator('#passwordDialog')).toBeVisible();
