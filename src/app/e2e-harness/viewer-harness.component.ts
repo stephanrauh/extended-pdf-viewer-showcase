@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, isSignal, OutputEmitterRef, signal, viewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, isSignal, OutputEmitterRef, signal, viewChild, viewChildren } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { NgxExtendedPdfViewerComponent, NgxExtendedPdfViewerModule, NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
@@ -140,27 +140,100 @@ export class ViewerHarnessComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    const events: Array<{ name: string; t: number; payload: unknown }> = [];
-    (window as unknown as Record<string, unknown>)['__ngxEvents'] = events;
-    const viewer = this.outlet().componentInstance as Record<string, unknown>;
-    const record = (eventName: string) => (payload: unknown) => events.push({ name: eventName, t: performance.now(), payload: summarize(payload) });
-    for (const [name, member] of Object.entries(viewer)) {
-      if (member instanceof OutputEmitterRef) {
-        member.subscribe(record(name));
-      } else if (isSignal(member) && typeof (member as { subscribe?: unknown }).subscribe === 'function') {
-        // a model(): two-way binding
-        (member as unknown as OutputEmitterRef<unknown>).subscribe(record(`${name}Change`));
+    (window as unknown as Record<string, unknown>)['__ngxEvents'] = recordEvents(this.outlet().componentInstance);
+  }
+}
+
+type RecordedEvent = { name: string; t: number; payload: unknown };
+
+/** Subscribes to every output and two-way binding of a viewer and records what it emits. */
+function recordEvents(componentInstance: unknown): RecordedEvent[] {
+  const events: RecordedEvent[] = [];
+  const viewer = componentInstance as Record<string, unknown>;
+  const record = (eventName: string) => (payload: unknown) => events.push({ name: eventName, t: performance.now(), payload: summarize(payload) });
+  for (const [name, member] of Object.entries(viewer)) {
+    if (member instanceof OutputEmitterRef) {
+      member.subscribe(record(name));
+    } else if (isSignal(member) && typeof (member as { subscribe?: unknown }).subscribe === 'function') {
+      // a model(): two-way binding
+      (member as unknown as OutputEmitterRef<unknown>).subscribe(record(`${name}Change`));
+    }
+  }
+  // @Output() getters, e.g. formDataChange, live on the prototype.
+  const prototype = Object.getPrototypeOf(viewer);
+  for (const [name, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(prototype))) {
+    if (descriptor.get && name.endsWith('Change')) {
+      const emitter = viewer[name] as { subscribe?: (next: (value: unknown) => void) => unknown } | undefined;
+      if (typeof emitter?.subscribe === 'function') {
+        emitter.subscribe(record(name));
       }
     }
-    // @Output() getters, e.g. formDataChange, live on the prototype.
-    const prototype = Object.getPrototypeOf(viewer);
-    for (const [name, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(prototype))) {
-      if (descriptor.get && name.endsWith('Change')) {
-        const emitter = viewer[name] as { subscribe?: (next: (value: unknown) => void) => unknown } | undefined;
-        if (typeof emitter?.subscribe === 'function') {
-          emitter.subscribe(record(name));
-        }
+  }
+  return events;
+}
+
+const TWO_VIEWER_DEFAULTS: Array<Record<string, unknown>> = [
+  { ...DEFAULT_INPUTS, height: '80vh' },
+  { ...DEFAULT_INPUTS, src: '/assets/pdfs/BootsFaces_Deep_Dive_1.0.pdf', height: '80vh' },
+];
+
+/**
+ * Two viewers side by side, for the multiple-viewers work (React-migration.md, Step 2).
+ *
+ *   /e2e/two-viewers?a.src=/assets/pdfs/x.pdf&b.page=2&b.showPrintButton=false
+ *
+ * Query parameters work as in /e2e/viewer, prefixed with `a.` or `b.` for the
+ * first or second viewer; without a prefix they apply to both. `opt.<name>` is
+ * global, because pdfDefaultOptions is (for now).
+ *
+ * `window.__viewers[i]` holds `{ setInput(name, value), events }` per viewer
+ * (i = 0 for a, 1 for b).
+ */
+@Component({
+  selector: 'app-two-viewers-harness',
+  standalone: true,
+  imports: [NgComponentOutlet],
+  template: `
+    <div style="display: flex; gap: 8px">
+      <div style="flex: 1; min-width: 0" data-viewer="a">
+        <ng-container *ngComponentOutlet="viewer; inputs: inputsA(); ngModule: viewerModule" />
+      </div>
+      <div style="flex: 1; min-width: 0" data-viewer="b">
+        <ng-container *ngComponentOutlet="viewer; inputs: inputsB(); ngModule: viewerModule" />
+      </div>
+    </div>
+  `,
+})
+export class TwoViewersHarnessComponent implements AfterViewInit {
+  /** in document order: viewer a, then viewer b */
+  private readonly outlets = viewChildren(NgComponentOutlet);
+  public readonly viewer = NgxExtendedPdfViewerComponent;
+  public readonly viewerModule = NgxExtendedPdfViewerModule;
+  public readonly inputsA = signal<Record<string, unknown>>({ ...TWO_VIEWER_DEFAULTS[0] });
+  public readonly inputsB = signal<Record<string, unknown>>({ ...TWO_VIEWER_DEFAULTS[1] });
+
+  constructor() {
+    const targets = { a: this.inputsA(), b: this.inputsB() };
+    const params = inject(ActivatedRoute).snapshot.queryParamMap;
+    for (const key of params.keys) {
+      const value = parseValue(params.get(key)!);
+      if (key.startsWith('opt.')) {
+        (pdfDefaultOptions as Record<string, unknown>)[key.substring(4)] = value;
+      } else if (key.startsWith('a.') || key.startsWith('b.')) {
+        targets[key[0] as 'a' | 'b'][key.substring(2)] = value;
+      } else {
+        targets.a[key] = value;
+        targets.b[key] = value;
       }
     }
+  }
+
+  public ngAfterViewInit(): void {
+    const setter = (inputs: typeof this.inputsA) => (name: string, value: unknown) => inputs.update((current) => ({ ...current, [name]: value }));
+    const [outletA, outletB] = this.outlets();
+    (window as unknown as Record<string, unknown>)['__viewers'] = [
+      { setInput: setter(this.inputsA), events: recordEvents(outletA.componentInstance) },
+      { setInput: setter(this.inputsB), events: recordEvents(outletB.componentInstance) },
+    ];
   }
 }
