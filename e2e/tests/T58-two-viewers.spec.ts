@@ -131,4 +131,50 @@ test.describe('T58 two viewers on one page', () => {
     // [page] set from outside isn't echoed as (pageChange), so viewer a must not have emitted one either
     expect(await events(page, 0, 'pageChange')).toEqual([]);
   });
+
+  test('keyboard shortcuts act on the viewer the user works with', async ({ page }) => {
+    await openBoth(page, '?b.src=/assets/pdfs/Portugues-para-principiantes.pdf');
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await expect.poll(async () => (await events(page, 0, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+
+    // focus inside viewer b: only b turns the page
+    await page.locator(`${B} #viewerContainer`).click({ position: { x: 5, y: 5 } });
+    await page.keyboard.press('n');
+    await expect(page.locator(`${B} #pageNumber`)).toHaveValue('2');
+    await expect(page.locator(`${A} #pageNumber`)).toHaveValue('1');
+
+    // then viewer a
+    await page.locator(`${A} #viewerContainer`).click({ position: { x: 5, y: 5 } });
+    await page.keyboard.press('n');
+    await expect(page.locator(`${A} #pageNumber`)).toHaveValue('2');
+    await expect(page.locator(`${B} #pageNumber`)).toHaveValue('2');
+
+    // a key outside both viewers goes to the one used last (a)
+    await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
+    await page.keyboard.press('n');
+    await expect(page.locator(`${A} #pageNumber`)).toHaveValue('3');
+    await expect(page.locator(`${B} #pageNumber`)).toHaveValue('2');
+  });
+
+  test("printing viewer b prints b's pages, and only once", async ({ page }) => {
+    // the browser's print dialog would block the test, so window.print only records what it would print
+    await page.addInitScript(() => {
+      (window as any).__prints = [];
+      window.print = () => {
+        const containers = [...document.querySelectorAll('#printContainer')];
+        (window as any).__prints.push(containers.map((container) => container.children.length));
+      };
+    });
+    await openBoth(page, '?b.src=/assets/pdfs/pdf-sample.pdf');
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded'))[0]?.payload?.pagesCount, { timeout: 30_000 }).toBe(1);
+    await expect.poll(async () => (await events(page, 0, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+
+    await page.locator(`${B} #printButton`).click();
+    await expect.poll(async () => (await events(page, 1, 'afterPrint')).length, { timeout: 30_000 }).toBe(1);
+
+    // one print job, one print container, holding b's single page - not a's 641
+    expect(await page.evaluate(() => (window as any).__prints)).toEqual([[1]]);
+    expect(await events(page, 0, 'beforePrint')).toEqual([]);
+    await expect(page.locator('#printContainer')).toHaveCount(0);
+  });
 });
