@@ -1,16 +1,19 @@
 import type { Page } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 import { test, expect } from '../fixtures';
 
 /**
  * T58 — two viewers on one page (React-migration.md, Step 2).
  *
- * The target behavior: each viewer shows its own document, the page has no
- * duplicate ids (every `for=`, `aria-controls` and `aria-labelledby` must point
- * into its own viewer), and operating one viewer leaves the other alone.
+ * The target behavior: each viewer shows its own document, every id reference
+ * (`for=`, `aria-controls`, `aria-labelledby`, ...) points into its own viewer,
+ * and operating one viewer leaves the other alone. The ids themselves stay
+ * duplicated: the CSS and pdf.js rely on them, and WCAG 2.2 no longer requires
+ * unique ids (4.1.1 Parsing was removed).
  *
- * Step 2 is in progress, so the tests are marked `test.fail()`: the suite stays
- * green, and Playwright reports "expected to fail, but passed" as soon as a
- * test starts working. Remove the marker then.
+ * Step 2 is in progress, so the tests that don't work yet are marked
+ * `test.fail()`: the suite stays green, and Playwright reports "expected to
+ * fail, but passed" as soon as a test starts working. Remove the marker then.
  *
  * The harness is /e2e/two-viewers: viewer a shows Portugues-para-principiantes.pdf
  * (641 pages), viewer b BootsFaces_Deep_Dive_1.0.pdf (53 pages).
@@ -46,7 +49,6 @@ test.describe('T58 two viewers on one page', () => {
   });
 
   test('each viewer loads and renders its own document', async ({ page }) => {
-    test.fail(true, 'Step 2 in progress: a second viewer shares the first one');
     await openBoth(page);
     await expect.poll(async () => (await events(page, 0, 'pagesLoaded'))[0]?.payload?.pagesCount, { timeout: 30_000 }).toBe(641);
     await expect.poll(async () => (await events(page, 1, 'pagesLoaded'))[0]?.payload?.pagesCount, { timeout: 30_000 }).toBe(53);
@@ -54,27 +56,79 @@ test.describe('T58 two viewers on one page', () => {
     await expect(page.locator(`${B} .page[data-page-number="1"] canvas`)).toBeVisible({ timeout: 30_000 });
   });
 
-  test('no id appears twice on the page', async ({ page }) => {
-    test.fail(true, 'Step 2 in progress: both viewers render the same ids');
+  // The ids stay duplicated (the CSS and pdf.js rely on them), but no reference may cross
+  // into the other viewer: the browser would resolve it to the first viewer's element.
+  test('every id reference (labels, aria-*) resolves inside its own viewer', async ({ page }) => {
     await openBoth(page);
-    await expect(page.locator(`${B} .page[data-page-number="1"]`)).toBeAttached({ timeout: 30_000 });
-    const duplicates = await page.evaluate(() => {
-      const seen = new Map<string, number>();
-      for (const el of document.querySelectorAll('[id]')) {
-        seen.set(el.id, (seen.get(el.id) ?? 0) + 1);
-      }
-      return [...seen].filter(([, count]) => count > 1).map(([id]) => id);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    const viewers = await page.evaluate(() => {
+      // the IDL properties return the elements the browser uses, whether set by id or by element
+      const properties = [
+        'ariaLabelledByElements',
+        'ariaDescribedByElements',
+        'ariaControlsElements',
+        'ariaOwnsElements',
+        'ariaDetailsElements',
+        'ariaErrorMessageElements',
+        'ariaFlowToElements',
+      ];
+      return [...document.querySelectorAll('ngx-extended-pdf-viewer')].map((host) => {
+        let references = 0;
+        const outside: string[] = [];
+        for (const el of host.querySelectorAll<HTMLElement>('*')) {
+          for (const property of properties) {
+            for (const target of ((el as any)[property] ?? []) as Element[]) {
+              references++;
+              if (!host.contains(target)) outside.push(`${el.id || el.tagName}.${property} → #${target.id}`);
+            }
+          }
+          if (el instanceof HTMLLabelElement && el.htmlFor) {
+            references++;
+            const target = document.getElementById(el.htmlFor);
+            if (target && !host.contains(target)) outside.push(`label for="${el.htmlFor}"`);
+          }
+        }
+        return { references, outside };
+      });
     });
-    expect(duplicates, `${duplicates.length} duplicate ids, e.g. ${duplicates.slice(0, 10).join(', ')}`).toEqual([]);
+    for (const [i, viewer] of viewers.entries()) {
+      expect(viewer.references, `viewer ${i} has id references`).toBeGreaterThan(50);
+      expect(viewer.outside, `viewer ${i}: references into the other viewer`).toEqual([]);
+    }
+  });
+
+  test("clicking a label in viewer b operates viewer b's control", async ({ page }) => {
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await page.locator(`${B} #primaryViewFind`).click();
+    await expect(page.locator(`${B} #findbar`)).toBeVisible();
+    await page.locator(`${B} #findbar label`).filter({ hasText: /highlight all/i }).click();
+    await expect(page.locator(`${B} #findHighlightAll`)).toBeChecked();
+    await expect(page.locator(`${A} #findHighlightAll`)).not.toBeChecked();
+  });
+
+  test('axe finds nothing in viewer b', async ({ page }) => {
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await page.waitForTimeout(500);
+    const { violations } = await new AxeBuilder({ page })
+      .include('[data-viewer="b"]')
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+      .analyze();
+    const report = violations.map((v) => `${v.id}: ${v.nodes.slice(0, 5).map((n) => n.target.join(' ')).join(' | ')}`).join('\n');
+    expect(violations.map((v) => v.id), report).toEqual([]);
   });
 
   test('paging one viewer leaves the other where it is', async ({ page }) => {
-    test.fail(true, 'Step 2 in progress: a second viewer shares the first one');
-    await openBoth(page);
+    // Viewer b shows a portrait document here, too. With the landscape slides, a jump to
+    // page 5 leaves page 6 as the only fully visible page, so pdf.js reports page 6 -
+    // in a single viewer, too.
+    await openBoth(page, '?b.src=/assets/pdfs/Portugues-para-principiantes.pdf');
     await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
     await page.evaluate(() => (window as any).__viewers[1].setInput('page', 5));
-    await expect.poll(async () => (await events(page, 1, 'pageChange')).at(-1)?.payload, { timeout: 10_000 }).toBe(5);
-    await expect(page.locator(`${B} #pageNumber, ${B} [id$="pageNumber"]`).first()).toHaveValue('5');
+    await expect(page.locator(`${B} #pageNumber`)).toHaveValue('5');
     await expect(page.locator(`${A} #pageNumber`)).toHaveValue('1');
+    // [page] set from outside isn't echoed as (pageChange), so viewer a must not have emitted one either
+    expect(await events(page, 0, 'pageChange')).toEqual([]);
   });
 });
