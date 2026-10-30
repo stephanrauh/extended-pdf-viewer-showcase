@@ -186,8 +186,8 @@ const TWO_VIEWER_DEFAULTS: Array<Record<string, unknown>> = [
  * first or second viewer; without a prefix they apply to both. `opt.<name>` is
  * global, because pdfDefaultOptions is (for now).
  *
- * `window.__viewers[i]` holds `{ setInput(name, value), events }` per viewer
- * (i = 0 for a, 1 for b).
+ * `window.__viewers[i]` holds `{ setInput(name, value), events, remove() }` per viewer
+ * (i = 0 for a, 1 for b). `remove()` destroys that viewer.
  */
 @Component({
   selector: 'app-two-viewers-harness',
@@ -196,10 +196,14 @@ const TWO_VIEWER_DEFAULTS: Array<Record<string, unknown>> = [
   template: `
     <div style="display: flex; gap: 8px">
       <div style="flex: 1; min-width: 0" data-viewer="a">
-        <ng-container *ngComponentOutlet="viewer; inputs: inputsA(); ngModule: viewerModule" />
+        @if (showA()) {
+          <ng-container *ngComponentOutlet="viewer; inputs: inputsA(); ngModule: viewerModule" />
+        }
       </div>
       <div style="flex: 1; min-width: 0" data-viewer="b">
-        <ng-container *ngComponentOutlet="viewer; inputs: inputsB(); ngModule: viewerModule" />
+        @if (showB()) {
+          <ng-container *ngComponentOutlet="viewer; inputs: inputsB(); ngModule: viewerModule" />
+        }
       </div>
     </div>
   `,
@@ -211,6 +215,8 @@ export class TwoViewersHarnessComponent implements AfterViewInit {
   public readonly viewerModule = NgxExtendedPdfViewerModule;
   public readonly inputsA = signal<Record<string, unknown>>({ ...TWO_VIEWER_DEFAULTS[0] });
   public readonly inputsB = signal<Record<string, unknown>>({ ...TWO_VIEWER_DEFAULTS[1] });
+  public readonly showA = signal(true);
+  public readonly showB = signal(true);
 
   constructor() {
     const targets = { a: this.inputsA(), b: this.inputsB() };
@@ -232,8 +238,8 @@ export class TwoViewersHarnessComponent implements AfterViewInit {
     const setter = (inputs: typeof this.inputsA) => (name: string, value: unknown) => inputs.update((current) => ({ ...current, [name]: value }));
     const [outletA, outletB] = this.outlets();
     (window as unknown as Record<string, unknown>)['__viewers'] = [
-      { setInput: setter(this.inputsA), events: recordEvents(outletA.componentInstance) },
-      { setInput: setter(this.inputsB), events: recordEvents(outletB.componentInstance) },
+      { setInput: setter(this.inputsA), events: recordEvents(outletA.componentInstance), remove: () => this.showA.set(false) },
+      { setInput: setter(this.inputsB), events: recordEvents(outletB.componentInstance), remove: () => this.showB.set(false) },
     ];
   }
 }

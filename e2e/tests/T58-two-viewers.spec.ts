@@ -156,6 +156,68 @@ test.describe('T58 two viewers on one page', () => {
     await expect(page.locator(`${B} #pageNumber`)).toHaveValue('2');
   });
 
+  test('ctrl + mouse wheel zooms the viewer under the mouse only', async ({ page }) => {
+    await openBoth(page, '?b.src=/assets/pdfs/Portugues-para-principiantes.pdf');
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await expect.poll(async () => (await events(page, 0, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    const pageWidth = (viewer: string) => page.locator(`${viewer} .page[data-page-number="1"]`).evaluate((el) => el.getBoundingClientRect().width);
+    const widthA = await pageWidth(A);
+    const widthB = await pageWidth(B);
+
+    const box = (await page.locator(`${B} #viewerContainer`).boundingBox())!;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.keyboard.down('Control');
+    await page.mouse.wheel(0, -200);
+    await page.keyboard.up('Control');
+
+    await expect.poll(() => pageWidth(B)).toBeGreaterThan(widthB * 1.05);
+    expect(await pageWidth(A)).toBe(widthA);
+  });
+
+  test("opening an editor in viewer b moves the focus into b's editor toolbar", async ({ page }) => {
+    // each viewer gets half the width; below that, the draw button moves into the overflow menu
+    await page.setViewportSize({ width: 2800, height: 1000 });
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await page.locator(`${B} #primaryEditorInk`).click();
+    await expect(page.locator(`${B} #editorInkParamsToolbar`)).toBeVisible();
+    await expect.poll(() => page.evaluate((b) => !!document.querySelector(b)?.querySelector('#editorInkParamsToolbar')?.contains(document.activeElement), B)).toBe(true);
+
+    // closing it returns the focus to b's button
+    await page.locator(`${B} #primaryEditorInk`).click();
+    await expect(page.locator(`${B} #primaryEditorInk`)).toBeFocused();
+  });
+
+  test("each viewer has its own responsive stylesheet, and keeps it when the other viewer goes away", async ({ page }) => {
+    // wide enough that the responsive rules hide the buttons meant for narrow toolbars
+    await page.setViewportSize({ width: 2800, height: 1000 });
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    const stylesheets = () =>
+      page.evaluate(() =>
+        [...document.querySelectorAll('ngx-extended-pdf-viewer')].map((host) => {
+          const id = host.getAttribute('data-ngx-dynamic-css');
+          return !!id && !!document.getElementById(id);
+        }),
+      );
+    expect(await stylesheets()).toEqual([true, true]);
+    expect(await page.evaluate(() => [...document.querySelectorAll('ngx-extended-pdf-viewer')].map((host) => host.getAttribute('data-ngx-dynamic-css')))).toEqual([
+      'pdf-dynamic-css',
+      expect.stringMatching(/^pdf-dynamic-css-\d+$/),
+    ]);
+
+    // the secondary menu's entries for narrow toolbars stay hidden in viewer b after viewer a is destroyed
+    const narrowOnly = page.locator(`${B} #secondaryToolbar .visibleXXLView`).first();
+    await expect(narrowOnly).toBeAttached();
+    await page.evaluate(() => (window as any).__viewers[0].remove());
+    await expect(page.locator(A)).toHaveCount(0);
+    expect(await stylesheets()).toEqual([true]);
+    await page.locator(`${B} #secondaryToolbarToggle`).click();
+    await expect(page.locator(`${B} #secondaryToolbar`)).toBeVisible();
+    await expect(narrowOnly).toBeHidden();
+    await expect(page.locator(`${B} #primaryEditorInk`)).toBeVisible();
+  });
+
   test("printing viewer b prints b's pages, and only once", async ({ page }) => {
     // the browser's print dialog would block the test, so window.print only records what it would print
     await page.addInitScript(() => {
