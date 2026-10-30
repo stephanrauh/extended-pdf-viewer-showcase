@@ -184,7 +184,7 @@ const TWO_VIEWER_DEFAULTS: Array<Record<string, unknown>> = [
  *
  * Query parameters work as in /e2e/viewer, prefixed with `a.` or `b.` for the
  * first or second viewer; without a prefix they apply to both. `opt.<name>` is
- * global, because pdfDefaultOptions is (for now).
+ * global: pdfDefaultOptions apply to every viewer on the page.
  *
  * `window.__viewers[i]` holds `{ setInput(name, value), events, remove() }` per viewer
  * (i = 0 for a, 1 for b). `remove()` destroys that viewer.

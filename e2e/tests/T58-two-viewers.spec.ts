@@ -1,6 +1,7 @@
 import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect } from '../fixtures';
+import { test, expect, usingBleedingEdge } from '../fixtures';
+import { downloadPdf, readPdf } from '../poms/pdf-file';
 
 /**
  * T58 — two viewers on one page (React-migration.md, Step 2).
@@ -11,9 +12,7 @@ import { test, expect } from '../fixtures';
  * duplicated: the CSS and pdf.js rely on them, and WCAG 2.2 no longer requires
  * unique ids (4.1.1 Parsing was removed).
  *
- * Step 2 is in progress, so the tests that don't work yet are marked
- * `test.fail()`: the suite stays green, and Playwright reports "expected to
- * fail, but passed" as soon as a test starts working. Remove the marker then.
+ * Several viewers on one page need the bleeding-edge bundle (#3306).
  *
  * The harness is /e2e/two-viewers: viewer a shows Portugues-para-principiantes.pdf
  * (641 pages), viewer b BootsFaces_Deep_Dive_1.0.pdf (53 pages).
@@ -40,8 +39,7 @@ async function openBoth(page: Page, query = ''): Promise<void> {
 }
 
 test.describe('T58 two viewers on one page', () => {
-  // Not marked test.fail(): it guards the harness itself. Without it, a broken
-  // route would make every test.fail() test "pass".
+  // guards the harness itself: a broken route would make the other tests meaningless
   test('the harness shows two viewers with their own hooks', async ({ page }) => {
     await openBoth(page);
     await expect(page.locator('ngx-extended-pdf-viewer')).toHaveCount(2);
@@ -156,6 +154,69 @@ test.describe('T58 two viewers on one page', () => {
     await expect(page.locator(`${B} #pageNumber`)).toHaveValue('2');
   });
 
+  test('searching in viewer b finds and highlights in viewer b only', async ({ page }) => {
+    await openBoth(page, '?b.src=/assets/pdfs/Portugues-para-principiantes.pdf');
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await expect.poll(async () => (await events(page, 0, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await page.locator(`${B} #primaryViewFind`).click();
+    await page.locator(`${B} #findInput`).fill('a');
+    await page.locator(`${B} #findInput`).press('Enter');
+
+    await expect(page.locator(`${B} .textLayer .highlight`).first()).toBeAttached({ timeout: 15_000 });
+    await expect(page.locator(`${B} #findResultsCount`)).not.toBeEmpty();
+    await expect(page.locator(`${A} #findbar`)).toBeHidden();
+    expect(await page.locator(`${A} .textLayer .highlight`).count()).toBe(0);
+  });
+
+  test('[zoom] of viewer b zooms viewer b only', async ({ page }) => {
+    await openBoth(page, '?b.src=/assets/pdfs/Portugues-para-principiantes.pdf');
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await expect.poll(async () => (await events(page, 0, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    const pageWidth = (viewer: string) => page.locator(`${viewer} .page[data-page-number="1"]`).evaluate((el) => el.getBoundingClientRect().width);
+    await page.evaluate(() => (window as any).__viewers[1].setInput('zoom', 50));
+    await page.waitForTimeout(600);
+    const widthA = await pageWidth(A);
+    const widthB = await pageWidth(B);
+
+    await page.evaluate(() => (window as any).__viewers[1].setInput('zoom', 100));
+    await expect.poll(() => pageWidth(B)).toBeGreaterThan(widthB * 1.8);
+    expect(await pageWidth(A)).toBe(widthA);
+  });
+
+  test('a drawing made in viewer b belongs to viewer b', async ({ page }) => {
+    await page.setViewportSize({ width: 2800, height: 1000 });
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await page.locator(`${B} #primaryEditorInk`).click();
+    const layer = page.locator(`${B} .page[data-page-number="1"] .annotationEditorLayer`);
+    await expect(layer).toBeVisible();
+    // a gesture made in the same instant as the click on the tool can get lost
+    await page.waitForTimeout(150);
+    const box = (await layer.boundingBox())!;
+    await page.mouse.move(box.x + 100, box.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(box.x + 160, box.y + 140, { steps: 5 });
+    await page.mouse.move(box.x + 220, box.y + 120, { steps: 5 });
+    await page.mouse.up();
+    // ends the drawing session and turns the stroke into an editor
+    await page.keyboard.press('Escape');
+
+    await expect(layer.locator(':scope > *')).toHaveCount(1);
+    await expect(page.locator(`${A} .annotationEditorLayer > *`)).toHaveCount(0);
+  });
+
+  test('a dialog opened in viewer b opens in viewer b', async ({ page }) => {
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await page.locator(`${B} #secondaryToolbarToggle`).click();
+    await page.locator(`${B} #secondaryToolbar`).getByTitle(/Document Properties/).click();
+
+    await expect(page.locator(`${B} #documentPropertiesDialog`)).toBeVisible();
+    await expect(page.locator(`${A} #documentPropertiesDialog`)).toBeHidden();
+    // and it shows b's document
+    await expect(page.locator(`${B} #fileNameField`)).toHaveText(/BootsFaces/);
+  });
+
   test('ctrl + mouse wheel zooms the viewer under the mouse only', async ({ page }) => {
     await openBoth(page, '?b.src=/assets/pdfs/Portugues-para-principiantes.pdf');
     await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
@@ -218,6 +279,62 @@ test.describe('T58 two viewers on one page', () => {
     await expect(page.locator(`${B} #primaryEditorInk`)).toBeVisible();
   });
 
+  test('the same form in both viewers: each viewer keeps its own values and reports its own changes', async ({ page }) => {
+    await openBoth(page, '?src=/assets/pdfs/OoPdfFormExample.pdf');
+    const radios = (viewer: string) => page.locator(`${viewer} .annotationLayer input[type="radio"][name="educationLevel"]`);
+    await expect(radios(A).first()).toBeAttached({ timeout: 30_000 });
+    await expect(radios(B).first()).toBeAttached({ timeout: 30_000 });
+    const checked = (viewer: string) => radios(viewer).evaluateAll((all) => all.map((radio) => (radio as HTMLInputElement).checked));
+
+    // both start with the value stored in the PDF
+    await expect.poll(() => checked(A)).toEqual(await checked(B));
+    const initial = await checked(A);
+    expect(initial).toContain(true);
+
+    await radios(B).nth(1).check();
+    await expect(radios(B).nth(1)).toBeChecked();
+    expect(await checked(A)).toEqual(initial);
+    // (formDataChange) comes from the viewer whose form changed
+    await expect.poll(async () => (await events(page, 1, 'formDataChange')).length).toBeGreaterThan(0);
+    expect(await events(page, 0, 'formDataChange')).toEqual([]);
+
+    await radios(A).nth(2).check();
+    await expect(radios(A).nth(2)).toBeChecked();
+    await expect(radios(B).nth(1)).toBeChecked();
+  });
+
+  test('the same form in both viewers: each viewer saves its own values', async ({ page }) => {
+    // wide enough for the download button to be in each toolbar
+    await page.setViewportSize({ width: 2800, height: 1000 });
+    await openBoth(page, '?src=/assets/pdfs/OoPdfFormExample.pdf');
+    const field = (viewer: string, name: string) => page.locator(`${viewer} .annotationLayer [name="${name}"]`);
+    await expect(field(A, 'firstName')).toBeVisible({ timeout: 30_000 });
+    await expect(field(B, 'firstName')).toBeVisible({ timeout: 30_000 });
+
+    await field(A, 'firstName').fill('Ada');
+    await field(A, 'firstName').press('Tab');
+    await field(A, 'educationLevel').nth(2).check();
+    await field(B, 'firstName').fill('Grace');
+    await field(B, 'firstName').press('Tab');
+    await field(B, 'educationLevel').nth(1).check();
+    // the saved radio group holds the export value of the chosen button
+    const annotationId = (viewer: string, i: number) =>
+      field(viewer, 'educationLevel').nth(i).evaluate((el) => el.closest('[data-annotation-id]')!.getAttribute('data-annotation-id'));
+    const chosenInA = await annotationId(A, 2);
+    const chosenInB = await annotationId(B, 1);
+
+    for (const [viewer, firstName, chosenId] of [
+      [B, 'Grace', chosenInB],
+      [A, 'Ada', chosenInA],
+    ] as const) {
+      const saved = (await readPdf(page, await downloadPdf(page, viewer))).annotations;
+      const widgets = (name: string) => saved.filter((a) => a.annotationType === 20 && a.fieldName === name);
+      expect(widgets('firstName')[0].fieldValue, `firstName saved by ${viewer}`).toBe(firstName);
+      const chosen = saved.find((a) => a.id === chosenId)!;
+      expect(widgets('educationLevel')[0].fieldValue, `educationLevel saved by ${viewer}`).toBe(chosen.buttonValue);
+    }
+  });
+
   test("printing viewer b prints b's pages, and only once", async ({ page }) => {
     // the browser's print dialog would block the test, so window.print only records what it would print
     await page.addInitScript(() => {
@@ -238,5 +355,33 @@ test.describe('T58 two viewers on one page', () => {
     expect(await page.evaluate(() => (window as any).__prints)).toEqual([[1]]);
     expect(await events(page, 0, 'beforePrint')).toEqual([]);
     await expect(page.locator('#printContainer')).toHaveCount(0);
+  });
+
+  test("the secondary menu of viewer a operates viewer a (spread, scroll mode)", async ({ page }) => {
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 0, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+
+    await page.locator(`${A} #secondaryToolbarToggle`).click();
+    await page.locator(`${A} #secondaryToolbar #secondarySpreadEven`).click();
+    await expect(page.locator(`${A} #viewer .spread`).first()).toBeAttached();
+    await expect(page.locator(`${B} #viewer .spread`)).toHaveCount(0);
+
+    await page.locator(`${A} #secondaryToolbar #secondaryScrollWrapped`).click();
+    await expect(page.locator(`${A} #viewer`)).toHaveClass(/scrollWrapped/);
+    await expect(page.locator(`${B} #viewer`)).not.toHaveClass(/scrollWrapped/);
+  });
+
+  test('the side-by-side demo shows two viewers without iFrames', async ({ page }) => {
+    test.skip(!usingBleedingEdge, 'the stable bundle still needs the iFrame work-around');
+    await page.goto('/extended-pdf-viewer/side-by-side');
+    const viewers = page.locator('ngx-extended-pdf-viewer');
+    await expect(viewers).toHaveCount(2);
+    await expect(page.locator('iframe')).toHaveCount(0);
+    // CDK.pdf has 22 pages, GraalVM.pdf 39
+    for (const [i, pages] of [[0, /\b22\b/], [1, /\b39\b/]] as const) {
+      await expect(viewers.nth(i).locator('.page[data-page-number="1"] canvas')).toBeVisible({ timeout: 30_000 });
+      await expect(viewers.nth(i).locator('#numPages')).toHaveText(pages);
+    }
   });
 });

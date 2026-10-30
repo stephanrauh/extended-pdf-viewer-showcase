@@ -39,9 +39,9 @@ export type SavedAnnotation = {
  * Clicks the toolbar's download button and returns the bytes the browser
  * saved - the file the user ends up with, edits included.
  */
-export async function downloadPdf(page: Page): Promise<Buffer> {
+export async function downloadPdf(page: Page, viewer = ''): Promise<Buffer> {
   const downloadPromise = page.waitForEvent('download', { timeout: 30_000 });
-  await page.locator('#downloadButton').click();
+  await page.locator(`${viewer} #downloadButton`.trim()).click();
   const download = await downloadPromise;
   return readFileSync((await download.path())!);
 }
