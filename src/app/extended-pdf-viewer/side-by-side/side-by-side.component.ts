@@ -28,6 +28,7 @@ export class SideBySideComponent {
   public fullscreenService = inject(FullscreenService);
   // several viewers on one page need the bleeding-edge bundle (#3306)
   public readonly bleedingEdge = isBleedingEdge();
-  public sidebysidecomponentTab: string = 'displayingpdffilessidebyside';
+  // each version opens the description of the approach its demo shows
+  public sidebysidecomponentTab: string = this.bleedingEdge ? 'severalviewers' : 'iframes';
   public codeTab: string = this.bleedingEdge ? 'twoviewers' : 'usingtheiframecomponent';
 }

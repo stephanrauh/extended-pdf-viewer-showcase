@@ -8,51 +8,68 @@
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
-              [class.text-primary-600]="sidebysidecomponentTab === 'displayingpdffilessidebyside'"
-              [class.border-primary-600]="sidebysidecomponentTab === 'displayingpdffilessidebyside'"
-              [class.text-gray-500]="sidebysidecomponentTab !== 'displayingpdffilessidebyside'"
-              [class.border-transparent]="sidebysidecomponentTab !== 'displayingpdffilessidebyside'"
-              (click)="sidebysidecomponentTab = 'displayingpdffilessidebyside'">
-              Displaying PDF files side-by-side
+              [class.text-primary-600]="sidebysidecomponentTab === 'severalviewers'"
+              [class.border-primary-600]="sidebysidecomponentTab === 'severalviewers'"
+              [class.text-gray-500]="sidebysidecomponentTab !== 'severalviewers'"
+              [class.border-transparent]="sidebysidecomponentTab !== 'severalviewers'"
+              (click)="sidebysidecomponentTab = 'severalviewers'">
+              @if (bleedingEdge) { Several viewers on one page } @else { New in version 32 (bleeding-edge branch) }
+            </button>
+            <button
+              class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
+              [class.text-primary-600]="sidebysidecomponentTab === 'iframes'"
+              [class.border-primary-600]="sidebysidecomponentTab === 'iframes'"
+              [class.text-gray-500]="sidebysidecomponentTab !== 'iframes'"
+              [class.border-transparent]="sidebysidecomponentTab !== 'iframes'"
+              (click)="sidebysidecomponentTab = 'iframes'">
+              iFrames@if (bleedingEdge) { (deprecated)}
             </button>
           </div>
           </div>
 
           <!-- Tab content -->
-          @if (sidebysidecomponentTab === 'displayingpdffilessidebyside') {
+          @if (sidebysidecomponentTab === 'severalviewers') {
           <div class="tab-content">
           @if (bleedingEdge) {
-          <p>Starting with version 31.1.0, you can put several <code>&lt;ngx-extended-pdf-viewer&gt;</code> tags on the
-            same page. Each viewer shows its own document and keeps its own page, zoom, search, form fields, annotation
-            editors and print job.
+          <p>Starting with version 32.0.0, you can put several <code>&lt;ngx-extended-pdf-viewer&gt;</code> tags on the
+            same page.
           </p>
-          <p>Keyboard shortcuts and printing with <code>window.print()</code> or CTRL+P act on the viewer you've
-            clicked or focused last.
+          } @else {
+          <p><strong>New in version 32:</strong> several <code>&lt;ngx-extended-pdf-viewer&gt;</code> tags on the
+            same page, without iFrames. The release candidate 32.0.0-rc.0 ships it in the bleeding-edge bundle. Select
+            "bleeding edge" in the version selector at the top of the page to see it.
+          </p>
+          }
+          <p>Each viewer shows its own document and keeps its own page, zoom, search, form fields, annotation editors
+            and print job. Keyboard shortcuts and printing with <code>window.print()</code> or CTRL+P act on the viewer
+            you've clicked or focused last.
           </p>
           <p>Two things are shared by every viewer on the page:</p>
           <ul class="list-disc ml-6">
             <li><code>pdfDefaultOptions</code> apply to every viewer.</li>
             <li>All viewers share one theme. A dark viewer next to a light viewer isn't supported.</li>
           </ul>
-          <p>For the time being, this works with the bleeding-edge version only. With the stable version, you still
-            need the iFrame work-around - select "stable" in the version selector at the top of the page to see it.
+          </div>
+          }
+          @if (sidebysidecomponentTab === 'iframes') {
+          <div class="tab-content">
+          @if (bleedingEdge) {
+          <p><strong>Deprecated:</strong> version 31 needs a work-around: each viewer goes into an iFrame of its own.
+            The work-around still works, but you don't need it any more. If your application uses it, replace the
+            iFrames by <code>&lt;ngx-extended-pdf-viewer&gt;</code> tags. The code tabs marked "deprecated" show the old
+            approach.
           </p>
           } @else {
-          <p>With the stable version, you need to put each PDF viewer in an iFrame to display multiple PDF files on the
-            same page.
-          </p>
-          <p>The bleeding-edge version already allows several <code>&lt;ngx-extended-pdf-viewer&gt;</code> tags on the
-            same page, without an iFrame. Select "bleeding edge" in the version selector at the top of the page to see
-            it.
+          <p>With version 31, you need to put each PDF viewer in an iFrame to display multiple PDF files on the
+            same page. Version 32 deprecates this work-around.
           </p>
           <p>Note on the demo: since activating server-side rendering, the embedded PDF viewers initially show the wrong
-            content. That won't
-            happen on your machine unless you activate SSR, and I hope to fix it soon.
-          </p>
-          <p>The demo shows a work-around using a common component, the <code>IFrameComponent</code>. The Angular router
-            maps this component to a path, and the iFrame uses this path to display the PDF file.
+            content. That won't happen on your machine unless you activate SSR, and I hope to fix it soon.
           </p>
           }
+          <p>The work-around uses a common component, the <code>IFrameComponent</code>. The Angular router maps this
+            component to a path, and the iFrame uses this path to display the PDF file.
+          </p>
           </div>
           }
         </div>
@@ -70,9 +87,10 @@
               [class.text-gray-500]="codeTab !== 'twoviewers'"
               [class.border-transparent]="codeTab !== 'twoviewers'"
               (click)="codeTab = 'twoviewers'">
-              HTML
+              HTML (since version 32)
             </button>
-            } @else {
+            }
+            <!-- the iFrame work-around: deprecated since version 32, so the bleeding-edge bundle marks it -->
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'usingtheiframecomponent'"
@@ -80,7 +98,7 @@
               [class.text-gray-500]="codeTab !== 'usingtheiframecomponent'"
               [class.border-transparent]="codeTab !== 'usingtheiframecomponent'"
               (click)="codeTab = 'usingtheiframecomponent'">
-              Using the IFrameComponent
+              Using the IFrameComponent@if (bleedingEdge) { (deprecated)}
             </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
@@ -89,7 +107,7 @@
               [class.text-gray-500]="codeTab !== 'iframecomponenthtml'"
               [class.border-transparent]="codeTab !== 'iframecomponenthtml'"
               (click)="codeTab = 'iframecomponenthtml'">
-              iframe.component.html
+              iframe.component.html@if (bleedingEdge) { (deprecated)}
             </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
@@ -98,7 +116,7 @@
               [class.text-gray-500]="codeTab !== 'iframecomponentts'"
               [class.border-transparent]="codeTab !== 'iframecomponentts'"
               (click)="codeTab = 'iframecomponentts'">
-              iframe.component.ts
+              iframe.component.ts@if (bleedingEdge) { (deprecated)}
             </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
@@ -107,9 +125,8 @@
               [class.text-gray-500]="codeTab !== 'approutingmodulets'"
               [class.border-transparent]="codeTab !== 'approutingmodulets'"
               (click)="codeTab = 'approutingmodulets'">
-              app-routing.module.ts
+              app-routing.module.ts@if (bleedingEdge) { (deprecated)}
             </button>
-            }
           </div>
           </div>
 

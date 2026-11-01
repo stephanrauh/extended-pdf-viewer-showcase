@@ -492,4 +492,23 @@ test.describe('T58 two viewers on one page', () => {
       await expect(viewers.nth(i).locator('#numPages')).toHaveText(pages);
     }
   });
+
+  test('the stable side-by-side demo announces version 32; the bleeding-edge one keeps the iFrames as deprecated', async ({ page }) => {
+    // runs after the fixture's init script, so it picks the version shown by the selector at the top
+    await page.addInitScript(() => localStorage.setItem('showcase.viewer', 'stable'));
+    await page.goto('/extended-pdf-viewer/side-by-side');
+    // the stable demo shows the iFrames, so their description comes first
+    await expect(page.getByText('With version 31, you need to put each PDF viewer in an iFrame')).toBeVisible();
+    await page.getByRole('button', { name: 'New in version 32', exact: true }).click();
+    await expect(page.getByText('New in version 32:')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Using the IFrameComponent', exact: true })).toBeVisible();
+
+    await page.addInitScript(() => localStorage.setItem('showcase.viewer', 'bleeding-edge'));
+    await page.goto('/extended-pdf-viewer/side-by-side');
+    await expect(page.getByText('Starting with version 32.0.0')).toBeVisible();
+    await page.getByRole('button', { name: 'iFrames (deprecated)' }).click();
+    await expect(page.getByText('Deprecated:')).toBeVisible();
+    await page.getByRole('button', { name: 'Using the IFrameComponent (deprecated)' }).click();
+    await expect(page.locator('.tab-content').filter({ hasText: '/extended-pdf-viewer/iframe/cdk' })).toBeVisible();
+  });
 });
