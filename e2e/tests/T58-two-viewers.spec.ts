@@ -375,6 +375,26 @@ test.describe('T58 two viewers on one page', () => {
     await expect.poll(() => page.evaluate(() => window.print === (window as any).__nativePrint)).toBe(true);
   });
 
+  test('[replaceBrowserPrint]="false" in viewer b leaves pdf.js printing to viewer a', async ({ page }) => {
+    await page.addInitScript(() => {
+      const nativePrint = () => ((window as any).__nativePrints = ((window as any).__nativePrints ?? 0) + 1);
+      window.print = nativePrint;
+      (window as any).__nativePrint = nativePrint;
+    });
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 0, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+
+    await page.evaluate(() => (window as any).__viewers[1].setInput('replaceBrowserPrint', false));
+    await page.waitForTimeout(500);
+    expect(await page.evaluate(() => window.print === (window as any).__nativePrint)).toBe(false);
+
+    // once viewer a is gone, nobody prints with pdf.js any more
+    await page.evaluate(() => (window as any).__viewers[0].remove());
+    await expect(page.locator(A)).toHaveCount(0);
+    await expect.poll(() => page.evaluate(() => window.print === (window as any).__nativePrint)).toBe(true);
+  });
+
   // pdf-actions-demo.pdf appends a line to its form field "log" for every script it runs
   test("the PDF's scripts of viewer b talk to viewer b only", async ({ page }) => {
     await page.addInitScript(() => {
