@@ -357,6 +357,57 @@ test.describe('T58 two viewers on one page', () => {
     await expect(page.locator('#printContainer')).toHaveCount(0);
   });
 
+  test('when the last viewer goes away, window.print() is the browser\'s again', async ({ page }) => {
+    await page.addInitScript(() => {
+      const nativePrint = () => ((window as any).__nativePrints = ((window as any).__nativePrints ?? 0) + 1);
+      window.print = nativePrint;
+      (window as any).__nativePrint = nativePrint;
+    });
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    expect(await page.evaluate(() => window.print === (window as any).__nativePrint)).toBe(false);
+
+    // viewer b came last: it found the viewers' window.print() when it started
+    await page.evaluate(() => (window as any).__viewers[0].remove());
+    await expect(page.locator(A)).toHaveCount(0);
+    await page.evaluate(() => (window as any).__viewers[1].remove());
+    await expect(page.locator(B)).toHaveCount(0);
+    await expect.poll(() => page.evaluate(() => window.print === (window as any).__nativePrint)).toBe(true);
+  });
+
+  // pdf-actions-demo.pdf appends a line to its form field "log" for every script it runs
+  test("the PDF's scripts of viewer b talk to viewer b only", async ({ page }) => {
+    await page.addInitScript(() => {
+      window.print = () => undefined;
+    });
+    await openBoth(page, '?src=/assets/pdfs/pdf-actions-demo.pdf&opt.enableScripting=true&opt.enableCatalogAAJavaScript=true');
+    const log = (viewer: string) => page.locator(`${viewer} .annotationLayer [name="log"]`);
+    for (const viewer of [A, B]) {
+      await expect(log(viewer)).toHaveValue(/^\s*1\. Document-level JavaScript.*\n2\. PageOpen page 1/,{ timeout: 30_000 });
+    }
+    const logOfA = await log(A).inputValue();
+
+    await page.locator(`${B} #printButton`).click();
+    await expect.poll(async () => (await events(page, 1, 'afterPrint')).length, { timeout: 30_000 }).toBe(1);
+    await expect(log(B)).toHaveValue(/WillPrint[\s\S]*DidPrint/);
+    await expect(log(A)).toHaveValue(logOfA);
+  });
+
+  // An XFA form renders its radio buttons in the XFA layer, not in the annotation layer
+  test('the same XFA form in both viewers: a radio button of viewer b leaves viewer a alone', async ({ page }) => {
+    await openBoth(page, '?src=/assets/pdfs/xfa-form-example.pdf');
+    const radios = (viewer: string) => page.locator(`${viewer} .xfaLayer input[type="radio"]`);
+    await expect(radios(A).first()).toBeAttached({ timeout: 30_000 });
+    await expect(radios(B).first()).toBeAttached({ timeout: 30_000 });
+    // the three buttons of one group (ContactBy), none of them checked yet
+    await expect(radios(A)).toHaveCount(3);
+
+    await radios(A).nth(0).check();
+    await radios(B).nth(1).check();
+    await expect(radios(B).nth(1)).toBeChecked();
+    await expect(radios(A).nth(0)).toBeChecked();
+  });
+
   test("the secondary menu of viewer a operates viewer a (spread, scroll mode)", async ({ page }) => {
     await openBoth(page);
     await expect.poll(async () => (await events(page, 0, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
