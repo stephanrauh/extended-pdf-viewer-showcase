@@ -205,6 +205,43 @@ test.describe('T58 two viewers on one page', () => {
     await expect(page.locator(`${A} .annotationEditorLayer > *`)).toHaveCount(0);
   });
 
+  // pdf.js names the fonts after the document (g_d0_f1, ...) and registers them page-wide in
+  // document.fonts: when both documents were "d0", one viewer drew its text with the other's fonts
+  test("the fonts of the two documents don't share names", async ({ page }) => {
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 0, 'pageRendered')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    await expect.poll(async () => (await events(page, 1, 'pageRendered')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    const documentsWithFonts = () =>
+      page.evaluate(() => new Set([...document.fonts].map((font) => /^g_(d\d+)_/.exec(font.family)?.[1]).filter(Boolean)).size);
+    await expect.poll(documentsWithFonts, { timeout: 10_000 }).toBe(2);
+  });
+
+  // the draw layer references its SVG paths and masks by id (url(#path_0)), and ids are page-wide
+  test('drawings in both viewers get SVG ids of their own', async ({ page }) => {
+    await page.setViewportSize({ width: 2800, height: 1000 });
+    await openBoth(page);
+    await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
+    for (const viewer of [A, B]) {
+      await page.locator(`${viewer} #primaryEditorInk`).click();
+      const layer = page.locator(`${viewer} .page[data-page-number="1"] .annotationEditorLayer`);
+      await expect(layer).toBeVisible();
+      // a gesture made in the same instant as the click on the tool can get lost
+      await page.waitForTimeout(150);
+      const box = (await layer.boundingBox())!;
+      await page.mouse.move(box.x + 100, box.y + 100);
+      await page.mouse.down();
+      await page.mouse.move(box.x + 160, box.y + 140, { steps: 5 });
+      await page.mouse.move(box.x + 220, box.y + 120, { steps: 5 });
+      await page.mouse.up();
+      await page.keyboard.press('Escape');
+      await expect(layer.locator(':scope > *')).toHaveCount(1);
+    }
+
+    const ids = await page.evaluate(() => [...document.querySelectorAll('ngx-extended-pdf-viewer .canvasWrapper svg [id]')].map((e) => e.id));
+    expect(ids.length).toBeGreaterThanOrEqual(2);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
   test('a dialog opened in viewer b opens in viewer b', async ({ page }) => {
     await openBoth(page);
     await expect.poll(async () => (await events(page, 1, 'pagesLoaded')).length, { timeout: 30_000 }).toBeGreaterThan(0);
