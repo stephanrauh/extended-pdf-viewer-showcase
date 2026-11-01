@@ -251,12 +251,15 @@ test.describe('tagged PDFs', () => {
     await open(page, '', '/assets/pdfs/CDK.pdf');
     const pageDiv = page.locator('.page[data-page-number="1"]');
     await expect(pageDiv.locator('.textLayer span').first()).toBeAttached({ timeout: 15_000 });
-    const tree = pageDiv.locator('canvas [role]');
-    await expect(tree.first()).toBeAttached({ timeout: 15_000 });
+    // pdf.js 6.5 puts the elements carrying aria-owns into the canvas; 6.4 (the stable bundle) puts
+    // some of them into the marked-content spans of the text layer
+    const owners = pageDiv.locator('[aria-owns]');
+    await expect(owners.first()).toBeAttached({ timeout: 15_000 });
     const result = await pageDiv.evaluate((p) => {
-      const owners = Array.from(p.querySelectorAll('canvas [aria-owns]'));
+      const owners = Array.from(p.querySelectorAll('[aria-owns]'));
       const ids = owners.flatMap((o) => o.getAttribute('aria-owns')!.split(/\s+/));
-      const missing = ids.filter((id) => !p.querySelector(`.textLayer [id="${CSS.escape(id)}"]`));
+      // the stable bundle also lets the tree own the links of the annotation layer
+      const missing = ids.filter((id) => !p.querySelector(`:is(.textLayer, .annotationLayer) [id="${CSS.escape(id)}"]`));
       return { owners: owners.length, ids: ids.length, missing };
     });
     expect(result.ids, 'references from the structure tree to the text layer').toBeGreaterThan(0);
