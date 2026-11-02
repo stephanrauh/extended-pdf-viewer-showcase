@@ -13,7 +13,7 @@
               [class.text-gray-500]="sidebysidecomponentTab !== 'severalviewers'"
               [class.border-transparent]="sidebysidecomponentTab !== 'severalviewers'"
               (click)="sidebysidecomponentTab = 'severalviewers'">
-              @if (bleedingEdge) { Several viewers on one page } @else { New in version 32 (bleeding-edge branch) }
+              Several viewers on one page
             </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
@@ -22,7 +22,7 @@
               [class.text-gray-500]="sidebysidecomponentTab !== 'iframes'"
               [class.border-transparent]="sidebysidecomponentTab !== 'iframes'"
               (click)="sidebysidecomponentTab = 'iframes'">
-              iFrames@if (bleedingEdge) { (deprecated)}
+              iFrames (deprecated)
             </button>
           </div>
           </div>
@@ -30,16 +30,9 @@
           <!-- Tab content -->
           @if (sidebysidecomponentTab === 'severalviewers') {
           <div class="tab-content">
-          @if (bleedingEdge) {
           <p>Starting with version 32.0.0, you can put several <code>&lt;ngx-extended-pdf-viewer&gt;</code> tags on the
             same page.
           </p>
-          } @else {
-          <p><strong>New in version 32:</strong> several <code>&lt;ngx-extended-pdf-viewer&gt;</code> tags on the
-            same page, without iFrames. The release candidate 32.0.0-rc.0 ships it in the bleeding-edge bundle. Select
-            "bleeding edge" in the version selector at the top of the page to see it.
-          </p>
-          }
           <p>Each viewer shows its own document and keeps its own page, zoom, search, form fields, annotation editors
             and print job. Keyboard shortcuts and printing with <code>window.print()</code> or CTRL+P act on the viewer
             you've clicked or focused last.
@@ -53,20 +46,11 @@
           }
           @if (sidebysidecomponentTab === 'iframes') {
           <div class="tab-content">
-          @if (bleedingEdge) {
           <p><strong>Deprecated:</strong> version 31 needs a work-around: each viewer goes into an iFrame of its own.
             The work-around still works, but you don't need it any more. If your application uses it, replace the
             iFrames by <code>&lt;ngx-extended-pdf-viewer&gt;</code> tags. The code tabs marked "deprecated" show the old
             approach.
           </p>
-          } @else {
-          <p>With version 31, you need to put each PDF viewer in an iFrame to display multiple PDF files on the
-            same page. Version 32 deprecates this work-around.
-          </p>
-          <p>Note on the demo: since activating server-side rendering, the embedded PDF viewers initially show the wrong
-            content. That won't happen on your machine unless you activate SSR, and I hope to fix it soon.
-          </p>
-          }
           <p>The work-around uses a common component, the <code>IFrameComponent</code>. The Angular router maps this
             component to a path, and the iFrame uses this path to display the PDF file.
           </p>
@@ -79,7 +63,6 @@
           <!-- Tab buttons -->
           <div class="overflow-x-auto">
             <div class="flex space-x-2 w-max border-b border-gray-200 mb-2">
-            @if (bleedingEdge) {
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'twoviewers'"
@@ -89,8 +72,7 @@
               (click)="codeTab = 'twoviewers'">
               HTML (since version 32)
             </button>
-            }
-            <!-- the iFrame work-around: deprecated since version 32, so the bleeding-edge bundle marks it -->
+            <!-- the iFrame work-around: deprecated since version 32 -->
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
               [class.text-primary-600]="codeTab === 'usingtheiframecomponent'"
@@ -98,7 +80,7 @@
               [class.text-gray-500]="codeTab !== 'usingtheiframecomponent'"
               [class.border-transparent]="codeTab !== 'usingtheiframecomponent'"
               (click)="codeTab = 'usingtheiframecomponent'">
-              Using the IFrameComponent@if (bleedingEdge) { (deprecated)}
+              Using the IFrameComponent (deprecated)
             </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
@@ -107,7 +89,7 @@
               [class.text-gray-500]="codeTab !== 'iframecomponenthtml'"
               [class.border-transparent]="codeTab !== 'iframecomponenthtml'"
               (click)="codeTab = 'iframecomponenthtml'">
-              iframe.component.html@if (bleedingEdge) { (deprecated)}
+              iframe.component.html (deprecated)
             </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
@@ -116,7 +98,7 @@
               [class.text-gray-500]="codeTab !== 'iframecomponentts'"
               [class.border-transparent]="codeTab !== 'iframecomponentts'"
               (click)="codeTab = 'iframecomponentts'">
-              iframe.component.ts@if (bleedingEdge) { (deprecated)}
+              iframe.component.ts (deprecated)
             </button>
             <button
               class="px-3 py-1.5 text-xs font-medium border-b-2 focus:outline-none"
@@ -125,7 +107,7 @@
               [class.text-gray-500]="codeTab !== 'approutingmodulets'"
               [class.border-transparent]="codeTab !== 'approutingmodulets'"
               (click)="codeTab = 'approutingmodulets'">
-              app-routing.module.ts@if (bleedingEdge) { (deprecated)}
+              app-routing.module.ts (deprecated)
             </button>
           </div>
           </div>
@@ -166,7 +148,6 @@
   </div>
   }
 
-  @if (bleedingEdge) {
   <div class="flex gap-2 w-full mt-4">
     <div class="flex-1 min-w-0">
       <ngx-extended-pdf-viewer [src]="'/assets/pdfs/CDK.pdf'" [zoom]="'auto'" [height]="'100vh'" [textLayer]="true" [theme]="theme">
@@ -177,10 +158,4 @@
       </ngx-extended-pdf-viewer>
     </div>
   </div>
-  } @else {
-  <div class="flex gap-2 w-full h-screen mt-4">
-    <iframe id="iframe-left" class="flex-1 min-w-0 h-screen border-none" src="/extended-pdf-viewer/iframe/cdk" title="PDF Viewer - CDK"></iframe>
-    <iframe id="iframe-right" class="flex-1 min-w-0 h-screen border-none" src="/extended-pdf-viewer/iframe/graalvm" title="PDF Viewer - GraalVM"></iframe>
-  </div>
-  }
 </div>

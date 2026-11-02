@@ -4,7 +4,7 @@ import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
-import { isBleedingEdge, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
     selector: 'app-side-by-side',
@@ -26,9 +26,6 @@ export class SideBySideComponent {
     return this.themeService.theme();
   }
   public fullscreenService = inject(FullscreenService);
-  // several viewers on one page need the bleeding-edge bundle (#3306)
-  public readonly bleedingEdge = isBleedingEdge();
-  // each version opens the description of the approach its demo shows
-  public sidebysidecomponentTab: string = this.bleedingEdge ? 'severalviewers' : 'iframes';
-  public codeTab: string = this.bleedingEdge ? 'twoviewers' : 'usingtheiframecomponent';
+  public sidebysidecomponentTab: string = 'severalviewers';
+  public codeTab: string = 'twoviewers';
 }

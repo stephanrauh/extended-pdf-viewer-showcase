@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect, usingBleedingEdge } from '../fixtures';
+import { test, expect } from '../fixtures';
 import { downloadPdf, readPdf } from '../poms/pdf-file';
 
 /**
@@ -39,9 +39,6 @@ async function openBoth(page: Page, query = ''): Promise<void> {
 }
 
 test.describe('T58 two viewers on one page', () => {
-  // the stable bundle (pdf.js 6.4) lacks most of the engine changes #3306 needs
-  test.skip(!usingBleedingEdge, 'several viewers on one page need the bleeding-edge bundle (#3306)');
-
   // guards the harness itself: a broken route would make the other tests meaningless
   test('the harness shows two viewers with their own hooks', async ({ page }) => {
     await openBoth(page);
@@ -498,22 +495,17 @@ test.describe('T58 two viewers on one page', () => {
 
 // The side-by-side page documents both bundles, so this test runs with either one.
 test.describe('T58 the side-by-side documentation', () => {
-  test('the stable side-by-side demo announces version 32; the bleeding-edge one keeps the iFrames as deprecated', async ({ page }) => {
-    // runs after the fixture's init script, so it picks the version shown by the selector at the top
-    await page.addInitScript(() => localStorage.setItem('showcase.viewer', 'stable'));
-    await page.goto('/extended-pdf-viewer/side-by-side');
-    // the stable demo shows the iFrames, so their description comes first
-    await expect(page.getByText('With version 31, you need to put each PDF viewer in an iFrame')).toBeVisible();
-    await page.getByRole('button', { name: /^New in version 32\b/ }).click();
-    await expect(page.getByText('New in version 32:')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Using the IFrameComponent', exact: true })).toBeVisible();
-
-    await page.addInitScript(() => localStorage.setItem('showcase.viewer', 'bleeding-edge'));
-    await page.goto('/extended-pdf-viewer/side-by-side');
-    await expect(page.getByText('Starting with version 32.0.0')).toBeVisible();
-    await page.getByRole('button', { name: 'iFrames (deprecated)' }).click();
-    await expect(page.getByText('Deprecated:')).toBeVisible();
-    await page.getByRole('button', { name: 'Using the IFrameComponent (deprecated)' }).click();
-    await expect(page.locator('.tab-content').filter({ hasText: '/extended-pdf-viewer/iframe/cdk' })).toBeVisible();
-  });
+  for (const version of ['stable', 'bleeding-edge']) {
+    test(`${version}: the side-by-side demo shows version 32's approach and keeps the iFrames as deprecated`, async ({ page }) => {
+      // runs after the fixture's init script, so it picks the version shown by the selector at the top
+      await page.addInitScript((v) => localStorage.setItem('showcase.viewer', v), version);
+      await page.goto('/extended-pdf-viewer/side-by-side');
+      await expect(page.getByText('Starting with version 32.0.0')).toBeVisible();
+      await expect(page.locator('ngx-extended-pdf-viewer')).toHaveCount(2);
+      await page.getByRole('button', { name: 'iFrames (deprecated)' }).click();
+      await expect(page.getByText('Deprecated:')).toBeVisible();
+      await page.getByRole('button', { name: 'Using the IFrameComponent (deprecated)' }).click();
+      await expect(page.locator('.tab-content').filter({ hasText: '/extended-pdf-viewer/iframe/cdk' })).toBeVisible();
+    });
+  }
 });

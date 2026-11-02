@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 import { PDFDocument, StandardFonts, degrees } from 'pdf-lib';
-import { test, expect, usingBleedingEdge } from '../fixtures';
+import { test, expect } from '../fixtures';
 import { PdfViewerPage } from '../poms/pdf-viewer.page';
 import { drawInk } from '../poms/editor-gestures';
 
@@ -22,7 +22,6 @@ import { drawInk } from '../poms/editor-gestures';
  */
 
 test.describe.configure({ mode: 'parallel' });
-test.skip(!usingBleedingEdge, 'the fixes of stephanrauh/pdf.js#16 are in the bleeding-edge bundle only');
 
 const ERASER = 103;
 

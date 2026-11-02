@@ -1,4 +1,4 @@
-import { test, expect, usingBleedingEdge } from '../fixtures';
+import { test, expect } from '../fixtures';
 import { PdfViewerPage } from '../poms/pdf-viewer.page';
 
 /**
@@ -54,11 +54,6 @@ test.describe('T30 — annotation customId round-trip (#3225)', () => {
   test('a developer-supplied customId survives save → restore, the temporary id does not', async ({
     page,
   }) => {
-    // #3225 ships on the bleeding-edge build only; the stable build predates it.
-    test.skip(
-      !usingBleedingEdge,
-      'customId (#3225) is only available on the bleeding-edge pdf.js build',
-    );
     const viewer = await gotoExportRoute(page);
 
     // 1. Add a text annotation and export it. It has a temporary `id` but no customId.
