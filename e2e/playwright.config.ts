@@ -100,14 +100,15 @@ export default defineConfig({
       // across the whole document. Run the find tests against Playwright's
       // WebKit to gate the api.js patch.
       //
-      // Only the find-related specs run here (T3 find/custom findbar, T4
-      // toolbar find bar, T7 Ctrl+F). WebKit used to replay the whole suite,
+      // Only the find and pinch specs run here (T3, T4, T7, T64, T65, T66, T67).
+      // WebKit used to replay the whole suite,
       // which doubled the run time and the energy cost of every `test:e2e`
       // for a single Safari-specific bug class. Add a file to this list only
       // for a WebKit-specific regression - the chromium project remains the
       // full gate.
       name: 'webkit',
-      testMatch: /T(3|4|7)-.*\.spec\.ts$/,
+      // T64 also covers WebKit dropping pinch events after zoom's own scrolling.
+      testMatch: /T(3|4|7|64|65|66|67)-.*\.spec\.ts$/,
       use: { ...devices['Desktop Safari'], viewport: { width: 1920, height: 1080 } },
     },
     // Firefox runs the whole suite, but only on request (E2E_FIREFOX=1): like
