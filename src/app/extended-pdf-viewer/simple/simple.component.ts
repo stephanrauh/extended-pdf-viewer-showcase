@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, ElementRef, NgZone, OnDestroy, inject } from '@angular/core';
 import { PageRenderEvent, IPDFViewerApplication, pdfDefaultOptions, PDFNotificationService, PdfLoadedEvent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { LogService } from '../../log.service';
 import { FullscreenService } from '../../services/fullscreen.service';
@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { AsyncPipe } from '@angular/common';
+import { installPinchDiagnostics } from './pinch-diagnostics';
 
 @Component({
     selector: 'app-simple',
@@ -28,6 +29,7 @@ export class SimpleComponent implements OnDestroy {
   fullscreenService = inject(FullscreenService);
   private themeService = inject(ThemeService);
   private cdr = inject(ChangeDetectorRef);
+  private readonly removePinchDiagnostics: () => void;
 
   public page = 5;
 
@@ -156,6 +158,8 @@ export class SimpleComponent implements OnDestroy {
   }
 
   constructor() {
+    const root = inject(ElementRef<HTMLElement>).nativeElement;
+    this.removePinchDiagnostics = inject(NgZone).runOutsideAngular(() => installPinchDiagnostics(root, () => this.PDFViewerApplication));
     try {
       if (localStorage) {
         this._selectedTab = Number(localStorage.getItem('ngx-extended-pdf-viewer.simple.selectedTab')) || 0;
@@ -228,6 +232,7 @@ export class SimpleComponent implements OnDestroy {
     console.log('Rendered page ' + event.pageNumber + " " + (new Date().getTime() - this.currentStartTime) + 'ms (cumulated)');
   }
   public ngOnDestroy() {
+    this.removePinchDiagnostics();
     pdfDefaultOptions.rangeChunkSize = 64 * 1024; // restore the default value
   }
 }
