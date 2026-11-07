@@ -54,7 +54,6 @@ test.describe('live announcements', () => {
   });
 
   test('the find result is announced once: no live region inside another one', async ({ page }) => {
-    test.fail(true, 'two nested aria-live containers (#findbarMessageContainer twice) hold the result');
     await open(page);
     await find(page, 'principiantes');
     await expect(page.locator('#findResultsCount')).toHaveText(/of/, { timeout: 15_000 });
@@ -90,7 +89,6 @@ test.describe('dialogs', () => {
   });
 
   test('the document properties dialog has an accessible name', async ({ page }) => {
-    test.fail(true, 'pdf.js gives #documentPropertiesDialog no aria-labelledby / aria-label');
     await open(page, '&show=always-visible');
     await page.locator('#documentProperties').click();
     await expect(page.locator('#documentPropertiesDialog')).toBeVisible();
@@ -98,7 +96,6 @@ test.describe('dialogs', () => {
   });
 
   test('the password dialog has an accessible name', async ({ page }) => {
-    test.fail(true, 'pdf.js gives #passwordDialog no aria-labelledby / aria-label');
     const viewer = new PdfViewerPage(page);
     await viewer.goto('/e2e/viewer?src=/assets/pdfs/GraalVM-password-protected.pdf');
     await expect(page.locator('#passwordDialog')).toBeVisible({ timeout: 30_000 });
@@ -179,7 +176,6 @@ test.describe('Windows high-contrast mode (forced-colors: active)', () => {
   });
 
   test('a toggle button shows whether it is on', async ({ page }) => {
-    test.fail(true, 'the "on" state is a background color only, and forced colors replaces it');
     await page.emulateMedia({ forcedColors: 'active' });
     expect(await looksDifferentOnAndOff(page), 'the button looks the same on and off').toBe(true);
   });
@@ -190,10 +186,19 @@ test.describe('reduced motion', () => {
     await open(page, '&pageViewMode=book&show=always-visible');
     await expect.poll(() => page.evaluate(() => !!(window as any).__ngxApp.pdfViewer.pageFlip)).toBe(true);
     await page.waitForTimeout(500);
+    const flip = () =>
+      page.evaluate(() => {
+        const pageFlip = (window as any).__ngxApp.pdfViewer.pageFlip;
+        return { index: pageFlip.getCurrentPageIndex() as number, state: pageFlip.getState() as string };
+      });
+    const before = (await flip()).index;
     const start = Date.now();
     await page.locator('#primaryNext').click();
-    await expect.poll(() => page.evaluate(() => (window as any).__ngxApp.pdfViewer.pageFlip.getState()), { intervals: [25] }).toBe('flipping');
-    await expect.poll(() => page.evaluate(() => (window as any).__ngxApp.pdfViewer.pageFlip.getState()), { intervals: [25] }).toBe('read');
+    // a reduced-motion flip can be over before a poll ever sees the state 'flipping'
+    await expect.poll(async () => {
+      const { index, state } = await flip();
+      return index !== before && state === 'read';
+    }, { intervals: [25] }).toBe(true);
     return Date.now() - start;
   }
 
@@ -202,7 +207,6 @@ test.describe('reduced motion', () => {
   });
 
   test('with prefers-reduced-motion, book mode turns the page (almost) at once', async ({ page }) => {
-    test.fail(true, 'the page flip always takes 1 s (page-flip flippingTime)');
     await page.emulateMedia({ reducedMotion: 'reduce' });
     expect(await flipDuration(page)).toBeLessThan(300);
   });
