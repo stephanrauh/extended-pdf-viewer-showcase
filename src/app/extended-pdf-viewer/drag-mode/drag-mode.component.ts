@@ -2,6 +2,8 @@ import { Component, effect, inject, OnDestroy } from '@angular/core';
 import { AnnotationEditorEvent, IPDFViewerApplication, NgxExtendedPdfViewerModule, NgxExtendedPdfViewerService, PDFNotificationService } from 'ngx-extended-pdf-viewer';
 import { ThemeService } from '../../services/theme.service';
 import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
+import { FullscreenService } from '../../services/fullscreen.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 
 /** pdf.js AnnotationEditorType values we care about. */
@@ -58,9 +60,10 @@ type DragState = 'none' | 'drag' | 'paint';
   selector: 'app-drag-mode',
   standalone: true,
   templateUrl: './drag-mode.component.html',
-  imports: [NgxExtendedPdfViewerModule, DemoComponent, Ie11MarkdownComponent],
+  imports: [NgxExtendedPdfViewerModule, DemoComponent, Ie11MarkdownComponent, AsyncPipe],
 })
 export class DragModeComponent implements OnDestroy {
+  public fullscreenService = inject(FullscreenService);
   private themeService = inject(ThemeService);
   private pdfService = inject(NgxExtendedPdfViewerService);
   private notificationService = inject(PDFNotificationService);

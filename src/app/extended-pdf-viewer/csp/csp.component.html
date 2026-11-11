@@ -1,4 +1,5 @@
 <div class="flex-container-column fill-container">
+  @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
     <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[45%]">
               <div class="w-full">
@@ -250,6 +251,7 @@
         </div>
     </div>
   </div>
+  }
 
   <app-demo [src]="cspcomponentTab === 'wasm' ? '/assets/pdfs/jbig2-demo.pdf' : '/assets/pdfs/2404.00465v1.pdf'">
     <div class="w-full">

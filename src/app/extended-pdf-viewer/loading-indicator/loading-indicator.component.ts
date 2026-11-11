@@ -5,6 +5,8 @@ import { ThemeService } from '../../services/theme.service';
 import { firstValueFrom } from 'rxjs';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
@@ -24,9 +26,11 @@ interface PdfState {
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
+        AsyncPipe,
     ],
 })
 export class LoadingIndicatorComponent {
+  public fullscreenService = inject(FullscreenService);
   private themeService = inject(ThemeService);
   private cdr = inject(ChangeDetectorRef);
 
@@ -38,7 +42,6 @@ export class LoadingIndicatorComponent {
 
   public src: Blob | undefined = undefined;
 
-  public fullscreen = false;
   public loadingindicatorcomponentTab: string = 'customloadingindicator';
   public codeTab: string = 'htmltemplate';
 

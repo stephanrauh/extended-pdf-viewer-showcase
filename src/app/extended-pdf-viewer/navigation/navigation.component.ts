@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
+import { FullscreenService } from '../../services/fullscreen.service';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-library-usage.directive';
 
@@ -10,9 +12,10 @@ import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-libr
   standalone: true,
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css'],
-  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective],
+  imports: [Ie11MarkdownComponent, DemoComponent, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
 export class NavigationComponent {
+  public fullscreenService = inject(FullscreenService);
   private cdr = inject(ChangeDetectorRef);
   private themeService = inject(ThemeService);
 
@@ -23,7 +26,6 @@ export class NavigationComponent {
 
   public page: number | undefined;
 
-  public fullscreen = false;
   public activeTab: string = 'html';
 
   public get namedDest() {

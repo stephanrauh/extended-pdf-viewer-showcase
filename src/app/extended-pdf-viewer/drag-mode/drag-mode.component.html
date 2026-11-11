@@ -1,4 +1,5 @@
 <div class="flex-container-column fill-container">
+  @if (!(fullscreenService.isFullscreen$ | async)) {
   <div class="flex-container-row">
     <!-- Left: description -->
     <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 margin-right flex-1 box-border max-w-[48%]">
@@ -65,6 +66,7 @@
       }
     </div>
   </div>
+  }
 
   <app-demo [src]="'/assets/pdfs/ngx-extended-pdf-viewer-flyer.pdf'">
     <ngx-extended-pdf-viewer

@@ -5,6 +5,8 @@ import { SetMinifiedLibraryUsageDirective } from '../../shared/set-minified-libr
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
 import { RouterLink } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 @Component({
   selector: 'app-book-mode',
@@ -13,7 +15,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './book-mode.component.html',
   styleUrls: ['./book-mode.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective],
+  imports: [Ie11MarkdownComponent, DemoComponent, RouterLink, NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective, AsyncPipe],
 })
 export class BookModeComponent {
   private themeService = inject(ThemeService);
@@ -23,7 +25,7 @@ export class BookModeComponent {
   }
   public page = 1;
 
-  public fullscreen = false;
+  public fullscreenService = inject(FullscreenService);
 
   public activeTab: string = 'html';
 

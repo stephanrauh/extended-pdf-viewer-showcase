@@ -8,6 +8,8 @@ import { isBrowser } from '../common/utilities';
 import { FormsModule } from '@angular/forms';
 import { Ie11MarkdownComponent } from '../../shared/ie11-markdown/ie11-markdown.component';
 import { DemoComponent } from '../common/demo.component';
+import { AsyncPipe } from '@angular/common';
+import { FullscreenService } from '../../services/fullscreen.service';
 
 const WARMUP_SRC = './assets/pdfs/blank.pdf';
 const ARXIV_SRC = './assets/pdfs/2404.00465v1.pdf';
@@ -26,9 +28,11 @@ const JBIG2_SRC = './assets/pdfs/jbig2-demo.pdf';
         Ie11MarkdownComponent,
         DemoComponent,
         NgxExtendedPdfViewerModule, SetMinifiedLibraryUsageDirective,
+        AsyncPipe,
     ],
 })
 export class CSPComponent implements OnInit, OnDestroy {
+  public readonly fullscreenService = inject(FullscreenService);
   private readonly themeService = inject(ThemeService);
   private readonly route = inject(ActivatedRoute);
 
