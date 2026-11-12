@@ -280,6 +280,88 @@ test.describe('T15 — /display-options other controls', () => {
   });
 });
 
+// [showBorders] layout. The class toggle above is set by the Angular
+// component itself, so it stays green even when the engine ignores the
+// option. pdf.js removed `removePageBorders` upstream (4b7618bf8); the fork
+// keeps it (#194). These tests check the layout the engine produces:
+//  - seamless pages have no frame, and "page width" zoom fills the container;
+//  - bordered pages have a frame and keep pdf.js's scrollbar gap (40 px).
+test.describe('T15 — /display-options showBorders layout (#194)', () => {
+  type Layout = { gap: number; borderWidth: number };
+
+  const measure = (page: import('@playwright/test').Page): Promise<Layout> =>
+    page.evaluate(() => {
+      const container = document.querySelector('#viewerContainer') as HTMLElement;
+      const firstPage = container.querySelector('.page') as HTMLElement;
+      return {
+        gap: container.clientWidth - firstPage.getBoundingClientRect().width,
+        borderWidth: parseFloat(getComputedStyle(firstPage).borderLeftWidth) || 0,
+      };
+    });
+
+  // Re-selecting "page width" makes pdf.js recompute the scale with the
+  // current padding (a runtime [showBorders] toggle doesn't recompute it).
+  const zoomToPageWidth = async (viewer: PdfViewerPage) => {
+    await viewer.zoomSelect.selectOption('page-fit');
+    await viewer.zoomSelect.selectOption('page-width');
+  };
+
+  const showBordersCheckbox = (page: import('@playwright/test').Page) =>
+    page
+      .locator('label')
+      .filter({ hasText: '[showBorders]="true"' })
+      .locator('input[type="checkbox"]');
+
+  test('seamless from start-up: no frame, page width fills the container', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(DISPLAY); // demo default: [showBorders]="false"
+    await viewer.waitForFirstPageRender();
+
+    await viewer.zoomSelect.selectOption('page-width');
+    await expect.poll(async () => (await measure(page)).gap, { timeout: 10_000 }).toBeLessThan(3);
+    const { gap, borderWidth } = await measure(page);
+    expect(gap).toBeGreaterThan(-3);
+    expect(borderWidth).toBe(0);
+  });
+
+  test('bordered: frame and scrollbar gap at page width', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(DISPLAY);
+    await viewer.waitForFirstPageRender();
+
+    await showBordersCheckbox(page).check();
+    await expect(page.locator('#viewer.removePageBorders')).toHaveCount(0, { timeout: 5_000 });
+    await zoomToPageWidth(viewer);
+
+    await expect
+      .poll(async () => (await measure(page)).gap, { timeout: 10_000 })
+      .toBeGreaterThan(20);
+    const { gap, borderWidth } = await measure(page);
+    expect(gap).toBeLessThan(60);
+    expect(borderWidth).toBeGreaterThan(0);
+  });
+
+  test('back to seamless at runtime: frame and gap disappear', async ({ page }) => {
+    const viewer = new PdfViewerPage(page);
+    await viewer.goto(DISPLAY);
+    await viewer.waitForFirstPageRender();
+
+    const cb = showBordersCheckbox(page);
+    await cb.check();
+    await zoomToPageWidth(viewer);
+    await expect
+      .poll(async () => (await measure(page)).gap, { timeout: 10_000 })
+      .toBeGreaterThan(20);
+
+    await cb.uncheck();
+    await expect(page.locator('#viewer.removePageBorders')).toHaveCount(1, { timeout: 5_000 });
+    await zoomToPageWidth(viewer);
+
+    await expect.poll(async () => (await measure(page)).gap, { timeout: 10_000 }).toBeLessThan(3);
+    expect((await measure(page)).borderWidth).toBe(0);
+  });
+});
+
 test.describe('T15 — /display-options two-way binding (PDF → Angular)', () => {
   test('switching spread via pdf.js secondary toolbar updates the demo spread radio', async ({
     page,
