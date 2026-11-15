@@ -16,9 +16,13 @@ Downloads the current document.
 this.pdfService.download();
 ```
 
-## getCurrentDocumentAsBlob(): Promise&lt;Blob | undefined&gt;
+## getCurrentDocumentAsBlob(options?): Promise&lt;Blob | undefined&gt;
 
-Returns the current document as a Blob for further processing.
+Returns the current document as a Blob for further processing, including the form values and annotations the user added.
+
+Version 32, bleeding edge only: `getCurrentDocumentAsBlob({ flatten: true })` draws the form fields and annotations into the page, so nobody can edit them any more. `flatten: 'non-forms'` flattens the annotations but keeps the form fields. `intent` (`'print'`, the default, or `'display'`) decides which fields count as visible. Links stay clickable.
+
+The flattened file is a bit larger than the original: pdf.js appends the flattened pages and keeps the original file inside it. So flattening isn't redaction: the original content, including values that were filled in before, can still be recovered.
 
 ```typescript
 try {

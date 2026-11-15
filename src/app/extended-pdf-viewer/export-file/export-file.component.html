@@ -6,6 +6,20 @@
           You can export the PDF as a Blob, including filled fields and drawings, texts, images, and highlights added by the user.
         </p>
         <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded shadow" (click)="getCurrentDocumentAsBlob()" style="margin-left: 16px">Export the PDF file</button>
+        <p class="mt-4">
+          Version 32, bleeding edge only: you can also flatten the file. Flattening draws the form fields and annotations into the page,
+          so nobody can edit them any more. The setting applies to the export button above and to the download button of
+          the viewer (<code>[flattenOnDownload]</code>). Note that the original file stays inside the flattened one, so it's a bit larger, 
+          and flattening isn't redaction: the original content can still be recovered.
+        </p>
+        <label class="block mt-2">
+          Flatten:
+          <select class="border border-gray-300 rounded px-2 py-1 ml-2" [value]="flattenValue" (change)="setFlatten($any($event.target).value)">
+            <option value="false">no</option>
+            <option value="true">form fields and annotations</option>
+            <option value="non-forms">annotations only, keep the form fields</option>
+          </select>
+        </label>
       </div>
   <div class="bg-white border border-gray-300 rounded-lg shadow-mat-8 p-6 mt-1 flex-1 box-border max-w-[58%]">
                 <div class="w-full">
@@ -80,7 +94,7 @@
       [textLayer]="true"
       [showHandToolButton]="true"
       [handTool]="false"
-
+      [flattenOnDownload]="flatten"
 
       [theme]="theme">
     </ngx-extended-pdf-viewer>

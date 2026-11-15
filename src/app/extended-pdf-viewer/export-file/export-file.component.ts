@@ -46,9 +46,20 @@ export class ExportFileComponent {
     pdfDefaultOptions.textLayerMode = 1;
   }
 
+  /** #3314 Version 32, bleeding edge only: draw the form fields and annotations into the page */
+  public flatten: boolean | 'non-forms' = false;
+
+  public get flattenValue(): string {
+    return String(this.flatten);
+  }
+
+  public setFlatten(value: string): void {
+    this.flatten = value === 'non-forms' ? 'non-forms' : value === 'true';
+  }
+
   public async getCurrentDocumentAsBlob(): Promise<void> {
     this.exportfilecomponentTab = 'extractedfile';
-    this.blob = await this.pdfViewerService.getCurrentDocumentAsBlob();
+    this.blob = await this.pdfViewerService.getCurrentDocumentAsBlob({ flatten: this.flatten });
     this.cdr.markForCheck();
   }
 }

@@ -104,26 +104,57 @@ test('CSS zoom does not resize the viewport; window and parent resizes still not
   await expect.poll(() => page.evaluate(() => (window as any).__t64ResizeCalls)).toBeGreaterThan(before.calls);
 });
 
-test('the scrolling guard still blocks wheel zoom during a separate scroll', async ({ page }) => {
+// The guard (pdf.js issue 7022) ignores Ctrl+wheel while the document scrolls, so
+// holding Ctrl during momentum scrolling doesn't zoom. Since pdf.js bug 1915803 it
+// applies to the physical Ctrl key only: a trackpad pinch zooms even then. #3171
+// keeps zoom-induced scrolling from setting `_isScrolling`; a separate scroll must
+// still set it.
+test('the scrolling guard still blocks physical Ctrl+wheel zoom during a separate scroll', async ({ page }) => {
   await prepare(page);
   const result = await page.evaluate(() => {
     const app = (window as any).__ngxApp, v = app.pdfViewer, container = v.container;
     const r = container.getBoundingClientRect();
+    // A mouse wheel notch, with the physical Ctrl key held (see keydown below).
     const wheel = () => container.dispatchEvent(new WheelEvent('wheel', {
-      bubbles: true, cancelable: true, ctrlKey: true, deltaMode: 0, deltaY: -.22583,
+      bubbles: true, cancelable: true, ctrlKey: true, deltaMode: 0, deltaY: -100,
       clientX: r.x + r.width / 2, clientY: r.y + r.height / 2,
     }));
+    // Scroll first: a scroll that starts while Ctrl is down doesn't count.
     container.scrollTop += 100;
     container.dispatchEvent(new Event('scroll'));
     const guarded = app._isScrolling, before = v.currentScale;
-    wheel();
-    const during = v.currentScale;
-    container.dispatchEvent(new Event('blur')); // end the separate scroll synchronously
-    wheel();
-    return { guarded, before, during, after: v.currentScale };
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Control', ctrlKey: true }));
+    try {
+      wheel();
+      const during = v.currentScale;
+      container.dispatchEvent(new Event('blur')); // end the separate scroll synchronously
+      wheel();
+      return { guarded, before, during, after: v.currentScale };
+    } finally {
+      window.dispatchEvent(new KeyboardEvent('keyup', { key: 'Control' }));
+    }
   });
   expect(result.guarded).toBe(true);
   expect(result.during).toBe(result.before);
+  expect(result.after).toBeGreaterThan(result.before);
+});
+
+test('a trackpad pinch zooms even during a separate scroll (pdf.js bug 1915803)', async ({ page }) => {
+  await prepare(page);
+  const result = await page.evaluate(() => {
+    const app = (window as any).__ngxApp, v = app.pdfViewer, container = v.container;
+    const r = container.getBoundingClientRect();
+    container.scrollTop += 100;
+    container.dispatchEvent(new Event('scroll'));
+    const guarded = app._isScrolling, before = v.currentScale;
+    // ctrlKey without the physical Ctrl key: what a trackpad pinch sends.
+    container.dispatchEvent(new WheelEvent('wheel', {
+      bubbles: true, cancelable: true, ctrlKey: true, deltaMode: 0, deltaY: -.22583,
+      clientX: r.x + r.width / 2, clientY: r.y + r.height / 2,
+    }));
+    return { guarded, before, after: v.currentScale };
+  });
+  expect(result.guarded).toBe(true);
   expect(result.after).toBeGreaterThan(result.before);
 });
 

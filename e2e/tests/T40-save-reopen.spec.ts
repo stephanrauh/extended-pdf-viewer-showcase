@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures';
+import { test, expect, usingBleedingEdge } from '../fixtures';
 import { PdfViewerPage } from '../poms/pdf-viewer.page';
 import { drawInk, highlightWord, typeFreeText } from '../poms/editor-gestures';
 import { downloadPdf, readPdf, readServedPdf, type SavedAnnotation } from '../poms/pdf-file';
@@ -133,4 +133,58 @@ test('T40 — a page the user moved stays moved in the saved file', async ({ pag
   expect(saved.pageTexts[0], 'the old page 2 comes first').toBe(original.pageTexts[1]);
   expect(saved.pageTexts[1], 'the old page 1 comes second').toBe(original.pageTexts[0]);
   expect(saved.pageTexts.slice(2)).toEqual(original.pageTexts.slice(2));
+});
+
+// #3314: flattening draws the annotations and form fields into the page content.
+// Only the bleeding-edge engine can flatten; the stable one ignores the option.
+test.describe('T40 — flattened saving (#3314)', () => {
+  test.skip(!usingBleedingEdge, 'flattening is in the bleeding-edge engine');
+
+  test('[flattenOnDownload]="true": no form field is left, the value is page text', async ({ page }) => {
+    await open(page, `src=${FORM}&flattenOnDownload=true`);
+    const original = await readServedPdf(page, FORM);
+    expect(widget(original.annotations, 'firstName'), 'the original has the field').toHaveLength(1);
+
+    const field = page.locator('.annotationLayer [name="firstName"]');
+    await expect(field).toBeVisible({ timeout: 15_000 });
+    await field.fill('Ada Flattened');
+    await field.press('Tab');
+
+    const saved = await readPdf(page, await downloadPdf(page));
+    expect(saved.annotations.filter((a) => a.annotationType === TYPE.WIDGET), 'form fields').toHaveLength(0);
+    expect(saved.pageTexts[0]).toContain('Ada Flattened');
+  });
+
+  test('[flattenOnDownload]="non-forms": the annotations are flattened, the form fields stay', async ({ page }) => {
+    await open(page, `src=${FORM}&flattenOnDownload=non-forms`);
+    // The form's labels ("Other Job Experience", ...) are FreeText annotations.
+    const original = await readServedPdf(page, FORM);
+    const freeTexts = original.annotations.filter((a) => a.annotationType === TYPE.FREETEXT);
+    expect(freeTexts.length, 'the original has free text annotations').toBeGreaterThan(0);
+
+    const field = page.locator('.annotationLayer [name="firstName"]');
+    await expect(field).toBeVisible({ timeout: 15_000 });
+    await field.fill('Ada');
+    await field.press('Tab');
+
+    const saved = await readPdf(page, await downloadPdf(page));
+    expect(saved.annotations.filter((a) => a.annotationType === TYPE.FREETEXT), 'free text annotations').toHaveLength(0);
+    expect(saved.pageTexts[0], 'their text is page text now').toContain(freeTexts[0].contents.trim());
+    expect(widget(saved.annotations, 'firstName')[0]?.fieldValue, 'the form field is still a field').toBe('Ada');
+  });
+
+  test('getCurrentDocumentAsBlob({ flatten: true }) flattens an unchanged document, too', async ({ page }) => {
+    await open(page, `src=${FORM}`);
+    await expect(page.locator('.annotationLayer [name="firstName"]')).toBeVisible({ timeout: 15_000 });
+
+    const base64 = await page.evaluate(async () => {
+      const blob: Blob = await (window as any).__ngxService.getCurrentDocumentAsBlob({ flatten: true });
+      const bytes = new Uint8Array(await blob.arrayBuffer());
+      let binary = '';
+      for (const b of bytes) binary += String.fromCharCode(b);
+      return btoa(binary);
+    });
+    const saved = await readPdf(page, Buffer.from(base64, 'base64'));
+    expect(saved.annotations.filter((a) => a.annotationType === TYPE.WIDGET), 'form fields').toHaveLength(0);
+  });
 });
