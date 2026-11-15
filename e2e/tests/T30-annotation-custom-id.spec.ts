@@ -92,4 +92,31 @@ test.describe('T30 — annotation customId round-trip (#3225)', () => {
       'the temporary id is regenerated, not equal to the stable customId',
     ).not.toBe(CUSTOM_ID);
   });
+
+  // #3271: removeEditorAnnotations(filter) passed an object without the
+  // customId to the filter, so a restored annotation couldn't be removed by
+  // its stable id. The demo's button uses `serial => serial?.customId !== undefined`.
+  test('removeEditorAnnotations can filter by customId after a restore (#3271)', async ({ page }) => {
+    const viewer = await gotoExportRoute(page);
+    const textEditors = viewer.page.locator('.page[data-page-number="1"] .freeTextEditor');
+
+    // 1. A text annotation, restored with a customId (remove-all + re-add).
+    await page.getByRole('button', { name: 'Add text editor', exact: true }).click();
+    const initial = JSON.parse(await exportFirstAnnotation(viewer.page));
+    const textarea = viewer.page.locator('textarea').first();
+    await textarea.fill(JSON.stringify({ ...initial, customId: CUSTOM_ID }));
+    await textarea.dispatchEvent('change');
+    await expect(textEditors).toHaveCount(1, { timeout: 10_000 });
+
+    // 2. A second text annotation without a customId.
+    await page.getByRole('button', { name: 'Add text editor', exact: true }).click();
+    await expect(textEditors).toHaveCount(2, { timeout: 10_000 });
+
+    // 3. Remove by customId: only the restored annotation goes.
+    await page.getByRole('button', { name: 'Remove annotations with a customId', exact: true }).click();
+    await expect(textEditors).toHaveCount(1, { timeout: 10_000 });
+
+    const remaining = JSON.parse(await exportFirstAnnotation(viewer.page));
+    expect(remaining.customId, 'the annotation without a customId is kept').toBeUndefined();
+  });
 });

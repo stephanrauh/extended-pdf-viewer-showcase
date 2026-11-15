@@ -15,3 +15,11 @@ public removeDrawingEditors(): void {
   this.pdfViewerService.removeEditorAnnotations(filter);
 }
 ```
+
+```typescript
+// Match your own stable id, e.g. after restoring annotations with addEditorAnnotation()
+public removeEditorsWithCustomId(): void {
+  const filter = (serial: any) => serial?.customId !== undefined;
+  this.pdfViewerService.removeEditorAnnotations(filter);
+}
+```

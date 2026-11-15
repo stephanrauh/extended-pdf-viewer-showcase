@@ -165,6 +165,12 @@ export class ExportAnnotationsComponent {
     this.pdfViewerService.removeEditorAnnotations(filter);
   }
 
+  public removeEditorsWithCustomId(): void {
+    // #3271: the filter sees the stable customId you assigned (see getSerializedAnnotations())
+    const filter = (serial: any) => serial?.customId !== undefined;
+    this.pdfViewerService.removeEditorAnnotations(filter);
+  }
+
   public async updateAnnotation(index: number, event: Event): Promise<void> {
     const textarea = event.target as HTMLTextAreaElement;
     console.log('Before update');
