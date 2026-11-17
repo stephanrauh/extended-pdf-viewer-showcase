@@ -119,4 +119,22 @@ test.describe('T30 — annotation customId round-trip (#3225)', () => {
     const remaining = JSON.parse(await exportFirstAnnotation(viewer.page));
     expect(remaining.customId, 'the annotation without a customId is kept').toBeUndefined();
   });
+
+  // The demo must work on its own, using only its buttons: before, none of the
+  // "Add" buttons set a customId, so "Remove annotations with a customId" did nothing.
+  test('the demo buttons add an annotation with a customId and remove it again (#3271)', async ({ page }) => {
+    const viewer = await gotoExportRoute(page);
+    const textEditors = viewer.page.locator('.page[data-page-number="1"] .freeTextEditor');
+
+    await page.getByRole('button', { name: 'Add text editor', exact: true }).click();
+    await expect(textEditors).toHaveCount(1, { timeout: 10_000 });
+    await page.getByRole('button', { name: 'Add text editor with a customId', exact: true }).click();
+    await expect(textEditors).toHaveCount(2, { timeout: 10_000 });
+
+    await page.getByRole('button', { name: 'Remove annotations with a customId', exact: true }).click();
+    await expect(textEditors).toHaveCount(1, { timeout: 10_000 });
+    const remaining = JSON.parse(await exportFirstAnnotation(viewer.page));
+    expect(remaining.customId, 'the annotation without a customId is kept').toBeUndefined();
+    expect(remaining.value).toBe('Hello world!');
+  });
 });

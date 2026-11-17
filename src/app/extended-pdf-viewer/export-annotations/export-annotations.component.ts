@@ -59,20 +59,29 @@ export class ExportAnnotationsComponent {
     this.cdr.markForCheck();
   }
 
-  public async addTextEditor(): Promise<void> {
+  private customIdCounter = 0;
+
+  // #3271: an annotation carrying your own stable id, so "Remove annotations with a customId" has something to remove
+  public async addTextEditorWithCustomId(): Promise<void> {
+    const customId = `my-note-${++this.customIdCounter}`;
+    await this.addTextEditor(customId, `customId: ${customId}`);
+  }
+
+  public async addTextEditor(customId?: string, value = 'Hello world!'): Promise<void> {
     const x = Math.round(Math.random() * 400);
     const y = Math.round(350 + Math.random() * 500);
     const fontSize = Math.round(Math.random() * 30 + 10);
     const height = fontSize * 1.75;
-    const width = fontSize * 5.8;
+    const width = fontSize * 0.5 * value.length;
     const textEditorAnnotation: FreeTextEditorAnnotation = {
       annotationType: 3,
       color: [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)],
       fontSize: fontSize,
-      value: 'Hello world!',
+      value,
       pageIndex: 0,
       rect: [x, y, x + width, y + height],
       rotation: 0,
+      ...(customId ? { customId } : {}),
     };
     console.log(textEditorAnnotation);
     console.log('Before update');
